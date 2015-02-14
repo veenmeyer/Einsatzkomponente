@@ -1,0 +1,12 @@
+
+
+/*  #Mobile (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+@media only screen and (max-width: 440px) {
+	
+.mobile_hide_summary {display: none;}
+.mobile_hide_image {display: none;}
+}

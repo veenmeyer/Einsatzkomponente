@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Einsatzfahrzeuge" option="View">
+	</layout>
+	<fields name="params">
+		<fieldset 
+            name="basic"
+			label="Parametereinstellungen">
+			
+			
+			
+		 <field name="note_fahrzeuge_layout" 
+		  type="note" 
+		  label="Auswahl des Layout für die Fahrzeugübersicht :" 
+		  description="Hier können Sie jetzt das Aussehen der Fahrzeugübersicht festlegen. Sie können hier auch eigene Layouts angeben, nähere Informationen darüber gibt es im Forum."
+		  />	
+
+			
+			<field name="fahrzeuge_layout" 
+			type="list" 
+			default="fahrzeuge_layout_1.php" 
+			label="Bitte wählen Sie ein Layout für die Fahrzeugübersicht aus :" 
+			description="">
+  				<option value="fahrzeuge_layout_1.php">fahrzeuge_layout_1</option>
+  				<option value="fahrzeuge_layout_2.php">fahrzeuge_layout_2</option>
+				<option value="fahrzeuge_layout_3.php">leer</option>
+				<option value="fahrzeuge_layout_4.php">leer</option>
+				<option value="fahrzeuge_layout_5.php">leer</option>
+			</field>			
+			
+		<field
+			name="spacer1"
+			type="spacer"
+			hr="true"
+		/>
+		
+		 <field name="note_fahrzeug_layout" 
+		  type="note" 
+		  label="Auswahl des Layout für die Fahrzeug-Detailansicht :" 
+		  description="Hier können Sie jetzt das Aussehen der Fahrzeug-Detailansicht festlegen."
+		  />	
+		
+			<field name="fahrzeug_layout" 
+			type="list" 
+			default="fahrzeug_layout_1.php" 
+			label="Bitte wählen Sie ein Layout für die Detailansicht aus :" 
+			description="">
+  				<option value="fahrzeug_layout_1.php">fahrzeug_layout_1</option>
+  				<option value="fahrzeug_layout_2.php">fahrzeug_layout_2</option>
+				<option value="fahrzeug_layout_3.php">leer</option>
+				<option value="fahrzeug_layout_4.php">leer</option>
+				<option value="fahrzeug_layout_5.php">leer</option>
+			</field>			
+			
+		<field
+			name="spacer12"
+			type="spacer"
+			hr="true"
+		/>
+		
+			
+		 <field name="note_custom" 
+		  type="note" 
+		  label="Diverse Einstellungen :" 
+		  description=""
+		  />	
+			
+		<field name="abfragewehr_fhz" type="radio" 			
+		class="btn-group"
+		default="0" label="Sollen nur Fahrzeuge einer bestimmten Organisation angezeigt werden ?" 
+		description="">
+        <option value="0">nein</option>
+        <option value="1">ja</option> 
+		</field>
+
+
+			<field name="anzeigewehr_fhz" type="sql" default="" label="Wenn Ja, bitte hier w&#228;hlen" query="SELECT name AS value, name AS anzeigewehr_fhz FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `name`" />
+			
+		<field
+			name="spacer13"
+			type="spacer"
+			hr="true"
+		/>
+
+
+		</fieldset>
+	</fields>
+</metadata>

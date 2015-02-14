@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Organisationen" option="View">
+	</layout>
+	<fields name="params">
+		<fieldset 
+            name="basic"
+			label="Parametereinstellungen">
+			
+			
+		 <field name="note_organisationen_layout" 
+		  type="note" 
+		  label="Auswahl des Layout für die Übersicht der Organisationen :" 
+		  description="Hier können Sie jetzt das Aussehen der Übersicht für die Organisationen festlegen."
+		  />	
+
+			
+			<field name="organisationen_layout" 
+			type="list" 
+			default="organisationen_layout_1.php" 
+			label="Bitte wählen Sie ein Layout für die Übersicht für die Organisationen aus :" 
+			description="">
+  				<option value="organisationen_layout_1.php">organisationen_layout_1</option>
+  				<option value="organisationen_layout_2.php">organisationen_layout_2</option>
+				<option value="organisationen_layout_3.php">leer</option>
+				<option value="organisationen_layout_4.php">leer</option>
+				<option value="organisationen_layout_5.php">leer</option>
+			</field>			
+			
+		<field
+			name="spacer1"
+			type="spacer"
+			hr="true"
+		/>
+		
+		 <field name="note_organisation_layout" 
+		  type="note" 
+		  label="Auswahl des Layout für die Organisations-Detailansicht :" 
+		  description="Hier können Sie jetzt das Aussehen der Organisations-Detailansicht festlegen."
+		  />	
+		
+			<field name="organisation_layout" 
+			type="list" 
+			default="organisation_layout_1.php" 
+			label="Bitte wählen Sie ein Layout für die Organisations-Detailansicht aus :" 
+			description="">
+  				<option value="organisation_layout_1.php">organisation_layout_1</option>
+  				<option value="organisation_layout_2.php">organisation_layout_2</option>
+				<option value="organisation_layout_3.php">leer</option>
+				<option value="organisation_layout_4.php">leer</option>
+				<option value="organisation_layout_5.php">leer</option>
+			</field>			
+			
+		<field
+			name="spacer12"
+			type="spacer"
+			hr="true"
+		/>
+		
+		
+		
+		
+
+
+
+		<field
+			name="spacer3"
+			type="spacer"
+			hr="true"
+		/>
+
+		</fieldset>
+	</fields>
+</metadata>
