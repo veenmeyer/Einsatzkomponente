@@ -40,10 +40,7 @@ class EinsatzkomponenteViewKontrollcenter extends JViewLegacy
         
 		$this->addToolbar();
 		
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         $this->sidebar = JHtmlSidebar::render();
-		endif;
 		
 		parent::display($tpl);
 	}
@@ -58,13 +55,10 @@ class EinsatzkomponenteViewKontrollcenter extends JViewLegacy
 		JToolBarHelper::title(JText::_('COM_EINSATZKOMPONENTE_TITLE_KONTROLLCENTER'), 'organisationen.png');
 		JToolBarHelper::preferences('com_einsatzkomponente');
         
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         //Set sidebar action - New in 3.0
 		JHtmlSidebar::setAction('index.php?option=com_einsatzkomponente&view=kontrollcenter');
-        endif;
 		
-        $this->extra_sidebar = '';
+        $this->extra_sidebar = ''; 
         
         
 	}

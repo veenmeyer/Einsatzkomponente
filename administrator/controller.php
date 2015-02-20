@@ -25,34 +25,19 @@ class EinsatzkomponenteController extends JControllerLegacy
 	{
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 		
-		$version = new JVersion;
-		if (!$version->isCompatible('3.0')) :
-		$document = JFactory::getDocument();
- 		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
-		endif;
-		
 		// Version auf BETA überprüfen, und gegebenenfalls eine Warnung ausgeben
 		$db = JFactory::getDbo();
 		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 		$params = json_decode( $db->loadResult(), true );
         $version = $params['version'];
         if($version!=str_replace("Beta","",$version)):
-		
 		?>
-    <div class="alert alert-info">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-	<strong>Hinweis :</strong><br/>Achtung Beta-Version <?php echo $params['version'];?> !!! Es wird nicht empfohlen, diese Version der Einsatzkomponente auf einer öffentlichen Live-Webseite zu betreiben.
-    </div>        
-		<?php else:
-		$version = new JVersion;
-		if (!$version->isCompatible('3.0')) :?>
-		    <div class="alert alert-info">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-	<strong>Hinweis :</strong><br/>Achtung Beta-Version <?php echo $params['version'];?> für Joomla 2.5 !!! Es wird nicht empfohlen, diese Version der Einsatzkomponente auf einer öffentlichen Live-Webseite zu betreiben.
-    </div>        
+		<div class="alert alert-info j-toggle-main span8" style="float:right;">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>Hinweis :</h4>Achtung Beta-Version <?php echo $params['version'];?> !!! Es wird nicht empfohlen, diese Version der Einsatzkomponente auf einer öffentlichen Live-Webseite zu betreiben.
+		</div>        
 		<?php endif;  
-		endif;  
+		
 		
 		//------------------------------------------------------------------------
 		$db = JFactory::getDbo();

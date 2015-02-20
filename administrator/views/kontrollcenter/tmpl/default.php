@@ -47,7 +47,7 @@ if (!empty($this->extra_sidebar)) {
     $this->sidebar .= $this->extra_sidebar;
 }
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisationen'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=kontrollcenter'); ?>" method="post" name="adminForm" id="adminForm">
 <?php if(!empty($this->sidebar)): ?>
 	<div id="j-sidebar-container" class="span2">
 		<?php echo $this->sidebar; ?>
@@ -57,23 +57,13 @@ if (!empty($this->extra_sidebar)) {
 	<div id="j-main-container">
 <?php endif;?>
     
-		<div id="filter-bar" class="btn-toolbar">
-        </div> 
+		<div id="filter-bar" class="btn-toolbar"></div> 
                
-		<div class="clearfix"> </div>
         
-		<table class="table table-striped" id="organisationList">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-            
-
-               <tr>
-                    <td>
 			<div class="row-fluid">
 				<div class="span12">
 						
@@ -126,9 +116,13 @@ if ($version->isCompatible('3.0')) : ?>
 <?php endif;?>                           
                     </div>
                     </div>
-						<div class="clearfix"></div>
-                    </td>
+	
+					</th>
 				</tr>
+			</thead>
+			<tbody>
+            
+
             
 				<tr>
 					<td>
@@ -151,7 +145,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 </div>
 </div>
 <div class="span5">
-					<div class="well well-small" style=" float:right;">
+					<div class="well well-small" style=" float:left;">
 						<div class="center">
 							<?php echo '<h4>'.JTEXT::_('Einsatzkomponente Version ');?><?php echo $params['version'].'</h4>';?>
 						</div>
@@ -176,8 +170,41 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 							<dt>Lizenz:</dt>
 							<dd>GNU General Public License version 2 or later </dd>
 						</dl>
-Aktuellste Version: <iframe  frameborder="0" height="70px" width="150px" src="http://www.feuerwehr-veenhusen.de/images/einsatzkomponenteJ30/index.html" scrolling="no"></iframe><br/><a target="_blank" class="btn" href="http://www.einsatzkomponente.de">Download-Link</a>			</div>
-                    
+</div>
+          
+					<div class="well well-small" style="float:left;">
+					
+						Aktuellste Version: <iframe  frameborder="0" height="30px" width="250px" src="http://www.feuerwehr-veenhusen.de/images/einsatzkomponenteJ30/index.html" scrolling="no"></iframe><br/><a target="_blank" class="btn" href="http://www.einsatzkomponente.de">Download-Link Webseite</a> <a target="_blank" class="btn" href="https://github.com/veenmeyer/Einsatzkomponente">Link zu GitHub</a>			
+
+						<!-- Button to trigger modal -->
+						<a href="#myModal" role="button" class="btn" data-toggle="modal">Verfügbare Module ...</a>
+     
+						<!-- Modal -->
+						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Verfügbare Module</h3>
+						</div>
+						<div class="modal-body">
+						<ul>
+						<li>mod_eiko_last (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
+						<li>mod_eiko_chart (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
+						<li>mod_eiko_statistik (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
+						<li>mod_eiko_melder (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
+						<li>mod_eiko_einsatzticker (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
+						<li>mod_eiko_led (Modul zur Anzeige des letzten Einsatzes als LED-Tickerlaufschrift)</li>
+						<li>mod_eiko_articles_news (Modul zur Anzeige der letzten Einsätze als Joomla-Artikel)</li>
+						</ul>
+						<h4>Mehr Infos dazu auf www.einsatzkomponente.de</h4>
+						</div>
+						<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</button>
+						<!--<button class="btn btn-primary">Save changes</button> !-->
+						</div>
+						</div>		
+				</div>
+				
+						
 					</td>
                     
                </tr>
