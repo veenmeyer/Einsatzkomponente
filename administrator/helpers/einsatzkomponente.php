@@ -138,16 +138,7 @@ class EinsatzkomponenteHelper
 		$result = $db->loadObjectList();
         return $result;
     }
-    
-    public static function last_year_id () {
-    // Letzte ID des Jahres auslesen, fuer die Einsatznummer
-    $query = 'SELECT id FROM  `#__eiko_einsatzberichte` WHERE 1 AND YEAR(  `date1` ) = YEAR( DATE_SUB( CURDATE( ) , INTERVAL 0 YEAR ) ) ORDER BY id ASC LIMIT 1';
-    $db = JFactory::getDBO();
-    $db->setQuery($query);
-	 $result = $db->loadObjectList();
-        return $result;
-    } 
-		
+	
 	public static function getYear() 
 	{
 		// Funktion : Alle Jahreszahlen aller Einsätze zusammenfassen
