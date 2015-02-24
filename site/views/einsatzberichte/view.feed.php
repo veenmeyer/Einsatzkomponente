@@ -39,8 +39,10 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		if ($layout_detail) : $this->layout_detail_link = '&layout='.$layout_detail;  endif; // Detailbericht Layout 'default' ?
 
 		
-		$rows 		= EinsatzkomponenteHelper::letze_x_einsatzdaten ($this->params->get('rss_items','10')); 
-		
+		$rows 		= EinsatzkomponenteHelper::letze_x_einsatzdaten ($this->params->get('rss_items','10'));
+		$startid = EinsatzkomponenteHelper::last_year_id();
+		$startid = $startid[0];
+		$startid = $startid->id;
 		$app	= JFactory::getApplication();
 		$menus	= $app->getMenu();
 		$title	= null;
@@ -67,9 +69,13 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			$author			= $row->created_by_alias ? $row->created_by_alias : $row->author;
 */
 			// load individual item creator class
-			
 			$item = new JFeedItem();
-			$item->title 		= $title;
+			if ($row->id >= $startid) {
+ 				$nr = $row->id - $startid+1;
+ 				$item->title = "+++ Einsatz Nr: " . $nr . " - " . $title . " +++";
+			} else {
+ 				$item->title = $title;
+			}
 			$item->link 		= $link;
 
 			$item->description 	.= '<table>';
