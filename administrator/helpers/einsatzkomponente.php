@@ -138,7 +138,7 @@ class EinsatzkomponenteHelper
 		$result = $db->loadObjectList();
         return $result;
     }
-	
+		
 	public static function getYear() 
 	{
 		// Funktion : Alle Jahreszahlen aller Einsätze zusammenfassen
