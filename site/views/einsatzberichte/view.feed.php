@@ -39,8 +39,12 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		if ($layout_detail) : $this->layout_detail_link = '&layout='.$layout_detail;  endif; // Detailbericht Layout 'default' ?
 
 		
-		$rows 		= EinsatzkomponenteHelper::letze_x_einsatzdaten ($this->params->get('rss_items','10')); 
-		
+		$rows 		= EinsatzkomponenteHelper::letze_x_einsatzdaten ($this->params->get('rss_items','10'));
+		$years = EinsatzkomponenteHelper::getYear();
+		foreach ($years as $year) {
+                        $yeararray[$year->id] = EinsatzkomponenteHelper::einsatz_daten_bestimmtes_jahr($year->id,9999,0);
+                        $eicount[$year->id] = count($yeararray[$year->id]);
+		}
 		$app	= JFactory::getApplication();
 		$menus	= $app->getMenu();
 		$title	= null;
@@ -48,7 +52,6 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
 		$this->document->link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$menu->id);;
-
 		foreach ( $rows as $row )
 		{
 			$auswahlorga = str_replace(",", " +++ ", $row->auswahlorga);
@@ -67,9 +70,10 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			$author			= $row->created_by_alias ? $row->created_by_alias : $row->author;
 */
 			// load individual item creator class
-			
 			$item = new JFeedItem();
-			$item->title 		= $title;
+			$itemyear = date("Y", strtotime($row->date1));
+			$rssnr = $eicount[$itemyear];
+			$item->title = "+++ Einsatz Nr: " . $rssnr . " - " . $title . " +++";
 			$item->link 		= $link;
 
 			$item->description 	.= '<table>';
@@ -98,6 +102,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 */
 			// loads item info into rss array
 			$this->document->addItem( $item );
+			$eicount[$itemyear]--;
 		}
 		
 		
