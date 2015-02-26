@@ -92,7 +92,7 @@ if ($this->params->get('display_home_pagination')) :
           
           
 <h2>
-<?php echo date('d.m.Y ', $curTime);?> 
+<?php echo date('d.m.Y ', $curTime);?>&nbsp;<?php echo date('H:i ', $curTime); ?>Uhr
 ||
 <?php echo $item->summary;?>
 </h2>
