@@ -34,7 +34,7 @@ class JFormFieldoptgroup extends JFormField
                 $query = 'SELECT id,name from #__eiko_organisationen where state=1';
                 $db->setQuery($query);
                 $orgs = $db->loadObjectList();
-                $html[] .= '<select id="'.$this->id.'" name="'.$this->name.'" multiple>';
+                $html[] .= '<select id="'.$this->id.'" name="'.$this->name.'[]" multiple>';
                 $html[] .= '<option>&nbsp;</option>';
                 foreach ($orgs as $org) {
                         $html[].='<optgroup label="'.$org->name.'">';
