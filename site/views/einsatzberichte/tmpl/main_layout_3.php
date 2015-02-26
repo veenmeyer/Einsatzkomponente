@@ -117,7 +117,7 @@ if ($this->params->get('display_home_pagination')) :
 		  <?php if($item->state == '1'): ?>
            
         <div id="bericht_<?php echo $item->id;?>" class="eintragHeadline <?php echo $first;?>">
-        <span><?php echo date('d.m.Y ', $curTime).' - '.$item->data1;?></span>
+        <span><?php echo date('d.m.Y ', $curTime).'&nbsp;' . date('H:i ', $curTime). ' - '.$item->data1;?></span>
         </div>
         <div class="eintragContent">
            <?php echo $item->summary;?>
