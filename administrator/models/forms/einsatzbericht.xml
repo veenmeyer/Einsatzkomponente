@@ -234,13 +234,9 @@
 			key_field="name" 
 			value_field="name"
              /> 
-       <field name="vehicles" type="sql" class="inputbox"
+       <field name="vehicles" type="optgroup" class="inputbox"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
-            query="SELECT `id`, `name` FROM `#__eiko_fahrzeuge` WHERE `state`='1' ORDER BY `ordering` ASC" 
-			key_field="id" 
-			value_field="name"
-			multiple="multiple"
          /> 
        <field name="article_id" 
 	   label = "Joomla-Artikel verlinken ?"
