@@ -179,7 +179,7 @@ if ($this->params->get('display_home_pagination')) :
            </td>
            <?php endif;?>
            <?php if (!$this->params->get('display_home_date_image')) : ?>
-		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?></td>
+		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime); ?>Uhr</td>
            <?php endif;?>
 
 		   <td>
