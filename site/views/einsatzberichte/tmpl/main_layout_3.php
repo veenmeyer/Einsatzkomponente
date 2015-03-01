@@ -117,8 +117,27 @@ if ($this->params->get('display_home_pagination')) :
 		  <?php if($item->state == '1'): ?>
            
         <div id="bericht_<?php echo $item->id;?>" class="eintragHeadline <?php echo $first;?>">
-        <span><?php echo date('d.m.Y ', $curTime).'&nbsp;' . date('H:i ', $curTime). ' - '.$item->data1;?></span>
+		
+        <span>
+           <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
+			<div class="home_cal_icon" style ="width:50px;">
+			<div class="home_cal_monat" style ="width:50px;"><?php echo date('M', $curTime);?></div>
+			<div class="home_cal_tag" style ="width:50px;"><?php echo date('d', $curTime);?></div>
+			<div class="home_cal_jahr" style ="width:50px;"><span style="font-size:10px;"><?php echo date('Y', $curTime);?></span></div>
+			</div>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
+		   <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime).' Uhr - '; ?>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
+		   <?php echo date('d.m.Y ', $curTime).' - ';?>
+           <?php endif;?>
+
+		   <?php echo $item->data1;?>
+		</span>
+		
         </div>
+		
         <div class="eintragContent">
            <?php echo $item->summary;?>
         </div>

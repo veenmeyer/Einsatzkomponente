@@ -92,8 +92,23 @@ if ($this->params->get('display_home_pagination')) :
           
           
 <h2>
-<?php echo date('d.m.Y ', $curTime);?>&nbsp;<?php echo date('H:i ', $curTime); ?>Uhr
-||
+
+           <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
+			<div class="home_cal_icon">
+			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
+			<div class="home_cal_tag"><?php echo date('d', $curTime);?></div>
+			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $curTime);?></span></div>
+			</div>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
+		   <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime).' Uhr || '; ?>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
+		   <?php echo date('d.m.Y ', $curTime).' || ';?>
+           <?php endif;?>
+
+		   
+
 <?php echo $item->summary;?>
 </h2>
 <hr align="left" />

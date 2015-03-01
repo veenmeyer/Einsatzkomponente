@@ -169,7 +169,7 @@ if ($this->params->get('display_home_pagination')) :
            </td>
            <?php endif;?>
            
-           <?php if ($this->params->get('display_home_date_image')) : ?>
+           <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
 		   <td> 
 			<div class="home_cal_icon">
 			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
@@ -178,8 +178,11 @@ if ($this->params->get('display_home_pagination')) :
 			</div>
            </td>
            <?php endif;?>
-           <?php if (!$this->params->get('display_home_date_image')) : ?>
+           <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
 		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime); ?>Uhr</td>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
+		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?></td>
            <?php endif;?>
 
 		   <td>

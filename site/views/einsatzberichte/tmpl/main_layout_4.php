@@ -200,27 +200,32 @@ if ($this->params->get('display_home_pagination')) :
            <?php endif;?>
            
 
-           <?php if ($this->params->get('display_home_date_image')) : ?>
+          
 		   <td align="center"> 
-			<?php
-				$wochentage = explode(',','So.,Mo.,Di.,Mi.,Do.,Fr.,Sa.');
-				$date2 = $wochentage[date('w', $curTime)];			   
-				echo $date2.', '.date('d.m.Y', $curTime);				
-			?>
+		   
+			<?php $wochentage = explode(',','So.,Mo.,Di.,Mi.,Do.,Fr.,Sa.');
+				$date2 = $wochentage[date('w', $curTime)];?>
+  
+			<?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
+			<div class="home_cal_icon">
+			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
+			<div class="home_cal_tag"><?php echo date('d', $curTime);?></div>
+			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $curTime);?></span></div>
+			</div>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
+		   <?php echo $date2.', '.date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime).' Uhr'; ?>
+           <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
+		   <?php echo $date2.', '.date('d.m.Y ', $curTime).'';?>
+           <?php endif;?>
+
+		   
 
 			   <?php if ($this->params->get('display_home_alertimage','0')) : ?>			   
 					<br /><img class="img-rounded" style="width:32px; height:32px;margin-right:2px;" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />			   
 			   <?php endif;?>			
-			<!--<div class="home_cal_icon">
-			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
-			<div class="home_cal_tag"><?php echo date('d', $curTime);?></div>
-			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $curTime);?></span></div>
-			</div>-->
            </td>
-           <?php endif;?>
-           <?php if (!$this->params->get('display_home_date_image')) : ?>
-		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?></td>
-           <?php endif;?>
 
 		   <td align="center">         		   
 				<?php if ($this->params->get('display_home_links')) : ?>

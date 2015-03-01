@@ -770,9 +770,11 @@
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Text</option>
+				value="0">Datum (Text)</option>
 			<option
-				value="1">Icon</option>
+				value="2">Datum (Text und Uhrzeit)</option>
+			<option
+				value="1">Kalendar-Icon</option>
 	  </field>
 	  <field
 			name="display_home_monat"
