@@ -22,13 +22,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 <!--RSS-Feed Imag-->
 <?php if ($this->params->get('display_home_rss','1')) : ?>
-<div style="float:right;" class="eiko_rss" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzberichte&format=feed&type=rss"><img src="<?php echo JURI::Root();?>/components/com_einsatzkomponente/assets/images/livemarks.png" class="eiko_rss_icon" border="0" alt="rss-feed-image"></a></div>
+<div class="eiko_rss_main_1" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzberichte&format=feed&type=rss"><img src="<?php echo JURI::Root();?>/components/com_einsatzkomponente/assets/images/livemarks.png" class="eiko_rss_icon_main_1" border="0" alt="rss-feed-image"></a></div>
 <?php endif;?>
 
 
 <!--Page Heading-->
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
-<div class="page-header">
+<div class="page-header eiko_header_main_1">
 <h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1> 
 </div>
 <?php endif;?>
@@ -45,7 +45,7 @@ if (!$this->params->get('anzeigejahr','0') and $this->params->get('display_filte
 	$years[] = JHTML::_('select.option', '9999', JTEXT::_('Alle Einsätze anzeigen')  , 'id', 'title');
 	$years = array_merge($years, (array)$this->years);
 	 
-	echo JHTML::_('select.genericlist',  $years, 'year', ' onchange=submit(); ', 'id', 'title', $this->selectedYear);?>
+	echo JHTML::_('select.genericlist',  $years, 'year', ' class="eiko_select_jahr_main_1" onchange=submit(); ', 'id', 'title', $this->selectedYear);?>
 	
     <?php
 endif;
@@ -53,14 +53,14 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('alle Einsatzarten')  , 'title', 'title');
 	$einsatzarten = array_merge($einsatzarten, (array)$this->einsatzarten);
 	?><?php 
-	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' onchange=submit(); ', 'title', 'title', $this->selectedEinsatzart);?>
+	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' class="eiko_select_einsatzart_main_1" onchange=submit(); ', 'title', 'title', $this->selectedEinsatzart);?>
     <?php
 	endif;
 	if (!$this->params->get('abfragewehr','0') and $this->params->get('display_filter_organisationen','1')) : 
 	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'name', 'name');
 	$organisationen = array_merge($organisationen, (array)$this->organisationen);
 	?><?php 
-	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' onchange=submit(); ', 'name', 'name', $this->selectedOrga);
+	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'name', 'name', $this->selectedOrga);
 	endif;?>
 	</form> 
 </div>
@@ -71,34 +71,34 @@ echo $this->modulepos_2;
 
 ?>
 
-<table width="100%" class="table table-striped table-bordered" id="example" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" class="table table-striped table-bordered eiko_table_main_1" border="0" cellspacing="0" cellpadding="0">
     <thead>
         <tr>
            <?php $col ='0';?>
            <?php if ($this->params->get('display_home_number','1') or $this->params->get('display_home_alertimage_num','0')) : ?>
 		   <?php if ($this->params->get('display_home_number','1')):?>
-            <th class="eiko_th_nr" width="">Nr.</th>
+            <th class="eiko_th_einsatznummer_main_1" width="">Nr.</th>
            <?php else:?>
-            <th class="eiko_th_nr" width=""></th>
+            <th class="eiko_th_einsatznummer_main_1" width=""></th>
            <?php endif;?>
            <?php $col =$col+1;?>
            <?php endif;?>
            <?php if ($this->params->get('display_home_alertimage','0')) : ?>
-            <th class="eiko_th_alert" width="">Alarm über</th>
+            <th class="eiko_th_alarmierungsart_main_1" width="">Alarm über</th>
            <?php $col =$col+1;?>
            <?php endif;?>
-            <th class="eiko_th_date" width="">Datum</th>
+            <th class="eiko_th_datum_main_1" width="">Datum</th>
            <?php $col =$col+1;?>
-            <th class="eiko_th_data" width="">Einsatzart/-ort</th>
+            <th class="eiko_th_einsatzart_main_1" width="">Einsatzart/-ort</th>
            <?php $col =$col+1;?>
-            <th class="eiko_th_summary mobile_hide_summary" width="">Beschreibung</th>
+            <th class="eiko_th_kurzbericht_main_1 mobile_hide_summary" width="">Beschreibung</th>
            <?php $col =$col+1;?>
            <?php if ($this->params->get('display_home_orga','0')) : ?>
-            <th class="eiko_th_orga" width="">Organisationen</th>
+            <th class="eiko_th_organisationen_main_1" width="">Organisationen</th>
            <?php $col =$col+1;?>
            <?php endif;?>
            <?php if ($this->params->get('display_home_image')) : ?>
-            <th class="eiko_th_image mobile_hide_image" width="">Bild</th>
+            <th class="eiko_th_einsatzbild_main_1 mobile_hide_image" width="">Bild</th>
            <?php $col =$col+1;?>
            <?php endif;?>
         </tr>
@@ -142,13 +142,13 @@ if ($this->params->get('display_home_pagination')) :
            <?php endif;?>
            <!--Anzeige des Monatsnamen ENDE-->
            
-		   <tr>
+		   <tr class="eiko_tr_main_1">
            
            <?php if ($this->params->get('display_home_number','1') or $this->params->get('display_home_alertimage_num','0')) : ?>
            <?php if ($this->params->get('display_home_marker','1')) : ?>
-		   <td style="text-align:center;color:#000000;font-weight:bold;font-size:larger;background-color:<?php echo $item->marker;?>;" >
+		   <td class="eiko_td_marker_main_1" style="background-color:<?php echo $item->marker;?>;" >
            <?php else:?>
-		   <td style="text-align:center;color:#000000;font-weight:bold;font-size:larger;" >
+		   <td class="eiko_td_marker_main_1">
            <?php endif;?>
            <?php if ($this->params->get('display_home_number','1')) : ?>
            <?php if ($hide) :?>
@@ -158,19 +158,19 @@ if ($this->params->get('display_home_pagination')) :
            <?php endif;?>
            <?php endif;?>
            <?php if ($this->params->get('display_home_alertimage_num','0')) : ?>
-           <br/><img class="img-rounded" style="width:30px; height:30px;" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />
+           <br/><img class="img-rounded eiko_img_alarmierungsart_main_1" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />
            <?php endif;?>
             </td>
            <?php endif;?>
            
            <?php if ($this->params->get('display_home_alertimage','0')) : ?>
-		   <td style=" text-align:center;" > 
-           <img class="img-rounded" style="width:50px; height:50px;margin-right:2px;" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />
+		   <td class="eiko_td_alarmierungsart_main_1"> 
+           <img class="img-rounded eiko_img_alarmierungsart_main_1" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />
            </td>
            <?php endif;?>
            
            <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
-		   <td> 
+		   <td class="eiko_td_kalender_main_1"> 
 			<div class="home_cal_icon">
 			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
 			<div class="home_cal_tag"><?php echo date('d', $curTime);?></div>
@@ -179,16 +179,16 @@ if ($this->params->get('display_home_pagination')) :
            </td>
            <?php endif;?>
            <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
-		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime); ?>Uhr</td>
+		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime); ?>Uhr</td>
            <?php endif;?>
            <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
-		   <td style=" padding-left:5px;"> <?php echo date('d.m.Y ', $curTime);?></td>
+		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $curTime);?></td>
            <?php endif;?>
 
-		   <td>
+		   <td class="eiko_td_einsatzart_main_1">
            
 		   <?php if ($this->params->get('display_list_icon')) : ?>
-           <img class="img-rounded" style="float:<?php echo $this->params->get('float_list_icon');?>;width:50px; height:50px;margin-right:2px;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" />
+           <img class="img-rounded eiko_img_einsatzart_main_1" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" />
            <?php endif;?>
 			<?php if ($this->params->get('display_home_links')) : ?>
            <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">
@@ -222,20 +222,20 @@ if ($this->params->get('display_home_pagination')) :
 		   
            </td>
 		   
-		   <td class="mobile_summary"> <?php echo $item->summary;?></td>
+		   <td class="mobile_summary eiko_td_kurzbericht_main_1"> <?php echo $item->summary;?></td>
            
            <?php if ($this->params->get('display_home_orga','0')) : ?>
            <?php $auswahlorga = str_replace(",", "</br>", $item->auswahlorga);?>
-		   <td nowrap> <?php echo $auswahlorga;?></td>
+		   <td nowrap class="eiko_td_organisationen_main_1"> <?php echo $auswahlorga;?></td>
            <?php endif;?>
 
            <?php if ($this->params->get('display_home_image')) : ?>
 		   <?php if ($item->foto) : ?>
-		   <td class="mobile_image"> <img  class="img-rounded" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->foto;?>"/></td>
+		   <td class="mobile_image eiko_td_einsatzbild_main_1"> <img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->foto;?>"/></td>
            <?php endif;?>
 		   <?php if (!$item->foto) : ?>
            <?php if ($this->params->get('display_home_image_nopic','0')) : ?>
-		   <td class="mobile_image"> <img  class="img-rounded" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/></td>
+		   <td class="mobile_image eiko_td_einsatzbild_main_1"> <img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/></td>
            <?php else:?>
 			<td class="mobile_image">&nbsp;</td>
 		   <?php endif;?>
@@ -246,7 +246,7 @@ if ($this->params->get('display_home_pagination')) :
            <!-- Zusatzinformation -->
 			<?php if ($this->params->get('display_home_info','1')) : ?>
             <?php $auswahlorga = str_replace(",", " +++ ", $item->auswahlorga);?>
-            <tr id="tr<?php echo $item->id;?>" style=" display:none;" >
+            <tr id="tr<?php echo $item->id;?>" class="eiko_tr_zusatz_main_1" style=" display:none;" >
             
            <?php if ($this->params->get('display_home_marker','1')) : ?>
            <?php $rgba = hex2rgba($item->marker,0.7);?>
@@ -266,7 +266,7 @@ if ($this->params->get('display_home_pagination')) :
 		   <td>
            <?php endif;?>
             </td>
-            <td colspan="<?php echo $col;?>">
+            <td colspan="<?php echo $col;?>" class=""eiko_td_zusatz_main_1>
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
             <h3>Alarmierungszeit :</h3><?php echo date('d.m.Y', $curTime);?> um <?php echo date('H:i', $curTime);?> Uhr
             <h3>alarmierte Organisationen :</h3><?php echo $auswahlorga;?><br/>
@@ -295,7 +295,7 @@ if ($this->params->get('display_home_pagination')) :
 
     
     <?php if ($this->params->get('display_home_map')) : ?>
-    <tr><td colspan="<?php echo $col;?>">
+    <tr><td colspan="<?php echo $col;?>" class="eiko_td_gmap_main_1">
     <h4>Einsatzgebiet</h4>
 			<?php if ($this->params->get('gmap_action','0') == '1') :?>
   			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
@@ -374,7 +374,7 @@ echo $this->modulepos_1;
         	$output = 'rgb('.implode(",",$rgb).')';
         }
         //Return rgb(a) color string
-        return $output;
+        return $output; 
 		
 }
 ?> 

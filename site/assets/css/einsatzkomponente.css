@@ -611,3 +611,43 @@ h4, h5 {
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
+
+ 
+/* CSS main_layout_1 */
+.eiko_rss_main_1 {float:right;}
+.eiko_rss_icon_main_1 {width:24px;}
+.eiko_header_main_1 {}
+.eiko_select_jahr_main_1 {}
+.eiko_select_einsatzart_main_1 {}
+.eiko_select_organisation_main_1 {}
+.eiko_table_main_1 {}
+.eiko_th_einsatznummer_main_1 {}
+.eiko_th_alarmierungsart_main_1 {}
+.eiko_th_datum_main_1 {}
+.eiko_th_einsatzart_main_1 {}
+.eiko_th_kurzbericht_main_1 {}
+.eiko_th_organisationen_main_1 {}
+.eiko_th_einsatzbild_main_1 {}
+.eiko_tr_main_1 {}
+.eiko_td_marker_main_1 {text-align:center;color:#000000;font-weight:bold;font-size:larger;}
+.eiko_img_alarmierungsart_main_1 {width:50px; height:50px;margin-right:2px;}
+.eiko_td_alarmierungsart_main_1 {text-align:center;}
+.eiko_td_kalender_main_1 {}
+.eiko_td_datum_main_1 {padding-left:5px;}
+.eiko_td_einsatzart_main_1 {}
+.eiko_img_einsatzart_main_1 {width:50px; height:50px;margin-right:2px;}
+.eiko_td_kurzbericht_main_1 {}
+.eiko_td_organisationen_main_1 {}
+.eiko_td_einsatzbild_main_1 {}
+.eiko_img_einsatzbild_main_1 {}
+.eiko_tr_zusatz_main_1 {}
+.eiko_td_zusatz_main_1 {}
+.eiko_td_gmap_main_1 {}
+
+
+
+
+
+
+
