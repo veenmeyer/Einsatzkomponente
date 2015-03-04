@@ -14,38 +14,14 @@
             key_field="title"
             value_field="title" />
 			
-       <field name="tickerkat" type="list"
+              <field name="tickerkat" type="sql"
             label="Einsatzkategorie"
             description="Einsatzkategorie" 
-            default="0"
-            class="eiko_tickerKAT"
+            required="true" 
             filter="raw"
-            multiple="false">
-			
-                <option value="17">COM_EINSATZKOMPONENTE_TICKER_KAT_17</option>
-                <option value="22">COM_EINSATZKOMPONENTE_TICKER_KAT_22</option>
-                <option value="1">COM_EINSATZKOMPONENTE_TICKER_KAT_01</option>
-                <option value="3">COM_EINSATZKOMPONENTE_TICKER_KAT_03</option>
-                <option value="20">COM_EINSATZKOMPONENTE_TICKER_KAT_20</option>
-                <option value="21">COM_EINSATZKOMPONENTE_TICKER_KAT_21</option>
-                <option value="19">COM_EINSATZKOMPONENTE_TICKER_KAT_19</option>
-                <option value="4">COM_EINSATZKOMPONENTE_TICKER_KAT_04</option>
-                <option value="2">COM_EINSATZKOMPONENTE_TICKER_KAT_02</option>
-                <option value="13">COM_EINSATZKOMPONENTE_TICKER_KAT_13</option>
-                <option value="5">COM_EINSATZKOMPONENTE_TICKER_KAT_05</option>
-                <option value="15">COM_EINSATZKOMPONENTE_TICKER_KAT_15</option>
-                <option value="11">COM_EINSATZKOMPONENTE_TICKER_KAT_11</option>
-                <option value="7">COM_EINSATZKOMPONENTE_TICKER_KAT_07</option>
-                <option value="6">COM_EINSATZKOMPONENTE_TICKER_KAT_06</option>
-                <option value="10">COM_EINSATZKOMPONENTE_TICKER_KAT_10</option>
-                <option value="16">COM_EINSATZKOMPONENTE_TICKER_KAT_16</option>
-                <option value="8">COM_EINSATZKOMPONENTE_TICKER_KAT_08</option>
-                <option value="9">COM_EINSATZKOMPONENTE_TICKER_KAT_09</option>
-                <option value="12">COM_EINSATZKOMPONENTE_TICKER_KAT_12</option>
-                <option value="18">COM_EINSATZKOMPONENTE_TICKER_KAT_18</option>
-                <option value="14">COM_EINSATZKOMPONENTE_TICKER_KAT_14</option>
-                <option value="23">COM_EINSATZKOMPONENTE_TICKER_KAT_23</option>
-        </field> 
+            query="SELECT * FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            key_field="title"
+            value_field="title" />
 		
        <field name="alerting" type="sql"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING"
