@@ -1171,12 +1171,28 @@
 				hide_none="true" 
 				stripext="" 
 			/>
+	  <field
+			name="einsatzkarte_gmap_icon"
+			type="radio"
+			class="btn-group"
+			default="14"
+			label="Größe der Gmap-Icons :"
+			description="">
+			<option
+				value="14">14 x 14</option>
+			<option
+				value="24">24 x 24</option>
+			<option
+				value="32">32 x 32</option>
+			<option
+				value="48">48 x 48</option>
+	  </field>
 		<field
 			name="spacer6456433"
 			type="spacer"
 			hr="true"
 		/>
-
+		
 	  <field
 			name="display_einsatzkarte_links"
 			type="radio"

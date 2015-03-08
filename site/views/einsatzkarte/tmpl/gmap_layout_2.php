@@ -222,8 +222,8 @@ if (foto != "")
 var detailString = "<table style='height:100px;'><tr><td width='88%'><div style=' background-color:#ffffff;' align='left'><span style='font-size:14px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;color:#fff;background-color:#ff0000;'>" + html + "</span>" + "<p></p>Einsatzdatum : " + day + "." + month + "." + year + "<p></p><strong>" + name + "</strong> " + "" + "<p></p>" + "<p align='left'>" + "<a href=<?php echo JRoute::_('index.php?option=com_reports2&all=0');?>" + "&view=show&Itemid=" + itemid + "&gmaplink=1&id=" + id + "> zum Detailbericht <\/a></p></div></td><td style='padding-right:20px;margin-right:20px;'><img style='border:1px solid;' src='/" + foto + "' height='90' /></td></tr></table>";
 }
 
-var bild = new google.maps.MarkerImage("<?php echo JURI::root()."/";?>"+ image,null, null, null, new google.maps.Size(14, 14));
-var bildschatten = new google.maps.MarkerImage("<?php echo JURI::root()."/shadow-";?>"+ image,new google.maps.Size(14, 14), null, null, new google.maps.Size(14, 14));
+var bild = new google.maps.MarkerImage("<?php echo JURI::root()."/";?>"+ image,null, null, null, new google.maps.Size(<?php echo $this->params->get('einsatzkarte_gmap_icon', 14);?>, <?php echo $this->params->get('einsatzkarte_gmap_icon', 14);?>));
+var bildschatten = new google.maps.MarkerImage("<?php echo JURI::root()."/shadow-";?>"+ image,new google.maps.Size(<?php echo $this->params->get('einsatzkarte_gmap_icon', 14);?>, <?php echo $this->params->get('einsatzkarte_gmap_icon', 14);?>), null, null, new google.maps.Size(<?php echo $this->params->get('einsatzkarte_gmap_icon', 14);?>, <?php echo $this->params->get('einsatzkarte_gmap_icon', 14);?>));
 
   // Marker sizes are expressed as a Size of X,Y
   // where the origin of the image (0,0) is located
