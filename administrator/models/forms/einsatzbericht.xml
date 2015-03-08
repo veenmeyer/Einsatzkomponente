@@ -15,14 +15,15 @@
             value_field="title" />
 			
               <field name="tickerkat" type="sql"
-            label="Einsatzkategorie"
-            description="Einsatzkategorie" 
+			class="eiko_tickerkat"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_KATEGORIE" 
             required="true" 
             filter="raw"
             query="SELECT * FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC"
-            key_field="title"
+            key_field="id"
             value_field="title" />
-		
+			
        <field name="alerting" type="sql"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_ALERTING" 
