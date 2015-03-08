@@ -67,7 +67,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_NOTRUFTICKER'); ?>:
 			<?php echo $this->item->notrufticker; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TICKERKAT'); ?>:
-			<?php echo JText::_($this->item->tickerKat); ?></li>
+			<?php echo JText::_($this->item->tickerKat->title); ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA'); ?>:
 			<?php
 				$array = array();

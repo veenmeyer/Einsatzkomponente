@@ -37,7 +37,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 		<?php echo $this->item->data1; ?></h1>
         
             <?php if( $this->item->tickerkat ) : ?>
-        	<span class="einsatzdetails_sub_headline">Einsatzart: <?php echo JText::_($this->tickerKat); ?></span>
+        	<span class="einsatzdetails_sub_headline">Einsatzart: <?php echo JText::_($this->tickerKat->title); ?></span>
             <?php endif;?>
         
         <hr/>

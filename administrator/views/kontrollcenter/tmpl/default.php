@@ -68,53 +68,51 @@ if (!empty($this->extra_sidebar)) {
 				<div class="span12">
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzberichte">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/liste.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/liste.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?></span>
 	    					</a>
-    						
+							
+	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=kategorien">
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'); ?></span>
+	    					</a>   						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzarten">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?></span>
-	    					</a>
-    						
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?></span>
+	    					</a>    						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=organisationen">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/organisationen.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?></span>
-	    					</a>
-    						
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/organisationen.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?></span>
+	    					</a>    						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=alarmierungsarten">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/alarmierungsarten.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?></span>
-	    					</a>
-    						
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/alarmierungsarten.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?></span>
+	    					</a>    						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzfahrzeuge.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzfahrzeuge.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?></span>
 	    					</a>
     						
 	    					<!--<a class="btn" href="index.php?option=com_einsatzkomponente&view=beispiel">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?>" src="components/com_einsatzkomponente/assets/images/menu/beispiel.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?></span>
+		    				<img  style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?>" src="components/com_einsatzkomponente/assets/images/menu/beispiel.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?></span>
 	    					</a>-->
     					
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzbildmanager">
-		    				<img alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzbildmanager.png" /><br/>
-		    				<span><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzbildmanager.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?></span>
+	    					</a>
 
-	    					</a>
-<?php
-$version = new JVersion;
-if ($version->isCompatible('3.0')) : ?>
 	    					<a class="btn" href="index.php?option=com_config&view=component&component=com_einsatzkomponente">
-		    				<img alt="<?php echo JText::_('Optionen'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einstellungen.png" /><br/>
-		    				<span><?php echo JText::_('Optionen'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('Optionen'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einstellungen.png" /><br/>
+		    				<span style="font-size:8px;"><?php echo JText::_('Optionen'); ?></span>
 	    					</a>
-<?php endif;?>                           
-                    </div>
+
+				</div>
                     </div>
 	
 					</th>

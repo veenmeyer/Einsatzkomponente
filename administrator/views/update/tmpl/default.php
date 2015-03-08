@@ -119,6 +119,13 @@ else {
 	
 // ------------------ Update von Version 3.05 auf 3.06 beta ---------------------------------------------------
 
+	$db = JFactory::getDbo();
+	$db->setQuery('show columns from `#__eiko_tickerkat` where Field="id"');
+	try {
+	$check_tickerkat = $db->execute();
+	} catch (Exception $e) {
+
+	
 $eiko_tickerkat = array(
   array('id' => '1','asset_id' => '0','title' => 'Brandeinsatz > Brandmeldeanlage (Fehlalarm)','image' => 'images/com_einsatzkomponente/images/list/brand_bma_fehl.png','beschreibung' => '','ordering' => '1','state' => '1','created_by' => '0','checked_out' => '0','checked_out_time' => '0000-00-00 00:00:00'),
   array('id' => '2','asset_id' => '0','title' => 'Brandeinsatz > Wohngebäude','image' => 'images/com_einsatzkomponente/images/list/brand_wohnhaus.png','beschreibung' => '','ordering' => '2','state' => '1','created_by' => '0','checked_out' => '0','checked_out_time' => '0000-00-00 00:00:00'),
@@ -181,11 +188,12 @@ foreach($eiko_tickerkat as $data){
 	}	
 	
 }  
+	echo 'DB-Updates Version 3.6 erfolgreich <span class="label label-success">aktualisiert.</span>.<br/><br/>'; 
 
 
+}
 
 
-	if (!$e):echo 'DB-Updates  < 3.06 beta erfolgreich <span class="label label-success">aktualisiert.</span>.<br/><br/>'; endif;
 
 
 // ------------------------------------------------------------------------------------------------------------

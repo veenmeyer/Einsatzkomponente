@@ -29,7 +29,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Headline-->
         	<h1 class="eiko_headline_2">
             <?php if ($this->einsatzlogo->list_icon) :?>
-        	<img  class="eiko_img-rounded_2 eiko_list_icon_2" src="<?php echo JURI::Root();?><?php echo $this->einsatzlogo->list_icon;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat); ?>"/>
+        	<img  class="eiko_img-rounded_2 eiko_list_icon_2" src="<?php echo JURI::Root();?><?php echo $this->einsatzlogo->list_icon;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat->image); ?>"/>
             <?php endif;?>
 			<span class="eiko_kurzbericht_2"><?php echo $this->item->summary; ?></span>
             </h1>
@@ -37,7 +37,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             
             <!--Einsatzkategorie-->
             <?php if( $this->item->tickerkat ) : ?>
-        	<br /><span class="eiko_einsatzkategorie_2">Einsatzart: <?php echo JText::_($this->tickerKat); ?></span>
+        	<br /><span class="eiko_einsatzkategorie_2">Einsatzart: <?php echo JText::_($this->tickerKat->title); ?></span>
 			<?php if ($this->params->get('display_detail_hits','1')):?>
             <span class="badge pull-right small">Zugriffe: <?php echo $this->item->counter; ?></span>
             <?php endif;?>

@@ -37,14 +37,12 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
         }
  
 		$document = JFactory::getDocument();
-		//if ($this->params->get('display_home_bootstrap','0')) :
 		// Import Bootstrap
  		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 		$document->addStyleDeclaration($this->params->get('edit_css','')); 
-		//endif;
 		
 		// Import Jquery
 		$version = new JVersion;

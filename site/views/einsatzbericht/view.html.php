@@ -53,7 +53,6 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$this->tickerKat = EinsatzkomponenteHelper::getTickerKat($this->item->tickerkat); 
 		$this->alarmierungsart = EinsatzkomponenteHelper::getAlarmierungsart($this->item->alerting); 
 		
-		
 		// Get active menu
 		$app	= JFactory::getApplication();
 		$menus	= $app->getMenu();

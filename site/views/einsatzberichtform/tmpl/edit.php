@@ -12,10 +12,7 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('formbehavior.chosen', 'select');
-endif;
 
 ?>
 <?php
