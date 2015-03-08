@@ -1059,6 +1059,127 @@
 	  
 	</fieldset>
 	
+
+<!-- Einsatzkarte -->
+
+<fieldset name="einsatzkarte" label="Einsatzkarte" description="">
+
+<field name="note_einsatzkarte" 
+		type="note" 
+		label="Hier können Sie Ihre Einsatzkarte (Übersicht) anpassen :" 
+		class="alert alert-info" 
+		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
+		/>	
+		
+	  <field
+			name="display_einsatzkarte_bootstrap"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="Bootstrap CSS+JS :"
+			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+		<field
+			name="spacer43323"
+			type="spacer"
+			hr="true"
+		/>
+	  <field
+			name="display_einsatzkarte_map"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Karte :"
+			description="">
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
+			name="display_einsatzkarte_sidebar"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Sidebar :"
+			description="">
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  
+	  <field
+			name="display_einsatzkarte_einsatzgebiet"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Einsatzgebiet auf Karte :"
+			description="">
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+			<field name="einsatzkarte_map_height" 
+				type="text" 	
+				default="450" 
+				label="Höhe der Karte :" 
+				description="Bitte nur so angeben : z.b. 450 (ohne px) !!" 
+			/>
+	  <field
+			name="display_einsatzkarte_organisationen"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Organisationen auf Karte :"
+			description="">
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+			<field name="einsatzkarte_orga_image" 
+				type="imagelist" 
+				default="haus_rot.png" label="Orga-Icon wählen :" 
+				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
+				directory="images/com_einsatzkomponente/images/map/icons/" 
+				exclude="index.html" 
+				hide_default="true" 
+				hide_none="true" 
+				stripext="" 
+			/>
+		<field
+			name="spacer6456433"
+			type="spacer"
+			hr="true"
+		/>
+
+	  <field
+			name="display_einsatzkarte_links"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Link zum Detailbericht :"
+			description="">
+			
+			<option
+				value="0">Ausblenden</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+		<field
+			name="spacer45544354"
+			type="spacer"
+			hr="true"
+		/>
+	</fieldset>
+
 	
 	
 <fieldset name="orga_uebersicht" label="Organisationsübersicht" description="">

@@ -69,14 +69,13 @@ $gmapconfig = $this->gmap_config;
 
 	
 
-		if ($this->params->get('display_detail_organisationen','1')) :
+		if ($this->params->get('display_einsatzkarte_organisationen','1')) :
 			// Feuerwehrliste aus DB holen
 			$db = JFactory::getDBO();
 			$query = 'SELECT id, name,gmap_latitude,gmap_longitude,link,detail1 FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `id`';
 			$db->setQuery($query);
 			$orga = $db->loadObjectList();
 
-			$orga_image 	= JURI::base().'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png');
 	  		$organisationen='['; // Feuerwehr Details  ------>
 	  		$n=0;
 	  		for($i = 0; $i < count($orga); $i++) {
@@ -92,11 +91,13 @@ $gmapconfig = $this->gmap_config;
 		else:
 			$organisationen	 = '[["",1,1,0],["",1,1,0] ]';	
 			endif;
+			
+			$orga_image 	= JURI::base().'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png');
 
 //print_r ($organisationen);break;
 
 
-		if ($this->params->get('display_detail_einsatzgebiet','1')) :
+		if ($this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
 	  	 $alarmareas1  = $this->gmap_config->gmap_alarmarea;  // Einsatzgebiet  ---->
 	 	 $alarmareas = explode('|', $alarmareas1);
 	     $einsatzgebiet='[ ';
@@ -142,7 +143,12 @@ $catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="'.
 
 $i++; 
 } 
+if ($this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
 $catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="area"><button type="button" class="btn btn-default btn-xs" onClick="togglearea()" id="div_area"><input type="checkbox" class="eiko_gmap_checkbox" id="area" onClick="togglearea()" checked/>&nbsp;&nbsp;<img src="'.JURI::base().'images/com_einsatzkomponente/images/map/icons/haus_rot.png" width="32px" height="32px" />Einsatzgebiet<br/>anzeigen</button></label></div>';
+endif;
+if (!$this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
+$catbox .= '';
+endif;
 
 
 
@@ -207,7 +213,7 @@ function createHouse(latlng, label, html,index,image) {
 
       // A function to create the marker and set up the event window
 function createMarker(latlng,name,html,category,image,id,date1,day,month,year,foto,itemid) {
-var contentString = "<div align='center'><span class='label label-info' style='font-size:16px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;'>" + html + "</span><br/>" + name + "<br/>" + day + "." + month + "." + year + "<br/>" + "<a class='btn-home' href=<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' ); ?>"+id+">zur Detailansicht</a></div>";
+var contentString = "<div align='center'><span class='label label-info' style='font-size:16px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;'>" + html + "</span><br/>" + name + "<br/>" + day + "." + month + "." + year + "<?php if ($this->params->get('display_einsatzkarte_links','1')) :?><br/>" + "<a class='btn-home' href=<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' ); ?>"+id+">zur Detailansicht</a><?php endif;?></div>";
 
 var detailString = "<table style='height:100px;'><tr><td width='88%'><div style=' background-color:#ffffff;' align='left'><span style='font-size:14px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;color:#fff;background-color:#ff0000;'>" + html + "</span>" + "<p></p>Einsatzdatum : " + day + "." + month + "." + year + "<p></p><strong>" + name + "</strong> " + "" + "<p></p>" + "<p align='left'>" + "<a href=<?php echo JRoute::_('index.php?option=com_reports2&all=0');?>" + "&view=show&Itemid=" + itemid + "&gmaplink=1&id=" + id + "> zum Detailbericht <\/a></p></div></td><td style='padding-right:20px;margin-right:20px;'><img style='border:1px solid;' src='/components/com_reports2/images/noimage.png' height='90' /></td></tr></table>";
 
@@ -522,8 +528,16 @@ polygon.setMap(map);
 
 		<?php echo '<div class="well row-fluid btn-toolbar" id="einsatzarten_panel">'.$catbox.'</div>';?>
 		
-		<div class="well eiko_gmap_sidebar span6" id="map" style="height:450px;width:98%;margin-left:0px;"></div>
-		<div class="well eiko_gmap_sidebar span6" id="side_bar" style="height: <?php echo $gmapconfig->gmap_height;?>px;width:98%;margin-left:0px;"></div>	
+		<?php if ($this->params->get('display_einsatzkarte_map','1')) : ?>
+		<div class="well eiko_gmap_sidebar span6" id="map" style="height:<?php echo $this->params->get('einsatzkarte_map_height','450');?>px;width:98%;margin-left:0px;"></div>
+		<?php endif; ?>
+		<?php if (!$this->params->get('display_einsatzkarte_map','1')) : ?>
+		<div class="well eiko_gmap_sidebar span6" id="map" style="height:<?php echo $this->params->get('einsatzkarte_map_height','450');?>px;width:98%;margin-left:0px;"></div>
+		<?php endif; ?>
+		<?php if ($this->params->get('display_einsatzkarte_sidebar','1')) : ?>
+		<div class="well eiko_gmap_sidebar span6" id="side_bar" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px;width:98%;margin-left:0px;"></div>	
+		<?php endif; ?>
+
 
 		<div class="row-fluid">
 			<div class="span6" id="details" style="display:none;">Daten werden eingelesen ...</div>

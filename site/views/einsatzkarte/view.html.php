@@ -132,21 +132,18 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
         // Import CSS
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
-		
+		if ($this->params->get('display_einsatzkarte_bootstrap','0')) :
  		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
+		endif;
 		$document->addStyleDeclaration($this->params->get('gmap_css','')); 
 		
 		// Import Jquery
-		$version = new JVersion;
-		if ($version->isCompatible('3.0')) :
 		JHtml::_('jquery.framework',true);
 		JHtml::_('jquery.ui');
-		else:
-		$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
+		//$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
 		
-		endif;
 		// prüfen ob jquery geladen wurde
 		echo "<script type=\"text/javascript\">
 		if(typeof jQuery == \"function\")
@@ -155,8 +152,8 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
 		  alert(\"jQuery nicht geladen\");
 		</script>";
 		
-		$document->addStyleSheet('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/iThing.css');
- 		$document->addScript('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/jQDateRangeSlider-withRuler-min.js');	
+		//$document->addStyleSheet('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/iThing.css');
+ 		//$document->addScript('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/jQDateRangeSlider-withRuler-min.js');	
 		
 		
 
