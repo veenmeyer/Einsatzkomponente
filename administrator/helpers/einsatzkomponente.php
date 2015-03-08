@@ -700,7 +700,7 @@ endif;
 		$body   = ''
 				. '<h2>+++ '.$result[0]->summary.' +++</h2>';
 		if ($params->get('send_mail_kat','0')) :	
-		$body   .= '<h4>'.JText::_($kat).'</h4>';
+		$body   .= '<h4>'.JText::_($kat->title).'</h4>';
 		endif;
 		if ($params->get('send_mail_orga','0')) :	
 		$body   .= '<span><b>Eingesetzte Kräfte:</b> '.$orgas.'</span>';

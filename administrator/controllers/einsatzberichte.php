@@ -108,11 +108,7 @@ class EinsatzkomponenteControllerEinsatzberichte extends JControllerAdmin
 				$this->setMessage($model->getError());
 			}
 		}
-		$version = new JVersion;
-        	if ($version->isCompatible('3.0')) :
-				// Invoke the postDelete method to allow for the child class to access the model.
 				$this->postDeleteHook($model, $cid);
-			endif;
 
 		$this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
 	}

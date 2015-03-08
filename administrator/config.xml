@@ -320,14 +320,36 @@
 			type="radio"
 			class="btn-group"
 			default="0"
-			description="Email-Funktionen im Backend aktivieren ?"
-			label="Email (Backend) :" >
+			description="Email-Funktionen (manuell) im Backend aktivieren ?"
+			label="Email - manuell:" >
 			<option
 				value="0">Nein</option>
 			<option
 				value="1">Ja</option>
 		</field>
-			
+		<field name="mail_empfaenger" 
+			type="text" default="" hint="max.mustermann@host.de,presse@presse.net" 
+			label="Emailadressen (manuell)" 
+			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
+			/>
+		<field
+			name="send_mail_auto"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Email-Funktionen (automatisch) aktivieren ?"
+			label="Email - automatisch:" >
+			<option
+				value="0">Nein</option>
+			<option
+				value="1">Ja</option>
+		</field>
+		
+		<field name="mail_empfaenger_auto" 
+			type="text" default="" hint="max.mustermann@host.de,presse@presse.net" 
+			label="Emailadressen (auto)" 
+			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
+			/>
 			
 		<field
 			name="send_mail_orga"
@@ -389,11 +411,6 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
-		<field name="mail_empfaenger" 
-			type="text" default="" hint="max.mustermann@host.de,presse@presse.net" 
-			label="Emailadressen" 
-			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
-			/>
 
 <field name="note_social" 
 		type="note" 
