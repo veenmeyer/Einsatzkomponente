@@ -38,6 +38,11 @@ class EinsatzkomponenteHelper
 				  $vName == 'einsatzberichte'
 			  );
 			  JHtmlSidebar::addEntry(
+				  JText::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'),
+				  'index.php?option=com_einsatzkomponente&view=kategorien',
+				  $vName == 'kategorien'
+			  );
+			  JHtmlSidebar::addEntry(
 				  JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'),
 				  'index.php?option=com_einsatzkomponente&view=einsatzarten',
 				  $vName == 'einsatzarten'
@@ -256,32 +261,16 @@ class EinsatzkomponenteHelper
 
     public static function getTickerKat($kat) {
 		// Funktion : Einsatzkategorie
-             if (!$kat)		{$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_00";} 
-             if ($kat == 22){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_22";} 
-             if ($kat == 1){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_01";} 
-             if ($kat == 3){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_03";} 
-             if ($kat == 20){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_20";} 
-             if ($kat == 21){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_21";} 
-             if ($kat == 19){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_19";} 
-             if ($kat == 17){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_17";} 
-             if ($kat == 4){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_04";} 
-             if ($kat == 2){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_02";} 
-             if ($kat == 13){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_13";} 
-             if ($kat == 5){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_05";} 
-             if ($kat == 15){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_15";} 
-             if ($kat == 11){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_11";} 
-             if ($kat == 7){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_07";} 
-             if ($kat == 6){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_06";} 
-             if ($kat == 10){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_10";} 
-             if ($kat == 16){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_16";} 
-             if ($kat == 8){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_08";} 
-             if ($kat == 9){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_09";} 
-             if ($kat == 12){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_12";} 
-             if ($kat == 18){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_18";} 
-             if ($kat == 14){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_14";} 
-             if ($kat == 23){$tickerKAT = "COM_EINSATZKOMPONENTE_TICKER_KAT_23";} 
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+					$query
+						->select('*')
+						->from('`#__eiko_tickerkat`')
+						->where('id = "' .$kat.'"  AND state = "1" ');
+					$db->setQuery($query);
+					$result = $db->loadObject();
 
-        return $tickerKAT;
+        return $result;
     }
 	
     public static function getAlarmierungsart($alerting) {
