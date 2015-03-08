@@ -322,7 +322,7 @@ var bildschatten = new google.maps.MarkerImage("<?php echo JURI::root()."/shadow
         var side = "";
         for (var i=0; i<gmarkers.length; i++) {
           if (gmarkers[i].getVisible()) {
-          side += '<a class="eiko_gmap_sidebar_link" href="javascript:myclick(' + i + ')">' + gmarkers[i].day + "." + gmarkers[i].month + "." + gmarkers[i].year + "  " + '<img src="<?php echo JURI::base();?>'+gmarkers[i].image+'" width=16px height=16px alt=""/>' + gmarkers[i].myname + '<\/a><br/>';
+          side += '<div class="eiko_gmap_sidebar_div"><a class="eiko_gmap_sidebar_link" href="javascript:myclick(' + i + ')">' + gmarkers[i].day + "." + gmarkers[i].month + "." + gmarkers[i].year + "  " + '<img src="<?php echo JURI::base();?>'+gmarkers[i].image+'" class ="eiko_gmap_sidebar_icon" alt=""/>' + gmarkers[i].myname + '<\/a></div>';
           }
         }
         document.getElementById("side_bar").innerHTML = side;

@@ -588,6 +588,17 @@ h4, h5 {
 	}
 .eiko_gmap_sidebar_link {  
 	}
+.eiko_gmap_sidebar_div {  
+	}
+.eiko_gmap_sidebar_icon {  
+width: 16px;
+height:16px;
+margin-left:5px;
+padding-left:5px;
+margin-right:5px;
+padding-right:5px;
+	}
+
 .eiko_gmap_checkbox {
 	visibility: hidden;
 	}

@@ -324,7 +324,7 @@ var bildschatten = new google.maps.MarkerImage("<?php echo JURI::root()."/shadow
         var side = "";
         for (var i=0; i<gmarkers.length; i++) {
           if (gmarkers[i].getVisible()) {
-          side += '<a class="eiko_gmap_sidebar_link" href="javascript:myclick(' + i + ')">' + gmarkers[i].day + "." + gmarkers[i].month + "." + gmarkers[i].year + "  " + '<img src="<?php echo JURI::base();?>'+gmarkers[i].image+'" width=16px height=16px alt=""/>' + gmarkers[i].myname + '<\/a><br/>';
+          side += '<div class="eiko_gmap_sidebar_div"><a class="eiko_gmap_sidebar_link" href="javascript:myclick(' + i + ')">' + gmarkers[i].day + "." + gmarkers[i].month + "." + gmarkers[i].year + "  " + '<img src="<?php echo JURI::base();?>'+gmarkers[i].image+'" class ="eiko_gmap_sidebar_icon" alt=""/>' + gmarkers[i].myname + '<\/a></div>';
           }
         }
         document.getElementById("side_bar").innerHTML = side;
@@ -517,6 +517,7 @@ polygon.setMap(map);
 				  echo JHTML::_('select.genericlist', $Mona, 'selectendmonth', 'class="eiko_gmap_month_select" onchange=selectdate() ','id', 'title', $Monat);
 				  echo JHTML::_('select.genericlist',  $years, 'selectendyear', 'class="eiko_gmap_year_select" onchange=selectdate() ', 'id', 'title', $selectedYear);
 			  ?>
+<button type="button" id="einsatzarten_flip" class="btn btn-sm">Einsatzarten auswählen</button>
 		</div>
 
 		<?php echo '<div class="well row-fluid btn-toolbar" id="einsatzarten_panel">'.$catbox.'</div>';?>
