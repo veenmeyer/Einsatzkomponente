@@ -16,7 +16,7 @@
               description="COM_EINSATZKOMPONENTE_FORM_DESC_KATEGORIE_IMAGE" 
 	          preview="true"
 			  hide_none="1"
-			  id="alarmierungsart_image_klein"
+			  id="KATEGORIE_image_klein"
               directory="com_einsatzkomponente/images/list" /> 
        <field name="created_by" type="createdby" default="" 
               label="COM_EINSATZKOMPONENTE_FORM_LBL_KATEGORIE_CREATED_BY"
@@ -44,7 +44,7 @@
                             validate="rules"
                             class="inputbox"
                             component="com_einsatzkomponente"
-                            section="kategorie"
+                            section="KATEGORIE"
                         />
 	</fieldset>
 </form>
