@@ -95,8 +95,6 @@ class EinsatzkomponenteViewKategorien extends JViewLegacy
 			JToolBarHelper::preferences('com_einsatzkomponente');
 		}
 		
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         //Set sidebar action - New in 3.0
 		JHtmlSidebar::setAction('index.php?option=com_einsatzkomponente&view=kategorien');
 		$options = '';
@@ -108,7 +106,6 @@ class EinsatzkomponenteViewKategorien extends JViewLegacy
 			'filter_published',
 			JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.state'), true)
 		);
-		endif;
 		
         $this->extra_sidebar = '';
 		
