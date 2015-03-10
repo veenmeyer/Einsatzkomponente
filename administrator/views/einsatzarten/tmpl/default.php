@@ -134,6 +134,9 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  '', 'a.marker', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
+				<?php echo 'Anzahl Einsätze'; ?>
+				</th>
+				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZARTEN_BESCHR', 'a.beschr', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -211,7 +214,16 @@ if (!empty($this->extra_sidebar)) {
 				<td>
 					<?php echo '<span style="float:left;background:'.$this->escape($item->marker).'">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;'; ?>
 				</td>
-                
+				<?php // Anzahl der Einsätze je Einsatzkategorie ermitteln
+				     $database = JFactory::getDBO();
+                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE data1 = "'.$item->title.'" and state="1" or state="2" ' ;
+                     $database->setQuery( $query );
+                     $mission = $database->loadObject();	
+				?>
+				<td>
+				<?php echo '<span class="badge">'.$mission->count.'</span>';?>
+				</td>
+				
                 <td> <!--Einsatzart-Logo-->
 				<?php echo '<span style="float:left;"> <img src="../'.$item->beschr.'" width="200" height="100%" /></span>';?>
                 </td> 

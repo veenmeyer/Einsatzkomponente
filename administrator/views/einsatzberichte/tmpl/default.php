@@ -95,8 +95,6 @@ if (!empty($this->extra_sidebar)) {
 			</div>
 <?php endif;?>
             
-		<?php $version = new JVersion;
-        if ($version->isCompatible('3.0')) :?>
 			<div class="btn-group pull-right hidden-phone">
 				<label for="limit" class="element-invisible"><?php echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC');?></label>
 				<?php echo $this->pagination->getLimitBox(); ?>
@@ -116,7 +114,6 @@ if (!empty($this->extra_sidebar)) {
 					<?php echo JHtml::_('select.options', $sortFields, 'value', 'text', $listOrder);?>
 				</select>
 			</div>
-<?php endif;?>
 
 		</div>        
 		<div class="clearfix"> </div>
@@ -144,14 +141,17 @@ if (!empty($this->extra_sidebar)) {
                 <th>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ALERTING', 'a.alerting', $listDirn, $listOrder); ?>
 				</th>
--->				
+-->		
+                <th class='left backend_tickerkat' >
+				<?php echo JHtml::_('grid.sort',  'Kat', 'a.tickerkat', $listDirn, $listOrder); ?>
+				</th>
                 <th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATA1', 'a.data1', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ADDRESS', 'a.address', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left backend_einsatzfoto'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGE', 'a.image', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -244,37 +244,59 @@ if (!empty($this->extra_sidebar)) {
 				<td>
 					<?php echo $item->date1; ?>
 				</td>
-                
+				
+                <?php // Get Einsatzkategorie
+				     $database = JFactory::getDBO();
+                     $query = 'SELECT * FROM #__eiko_tickerkat WHERE id = "'.$item->tickerkat.'" LIMIT 1 ' ;
+                     $database->setQuery( $query );
+                     $kat = $database->loadObject();	
+				?>
+				<td class='backend_tickerkat'>
+					<?php echo '<img src="../'.$kat->image.'" width="32" height="100%" title="'.$kat->title.'" />'; ?>
+				</td>
+				
 				<td>
                 <?php // Get Image of Alarmierungsart
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT image FROM #__eiko_alarmierungsarten WHERE id = "'.$item->alerting.'" LIMIT 1 ' ;
+                     $query = 'SELECT * FROM #__eiko_alarmierungsarten WHERE id = "'.$item->alerting.'" LIMIT 1 ' ;
                      $database->setQuery( $query );
                      $alerting_image = $database->loadObject();	
 				?>
                 <?php // Get color of Einsatzart
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT marker FROM #__eiko_einsatzarten WHERE title = "'.$item->data1.'" LIMIT 1 ' ;
+                     $query = 'SELECT * FROM #__eiko_einsatzarten WHERE title = "'.$item->data1.'" LIMIT 1 ' ;
                      $database->setQuery( $query );
                      $data1_color = $database->loadObject();	
 				?>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzberichte.', $canCheckin); ?>
 				<?php endif; ?>
-				<?php if ($canEdit) : ?>
-					<p><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.edit&id='.(int) $item->id); ?>">
-                    <?php echo '<b>'.$item->data1; ?></b></a></p>
-				      <?php echo '<span style="float:left;background:'.$data1_color->marker.';"><img src="../'.$alerting_image->image.'" width="16" height="100%" />&nbsp;&nbsp;&nbsp;</span>';?>
-				<?php else : ?>
-					 <?php echo '<p><b>'.$item->data1.'</b></p>'; ?>
-			       	 <?php echo '<span style="float:left;background:'.$data1_color->marker.';"><img src="../'.$alerting_image->image.'" width="16" height="100%" />&nbsp;&nbsp;&nbsp;</span>';?>
+				
+				
+					<div style="border-left:6px solid;border-color:<?php echo $data1_color->marker;?>;padding-left:3px;">
+						<?php if ($canEdit) : ?>
+						<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.edit&id='.(int) $item->id); ?>">
+						<?php endif; ?>
+					<?php echo '<b>'.$item->data1.'</b>'; ?>
+						<?php if ($canEdit) : ?>
+						</a>
+						<?php endif; ?>
+					</div>
+				      <?php 
+						echo '<div style="padding-top:5px;">';
+						echo '<img src="../'.$kat->image.'" class="backend_kat_style" title="'.$kat->id.'" />';
+						echo '&nbsp;<img src="../'.$alerting_image->image.'" class="backend_alerting_style" title ="'.$alerting_image->title.'" />';
+						echo '&nbsp;<img src="../'.$data1_color->list_icon.'" class="backend_data_style" title ="'.$data1_color->title.'" />';
+							if ($item->image):
+							echo '&nbsp;<img src="../'.$item->image.'" class="backend_foto_style" title="'.$item->image.'"/>';
+							endif;
+						echo '</div>';?>
                     
-				<?php endif; ?>
                 </td>
 				<td>
 					<?php echo $this->escape($item->address); ?>
 				</td>
-				<td>
+				<td class='backend_einsatzfoto'>
 					<?php echo '<span style="float:left;"> <img src="../'.$item->image.'" width="30" height="100%" title="'.$item->image.'"/></span>';?>
 				</td>
 				<td>
@@ -284,7 +306,7 @@ if (!empty($this->extra_sidebar)) {
 					<?php //echo $item->department; ?>
 				</td>
 -->				<td>
-					<?php echo $item->counter; ?>
+					<?php echo '<span class="badge">'.$item->counter.'</span>'; ?>
 				</td>
                 
             	<?php if ($params->get('gmap_action','0')) : ?>

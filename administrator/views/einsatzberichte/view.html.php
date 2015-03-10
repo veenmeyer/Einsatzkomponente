@@ -206,6 +206,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		'a.id' => JText::_('JGRID_HEADING_ID'),
 		'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 		'a.data1' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATA1'),
+		'a.tickerkat' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_KATEGORIE'),
 		'a.image' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGE'),
 		'a.address' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ADDRESS'),
 		'a.date1' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1'),

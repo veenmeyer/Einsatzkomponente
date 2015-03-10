@@ -11,11 +11,8 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.multiselect');
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('bootstrap.tooltip');
 JHtml::_('formbehavior.chosen', 'select');
-endif;
 
 // Import CSS
 $document = JFactory::getDocument();
@@ -63,8 +60,6 @@ if (!empty($this->extra_sidebar)) {
 <?php endif;?>
 		<div id="filter-bar" class="btn-toolbar">
         
-		<?php $version = new JVersion;
-        if ($version->isCompatible('3.0')) :?>
 			<div class="filter-search btn-group pull-left">
 				<label for="filter_search" class="element-invisible"><?php echo JText::_('JSEARCH_FILTER');?></label>
 				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo JText::_('JSEARCH_FILTER'); ?>" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('JSEARCH_FILTER'); ?>" />
@@ -73,10 +68,7 @@ if (!empty($this->extra_sidebar)) {
 				<button class="btn hasTooltip" type="submit" title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>"><i class="icon-search"></i></button>
 				<button class="btn hasTooltip" type="button" title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>" onclick="document.id('filter_search').value='';this.form.submit();"><i class="icon-remove"></i></button>
 			</div>
-<?php endif;?>
     
-		<?php $version = new JVersion;
-        if (!$version->isCompatible('3.0')) :?>
 			<div class="filter-search btn-group pull-left">
 				<label for="filter_search" class="element-invisible"><?php echo JText::_('JSEARCH_FILTER');?></label>
 				<input type="text" name="filter_search" id="filter_search" placeholder="<?php echo JText::_('JSEARCH_FILTER'); ?>" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('JSEARCH_FILTER'); ?>" />
@@ -85,10 +77,7 @@ if (!empty($this->extra_sidebar)) {
 				<button class="btn hasTooltip" type="submit" title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>">Suchen</button>
 				<button class="btn hasTooltip" type="button" title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>" onclick="document.id('filter_search').value='';this.form.submit();">Zurücksetzen</button>
 			</div>
-<?php endif;?>
             
-		<?php $version = new JVersion;
-        if ($version->isCompatible('3.0')) :?>
 			<div class="btn-group pull-right hidden-phone">
 				<label for="limit" class="element-invisible"><?php echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC');?></label>
 				<?php echo $this->pagination->getLimitBox(); ?>
@@ -108,7 +97,6 @@ if (!empty($this->extra_sidebar)) {
 					<?php echo JHtml::_('select.options', $sortFields, 'value', 'text', $listOrder);?>
 				</select>
 			</div>
-<?php endif;?>
 
 		</div>        
 		<div class="clearfix"> </div>
@@ -131,6 +119,9 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_KATEGORIEN_TITLE', 'a.title', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo 'Anzahl Einsätze'; ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_KATEGORIEN_IMAGE', 'a.image', $listDirn, $listOrder); ?>
@@ -202,6 +193,16 @@ if (!empty($this->extra_sidebar)) {
 					<?php echo $this->escape($item->title); ?>
 				<?php endif; ?>
 				</td>
+				<?php // Anzahl der Einsätze je Einsatzkategorie ermitteln
+				     $database = JFactory::getDBO();
+                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and state="1" ' ;
+                     $database->setQuery( $query );
+                     $mission = $database->loadObject();	
+				?>
+				<td>
+				<?php echo '<span class="badge">'.$mission->count.'</span>';?>
+				</td>
+				
 				<td>
 				<?php echo '<span style="float:left;"><img src="../'.$item->image.'" width="30" height="100%" /></span>';?>
 				</td>
