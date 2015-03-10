@@ -193,7 +193,13 @@ foreach($eiko_tickerkat as $data){
 
 }
 
-
+	$db = JFactory::getDbo();
+	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `tickerkat` `tickerkat` INT(10) NOT NULL;";
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	}	
 
 
 // ------------------------------------------------------------------------------------------------------------
