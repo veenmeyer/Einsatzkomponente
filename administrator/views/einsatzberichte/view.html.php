@@ -175,8 +175,6 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
             }
         }
 		
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         JHtmlSidebar::addFilter(
             'Organisationen',
             'filter_auswahlorga',
@@ -193,10 +191,57 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			'filter_published',
 			JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.state'), true)
 		);
+		
+		
+        //Filter for the field tickerkat;
+        jimport('joomla.form.form');
+        $options = array();
+        JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
+        $form = JForm::getInstance('com_einsatzkomponente.einsatzbericht', 'einsatzbericht');
+
+        $field = $form->getField('tickerkat');
+
+        $query = $form->getFieldAttribute('filter_tickerkat','query');
+        $translate = $form->getFieldAttribute('filter_tickerkat','translate');
+        $key = $form->getFieldAttribute('filter_tickerkat','key_field');
+        $value = $form->getFieldAttribute('filter_tickerkat','value_field');
+
+        // Get the database object.
+        $db = JFactory::getDBO();
+
+        // Set the query and get the result list.
+        $db->setQuery($query);
+        $items = $db->loadObjectlist();
+
+        // Build the field options.
+        if (!empty($items))
+        {
+            foreach ($items as $item)
+            {
+                if ($translate == true)
+                {
+                    $options[] = JHtml::_('select.option', $item->$key, JText::_($item->$value));
+                }
+                else
+                {
+                    $options[] = JHtml::_('select.option', $item->$key, $item->$value);
+                }
+            }
+        }
+
+        JHtmlSidebar::addFilter(
+            '$tickerkat',
+            'filter_tickerkat',
+            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.tickerkat')),
+            true
+        );                                                
+			
+		
+		
+		
 		//Filter for the field created_by
 		$this->extra_sidebar .= '<small><label for="filter_created_by">Created by</label></small>';
 		$this->extra_sidebar .= JHtmlList::users('filter_created_by', $this->state->get('filter.created_by'), 1, 'onchange="this.form.submit();"');
-		endif;
         
 	}
     

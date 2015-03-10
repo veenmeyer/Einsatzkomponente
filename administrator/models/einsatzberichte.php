@@ -89,6 +89,8 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		$this->setState('filter.date1.to', $app->getUserStateFromRequest($this->context.'.filter.date1.to', 'filter_date1_to', '', 'string'));
 		//Filtering auswahlorga
 		$this->setState('filter.auswahlorga', $app->getUserStateFromRequest($this->context.'.filter.auswahlorga', 'filter_auswahlorga', '', 'string'));
+		//Filtering tickerkat
+		$this->setState('filter.tickerkat', $app->getUserStateFromRequest($this->context.'.filter.tickerkat', 'filter_tickerkat', '', 'string'));
 		//Filtering created_by
 		$this->setState('filter.created_by', $app->getUserStateFromRequest($this->context.'.filter.created_by', 'filter_created_by', '', 'string'));
         
@@ -139,6 +141,10 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		$query->select('dep.name AS mission_orga');
 		$query->select('dep.ordering AS department_ordering');
 		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.name = a.auswahlorga');
+		// Join over the foreign key 'tickerkat'
+		$query->select('tic.title AS mission_kat');
+		$query->select('tic.ordering AS kat_ordering');
+		$query->join('LEFT', '#__eiko_tickerkat AS tic ON tic.id = a.tickerkat');
 		// Join over the foreign key 'vehicles'
 		$query->select('veh.name AS mission_car');
 		$query->select('veh.ordering AS vehicle_ordering');
@@ -183,6 +189,14 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		}
 		if ($filter_auswahlorga != 'Organisation auswählen') {
 			$query->where("a.auswahlorga LIKE '%".$db->escape($filter_auswahlorga)."%'");
+		}
+		//Filtering tickerkat
+		$filter_tickerkat = $this->state->get("filter.tickerkat");
+		if ($filter_tickerkat == 'Einsatzkategorie auswählen') {
+			$query->where("a.tickerkat LIKE '%'");
+		}
+		if ($filter_tickerkat != 'Einsatzkategorie auswählen') {
+			$query->where("a.tickerkat LIKE '%".$db->escape($filter_tickerkat)."%'");
 		}
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");

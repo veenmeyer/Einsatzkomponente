@@ -24,6 +24,11 @@
             key_field="id"
             value_field="title" />
 			
+       <field name="filter_tickerkat" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, 'Einsatzkategorie auswählen' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_tickerkat`" key_field="id" value_field="val"
+             /> 
+			
        <field name="alerting" type="sql"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_ALERTING" 
