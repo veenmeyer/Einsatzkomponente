@@ -198,9 +198,11 @@ if (!empty($this->extra_sidebar)) {
                      $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and state="1" ' ;
                      $database->setQuery( $query );
                      $mission = $database->loadObject();	
-				?>
+				?> 
 				<td>
+				<a onclick="window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&id='.(int) $item->id); ?>';">
 				<?php echo '<span class="badge">'.$mission->count.'</span>';?>
+				</a>
 				</td>
 				
 				<td>
