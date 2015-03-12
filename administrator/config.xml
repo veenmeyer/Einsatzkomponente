@@ -766,6 +766,18 @@
 				value="1">unter Einsatz-Nr. anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_alertingtime"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Hier können Sie einstellen, ob die Alarmierungszeit angezeigt werden sollen."
+			label="Alamierungszeit :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
+	  <field
 			name="display_home_marker"
 			type="radio"
 			class="btn-group"
