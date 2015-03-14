@@ -154,7 +154,7 @@ $eiko_tickerkat = array(
 
 $e ='';
 $sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
-`id` int(11) unsigned NOT NULL,
+`id` int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -163,7 +163,8 @@ $sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
   `state` tinyint(1) NOT NULL,
   `created_by` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;";
 	$db = JFactory::getDbo();
 	$db->setQuery($sql); 
@@ -172,6 +173,15 @@ $sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
 	} catch (Exception $e) {
 		print_r ($e);$bug='1';
 	}	
+
+//$sql = "ALTER TABLE `#__eiko_tickerkat` CHANGE `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT;";
+//	$db = JFactory::getDbo();
+//	$db->setQuery($sql); 
+//	try {
+//	$result = $db->execute();
+//	} catch (Exception $e) {
+//		print_r ($e);$bug='1';
+//	}	
 
 
 foreach($eiko_tickerkat as $data){
