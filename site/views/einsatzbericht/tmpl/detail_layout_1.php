@@ -86,7 +86,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
               </span></td>
               <td class="eiko_td2_2"><span class="eiko_date1_value_2"><?php echo date("d.m.Y", strtotime($this->item->date1)).''; ?></span></td>
             </tr>
-				<?php if ($this->params->get('display_home_alertingtime','1')=='1') : ?>
+				<?php if ($this->params->get('display_alertingtime','1')) : ?>
 				<tr>
               <td class="eiko_td1_2"><span class="eiko_date1_time_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE1'); ?>: 
@@ -94,12 +94,14 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
               <td class="eiko_td1_2"><span class="eiko_date1_time_value_2"><?php echo date("H:i", strtotime($this->item->date1)).' Uhr'; ?></span></td>
             </tr>
 				<?php endif;?>
+            <?php if( $this->item->date2>1) : ?>
             <tr>
               <td class="eiko_td1_2"><span class="eiko_date1_time_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMESTART'); ?>: 
               </span></td>
               <td class="eiko_td1_2"><span class="eiko_date1_time_value_2"><?php echo date("H:i", strtotime($this->item->date2)).' Uhr'; ?></span></td>
             </tr>
+				<?php endif;?>
             <?php if( $this->item->date3>1) : ?>
             <tr>
               <td class="eiko_td2_2"><span class="eiko_date3_label_2">
