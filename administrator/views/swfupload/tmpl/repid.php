@@ -3,10 +3,7 @@
 // No direct access to this file
 defined('_JEXEC') or die;
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('bootstrap.tooltip');
-endif;
 
 $pview      = JFactory::getApplication()->input->get('pview', 'kontrollcenter');
 $db = JFactory::getDBO();
