@@ -191,12 +191,18 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 			$query->where("a.auswahlorga LIKE '%".$db->escape($filter_auswahlorga)."%'");
 		}
 		//Filtering tickerkat
+		if (!$filter_tickerkat = JRequest::getVar('kat', 0) ):
 		$filter_tickerkat = $this->state->get("filter.tickerkat");
-		if ($filter_tickerkat == 'Einsatzkategorie auswählen') {
+		else:
+		$this->setState('filter.tickerkat', $filter_tickerkat);
+
+		endif;
+		echo $filter_tickerkat;
+		if ($filter_tickerkat == '0') {
 			$query->where("a.tickerkat LIKE '%'");
 		}
-		if ($filter_tickerkat != 'Einsatzkategorie auswählen') {
-			$query->where("a.tickerkat LIKE '%".$db->escape($filter_tickerkat)."%'");
+		if ($filter_tickerkat != '0') {
+			$query->where("a.tickerkat LIKE '".$db->escape($filter_tickerkat)."'");
 		}
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");
