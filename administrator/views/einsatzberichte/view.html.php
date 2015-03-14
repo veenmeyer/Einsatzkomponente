@@ -119,9 +119,6 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			endif;
 
 
-    	// Filter nach Datum  für Joomla 3
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
 		JHtmlSidebar::setAction('index.php?option=com_einsatzkomponente&view=einsatzberichte');
         $this->extra_sidebar = '';
 			$this->extra_sidebar .= '<small><label for="filter_from_date1">Anzeigen ab Datum</label></small>';
@@ -129,18 +126,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			$this->extra_sidebar .= '<small><label for="filter_to_date1">bis Datum</label></small>';
 			$this->extra_sidebar .= EinsatzkomponenteHelper::kalender($this->state->get('filter.date1.to'), 'filter_date1_to', 'filter_to_date1', '%Y-%m-%d', ' style="width:142px;" onchange="this.form.submit();"');
 			$this->extra_sidebar .= '<hr class="hr-condensed">';  
-        endif;
 
-    	// Filter nach Datum  für Joomla 2.5
-		$version = new JVersion;
-        if (!$version->isCompatible('3.0')) :
-        $this->extra_sidebar = '';
-			$this->extra_sidebar .= '<small><label for="filter_from_date1">Anzeigen ab Datum</label></small>';
-			$this->extra_sidebar .= JHtml::_('calendar',$this->state->get('filter.date1.from'), 'filter_date1_from', 'filter_from_date1', '%Y-%m-%d', ' style="width:100px;" onchange="this.form.submit();"');
-			$this->extra_sidebar .= '<small><label for="filter_to_date1">bis Datum</label></small>';
-			$this->extra_sidebar .= JHtml::_('calendar',$this->state->get('filter.date1.to'), 'filter_date1_to', 'filter_to_date1', '%Y-%m-%d', ' style="width:100px;" onchange="this.form.submit();"');
-			$this->extra_sidebar .= '<hr class="hr-condensed">';  
-        endif;
 			
         //Filter for the field ".auswahlorga;
         jimport('joomla.form.form');
@@ -229,7 +215,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
         JHtmlSidebar::addFilter(
             '$tickerkat',
             'filter_tickerkat',
-            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.tickerkat')),
+            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.tickerkat','Einsatzkategorie auswählen')),
             true
         );                                                
 			
