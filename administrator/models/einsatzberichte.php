@@ -90,7 +90,7 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		//Filtering auswahlorga
 		$this->setState('filter.auswahlorga', $app->getUserStateFromRequest($this->context.'.filter.auswahlorga', 'filter_auswahlorga', '', 'string'));
 		//Filtering tickerkat
-		$this->setState('filter.tickerkat', $app->getUserStateFromRequest($this->context.'.filter.tickerkat', 'filter_tickerkat', '', 'string'));
+		$this->setState('filter.tickerkat', $app->getUserStateFromRequest($this->context.'.filter.tickerkat', 'filter_tickerkat', '0', 'string'));
 		//Filtering created_by
 		$this->setState('filter.created_by', $app->getUserStateFromRequest($this->context.'.filter.created_by', 'filter_created_by', '', 'string'));
         
@@ -190,14 +190,8 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		if ($filter_auswahlorga != 'Organisation auswählen') {
 			$query->where("a.auswahlorga LIKE '%".$db->escape($filter_auswahlorga)."%'");
 		}
-		//Filtering tickerkat
-		if (!$filter_tickerkat = JRequest::getVar('kat', 0) ):
+		
 		$filter_tickerkat = $this->state->get("filter.tickerkat");
-		else:
-		$this->setState('filter.tickerkat', $filter_tickerkat);
-
-		endif;
-		echo $filter_tickerkat;
 		if ($filter_tickerkat == '0') {
 			$query->where("a.tickerkat LIKE '%'");
 		}

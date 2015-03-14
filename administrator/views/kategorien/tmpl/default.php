@@ -195,19 +195,12 @@ if (!empty($this->extra_sidebar)) {
 				</td>
 				<?php // Anzahl der Einsätze je Einsatzkategorie ermitteln
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and state="1"  ' ; 
+                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and (state="1" OR state="2")  ' ; 
                      $database->setQuery( $query );
-                     $mission_1 = $database->loadResult();	
-					 
-				     $database = JFactory::getDBO();
-                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and state="2"  ' ; 
-                     $database->setQuery( $query );
-                     $mission_2 = $database->loadResult();	
-					 
-					 $mission = $mission_1+$mission_2; 
+                     $mission = $database->loadResult();	
 				?> 
 				<td>
-				<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&kat='.(int) $item->id); ?>">
+				<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&filter_tickerkat='.(int) $item->id); ?>">
 				<?php echo '<span class="badge">'.$mission.'</span>';?>
 				</a>
 				</td>
