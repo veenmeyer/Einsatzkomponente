@@ -47,10 +47,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		endif;
 		// Weiterleitungsfunktionen ENDE ------------------------------------------------
         
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         $this->sidebar = JHtmlSidebar::render();
-		endif;
 
 		parent::display($tpl);
 	}
