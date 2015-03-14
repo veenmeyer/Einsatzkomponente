@@ -197,7 +197,8 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 //				endif;
 //			endforeach;
 //			$vehicles = implode(',',$array);
-echo '<input id="fahrzeug"/>';
+
+//echo '<input id="fahrzeug"/>';
 ?>
 <script>
 function displayVals() {
