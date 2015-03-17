@@ -66,10 +66,10 @@ class EinsatzkomponenteModelEinsatzkarte extends JModelList {
         
         $query->from('`#__eiko_einsatzberichte` AS a');
         
-		// Join over the foreign key 'auswahlorga'
+		// Join over the foreign key 'auswahl_orga'
 		$query->select('dep.name AS mission_orga');
 		$query->select('dep.ordering AS department_ordering');
-		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.name = a.auswahlorga');
+		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.name = a.auswahl_orga');
 		// Join over the foreign key 'vehicles'
 		$query->select('veh.name AS mission_car');
 		$query->select('veh.ordering AS vehicle_ordering');
@@ -99,10 +99,10 @@ class EinsatzkomponenteModelEinsatzkarte extends JModelList {
 		if ($filter_updatedate_to) {
 			$query->where("a.updatedate <= '".$filter_updatedate_to."'");
 		}
-		//Filtering auswahlorga
-		$filter_auswahlorga = $this->state->get("filter.auswahlorga");
-		if ($filter_auswahlorga) {
-			$query->where("a.auswahlorga = '".$filter_auswahlorga."'");
+		//Filtering auswahl_orga
+		$filter_auswahl_orga = $this->state->get("filter.auswahl_orga");
+		if ($filter_auswahl_orga) {
+			$query->where("a.auswahl_orga = '".$filter_auswahl_orga."'");
 		}
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");

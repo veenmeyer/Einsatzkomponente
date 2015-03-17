@@ -68,9 +68,8 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$selectedEinsatzart = '';
 		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', 'alle Einsatzarten' );
 		$selectedOrga = '';
-		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', 'alle Organisationen' );
+		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', '0' );
 		//print_r ($selectedEinsatzart);
-		//echo $selectedOrga;
 		//endif;
 		if ($this->params->get('anzeigejahr')) : $selectedYear = $this->params->get('anzeigejahr'); endif;
 		$this->selectedYear  = $selectedYear;	
@@ -83,7 +82,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$this->selectedOrga  = $selectedOrga;	
 		$this->selectedOrga  = $app->setUserState( "com_einsatzkomponente.selectedOrga", $selectedOrga );
 		else:
-		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', 'alle Organisationen' );
+		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', '0' );
 		$this->selectedOrga  = $selectedOrga;	
 		endif;
 		

@@ -30,13 +30,13 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
      */
     public function bind($array, $ignore = '') {
 		$array['updatedate'] = date("Y-m-d H:i:s");
-		//Support for multiple or not foreign key field: auswahlorga
-			if(isset($array['auswahlorga'])):
-				if(is_array($array['auswahlorga'])){
-					$array['auswahlorga'] = implode(',',$array['auswahlorga']);
+		//Support for multiple or not foreign key field: auswahl_orga
+			if(isset($array['auswahl_orga'])):
+				if(is_array($array['auswahl_orga'])){
+					$array['auswahl_orga'] = implode(',',$array['auswahl_orga']);
 				}
-				else if(strrpos($array['auswahlorga'], ',') != false){
-					$array['auswahlorga'] = explode(',',$array['auswahlorga']);
+				else if(strrpos($array['auswahl_orga'], ',') != false){
+					$array['auswahl_orga'] = explode(',',$array['auswahl_orga']);
 				}
 			endif;
 		//Support for multiple or not foreign key field: vehicles

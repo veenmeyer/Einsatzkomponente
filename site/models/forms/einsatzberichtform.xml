@@ -30,6 +30,11 @@
             key_field="id"
             value_field="title" />
 			
+       <field name="filter_tickerkat" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, 'Einsatzkategorie auswählen' AS `val` , 0 AS `ordering` UNION SELECT `id`, `title`, `ordering` AS val FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC" key_field="id" value_field="val"
+             /> 
+			
 		
        <field name="alerting" 
 	   		type="sql"
@@ -215,29 +220,25 @@
             class="eiko_notrufticker"
             filter="safehtml" /> 
 			
-       <field name="auswahlorga" type="sql" class="inputbox"
+       <field name="auswahl_orga" type="sql" class="inputbox"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
             required="true" 
-            query="SELECT `name`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
-			key_field="name"       		
+            query="SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
+			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
          /> 
-       <field name="filter_auswahlorga" type="sql" class="inputbox"
-            onchange="this.form.submit();" 
-            query="SELECT 0 AS `name`, 'Organisation auswählen' AS `name` UNION SELECT `name`, `name` FROM `#__eiko_organisationen` " 
-			key_field="name" 
-			value_field="name"
-             /> 
 
-       <field name="vehicles" type="sql" class="inputbox"
-            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
-            query="SELECT `id`, `name` FROM `#__eiko_fahrzeuge` WHERE `state`='1' ORDER BY `ordering` ASC" 
+       <field name="filter_auswahl_orga" type="sql" class="inputbox"
+            onchange="this.form.submit();" 
+            query="SELECT 0 AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name`,`ordering` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC" 
 			key_field="id" 
 			value_field="name"
-			multiple="multiple"
+             /> 
+       <field name="vehicles" type="optgroup" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
          /> 
        <field name="article_id" 
 	   label = "Joomla-Artikel verlinken ?"

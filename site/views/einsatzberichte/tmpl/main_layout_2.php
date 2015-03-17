@@ -50,11 +50,11 @@ endif;
 	?><?php 
 	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' onchange=submit(); ', 'title', 'title', $this->selectedEinsatzart);?> 
     <?php
-	if (!$this->params->get('abfragewehr')) : 
-	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'name', 'name');
+	if (!$this->params->get('abfragewehr','0') and $this->params->get('display_filter_organisationen','1')) : 
+	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'id', 'name');
 	$organisationen = array_merge($organisationen, (array)$this->organisationen);
 	?><?php 
-	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' onchange=submit(); ', 'name', 'name', $this->selectedOrga);
+	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
 	endif;?>
 	</form>
 </div>
@@ -87,7 +87,7 @@ if ($this->params->get('display_home_pagination')) :
           <!-- Filter State-->
 		  <?php if($item->state == '1'): ?>
           <!-- Filter Einsatzart-->
-		  <?php if(strpos($item->auswahlorga,$this->selectedOrga)!==false or $this->selectedOrga == 'alle Organisationen'): ?>
+		  <?php if(preg_match('/\b'.$this->selectedOrga.'\b/',$item->auswahl_orga)==true or $this->selectedOrga == '0'): ?>
 		  <?php if ($this->selectedEinsatzart == $item->data1 or $this->selectedEinsatzart == 'alle Einsatzarten' ) : ?>
           
           

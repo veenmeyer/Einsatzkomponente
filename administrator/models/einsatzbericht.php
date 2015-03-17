@@ -63,14 +63,14 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 		$data = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzbericht.data', array());
 		if (empty($data)) {
 			$data = $this->getItem();
-			//Support for multiple or not foreign key field: auswahlorga
+			//Support for multiple or not foreign key field: auswahl_orga
 			$array = array();
-			foreach((array)$data->auswahlorga as $value): 
+			foreach((array)$data->auswahl_orga as $value): 
 				if(!is_array($value)):
 					$array[] = $value;
 				endif;
 			endforeach;
-			$data->auswahlorga = implode(',',$array);
+			$data->auswahl_orga = implode(',',$array);
 			//Support for multiple or not foreign key field: vehicles
 			$array = array();
 			foreach((array)$data->vehicles as $value): 

@@ -24,6 +24,11 @@
             key_field="id"
             value_field="title" />
 			
+       <field name="filter_tickerkat" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, 'Einsatzkategorie auswählen' AS `val` , 0 AS `ordering` UNION SELECT `id`, `title`, `ordering` AS val FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC" key_field="id" value_field="val"
+             /> 
+			
        <field name="alerting" type="sql"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_ALERTING" 
@@ -62,22 +67,24 @@
        <field name="date1" type="calendar" class="inputbox"
             required="true" 
 		    format="%Y-%m-%d %H:%M:00"
-            default="0000-00-00 00:00:00" 
+            default="NOW" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE1"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE1" 
-            filter="safehtml" /> 
+			filter="safehtml"
+		/> 
+			
        <field name="date2" type="calendar" class="inputbox"
 	   	    format="%Y-%m-%d %H:%M:00"
             default="0000-00-00 00:00:00" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE2" 
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE2"  
             filter="safehtml" /> 
 		 
        <field name="date3" type="calendar" class="inputbox"
             format="%Y-%m-%d %H:%M:00"
             default="0000-00-00 00:00:00" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE3"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE3" 
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE3"  
             filter="safehtml" /> 
        <field name="summary" type="summary"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY"
@@ -194,28 +201,25 @@
             class="eiko_notrufticker"
             filter="safehtml" /> 
 			
-       <field name="auswahlorga" type="sql" class="inputbox"
+       <field name="auswahl_orga" type="sql" class="inputbox"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
             required="true" 
-            query="SELECT `name`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
-			key_field="name"       		
+            query="SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
+			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
          /> 
-       <field name="filter_auswahlorga" type="sql" class="inputbox"
+
+       <field name="filter_auswahl_orga" type="sql" class="inputbox"
             onchange="this.form.submit();" 
-            query="SELECT 0 AS `name`, 'Organisation auswählen' AS `name` UNION SELECT `name`, `name` FROM `#__eiko_organisationen` " 
-			key_field="name" 
-			value_field="name"
-             /> 
-       <field name="vehicles" type="sql" class="inputbox"
-            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
-            query="SELECT `id`, `name` FROM `#__eiko_fahrzeuge` WHERE `state`='1' ORDER BY `ordering` ASC" 
+            query="SELECT 0 AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name`,`ordering` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC" 
 			key_field="id" 
 			value_field="name"
-			multiple="multiple"
+             /> 
+       <field name="vehicles" type="optgroup" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
          /> 
        <field name="article_id" 
 	   label = "Joomla-Artikel verlinken ?"
@@ -226,8 +230,8 @@
 			key_field="id" 
 			value_field="title"
              /> 
-
-         	<field
+			      	
+			<field
         	name="status_fb"
         	type="radio"
         	class="btn-group"
@@ -240,6 +244,7 @@
                 	value="1">Anzeigen</option>
    			</field>
 
+		 
        <field name="status" type="list"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_STATUS"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_STATUS" 
@@ -263,11 +268,11 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_UPDATEDATE"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_UPDATEDATE"  /> 
 			
-       <field name="counter" type="hidden"
+       <field name="counter" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_COUNTER" 
+            description="Dieses Feld ist nur für Admins sichtbar ! Hier können Sie den Zähler der Einsatzberichte ändern." 
             default="0"
-            readonly="true"
+            readonly="false"
             class="eiko_counter"
             filter="int"
             size="20" /> 

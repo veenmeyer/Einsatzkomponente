@@ -115,8 +115,8 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="controls"><?php echo $this->form->getInput('people'); ?></div>
 			</div>
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('auswahlorga'); ?></div>
-				<div class="controls"><!--<?php echo $this->form->getInput('auswahlorga'); ?></div>
+				<div class="control-label"><?php echo $this->form->getLabel('auswahl_orga'); ?></div>
+				<div class="controls"><!--<?php echo $this->form->getInput('auswahl_orga'); ?></div>
            </div>-->
            
 					<?php
@@ -124,8 +124,8 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 						$query = 'SELECT `name`, `name` FROM `#__eiko_organisationen` WHERE `state`="1" ORDER BY `ordering` ASC';
 						$db->setQuery($query);
 						$orgasDb = $db->loadObjectList(); 
-						if ($this->item->auswahlorga):
-						foreach((array)$this->item->auswahlorga as $value): 
+						if ($this->item->auswahl_orga):
+						foreach((array)$this->item->auswahl_orga as $value): 
 							if(!is_array($value)):
 								//echo '<option value="'.$value.'">'.$value.'</option>';
 								$orgas[] = JHTML::_('select.option','.$value.', "$value", 'name', 'name');
@@ -139,24 +139,24 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 						else: $orgas[] = '';
 						endif; 
 						$orgas = array_merge($orgas, $orgasDb);
-						$html= JHTML::_('select.genericlist', $orgas, "jform[auswahlorga][]",'multiple required aria-required="true"' , 'name', 'name', '');
+						$html= JHTML::_('select.genericlist', $orgas, "jform[auswahl_orga][]",'multiple required aria-required="true"' , 'name', 'name', '');
 						echo $html;
 						?></div></div>
                         
     		<?php  
-				foreach((array)$this->item->auswahlorga as $value): 
+				foreach((array)$this->item->auswahl_orga as $value): 
 					if(!is_array($value)):
-					echo '<input type="hidden" class="auswahlorga" name="jform[auswahlorgahidden]['.$value.']" value="'.$value.'" />';
+					echo '<input type="hidden" class="auswahl_orga" name="jform[auswahl_orgahidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach; 
 				
 			?>
 			<script type="text/javascript">
 				jQuery.noConflict();
-				jQuery('input:hidden.auswahlorga').each(function(){
+				jQuery('input:hidden.auswahl_orga').each(function(){
 					var name = jQuery(this).attr('name');
-					if(name.indexOf('auswahlorgahidden')){
-						jQuery('#jformauswahlorga option[value="'+jQuery(this).val()+'"]').attr('selected',true);
+					if(name.indexOf('auswahl_orgahidden')){
+						jQuery('#jformauswahl_orga option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});
 			</script>		

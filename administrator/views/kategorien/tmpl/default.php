@@ -195,7 +195,7 @@ if (!empty($this->extra_sidebar)) {
 				</td>
 				<?php // Anzahl der Einsätze je Einsatzkategorie ermitteln
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and (state="1" OR state="2")  ' ; 
+                     $query = 'SELECT count(id) FROM #__eiko_einsatzberichte WHERE tickerkat = "'.$item->id.'" and (state="1" OR state="2")  ' ; 
                      $database->setQuery( $query );
                      $mission = $database->loadResult();	
 				?> 

@@ -100,8 +100,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$recipient = $params->get('mail_empfaenger_auto',$user->email);
 		
 		$recipient 	 = explode( ',', $recipient);
-		$orga		 = explode( ',', $result[0]->auswahlorga);
-		$orgas 		 = str_replace(",", " +++ ", $result[0]->auswahlorga);
+		$orga		 = explode( ',', $result[0]->auswahl_orga);
+		$orgas 		 = str_replace(",", " +++ ", $result[0]->auswahl_orga);
  
 		$mailer->addRecipient($recipient);
 		

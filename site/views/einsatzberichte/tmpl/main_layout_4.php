@@ -75,10 +75,10 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
     <?php
 	endif;
 	if (!$this->params->get('abfragewehr','0') and $this->params->get('display_filter_organisationen','1')) : 
-	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'name', 'name');
+	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'id', 'name');
 	$organisationen = array_merge($organisationen, (array)$this->organisationen);
 	?><?php 
-	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' onchange=submit(); ', 'name', 'name', $this->selectedOrga);
+	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
 	endif;?>
 	</form>
 </div>
@@ -131,7 +131,7 @@ if ($this->params->get('display_home_pagination')) :
 		   $curTime = strtotime($item->date1); 
 		   ?>
           <!-- Filter Einsatzart-->
-		  <?php if(strpos($item->auswahlorga,$this->selectedOrga)!==false or $this->selectedOrga == 'alle Organisationen'): ?>
+		  <?php if(preg_match('/\b'.$this->selectedOrga.'\b/',$item->auswahl_orga)==true or $this->selectedOrga == '0'): ?>
 		  <?php if ($this->selectedEinsatzart == $item->data1 or $this->selectedEinsatzart == 'alle Einsatzarten' ) : ?>
           <?php $show = true;?>
           
@@ -257,8 +257,23 @@ if ($this->params->get('display_home_pagination')) :
 		   <td align="center"><?php echo '<i class="icon-arrow-right"></i> '.$item->address;?></td>
            
            <?php if ($this->params->get('display_home_orga','0')) : ?>
-           <?php $auswahlorga = str_replace(",", "</br>", $item->auswahlorga);?>
-		   <td nowrap> <?php echo $auswahlorga;?></td>
+           <?php 					$data = array();
+					foreach(explode(',',$item->auswahl_orga) as $value):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = "' .$value.'"');
+						$db->setQuery($query);
+						$results = $db->loadObjectList();
+						if(count($results)){
+							$data[] = '<!-- <span class="label label-info"> --!>'.$results[0]->name.'<!-- </span>--!>'; 
+						}
+					endforeach;
+					$auswahl_orga=  implode('</br>',$data); 
+?>
+		   <td nowrap> <?php echo $auswahl_orga;?></td>
            <?php endif;?>
 
            <?php if ($this->params->get('display_home_image')) : ?>
@@ -277,7 +292,7 @@ if ($this->params->get('display_home_pagination')) :
            
            <!-- Zusatzinformation -->
 			<?php if ($this->params->get('display_home_info','1')) : ?>
-            <?php $auswahlorga = str_replace(",", " +++ ", $item->auswahlorga);?>
+            <?php $auswahl_orga = str_replace(",", " +++ ", $item->auswahl_orga);?>
             <tr id="tr<?php echo $item->id;?>" style=" display:none;" >
             
            <?php if ($this->params->get('display_home_marker','1')) : ?>
@@ -301,7 +316,7 @@ if ($this->params->get('display_home_pagination')) :
             <td colspan="<?php echo $col;?>">
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
             <h3>Alarmierungszeit :</h3><?php echo date('d.m.Y', $curTime);?> um <?php echo date('H:i', $curTime);?> Uhr
-            <h3>alarmierte Organisationen :</h3><?php echo $auswahlorga;?><br/>
+            <h3>alarmierte Organisationen :</h3><?php echo $auswahl_orga;?><br/>
 		   <?php if ($item->desc) : ?>
 			<h3>Einsatzbericht :</h3><?php echo $item->desc;?>
             <?php endif;?>

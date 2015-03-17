@@ -141,12 +141,12 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
   <tr>
     <td class="layout4_row_11" width="250px">Am Einsatz beteiligte Einheiten:</td>
     <td class="layout4_row_11">
-            <?php if( $this->item->auswahlorga ) : ?>   
+            <?php if( $this->item->auswahl_orga ) : ?>   
             <div class="well well-small">
 			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Alarmierte Organisationen').'</u></span>'; ?>:
 			<?php
 				$array = array();
-				foreach((array)$this->item->auswahlorga as $value): 
+				foreach((array)$this->item->auswahl_orga as $value): 
 					if(!is_array($value)):
 						$array[] = $value;
 					endif;
@@ -158,7 +158,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query
 						->select('*')
 						->from('`#__eiko_organisationen`')
-						->where('name = "' .$value.'"');
+						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					
@@ -173,9 +173,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					endif;
 										
 				endforeach;
-				$this->item->auswahlorga = implode('',$data); ?>
+				$this->item->auswahl_orga = implode('',$data); ?>
 				<br/><br/>
-			<?php echo '<ul style="margin:0;">'.$this->item->auswahlorga.'</ul>'; ?>
+			<?php echo '<ul style="margin:0;">'.$this->item->auswahl_orga.'</ul>'; ?>
             <?php endif;?>
             <br/><br/>
             

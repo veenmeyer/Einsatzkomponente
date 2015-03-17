@@ -71,7 +71,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA'); ?>:
 			<?php
 				$array = array();
-				foreach((array)$this->item->auswahlorga as $value): 
+				foreach((array)$this->item->auswahl_orga as $value): 
 					if(!is_array($value)):
 						$array[] = $value;
 					endif;
@@ -83,13 +83,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query
 						->select('name')
 						->from('`#__eiko_organisationen`')
-						->where('name = "' .$value.'"');
+						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					$data[] = $results[0]->name;
 				endforeach;
-				$this->item->auswahlorga = implode(',',$data); ?>
-			<?php echo $this->item->auswahlorga; ?></li>
+				$this->item->auswahl_orga = implode(',',$data); ?>
+			<?php echo $this->item->auswahl_orga; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES'); ?>:
 			<?php
 				$array = array();

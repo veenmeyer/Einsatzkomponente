@@ -110,7 +110,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$organisationen	 = '[["",1,1,0],["",1,1,0] ]';	
 			endif;
 		
- 		 $standort = EinsatzkomponenteHelper::getStandort_orga($this->item->auswahlorga); 
+ 		 $standort = EinsatzkomponenteHelper::getStandort_orga($this->item->auswahl_orga); 
 		 $display_map_route		= $this->params->get('display_map_route','true');	
 //		 echo $standort->gmap_latitude;
 //		 echo $standort->gmap_longitude;
@@ -199,7 +199,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$einsatzgebiet='[[0,0]]';
 		endif;
 		
- 		$standort = EinsatzkomponenteHelper::getStandort_orga($this->item->auswahlorga); 
+ 		$standort = EinsatzkomponenteHelper::getStandort_orga($this->item->auswahl_orga); 
 		$display_map_route		= $this->params->get('$display_map_route','true');
 		
         $display_detail_popup = $this->params->get('display_detail_popup','false');

@@ -120,12 +120,12 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
            
             <table width="100%"><tr><td>
             
-            <?php if( $this->item->auswahlorga ) : ?>           
+            <?php if( $this->item->auswahl_orga ) : ?>           
             <div class="well well-small">
 			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('alarmierte Organisationen').'</u></span>'; ?>:
 			<?php
 				$array = array();
-				foreach((array)$this->item->auswahlorga as $value): 
+				foreach((array)$this->item->auswahl_orga as $value): 
 					if(!is_array($value)):
 						$array[] = $value;
 					endif;
@@ -137,7 +137,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query
 						->select('*')
 						->from('`#__eiko_organisationen`')
-						->where('name = "' .$value.'"');
+						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					if (!$results[0]->link) :
@@ -147,8 +147,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					endif;
 					
 				endforeach;
-				$this->item->auswahlorga = implode(', ',$data); ?>
-			<?php echo $this->item->auswahlorga; ?>
+				$this->item->auswahl_orga = implode(', ',$data); ?>
+			<?php echo $this->item->auswahl_orga; ?>
             <?php endif;?>
             <br/><br/>
             

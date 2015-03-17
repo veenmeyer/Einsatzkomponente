@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `einsatzticker` VARCHAR(255)  NOT NULL ,
 `notrufticker` VARCHAR(255)  NOT NULL ,
 `tickerkat` INT(10)  NOT NULL ,
-`auswahlorga` TEXT NOT NULL ,
+`auswahl_orga` TEXT NOT NULL ,
 `vehicles` TEXT NOT NULL ,
 `status` VARCHAR(255)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',

@@ -55,7 +55,7 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
                 'einsatzticker', 'a.einsatzticker',
                 'notrufticker', 'a.notrufticker',
                 'tickerkat', 'a.tickerkat',
-                'auswahlorga', 'a.auswahlorga',
+                'auswahl_orga', 'a.auswahl_orga',
                 'vehicles', 'a.vehicles',
                 'status', 'a.status',
                 'state', 'a.state',
@@ -87,8 +87,8 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		//Filtering date1
 		$this->setState('filter.date1.from', $app->getUserStateFromRequest($this->context.'.filter.date1.from', 'filter_date1_from', '', 'string'));
 		$this->setState('filter.date1.to', $app->getUserStateFromRequest($this->context.'.filter.date1.to', 'filter_date1_to', '', 'string'));
-		//Filtering auswahlorga
-		$this->setState('filter.auswahlorga', $app->getUserStateFromRequest($this->context.'.filter.auswahlorga', 'filter_auswahlorga', '', 'string'));
+		//Filtering auswahl_orga
+		$this->setState('filter.auswahl_orga', $app->getUserStateFromRequest($this->context.'.filter.auswahl_orga', 'filter_auswahl_orga', '0', 'string'));
 		//Filtering tickerkat
 		$this->setState('filter.tickerkat', $app->getUserStateFromRequest($this->context.'.filter.tickerkat', 'filter_tickerkat', '0', 'string'));
 		//Filtering created_by
@@ -137,10 +137,10 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 			)
 		);
 		$query->from('`#__eiko_einsatzberichte` AS a');
-		// Join over the foreign key 'auswahlorga'
-		$query->select('dep.name AS mission_orga');
+		// Join over the foreign key 'auswahl_orga'
+		$query->select('dep.id AS mission_orga');
 		$query->select('dep.ordering AS department_ordering');
-		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.name = a.auswahlorga');
+		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.id = a.auswahl_orga');
 		// Join over the foreign key 'tickerkat'
 		$query->select('tic.title AS mission_kat');
 		$query->select('tic.ordering AS kat_ordering');
@@ -182,15 +182,15 @@ class EinsatzkomponenteModeleinsatzberichte extends JModelList
 		if ($filter_date1_to) {
 			$query->where("a.date1 <= '".$db->escape($filter_date1_to)."'");
 		}
-		//Filtering auswahlorga
-		$filter_auswahlorga = $this->state->get("filter.auswahlorga");
-		if ($filter_auswahlorga == 'Organisation auswählen') {
-			$query->where("a.auswahlorga LIKE '%'");
+		//Filtering auswahl_orga
+		$filter_auswahl_orga = $this->state->get("filter.auswahl_orga");
+		if ($filter_auswahl_orga == '0') {
+			$query->where("a.auswahl_orga LIKE '%'");
 		}
-		if ($filter_auswahlorga != 'Organisation auswählen') {
-			$query->where("a.auswahlorga LIKE '%".$db->escape($filter_auswahlorga)."%'");
+		if ($filter_auswahl_orga != '0' ) { 
+			$query->where("FIND_IN_SET('".$db->escape($filter_auswahl_orga)."',a.auswahl_orga)"); 
 		}
-		
+
 		$filter_tickerkat = $this->state->get("filter.tickerkat");
 		if ($filter_tickerkat == '0') {
 			$query->where("a.tickerkat LIKE '%'");

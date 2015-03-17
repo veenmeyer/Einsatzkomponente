@@ -148,7 +148,7 @@ $query
     //->order('a.created DESC');
 $db->setQuery($query);
 $results = $db->loadColumn();
-$auswahlorga[$i] = implode(",", $results);
+$auswahl_orga[$i] = implode(",", $results);
 $i++; 
 }
 $i = 0; // eingesetzte Fahrzeuge
@@ -179,8 +179,8 @@ $foto = 'images/com_einsatzkomponente/einsatzbilder/thumbs/nopic.png';
 endif;
 $db = JFactory::getDbo();
 $query = $db->getQuery(true);
-$columns = array('id','asset_id','ordering','data1','image','address','date1','date2','date3','summary','boss','boss2','people','department','desc','alerting','gmap_report_latitude','gmap_report_longitude','counter','gmap','presse','presse2','presse3','updatedate','einsatzticker','notrufticker','tickerkat','auswahlorga','vehicles','status','state','created_by');
-$values = array($reports_id[$i], '0', '0', $db->quote($reports_data1[$i]), $db->quote($foto), $db->quote($reports_address[$i]), $db->quote($reports_date1[$i]), $db->quote($reports_date2[$i]), $db->quote($reports_date3[$i]), $db->quote($reports_summary[$i]), $db->quote($reports_boss[$i]), $db->quote($reports_boss2[$i]), $db->quote($reports_people[$i]), $db->quote($reports_department[$i]), $db->quote($reports_desc[$i]), $db->quote($reports_alerting[$i]), $db->quote($reports_gmap_report_latitude[$i]), $db->quote($reports_gmap_report_longitude[$i]), $db->quote($reports_counter[$i]), $db->quote($reports_gmap[$i]), $db->quote($reports_presse[$i]), $db->quote($reports_presse2[$i]), $db->quote($reports_presse3[$i]), $db->quote($reports_updatedate[$i]),$db->quote($reports_einsatzticker[$i]), $db->quote($reports_notrufticker[$i]),$db->quote($reports_tickerKAT[$i]), $db->quote($auswahlorga[$i]), $db->quote($vehicles[$i]), $db->quote($reports_status[$i]), $db->quote($reports_published[$i]), $db->quote($reports_updatename[$i]));
+$columns = array('id','asset_id','ordering','data1','image','address','date1','date2','date3','summary','boss','boss2','people','department','desc','alerting','gmap_report_latitude','gmap_report_longitude','counter','gmap','presse','presse2','presse3','updatedate','einsatzticker','notrufticker','tickerkat','auswahl_orga','vehicles','status','state','created_by');
+$values = array($reports_id[$i], '0', '0', $db->quote($reports_data1[$i]), $db->quote($foto), $db->quote($reports_address[$i]), $db->quote($reports_date1[$i]), $db->quote($reports_date2[$i]), $db->quote($reports_date3[$i]), $db->quote($reports_summary[$i]), $db->quote($reports_boss[$i]), $db->quote($reports_boss2[$i]), $db->quote($reports_people[$i]), $db->quote($reports_department[$i]), $db->quote($reports_desc[$i]), $db->quote($reports_alerting[$i]), $db->quote($reports_gmap_report_latitude[$i]), $db->quote($reports_gmap_report_longitude[$i]), $db->quote($reports_counter[$i]), $db->quote($reports_gmap[$i]), $db->quote($reports_presse[$i]), $db->quote($reports_presse2[$i]), $db->quote($reports_presse3[$i]), $db->quote($reports_updatedate[$i]),$db->quote($reports_einsatzticker[$i]), $db->quote($reports_notrufticker[$i]),$db->quote($reports_tickerKAT[$i]), $db->quote($auswahl_orga[$i]), $db->quote($vehicles[$i]), $db->quote($reports_status[$i]), $db->quote($reports_published[$i]), $db->quote($reports_updatename[$i]));
 $query
     ->insert($db->quoteName('#__eiko_einsatzberichte'))
     ->columns($db->quoteName($columns))

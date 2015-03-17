@@ -211,7 +211,70 @@ foreach($eiko_tickerkat as $data){
 	} catch (Exception $e) {
 	}	
 
-
+// ------------------------------------------------------------------------------------------------------------
+	$check_update = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="auswahl_orga"');
+	try {
+	$check_update = $db->execute();
+	} catch (Exception $e) { }
+	$check_update = $check_update->num_rows;
+	
+	if (!$check_update) :
+	$db = JFactory::getDbo();
+	$query = "ALTER TABLE `#__eiko_einsatzberichte` ADD `auswahl_orga` TEXT NOT NULL AFTER `auswahlorga`;";
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	}	
+       	$results = array();
+		$query = 'SELECT * FROM #__eiko_einsatzberichte' ;
+		$db	= JFactory::getDBO();
+		$db->setQuery( $query );
+		$results = $db->loadObjectList();
+		
+       	$data = array();
+		foreach($results as $result):
+		$data_id = '';
+		foreach(explode(',',$result->auswahlorga) as $data):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('id')
+							->from('`#__eiko_organisationen`')
+							->where('name = "' .$data.'"');
+						$db->setQuery($query);
+						$orga_id = $db->loadResult();
+						
+		//echo '('.$data.' - '.$orga_id.') ';
+		$data_id .= $orga_id.',';
+		endforeach;
+	  	$data_id=substr($data_id,0,strlen($data_id)-1);
+		echo '</br>';
+		echo $result->id.' = '.$data_id.'</br>';
+		
+$db = JFactory::getDbo();
+$query = $db->getQuery(true);
+// Fields to update.
+$fields = array(
+    $db->quoteName('auswahl_orga') . ' = ' . $db->quote(''.$data_id.'') );
+// Conditions for which records should be updated.
+$conditions = array(
+    $db->quoteName('id') . ' = '.$result->id.'' );
+$query->update($db->quoteName('#__eiko_einsatzberichte'))->set($fields)->where($conditions);
+ 
+$db->setQuery($query);
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+		print_r ($e);$bug='1';
+	}	
+	
+		endforeach;
+endif;		
+		
+ 
 // ------------------------------------------------------------------------------------------------------------
 ?>
 <?php echo '<br/><br/>';?>

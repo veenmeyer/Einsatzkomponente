@@ -150,10 +150,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
         <tr><td class="eiko_td3_2"> <br/>
         
       
-            <?php if( $this->item->auswahlorga ) : ?>   
+            <?php if( $this->item->auswahl_orga ) : ?>   
 			<?php
 				$array = array();
-				foreach((array)$this->item->auswahlorga as $value): 
+				foreach((array)$this->item->auswahl_orga as $value): 
 					if(!is_array($value)):
 						$array[] = $value;
 					endif;
@@ -165,7 +165,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query
 						->select('*')
 						->from('`#__eiko_organisationen`')
-						->where('name = "' .$value.'" AND state="1" ');
+						->where('id = "' .$value.'" AND state="1" ');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					if ($results[0]->name) :
@@ -229,7 +229,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
   						endif;
 		
 				endforeach;
-				//$this->item->auswahlorga = implode(', ',$data); ?>
+				//$this->item->auswahl_orga = implode(', ',$data); ?>
             <?php endif;?>
 
         

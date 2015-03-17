@@ -208,12 +208,12 @@ if (!empty($this->extra_sidebar)) {
 				
 				<?php // Anzahl der Einsätze je Einsatzkategorie ermitteln
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT count(id) as count FROM #__eiko_einsatzberichte WHERE alerting = "'.$item->id.'" and state="1" or state="2" ' ;
+                     $query = 'SELECT count(id) FROM #__eiko_einsatzberichte WHERE alerting = "'.$item->id.'" and (state="1" or state="2") ' ;
                      $database->setQuery( $query );
-                     $mission = $database->loadObject();	
+                     $mission = $database->loadResult();	
 				?>
 				<td>
-				<?php echo '<span class="badge">'.$mission->count.'</span>';?>
+				<?php echo '<span class="badge">'.$mission.'</span>';?>
 				</td>
 				
 				<td>

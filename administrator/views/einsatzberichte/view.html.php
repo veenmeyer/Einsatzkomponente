@@ -128,15 +128,15 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			$this->extra_sidebar .= '<hr class="hr-condensed">';  
 
 			
-        //Filter for the field ".auswahlorga;
+        //Filter for the field ".auswahl_orga;
         jimport('joomla.form.form');
         JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
         $form = JForm::getInstance('com_einsatzkomponente.einsatzbericht', 'einsatzbericht');
-        $field = $form->getField('filter_auswahlorga');
-        $query = $form->getFieldAttribute('filter_auswahlorga','query');
-        $translate = $form->getFieldAttribute('filter_auswahlorga','translate');
-        $key = $form->getFieldAttribute('filter_auswahlorga','key_field');
-        $value = $form->getFieldAttribute('filter_auswahlorga','value_field');
+        $field = $form->getField('filter_auswahl_orga');
+        $query = $form->getFieldAttribute('filter_auswahl_orga','query');
+        $translate = $form->getFieldAttribute('filter_auswahl_orga','translate');
+        $key = $form->getFieldAttribute('filter_auswahl_orga','key_field');
+        $value = $form->getFieldAttribute('filter_auswahl_orga','value_field');
         // Get the database object.
         $db = JFactory::getDBO();
         // Set the query and get the result list.
@@ -160,8 +160,8 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		
         JHtmlSidebar::addFilter(
             'Organisationen',
-            'filter_auswahlorga',
-            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.auswahlorga')),
+            'filter_auswahl_orga',
+            JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.auswahl_orga')),
             true
         );
 		$options = '';
@@ -246,7 +246,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		'a.updatedate' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_UPDATEDATE'),
 		'a.einsatzticker' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_EINSATZTICKER'),
 		'a.notrufticker' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_NOTRUFTICKER'),
-		'a.auswahlorga' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA'),
+		'a.auswahl_orga' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA'),
 		'a.state' => JText::_('JSTATUS'),
 		'a.created_by' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATED_BY'),
 		);

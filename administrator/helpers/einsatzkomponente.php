@@ -128,7 +128,7 @@ class EinsatzkomponenteHelper
 
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahlorga,r.state FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
+		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.state FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -137,7 +137,7 @@ class EinsatzkomponenteHelper
 	
     public static function letze_x_einsatzdaten ($x) {
 		// Funktion : letze x Einsatzdaten laden
-		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahlorga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahlorga,r.state FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
+		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -192,7 +192,7 @@ class EinsatzkomponenteHelper
 				endforeach;
 				$data = array();
 		$db = JFactory::getDBO();
-		$query = 'SELECT gmap_latitude,gmap_longitude,name FROM `#__eiko_organisationen` WHERE state="1" and name="'.$array[0].'" ';
+		$query = 'SELECT gmap_latitude,gmap_longitude,name FROM `#__eiko_organisationen` WHERE state="1" and id="'.$array[0].'" ';
 		$db->setQuery($query);
 		$result = $db->loadObject();
         return $result;
@@ -218,7 +218,7 @@ class EinsatzkomponenteHelper
         return $result;
 		else:
 		
-		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` < "'.$cur_date.'" AND auswahlorga LIKE "%'.$selectedOrga.'%"  AND `state`="1" ORDER BY `date1` desc LIMIT 1';
+		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` < "'.$cur_date.'" AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND `state`="1" ORDER BY `date1` desc LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -236,7 +236,7 @@ class EinsatzkomponenteHelper
 		$result = $db->loadObjectList();
         return $result;
 		else:
-		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` > "'.$cur_date.'"  AND auswahlorga LIKE "%'.$selectedOrga.'%"  AND `state`="1" ORDER BY `date1` asc LIMIT 1';
+		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` > "'.$cur_date.'"  AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND `state`="1" ORDER BY `date1` asc LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -686,8 +686,25 @@ endif;
 		$recipient = $params->get('mail_empfaenger',$user->email);
 		
 		$recipient 	 = explode( ',', $recipient);
-		$orga		 = explode( ',', $result[0]->auswahlorga);
-		$orgas 		 = str_replace(",", " +++ ", $result[0]->auswahlorga);
+		
+					$data = array();
+					foreach(explode(',',$result[0]->auswahl_orga) as $value):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = "' .$value.'"');
+						$db->setQuery($query);
+						$results = $db->loadObjectList();
+						if(count($results)){
+							$data[] = ''.$results[0]->name.''; 
+						}
+					endforeach;
+					$auswahl_orga=  implode(',',$data); 
+
+		$orga		 = explode( ',', $auswahl_orga);
+		$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
  
 		$mailer->addRecipient($recipient);
 		
@@ -870,7 +887,23 @@ endif;
 		$query->set('`introtext`="'.$db->escape($intro).'"');
 		
 		if ($params->get('article_orgas','1')) :	
-		$orgas 		 = str_replace(",", " +++ ", $result[0]->auswahlorga);
+					$data = array();
+					foreach(explode(',',$result[0]->auswahl_orga) as $value):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = "' .$value.'"');
+						$db->setQuery($query);
+						$results = $db->loadObjectList();
+						if(count($results)){
+							$data[] = ''.$results[0]->name.''; 
+						}
+					endforeach;
+					$auswahl_orga=  implode(',',$data); 
+
+					$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
 		$orgas       = '<br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte: '.$orgas.'</div>';
 		$query->set('`fulltext`="'.$db->escape($result[0]->desc).$orgas.'"');
 		else:
@@ -893,7 +926,7 @@ endif;
 		$query->set('`attribs`="{\"show_title\":"",\"link_titles\":"",\"show_tags\":"",\"show_intro\":"",\"info_block_position\":"",\"show_category\":"",\"link_category\":"",\"show_parent_category\":"",\"link_parent_category\":"",\"show_author\":"",\"link_author\":"",\"show_create_date\":"",\"show_modify_date\":"",\"show_publish_date\":"",\"show_item_navigation\":"",\"show_icons\":"",\"show_print_icon\":"",\"show_email_icon\":"",\"show_vote\":"",\"show_hits\":"",\"show_noauth\":"",\"urls_position\":"",\"alternative_readmore\":"",\"article_layout\":"",\"show_publishing_options\":"",\"show_article_options\":"",\"show_urls_images_backend\":"",\"show_urls_images_frontend\":""}"');
 		$query->set('`version`="1"');
 		$query->set('`ordering`="0"');
-		$query->set('`metakey`="'.$result[0]->auswahlorga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
+		$query->set('`metakey`="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
 		$query->set('`metadesc`="'.$params->get('article_meta_desc','Einsatzbericht').'"');
 		$query->set('`access`="1"');
 		$query->set('`hits`="0"');

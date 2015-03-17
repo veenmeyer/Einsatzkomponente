@@ -51,7 +51,7 @@ defined('_JEXEC') or die;
 											<input type="hidden" name="jform[einsatzticker]" value="<?php echo $item->einsatzticker; ?>" />
 											<input type="hidden" name="jform[notrufticker]" value="<?php echo $item->notrufticker; ?>" />
 											<input type="hidden" name="jform[tickerkat]" value="<?php echo $item->tickerkat; ?>" />
-											<input type="hidden" name="jform[auswahlorga]" value="<?php echo $item->auswahlorga; ?>" />
+											<input type="hidden" name="jform[auswahl_orga]" value="<?php echo $item->auswahl_orga; ?>" />
 											<input type="hidden" name="jform[vehicles]" value="<?php echo $item->vehicles; ?>" />
 											<input type="hidden" name="jform[status]" value="<?php echo $item->status; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo (int)!((int)$item->state); ?>" />
@@ -91,7 +91,7 @@ defined('_JEXEC') or die;
 											<input type="hidden" name="jform[einsatzticker]" value="<?php echo $item->einsatzticker; ?>" />
 											<input type="hidden" name="jform[notrufticker]" value="<?php echo $item->notrufticker; ?>" />
 											<input type="hidden" name="jform[tickerkat]" value="<?php echo $item->tickerkat; ?>" />
-											<input type="hidden" name="jform[auswahlorga]" value="<?php echo $item->auswahlorga; ?>" />
+											<input type="hidden" name="jform[auswahl_orga]" value="<?php echo $item->auswahl_orga; ?>" />
 											<input type="hidden" name="jform[vehicles]" value="<?php echo $item->vehicles; ?>" />
 											<input type="hidden" name="jform[status]" value="<?php echo $item->status; ?>" />
 											<input type="hidden" name="jform[state]" value="<?php echo $item->state; ?>" />

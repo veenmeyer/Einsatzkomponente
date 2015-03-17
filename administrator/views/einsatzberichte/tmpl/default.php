@@ -182,7 +182,7 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
 
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahlorga', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
@@ -355,13 +355,13 @@ if (!empty($this->extra_sidebar)) {
             <td>
 					<?php
 					$data = array();
-					foreach(explode(',',$item->auswahlorga) as $value):
+					foreach(explode(',',$item->auswahl_orga) as $value):
 						$db = JFactory::getDbo();
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
 							->from('`#__eiko_organisationen`')
-							->where('name = "' .$value.'"');
+							->where('id = "' .$value.'"');
 						$db->setQuery($query);
 						$results = $db->loadObjectList();
 						if(count($results)){

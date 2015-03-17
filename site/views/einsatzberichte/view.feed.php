@@ -54,7 +54,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$this->document->link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$menu->id);;
 		foreach ( $rows as $row )
 		{
-			$auswahlorga = str_replace(",", " +++ ", $row->auswahlorga);
+			$auswahl_orga = str_replace(",", " +++ ", $row->auswahl_orga);
 			$title = html_entity_decode( $title );
 			$summary = $this->escape( $row->summary );
 			$title = html_entity_decode( $summary );
@@ -86,8 +86,8 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			if ($row->desc) :
 			$item->description 	.= '<tr><td>'.$desc.'</td></tr>';
 			endif;
-			if ($row->auswahlorga) :
-			$item->description 	.= '<tr><td><b>Einsatzkräfte</b>: +++ '.$auswahlorga.'</td></tr>';
+			if ($row->auswahl_orga) :
+			$item->description 	.= '<tr><td><b>Einsatzkräfte</b>: +++ '.$auswahl_orga.'</td></tr>';
 			endif;
 		    $item->date = date('r', strtotime($row->date1));
 			$item->description 	.= '</table>';
