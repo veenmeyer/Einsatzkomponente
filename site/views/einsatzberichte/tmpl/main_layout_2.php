@@ -45,10 +45,10 @@ if (!$this->params->get('anzeigejahr')) :
 	
     <?php
 endif;
-	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('alle Einsatzarten')  , 'title', 'title');
+	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('alle Einsatzarten')  , 'id', 'title');
 	$einsatzarten = array_merge($einsatzarten, (array)$this->einsatzarten);
 	?><?php 
-	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' onchange=submit(); ', 'title', 'title', $this->selectedEinsatzart);?> 
+	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' onchange=submit(); ', 'id', 'title', $this->selectedEinsatzart);?> 
     <?php
 	if (!$this->params->get('abfragewehr','0') and $this->params->get('display_filter_organisationen','1')) : 
 	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'id', 'name');
@@ -88,7 +88,7 @@ if ($this->params->get('display_home_pagination')) :
 		  <?php if($item->state == '1'): ?>
           <!-- Filter Einsatzart-->
 		  <?php if(preg_match('/\b'.$this->selectedOrga.'\b/',$item->auswahl_orga)==true or $this->selectedOrga == '0'): ?>
-		  <?php if ($this->selectedEinsatzart == $item->data1 or $this->selectedEinsatzart == 'alle Einsatzarten' ) : ?>
+		  <?php if ($this->selectedEinsatzart == $item->data1 or $this->selectedEinsatzart == '' ) : ?>
           
           
 <h2>

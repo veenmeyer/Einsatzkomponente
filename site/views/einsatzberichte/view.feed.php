@@ -54,7 +54,23 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$this->document->link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$menu->id);;
 		foreach ( $rows as $row )
 		{
-			$auswahl_orga = str_replace(",", " +++ ", $row->auswahl_orga);
+					$data = array();
+					foreach(explode(',',$row->auswahl_orga) as $value):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = "' .$value.'"');
+						$db->setQuery($query);
+						$results = $db->loadObjectList();
+						if(count($results)){
+							$data[] = ''.$results[0]->name.''; 
+						}
+					endforeach;
+					$auswahl_orga=  implode(',',$data); 
+					
+			$auswahl_orga = str_replace(",", " +++ ", $auswahl_orga);
 			$title = html_entity_decode( $title );
 			$summary = $this->escape( $row->summary );
 			$title = html_entity_decode( $summary );

@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
 `article_id` VARCHAR(255)  NOT NULL DEFAULT '0' ,
 `ordering` INT(11)  NOT NULL ,
-`data1` TEXT NOT NULL ,
+`data1` INT(10)  NOT NULL ,
 `image` VARCHAR(255)  NOT NULL ,
 `address` VARCHAR(255)  NOT NULL ,
 `date1` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',

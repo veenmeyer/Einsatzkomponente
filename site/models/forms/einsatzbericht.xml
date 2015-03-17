@@ -11,7 +11,7 @@
             required="true" 
             filter="raw"
             query="SELECT * FROM `#__eiko_einsatzarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
-            key_field="title"
+            key_field="id"
             value_field="title" />
 			
               <field name="tickerkat" type="sql"

@@ -66,7 +66,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		
 		$selectedYear = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedYear", 'year', $selectedYear );
 		$selectedEinsatzart = '';
-		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', 'alle Einsatzarten' );
+		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', '' );
 		$selectedOrga = '';
 		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', '0' );
 		//print_r ($selectedEinsatzart);

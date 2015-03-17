@@ -62,8 +62,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
   <div style=" text-align:center;">
                 <div>
-    			  <a href="<?php echo $this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->data1;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->data1;?>">
-                  <img  class="img-rounded" src="<?php echo $this->item->image;?>"  alt="<?php echo $this->item->data1;?>" title="<?php echo $this->item->data1;?>" alt ="<?php echo $this->item->data1;?>" style="max-width:600px;"/>
+    			  <a href="<?php echo $this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->einsatzart;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->einsatzart;?>">
+                  <img  class="img-rounded" src="<?php echo $this->item->image;?>"  alt="<?php echo $this->item->einsatzart;?>" title="<?php echo $this->item->einsatzart;?>" alt ="<?php echo $this->item->einsatzart;?>" style="max-width:600px;"/>
                   </a>
                 </div>
   </div>
@@ -89,8 +89,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			?>   
               <li>
                 <div class="thumbnail" style="max-width:<?php echo $thumbwidth;?>;)">
-    			  <a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->data1;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->data1;?>">
-                  <img  class="img-rounded" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->item->data1;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->item->data1;?>"/>
+    			  <a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->einsatzart;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->einsatzart;?>">
+                  <img  class="img-rounded" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->item->einsatzart;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->item->einsatzart;?>"/>
 <?php if ($this->images[$i]->comment) : ?>
 <br/><span><i class="icon-info-sign" style=" margin-right:5px;"></i>Info</span>
  <?php endif; ?>

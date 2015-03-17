@@ -15,7 +15,6 @@ defined('_JEXEC') or die;
 $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
-
 ?>
 
           
@@ -33,11 +32,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 
         <h1 class="einsatzdetails_headline">
-        <img  class="img-rounded" src="<?php echo JURI::Root();?><?php echo $this->einsatzlogo->list_icon;?>"  alt="" title=""/>
-		<?php echo $this->item->data1; ?></h1>
+        <img  class="img-rounded" src="<?php echo JURI::Root();?><?php echo $this->tickerKat->image;?>"  alt="" title=""/>
+		<?php echo $this->tickerKat->title; ?></h1>
         
             <?php if( $this->item->tickerkat ) : ?>
-        	<span class="einsatzdetails_sub_headline">Einsatzart: <?php echo JText::_($this->tickerKat->title); ?></span>
+        	<span class="einsatzdetails_sub_headline">Einsatzart: <?php echo JText::_($this->einsatzlogo->title); ?></span>
             <?php endif;?>
         
         <hr/>
@@ -196,9 +195,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 </td><td></td></tr>
 <tr><td colspan="2">
   <div class="distance100">&nbsp;</div>
+<?php if ($this->images) : ?>
    <h2>Sonstige Informationen</h2>
       <h3>Einsatzbilder</h3> 
-			<?php if ($this->images) : ?>
               <div class="row-fluid">
             <ul class="thumbnails">
             <?php

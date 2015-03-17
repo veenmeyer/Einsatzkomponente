@@ -119,7 +119,7 @@ class EinsatzkomponenteHelper
 	
     public static function count_einsatz_daten_bestimmtes_jahr ($selectedYear) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC ' ;
+		$query = 'SELECT COUNT(r.id) as total FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -128,7 +128,7 @@ class EinsatzkomponenteHelper
 
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.state FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
+		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.state,rd.title as einsatzart FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -137,7 +137,7 @@ class EinsatzkomponenteHelper
 	
     public static function letze_x_einsatzdaten ($x) {
 		// Funktion : letze x Einsatzdaten laden
-		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
+		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state,rd.title as einsatzart FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -251,7 +251,7 @@ class EinsatzkomponenteHelper
 					$query
 						->select('*')
 						->from('`#__eiko_einsatzarten`')
-						->where('title = "' .$data1.'"  AND state = "1" ');
+						->where('id = "' .$data1.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$result = $db->loadObject();
         return $result;

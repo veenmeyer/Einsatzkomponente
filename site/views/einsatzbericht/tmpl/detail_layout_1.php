@@ -28,8 +28,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
             <!--Headline-->
         	<h1 class="eiko_headline_2">
-            <?php if ($this->einsatzlogo->list_icon) :?>
-        	<img  class="eiko_img-rounded_2 eiko_list_icon_2" src="<?php echo JURI::Root();?><?php echo $this->einsatzlogo->list_icon;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat->image); ?>"/>
+            <?php if ($this->tickerKat->image) :?>
+        	<img  class="eiko_img-rounded_2 eiko_list_icon_2" src="<?php echo JURI::Root();?><?php echo $this->tickerKat->image;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat->title); ?>"/>
             <?php endif;?>
 			<span class="eiko_kurzbericht_2"><?php echo $this->item->summary; ?></span>
             </h1>
@@ -37,7 +37,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             
             <!--Einsatzkategorie-->
             <?php if( $this->item->tickerkat ) : ?>
-        	<br /><span class="eiko_einsatzkategorie_2">Einsatzart: <?php echo JText::_($this->tickerKat->title); ?></span>
+        	<br /><span class="eiko_einsatzkategorie_2">Einsatzkategorie: <?php echo JText::_($this->tickerKat->title); ?></span>
 			<?php if ($this->params->get('display_detail_hits','1')):?>
             <span class="badge pull-right small">Zugriffe: <?php echo $this->item->counter; ?></span>
             <?php endif;?>
@@ -253,8 +253,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 <!--Titelbild mit Highslide JS-->
 <?php if( $this->item->image ) : ?>
-<a href="<?php echo JURI::Root().$this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->data1;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?>' });" alt ="<?php echo $this->item->data1;?>">
-                  <img class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->item->data1;?>" title="<?php echo $this->item->data1;?>" alt ="<?php echo $this->item->data1;?>"/>
+<a href="<?php echo JURI::Root().$this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->einsatzart;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?>' });" alt ="<?php echo $this->item->einsatzart;?>">
+                  <img class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->item->einsatzart;?>" title="<?php echo $this->item->einsatzart;?>" alt ="<?php echo $this->item->einsatzart;?>"/>
                   </a>
 <?php endif;?>
 
@@ -297,8 +297,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			?>   
               <li>
                 <div class="thumbnail eiko_thumbnail_2" style="max-width:<?php echo $thumbwidth;?>;)">
-    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->data1;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->data1;?>">
-                <img  class="eiko_img-rounded eiko_thumbs_2" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->item->data1;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->item->data1;?>"/>
+    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->einsatzart;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->einsatzart;?>">
+                <img  class="eiko_img-rounded eiko_thumbs_2" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->item->einsatzart;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->item->einsatzart;?>"/>
 <?php if ($this->images[$i]->comment) : ?>
 <br/><span><i class="icon-info-sign" style=" margin-right:5px;"></i>Info</span>
  <?php endif; ?>

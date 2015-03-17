@@ -21,7 +21,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ORDERING'); ?>:
 			<?php echo $this->item->ordering; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1'); ?>:
-			<?php echo $this->item->data1; ?></li>
+			<?php echo $this->item->data1.' : '.$this->item->einsatzart; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_IMAGE'); ?>:
 			<?php echo $this->item->image; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'); ?>:

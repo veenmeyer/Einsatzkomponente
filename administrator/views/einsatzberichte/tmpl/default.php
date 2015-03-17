@@ -264,20 +264,20 @@ if (!empty($this->extra_sidebar)) {
 				?>
                 <?php // Get color of Einsatzart
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT * FROM #__eiko_einsatzarten WHERE title = "'.$item->data1.'" LIMIT 1 ' ;
+                     $query = 'SELECT * FROM #__eiko_einsatzarten WHERE id = "'.$item->data1.'" LIMIT 1 ' ;
                      $database->setQuery( $query );
-                     $data1_color = $database->loadObject();	
+                     $data1 = $database->loadObject();	
 				?>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzberichte.', $canCheckin); ?>
 				<?php endif; ?>
 				
 				
-					<div style="border-left:6px solid;border-color:<?php echo $data1_color->marker;?>;padding-left:3px;">
+					<div style="border-left:6px solid;border-color:<?php echo $data1->marker;?>;padding-left:3px;">
 						<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.edit&id='.(int) $item->id); ?>">
 						<?php endif; ?>
-					<?php echo '<b>'.$item->data1.'</b>'; ?>
+					<?php echo '<b>'.$data1->title.'</b>'; ?>
 						<?php if ($canEdit) : ?>
 						</a>
 						<?php endif; ?>
@@ -286,7 +286,7 @@ if (!empty($this->extra_sidebar)) {
 						echo '<div style="padding-top:5px;">';
 						echo '<img src="../'.$kat->image.'" class="backend_kat_style" title="'.$kat->title.'" />';
 						echo '&nbsp;<img src="../'.$alerting_image->image.'" class="backend_alerting_style" title ="'.$alerting_image->title.'" />';
-						echo '&nbsp;<img src="../'.$data1_color->list_icon.'" class="backend_data_style" title ="'.$data1_color->title.'" />';
+						echo '&nbsp;<img src="../'.$data1->list_icon.'" class="backend_data_style" title ="'.$data1->title.'" />';
 							if ($item->image):
 							echo '&nbsp;<img src="../'.$item->image.'" class="backend_foto_style" title="'.$item->image.'"/>';
 							endif;

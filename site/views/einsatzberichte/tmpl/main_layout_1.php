@@ -50,10 +50,10 @@ if (!$this->params->get('anzeigejahr','0') and $this->params->get('display_filte
     <?php
 endif;
 if ($this->params->get('display_filter_einsatzarten','1')) : 
-	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('alle Einsatzarten')  , 'title', 'title');
+	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('alle Einsatzarten')  , 'id', 'title');
 	$einsatzarten = array_merge($einsatzarten, (array)$this->einsatzarten);
-	?><?php 
-	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' class="eiko_select_einsatzart_main_1" onchange=submit(); ', 'title', 'title', $this->selectedEinsatzart);?>
+	?><?php  
+	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' class="eiko_select_einsatzart_main_1" onchange=submit(); ', 'id', 'title', $this->selectedEinsatzart);?>
     <?php
 	endif;
 	if (!$this->params->get('abfragewehr','0') and $this->params->get('display_filter_organisationen','1')) : 
@@ -125,7 +125,7 @@ if ($this->params->get('display_home_pagination')) :
 			?>
 		   <!-- Filter Einsatzart--!>
 		  <?php if(preg_match('/\b'.$this->selectedOrga.'\b/',$item->auswahl_orga)==true or $this->selectedOrga == '0'): ?>
-		  <?php if ($this->selectedEinsatzart == $item->data1 or $this->selectedEinsatzart == 'alle Einsatzarten' ) : ?>
+		  <?php if ($this->selectedEinsatzart == $item->data1 or $this->selectedEinsatzart == '' ) : ?>
           <?php $show = true;?>
           
            <!--Anzeige des Monatsnamen-->
@@ -193,7 +193,7 @@ if ($this->params->get('display_home_pagination')) :
 			<?php if ($this->params->get('display_home_links')) : ?>
            <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">
 		   <?php endif; ?>
-		   <?php echo ''.$item->data1; ?>
+		   <?php echo ''.$item->einsatzart; ?>
 			<?php if ($this->params->get('display_home_links','1')) : ?>
            </a>
 		   <?php endif; ?>
@@ -348,7 +348,7 @@ if ($this->params->get('display_home_pagination')) :
     				<!--Prüfen, ob Pagination angezeigt wrden soll-->
     				<?php if ($this->params->get('display_home_pagination')) : ?>
     				<!--Prüfen, ob Einsatzart ausgwählt ist -->
-                    <?php if ($this->selectedEinsatzart == '' or $this->selectedEinsatzart == 'alle Einsatzarten') : ?>
+                    <?php if ($this->selectedEinsatzart == '' or $this->selectedEinsatzart == '0') : ?>
 					<tr><td colspan="<?php echo $col;?>">
                     	<form action="#" method=post>
 						<?php echo $this->pagination->getListFooter(); ?><!--Pagination anzeigen-->

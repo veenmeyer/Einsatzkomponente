@@ -250,7 +250,7 @@ foreach($eiko_tickerkat as $data){
 		//echo '('.$data.' - '.$orga_id.') ';
 		$data_id .= $orga_id.',';
 		endforeach;
-	  	$data_id=substr($data_id,0,strlen($data_id)-1);
+	  	//$data_id=substr($data_id,0,strlen($data_id)-1);
 		echo '</br>';
 		echo $result->id.' = '.$data_id.'</br>';
 		
@@ -312,7 +312,68 @@ $db->setQuery($query);
 
 		endforeach;
 		
-endif;		
+
+
+       	$results = array();
+		$query = 'SELECT * FROM #__eiko_einsatzberichte' ;
+		$db	= JFactory::getDBO();
+		$db->setQuery( $query );
+		$results = $db->loadObjectList();
+		
+       	$data = array();
+		foreach($results as $result):
+		$data_id = '';
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('id')
+							->from('`#__eiko_einsatzarten`')
+							->where('title = "' .$result->data1.'"');
+						$db->setQuery($query);
+						$data_id = $db->loadResult();
+						
+		//echo '('.$result->data1.' - '.$data_id.') ';
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		// Fields to update.
+		$fields = array(
+		$db->quoteName('data1') . ' = ' . $db->quote(''.$data_id.'') );
+		// Conditions for which records should be updated.
+		$conditions = array(
+		$db->quoteName('id') . ' = '.$result->id.'' );
+		$query->update($db->quoteName('#__eiko_einsatzberichte'))->set($fields)->where($conditions);
+ 
+		$db->setQuery($query);
+			try {
+				$result = $db->execute();
+				} catch (Exception $e) {
+					print_r ($e);$bug='1';
+					}	
+		endforeach;
+	
+	$db = JFactory::getDbo();
+	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `data1` `data1` INT(10) NOT NULL;";
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+		print_r ($e);$bug='1';
+	}	
+		
+	$db = JFactory::getDbo();
+	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `data1` `data1` INT(10) NOT NULL;";
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+		print_r ($e);$bug='1';
+	}	
+
+		
+endif;	
+
+
+
  
 // ------------------------------------------------------------------------------------------------------------
 ?>

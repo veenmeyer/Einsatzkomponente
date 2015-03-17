@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 						$show = true;
 						?>
 							<li>
-								<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$item->id); ?>"><?php echo $item->data1; ?></a>
+								<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$item->id); ?>"><?php echo $item->einsatzart; ?></a>
 								<?php
 									if(JFactory::getUser()->authorise('core.edit.state','com_einsatzkomponente.einsatzbericht'.$item->id)):
 									?>
