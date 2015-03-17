@@ -100,8 +100,25 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$recipient = $params->get('mail_empfaenger_auto',$user->email);
 		
 		$recipient 	 = explode( ',', $recipient);
-		$orga		 = explode( ',', $result[0]->auswahl_orga);
-		$orgas 		 = str_replace(",", " +++ ", $result[0]->auswahl_orga);
+		
+					$data = array();
+					foreach(explode(',',$result[0]->auswahl_orga) as $value):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = "' .$value.'"');
+						$db->setQuery($query);
+						$results = $db->loadObjectList();
+						if(count($results)){
+							$data[] = ''.$results[0]->name.''; 
+						}
+					endforeach;
+					$auswahl_orga=  implode(',',$data); 
+
+					$orga		 = explode( ',', $auswahl_orga);
+		$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
  
 		$mailer->addRecipient($recipient);
 		

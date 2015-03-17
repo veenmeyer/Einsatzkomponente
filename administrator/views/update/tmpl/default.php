@@ -272,8 +272,47 @@ $db->setQuery($query);
 	}	
 	
 		endforeach;
-endif;		
+	
+
+       	$results = array();
+		$query = 'SELECT * FROM #__eiko_fahrzeuge' ;
+		$db	= JFactory::getDBO();
+		$db->setQuery( $query );
+		$results = $db->loadObjectList();
 		
+       	$data = '';
+		foreach($results as $result):
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('id')
+							->from('`#__eiko_organisationen`')
+							->where('name = "' .$result->department.'"');
+						$db->setQuery($query);
+						$orga_id = $db->loadResult();
+						
+		//echo '('.$result->department.' - '.$orga_id.')</br> ';
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		// Fields to update.
+		$fields = array(
+		$db->quoteName('department') . ' = ' . $db->quote(''.$orga_id.'') );
+		// Conditions for which records should be updated.
+		$conditions = array(
+		$db->quoteName('id') . ' = '.$result->id.'' );
+		$query->update($db->quoteName('#__eiko_fahrzeuge'))->set($fields)->where($conditions);
+ 
+		$db->setQuery($query);
+			try {
+				$result = $db->execute();
+				} catch (Exception $e) {
+					print_r ($e);$bug='1';
+					}	
+
+		endforeach;
+		
+endif;		
  
 // ------------------------------------------------------------------------------------------------------------
 ?>

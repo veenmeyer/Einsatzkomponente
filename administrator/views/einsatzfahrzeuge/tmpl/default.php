@@ -11,11 +11,8 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.multiselect');
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('formbehavior.chosen', 'select');
 JHtml::_('bootstrap.tooltip');
-endif;
 
 // Import CSS
 $document = JFactory::getDocument();
@@ -30,10 +27,7 @@ if ($saveOrder)
 {
 	$saveOrderingUrl = 'index.php?option=com_einsatzkomponente&task=einsatzfahrzeuge.saveOrderAjax&tmpl=component';
 	
-	$version = new JVersion;
-	if ($version->isCompatible('3.0')) :
 	JHtml::_('sortablelist.sortable', 'einsatzfahrzeugList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
-	endif;
 	
 }
 $sortFields = $this->getSortFields();
@@ -233,9 +227,21 @@ if (!empty($this->extra_sidebar)) {
 				<td>
 					<?php echo $item->detail3; ?>
 				</td>
+				
 				<td>
-					<?php echo $item->department; ?>
+				<?php	$result ='';
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = "' .$item->department.'"');
+						$db->setQuery($query);
+						$result = $db->loadResult(); ?>
+					
+					<?php echo $result; ?>
 				</td>
+				
 				<td>
 					<?php echo $item->link; ?>
 				</td>
