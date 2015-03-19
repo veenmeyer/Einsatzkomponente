@@ -372,7 +372,29 @@ $db->setQuery($query);
 		
 endif;	
 
-
+// ------------------ ADD gmap_icon zu Organisationen --------------------------------------------------
+	$check_gmap_icon = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('show columns from `#__eiko_organisationen` where Field="gmap_icon"');
+	try {
+	$check_gmap_icon = $db->execute();
+	} catch (Exception $e) {
+	print_r($e);$bug='1';
+	}	
+$check_gmap_icon = $check_gmap_icon->num_rows;
+if (!$check_gmap_icon) {
+	
+	$db = JFactory::getDbo();
+    $query = 'ALTER TABLE `#__eiko_organisationen` ADD `gmap_icon_orga` VARCHAR( 255 ) NOT NULL AFTER `name`';	
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	print_r($e);$bug='1';
+	}	
+}
+else {
+	}
 
  
 // ------------------------------------------------------------------------------------------------------------
