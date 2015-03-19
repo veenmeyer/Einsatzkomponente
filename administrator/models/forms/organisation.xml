@@ -13,7 +13,17 @@
             filter="safehtml"
             size="100"
             maxlength="100" /> 
-       
+			
+       <field name="gmap_icon_orga" type="media"
+                
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZART_ICON"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_ICON" 
+            filter="raw"
+			preview ="true"
+			hide_none="1"
+			id="organisation_icon"
+            directory="com_einsatzkomponente/images/map/icons" /> 
+			
     <field name="detail1_label" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_DETAIL1_LABEL"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_ORGANISATION_DETAIL1_LABEL" 

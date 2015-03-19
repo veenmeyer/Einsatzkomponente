@@ -57,7 +57,10 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				<div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('name'); ?></div>
             </div>   
-            
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('gmap_icon_orga'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('gmap_icon_orga'); ?></div>
+            </div>   
 <?php // zugeordnete Fahrzeuge aufrufen ----------------------------------
 if ($this->item->name)
 {
@@ -68,14 +71,16 @@ if ($this->item->name)
 	echo '<div class="control-label">';echo JText::_('Zugeordnete Fahrzeuge :');echo '</div>';
 	echo '<div class="controls"><ul class="adminformlist">';
 $database			= JFactory::getDBO();
-$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$this->item->name.'" ORDER BY ordering ASC ' ;
+$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$this->item->id.'" ORDER BY ordering ASC ' ;
 $database->setQuery( $query );
 $total = $database->loadObjectList();	
 		if ($total) {
 		foreach($total as $totale): 
 		echo '<li>';
 		echo '<a title="Fahrzeug bearbeiten" href="index.php?option=com_einsatzkomponente&task=einsatzfahrzeug.edit&id='.$totale->id.'); ">';
-		echo $totale->name.' ( '.$totale->detail2.' )'.' '.$totale->detail1;
+		echo $totale->name;
+		if ($totale->detail2): echo ' ( '.$totale->detail2.' )'; endif;
+		if ($totale->detail1): echo ' '.$totale->detail1; endif;
 		echo '</a></li>'; 
 		endforeach; 
 		}

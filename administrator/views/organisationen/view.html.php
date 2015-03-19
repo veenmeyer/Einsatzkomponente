@@ -123,6 +123,7 @@ class EinsatzkomponenteViewOrganisationen extends JViewLegacy
 		'a.id' => JText::_('JGRID_HEADING_ID'),
 		'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 		'a.name' => JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN_NAME'),
+		'a.gmap_icon_orga' => JText::_(''),
 		'a.detail1' => JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN_DETAIL1'),
 		'a.link' => JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN_LINK'),
 		'a.gmap_latitude' => JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN_GMAP_LATITUDE'),

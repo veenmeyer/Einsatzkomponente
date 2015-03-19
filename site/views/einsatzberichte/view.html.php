@@ -63,7 +63,6 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		  //----Modulposition laden ----
 		$this->modulepos_1 = '<div class="mod_eiko1">'.EinsatzkomponenteHelper::module ('eiko1').'</div>'; 
 		$this->modulepos_2 = '<div class="mod_eiko2">'.EinsatzkomponenteHelper::module ('eiko2').'</div>'; 
-		
 		$selectedYear = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedYear", 'year', $selectedYear );
 		$selectedEinsatzart = '';
 		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', '' );
@@ -174,21 +173,22 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			$standort->gmap_latitude = '0';
 			$standort->gmap_longitude= '0';
 			$orga = EinsatzkomponenteHelper::getOrganisationen(); 
-			$orga_image 	= '../../images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png');
 	  		$organisationen='['; // Feuerwehr Details  ------>
 	  		$n=0;
 	  		for($i = 0; $i < count($orga); $i++) {
+			$orga_image 	= $orga[$i]->gmap_icon_orga;
+			if (!$orga_image) : $orga_image= '../../images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png'); endif;
 		  	if($i==$n-1){
-			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.']';
+			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"]';
 		 	}else {
-			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i;
+			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"';
 			$organisationen=$organisationen.'],';
 		    }
 	        }
 	  		$organisationen=substr($organisationen,0,strlen($organisationen)-1);
 	  		$organisationen=$organisationen.' ];';
 			if (!$this->params->get('display_home_organisationen','1')) :
-			$organisationen	 = '[["",1,1,0],["",1,1,0] ]';	
+			$organisationen	 = '[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]';	
 		    endif;
 		 $display_map_route		= 'false';	
 
@@ -235,22 +235,23 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 			$standort->gmap_longitude= '0';
 
 			$orga = EinsatzkomponenteHelper::getOrganisationen(); 
-			$orga_image 	= '../../images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png');
 	  		$organisationen='['; // Feuerwehr Details  ------>
 	  		$n=0;
 	  		for($i = 0; $i < count($orga); $i++) {
+			$orga_image 	= $orga[$i]->gmap_icon_orga;
+			if (!$orga_image) : $orga_image= '../../images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png'); endif;
 		  	if($i==$n-1){
-			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.']';
+			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"]';
 		 	}else {
-			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i;
+			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"';
 			$organisationen=$organisationen.'],';
 		    }
 	        }
 	  		$organisationen=substr($organisationen,0,strlen($organisationen)-1);
-	  		$organisationen=$organisationen.' ]';
+	  		$organisationen=$organisationen.' ];';
 			if (!$this->params->get('display_home_organisationen','1')) :
-			$organisationen	 = '[["",1,1,0],["",1,1,0] ]';	
-			endif;
+			$organisationen	 = '[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]';	
+		    endif;
 			
 	  	 $alarmareas1  = $this->gmap_config->gmap_alarmarea;  // Einsatzgebiet  ---->
 	 	 $alarmareas = explode('|', $alarmareas1);

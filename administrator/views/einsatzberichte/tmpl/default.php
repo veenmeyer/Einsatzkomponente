@@ -284,9 +284,9 @@ if (!empty($this->extra_sidebar)) {
 					</div>
 				      <?php 
 						echo '<div style="padding-top:5px;">';
-						echo '<img src="../'.$kat->image.'" class="backend_kat_style" title="'.$kat->title.'" />';
-						echo '&nbsp;<img src="../'.$alerting_image->image.'" class="backend_alerting_style" title ="'.$alerting_image->title.'" />';
+						echo '<img src="../'.$alerting_image->image.'" class="backend_alerting_style" title ="'.$alerting_image->title.'" />';
 						echo '&nbsp;<img src="../'.$data1->list_icon.'" class="backend_data_style" title ="'.$data1->title.'" />';
+						echo '&nbsp;<img src="../'.$kat->image.'" class="backend_kat_style" title="'.$kat->title.'" />';
 							if ($item->image):
 							echo '&nbsp;<img src="../'.$item->image.'" class="backend_foto_style" title="'.$item->image.'"/>';
 							endif;

@@ -27,6 +27,7 @@ class EinsatzkomponenteModelorganisationen extends JModelList
                                 'id', 'a.id',
                 'ordering', 'a.ordering',
                 'name', 'a.name',
+                'gmap_icon_orga', 'a.gmap_icon_orga',
                 'detail1_label', 'a.detail1_label',
                 'detail1', 'a.detail1',
                 'detail2_label', 'a.detail2_label',

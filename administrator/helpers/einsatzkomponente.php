@@ -192,7 +192,7 @@ class EinsatzkomponenteHelper
 				endforeach;
 				$data = array();
 		$db = JFactory::getDBO();
-		$query = 'SELECT gmap_latitude,gmap_longitude,name FROM `#__eiko_organisationen` WHERE state="1" and id="'.$array[0].'" ';
+		$query = 'SELECT gmap_latitude,gmap_longitude,name,gmap_icon_orga,ffw FROM `#__eiko_organisationen` WHERE state="1" and id="'.$array[0].'" ';
 		$db->setQuery($query);
 		$result = $db->loadObject();
         return $result;
@@ -295,7 +295,7 @@ class EinsatzkomponenteHelper
         return $result;
 	}
 	
-public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0],["",1,1,1] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
+public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
  {
 $gmap ='function initialize() {
 	
@@ -391,10 +391,10 @@ var request = {
 var orgas = '.$organisationen.';
 setMarkers(map, orgas);
 function setMarkers(map, locations) {
-  var image = "'.JURI::base().$orga_image.'";
   for (var i = 0; i < locations.length; i++) {
     var orgas = locations[i];
     var myLatLng = new google.maps.LatLng(orgas[1], orgas[2]);
+	var image = "'.JURI::base().'"+orgas[4];
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -424,7 +424,7 @@ return $gmap; }
 	
 	
 	
-public static function getOsm($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0],["",1,1,1] ]',$orga_image='haus_rot.png',$einsatzgebiet='[ [53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655] ]',$display_detail_popup='false',$standort,$display_map_route="true")
+public static function getOsm($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[ [53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655] ]',$display_detail_popup='false',$standort,$display_map_route="true")
  {
 $gmap ='//<![CDATA[
 
@@ -484,7 +484,7 @@ setMarkers(map, orgas);
 function setMarkers(map, locations) {
    for (var i = 0; i < locations.length; i++) {
      var orgas = locations[i];
-	icons[i] = new Array("'.JURI::base().$orga_image.'","32","32","0","1");
+	icons[i] = new Array("'.JURI::base().'"+orgas[4],"32","32","0","1");
 	 addMarker(layer_standort,orgas[2],orgas[1],orgas[0],false,i);
   } }
 

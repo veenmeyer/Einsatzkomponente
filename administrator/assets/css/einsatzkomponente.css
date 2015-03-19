@@ -104,7 +104,7 @@
 .backend_tickerkat {display:none;}
 .backend_einsatzfoto {display:none;}
 
-.backend_kat_style, .backend_alerting_style, .backend_data_style, .backend_foto_style {width:24px;height:100%;}
+.backend_kat_style, .backend_alerting_style, .backend_data_style, .backend_foto_style, .backend_gmap_icon_orga  {width:24px;height:100%;}
 
 .backend_foto_style {border:1px solid #000000;}
 

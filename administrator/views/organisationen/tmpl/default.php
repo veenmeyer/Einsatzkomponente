@@ -139,6 +139,9 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_ORGANISATIONEN_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
+				<?php echo JHtml::_('grid.sort',  '', 'a.gmap_icon_orga', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_ORGANISATIONEN_DETAIL1', 'a.detail1', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -225,6 +228,12 @@ if (!empty($this->extra_sidebar)) {
 				<?php else : ?>
 					<?php echo $this->escape($item->name); ?>
 				<?php endif; ?>
+				</td>
+				<td>
+				<?php 	if ($item->gmap_icon_orga) :
+						echo '<img src="../'.$item->gmap_icon_orga.'" class="backend_gmap_icon_orga" title ="" />';
+						endif;
+				?>
 				</td>
 				<td>
 					<?php echo $item->detail1; ?>

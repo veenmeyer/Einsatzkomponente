@@ -69,29 +69,30 @@ $gmapconfig = $this->gmap_config;
 		if ($this->params->get('display_einsatzkarte_organisationen','1')) :
 			// Feuerwehrliste aus DB holen
 			$db = JFactory::getDBO();
-			$query = 'SELECT id, name,gmap_latitude,gmap_longitude,link,detail1 FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `id`';
+			$query = 'SELECT id, name,gmap_icon_orga,gmap_latitude,gmap_longitude,link,detail1 FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `id`';
 			$db->setQuery($query);
 			$orga = $db->loadObjectList();
 
 	  		$organisationen='['; // Feuerwehr Details  ------>
 	  		$n=0;
 	  		for($i = 0; $i < count($orga); $i++) {
+			$orga_image 	= $orga[$i]->gmap_icon_orga;
+			if (!$orga_image) : $orga_image= 'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png'); endif;
 		  	if($i==$n-1){
-			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.']';
+			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"]';
 		 	}else {
-			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i;
+			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"';
 			$organisationen=$organisationen.'],';
 		    }
 	        }
 	  		$organisationen=substr($organisationen,0,strlen($organisationen)-1);
 	  		$organisationen=$organisationen.' ];';
 		else:
-			$organisationen	 = '[["",1,1,0],["",1,1,0] ]';	
+			$organisationen	 = '[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]';	
 			endif;
-			$orga_image 	= JURI::base().'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png');
 			
 
-//print_r ($organisationen);break;
+//echo $organisationen;break;
 
 
 		if ($this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
@@ -117,7 +118,7 @@ $gmapconfig = $this->gmap_config;
 
 // Einsatzarten als Kategorie setzen
 $db = JFactory::getDBO();
-$query = 'SELECT COUNT(r.data1) as total,r.data1,rd.marker,rd.marker,rd.icon FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.title WHERE r.state = "1" AND rd.state = "1" GROUP BY r.data1';
+$query = 'SELECT COUNT(r.data1) as total,r.data1,rd.marker,rd.marker,rd.icon,rd.title as einsatzart FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id WHERE r.state = "1" AND rd.state = "1" GROUP BY r.data1';
 $db->setQuery($query);
 $pie = $db->loadObjectList();
 //print_r ($pie);
@@ -133,9 +134,9 @@ $catinit    .= 'show("'.$pie[$i]->data1.'");';
 $cat_count    .= 'cat_count("'.$pie[$i]->data1.'");';
 
 
-//$catbox .= '<span class="label"><input type="checkbox" id="'.$pie[$i]->data1.'box" onClick="boxclick(this,&#39;'.$pie[$i]->data1.'&#39;)" />&nbsp;&nbsp;<img src="'.JURI::base().$pie[$i]->icon.'" width="16px" height="16px" /><strong>'.$pie[$i]->data1.'</strong> </span> ';
+//$catbox .= '<span class="label"><input type="checkbox" id="'.$pie[$i]->data1.'box" onClick="boxclick(this,&#39;'.$pie[$i]->data1.'&#39;)" />&nbsp;&nbsp;<img src="'.JURI::base().$pie[$i]->icon.'" width="16px" height="16px" /><strong>'.$pie[$i]->einsatzart.'</strong> </span> ';
 
-$catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs " onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" width="32px" height="32px" />&nbsp;'.$pie[$i]->data1.' 
+$catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs " onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" width="32px" height="32px" />&nbsp;'.$pie[$i]->einsatzart.' 
 <span class="pull-right" style ="font-size:9px;" ><span id="'.$pie[$i]->data1.'count"></span> / '.$pie[$i]->total.' Einsätze</span></button></label></div>';
 
 $i++; 
@@ -405,7 +406,7 @@ $day = date("d",strtotime($reports[$i]->date1));   ### 111225
 
 ?>
 
-var marker = createMarker(new google.maps.LatLng(<?php echo $reports[$i]->gmap_report_latitude;?>,<?php echo $reports[$i]->gmap_report_longitude;?>),"<?php echo $rSummary;?>","<?php echo $reports[$i]->data1;?>","<?php echo $reports[$i]->data1;?>","<?php echo $reports[$i]->icon;?>","<?php echo $reports[$i]->id;?>","<?php echo $reports[$i]->date1;?>","<?php echo $day;?>","<?php echo $month;?>","<?php echo $year;?>","<?php echo $reports[$i]->image;?>","");
+var marker = createMarker(new google.maps.LatLng(<?php echo $reports[$i]->gmap_report_latitude;?>,<?php echo $reports[$i]->gmap_report_longitude;?>),"<?php echo $rSummary;?>","<?php echo $reports[$i]->einsatzart;?>","<?php echo $reports[$i]->data1;?>","<?php echo $reports[$i]->icon;?>","<?php echo $reports[$i]->id;?>","<?php echo $reports[$i]->date1;?>","<?php echo $day;?>","<?php echo $month;?>","<?php echo $year;?>","<?php echo $reports[$i]->image;?>","");
 <?php 
 $i++; 
 } 
@@ -416,11 +417,11 @@ var infowindow = new google.maps.InfoWindow(
   { 
     size: new google.maps.Size(150,120)
   });
-  var image = new google.maps.MarkerImage('<?php echo $orga_image;?>')
   for (var i = 0; i < homes.length; i++) {
     var homi = homes[i];
+	var image = new google.maps.MarkerImage("<?php echo JURI::root()."/";?>"+ homi[4],null, null, null, new google.maps.Size(<?php echo $this->params->get('einsatzkarte_gmap_icon_orga', 24);?>, <?php echo $this->params->get('einsatzkarte_gmap_icon_orga', 24);?>));
     var myLatLng = new google.maps.LatLng(homi[1], homi[2]);
-    var marker = createHouse(myLatLng,homi[0],homi[4],homi[3],image);
+    var marker = createHouse(myLatLng,homi[0],'',homi[3],image);
     
   }
 
