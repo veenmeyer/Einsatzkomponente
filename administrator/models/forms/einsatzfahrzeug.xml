@@ -138,8 +138,8 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZFAHRZEUG_DEPARTMENT"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZFAHRZEUG_DEPARTMENT" 
             filter="safehtml"
-            query="SELECT name FROM `#__eiko_organisationen` WHERE `state` = '1' ORDER BY `ordering` ASC"
-            key_field="name"
+            query="SELECT id,name FROM `#__eiko_organisationen` WHERE `state` = '1' ORDER BY `ordering` ASC"
+            key_field="id"
             value_field="name" />
     <field name="link" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZFAHRZEUG_LINK"

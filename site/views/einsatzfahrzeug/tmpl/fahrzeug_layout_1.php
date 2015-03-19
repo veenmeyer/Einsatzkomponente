@@ -51,9 +51,16 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 </tr>
 <?php endif; ?>
 <?php if ($this->item->department) : ?>
+<?php
+$database			= JFactory::getDBO();
+$query = 'SELECT name FROM #__eiko_organisationen WHERE id='.$this->item->department.' AND state ="1"' ;
+$database->setQuery( $query );
+$orga = $database->loadResult();
+?>
+
 <tr class="fahrzeug_box_3">
 <td><strong>Organisation:</strong></td>
-<td><?php echo $this->item->department; ?></td> 
+<td><?php echo $orga; ?></td> 
 </tr>
 <?php endif; ?>
 <?php if ($this->item->detail2) : ?>
@@ -94,9 +101,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <td><?php echo $this->item->detail7; ?></td>
 </tr>
 <?php endif; ?>
-<?php // letzter Einsatz   BUG : Problem bei der Suche nach ID z.B. 1 -> 11
+<?php // letzter Einsatz   
 $database			= JFactory::getDBO();
-$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE vehicles LIKE "%'.$this->item->id.'%" AND state ="1" ORDER BY date1 DESC' ;
+$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$this->item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
 $database->setQuery( $query );
 $total = $database->loadObjectList();
 $detail_check = $this->item->detail7_label;

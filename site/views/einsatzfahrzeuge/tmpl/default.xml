@@ -73,8 +73,12 @@
         <option value="1">ja</option> 
 		</field>
 
+       <field name="anzeigewehr_fhz" type="sql" label="Wenn ja, von welcher Organisation anzeigen:"
+              query="SELECT 0 AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name`,`ordering` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC" 
+			key_field="id" 
+			value_field="name"
+             /> 
 
-			<field name="anzeigewehr_fhz" type="sql" default="" label="Wenn Ja, bitte hier w&#228;hlen" query="SELECT name AS value, name AS anzeigewehr_fhz FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `name`" />
 			
 		<field
 			name="spacer13"
