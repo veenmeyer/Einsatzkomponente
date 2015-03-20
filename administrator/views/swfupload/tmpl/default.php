@@ -11,6 +11,9 @@ defined('_JEXEC') or die;
 $pview      = JFactory::getApplication()->input->get('pview', 'kontrollcenter');
 $rep_id      = JFactory::getApplication()->input->get('rep_id', 0);
 
+$params = JComponentHelper::getParams('com_einsatzkomponente');
+$watermark      = JFactory::getApplication()->input->get('watermark_image', $params->get('watermark_image'));
+//echo $watermark;
 $db =  JFactory::getDBO();
 $query = 'SELECT id, summary as title, date1 FROM `#__eiko_einsatzberichte` WHERE id='.$rep_id.' AND state=1 LIMIT 1';
 $db->setQuery($query);
@@ -37,13 +40,62 @@ $reportDb = $db->loadObjectList();
 				<div>
 					<span id="spanButtonPlaceHolder"></span><br/><br/>  
 					<input id="btnCancel" type="button" value="Alle Uploads abbrechen" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" /><br/><br/><br/><br/>
-                    <input id="btnSubmit" type="submit" value="weiter / abbrechen" class="btn btn-primary" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+		<a class="btn btn-primary" href="index.php?option=com_einsatzkomponente&view=<?php echo $pview;?>&layout=edit&id=<?php echo $rep_id;?>" target="_self">zurück</a>
 				</div> 
+		
+						<!-- Button to trigger modal -->
+						<a href="#myModal" role="button" class="btn" data-toggle="modal">Wasserzeichen auswählen</a>
+		
+						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Standard-Wasserzeichen: <?php echo $watermark;?></h3>
+						</div>
+						<div class="modal-body">
+						
+<div class="control-group">
+	<div class="control-label">
+	<label id="jform_watermark_image-lbl" for="jform_watermark_image" class="hasTooltip" title="">
+	Wasserzeichen wählen :</label>									
+	</div>
+	<div class="controls">
+		<select id="watermark_image" name="watermark_image" onchange="changeText_watermark()">  
+		<option value="presse_watermark.png">presse_watermark.png</option>
+		<option value="watermark.png" selected="selected">watermark.png</option>
+		</select>
+	</div>
+</div>					
+						
+						<strong>Wasserzeichen wählen </strong><br/>Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!
+						
+						<h4>Mehr Infos dazu auf www.einsatzkomponente.de</h4>
+						</div>
+						<div class="modal-footer">
+						<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+						<button class="btn btn-primary">Speichern</button> 
+						</div>
+						</div>	
+	
 		</fieldset>
+		
+<script type="text/javascript">
+function changeText_watermark(){
+    var userInput1 = document.getElementById("watermark_image").value;
+	document.getElementById("watermark").value = userInput1;
+}
+</script>	
+<input type="text" name="watermark_image" id="watermark" value="<?php echo $watermark;?>"/>
 <input type="hidden" name="option" value="com_einsatzkomponente" />
-<input type="hidden" name="view" value="<?php echo $pview;?>" />
-<input type="hidden" name="id" value="<?php echo $rep_id;?>" />
+<input type="hidden" name="view" value="swfupload" />
+<input type="hidden" name="pview" value="<?php echo $pview;?>" />
+<input type="hidden" name="rep_id" value="<?php echo $rep_id;?>" />
 <input type="hidden" name="layout" value="edit" />
 	</form>
+	
+	
+	
+
+						
+	
 </div>
 </td></tr></table>

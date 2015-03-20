@@ -50,6 +50,7 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 					
 						
 		$rep_id = JRequest::getVar('rep_id', 0);   // Einsatz_ID holen für Zuordnung der Bilder in der Datenbank
+		$watermark_image = JRequest::getVar('watermark_image', $params->get('watermark_image'));
 		
 		// Check ob Bilder in einen Unterordner (OrdnerName = ID-Nr.) abgespeichert werden sollen :
 		if ($params->get('new_dir', '1')) :
@@ -158,7 +159,7 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 			
 $source = JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').$rep_id_ordner.'/'.$fileName ; //the source file
 $destination =  JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').$rep_id_ordner.'/'.$fileName ; //were to place the thumb
-$watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets/images/watermark/'.$params->get('watermark_image', 'watermark.png').''; //the watermark files
+$watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets/images/watermark/'.$watermark_image.''; //the watermark files
 
     // Einsatzbilder resizen
 	$image_resize = $params->get('image_resize', 'true');

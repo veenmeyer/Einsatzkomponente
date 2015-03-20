@@ -39,7 +39,8 @@ class EinsatzkomponenteViewSWFUpload extends JViewLegacy
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		
 		$rep_id = JRequest::getVar('rep_id', 0);   // Einsatz_ID holen für Zuordnung der Bilder in der Datenbank
-		
+		$watermark      = JRequest::getVar('watermark_image', $params->get('watermark_image'));
+
 		$swfUploadHeadJs ='
 		var swfu;
  
@@ -57,6 +58,7 @@ class EinsatzkomponenteViewSWFUpload extends JViewLegacy
 				"controller" : "swfupload",
 				"task" : "upload",
 				"rep_id" : "'.$rep_id.'",
+				"watermark_image" : "'.$watermark.'",
 				"'.$session->getName().'" : "'.$session->getId().'",
 				"format" : "raw"
 			}, 
