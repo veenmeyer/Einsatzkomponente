@@ -295,6 +295,71 @@ class EinsatzkomponenteHelper
         return $result;
 	}
 	
+    public static function getFahrzeuge_mission ($array_vehicle ='',$orga_id='',$title='') {
+ 		// Funktion : sonstige Fahrzeuge aus DB holen
+						$params = JComponentHelper::getParams('com_einsatzkomponente');
+						$sonstige ='';
+						$sonstige_result = '';
+						$query = 'SELECT * from #__eiko_fahrzeuge where department = "'.$orga_id.'" and (state = 1 or state = 2) order by ordering ASC';
+						$db = JFactory::getDBO();
+                        $db->setQuery($query);
+                        if ($vehicles = $db->loadObjectList()) :
+                                foreach ($vehicles as $vehicle) {
+						if (in_array($vehicle->id, $array_vehicle)) : 
+						if ($vehicle->state == '2'): $vehicle->name = $vehicle->name.' (a.D.)';endif;
+						if ($params->get('display_detail_fhz_links','1')) :
+						if (!$vehicle->link) : 
+						$sonstige .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $vehicle->id).'" target="_self"><li>'.$vehicle->name.'</li></a>';
+						else:
+						$sonstige .= '<a href="'.$vehicle->link.'" target="_self"><li>'.$vehicle->name.'</li></a>';
+						endif;
+						else:
+						$sonstige .= '<li>'.$vehicle->name.'</li>';
+						endif;
+						
+						endif;
+                                }
+						if ($sonstige):
+						$sonstige_result = '';
+						$sonstige_result = $title;
+						$sonstige_result .= '<div class="items"><ul class="items_list">';
+						$sonstige_result .= $sonstige;
+						$sonstige_result .= '</ul></div>'; 
+						endif;
+						endif;
+        return $sonstige_result;
+	}
+    public static function getFahrzeuge_mission_image ($array_vehicle ='',$orga_id='') {
+ 		// Funktion : sonstige Fahrzeuge aus DB holen
+						$params = JComponentHelper::getParams('com_einsatzkomponente');
+						$vehicles_image ='';
+						$sonstige_result = '';
+						$query = 'SELECT * from #__eiko_fahrzeuge where department = "'.$orga_id.'" and (state = 1 or state = 2) order by ordering ASC';
+						$db = JFactory::getDBO();
+                        $db->setQuery($query);
+                        if ($vehicles = $db->loadObjectList()) :
+                                foreach ($vehicles as $vehicle) {
+						if (in_array($vehicle->id, $array_vehicle)) : 
+						if ($vehicle->state == '2'): $vehicle->name = $vehicle->name.' (a.D.)';endif;
+						if ($params->get('display_detail_fhz_links','1')) :
+						if (!$vehicle->link) : 
+						$vehicles_image .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $vehicle->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
+						else:
+						$vehicles_image .= '<a href="'.$vehicle->link.'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
+						endif;
+						else:
+						$vehicles_image .= '<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/>';
+						endif;
+						
+						endif;
+                                }
+						if ($vehicles_image):
+						$vehicles_images = $vehicles_image;
+						endif;
+						endif;
+        return $vehicles_images;
+	}
+	
 public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
  {
 $gmap ='function initialize() {

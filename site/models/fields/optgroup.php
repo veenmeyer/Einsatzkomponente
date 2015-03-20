@@ -42,10 +42,31 @@ class JFormFieldoptgroup extends JFormField
                         $db->setQuery($query);
                         $vehicles = $db->loadObjectList();
                                 foreach ($vehicles as $vehicle) {
-                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . '</option>';
+                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' ( '.$org->name.' ) </option>';
                                 }
                         $html[].='</optgroup>';
                 }
+
+						$query = 'SELECT id,name from #__eiko_fahrzeuge where department = "" and state = 1 order by ordering ASC';
+                        $db->setQuery($query);
+                        if ($vehicles = $db->loadObjectList()) :
+                        $html[].='<optgroup label="sonstige">';
+                                foreach ($vehicles as $vehicle) {
+                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' ( sonstige ) </option>';
+                                }
+                        $html[].='</optgroup>';
+						endif;
+						
+                        $query = 'SELECT id,name from #__eiko_fahrzeuge where state = 2 order by ordering ASC';
+                        $db->setQuery($query);
+                        if ($vehicles = $db->loadObjectList()) :
+                        $html[].='<optgroup label="außer Dienst">';
+                                foreach ($vehicles as $vehicle) {
+                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' - a.D. ( ID '.$vehicle->id.' ) </option>';
+                                }
+                        $html[].='</optgroup>';
+						endif;
+						
                 $html[].='</select>';
                 return implode($html);
         }

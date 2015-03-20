@@ -32,7 +32,7 @@
 			
        <field name="filter_tickerkat" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, 'Einsatzkategorie auswählen' AS `val` , 0 AS `ordering` UNION SELECT `id`, `title`, `ordering` AS val FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC" key_field="id" value_field="val"
+            query="SELECT '' AS `id`, 'Einsatzkategorie auswählen' AS `val` , 0 AS `ordering` UNION SELECT `id`, `title` AS val, `ordering`  FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC" key_field="id" value_field="val"
              /> 
 			
 		

@@ -133,14 +133,15 @@
             maxlength="100" />
 			
 			
-			
-    <field name="department" type="sql"
+
+	<field name="department" type="sql"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZFAHRZEUG_DEPARTMENT"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZFAHRZEUG_DEPARTMENT" 
             filter="safehtml"
-            query="SELECT id,name FROM `#__eiko_organisationen` WHERE `state` = '1' ORDER BY `ordering` ASC"
+            query="SELECT '' AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name` AS name, `ordering` FROM `#__eiko_organisationen` WHERE `state` ='1' ORDER BY `ordering` ASC" 
             key_field="id"
             value_field="name" />
+			
     <field name="link" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZFAHRZEUG_LINK"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZFAHRZEUG_LINK" 

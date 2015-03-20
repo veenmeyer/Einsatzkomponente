@@ -186,7 +186,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
                     
 					<?php
 						if( $this->item->vehicles ) :
-						$orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($results[0]->name);
+						$orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($results[0]->id);
 						$array = array();
 						foreach((array)$orga_fahrzeuge as $value): 
 						if(!is_array($value)):
@@ -200,9 +200,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 						$array_vehicle[] = $value;
 						endif;
 						endforeach;
-
 						echo '<div class="items"><ul class="items_list">';
 						foreach($array as $value):
+				// sonstige Fahrzeuge anzeigen lassen
 						if (in_array($value->id, $array_vehicle)) : 
 						if ($value->state == '2'): $value->name = $value->name.' (a.D.)';endif;
 						echo '<li>';
@@ -227,9 +227,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 						endforeach;
 						echo '</ul></div>';
   						endif;
-		
 				endforeach;
-				//$this->item->auswahl_orga = implode(', ',$data); ?>
+				
+				// sonstige Fahrzeuge anzeigen lassen
+				if ($sonstige = EinsatzkomponenteHelper::getFahrzeuge_mission($array_vehicle,'','sonstige Kräfte')) : echo $sonstige; endif;
+				if ($sonstige = EinsatzkomponenteHelper::getFahrzeuge_mission_image($array_vehicle,'')) : $vehicles_images .= $sonstige; endif;
+			?>
+				
             <?php endif;?>
 
         

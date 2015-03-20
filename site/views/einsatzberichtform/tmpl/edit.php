@@ -168,18 +168,9 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			<?php
 				foreach((array)$this->item->vehicles as $value): 
 					if(!is_array($value)):
-				$database			= JFactory::getDBO();
-				$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE id = "'.$value.'" AND state ="2" ORDER BY ordering ASC LIMIT 1' ;
-				$database->setQuery( $query );
-				$total=array();
-				if($total = $database->loadObjectList()) :
-				echo '<span class="label label-default controls hasTooltip" title="Zum Löschen dieses Fahrzeuges in diesem Bericht, bitte erst das Fahrzeug wieder veröffentlichen, und dann hier im Einsatzbericht abwählen.">'.$total[0]->name.' (außer Dienst) </span>  <span class="label label-default controls"> zugeordn. Organisation: '.$total[0]->department.'</span><br/>';	
-						echo '<input type="hidden" class="vehicles" name="jform[vehicles]['.$value.']" value="'.$value.'" />';
-				endif;
-						echo '<input type="hidden" class="vehicles" name="jform[vehicleshidden]['.$value.']" value="'.$value.'" />';
-					
+				echo '<input type="hidden" class="vehicles" name="jform[vehicleshidden]['.$value.']" value="'.$value.'" />';
 					endif;
-				endforeach;
+				endforeach; 
 				
 				
 			?>

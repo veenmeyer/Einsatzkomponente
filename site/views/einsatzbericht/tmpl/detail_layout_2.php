@@ -172,6 +172,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					$data[] = $results[0]->name;
+					if ($results[0]->state == '2'): $results[0]->name = $results[0]->name.' (a.D.)';endif;
 					if (!$results[0]->link) :
 					$vehicles_images[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self"><img class="img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>';
 					$vehicles_list[] = '<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</li>';
