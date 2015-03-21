@@ -24,11 +24,8 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
     protected $params;
     protected $reports;
     protected $years;
-    protected $selectedYear;
     protected $version;
     protected $einsatzarten;
-    protected $selectedEinsatzart;
-	protected $selectedOrga;
     protected $layout_detail_link;
     protected $gmap_config;
     protected $monate;
@@ -51,35 +48,7 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 		
 		$aktuelles_Datum = getdate(); 
-		$selectedYear = $aktuelles_Datum["year"];
-		//if (!$app->input->get(year)) :
-		//if ($this->params->get('anzeigejahr')) : $selectedYear = $this->params->get('anzeigejahr'); endif;
-		//endif;
-		//if ($app->input->get(year)) : $selectedYear = $app->input->get(year); endif;
-		//if ($app->input->get(year)) :
 		
-		$selectedYear = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedYear", 'year', $selectedYear );
-		$selectedEinsatzart = '';
-		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', 'alle Einsatzarten' );
-		$selectedOrga = '';
-		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', 'alle Organisationen' );
-		//print_r ($selectedEinsatzart);
-		//echo $selectedOrga;
-		//endif;
-		if ($this->params->get('anzeigejahr')) : $selectedYear = $this->params->get('anzeigejahr'); endif;
-		$this->selectedYear  = $selectedYear;	
-		$this->selectedEinsatzart  = $selectedEinsatzart;	
-		$app->setUserState( "com_einsatzkomponente.selectedYear", $selectedYear );
-		$app->setUserState( "com_einsatzkomponente.selectedEinsatzart", $selectedEinsatzart );
-		
-		if ($this->params->get('abfragewehr','1')) :
-		if ($this->params->get('anzeigewehr')) : $selectedOrga = $this->params->get('anzeigewehr'); endif;
-		$this->selectedOrga  = $selectedOrga;	
-		$this->selectedOrga  = $app->setUserState( "com_einsatzkomponente.selectedOrga", $selectedOrga );
-		else:
-		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', 'alle Organisationen' );
-		$this->selectedOrga  = $selectedOrga;	
-		endif;
 		
 		//Komponentenversion aus Datenbank lesen
 		$this->version 		= EinsatzkomponenteHelper::getVersion (); 
@@ -101,26 +70,13 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
 //		$this->pagination->pagesStop = ceil(count($count)/$limit);
 		$this->reports = EinsatzkomponenteHelper::einsatz_daten_bestimmtes_jahr ('','99999','0'); 
 
-		if (!$this->reports) : 
-		$count = EinsatzkomponenteHelper::count_einsatz_daten_bestimmtes_jahr ($aktuelles_Datum["year"]-1); 
-//		$this->pagination->total = count($count);
-//		$this->pagination->pagesTotal = ceil(count($count)/$limit);
-//		$this->pagination->pagesStop = ceil(count($count)/$limit);
-		$this->reports = EinsatzkomponenteHelper::einsatz_daten_bestimmtes_jahr ($aktuelles_Datum["year"]-1,'99999','0'); 
-				// Falls Jahr ohne Einsatz per Menülink aufgerufen wird, dann kein anderes Jahr anzeigen
-				if ($this->params->get('anzeigejahr') == $selectedYear) : 
-				$this->reports='';
-				endif;
-		endif;
 		
-		//print_r ($this->reports);break;
 		
 		
 
 		$this->years 				= EinsatzkomponenteHelper::getYear (); // Alle Jahre der Einsatzdaten ermitteln
 		$this->einsatzarten 		= EinsatzkomponenteHelper::getEinsatzarten (); // Alle Einsatzarten der Einsatzdaten ermitteln
 		$this->organisationen 		= EinsatzkomponenteHelper::getOrganisationen (); // Alle Einsatzarten der Einsatzdaten ermitteln
-		//print_r ($this->einsatzarten);
 		
 
 		$layout_detail = $this->params->get('layout_detail',''); // Detailbericht Layout
@@ -139,18 +95,6 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
 		endif;
 		$document->addStyleDeclaration($this->params->get('gmap_css','')); 
 		
-		// Import Jquery
-		JHtml::_('jquery.framework',true);
-		JHtml::_('jquery.ui');
-		//$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
-		
-		// prüfen ob jquery geladen wurde
-		echo "<script type=\"text/javascript\">
-		if(typeof jQuery == \"function\")
-		var x='';
-		else
-		  alert(\"jQuery nicht geladen\");
-		</script>";
 		
 		//$document->addStyleSheet('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/iThing.css');
  		//$document->addScript('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/jQDateRangeSlider-withRuler-min.js');	
