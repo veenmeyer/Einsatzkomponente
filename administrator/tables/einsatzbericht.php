@@ -103,6 +103,9 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
         if (property_exists($this, 'ordering') && $this->id == 0) {
             $this->ordering = self::getNextOrder();
         }
+        if ($this->counter > '0'&& $this->id == 0) {
+		$this->counter = '0';  }
+			
         return parent::check();
     }
     /**

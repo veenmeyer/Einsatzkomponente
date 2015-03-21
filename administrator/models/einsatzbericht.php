@@ -80,6 +80,7 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 			endforeach;
 			$data->vehicles = implode(',',$array);
 		}
+
 		return $data;
 	}
 	/**
