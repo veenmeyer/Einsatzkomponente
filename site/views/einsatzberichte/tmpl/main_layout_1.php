@@ -202,7 +202,7 @@ if ($this->params->get('display_home_pagination')) :
 <?php echo '<i class="icon-arrow-right"></i> '.$item->address;?>
 
 			<?php if ($this->params->get('display_home_info','1') or $this->params->get('display_home_links','1')) : ?>
-			<br/>
+			<p class="eiko_td_buttons_main_1">
 			<?php endif;?>
 
 			<?php if ($this->params->get('display_home_info','1')) : ?>
@@ -220,6 +220,9 @@ if ($this->params->get('display_home_pagination')) :
             <a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">Details</a>
            <?php endif;?>   
 		   
+			<?php if ($this->params->get('display_home_info','1') or $this->params->get('display_home_links','1')) : ?>
+			</p>
+			<?php endif;?>
            </td>
 		   
 		   <td class="mobile_summary eiko_td_kurzbericht_main_1"> <?php echo $item->summary;?></td>
