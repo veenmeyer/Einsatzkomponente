@@ -281,15 +281,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		if( $this->item->image ) :
 		$opengraph .= '<meta property="og:image" content="'.JURI::base().$this->item->image.'"/>';
 		endif;
-		if($this->einsatzlogo->list_icon) :
-		$opengraph .= '<meta property="og:image" content="'.JURI::base().$this->einsatzlogo->list_icon.'"/>';
-		endif;
 
-		if ($this->image) :
-			$fileName_image = JURI::Root().$this->item->image;
-			$opengraph .= '<meta property="og:image" content="'.$fileName_image.'"/>';
-			} 
-	   endif;
 		if ($this->images) :
 			for ($i = 0;$i < count($this->images);++$i) { 
 			$fileName_thumb = JURI::Root().$this->images[$i]->thumb;
@@ -298,7 +290,10 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			} 
 	   endif;
 	   
-		
+		if($this->einsatzlogo->list_icon) :
+		$opengraph .= '<meta property="og:image" content="'.JURI::base().$this->einsatzlogo->list_icon.'"/>';
+		endif;
+
 		$document->addCustomTag($opengraph);
 
 		// Wenn Titlebild in Bildergalerie enthalten, dann dieses aus der Bildergalerie löschen
