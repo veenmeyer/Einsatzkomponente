@@ -266,7 +266,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		}
 		$opengraph .= '<meta property="og:type" content="article"/>';
 		$opengraph .= '<meta property="og:url"  content="'.JURI::current().'"/>';
-		$opengraph .= '<meta property="og:site_name" content="#Einsatzinfo: '.$this->item->data1.'"/>';
+		$opengraph .= '<meta property="og:site_name" content="#Einsatzinfo: '.$this->einsatzlogo->title.'"/>';
 		
 		if ($this->item->summary)
 		{	$summary = strip_tags($this->item->summary);
@@ -285,6 +285,11 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$opengraph .= '<meta property="og:image" content="'.JURI::base().$this->einsatzlogo->list_icon.'"/>';
 		endif;
 
+		if ($this->image) :
+			$fileName_image = JURI::Root().$this->item->image;
+			$opengraph .= '<meta property="og:image" content="'.$fileName_image.'"/>';
+			} 
+	   endif;
 		if ($this->images) :
 			for ($i = 0;$i < count($this->images);++$i) { 
 			$fileName_thumb = JURI::Root().$this->images[$i]->thumb;
@@ -292,6 +297,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$opengraph .= '<meta property="og:image" content="'.$fileName_image.'"/>';
 			} 
 	   endif;
+	   
 		
 		$document->addCustomTag($opengraph);
 
