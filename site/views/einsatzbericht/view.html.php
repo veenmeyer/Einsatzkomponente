@@ -264,7 +264,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		{	$summary = strip_tags($this->item->summary);
  		$opengraph  = '<meta property="og:title" content="#Einsatzinfo: '.$summary.'"/>';
 		}
-		$opengraph .= '<meta property="og:type" content="article"/>';
+		$opengraph .= '<meta property="og:type" content="article"/>'; 
 		$opengraph .= '<meta property="og:url"  content="'.JURI::current().'"/>';
 		$opengraph .= '<meta property="og:site_name" content="#Einsatzinfo: '.$this->einsatzlogo->title.'"/>';
 		
@@ -276,23 +276,25 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		{	$desc = strip_tags($this->item->desc);
 		$opengraph .= '<meta property="og:description" content="Datum: '.date('d.m.Y', strtotime($this->item->date1)).' --- Ort: #'.$this->item->address.' --- #'.$desc.'" />';
 		}
-		
+	
+
+		if($this->einsatzlogo->list_icon) :
+			$fileName_image = str_replace(' ', '%20', $this->einsatzlogo->list_icon);  
+			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+		endif;
 		//$opengraph .= '<meta property="article:publisher" content="https://www.einsatzkomponente.de" />';
 		if( $this->item->image ) :
-		$opengraph .= '<meta property="og:image" content="'.JURI::base().$this->item->image.'"/>';
+			$fileName_image = str_replace(' ', '%20', $this->item->image);  
+			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 		endif;
 
 		if ($this->images) :
 			for ($i = 0;$i < count($this->images);++$i) { 
-			$fileName_thumb = JURI::Root().$this->images[$i]->thumb;
-			$fileName_image = JURI::Root().$this->images[$i]->image;
-			$opengraph .= '<meta property="og:image" content="'.$fileName_image.'"/>';
+			$fileName_image = str_replace(' ', '%20', $this->images[$i]->image);  
+			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			} 
 	   endif;
 	   
-		if($this->einsatzlogo->list_icon) :
-		$opengraph .= '<meta property="og:image" content="'.JURI::base().$this->einsatzlogo->list_icon.'"/>';
-		endif;
 
 		$document->addCustomTag($opengraph);
 
