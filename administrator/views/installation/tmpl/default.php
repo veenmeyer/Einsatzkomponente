@@ -461,7 +461,7 @@ endif;
 // ------------------ ADD gmap_icon zu Organisationen --------------------------------------------------
 	$check_gmap_icon = '';
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_organisationen` where Field="gmap_icon"');
+	$db->setQuery('show columns from `#__eiko_organisationen` where Field="gmap_icon_orga"');
 	try {
 	$check_gmap_icon = $db->execute();
 	} catch (Exception $e) {
