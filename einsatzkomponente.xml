@@ -47,7 +47,6 @@
 	<media destination="com_einsatzkomponente" folder="media">
 		<folder>einsatzbilder</folder>
 		<folder>images</folder>
-		<filename>index.html</filename>
 	</media>
 	
     <administration>
