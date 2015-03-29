@@ -925,8 +925,12 @@ endif;
 
 		$kat	= EinsatzkomponenteHelper::getTickerKat ($result[0]->tickerkat); 
 		
-		
-		$link = JRoute::_( JURI::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id); 
+		$db = JFactory::getDbo();
+		$db->setQuery('SELECT MAX(asset_id) FROM #__content');
+		$max = $db->loadResult();
+		$asset_id = $max+1;
+
+				$link = JRoute::_( JURI::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id); 
 		$image_intro = str_replace('/', '\/', $result[0]->image);
 		$image_intro = $db->escape($image_intro);
 		if (str_replace('\/com_einsatzkomponente\/einsatzbilder\/thumbs', '', $image_intro)):
@@ -940,7 +944,7 @@ endif;
 		
 		$query->insert('#__content'); // #__table_name = databse prefix + table name
 		$query->set('`id`=NULL');
-		$query->set('`asset_id`="0"');
+		$query->set('`asset_id`="'.$asset_id.'"');
 		$query->set('`title`="'.$result[0]->summary.'"');
 		
 		$alias = strtolower($result[0]->summary);
@@ -955,12 +959,12 @@ endif;
 					$data = array();
 					foreach(explode(',',$result[0]->auswahl_orga) as $value):
 						$db = JFactory::getDbo();
-						$query	= $db->getQuery(true);
-						$query
+						$sql	= $db->getQuery(true);
+						$sql
 							->select('name')
 							->from('`#__eiko_organisationen`')
 							->where('id = "' .$value.'"');
-						$db->setQuery($query);
+						$db->setQuery($sql);
 						$results = $db->loadObjectList();
 						if(count($results)){
 							$data[] = ''.$results[0]->name.''; 
@@ -1005,9 +1009,14 @@ endif;
 		*/
 		
 		$db->setQuery($query);
-		$db->query();
+	try {
+	// Execute the query in Joomla 3.0.
+		$db->execute();
+	} catch (Exception $e) {
+	//print the errors
+	print_r ($e).'';
+	}
 		$content_id = $db->insertId();
-		
 		// Joomla-Artikel Id in Einsatzbericht eintragen 
 		$query = "UPDATE `#__eiko_einsatzberichte` SET `article_id` = '".$content_id."' WHERE `id` = '".$result[0]->id."'";
 		$db = JFactory::getDBO();
