@@ -365,15 +365,17 @@ public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='
  {
 $gmap ='function initialize() {
 	
-	
-
+  var isDraggable = window.innerWidth > 680 ? true : false;
+  var pan = window.innerWidth > 680 ? false : true;
+  
   var mapOptions = {
 	center: new google.maps.LatLng("'.$center_lat.'", "'.$center_lng.'"),
     zoom: '.$gmap_zoom_level.',
 	maxZoom: '.$gmap_zoom_level.',
 	disableDefaultUI: true,
-	panControl: false,
 	mapTypeControl: true,
+	panControl: pan,
+	draggable: isDraggable,
     scrollwheel: false,
     disableDoubleClickZoom: true,
 	streetViewControl: false,

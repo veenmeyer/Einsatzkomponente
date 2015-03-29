@@ -186,8 +186,13 @@ function createMarker(latlng,name,html,category) {
       }
 
   function initialize() {
+	  
+	var isDraggable = window.innerWidth > 680 ? true : false;
+	var pan = window.innerWidth > 680 ? false : true;
     var myOptions = {
       zoom: 11,
+		  panControl: pan,
+	      draggable: isDraggable,
       center: new google.maps.LatLng(53.8363,-3.0377),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
