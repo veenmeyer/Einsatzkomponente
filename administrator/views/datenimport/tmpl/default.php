@@ -53,6 +53,50 @@ $bug='0';
 //$i++; 
 //}
 //endif;
+// ---------------------------------------------------------------------------------------------------------------
+$db = JFactory::getDbo();
+$query = $db->getQuery(true);
+$query->select('*');
+$query->from('#__reports_data');
+$db->setQuery($query);
+$results = $db->loadObjectList();
+if ($results) :
+	echo 'Importiere <span class="label label-info">#_reports_data</span>     ..........      ';
+	echo count($results).' Einsatzarten <span class="label label-success">erfolgreich importiert</span><br/>';
+$count = count($results)-1;	
+$i = 0;
+while ($i <= $count) {
+$reports_data_id[$i] = $results[$i]->id;
+$reports_data_title[$i] = $results[$i]->title ?: '';
+$reports_data_marker[$i] = '#'.$results[$i]->marker;
+$reports_data_beschr[$i] = 'images/com_einsatzkomponente/images/mission/'.$results[$i]->beschr ?: 'images/com_einsatzkomponente/images/mission/Einsatz.png';
+$reports_data_published[$i] = $results[$i]->published ?: '1';
+$reports_data_icon[$i] = 'images/com_einsatzkomponente/images/map/icons/'.$results[$i]->icon ?: 'images/com_einsatzkomponente/images/map/icons/icon.png';
+$reports_data_list_icon[$i] = 'images/com_einsatzkomponente/images/list/'.$results[$i]->list_icon ?: 'images/com_einsatzkomponente/images/list/blank.png';
+$i++; 
+}
+$i = 0;
+while ($i <= $count) {
+$db = JFactory::getDbo();
+$query = $db->getQuery(true);
+$columns = array('id', 'asset_id', 'title', 'marker', 'beschr', 'icon', 'list_icon', 'ordering', 'state', 'created_by');
+$values = array($db->quote($reports_data_id[$i]), '0', $db->quote($reports_data_title[$i]), $db->quote($reports_data_marker[$i]), $db->quote($reports_data_beschr[$i]), $db->quote($reports_data_icon[$i]), $db->quote($reports_data_list_icon[$i]), $db->quote('0'), $db->quote($reports_data_published[$i]), $db->quote('')  );
+ 
+$query
+    ->insert($db->quoteName('#__eiko_einsatzarten'))
+    ->columns($db->quoteName($columns))
+    ->values(implode(',', $values));
+ 
+$db->setQuery($query);
+try {
+    $result = $db->execute();
+} catch (Exception $e) {
+    print_r ($e);
+}
+$i++; 
+}
+endif;
+
 // -------------------------------------- #__reports to #__eiko_einsatzberichte------------------------------------------
 $db = JFactory::getDbo();
 $query = $db->getQuery(true);
@@ -107,7 +151,18 @@ $count = count($results)-1;
 $i = 0;
 while ($i <= $count) {
 $reports_id[$i] = $results[$i]->id;
-$reports_data1[$i] = $results[$i]->data1 ?: '';
+
+		$data_id = '';
+						$db = JFactory::getDbo();
+						$query	= $db->getQuery(true);
+						$query
+							->select('id')
+							->from('`#__eiko_einsatzarten`')
+							->where('title = "' .$results[$i]->data1.'"');
+						$db->setQuery($query);
+						$data_id = $db->loadResult();
+
+$reports_data1[$i] = $data_id  ?: '';
 $reports_image[$i] = $results[$i]->image ?: 'nopic.jpg';
 $reports_address[$i] = $results[$i]->address ?: '';
 $reports_date1[$i] = $results[$i]->date1 ?: '';
@@ -141,7 +196,7 @@ while ($i <= $count) {
 $db = JFactory::getDbo();
 $query = $db->getQuery(true);
 $query
-    ->select(array('a.name', 'a.id', 'b.report_id'))
+    ->select(array('a.id', 'a.name', 'b.report_id'))
     ->from('#__reports_departments AS a')
     ->join('INNER', '#__reports_departments_link AS b ON (a.id = b.department_id)')
     ->where('b.report_id LIKE '.$reports_id[$i].'');
@@ -385,49 +440,6 @@ $reports_counter_counter_id[$i] = $results[$i]->counter_id;
 $reports_counter_counter_time[$i] = $results[$i]->counter_time;
 $reports_counter_counter_ip[$i] = $results[$i]->counter_ip;
 $reports_counter_counter_rp_id[$i] = $results[$i]->counter_rp_id;
-$i++; 
-}
-endif;
-// ---------------------------------------------------------------------------------------------------------------
-$db = JFactory::getDbo();
-$query = $db->getQuery(true);
-$query->select('*');
-$query->from('#__reports_data');
-$db->setQuery($query);
-$results = $db->loadObjectList();
-if ($results) :
-	echo 'Importiere <span class="label label-info">#_reports_data</span>     ..........      ';
-	echo count($results).' Einsatzarten <span class="label label-success">erfolgreich importiert</span><br/>';
-$count = count($results)-1;	
-$i = 0;
-while ($i <= $count) {
-$reports_data_id[$i] = $results[$i]->id;
-$reports_data_title[$i] = $results[$i]->title ?: '';
-$reports_data_marker[$i] = '#'.$results[$i]->marker;
-$reports_data_beschr[$i] = 'images/com_einsatzkomponente/images/mission/'.$results[$i]->beschr ?: 'images/com_einsatzkomponente/images/mission/Einsatz.png';
-$reports_data_published[$i] = $results[$i]->published ?: '1';
-$reports_data_icon[$i] = 'images/com_einsatzkomponente/images/map/icons/'.$results[$i]->icon ?: 'images/com_einsatzkomponente/images/map/icons/icon.png';
-$reports_data_list_icon[$i] = 'images/com_einsatzkomponente/images/list/'.$results[$i]->list_icon ?: 'images/com_einsatzkomponente/images/list/blank.png';
-$i++; 
-}
-$i = 0;
-while ($i <= $count) {
-$db = JFactory::getDbo();
-$query = $db->getQuery(true);
-$columns = array('id', 'asset_id', 'title', 'marker', 'beschr', 'icon', 'list_icon', 'ordering', 'state', 'created_by');
-$values = array($db->quote($reports_data_id[$i]), '0', $db->quote($reports_data_title[$i]), $db->quote($reports_data_marker[$i]), $db->quote($reports_data_beschr[$i]), $db->quote($reports_data_icon[$i]), $db->quote($reports_data_list_icon[$i]), $db->quote('0'), $db->quote($reports_data_published[$i]), $db->quote('')  );
- 
-$query
-    ->insert($db->quoteName('#__eiko_einsatzarten'))
-    ->columns($db->quoteName($columns))
-    ->values(implode(',', $values));
- 
-$db->setQuery($query);
-try {
-    $result = $db->execute();
-} catch (Exception $e) {
-    print_r ($e);
-}
 $i++; 
 }
 endif;
