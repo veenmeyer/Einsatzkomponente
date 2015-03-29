@@ -72,8 +72,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
   <tr>
     <td class="layout4_row_9" width="250px">Alarmierung:</td>
     <td class="layout4_row_9">
-    Alarmierung per 
+    Alarmierung per
+<?php if($this->alarmierungsart->image)	:?>
     <img src="<?php echo JURI::Root();?><?php echo $this->alarmierungsart->image;?>"  alt="<?php echo $this->alarmierungsart->title;?>" title="<?php echo $this->alarmierungsart->title;?>" width="32px"/><br/>
+<?php endif;?>
+<?php if(!$this->alarmierungsart->image)	:?>
+    <?php echo $this->alarmierungsart->title;?><br/>
+<?php endif;?>
 
 	<?php
 		$wochentage = explode(',','Sonntag,Montag,Dienstag,Mittwoch,Donnerstag,Freitag,Samstag');
