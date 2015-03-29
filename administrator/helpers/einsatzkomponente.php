@@ -333,6 +333,7 @@ class EinsatzkomponenteHelper
  		// Funktion : sonstige Fahrzeuge aus DB holen
 						$params = JComponentHelper::getParams('com_einsatzkomponente');
 						$vehicles_image ='';
+						$vehicles_images ='';
 						$sonstige_result = '';
 						$query = 'SELECT * from #__eiko_fahrzeuge where department = "'.$orga_id.'" and (state = 1 or state = 2) order by ordering ASC';
 						$db = JFactory::getDBO();
