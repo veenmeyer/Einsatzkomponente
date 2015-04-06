@@ -69,18 +69,6 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
             </fieldset>
     	</div>
         
-        <div class="clr"></div>
-<?php if (JFactory::getUser()->authorise('core.admin','einsatzkomponente')): ?>
-	<div class="fltlft" style="width:80%;">
-		<?php echo JHtml::_('sliders.start', 'permissions-sliders-'.$this->item->id, array('startOffset'=>-1)); ?>
-		<?php echo JHtml::_('sliders.panel', JText::_('ACL Configuration'), 'access-rules'); ?>
-		<fieldset class="panelform">
-			<?php echo $this->form->getLabel('rules'); ?>
-			<?php echo $this->form->getInput('rules'); ?>
-		</fieldset>
-		<?php echo JHtml::_('sliders.end'); ?>
-	</div>
-<?php endif; ?>
         <input type="hidden" name="task" value="" />
         <?php echo JHtml::_('form.token'); ?>
         
