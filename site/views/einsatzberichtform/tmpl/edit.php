@@ -116,50 +116,24 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('auswahl_orga'); ?></div>
-				<div class="controls"><!--<?php echo $this->form->getInput('auswahl_orga'); ?></div>
-           </div>-->
-           
-					<?php
-						$db = JFactory::getDBO();
-						$query = 'SELECT `name`, `name` FROM `#__eiko_organisationen` WHERE `state`="1" ORDER BY `ordering` ASC';
-						$db->setQuery($query);
-						$orgasDb = $db->loadObjectList(); 
-						if ($this->item->auswahl_orga):
-						foreach((array)$this->item->auswahl_orga as $value): 
-							if(!is_array($value)):
-								//echo '<option value="'.$value.'">'.$value.'</option>';
-								$orgas[] = JHTML::_('select.option','.$value.', "$value", 'name', 'name');
-									foreach($orgasDb as $key => $orgadb) {        
-        							if($orgadb->name == $value) {    
-            						unset($orgasDb[$key]);
-       								}      
-   						 }  
-							endif;
-						endforeach; 
-						else: $orgas[] = '';
-						endif; 
-						$orgas = array_merge($orgas, $orgasDb);
-						$html= JHTML::_('select.genericlist', $orgas, "jform[auswahl_orga][]",'multiple required aria-required="true"' , 'name', 'name', '');
-						echo $html;
-						?></div></div>
-                        
-    		<?php  
+				<div class="controls"><?php echo $this->form->getInput('auswahl_orga'); ?></div>
+			</div>
+			<?php
 				foreach((array)$this->item->auswahl_orga as $value): 
 					if(!is_array($value)):
-					echo '<input type="hidden" class="auswahl_orga" name="jform[auswahl_orgahidden]['.$value.']" value="'.$value.'" />';
+						echo '<input type="hidden" class="auswahl_orga" name="jform[auswahl_orgahidden]['.$value.']" value="'.$value.'" />';
 					endif;
-				endforeach; 
-				
+				endforeach;
 			?>
 			<script type="text/javascript">
 				jQuery.noConflict();
 				jQuery('input:hidden.auswahl_orga').each(function(){
 					var name = jQuery(this).attr('name');
-					if(name.indexOf('auswahl_orgahidden')){
-						jQuery('#jformauswahl_orga option[value="'+jQuery(this).val()+'"]').attr('selected',true);
+					if(name.indexOf('auswahlorga_hidden')){
+						jQuery('#jform_auswahl_orga option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});
-			</script>		
+			</script>			
             	
             <div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('vehicles'); ?></div>
