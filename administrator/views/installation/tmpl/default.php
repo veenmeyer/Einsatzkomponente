@@ -99,24 +99,6 @@ else
 	}
 	else{}
 	}
-// ------------------------------------ Alte Datenbanken vorhanden ? ---------------------------------------
-
-	$check_db = '';
-	$db = JFactory::getDbo();
-	$db->setQuery('SELECT id from #__reports');
-	try {
-	// Execute the query in Joomla 3.0.
-	$check_db = $db->execute();
-	} catch (Exception $e) {
-	echo 'Frühere Datenbanktabellen #__reports_* <span class="label label-success">sind ncht vorhanden !!!!</span>.<br/><br/>';
-	}	
-	
-	if ($check_db) : 
-	echo 'Frühere Datenbanktabellen #__reports_* <span class="label label-important">sind vorhanden !!!!</span>.<br/><br/>';$bug ='2';
-	endif;
-
-
-// ------------------------------------------------------------------------------------------------------------
 // ------------------ Update von Version 3.0 beta 3 auf 3.0 beta 4 --------------------------------------------------
 	$db = JFactory::getDbo();
 	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="presse_label"');
@@ -206,11 +188,13 @@ else {
 // ------------------ Update von Version 3.05 auf 3.06 beta ---------------------------------------------------
 
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_tickerkat` where Field="id"');
+	$db->setQuery('select * from `#__eiko_tickerkat` where id="0"');
 	try {
 	$check_tickerkat = $db->execute();
-	} catch (Exception $e) {
-
+	} catch (Exception $e) {$check_tickerkat=true;}
+	
+	
+if ($check_tickerkat) {
 	
 $eiko_tickerkat = array(
   array('id' => '1','asset_id' => '0','title' => 'Brandeinsatz > Brandmeldeanlage (Fehlalarm)','image' => 'images/com_einsatzkomponente/images/list/brand_bma_fehl.png','beschreibung' => '','ordering' => '1','state' => '1','created_by' => '0','checked_out' => '0','checked_out_time' => '0000-00-00 00:00:00'),
@@ -280,11 +264,11 @@ foreach($eiko_tickerkat as $data){
 	try {
 	$result = $db->execute();
 	} catch (Exception $e) {
-		print_r ($e);$bug='1';
+		//print_r ($e);$bug='1';
 	}	
 	
 }  
-	echo 'DB-Updates Version 3.6 erfolgreich <span class="label label-success">aktualisiert.</span>.<br/><br/>'; 
+	//echo 'DB-Updates Version 3.6 erfolgreich <span class="label label-success">aktualisiert.</span>.<br/><br/>'; 
 
 
 }
@@ -428,15 +412,16 @@ $db->setQuery($query);
 		$conditions = array(
 		$db->quoteName('id') . ' = '.$result->id.'' );
 		$query->update($db->quoteName('#__eiko_einsatzberichte'))->set($fields)->where($conditions);
- 
+		$bug_data='';
 		$db->setQuery($query);
 			try {
 				$result = $db->execute();
 				} catch (Exception $e) {
-					print_r ($e);$bug='1';
+					print_r ($e);$bug='1';$bug_data='1';
 					}	
 		endforeach;
 	
+	if (!$bug_data) :
 	$db = JFactory::getDbo();
 	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `data1` `data1` INT(10) NOT NULL;";
 	$db->setQuery($query); 
@@ -445,15 +430,8 @@ $db->setQuery($query);
 	} catch (Exception $e) {
 		print_r ($e);$bug='1';
 	}	
+	endif;
 		
-	$db = JFactory::getDbo();
-	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `data1` `data1` INT(10) NOT NULL;";
-	$db->setQuery($query); 
-	try {
-	$result = $db->execute();
-	} catch (Exception $e) {
-		print_r ($e);$bug='1';
-	}	
 
 		
 endif;	
@@ -483,6 +461,24 @@ else {
 	}
 
  
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------ Alte Datenbanken vorhanden ? ---------------------------------------
+
+	$check_db = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('SELECT id from #__reports');
+	try {
+	// Execute the query in Joomla 3.0.
+	$check_db = $db->execute();
+	} catch (Exception $e) {
+	echo 'Frühere Datenbanktabellen #__reports_* <span class="label label-success">sind ncht vorhanden !!!!</span>.<br/><br/>';
+	}	
+	
+	if ($check_db) : 
+	echo 'Frühere Datenbanktabellen #__reports_* <span class="label label-important">sind vorhanden !!!!</span>.<br/><br/>';$bug ='2';
+	endif;
+
+
 // ------------------------------------------------------------------------------------------------------------
 
 ?>
