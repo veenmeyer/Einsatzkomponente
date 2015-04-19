@@ -116,6 +116,17 @@ if ($this->params->get('display_home_pagination')) :
 	 $m = '';
 	 $hide=0;
      foreach ($this->reports as $item) :
+	 
+	 	// Funktion : Einsatzkategorie
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+					$query
+						->select('*')
+						->from('`#__eiko_tickerkat`')
+						->where('id = "' .$item->tickerkat.'"  AND state = "1" ');
+					$db->setQuery($query);
+					$tickerkat = $db->loadObject();
+
 ?>
           <!-- Filter State-->
 		  <?php if($item->state == '1'): ?>
@@ -189,6 +200,9 @@ if ($this->params->get('display_home_pagination')) :
            
 		   <?php if ($this->params->get('display_list_icon')) : ?>
            <img class="img-rounded eiko_img_einsatzart_main_1" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" />
+           <?php endif;?>
+		   <?php if ($this->params->get('display_tickerkat_icon')) : ?>
+           <img class="img-rounded eiko_img_einsatzart_main_1" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" />
            <?php endif;?>
 			<?php if ($this->params->get('display_home_links')) : ?>
            <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">

@@ -28,23 +28,45 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
             <!--Headline-->
         	<h1 class="eiko_headline_2">
+			
+			<?php if ($this->params->get('display_detail_tickerkat_icon','1') == '1') :?> 
             <?php if ($this->tickerKat->image) :?>
         	<img  class="eiko_img-rounded_2 eiko_list_icon_2" src="<?php echo JURI::Root();?><?php echo $this->tickerKat->image;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat->title); ?>"/>
             <?php endif;?>
+            <?php endif;?>
+			
+			<?php if ($this->params->get('display_detail_einsatzart_icon','0') == '1') :?> 
+            <?php if ($this->einsatzlogo->list_icon) :?>
+        	<img  class="eiko_img-rounded_2 eiko_list_icon_3" src="<?php echo JURI::Root();?><?php echo $this->einsatzlogo->list_icon;?>"  alt="eiko_list_icon" title="<?php echo JText::_($this->einsatzlogo->title); ?>"/>
+            <?php endif;?>
+            <?php endif;?>
+			
 			<span class="eiko_kurzbericht_2"><?php echo $this->item->summary; ?></span>
             </h1>
             <!--Headline ENDE-->
             
             <!--Einsatzkategorie-->
+			<?php if ($this->params->get('display_detail_tickerkat','1') == '1') :?> 
             <?php if( $this->item->tickerkat ) : ?>
         	<br /><span class="eiko_einsatzkategorie_2">Einsatzkategorie: <?php echo JText::_($this->tickerKat->title); ?></span>
+            <?php endif;?>
+            <?php endif;?>
+            <!--Einsatzkategorie ENDE-->
+			
+            <!--Einsatzart-->
+			<?php if ($this->params->get('display_detail_einsatzart','0') == '1') :?> 
+            <?php if( $this->item->data1 ) : ?>
+        	<br /><span class="eiko_einsatzart_2">Einsatzart: <?php echo JText::_($this->einsatzlogo->title); ?></span>
+            <?php endif;?>
+            <?php endif;?>
+            <!--Einsatzart ENDE-->
+
 			<?php if ($this->params->get('display_detail_hits','1')):?>
             <span class="badge pull-right small">Zugriffe: <?php echo $this->item->counter; ?></span>
             <?php endif;?>
+			
             <div class="eiko_clearfix"></div>
-            <?php endif;?>
-            <!--Einsatzkategorie ENDE-->
-
+			
             <!--Einsatzkarte-->
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<?php if ($this->params->get('gmap_action','0') == '1') :?> 
