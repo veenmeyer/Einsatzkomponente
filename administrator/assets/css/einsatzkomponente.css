@@ -1,9 +1,5 @@
 
-/*CSS-Anpassungen für J2.5*/
-#jformauswahlorga, #jform_vehicles {
-	height:300px !important; 
-} 
-/*CSS-Anpassungen für J2.5  ENDE*/
+.div_side_filter {margin-left:15px;}
 
 #jform_einsatzart_logo_preview {
 	max-height:100px !important; max-width:400px !important; 
