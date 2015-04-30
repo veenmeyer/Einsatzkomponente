@@ -67,9 +67,13 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
         $query->from('`#__eiko_einsatzberichte` AS a');
         
 		// Join over the foreign key 'auswahl_orga'
-		$query->select('dep.name AS mission_orga');
+		$query->select('dep.id AS mission_orga');
 		$query->select('dep.ordering AS department_ordering');
-		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.name = a.auswahl_orga');
+		$query->join('LEFT', '#__eiko_organisationen AS dep ON dep.id = a.auswahl_orga');
+		// Join over the foreign key 'tickerkat'
+		$query->select('tic.title AS mission_kat');
+		$query->select('tic.ordering AS kat_ordering');
+		$query->join('LEFT', '#__eiko_tickerkat AS tic ON tic.id = a.tickerkat');
 		// Join over the foreign key 'vehicles'
 		$query->select('veh.name AS mission_car');
 		$query->select('veh.ordering AS vehicle_ordering');

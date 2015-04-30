@@ -828,7 +828,28 @@
 		<option value="left">Links</option>
 		<option value="right">Rechts</option>
 	  </field>
-	  
+	  <field
+			name="display_tickerkat_icon"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="Einsatzkateg.-Icon :"
+			description="Funktion nur beim Standard-Layout">
+			
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field 
+		  name="float_tickerkat_icon" 
+		  type="list" 
+		  default="right" 
+		  label="Position Einsatzkateg.-Icon :" 
+		  description="Funktion nur beim Standard-Layout">
+		<option value="left">Links</option>
+		<option value="right">Rechts</option>
+	  </field>
 	  <field
 			name="display_home_image"
 			type="radio"
@@ -951,6 +972,56 @@
 			type="spacer"
 			hr="true"
 		/>
+		
+	  <field
+			name="display_detail_tickerkat"
+			type="radio"
+			class="btn-group"
+			default="1"
+			description="Hier können Sie einstellen, ob die Einsatzkategorie angezeigt werden sollen."
+			label="Einsatzkategorie :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
+	  <field
+			name="display_detail_tickerkat_icon"
+			type="radio"
+			class="btn-group"
+			default="1"
+			description="Hier können Sie einstellen, ob das Einsatzkategorie-Icon angezeigt werden soll."
+			label="Einsatzkategorie-Icon :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
+		
+	  <field
+			name="display_detail_einsatzart"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Hier können Sie einstellen, ob die Einsatzart angezeigt werden sollen."
+			label="Einsatzart :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
+	  <field
+			name="display_detail_einsatzart_icon"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Hier können Sie einstellen, ob das Einsatzart-Icon angezeigt werden soll."
+			label="Einsatzart-Icon :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
 		
 	  <field
 			name="display_alertingtime"

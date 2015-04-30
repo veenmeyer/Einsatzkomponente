@@ -128,7 +128,7 @@ class EinsatzkomponenteHelper
 
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.state,rd.title as einsatzart FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
+		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -137,7 +137,7 @@ class EinsatzkomponenteHelper
 	
     public static function letze_x_einsatzdaten ($x) {
 		// Funktion : letze x Einsatzdaten laden
-		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state,rd.title as einsatzart FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
+		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -622,16 +622,22 @@ return $gmap; }
 	
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	
+	$navbar  ='<nav>';
+	//$navbar .='<ul class="pager">';
+	//$navbar .='<ul class="pagination pagination-lg">';
+	//$navbar .='<ul class="pagination">';
+	$navbar .='<ul class="pagination pagination-sm">';
+	
 	if( $prev_id) : 
-    $navbar ='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn eiko_btn_2 small" title="">';
-    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id.'" class="btn eiko_btn_2" title="'.$prev_id.'">';
-    $navbar .='<span><strong>Zurück</strong></span></a>';
+    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="eiko_btn_2" title="">';
+    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id.'" class="eiko_btn_2" title="'.$prev_id.'">';
+    $navbar .='<strong>Zurück</strong></a></li>';
 	endif; 
 	
 	if( $next_id) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class="btn eiko_btn_2 small" title="">';
-    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id.'" class="btn eiko_btn_2" title="'.$next_id.'">';
-    $navbar .='<span><strong>Vor</strong></span></a>';
+    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class="eiko_btn_2" title="">';
+    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id.'" class="eiko_btn_2" title="'.$next_id.'">';
+    $navbar .='<strong>Vor</strong></a></li>';
 	endif; ?>
     
     <?php if ($menu_link=='&Itemid=') : 
@@ -640,17 +646,20 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<a href="'.$menu_link.'" class="btn btn-details small"><span><strong>Übersicht</strong></span></a>';
-    //$navbar .='<a href="'.$menu_link.'" class="btn btn-details"><span><strong>Übersicht</strong></span></a>';
+    $navbar .='<li><a href="'.$menu_link.'" class="btn-details"><strong>Übersicht</strong></a></li>';
+    //$navbar .='<a href="'.$menu_link.'" class="btn-details"><span><strong>Übersicht</strong></span></a>';
 	endif;
 	if( !$menu_link) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2 small"><span><strong>Übersicht</strong></span></a>';
-    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzberichte" class="btn eiko_btn_2"><span><strong>Übersicht</strong></span></a>';
+    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="eiko_btn_2"><strong>Übersicht</strong></a></li>';
+    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzberichte" class="eiko_btn_2"><span><strong>Übersicht</strong></span></a>';
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht.'.$id)):
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class="btn eiko_btn_2 btn-danger small">';
-    $navbar .='<span><strong>Editieren</strong></span></a>';
+    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class="eiko_btn_2">';
+    $navbar .='<strong>Editieren</strong></a></li>';
     endif;
+	
+	$navbar .='</ul>';
+	$navbar .='</nav>';
 		return $navbar;
 	}
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
     <name>com_einsatzkomponente</name>
-    <creationDate>2015-03-29</creationDate>
+    <creationDate>2015-04-26</creationDate>
     <copyright>Copyright (C) 2013 by Ralf Meyer. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Ralf Meyer</author>
     <authorEmail>webmaster@feuerwehr-veenhusen.de</authorEmail>
     <authorUrl>http://einsatzkomponente.de</authorUrl>
-    <version>3.06_Beta</version>
+    <version>3.07_beta</version>
 	
     <description>
             <![CDATA[
@@ -83,6 +83,10 @@
             <language tag="de-DE">language/de-DE.com_einsatzkomponente.ini
             </language>
             <language tag="de-DE">language/de-DE.com_einsatzkomponente.sys.ini
+            </language>
+            <language tag="en-GB">language/en-GB.com_einsatzkomponente.ini
+            </language>
+            <language tag="en-GB">language/en-GB.com_einsatzkomponente.sys.ini
             </language>
         </languages>
 		

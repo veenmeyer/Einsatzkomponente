@@ -12,11 +12,8 @@ $params = JComponentHelper::getParams('com_einsatzkomponente');
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.multiselect');
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('bootstrap.tooltip');
 JHtml::_('formbehavior.chosen', 'select');
-endif;
 
 // Import CSS
 $document = JFactory::getDocument();
@@ -53,7 +50,7 @@ $sortFields = $this->getSortFields();
 	}
 </script>
 <?php
-//Joomla Component Creator code to allow adding non select list filters
+//code to allow adding non select list filters
 if (!empty($this->extra_sidebar)) {
     $this->sidebar .= $this->extra_sidebar;
 }
@@ -247,7 +244,7 @@ if (!empty($this->extra_sidebar)) {
 				
                 <?php // Get Einsatzkategorie
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT * FROM #__eiko_tickerkat WHERE id = "'.$item->tickerkat.'" LIMIT 1 ' ;
+                     $query = 'SELECT * FROM #__eiko_tickerkat WHERE title = "'.$item->tickerkat.'" LIMIT 1 ' ;
                      $database->setQuery( $query );
                      $kat = $database->loadObject();	
 				?>
@@ -258,13 +255,13 @@ if (!empty($this->extra_sidebar)) {
 				<td>
                 <?php // Get Image of Alarmierungsart
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT * FROM #__eiko_alarmierungsarten WHERE id = "'.$item->alerting.'" LIMIT 1 ' ;
+                     $query = 'SELECT * FROM #__eiko_alarmierungsarten WHERE title = "'.$item->alerting.'" LIMIT 1 ' ;
                      $database->setQuery( $query );
                      $alerting_image = $database->loadObject();	
 				?>
                 <?php // Get color of Einsatzart
 				     $database = JFactory::getDBO();
-                     $query = 'SELECT * FROM #__eiko_einsatzarten WHERE id = "'.$item->data1.'" LIMIT 1 ' ;
+                     $query = 'SELECT * FROM #__eiko_einsatzarten WHERE title = "'.$item->data1.'" LIMIT 1 ' ;
                      $database->setQuery( $query );
                      $data1 = $database->loadObject();	
 				?>
@@ -353,22 +350,7 @@ if (!empty($this->extra_sidebar)) {
 // ----------------  info112.net  ENDE ----------------------------------------
 			?>
             <td>
-					<?php
-					$data = array();
-					foreach(explode(',',$item->auswahl_orga) as $value):
-						$db = JFactory::getDbo();
-						$query	= $db->getQuery(true);
-						$query
-							->select('name')
-							->from('`#__eiko_organisationen`')
-							->where('id = "' .$value.'"');
-						$db->setQuery($query);
-						$results = $db->loadObjectList();
-						if(count($results)){
-							$data[] = '<span class="label label-info">'.$results[0]->name.'</span>';
-						}
-					endforeach;
-					echo implode(' ',$data); ?>
+					<?php echo $item->auswahl_orga; ?>
 				</td>
 				<td>
 					<?php echo $item->created_by; ?>

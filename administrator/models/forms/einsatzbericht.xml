@@ -5,14 +5,6 @@
        <field name="id" type="text" default="0" label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID"
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
-       <field name="data1" type="sql"
-            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATA1" 
-            required="true" 
-            filter="raw"
-            query="SELECT * FROM `#__eiko_einsatzarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
-            key_field="id"
-            value_field="title" />
 			
               <field name="tickerkat" type="sql"
 			class="eiko_tickerkat"
@@ -23,11 +15,26 @@
             query="SELECT * FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC"
             key_field="id"
             value_field="title" />
-			
+
        <field name="filter_tickerkat" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT '' AS `id`, 'Einsatzkategorie auswählen' AS `val` , 0 AS `ordering` UNION SELECT `id`, `title` AS val, `ordering`  FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- Einsatzkategorie -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_tickerkat`" key_field="id" value_field="val"
              /> 
+
+       <field name="data1" type="sql"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATA1" 
+            required="true" 
+            filter="raw"
+            query="SELECT * FROM `#__eiko_einsatzarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            key_field="id"
+            value_field="title" />
+
+       <field name="filter_data1" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Einsatzart -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_einsatzarten`" key_field="id" value_field="val"
+             /> 
+
 			
        <field name="alerting" type="sql"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING"
@@ -38,6 +45,13 @@
             key_field="id"
             value_field="title" /> 
 			
+       <field name="filter_alerting" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Alarmierungsart -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_alarmierungsarten`" key_field="id" value_field="val"
+             /> 
+
+
+			 
        <field name="image" type="media"
             label="Titelbild"
             description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
@@ -205,19 +219,19 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
             required="true" 
-            query="SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
+            query="SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` DESC"
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
          /> 
 
        <field name="filter_auswahl_orga" type="sql" class="inputbox"
-            onchange="this.form.submit();" 
-            query="SELECT 0 AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name`,`ordering` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC" 
-			key_field="id" 
-			value_field="name"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Organisation -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_organisationen`" key_field="id" value_field="val"
              /> 
-       <field name="vehicles" type="optgroup" class="inputbox"
+
+
+			 <field name="vehicles" type="optgroup" class="inputbox"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
          /> 
