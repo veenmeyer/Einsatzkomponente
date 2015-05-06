@@ -142,6 +142,11 @@
 	font-weight:bold !important;
 	text-align:left !important;
 }
+/*DIV-Container für "Einsatz eintragen"*/
+.eiko_neu {
+	margin-bottom: 10px;
+	float: right;
+}
  /*CSS-Design Einsatz-Übersicht Copyright*/
 .copyright { 
 	/*color:#cccccc !important;*/ 
