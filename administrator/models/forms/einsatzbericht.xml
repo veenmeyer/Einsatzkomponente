@@ -18,7 +18,7 @@
 
        <field name="filter_tickerkat" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Einsatzkategorie -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_tickerkat`" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- alle Einsatzkategorien -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_tickerkat`" key_field="id" value_field="val"
              /> 
 
        <field name="data1" type="sql"
@@ -32,7 +32,7 @@
 
        <field name="filter_data1" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Einsatzart -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_einsatzarten`" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- alle Einsatzarten -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_einsatzarten`" key_field="id" value_field="val"
              /> 
 
 			
@@ -47,7 +47,7 @@
 			
        <field name="filter_alerting" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Alarmierungsart -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_alarmierungsarten`" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- alle Alarmierungsarten -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_alarmierungsarten`" key_field="id" value_field="val"
              /> 
 
 
@@ -227,7 +227,7 @@
 
        <field name="filter_auswahl_orga" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Organisation -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_organisationen`" key_field="id" value_field="val"
+            query="SELECT 0 AS `id`, '- alle Organisationen -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_organisationen`" key_field="id" value_field="val"
              /> 
 
 
