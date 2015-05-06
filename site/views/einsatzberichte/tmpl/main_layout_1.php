@@ -70,7 +70,8 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 echo $this->modulepos_2;
 
 ?>
-
+<?php if(JFactory::getUser()->authorise('core.create','com_einsatzkomponente.einsatzbericht'.$item->id)): ?><div class="eiko_neu"><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=0'); ?>" class="eiko_btn2">Einsatz eintragen</a></div>
+	<?php endif; ?>
 <table width="100%" class="table table-striped table-bordered eiko_table_main_1" border="0" cellspacing="0" cellpadding="0">
     <thead>
         <tr>
@@ -383,14 +384,9 @@ if ($this->params->get('display_home_pagination')) :
 </tfoot>
 </table>
 
-
-<?php if(JFactory::getUser()->authorise('core.create','com_einsatzkomponente.einsatzbericht'.$item->id)): ?><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=0'); ?>">Einsatz eintragen</a>
-	<?php endif; ?>
-	
 <?php
 echo $this->modulepos_1;
 ?>
-
 
     <?php function hex2rgba($color, $opacity = false) {  // Farbe von HEX zu RGBA umwandeln 
 
