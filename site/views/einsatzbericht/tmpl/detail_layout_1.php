@@ -191,7 +191,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					if ($results[0]->name) :
-					if ($this->params->get('display_detail_orga_links','1')) :
+					if ($this->params->get('display_orga_links','1')) :
 					if (!$results[0]->link) :
 					?>
 					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&id=' . $results[0]->id); ?>"><?php echo $results[0]->name; ?></a><br/>
@@ -229,7 +229,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 						if ($value->state == '2'): $value->name = $value->name.' (a.D.)';endif;
 						echo '<li>';
 						//if ($array_vehicle == $value->id) : echo $value->name;break; endif;
-						if ($this->params->get('display_detail_fhz_links','1')) :
+						if ($this->params->get('display_orga_fhz_links','1')) :
 						if (!$value->link) : ?>
                         
 						<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
