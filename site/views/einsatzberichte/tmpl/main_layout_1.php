@@ -70,7 +70,7 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 echo $this->modulepos_2;
 
 ?>
-<?php if(JFactory::getUser()->authorise('core.create','com_einsatzkomponente.einsatzbericht'.$item->id)): ?><div class="eiko_neu"><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=0'); ?>" class="eiko_btn2">Einsatz eintragen</a></div>
+<?php if(JFactory::getUser()->authorise('core.create','com_einsatzkomponente.einsatzbericht')): ?><div class="eiko_neu"><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=0'); ?>" class="eiko_btn2">Einsatz eintragen</a></div>
 	<?php endif; ?>
 <table width="100%" class="table table-striped table-bordered eiko_table_main_1" border="0" cellspacing="0" cellpadding="0">
     <thead>
