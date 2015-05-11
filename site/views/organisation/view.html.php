@@ -36,7 +36,7 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy {
    		$this->form		= $this->get('Form');
 		$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
         //print_r ($this->item);break;
-		$this->orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($this->item->name);  
+		$this->orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($this->item->id);  
 	    $document = JFactory::getDocument();
 
 		
