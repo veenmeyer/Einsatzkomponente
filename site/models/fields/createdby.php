@@ -1,13 +1,16 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.1.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2014. Alle Rechte vorbehalten.
+ * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@einsatzkomponente.de> - http://einsatzkomponente.de
  */
+
 defined('JPATH_BASE') or die;
+
 jimport('joomla.form.formfield');
+
 /**
  * Supports an HTML select list of categories
  */
@@ -20,6 +23,7 @@ class JFormFieldCreatedby extends JFormField
 	 * @since	1.6
 	 */
 	protected $type = 'createdby';
+
 	/**
 	 * Method to get the field input markup.
 	 *
