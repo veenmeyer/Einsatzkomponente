@@ -203,11 +203,14 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					<a target="_blank" href="<?php echo $results[0]->link; ?>"><?php echo $results[0]->name; ?></a><br/>
 					<?php	
 					endif;	
-					else: ?>
+					else:
+					if ($results[0]->link) : ?>
+					<a target="_blank" href="<?php echo $results[0]->link; ?>"><?php echo $results[0]->name; ?></a><br/>
+					<?php else:?>
 					<?php echo $results[0]->name; ?><br/>
 					<?php endif; ?>
 					<?php endif; ?>
-                    
+					<?php endif; ?>
 					<?php
 						if( $this->item->vehicles ) :
 						$orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($results[0]->id);
@@ -232,22 +235,29 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 						echo '<li>';
 						//if ($array_vehicle == $value->id) : echo $value->name;break; endif;
 						if ($this->params->get('display_detail_fhz_links','1')) :
+						
 						if (!$value->link) : ?>
                         
 						<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
-						<?php $vehicles_images .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.' ('.$value->department.' )"/></a>';?>
+						<?php $vehicles_images .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.'"/></a>';?>
                         
                         <?php else: ?>
 						<a title ="<?php echo $value->detail2;?>" target="_blank" href="<?php echo $value->link; ?>"><?php echo $value->name; ?></a>
-						<?php $vehicles_images .= '<a href="'.$value->link.'" target="_blank">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.' ('.$value->department.' )"/></a>';?>
+						<?php $vehicles_images .= '<a href="'.$value->link.'" target="_blank">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.'"/></a>';?>
                         
 						<?php endif; ?>
 						<?php else:
+						if ($value->link) : 
+						?>
+						<a title ="<?php echo $value->detail2;?>" target="_blank" href="<?php echo $value->link; ?>"><?php echo $value->name; ?></a>
+						<?php $vehicles_images .= '<a href="'.$value->link.'" target="_blank">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.'"/></a>';
+						else:
 						echo $value->name;
-						$vehicles_images .= '&nbsp;&nbsp;<img  style="padding-right:3px;margin-right:3px;" class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.' ('.$value->department.' )"/>';
+						$vehicles_images .= '&nbsp;&nbsp;<img  style="padding-right:3px;margin-right:3px;" class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.'"/>';
 						endif;
 						echo '</li>';
-						endif;
+						endif;						endif;
+
 						endforeach;
 						echo '</ul></div>';
   						endif;

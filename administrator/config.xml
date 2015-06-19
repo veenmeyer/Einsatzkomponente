@@ -1069,12 +1069,12 @@
 			class="btn-group"
 			default="1"
 			label="Organisationen :"
-			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Layout2)">
+			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Layout1)">
 			
 			<option
-				value="0">ohne Link</option>
+				value="0">mit Link (nur extern)</option>
 			<option
-				value="1">mit Link</option>
+				value="1">mit Link (intern+extern)</option>
 	  </field>
 	  
 	  <field
@@ -1083,12 +1083,12 @@
 			class="btn-group"
 			default="1"
 			label="Fahrzeuge :"
-			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Layout2)">
+			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Layout1)">
 			
 			<option
-				value="0">ohne Link</option>
+				value="0">mit Link (nur extern)</option>
 			<option
-				value="1">mit Link</option>
+				value="1">mit Link (intern+extern)</option>
 	  </field>
 	  
 	  <field
