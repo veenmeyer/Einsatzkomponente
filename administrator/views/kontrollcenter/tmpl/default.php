@@ -12,11 +12,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 JHtml::_('behavior.multiselect');
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 	JHtml::_('bootstrap.tooltip');
 	JHtml::_('formbehavior.chosen', 'select'); 
-endif;
 
 // Import CSS
 $document = JFactory::getDocument();
@@ -28,21 +25,8 @@ $params = json_decode( $db->loadResult(), true );
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 ?>
-<script type="text/javascript">
-	Joomla.orderTable = function() {
-		table = document.getElementById("sortTable");
-		direction = document.getElementById("directionTable");
-		order = table.options[table.selectedIndex].value;
-		if (order != '<?php echo $listOrder; ?>') {
-			dirn = 'asc';
-		} else {
-			dirn = direction.options[direction.selectedIndex].value;
-		}
-		Joomla.tableOrdering(order, dirn, '');
-	}
-</script>
+
 <?php
-//Joomla Component Creator code to allow adding non select list filters
 if (!empty($this->extra_sidebar)) {
     $this->sidebar .= $this->extra_sidebar;
 }
@@ -56,16 +40,11 @@ if (!empty($this->extra_sidebar)) {
 <?php else : ?>
 	<div id="j-main-container">
 <?php endif;?>
-    
+ 
 		<div id="filter-bar" class="btn-toolbar"></div> 
                
         
-		<table class="table">
-			<thead>
-				<tr>
-					<th>
-			<div class="row-fluid">
-				<div class="span12">
+			  <div class="btn-group btn-group-justified">
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzberichte">
 		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/liste.png" /><br/>
@@ -113,18 +92,18 @@ if (!empty($this->extra_sidebar)) {
 	    					</a>
 
 				</div>
-                    </div>
-	
+					
+					
+			<table class="table"> 
+			<thead>
+				<tr>
+					<th>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-            
-
-            
 				<tr>
 					<td>
-
 
 <div class="span4">
 <div class="alert alert-info" style=" float:left;">
@@ -241,9 +220,6 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
             
 		</table>
 		<input type="hidden" name="task" value="" />
-		<input type="hidden" name="boxchecked" value="0" />
-		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>     

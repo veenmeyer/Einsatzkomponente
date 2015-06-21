@@ -10,9 +10,6 @@
 defined('_JEXEC') or die;
 
 
-//Load admin language file
-$lang = JFactory::getLanguage();
-$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 //print_r ($this->organisationen);
 
 //echo $this->selectedYear;
@@ -55,7 +52,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 	
 	echo '<div style="text-align:center;margin-bottom:20px;"><img src="'.JURI::Root().'images/com_einsatzkomponente/images/years/home'.$year.'.png" title="Eins&auml;tze '.$year_text.'" /></div>';
 
-?><form action="#" method=post><?php
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
+<?php
 	echo 'Jahr: ';
 
 if (!$this->params->get('anzeigejahr','0') and $this->params->get('display_filter_jahre','1')) : 
@@ -80,7 +79,6 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 	?><?php 
 	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
 	endif;?>
-	</form>
 </div>
 <?php // Filter ENDE   -------------------------------------------------------------------------------
 
@@ -382,7 +380,7 @@ if ($this->params->get('display_home_pagination')) :
     
 </tfoot>
 </table>
-
+	</form>
 <?php echo $this->modulepos_1;?>
 
 

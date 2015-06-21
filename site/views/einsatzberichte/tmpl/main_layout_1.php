@@ -10,9 +10,6 @@
 defined('_JEXEC') or die;
 
 
-//Load admin language file
-$lang = JFactory::getLanguage();
-$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 //print_r ($this->organisationen);
 
 //echo $this->selectedYear;
@@ -37,7 +34,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php // Filter ------------------------------------------------------------------------------------
 	
 
-?><form action="#" method=post><?php
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
+<?php
 
 
 if (!$this->params->get('anzeigejahr','0') and $this->params->get('display_filter_jahre','1')) : 
@@ -62,7 +61,6 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 	?><?php 
 	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
 	endif;?>
-	</form> 
 </div>
 <?php // Filter ENDE   -------------------------------------------------------------------------------
  
@@ -365,14 +363,11 @@ if ($this->params->get('display_home_pagination')) :
     <tfoot>
     				<!--Prüfen, ob Pagination angezeigt wrden soll-->
     				<?php if ($this->params->get('display_home_pagination')) : ?>
-    				<!--Prüfen, ob Einsatzart ausgwählt ist -->
-                    <?php if ($this->selectedEinsatzart == '' or $this->selectedEinsatzart == '0') : ?>
 					<tr><td colspan="<?php echo $col;?>">
                     	<form action="#" method=post>
 						<?php echo $this->pagination->getListFooter(); ?><!--Pagination anzeigen-->
 						</form> 
 					</td></tr>
-		   			<?php endif;?><!--Prüfen, ob Einsatzart ausgwählt ist ENDE-->
 		   			<?php endif;?><!--Prüfen, ob Pagination angezeigt wrden soll   ENDE -->
 
 <?php if (!$this->params->get('eiko')) : ?>
@@ -383,6 +378,7 @@ if ($this->params->get('display_home_pagination')) :
     
 </tfoot>
 </table>
+	</form> 
 
 <?php
 echo $this->modulepos_1;

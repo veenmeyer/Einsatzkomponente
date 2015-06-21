@@ -95,7 +95,6 @@ class EinsatzkomponenteModelEinsatzberichte_neu extends JModelList
 
         $limitstart = $app->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
-
         if ($list = $app->getUserStateFromRequest($this->context . '.list', 'list', array(), 'array'))
         {
             foreach ($list as $name => $value)

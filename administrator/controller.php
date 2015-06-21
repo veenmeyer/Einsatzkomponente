@@ -25,30 +25,54 @@ class EinsatzkomponenteController extends JControllerLegacy
 	{
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 		
-		// Version auf BETA überprüfen, und gegebenenfalls eine Warnung ausgeben
+		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		
 		$db = JFactory::getDbo();
 		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
-		$params = json_decode( $db->loadResult(), true );
-        $version = $params['version'];
+		$parameter = json_decode( $db->loadResult(), true );
+        $version = $parameter['version'];
+
+		// Version auf BETA überprüfen, und gegebenenfalls eine Warnung ausgeben
         if($version!=str_replace("Beta","",$version)):
 		?>
-		<div class="alert alert-info j-toggle-main span8" style="float:right;">
+		<table>
+		<tr>
+		<div class="alert alert-info j-toggle-main " style="">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<h4>Hinweis :</h4>Achtung Beta-Version <?php echo $params['version'];?> !!! Es wird nicht empfohlen, diese Version der Einsatzkomponente auf einer öffentlichen Live-Webseite zu betreiben.
+		<h4>Hinweis :</h4>Achtung Beta-Version <?php echo $parameter['version'];?> !!! Es wird nicht empfohlen, diese Version der Einsatzkomponente auf einer öffentlichen Live-Webseite zu betreiben. 
 		</div>        
-		<?php endif;  
+		</tr>
+		</table>
+		<?php endif; ?>
 		
-		
+
+<?php
 		//------------------------------------------------------------------------
-		$db = JFactory::getDbo();
-		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
-		$params = json_decode( $db->loadResult(), true );
-        $version = $params['version'];
         if($version!=str_replace("Premium","",$version)):
-		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		$params->set('eiko', '1');
-		endif;  
-		//------------------------------------------------------------------------
+		endif;  ?>
+		
+<?php if (!$params['eiko']) : ?>	 	
+		<table>
+		<tr>
+		<div class="alert alert-danger j-toggle-main " style="">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><span style="float:left;"><img border=0  width="100px" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></span></a>
+		Unterstützen Sie bitte die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit einer Spende, damit wir unsere Software auch weiterhin kostenlos und werbefrei zur Verfügung stellen können.<br/><small>Dieses Fenster wird nach der Eingabe des Validationsschlüssel automatisch ausgeblendet</small>.  
+		</div>        
+		</tr>
+		</table>
+<?php endif; ?>
+
+<?php	// Catch Sites 
+
+		$j_version = new JVersion;
+		$response = @file("http://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$j_version->getShortVersion()."&eikoversion=".$version); // Request absetzen
+
+?>
+
+<?php	
+
 		$view		= JFactory::getApplication()->input->getCmd('view', 'kontrollcenter');
         JFactory::getApplication()->input->set('view', $view);
 		parent::display($cachable, $urlparams);
