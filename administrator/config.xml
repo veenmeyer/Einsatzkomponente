@@ -915,6 +915,19 @@
 				value="1">Anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_links_2"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Link zum Detailbericht auf Einsatzart :"
+			description="Funktion nur beim Standard-Layout und Layout1">
+			
+			<option
+				value="0">Nein</option>
+			<option
+				value="1">Ja</option>
+	  </field>
+	  <field
 			name="display_home_info"
 			type="radio"
 			class="btn-group"

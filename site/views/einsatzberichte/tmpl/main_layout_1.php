@@ -213,11 +213,11 @@ if ($this->params->get('display_home_pagination')) :
 		   <?php if ($this->params->get('display_tickerkat_icon')) : ?>
            <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="Kategorie:<br/> <?php echo $tickerkat->title;?>" />
            <?php endif;?>
-			<?php if ($this->params->get('display_home_links')) : ?>
+			<?php if ($this->params->get('display_home_links_2')) : ?>
            <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">
 		   <?php endif; ?>
 		   <?php echo ''.$item->einsatzart; ?>
-			<?php if ($this->params->get('display_home_links','1')) : ?>
+			<?php if ($this->params->get('display_home_links_2','1')) : ?>
            </a>
 		   <?php endif; ?>
            <br />
