@@ -314,7 +314,7 @@ displayVals();
 
 	  
 function codeAddress2() {
-    var address = document.getElementById("jform_address").value;
+    var address = document.getElementById("jform_address").value+"<?php echo ' '.$params->get('ort_geocode','');?>";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
@@ -327,7 +327,6 @@ function codeAddress2() {
       } else {
             document.getElementById("jform_address").style.color = "red";
             document.getElementById("jform_address").style.border = "solid red 2px";
-        	<!--alert("Geocode war nicht erfolgreich. Geben sie eine andere Adresse ein, oder markieren Sie zusätzlich den Einsatzort auf der Karte (siehe weiter unten)");-->
       }
     });
   }	 

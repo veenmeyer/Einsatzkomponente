@@ -301,7 +301,18 @@
 					<option
 						value="true">Anzeigen</option>
 	  		</field>
-
+<field name="note_geocode" 
+		type="note" 
+		label="Hier können Sie einen Ort festlegen, der bei der Geocode-Suche berücksichtigt wird :" 
+		class="alert alert-info" 
+		description=""
+		/>	
+			<field name="ort_geocode" 
+				type="text" 	
+				default="" 
+				label="Ort oder Postleitzahl :" 
+				description="Es kann dann allerdings nicht in einem anderem Ort mehr gesucht werden !" 
+			/>
 </fieldset>
 	
 <!--Weiterleitungen-->
