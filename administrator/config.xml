@@ -791,7 +791,9 @@
 			<option
 				value="2">Datum (Text und Uhrzeit)</option>
 			<option
-				value="1">Kalendar-Icon</option>
+				value="1">Kalendar-Blatt</option>
+			<option
+				value="3">Kalendar-Blatt (und Uhrzeit als Text)</option>
 	  </field>
 	  <field
 			name="display_home_monat"

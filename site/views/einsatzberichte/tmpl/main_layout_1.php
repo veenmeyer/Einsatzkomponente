@@ -188,6 +188,16 @@ if ($this->params->get('display_home_pagination')) :
 			</div>
            </td>
            <?php endif;?>
+           <?php if ($this->params->get('display_home_date_image','1')=='3') : ?>
+		   <td class="eiko_td_kalender_main_1 mobile_hide_320"> 
+			<div class="home_cal_icon">
+			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
+			<div class="home_cal_tag"><?php echo date('d', $curTime);?></div>
+			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $curTime);?></span></div>
+			<?php echo '<span style="font-size:smaller;white-space: nowrap;" class="">'.date('H:i ', $curTime).'Uhr</span>'; ?>
+			</div>
+           </td>
+           <?php endif;?>
            <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
 		   <td class="eiko_td_datum_main_1 mobile_hide_320"> <?php echo date('d.m.Y ', $curTime);?><br /><?php echo date('H:i ', $curTime); ?>Uhr</td>
            <?php endif;?>
