@@ -17,9 +17,6 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 JHtml::_('behavior.framework', true);
 
 
-// Einstellungen
-$maxZoom = 14;
-
 
 ?>
 <script> 
@@ -374,8 +371,8 @@ togglearea = function(opt_enable) {
 	var pan = window.innerWidth > 680 ? false : true;
 
 	var myOptions = {
-		  maxZoom: <?php echo $maxZoom;?>,
-		  zoom: <?php echo $gmapconfig->gmap_zoom_level;?>,
+		  maxZoom: <?php echo $this->params->get('display_einsatzkarte_max_zoom_level', 14);?>,
+		  zoom: <?php echo $this->params->get('display_einsatzkarte_zoom_level', 14);?>,
 		  center: latlng,
 		  mapTypeId: google.maps.MapTypeId.<?php echo $gmapconfig->gmap_onload ;?>,
           mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
