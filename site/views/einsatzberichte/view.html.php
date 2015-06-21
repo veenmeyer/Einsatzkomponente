@@ -139,6 +139,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		
 		$document = JFactory::getDocument();
 		
+		$document = JFactory::getDocument();
         // Import CSS
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
@@ -153,12 +154,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 
 		
 		// Import Jquery
-		$version = new JVersion;
-		if ($version->isCompatible('3.0')) :
 		JHtml::_('jquery.framework',false);
-		else:
-		$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
-		endif;
 		// prüfen ob jquery geladen wurde
 		echo "<script type=\"text/javascript\">
 		if(typeof jQuery == \"function\")

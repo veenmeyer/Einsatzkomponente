@@ -5,8 +5,22 @@
 
     /* Note: Design for a width of 320px */
 
-@media only screen and (max-width: 440px) {
+.mobile_show_320 {display:none;}
+
+
+ @media only screen and (max-width: 765px) {
 	
-.mobile_hide_summary {display: none;}
-.mobile_hide_image {display: none;}
+.mobile_hide_480 {display: none;} 
+.eiko_td_buttons_main_1 {float:right;}
+.eiko_address_main_1 {float:left;}
+
 }
+
+ @media only screen and (max-width: 440px) {
+	
+.mobile_hide_320  {display: none;} 
+.eiko_td_buttons_main_1 {float:right;}
+.eiko_address_main_1 {float:left;}
+.mobile_show_320 {display:inline;}
+}
+

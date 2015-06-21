@@ -35,7 +35,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
     <?php echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
     <table class="table table-striped" id = "einsatzberichtList" >
         <thead >
-            <tr >
+            <tr class="mobile_hide_480 ">
 			
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1', 'a.date1', $listDirn, $listOrder); ?>
@@ -46,7 +46,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 				</th>
 				
            <?php if ($this->params->get('display_home_image')) : ?>
-				<th class='left'>
+				<th class='left mobile_hide_480 '>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGE', 'a.image', $listDirn, $listOrder); ?>
 				</th>
 			<?php endif;?>
@@ -54,7 +54,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGES', 'a.images', $listDirn, $listOrder); ?>
 				</th> -->
-				<th class='left'>
+				<th class='left mobile_hide_480'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_SUMMARY', 'a.summary', $listDirn, $listOrder); ?>
 				</th>
 		<!--		<th class='left'>
@@ -63,7 +63,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_VEHICLES', 'a.vehicles', $listDirn, $listOrder); ?>
 				</th> -->
-				<th class='left'>
+				<th class='left mobile_hide_480 '>
 				<?php echo JHtml::_('grid.sort',  'Zugriffe', 'a.counter', $listDirn, $listOrder); ?>
 				</th>
 		<!--		<th class='left'>
@@ -145,7 +145,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 				</td>
 				
            <?php if ($this->params->get('display_home_image')) : ?>
-		   <td class="mobile_image eiko_td_einsatzbild_main_1">
+		   <td class="mobile_hide_480  eiko_td_einsatzbild_main_1">
 		   <?php if ($item->image) : ?>
 					<?php if (isset($item->checked_out) && $item->checked_out) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzberichte_neu.', $canCheckin); ?>
@@ -161,7 +161,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 					<?php echo $item->images; ?>
 				</td> -->
 				
-				<td>
+				<td class="mobile_hide_480">
 
 					<?php echo $item->summary; ?>
 				</td>
@@ -173,7 +173,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 
 					<?php echo $item->vehicles; ?>
 				</td> -->
-				<td>
+				<td class="mobile_hide_480 ">
 
 					<?php echo $item->counter; ?>
 				</td>

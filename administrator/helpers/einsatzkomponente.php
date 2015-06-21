@@ -622,22 +622,22 @@ return $gmap; }
 	
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	
-	$navbar  ='<nav>';
+	$navbar  ='';
 	//$navbar .='<ul class="pager">';
 	//$navbar .='<ul class="pagination pagination-lg">';
 	//$navbar .='<ul class="pagination">';
-	$navbar .='<ul class="pagination pagination-sm">';
+	$navbar .='<div class="btn-group-justified">';
 	
 	if( $prev_id) : 
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="eiko_btn_2" title="">';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn btn-primary eiko_btn_2" title="">';
     //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id.'" class="eiko_btn_2" title="'.$prev_id.'">';
-    $navbar .='<strong>Zurück</strong></a></li>';
+    $navbar .='<strong>Zurück</strong></a>';
 	endif; 
 	
 	if( $next_id) :
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class="eiko_btn_2" title="">';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class=" btn btn-primary eiko_btn_2" title="">';
     //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id.'" class="eiko_btn_2" title="'.$next_id.'">';
-    $navbar .='<strong>Vor</strong></a></li>';
+    $navbar .='<strong>Vor</strong></a>';
 	endif; ?>
     
     <?php if ($menu_link=='&Itemid=') : 
@@ -646,20 +646,19 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<li><a href="'.$menu_link.'" class="btn-details"><strong>Übersicht</strong></a></li>';
+    $navbar .='<a href="'.$menu_link.'" class="btn btn-primary btn-details"><strong>Übersicht</strong></a>';
     //$navbar .='<a href="'.$menu_link.'" class="btn-details"><span><strong>Übersicht</strong></span></a>';
 	endif;
 	if( !$menu_link) :
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="eiko_btn_2"><strong>Übersicht</strong></a></li>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="btn btn-primary eiko_btn_2"><strong>Übersicht</strong></a>';
     //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzberichte" class="eiko_btn_2"><span><strong>Übersicht</strong></span></a>';
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht.'.$id)):
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class="eiko_btn_2">';
-    $navbar .='<strong>Editieren</strong></a></li>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn btn-primary eiko_btn_2">';
+    $navbar .='<strong>Editieren</strong></a>';
     endif;
 	
-	$navbar .='</ul>';
-	$navbar .='</nav>';
+	$navbar .='</div>';
 		return $navbar;
 	}
 
