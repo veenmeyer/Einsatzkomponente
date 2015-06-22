@@ -103,7 +103,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			  <span class="eiko_einsatzort_value_2"><?php echo $this->item->address.''; ?>
 			<?php if ($this->params->get('gmap_action','0')) : ?>
             <?php if( $this->item->gmap ) : ?>
-              <div class="hasTooltip" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !" id="distance_road"></div><br/>
+              <div class="eiko_distance_road hasTooltip" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !" id="distance_road"></div><br/>
             <?php endif;?>
             <?php endif;?>
               </span></td>

@@ -448,7 +448,7 @@ var request = {
 		if (status == google.maps.DirectionsStatus.OK) 
 			{
 				directionsDisplay.setDirections(response);
-	distance = "Der Anfahrtsweg betrug ca. "+response.routes[0].legs[0].distance.text;
+	distance = "(Der Anfahrtsweg betrug ca. "+response.routes[0].legs[0].distance.text+")";
 				/*distance += "<br/>Fahrtzeit ca. "+response.routes[0].legs[0].duration.text;*/
 				document.getElementById("distance_road").innerHTML = distance;
 							}

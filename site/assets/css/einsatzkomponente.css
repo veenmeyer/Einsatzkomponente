@@ -432,8 +432,7 @@ h4, h5 {
 	padding: 5px !important; 
 	background-color:#ededed !important;  
 	margin: 0 0 10px 0 !important;
-	line-height:14px !important;
-	font-size:smaller !important;
+	line-height:18px !important;
 }
 
 .eiko_content_2 { 
@@ -680,6 +679,7 @@ padding-right:5px;
 .eiko_icon {width:30px;}
 .eiko_nowrap {white-space: nowrap;}
 
+.eiko_distance_road {font-size:smaller;}
 
 
 
