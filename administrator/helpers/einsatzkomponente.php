@@ -641,7 +641,7 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<a href="'.$menu_link.'" class="btn btn-details"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.$menu_link.'" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
 	endif;
 	if( !$menu_link) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
