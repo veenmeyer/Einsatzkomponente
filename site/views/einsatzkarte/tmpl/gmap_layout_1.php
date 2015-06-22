@@ -361,8 +361,6 @@ togglearea = function(opt_enable) {
 
   function initialize() {
     var latlng = new google.maps.LatLng(<?php echo $gmapconfig->start_lat;?>, <?php echo $gmapconfig->start_lang;?>);
-	var isDraggable = window.innerWidth > 680 ? true : false;
-	var pan = window.innerWidth > 680 ? false : true;
 	
 		var myOptions = {
 		  maxZoom: <?php echo $this->params->get('display_einsatzkarte_max_zoom_level', 14);?>,
@@ -371,8 +369,8 @@ togglearea = function(opt_enable) {
 		  mapTypeId: google.maps.MapTypeId.<?php echo $gmapconfig->gmap_onload ;?>,
           mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
 		  mapTypeControl: true,
-		  panControl: pan,
-	      draggable: isDraggable,
+		  panControl: false,
+	      draggable: true,
           scrollwheel: false,
           disableDoubleClickZoom: true,
      	  streetViewControl: false,
