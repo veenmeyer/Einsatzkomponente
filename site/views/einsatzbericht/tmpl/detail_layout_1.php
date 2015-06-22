@@ -64,7 +64,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Einsatzart ENDE-->
 
 			<?php if ($this->params->get('display_detail_hits','1')):?>
-            <br/><span class="badge small">Zugriffe: <?php echo $this->item->counter; ?></span> 
+            <br/><span class="badge small eiko_counter_detail">Zugriffe: <?php echo $this->item->counter; ?></span> 
             <?php endif;?>
 			
             <div class="eiko_clearfix"></div>
