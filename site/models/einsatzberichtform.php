@@ -25,8 +25,11 @@ class EinsatzkomponenteModelEinsatzberichtForm extends JModelForm
 	 *
 	 * @since	1.6
 	 */
+	 
+
 	protected function populateState()
 	{
+		
 		$app = JFactory::getApplication('com_einsatzkomponente');
 		// Load state from the request userState on edit or from the passed variable on default
         if (JFactory::getApplication()->input->get('layout') == 'edit') {

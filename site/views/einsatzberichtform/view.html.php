@@ -43,20 +43,11 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 		$document->addStyleDeclaration($this->params->get('edit_css','')); 
-		
-		// Import Jquery
-		$version = new JVersion;
-		if ($version->isCompatible('3.0')) :
-		JHtml::_('jquery.framework',false);
-		else:
-		$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
-		endif;
-		// prüfen ob jquery geladen wurde
-		echo "<script type=\"text/javascript\">
-		if(typeof jQuery == \"function\")
-		else
-		  alert(\"jQuery nicht geladen\");
-		</script>";
+
+		//JHtml::_('jquery.framework',true);
+		//$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
+		//$document->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js');
+		//$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery.MultiFile.js');
 		
 		// Enter-Taste abstellen
 		echo '<script type="text/javascript">

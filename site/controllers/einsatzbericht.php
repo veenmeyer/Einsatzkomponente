@@ -145,13 +145,15 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
         // Clear the profile id from the session.
         $app->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', null);
         // Redirect to the list screen.
-        $this->setMessage(JText::_('Item saved successfully'));
+        $this->setMessage(JText::_('Einsatzdaten erfolgreich gepeichert'));
         $menu = & JSite::getMenu();
         $item = $menu->getActive(); //print_r ($item);break;
 //echo 'View :'.JFactory::getApplication()->input->get('view').'<br/>';
 //echo 'Layout :'.JFactory::getApplication()->input->get('layout').'<br/>';
 //echo 'Task :'.JFactory::getApplication()->input->get('task').'<br/>';break;
-		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte', false));
+
+        //$this->setRedirect(JRoute::_($item->link, false));
+		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink', '').'', false));
 		// Flush the data from the session.
 		$app->setUserState('com_einsatzkomponente.edit.einsatzbericht.data', null);
 	}
