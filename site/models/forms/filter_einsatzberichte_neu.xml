@@ -6,13 +6,13 @@
                class="js-stools-search-string" />
 
         <field name="alerting" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Alarmierungsart -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_alarmierungsarten`  WHERE `state`='1' ORDER BY `ordering` ASC" key_field="id" value_field="title"/> 
+                                    query="SELECT '' AS `id`, '- Alarmierungsart -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_alarmierungsarten`" key_field="id" value_field="title"/> 
 
  <field name="tickerkat" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Einsatzkategorie -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_tickerkat` WHERE `state`='1' ORDER BY `ordering` ASC" key_field="id" value_field="title"/> 
+                                    query="SELECT '' AS `id`, '- Einsatzkategorie -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_tickerkat`" key_field="id" value_field="title"/> 
 
  <field name="data1" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Einsatzart -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_einsatzarten` WHERE `state`='1' ORDER BY `ordering` ASC" key_field="id" value_field="title"/> 
+                                    query="SELECT '' AS `id`, '- Einsatzart -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_einsatzarten`" key_field="id" value_field="title"/> 
 
  
 		<!-- Keep "_dateformat" suffix for date validation on form submit -->
@@ -25,10 +25,10 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY"  onchange="this.form.submit();" /> 
 
  <field name="auswahl_orga" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Organisation -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC " key_field="id" value_field="name"/> 
+                                    query="SELECT '' AS `id`, '- Organisation -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_organisationen`" key_field="id" value_field="name"/> 
 
  <field name="vehicles" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Fahrzeuge -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_fahrzeuge` WHERE `state`='1' ORDER BY `ordering` ASC" key_field="id" value_field="name"/> 
+                                    query="SELECT '' AS `id`, '- Fahrzeuge -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_fahrzeuge`" key_field="id" value_field="name"/> 
 
 <!-- <field name="ausruestung" type="sql" class="inputbox" onchange="this.form.submit();"
                                     query="SELECT '' AS `id`, '- Please select Ausruestung -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_ausruestung`" key_field="id" value_field="name"/> -->

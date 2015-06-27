@@ -21,8 +21,6 @@ $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
-
- 
 $app	= JFactory::getApplication();
 $params = $app->getParams('com_einsatzkomponente');
 $gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
@@ -209,33 +207,27 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
         <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
 		<!--http://www.fyneworks.com/jquery/multifile/-->
      
-			</div>
+			</div></div>
+			
 <?php if (!$this->item->id == 0 && count($rImages)>'0' )	{ ?>
 	<div class="fltlft well" style="width:80%;">
     <br/><h1>Einsatzbilder :</h1>
-        <table>
         
 			<?php 
 			for ($i = 0;$i < count($rImages);++$i) {
 			$fileName = '../'.$rImages[$i]->thumb;
 			?>   
-  			<ul class="thumbnails inline">
-            <li class="span2">  
-            <div class="thumbnail">
+            <span class="thumbnail" style="width:150px;">
             <a href="index.php?option=com_einsatzkomponente&task=einsatzbilderbearbeiten.edit&id=<?php echo $rImages[$i]->id;?>" target="_self" class="thumbnail" title ="<?php echo $rImages[$i]->comment;?>">
 			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
             </a>
-            <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
+            <span class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></span>
             <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
-            </div>
-            </li>
+            </span>
 			<?php 	} ?>
-            </ul>
-       </table>
 	</div>
 <?php }?>
 
-			</div>  
 
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Quelle oder weiterführende Informationen :</h1>

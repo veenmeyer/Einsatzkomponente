@@ -32,13 +32,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
         	<h1 class="eiko_headline_2">
 			
 			<?php if ($this->params->get('display_detail_tickerkat_icon','1') == '1') :?> 
-            <?php if ($this->tickerKat->image) :?>
+            <?php if (isset($this->tickerKat->image)) :?>
         	<img  class="eiko_img-rounded_2 eiko_list_icon_2 mobile_hide_320" src="<?php echo JURI::Root();?><?php echo $this->tickerKat->image;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat->title); ?>"/>
             <?php endif;?>
             <?php endif;?>
 			
 			<?php if ($this->params->get('display_detail_einsatzart_icon','0') == '1') :?> 
-            <?php if ($this->einsatzlogo->list_icon) :?>
+            <?php if (isset($this->einsatzlogo->list_icon)) :?>
         	<img  class="eiko_img-rounded_2 eiko_list_icon_3 mobile_hide_320" src="<?php echo JURI::Root();?><?php echo $this->einsatzlogo->list_icon;?>"  alt="eiko_list_icon" title="<?php echo JText::_($this->einsatzlogo->title); ?>"/>
             <?php endif;?>
             <?php endif;?>

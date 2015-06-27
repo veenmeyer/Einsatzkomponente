@@ -154,6 +154,33 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 			$query = 'INSERT INTO `#__eiko_images` SET `report_id`="'.$rep_id.'", `image`="'.$custompath.$rep_id_ordner.'/'.$fileName.'", `thumb`="'.$custompath.'/thumbs'.$rep_id_ordner.'/'.$fileName.'", `state`="1", `created_by`="'.$user->id.'"';
 			$db->setQuery($query);
 			$db->query();
+			
+		$db = JFactory::getDBO();
+		$query = 'SELECT image FROM `#__eiko_einsatzberichte` WHERE `id` ="'.$rep_id.'" ';
+		$db->setQuery($query);
+		$rows = $db->loadObjectList();
+		$check_image      = $rows[0]->image;
+
+		if ($params->get('titelbild_auto', '1')):
+		if ($check_image == ''):
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
+		$query->update('#__eiko_einsatzberichte');
+		$query->set('image = "'.$custompath.'/'.$rep_id_ordner.'/'.$fileName.'" ');
+		$query->where('`id` ="'.$rep_id.'"');
+		$db->setQuery((string) $query);
+
+		try
+		{
+			$db->execute();
+		}
+		catch (RuntimeException $e)
+		{
+			JError::raiseError(500, $e->getMessage());
+		}
+		endif;
+		endif;
+			
 			echo JText::_( 'Bild wurde hochgeladen' );
 			
 			
@@ -178,7 +205,7 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
     $thumb = imagecreatetruecolor($newwidth, $newheight);
     $source_name = imagecreatefromjpeg($source);
     imagecopyresized($thumb, $source_name, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-	imagejpeg($thumb, $destination, 85);  
+	imagejpeg($thumb, $destination, 100);  
 	endif;
 
     // Wasserzeichen einbauen
@@ -195,7 +222,7 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	$source_img = imagecreatefromjpeg($source);
 	$watermark_img = imagecreatefrompng($watermark);
 	imagecopy($source_img, $watermark_img, $w_pos_x, $w_pos_y, 0, 0, $watermarkwidth,$watermarkheight);
-	imagejpeg($source_img, $destination, 85);  
+	imagejpeg($source_img, $destination, 100);  
 	imagedestroy ($source_img);
 	imagedestroy ($watermark_img);
 	endif;

@@ -34,6 +34,18 @@
 					<option
 						value="1">Ja</option>
 	  		</field>
+	  		<field
+				name="titelbild_auto"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="Titelbild Automatisch :"
+				description="Soll das Titelbild automatisch gesetzt werden, wenn Bilder hochgeladen werden ?">
+					<option
+						value="0">Nein</option>
+					<option
+						value="1">Ja</option>
+	  		</field>
 
 		<field
 			name="spacer3"

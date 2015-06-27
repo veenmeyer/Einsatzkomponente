@@ -208,11 +208,17 @@ if ($this->params->get('display_home_pagination')) :
 		   <td class="eiko_td_einsatzart_main_1">
            
 		   <?php if ($this->params->get('display_list_icon')) : ?>
+		   <?php if (isset($item->list_icon)) :?>
            <img class="eiko_icon hasTooltip" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" title="Einsatzart:<br/> <?php echo $item->einsatzart;?>" />
            <?php endif;?>
-		   <?php if ($this->params->get('display_tickerkat_icon')) : ?>
-           <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="Kategorie:<br/> <?php echo $tickerkat->title;?>" />
            <?php endif;?>
+
+		   <?php if ($this->params->get('display_tickerkat_icon')) : ?>
+		   <?php if (isset($tickerkat->image)) :?>
+           <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="Kategorie:<br/> <?php echo $tickerkat->title;?>" />
+		   <?php endif;?>
+           <?php endif;?>
+		   
 			<?php if ($this->params->get('display_home_links_2')) : ?>
            <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">
 		   <?php endif; ?>
