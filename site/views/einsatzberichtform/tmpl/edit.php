@@ -211,20 +211,25 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			
 <?php if (!$this->item->id == 0 && count($rImages)>'0' )	{ ?>
 	<div class="fltlft well" style="width:80%;">
-    <br/><h1>Einsatzbilder :</h1>
+        <table>
         
+  			<ul class="thumbnails inline">
 			<?php 
 			for ($i = 0;$i < count($rImages);++$i) {
-			$fileName = '../'.$rImages[$i]->thumb;
+			$fileName = JURI::base().$rImages[$i]->thumb;
 			?>   
-            <span class="thumbnail" style="width:150px;">
+            <li class="span2">  
+            <div class="thumbnail">
             <a href="index.php?option=com_einsatzkomponente&task=einsatzbilderbearbeiten.edit&id=<?php echo $rImages[$i]->id;?>" target="_self" class="thumbnail" title ="<?php echo $rImages[$i]->comment;?>">
 			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
             </a>
-            <span class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></span>
+            <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
             <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
-            </span>
+            </div>
+            </li>
 			<?php 	} ?>
+            </ul>
+       </table>
 	</div>
 <?php }?>
 
