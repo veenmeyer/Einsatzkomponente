@@ -133,9 +133,23 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 							<?php if ($this->params->get('eiko')) : ?>
 							<?php echo '<span class="label label-success"> ( validiert ) </span>';?>
                             <?php else:?>
-							<?php echo '<span class="label label-important"> ( nicht validiert ) </span> siehe Optionen / Info';?>
+							<?php echo '<span class="label label-important"> ( nicht validiert ) </span><br/>siehe Optionen / Info';?>
                             <?php endif;?>
                             </dd>
+							<br/>
+							<dt>Premiumfunktionen:</dt>
+							<?php if ($this->params->get('eiko')) : ?>
+							<dd><?php echo '<span style="margin-bottom:5px;" class="label label-success">Mehrfachbild-Upload im Frontend-Edit</span>';?></dd>
+							<?php else:?>
+							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Mehrfach-Bildupload im Frontend-Edit</span>';?></dd>
+							<?php endif;?>
+							<dt></dt>
+							<?php if ($this->params->get('eiko')) : ?>
+							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Option Ausrüstung</span>';?></dd>
+							<?php else:?>
+							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Option Ausrüstung</span>';?></dd>
+							<?php endif;?>
+							<br/>
 							<dt>Release-Datum:</dt>
 							<dd><?php echo $params['creationDate'];?></dd>
 							<dt>Autor:</dt>
@@ -164,15 +178,15 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 						</div>
 						<div class="modal-body">
 						<ul>
-						<li>mod_eiko_last (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
-						<li>mod_eiko_chart (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
-						<li>mod_eiko_statistik (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
-						<li>mod_eiko_melder (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
-						<li>mod_eiko_einsatzticker (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
-						<li>mod_eiko_led (Modul zur Anzeige des letzten Einsatzes als LED-Tickerlaufschrift)</li>
-						<li>mod_eiko_articles_news (Modul zur Anzeige der letzten Einsätze als Joomla-Artikel)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_last</a> (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_chart</a> (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_statistik</a> (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_melder</a> (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_einsatzticker</a> (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_led</a> (Modul zur Anzeige des letzten Einsatzes als LED-Tickerlaufschrift)</li>
+						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_articles_news</a> (Modul zur Anzeige der letzten Einsätze als Joomla-Artikel)</li>
 						</ul>
-						<h4>Mehr Infos dazu auf www.einsatzkomponente.de</h4>
+						<h4>Mehr Infos dazu auf <a href="http://www.einsatzkomponente.de/" target="_blank" class="">www.einsatzkomponente.de</a></h4>
 						</div>
 						<div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</button>

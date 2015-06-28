@@ -204,15 +204,15 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
             return false;
         }
         
+		$app	= JFactory::getApplication();
+		$params = $app->getParams('com_einsatzkomponente');
         $table = $this->getTable();
         if ($table->save($data) === true) {
-			//echo $table->id;break;
-			
-if(!$_FILES['data']['name']['0'] =='')  
-{
-	//print_r ($_FILES['data']);break;
-	$this->upload ($table->id,'data');
-}		
+		if ($params->get('eiko')) :
+		if(!$_FILES['data']['name']['0'] =='') :
+		$this->upload ($table->id,'data');
+		endif;	
+		endif;	
 
             return $id;
         } else {

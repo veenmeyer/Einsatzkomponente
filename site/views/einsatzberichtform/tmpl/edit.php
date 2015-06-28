@@ -27,13 +27,14 @@ $gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus h
 
 
 // Daten aus der Bilder-Galerie holen 
-if (!$this->item->id == 0)
-	{
+if (!$this->item->id == 0) :
+if ($params->get('eiko')) : 
+
 	$db = JFactory::getDBO();
 	$query = 'SELECT id, thumb, comment FROM `#__eiko_images` WHERE `report_id`="'.$this->item->id.'" AND `state`="1" ORDER BY `ordering` ASC';
 	$db->setQuery($query);
 	$rImages = $db->loadObjectList();
-	}
+    endif;endif;
 	
 // Import CSS
 $document = JFactory::getDocument();
@@ -195,6 +196,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
 			
+			<?php if ($params->get('eiko')) : ?>
 			<div class="control-group" style="height:100px;">
 			Bilderupload für Bildergalerie:
 			<div id="text">
@@ -206,10 +208,21 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
         <!-- Here u can add image for add button(Like Below) just call the id="add-file-field" into ur image tag thats it..-->
         <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
 		<!--http://www.fyneworks.com/jquery/multifile/-->
-     
-			</div></div>
-			
-<?php if (!$this->item->id == 0 && count($rImages)>'0' )	{ ?>
+			</div>
+		<?php else:?>	
+			<div class="control-group" style="height:100px;">
+			Bilderupload für Bildergalerie:
+			<div id="text">
+            <div ><input title ="Diese Funktion ist für Premiumbenutzer freigeschaltet" multiple class="" name="data[]" id="file"  disabled type="file"/></div>
+			<span style="font-weight:bold;color:#ff0000;">Diese Funktion steht nur für Premiumbenutzer zur Verfügung.</span>
+			</div>
+
+		    <br/><input class="btn btn-default btn-xs dropdown-toggle"  disabled type="button" id="add-file-field" name="add" value="weiteres Bild einzelnd hinzufügen" />
+			</div>
+		<?php endif;?>		
+			</div>
+<?php if (!$this->params->get('eiko')) : ?>
+<?php if (!$this->item->id == 0 && count($rImages)>'0' ): ?>
 	<div class="fltlft well" style="width:80%;">
         <table>
         
@@ -231,7 +244,8 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
             </ul>
        </table>
 	</div>
-<?php }?>
+<?php endif;?>
+<?php endif;?>
 
 
     		<div class="fltlft well" style="width:80%;">
