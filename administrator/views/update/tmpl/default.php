@@ -392,7 +392,82 @@ if (!$check_gmap_icon) {
 else {
 	}
 
- 
+// ------------------ ADD ausruestung zu Einsatzberichte --------------------------------------------------
+	$check_update = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="ausruestung"');
+	try {
+	$check_update = $db->execute();
+	} catch (Exception $e) {print_r($e);$bug='1';}
+	$check_update = $check_update->num_rows;
+	
+	if (!$check_update) :
+	
+	$db = JFactory::getDbo();
+	$query = "ALTER TABLE `#__eiko_einsatzberichte` ADD `ausruestung` TEXT NOT NULL AFTER `vehicles`;";
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {print_r($e);$bug='1';}	
+	
+	endif;
+
+// ------------------------------------------------------------------------------------------------------------
+// ------------------ ADD ausruestung zu Fahrzeuge --------------------------------------------------
+	$check_update = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('show columns from `#__eiko_fahrzeuge` where Field="ausruestung"');
+	try {
+	$check_update = $db->execute();
+	} catch (Exception $e) {print_r($e);$bug='1';}
+	$check_update = $check_update->num_rows;
+	
+	if (!$check_update) :
+	
+	$db = JFactory::getDbo();
+	$query = "ALTER TABLE `#__eiko_fahrzeuge` ADD `ausruestung` TEXT NOT NULL AFTER `department`;";
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {print_r($e);$bug='1';}	
+	
+	endif;
+
+// ------------------------------------------------------------------------------------------------------------
+// ------------------ Update von Version 3.06 auf 3.07  ---------------------------------------------------
+	$check_ausruestung = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('select * from `#__eiko_ausruestung` where id="0"');
+	try {
+	$check_ausruestung = $db->execute();
+	} catch (Exception $e) {$check_ausruestung=true;}
+	
+	
+if ($check_ausruestung) :
+
+$e ='';
+$sql="CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (
+`id` int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `beschreibung` text NOT NULL,
+  `ordering` int(11) NOT NULL,
+  `state` tinyint(1) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `checked_out` int(11) NOT NULL,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+	$db = JFactory::getDbo();
+	$db->setQuery($sql); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+		print_r ($e);$bug='1';
+	}	
+
+endif;
 // ------------------------------------------------------------------------------------------------------------
 ?>
 <?php echo '<br/><br/>';?>

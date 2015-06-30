@@ -18,7 +18,9 @@ $vehicles_images = '';
 $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 ?>
-            
+  
+
+ 
 <?php if( $this->item ) : ?>  <!--Einsatzdaten vorhanden ? Sonst ENDE --> 
             <!--Navigation-->
 			<div class="eiko_navbar_2 " style="float:<?php echo $this->params->get('navi_detail_pos','left');?>;"><?php echo $this->navbar;?></div>
@@ -123,7 +125,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             </tr>
 				<?php endif;?>
             <?php if( $this->item->date2>1) : ?>
-            <tr>
+            <tr class="mobile_hide_320">
               <td class="eiko_td1_2 mobile_hide_320"><span class="eiko_date1_time_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMESTART'); ?>: 
               </span></td>
@@ -131,7 +133,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             </tr>
 				<?php endif;?>
             <?php if( $this->item->date3>1) : ?>
-            <tr>
+            <tr class="mobile_hide_320">
               <td class="eiko_td2_2 mobile_hide_320"><span class="eiko_date3_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMEEND'); ?>: 
               </span></td>
@@ -139,7 +141,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             </tr>
             <?php endif;?>
             <?php if( $this->item->alerting) : ?>
-            <tr>
+            <tr class="mobile_hide_320">
               <td class="eiko_td1_2 mobile_hide_320"><span class="eiko_alarmart_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING'); ?>: 
               </span></td>
@@ -147,7 +149,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             </tr>
             <?php endif;?>
             <?php if( $this->item->boss2) : ?>
-            <tr>
+            <tr class="mobile_hide_320">
               <td class="eiko_td2_2 mobile_hide_320"><span class="eiko_boss2_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2'); ?>: 
               </span></td>
@@ -155,7 +157,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             </tr>
             <?php endif;?>
             <?php if( $this->item->boss) : ?>
-            <tr>
+            <tr class="mobile_hide_320">
               <td class="eiko_td1_2 mobile_hide_320"><span class="eiko_boss_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS'); ?>: 
               </span></td>
@@ -163,7 +165,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             </tr>
             <?php endif;?>
             <?php if( $this->item->people) : ?>
-            <tr>
+            <tr class="mobile_hide_320">
               <td class="eiko_td2_2 mobile_hide_320"><span class="eiko_people_label_2">
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE'); ?>: 
               </span></td>
@@ -283,7 +285,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
       </tr>
 				<?php if ($this->params->get('display_detail_fhz_images','1')) :?>
                 <tr class="mobile_hide_320">
-                <td class="eiko_fahrzeugaufgebot_2" style="margin-bottom:10px;padding-bottom:10px;" colspan="2"><hr>
+                <td class="eiko_fahrzeugaufgebot_2" style="margin-bottom:10px;padding-bottom:10px;" colspan="2">
 				<?php echo '<span class="mobile_hide_320">'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLE').' </span>'; ?> 
                 <?php echo $vehicles_images ;?>
                 </td>
@@ -312,6 +314,38 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 </div>
 <?php endif;?>
 <!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
+
+<!--eingesetzte Ausrüstung anzeigen -->  
+<?php 	if ($this->params->get('display_detail_ausruestung','1')) : 
+		if(!$this->item->ausruestung == '') :
+		if ($this->params->get('eiko','0')) : 
+				$array = array();
+				$ausruestung = '';
+				foreach((array)$this->item->ausruestung as $value): 
+					if(!is_array($value)):
+						$array[] = $value;
+					endif;
+				endforeach;
+				$data = array();
+				foreach($array as $value):
+					$db = JFactory::getDbo();
+					$query	= $db->getQuery(true);
+					$query
+						->select('*')
+						->from('`#__eiko_ausruestung`')
+						->where('id = "' .$value.'" AND state="1" ');
+					$db->setQuery($query);
+					$results = $db->loadObjectList();
+					$ausruestung .= '<li>'.$results[0]->name.'</li>';
+				endforeach; 
+  
+ ?>
+ <div><ul><b>u.a. eingesetzte Ausrüstung :</b> <?php echo $ausruestung;?></ul></div> 
+ <?php endif;?>
+ <?php endif;?>
+ <?php endif;?>
+<!--eingesetzte Ausrüstung anzeigen ENDE -->  
+
 
 <!--Socialbar-->
 <?php if($this->item->status_fb=='1'): ?>

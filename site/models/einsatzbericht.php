@@ -25,7 +25,7 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 	 *
 	 * @since	1.6
 	 */
-	protected function populateState()
+	protected function populateState() 
 	{
 		
 		$app = JFactory::getApplication('com_einsatzkomponente');

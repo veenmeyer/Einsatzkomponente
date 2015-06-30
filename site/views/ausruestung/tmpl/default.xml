@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_EINSATZKOMPONENTE_TITLE_ITEM_VIEW_AUSRUESTUNG" option="View">
+        <message>
+                        <![CDATA[COM_EINSATZKOMPONENTE_TITLE_ITEM_VIEW_AUSRUESTUNG_DESC]]>
+        </message>
+    </layout>
+    <fields name="params">
+        <fieldset 
+            name="basic"
+            label="COM_EINSATZKOMPONENTE_FIELDSET_ITEM_ID_SELECT_LABEL">
+            <field
+                name="item_id"
+                query="SELECT `id` FROM #__eiko_ausruestung ORDER BY `id`"
+                type="sql"
+                key_field="id" 
+                value_field="id"
+                label="COM_EINSATZKOMPONENTE_ITEM_ID_SELECT_LABEL"
+                require="true"
+                description="JGLOBAL_SHOW_TITLE_DESC">
+            </field>
+        </fieldset>
+    </fields>
+</metadata>

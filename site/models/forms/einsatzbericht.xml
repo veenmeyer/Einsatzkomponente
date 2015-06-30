@@ -221,6 +221,21 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
          /> 
+       <field name="ausruestung" type="sql" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSRUESTUNG" 
+            required="false" 
+            query="SELECT `id`, `name` FROM `#__eiko_ausruestung` WHERE `state`='1' ORDER BY `ordering` ASC"
+			key_field="id"       		
+			value_field="name"
+			multiple="multiple" 
+         /> 
+
+       <field name="ausruestung" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Ausrüstung -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_ausruestung`" key_field="id" value_field="val"
+             /> 
+		 
        <field name="article_id" 
 	   label = "Joomla-Artikel verlinken ?"
        description="Bitte frei lassen, wenn kein Joomla-Artikel verlinkt werden soll." 

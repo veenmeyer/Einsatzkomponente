@@ -137,7 +137,18 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				echo '<input type="hidden" class="vehicles" name="jform[vehicleshidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-				
+	?>
+<script>
+function displayVals() {
+var multipleValues = jQuery( "#jform_vehicles" ).val() || [];
+jQuery( "#fahrzeug" ).val(multipleValues.join( ", " ) );
+}
+jQuery( "select" ).change( displayVals );
+displayVals();
+</script>
+
+<?php
+			
 				
 			?>
 			<script type="text/javascript">
@@ -149,7 +160,40 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 					}
 				});
 				</script>	
-                
+   
+			<div class="control-group hide_ausruestung">
+				<div class="control-label line"><?php echo $this->form->getLabel('ausruestung'); ?></div>
+				<div class="controls hideme"><?php echo $this->form->getInput('ausruestung'); ?></div>
+				<?php if (!$params->get('eiko','0')) : ?>
+				<style>
+				.hideme {display:none;}
+				.line {text-decoration: line-through;}
+				</style>
+				<?php endif;?>
+			</div>
+				<?php if (!$params->get('display_detail_ausruestung','1')) : ?>
+				<style>
+				.hide_ausruestung {display:none;}
+				</style>
+				<?php endif;?>
+			
+			<?php
+				foreach((array)$this->item->ausruestung as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="ausruestung" name="jform[ausruestunghidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>
+			<script type="text/javascript">
+				jQuery.noConflict();
+				jQuery('input:hidden.ausruestung').each(function(){
+					var name = jQuery(this).attr('name');
+					if(name.indexOf('auswahlorga_hidden')){
+						jQuery('#jform_ausruestung option[value="'+jQuery(this).val()+'"]').attr('selected',true);
+					}
+				});
+			</script>			
+   
                 
            </div>		
            
@@ -164,17 +208,6 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 //			$vehicles = implode(',',$array);
 
 //echo '<input id="fahrzeug"/>';
-?>
-<script>
-function displayVals() {
-var multipleValues = jQuery( "#jform_vehicles" ).val() || [];
-jQuery( "#fahrzeug" ).val(multipleValues.join( ", " ) );
-}
-jQuery( "select" ).change( displayVals );
-displayVals();
-</script>
-
-<?php
 
 
 ?>

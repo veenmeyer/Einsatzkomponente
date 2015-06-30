@@ -117,7 +117,16 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
            <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
 		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $curTime);?></td>
            <?php endif;?>
-
+           <?php if ($this->params->get('display_home_date_image','1')=='3') : ?>
+		   <td class="eiko_td_kalender_main_1"> 
+			<div class="home_cal_icon">
+			<div class="home_cal_monat"><?php echo date('M', $curTime);?></div>
+			<div class="home_cal_tag"><?php echo date('d', $curTime);?></div>
+			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $curTime);?></span></div>
+			 <?php echo '<div style="font-size:12px;white-space: nowrap;">'.date('H:i ', $curTime).' Uhr</div>'; ?>
+			</div>
+           </td>
+           <?php endif;?>
 
             	<td>
 					<?php if (isset($item->checked_out) && $item->checked_out) : ?>

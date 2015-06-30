@@ -48,6 +48,15 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
 					$array['vehicles'] = explode(',',$array['vehicles']);
 				}
 			endif;
+		//Support for multiple or not foreign key field: ausruestung
+			if(isset($array['ausruestung'])):
+				if(is_array($array['ausruestung'])){
+					$array['ausruestung'] = implode(',',$array['ausruestung']);
+				}
+				else if(strrpos($array['ausruestung'], ',') != false){
+					$array['ausruestung'] = explode(',',$array['ausruestung']);
+				}
+			endif;
 		if(!JFactory::getUser()->authorise('core.edit.state','com_einsatzkomponente.einsatzbericht.'.$array['id']) && $array['state'] == 1){
 			$array['state'] = 0;
 		}

@@ -79,6 +79,14 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 				endif;
 			endforeach;
 			$data->vehicles = implode(',',$array);
+			//Support for multiple or not foreign key field: ausruestung
+			$array = array();
+			foreach((array)$data->ausruestung as $value): 
+				if(!is_array($value)):
+					$array[] = $value;
+				endif;
+			endforeach;
+			$data->ausruestung = implode(',',$array);
 		}
 
 		return $data;

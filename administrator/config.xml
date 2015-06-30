@@ -1142,6 +1142,19 @@
 			<option
 				value="1">Anzeigen</option>
 	  </field>
+	  <field
+			name="display_detail_ausruestung"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Ausrüstung :"
+			description="Hier können Sie einstellen, ob die eingesetzte Ausrüstung angezeigt werden soll.">
+			
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
 		<field
 			name="spacer12"
 			type="spacer"

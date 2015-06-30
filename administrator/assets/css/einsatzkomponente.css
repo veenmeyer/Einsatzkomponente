@@ -91,6 +91,17 @@
       padding-left:60px!important;
 }
 
+.icon-48-ausruestungen {
+      background-image: url(../images/l_einsatzarten.png);
+      padding-left:60px!important;
+}
+
+.icon-48-ausruestung {
+      background-image: url(../images/l_einsatzarten.png);
+      padding-left:60px!important;
+}
+
+
 
 #jform_tickerkat_chzn {width:380px!important;}
 #adresse_chzn {width:380px!important;}

@@ -145,7 +145,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 							<?php endif;?>
 							<dt></dt>
 							<?php if ($this->params->get('eiko')) : ?>
-							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Option Ausrüstung</span>';?></dd>
+							<dd><?php echo '<span style="margin-bottom:5px;" class="label label-success">Option Ausrüstung</span>';?></dd>
 							<?php else:?>
 							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Option Ausrüstung</span>';?></dd>
 							<?php endif;?>

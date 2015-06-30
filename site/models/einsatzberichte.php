@@ -151,6 +151,9 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		$query->select('veh.name AS mission_car');
 		$query->select('veh.ordering AS vehicle_ordering');
 		$query->join('LEFT', '#__eiko_fahrzeuge AS veh ON veh.id = a.vehicles');
+		// Join over the foreign key 'ausruestung'
+		$query->select('#__eiko_ausruestung_1662678.name AS ausruestung_name_1662678');
+		$query->join('LEFT', '#__eiko_ausruestung AS #__eiko_ausruestung_1662678 ON #__eiko_ausruestung_1662678.id = a.ausruestung');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
@@ -161,7 +164,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->escape($search, true).'%');
-                $query->where('( a.address LIKE '.$search.'  OR  a.summary LIKE '.$search.'  OR  a.boss LIKE '.$search.'  OR  a.boss2 LIKE '.$search.'  OR  a.desc LIKE '.$search.' )');
+                $query->where('( a.address LIKE '.$search.'  OR  a.summary LIKE '.$search.' OR  a.ausruestung LIKE '.$search.' OR  a.boss LIKE '.$search.'  OR  a.boss2 LIKE '.$search.'  OR  a.desc LIKE '.$search.' )');
 			}
 		}
         
@@ -180,6 +183,11 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		$filter_auswahl_orga = $this->state->get("filter.auswahl_orga");
 		if ($filter_auswahl_orga) {
 			$query->where("a.auswahl_orga = '".$filter_auswahl_orga."'");
+		}
+		//Filtering ausruestung
+		$filter_ausruestung = $this->state->get("filter.ausruestung");
+		if ($filter_ausruestung) {
+			$query->where("a.ausruestung = '".$filter_ausruestung."'");
 		}
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");
