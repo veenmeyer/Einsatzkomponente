@@ -299,16 +299,16 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$document->addCustomTag($opengraph);
 
 		// Wenn Titlebild in Bildergalerie enthalten, dann dieses aus der Bildergalerie löschen
-		if ($this->images and $this->item->image) :
+	//	if ($this->images and $this->item->image) :
 		
-			$i='0';
-			while ($i < count($this->images)){ 
-			if ($this->images[$i]->image == $this->item->image) : 
-				unset($this->images[$i]);$this->images[$i] = '';
-			endif;
-			$i++;
-			}
-		endif;
+	//		$i='0';
+	//		while ($i < count($this->images)){ 
+	//		if ($this->images[$i]->image == $this->item->image) : 
+	//			unset($this->images[$i]);$this->images[$i] = '';
+	//		endif;
+	//		$i++;
+	//		}
+	//	endif;
 	
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
