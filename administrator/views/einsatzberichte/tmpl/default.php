@@ -281,9 +281,15 @@ if (!empty($this->extra_sidebar)) {
 					</div>
 				      <?php 
 						echo '<div style="padding-top:5px;">';
+						if (isset($alerting_image->image)) :
 						echo '<img src="../'.$alerting_image->image.'" class="backend_alerting_style" title ="'.$alerting_image->title.'" />';
+						endif;
+						if (isset($data1->list_icon)) :
 						echo '&nbsp;<img src="../'.$data1->list_icon.'" class="backend_data_style" title ="'.$data1->title.'" />';
+						endif;
+						if (isset($kat->image)) :
 						echo '&nbsp;<img src="../'.$kat->image.'" class="backend_kat_style" title="'.$kat->title.'" />';
+						endif;
 							if ($item->image):
 							echo '&nbsp;<img src="../'.$item->image.'" class="backend_foto_style" title="'.$item->image.'"/>';
 							endif;
