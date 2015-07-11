@@ -321,8 +321,8 @@ foreach($eiko_tickerkat as $data){
 		$data_id .= $orga_id.',';
 		endforeach;
 	  	//$data_id=substr($data_id,0,strlen($data_id)-1);
-		echo '</br>';
-		echo $result->id.' = '.$data_id.'</br>';
+		//echo '</br>';
+		//echo $result->id.' = '.$data_id.'</br>';
 		
 $db = JFactory::getDbo();
 $query = $db->getQuery(true);
@@ -555,6 +555,40 @@ endif;
 	endif;
 
 
+// ---------------------- Fehler in auswahl_orga beheben, das letzte "," löschen -----------------------------------------------
+
+       	$results = array();
+		$query = 'SELECT * FROM #__eiko_einsatzberichte' ;
+		$db	= JFactory::getDBO();
+		$db->setQuery( $query );
+		$results = $db->loadObjectList();
+		
+       	$data = array();
+		foreach($results as $result):
+		
+		if (substr($result->auswahl_orga, -1) == ','   ) :
+	  	$result->auswahl_orga=substr($result->auswahl_orga,0,strlen($result->auswahl_orga)-1);
+		endif;
+		//echo $result->id.' = '.$result->auswahl_orga.'<br/>';
+		
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		// Fields to update.
+		$fields = array(
+		$db->quoteName('auswahl_orga') . ' = ' . $db->quote(''.$result->auswahl_orga.'') );
+		// Conditions for which records should be updated.
+		$conditions = array(
+		$db->quoteName('id') . ' = '.$result->id.'' );
+		$query->update($db->quoteName('#__eiko_einsatzberichte'))->set($fields)->where($conditions);
+ 
+		$db->setQuery($query);
+		try {
+		$result = $db->execute();
+		} catch (Exception $e) {
+			print_r ($e);$bug='1';
+		}	
+	
+		endforeach;
 // ------------------------------------------------------------------------------------------------------------
 
 ?>
