@@ -737,7 +737,7 @@ endif;
 
 		// Check for request forgeries
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
+		$user = JFactory::getUser();
 		// Get items to remove from the request.
 		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
 		
@@ -763,9 +763,14 @@ endif;
 	
 		$mailer = JFactory::getMailer();
 		$config = JFactory::getConfig();
+		
+		//$sender = array( 
+    	//$config->get( 'config.mailfrom' ),
+    	//$config->get( 'config.fromname' ) );
 		$sender = array( 
-    	$config->get( 'config.mailfrom' ),
-    	$config->get( 'config.fromname' ) );
+    	$user->email,
+    	$user->name );
+		
 		$mailer->setSender($sender);
 		
 		$user = JFactory::getUser();

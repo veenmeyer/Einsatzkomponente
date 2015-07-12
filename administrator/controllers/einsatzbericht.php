@@ -95,6 +95,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		$user = JFactory::getUser();
 		$query = 'SELECT * FROM `#__eiko_einsatzberichte` WHERE `id` = "'.$cid.'" LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
@@ -102,9 +103,14 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	
 		$mailer = JFactory::getMailer();
 		$config = JFactory::getConfig();
+		
+		//$sender = array( 
+    	//$config->get( 'config.mailfrom' ),
+    	//$config->get( 'config.fromname' ) );
 		$sender = array( 
-    	$config->get( 'config.mailfrom' ),
-    	$config->get( 'config.fromname' ) );
+    	$user->email,
+    	$user->name );
+		
 		$mailer->setSender($sender);
 		
 		$user = JFactory::getUser();
