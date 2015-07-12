@@ -33,7 +33,7 @@ class EinsatzkomponenteController extends JControllerLegacy
         $version = $parameter['version'];
 
 		// Version auf BETA überprüfen, und gegebenenfalls eine Warnung ausgeben
-        if($version!=str_replace("Beta","",$version)):
+        if($version!=str_replace("beta","",$version)):
 		?>
 		<table>
 		<tr>
