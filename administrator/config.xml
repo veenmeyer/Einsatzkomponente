@@ -201,34 +201,7 @@
 		class="alert alert-info" 
 		description=""
 		/>	
-			<field name="detail_map_height" 
-				type="text" 	
-				default="250px" 
-				label="Höhe der Karte (Detailansicht) :" 
-				description="Bitte nur so angeben : z.b. 250px !!" 
-			/>
 			
-			<field
-				name="display_map_route"
-				type="radio"
-				class="btn-group"
-				default="true"
-				label="Streckenverlauf :"
-				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
-					<option
-						value="false">Aus</option>
-					<option
-						value="true">An</option>
-			</field>
-			<field 
-				name="detail_gmap_zoom_level" 
-				type="integer" 
-				default="12" 
-				label="Zoom-Level" 
-				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
-				first="1" 
-				last="18" 
-				step="1" />
 				
 			<field
 				name="detail_gmap_onload"
@@ -242,18 +215,6 @@
            			<option value="SATELLITE">Satellitenkarte</option>
 	  		</field>
 			
-	  		<field
-				name="display_detail_einsatz_marker"
-				type="radio"
-				class="btn-group"
-				default="1"
-				label="Einsatz-Marker :"
-				description="Hier können Sie einstellen, ob die Einsatzort-Markierung generell angezeigt werden soll.">
-					<option
-						value="0">Aus</option>
-					<option
-						value="1">An</option>
-	  		</field>
 
 			<!--<field name="detail_pointer1_image" 
 				type="imagelist" 
@@ -321,18 +282,6 @@
 			<option
 				value="48">48 x 48</option>
 	  </field>
-	  		<field
-				name="display_detail_einsatzgebiet"
-				type="radio"
-				class="btn-group"
-				default="1"
-				label="Einsatzgebiet :"
-				description="Hier können Sie einstellen, ob das Einsatzgebiet auf der Karte angezeigt werden sollen.">
-					<option
-						value="0">Verbergen</option>
-					<option
-						value="1">Anzeigen</option>
-	  		</field>
 	  		<field
 				name="display_detail_popup"
 				type="radio"
@@ -1212,6 +1161,70 @@
 			description="Thumbsbreite der Bildergallerie. z.b. 100px !!" 
 			/>
 			
+
+		<field
+			name="spacer13"
+			type="spacer"
+			hr="true"
+		/>
+			<field 
+				name="detail_gmap_zoom_level" 
+				type="integer" 
+				default="12" 
+				label="Zoom-Level" 
+				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
+				first="1" 
+				last="18" 
+				step="1" />
+			<field name="detail_map_height" 
+				type="text" 	
+				default="250px" 
+				label="Höhe der Karte (Detailansicht) :" 
+				description="Bitte nur so angeben : z.b. 250px !!" 
+			/>
+	  		<field
+				name="display_detail_einsatz_marker"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="Einsatz-Marker :"
+				description="Hier können Sie einstellen, ob die Einsatzort-Markierung generell angezeigt werden soll.">
+					<option
+						value="0">Aus</option>
+					<option
+						value="1">An</option>
+	  		</field>
+			<field
+				name="display_map_route"
+				type="radio"
+				class="btn-group"
+				default="true"
+				label="Streckenverlauf :"
+				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
+					<option
+						value="false">Aus</option>
+					<option
+						value="true">An</option>
+			</field>
+	  		<field
+				name="display_detail_einsatzgebiet"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="Einsatzgebiet :"
+				description="Hier können Sie einstellen, ob das Einsatzgebiet auf der Karte angezeigt werden sollen.">
+					<option
+						value="0">Verbergen</option>
+					<option
+						value="1">Anzeigen</option>
+	  		</field>
+
+<field name="note_detail_map" 
+		type="note" 
+		label="Um weitere Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
+		class="alert alert-warning" 
+		description=""
+		/>	
 		<field
 			name="spacer546547"
 			type="spacer"
@@ -1240,19 +1253,6 @@
 			buttons="true"
 			hide="readmore,pagebreak"
             filter="raw" /> 
-
-		<field
-			name="spacer13"
-			type="spacer"
-			hr="true"
-		/>
-
-<field name="note_detail_map" 
-		type="note" 
-		label="Um Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
-		class="alert alert-warning" 
-		description=""
-		/>	
 	  
 	</fieldset>
 	
