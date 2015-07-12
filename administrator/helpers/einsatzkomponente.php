@@ -371,6 +371,7 @@ class EinsatzkomponenteHelper
 	
 public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
  {
+$params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='function initialize() {
 	
   var isDraggable = window.innerWidth > 680 ? true : false;
@@ -414,6 +415,10 @@ $gmap ='function initialize() {
 google.maps.event.addListener(map, "click", function() { infowindow_marker2.close(); });
   
   var image = "'.JURI::base().$marker1_image.'";
+	var image = {
+    url: "'.JURI::base().$marker1_image.'",
+    scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon', 14).','.$params->get('einsatzkarte_gmap_icon', 14).') 
+    };
   var myLatLng = new google.maps.LatLng("'.$marker1_lat.'","'.$marker1_lng.'");
   var marker1Marker = new google.maps.Marker({
       position: myLatLng,
@@ -470,7 +475,11 @@ function setMarkers(map, locations) {
   for (var i = 0; i < locations.length; i++) {
     var orgas = locations[i];
     var myLatLng = new google.maps.LatLng(orgas[1], orgas[2]);
-	var image = "'.JURI::base().'"+orgas[4];
+	var image = {
+    url: "'.JURI::base().'"+orgas[4],
+    scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon_orga', 24).','.$params->get('einsatzkarte_gmap_icon_orga', 24).') 
+    };
+
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -502,6 +511,7 @@ return $gmap; }
 	
 public static function getOsm($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[ [53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655] ]',$display_detail_popup='false',$standort,$display_map_route="true")
  {
+$params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='//<![CDATA[
 
 var map;
@@ -548,7 +558,7 @@ jumpTo(lon,lat,zoom);
 
 // Benutzte Marker Icons hinzufügen..
 icons = new Array();
-icons[4] = new Array("'.JURI::base().$marker1_image.'","28","28","0","1");
+icons[4] = new Array("'.JURI::base().$marker1_image.'","'.$params->get('einsatzkarte_gmap_icon', 24).'","'.$params->get('einsatzkarte_gmap_icon', 24).'","0","1");
 
 
 // Marker hinzufügen
@@ -560,7 +570,7 @@ setMarkers(map, orgas);
 function setMarkers(map, locations) {
    for (var i = 0; i < locations.length; i++) {
      var orgas = locations[i];
-	icons[i] = new Array("'.JURI::base().'"+orgas[4],"32","32","0","1");
+	icons[i] = new Array("'.JURI::base().'"+orgas[4],"'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","0","1");
 	 addMarker(layer_standort,orgas[2],orgas[1],orgas[0],false,i);
   } }
 

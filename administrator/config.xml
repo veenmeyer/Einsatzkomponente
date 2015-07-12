@@ -279,7 +279,7 @@
 						value="1">Anzeigen</option>
 	  		</field>
 			
-			<field name="detail_orga_image" 
+			<field name="einsatzkarte_orga_image" 
 				type="imagelist" 
 				default="haus_rot.png" label="Orga-Icon wählen :" 
 				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
@@ -289,6 +289,38 @@
 				hide_none="true" 
 				stripext="" 
 			/>
+	  <field
+			name="einsatzkarte_gmap_icon"
+			type="radio"
+			class="btn-group"
+			default="14"
+			label="Größe der Gmap-Icons :"
+			description="">
+			<option
+				value="14">14 x 14</option>
+			<option
+				value="24">24 x 24</option>
+			<option
+				value="32">32 x 32</option>
+			<option
+				value="48">48 x 48</option>
+	  </field>
+	  <field
+			name="einsatzkarte_gmap_icon_orga"
+			type="radio"
+			class="btn-group"
+			default="24"
+			label="Größe der Organisation-Icons :"
+			description="">
+			<option
+				value="14">14 x 14</option>
+			<option
+				value="24">24 x 24</option>
+			<option
+				value="32">32 x 32</option>
+			<option
+				value="48">48 x 48</option>
+	  </field>
 	  		<field
 				name="display_detail_einsatzgebiet"
 				type="radio"
@@ -1338,48 +1370,6 @@
 				value="0">Verbergen</option>
 			<option
 				value="1">Anzeigen</option>
-	  </field>
-			<field name="einsatzkarte_orga_image" 
-				type="imagelist" 
-				default="haus_rot.png" label="Orga-Icon wählen :" 
-				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-				directory="images/com_einsatzkomponente/images/map/icons/" 
-				exclude="index.html" 
-				hide_default="true" 
-				hide_none="true" 
-				stripext="" 
-			/>
-	  <field
-			name="einsatzkarte_gmap_icon"
-			type="radio"
-			class="btn-group"
-			default="14"
-			label="Größe der Gmap-Icons :"
-			description="">
-			<option
-				value="14">14 x 14</option>
-			<option
-				value="24">24 x 24</option>
-			<option
-				value="32">32 x 32</option>
-			<option
-				value="48">48 x 48</option>
-	  </field>
-	  <field
-			name="einsatzkarte_gmap_icon_orga"
-			type="radio"
-			class="btn-group"
-			default="24"
-			label="Größe der Organisation-Icons :"
-			description="">
-			<option
-				value="14">14 x 14</option>
-			<option
-				value="24">24 x 24</option>
-			<option
-				value="32">32 x 32</option>
-			<option
-				value="48">48 x 48</option>
 	  </field>
 		<field
 			name="spacer6456433"
