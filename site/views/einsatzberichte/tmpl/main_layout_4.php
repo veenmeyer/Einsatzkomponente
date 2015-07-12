@@ -171,6 +171,10 @@ if ($this->params->get('display_home_pagination')) :
 				<th class="eiko_th_image mobile_hide_image" width="">Bild</th>
 			   <?php $col =$col+1;?>
 			   <?php endif;?>
+			   <?php if ($this->params->get('display_home_counter','1')) : ?>
+				<th class="eiko_th_counter mobile_hide_counter" width="">Zugriffe</th>
+			   <?php $col =$col+1;?>
+			   <?php endif;?>
 			</tr>		   
            <?php endif;?>
            <?php endif;?>
@@ -286,6 +290,12 @@ if ($this->params->get('display_home_pagination')) :
 		   <?php endif;?>
            <?php endif;?>
            <?php endif;?>
+		   
+           <?php if ($this->params->get('display_home_counter','1')) : ?>
+		   <?php echo '<td class="mobile_hide_counter"">';?>
+		   <?php echo $item->counter;?>
+		   <?php echo '</td>';?>
+		   <?php endif;?>
 		   </tr>
            
            <!-- Zusatzinformation -->

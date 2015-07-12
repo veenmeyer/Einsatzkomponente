@@ -889,6 +889,19 @@
 				value="1">Anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_counter"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Zugriffe :"
+			description="Funktion nur beim Standard-Layout">
+			
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
 			name="display_home_orga"
 			type="radio"
 			class="btn-group"

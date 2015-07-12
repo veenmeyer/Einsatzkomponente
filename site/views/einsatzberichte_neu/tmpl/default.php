@@ -63,9 +63,11 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_VEHICLES', 'a.vehicles', $listDirn, $listOrder); ?>
 				</th> -->
+				<?php if ($this->params->get('display_home_counter','1')) : ?>
 				<th class='left mobile_hide_480 '>
 				<?php echo JHtml::_('grid.sort',  'Zugriffe', 'a.counter', $listDirn, $listOrder); ?>
 				</th>
+				<?php endif;?>
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
 				</th> -->
@@ -182,10 +184,14 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 
 					<?php echo $item->vehicles; ?>
 				</td> -->
+				
+				<?php if ($this->params->get('display_home_counter','1')) : ?>
 				<td class="mobile_hide_480 ">
 
 					<?php echo $item->counter; ?>
 				</td>
+				<?php endif; ?>
+				
 		<!--		<td>
 
 							<?php echo JFactory::getUser($item->created_by)->name; ?>				</td> -->
