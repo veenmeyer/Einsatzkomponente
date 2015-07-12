@@ -89,6 +89,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     </td>
   </tr>
 
+ <?php if( $this->item->date3>1) : ?>
   <tr>
     <td class="layout4_row_10" width="250px">Einsatzdauer:</td>
     <td class="layout4_row_10"><?php ?>
@@ -128,7 +129,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 		?>	
 	</td>
   </tr>  
-  
+ <?php endif;?>
+ 
   <tr>
     <td class="layout4_row_10" width="250px">Mannschaftsst&auml;rke:</td>
     <td class="layout4_row_10">
