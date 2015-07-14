@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `tickerkat` INT(10)  NOT NULL ,
 `auswahl_orga` TEXT NOT NULL ,
 `vehicles` TEXT NOT NULL ,
+`ausruestung` TEXT NOT NULL ,
 `status` VARCHAR(255)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
@@ -103,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_fahrzeuge` (
 `detail7_label` VARCHAR(255)  NOT NULL DEFAULT 'Detail7',
 `detail7` VARCHAR(255)  NOT NULL ,
 `department` TEXT NOT NULL ,
+`ausruestung` TEXT NOT NULL ,
 `link` VARCHAR(255)  NOT NULL ,
 `image` VARCHAR(255)  NOT NULL ,
 `desc` TEXT NOT NULL ,
@@ -110,6 +112,23 @@ CREATE TABLE IF NOT EXISTS `#__eiko_fahrzeuge` (
 `created_by` INT(11)  NOT NULL ,
 PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (
+`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+`asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+
+`name` VARCHAR(255)  NOT NULL ,
+`image` VARCHAR(255)  NOT NULL ,
+`beschreibung` TEXT NOT NULL ,
+`created_by` INT(11)  NOT NULL ,
+`checked_out` INT(11)  NOT NULL ,
+`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+`ordering` INT(11)  NOT NULL ,
+`state` TINYINT(1)  NOT NULL ,
+PRIMARY KEY (`id`)
+) DEFAULT COLLATE=utf8_general_ci;
+
 
 CREATE TABLE IF NOT EXISTS `#__eiko_alarmierungsarten` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,

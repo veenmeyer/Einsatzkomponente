@@ -51,6 +51,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 	public function save()
 	{
 		// Check for request forgeries.
+		echo 'upload_max_filesize: '.ini_get('upload_max_filesize'), "<br/>post_max_size: " , ini_get('post_max_size');
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		// Initialise variables.
 		$app	= JFactory::getApplication();
@@ -145,13 +146,15 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
         // Clear the profile id from the session.
         $app->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', null);
         // Redirect to the list screen.
-        $this->setMessage(JText::_('Item saved successfully'));
+        $this->setMessage(JText::_('Einsatzdaten erfolgreich gepeichert'));
         $menu = & JSite::getMenu();
         $item = $menu->getActive(); //print_r ($item);break;
 //echo 'View :'.JFactory::getApplication()->input->get('view').'<br/>';
 //echo 'Layout :'.JFactory::getApplication()->input->get('layout').'<br/>';
 //echo 'Task :'.JFactory::getApplication()->input->get('task').'<br/>';break;
-		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte', false));
+
+        //$this->setRedirect(JRoute::_($item->link, false));
+		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink', '').'', false));
 		// Flush the data from the session.
 		$app->setUserState('com_einsatzkomponente.edit.einsatzbericht.data', null);
 	}
@@ -161,7 +164,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		$menu = & JSite::getMenu();
         $item = $menu->getActive();
         $this->setMessage(JText::_('Einsatzeingabe abgebrochen'));
-		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte', false));
+		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink', '').'', false)); 
     }
     
 	public function remove()
@@ -239,15 +242,21 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		$user = JFactory::getUser();
 		$query = 'SELECT * FROM `#__eiko_einsatzberichte` WHERE `id` = "'.$cid.'" LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
 		$mailer = JFactory::getMailer();
 		$config = JFactory::getConfig();
+		
+		//$sender = array( 
+    	//$config->get( 'config.mailfrom' ),
+    	//$config->get( 'config.fromname' ) );
 		$sender = array( 
-    	$config->get( 'config.mailfrom' ),
-    	$config->get( 'config.fromname' ) );
+    	$user->email,
+    	$user->name );
+		
 		$mailer->setSender($sender);
 		
 		$user = JFactory::getUser();

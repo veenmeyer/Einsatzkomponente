@@ -10,9 +10,6 @@
 defined('_JEXEC') or die;
 
 
-//Load admin language file
-$lang = JFactory::getLanguage();
-$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 //print_r ($this->organisationen);
 
 //echo $this->selectedYear;
@@ -55,7 +52,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 	
 	echo '<div style="text-align:center;margin-bottom:20px;"><img src="'.JURI::Root().'images/com_einsatzkomponente/images/years/home'.$year.'.png" title="Eins&auml;tze '.$year_text.'" /></div>';
 
-?><form action="#" method=post><?php
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
+<?php
 	echo 'Jahr: ';
 
 if (!$this->params->get('anzeigejahr','0') and $this->params->get('display_filter_jahre','1')) : 
@@ -80,7 +79,6 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 	?><?php 
 	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
 	endif;?>
-	</form>
 </div>
 <?php // Filter ENDE   -------------------------------------------------------------------------------
 
@@ -171,6 +169,10 @@ if ($this->params->get('display_home_pagination')) :
 			   <?php endif;?>
 			   <?php if ($this->params->get('display_home_image')) : ?>
 				<th class="eiko_th_image mobile_hide_image" width="">Bild</th>
+			   <?php $col =$col+1;?>
+			   <?php endif;?>
+			   <?php if ($this->params->get('display_home_counter','1')) : ?>
+				<th class="eiko_th_counter mobile_hide_counter" width="">Zugriffe</th>
 			   <?php $col =$col+1;?>
 			   <?php endif;?>
 			</tr>		   
@@ -288,6 +290,12 @@ if ($this->params->get('display_home_pagination')) :
 		   <?php endif;?>
            <?php endif;?>
            <?php endif;?>
+		   
+           <?php if ($this->params->get('display_home_counter','1')) : ?>
+		   <?php echo '<td class="mobile_hide_counter"">';?>
+		   <?php echo $item->counter;?>
+		   <?php echo '</td>';?>
+		   <?php endif;?>
 		   </tr>
            
            <!-- Zusatzinformation -->
@@ -376,13 +384,13 @@ if ($this->params->get('display_home_pagination')) :
 
 <?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2013 by Ralf Meyer (<a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a>)</span></th>
+            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer (<a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a>)</span></th>
         </tr>
 	<?php endif; ?>
     
 </tfoot>
 </table>
-
+	</form>
 <?php echo $this->modulepos_1;?>
 
 

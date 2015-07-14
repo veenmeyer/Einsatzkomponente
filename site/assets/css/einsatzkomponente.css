@@ -5,6 +5,9 @@
 /*CSS-Anpassungen für J2.5  ENDE*/
 
 
+
+.eiko_counter_detail {float:right;margin-bottom:5px;}
+
 .thumbnail {
 }
 
@@ -429,8 +432,7 @@ h4, h5 {
 	padding: 5px !important; 
 	background-color:#ededed !important;  
 	margin: 0 0 10px 0 !important;
-	line-height:14px !important;
-	font-size:smaller !important;
+	line-height:18px !important;
 }
 
 .eiko_content_2 { 
@@ -581,12 +583,24 @@ h4, h5 {
 	}
 	
 .eiko_gmap_toolbar {
-	font-size:9px !important;
+	font-size:8px !important;
+	float:left;
+	}
+.eiko_gmap_toolbar_button {
+	margin-left:5px;	
+	}
+.eiko_gmap_toolbar_icon {
+	width:12px;	
+	height:12px;
+	}
+.eiko_gmap_count {
+	margin-left:10px;
+	font-weight:bold;
 	}
 .eiko_gmap_sidebar {
 	font-size:12px;
 	padding-left:10px;
-	margin-left:10px;
+	margin-left:10px; 
 	width:99%; 
 	overflow:auto;
 	line-height:14px;
@@ -661,6 +675,14 @@ padding-right:5px;
 .eiko_td_zusatz_main_1 {}
 .eiko_td_gmap_main_1 {}
 .eiko_td_buttons_main_1 {white-space: nowrap;}
+
+.eiko_icon {width:30px;}
+.eiko_nowrap {white-space: nowrap;}
+
+.eiko_distance_road {font-size:smaller;}
+
+
+
 
 
 

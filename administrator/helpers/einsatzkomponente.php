@@ -27,6 +27,8 @@ class EinsatzkomponenteHelper
 		$version = new JVersion;
         if ($version->isCompatible('3.0')) :
 
+			$params = JComponentHelper::getParams('com_einsatzkomponente');
+
 			  JHtmlSidebar::addEntry(
 				  JText::_('COM_EINSATZKOMPONENTE_TITLE_KONTROLLCENTER'),
 				  'index.php?option=com_einsatzkomponente&view=kontrollcenter',
@@ -57,6 +59,13 @@ class EinsatzkomponenteHelper
 				  'index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge',
 				  $vName == 'einsatzfahrzeuge'
 			  );
+			  if ($params->get('eiko','0')) :
+        		JHtmlSidebar::addEntry(
+			JText::_('COM_EINSATZKOMPONENTE_TITLE_AUSRUESTUNGEN'),
+			'index.php?option=com_einsatzkomponente&view=ausruestungen',
+			$vName == 'ausruestungen'
+		);
+			  endif;
 			  JHtmlSidebar::addEntry(
 				  JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'),
 				  'index.php?option=com_einsatzkomponente&view=organisationen',
@@ -67,7 +76,6 @@ class EinsatzkomponenteHelper
 				  'index.php?option=com_einsatzkomponente&view=einsatzbildmanager',
 				  $vName == 'einsatzbildmanager'
 			  );
-			  $params = JComponentHelper::getParams('com_einsatzkomponente');
 			  if ($params->get('gmap_action','0')) :
 			  JHtmlSidebar::addEntry(
 				  JText::_('COM_EINSATZKOMPONENTE_TITLE_GMAPKONFIGURATIONEN'),
@@ -128,7 +136,7 @@ class EinsatzkomponenteHelper
 
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
+		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.ausruestung,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -137,7 +145,7 @@ class EinsatzkomponenteHelper
 	
     public static function letze_x_einsatzdaten ($x) {
 		// Funktion : letze x Einsatzdaten laden
-		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
+		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.ausruestung,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -363,6 +371,7 @@ class EinsatzkomponenteHelper
 	
 public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
  {
+$params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='function initialize() {
 	
   var isDraggable = window.innerWidth > 680 ? true : false;
@@ -406,6 +415,10 @@ $gmap ='function initialize() {
 google.maps.event.addListener(map, "click", function() { infowindow_marker2.close(); });
   
   var image = "'.JURI::base().$marker1_image.'";
+	var image = {
+    url: "'.JURI::base().$marker1_image.'",
+    scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon', 14).','.$params->get('einsatzkarte_gmap_icon', 14).') 
+    };
   var myLatLng = new google.maps.LatLng("'.$marker1_lat.'","'.$marker1_lng.'");
   var marker1Marker = new google.maps.Marker({
       position: myLatLng,
@@ -448,7 +461,7 @@ var request = {
 		if (status == google.maps.DirectionsStatus.OK) 
 			{
 				directionsDisplay.setDirections(response);
-	distance = "Der Anfahrtsweg betrug ca. "+response.routes[0].legs[0].distance.text;
+	distance = "(Der Anfahrtsweg betrug ca. "+response.routes[0].legs[0].distance.text+")";
 				/*distance += "<br/>Fahrtzeit ca. "+response.routes[0].legs[0].duration.text;*/
 				document.getElementById("distance_road").innerHTML = distance;
 							}
@@ -462,7 +475,11 @@ function setMarkers(map, locations) {
   for (var i = 0; i < locations.length; i++) {
     var orgas = locations[i];
     var myLatLng = new google.maps.LatLng(orgas[1], orgas[2]);
-	var image = "'.JURI::base().'"+orgas[4];
+	var image = {
+    url: "'.JURI::base().'"+orgas[4],
+    scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon_orga', 24).','.$params->get('einsatzkarte_gmap_icon_orga', 24).') 
+    };
+
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -494,6 +511,7 @@ return $gmap; }
 	
 public static function getOsm($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[ [53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655] ]',$display_detail_popup='false',$standort,$display_map_route="true")
  {
+$params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='//<![CDATA[
 
 var map;
@@ -540,7 +558,7 @@ jumpTo(lon,lat,zoom);
 
 // Benutzte Marker Icons hinzufügen..
 icons = new Array();
-icons[4] = new Array("'.JURI::base().$marker1_image.'","28","28","0","1");
+icons[4] = new Array("'.JURI::base().$marker1_image.'","'.$params->get('einsatzkarte_gmap_icon', 24).'","'.$params->get('einsatzkarte_gmap_icon', 24).'","0","1");
 
 
 // Marker hinzufügen
@@ -552,7 +570,7 @@ setMarkers(map, orgas);
 function setMarkers(map, locations) {
    for (var i = 0; i < locations.length; i++) {
      var orgas = locations[i];
-	icons[i] = new Array("'.JURI::base().'"+orgas[4],"32","32","0","1");
+	icons[i] = new Array("'.JURI::base().'"+orgas[4],"'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","0","1");
 	 addMarker(layer_standort,orgas[2],orgas[1],orgas[0],false,i);
   } }
 
@@ -622,22 +640,17 @@ return $gmap; }
 	
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	
-	$navbar  ='<nav>';
-	//$navbar .='<ul class="pager">';
-	//$navbar .='<ul class="pagination pagination-lg">';
-	//$navbar .='<ul class="pagination">';
-	$navbar .='<ul class="pagination pagination-sm">';
+	$navbar  ='';
+	$navbar .='<div class="btn-group-justified">';
 	
 	if( $prev_id) : 
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="eiko_btn_2" title="">';
-    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id.'" class="eiko_btn_2" title="'.$prev_id.'">';
-    $navbar .='<strong>Zurück</strong></a></li>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn eiko_btn_2" title="">';
+    $navbar .='<strong>Zurück</strong></a>';
 	endif; 
 	
 	if( $next_id) :
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class="eiko_btn_2" title="">';
-    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id.'" class="eiko_btn_2" title="'.$next_id.'">';
-    $navbar .='<strong>Vor</strong></a></li>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class=" btn eiko_btn_2" title="">';
+    $navbar .='<strong>Vor</strong></a>';
 	endif; ?>
     
     <?php if ($menu_link=='&Itemid=') : 
@@ -646,20 +659,17 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<li><a href="'.$menu_link.'" class="btn-details"><strong>Übersicht</strong></a></li>';
-    //$navbar .='<a href="'.$menu_link.'" class="btn-details"><span><strong>Übersicht</strong></span></a>';
+    $navbar .='<a href="'.$menu_link.'" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
 	endif;
 	if( !$menu_link) :
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="eiko_btn_2"><strong>Übersicht</strong></a></li>';
-    //$navbar .='<a href="'.JURI::base().'index.php?option=com_einsatzkomponente&view=einsatzberichte" class="eiko_btn_2"><span><strong>Übersicht</strong></span></a>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht.'.$id)):
-    $navbar .='<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class="eiko_btn_2">';
-    $navbar .='<strong>Editieren</strong></a></li>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
+    $navbar .='<strong>Editieren</strong></a>';
     endif;
 	
-	$navbar .='</ul>';
-	$navbar .='</nav>';
+	$navbar .='</div>';
 		return $navbar;
 	}
 
@@ -727,7 +737,7 @@ endif;
 
 		// Check for request forgeries
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
+		$user = JFactory::getUser();
 		// Get items to remove from the request.
 		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
 		
@@ -753,9 +763,14 @@ endif;
 	
 		$mailer = JFactory::getMailer();
 		$config = JFactory::getConfig();
+		
+		//$sender = array( 
+    	//$config->get( 'config.mailfrom' ),
+    	//$config->get( 'config.fromname' ) );
 		$sender = array( 
-    	$config->get( 'config.mailfrom' ),
-    	$config->get( 'config.fromname' ) );
+    	$user->email,
+    	$user->name );
+		
 		$mailer->setSender($sender);
 		
 		$user = JFactory::getUser();

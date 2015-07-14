@@ -17,9 +17,6 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 JHtml::_('behavior.framework', true);
 
 
-// Einstellungen
-$maxZoom = 14;
-
 
 ?>
 <script> 
@@ -80,7 +77,7 @@ $gmapconfig = $this->gmap_config;
 	  		$n=0;
 	  		for($i = 0; $i < count($orga); $i++) {
 			$orga_image 	= $orga[$i]->gmap_icon_orga;
-			if (!$orga_image) : $orga_image= 'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('detail_orga_image','haus_rot.png'); endif;
+			if (!$orga_image) : $orga_image= 'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png'); endif;
 		  	if($i==$n-1){
 			$organisationen=$organisationen.'["'.$orga[$i]->name.'",'.$orga[$i]->gmap_latitude.','.$orga[$i]->gmap_longitude.','.$i.',"'.$orga_image.'"]';
 		 	}else {
@@ -91,7 +88,7 @@ $gmapconfig = $this->gmap_config;
 	  		$organisationen=substr($organisationen,0,strlen($organisationen)-1);
 	  		$organisationen=$organisationen.' ];';
 		else:
-			$organisationen	 = '[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]';	
+			$organisationen	 = '[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'"],["",1,1,0,"images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'"] ]';	
 			endif;
 
 //print_r ($organisationen);break;
@@ -138,13 +135,14 @@ $cat_count    .= 'cat_count("'.$pie[$i]->data1.'");';
 
 //$catbox .= '<span class="label"><input type="checkbox" id="'.$pie[$i]->data1.'box" onClick="boxclick(this,&#39;'.$pie[$i]->data1.'&#39;)" />&nbsp;&nbsp;<img src="'.JURI::base().$pie[$i]->icon.'" width="16px" height="16px" /><strong>'.$pie[$i]->data1.'</strong> </span> ';
 
-$catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs " onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" width="32px" height="32px" />&nbsp;'.$pie[$i]->einsatzart.' 
-<span class="pull-right" style ="font-size:9px;" ><span id="'.$pie[$i]->data1.'count"></span> / '.$pie[$i]->total.' Einsätze</span></button></label></div>';
+//$catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs " onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" width="32px" height="32px" />&nbsp;'.$pie[$i]->einsatzart.'<span class="pull-right" style ="font-size:9px;" ><span class="eiko_gmap_count" id="'.$pie[$i]->data1.'count"></span> / '.$pie[$i]->total.' Einsätze</span></button></label></div>';
+
+$catbox .= '<div class="eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs eiko_gmap_toolbar_button" onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" class="eiko_gmap_toolbar_icon" />&nbsp;'.$pie[$i]->einsatzart.'<span class="pull-right" style ="font-size:8px;" ><span class="eiko_gmap_count" id="'.$pie[$i]->data1.'count"></span> / '.$pie[$i]->total.' Einsätze</span></button></label></div>';
 
 $i++; 
 } 
 if ($this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
-$catbox .= '<div class="btn-group btn-group-xs eiko_gmap_toolbar"><label for="area"><button type="button" class="btn btn-default btn-xs" onClick="togglearea()" id="div_area"><input type="checkbox" class="eiko_gmap_checkbox" id="area" onClick="togglearea()" checked/>&nbsp;&nbsp;<img src="'.JURI::base().'images/com_einsatzkomponente/images/map/icons/haus_rot.png" width="32px" height="32px" />Einsatzgebiet<br/>anzeigen</button></label></div>';
+$catbox .= '<div class="eiko_gmap_toolbar"><label for="area"><button type="button" class="btn btn-default btn-xs eiko_gmap_toolbar_button" onClick="togglearea()" id="div_area"><input type="checkbox" class="eiko_gmap_checkbox" id="area" onClick="togglearea()" checked/>&nbsp;&nbsp;<img src="'.JURI::base().'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'" class="eiko_gmap_toolbar_icon" />Einsatzgebiet anzeigen</button></label></div>';
 endif;
 if (!$this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
 $catbox .= '';
@@ -369,18 +367,16 @@ togglearea = function(opt_enable) {
 
   function initialize() {
     var latlng = new google.maps.LatLng(<?php echo $gmapconfig->start_lat;?>, <?php echo $gmapconfig->start_lang;?>);
-	var isDraggable = window.innerWidth > 680 ? true : false;
-	var pan = window.innerWidth > 680 ? false : true;
 
 	var myOptions = {
-		  maxZoom: <?php echo $maxZoom;?>,
-		  zoom: <?php echo $gmapconfig->gmap_zoom_level;?>,
+		  maxZoom: <?php echo $this->params->get('display_einsatzkarte_max_zoom_level', 14);?>,
+		  zoom: <?php echo $this->params->get('display_einsatzkarte_zoom_level', 14);?>,
 		  center: latlng,
 		  mapTypeId: google.maps.MapTypeId.<?php echo $gmapconfig->gmap_onload ;?>,
           mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
 		  mapTypeControl: true,
-		  panControl: pan,
-	      draggable: isDraggable,
+		  panControl: false,
+	      draggable: true,
           scrollwheel: false,
           disableDoubleClickZoom: true,
      	  streetViewControl: false,

@@ -34,6 +34,18 @@
 					<option
 						value="1">Ja</option>
 	  		</field>
+	  		<field
+				name="titelbild_auto"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="Titelbild Automatisch :"
+				description="Soll das Titelbild automatisch gesetzt werden, wenn Bilder hochgeladen werden ?">
+					<option
+						value="0">Nein</option>
+					<option
+						value="1">Ja</option>
+	  		</field>
 
 		<field
 			name="spacer3"
@@ -189,34 +201,7 @@
 		class="alert alert-info" 
 		description=""
 		/>	
-			<field name="detail_map_height" 
-				type="text" 	
-				default="250px" 
-				label="Höhe der Karte (Detailansicht) :" 
-				description="Bitte nur so angeben : z.b. 250px !!" 
-			/>
 			
-			<field
-				name="display_map_route"
-				type="radio"
-				class="btn-group"
-				default="true"
-				label="Streckenverlauf :"
-				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
-					<option
-						value="false">Aus</option>
-					<option
-						value="true">An</option>
-			</field>
-			<field 
-				name="detail_gmap_zoom_level" 
-				type="integer" 
-				default="12" 
-				label="Zoom-Level" 
-				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
-				first="1" 
-				last="18" 
-				step="1" />
 				
 			<field
 				name="detail_gmap_onload"
@@ -230,18 +215,6 @@
            			<option value="SATELLITE">Satellitenkarte</option>
 	  		</field>
 			
-	  		<field
-				name="display_detail_einsatz_marker"
-				type="radio"
-				class="btn-group"
-				default="1"
-				label="Einsatz-Marker :"
-				description="Hier können Sie einstellen, ob die Einsatzort-Markierung generell angezeigt werden soll.">
-					<option
-						value="0">Aus</option>
-					<option
-						value="1">An</option>
-	  		</field>
 
 			<!--<field name="detail_pointer1_image" 
 				type="imagelist" 
@@ -267,7 +240,7 @@
 						value="1">Anzeigen</option>
 	  		</field>
 			
-			<field name="detail_orga_image" 
+			<field name="einsatzkarte_orga_image" 
 				type="imagelist" 
 				default="haus_rot.png" label="Orga-Icon wählen :" 
 				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
@@ -277,18 +250,38 @@
 				hide_none="true" 
 				stripext="" 
 			/>
-	  		<field
-				name="display_detail_einsatzgebiet"
-				type="radio"
-				class="btn-group"
-				default="1"
-				label="Einsatzgebiet :"
-				description="Hier können Sie einstellen, ob das Einsatzgebiet auf der Karte angezeigt werden sollen.">
-					<option
-						value="0">Verbergen</option>
-					<option
-						value="1">Anzeigen</option>
-	  		</field>
+	  <field
+			name="einsatzkarte_gmap_icon"
+			type="radio"
+			class="btn-group"
+			default="14"
+			label="Größe der Gmap-Icons :"
+			description="">
+			<option
+				value="14">14 x 14</option>
+			<option
+				value="24">24 x 24</option>
+			<option
+				value="32">32 x 32</option>
+			<option
+				value="48">48 x 48</option>
+	  </field>
+	  <field
+			name="einsatzkarte_gmap_icon_orga"
+			type="radio"
+			class="btn-group"
+			default="24"
+			label="Größe der Organisation-Icons :"
+			description="">
+			<option
+				value="14">14 x 14</option>
+			<option
+				value="24">24 x 24</option>
+			<option
+				value="32">32 x 32</option>
+			<option
+				value="48">48 x 48</option>
+	  </field>
 	  		<field
 				name="display_detail_popup"
 				type="radio"
@@ -301,7 +294,18 @@
 					<option
 						value="true">Anzeigen</option>
 	  		</field>
-
+<field name="note_geocode" 
+		type="note" 
+		label="Hier können Sie einen Ort festlegen, der bei der Geocode-Suche berücksichtigt wird :" 
+		class="alert alert-info" 
+		description=""
+		/>	
+			<field name="ort_geocode" 
+				type="text" 	
+				default="" 
+				label="Ort oder Postleitzahl :" 
+				description="Es kann dann allerdings nicht in einem anderem Ort mehr gesucht werden !" 
+			/>
 </fieldset>
 	
 <!--Weiterleitungen-->
@@ -791,7 +795,9 @@
 			<option
 				value="2">Datum (Text und Uhrzeit)</option>
 			<option
-				value="1">Kalendar-Icon</option>
+				value="1">Kalendar-Blatt</option>
+			<option
+				value="3">Kalendar-Blatt (und Uhrzeit als Text)</option>
 	  </field>
 	  <field
 			name="display_home_monat"
@@ -864,6 +870,19 @@
 				value="1">Anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_counter"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Zugriffe :"
+			description="Funktion nur beim Standard-Layout">
+			
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
 			name="display_home_orga"
 			type="radio"
 			class="btn-group"
@@ -911,6 +930,19 @@
 				value="0">Ausblenden</option>
 			<option
 				value="1">Anzeigen</option>
+	  </field>
+	  <field
+			name="display_home_links_2"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Link zum Detailbericht auf Einsatzart :"
+			description="Funktion nur beim Standard-Layout und Layout1">
+			
+			<option
+				value="0">Nein</option>
+			<option
+				value="1">Ja</option>
 	  </field>
 	  <field
 			name="display_home_info"
@@ -1069,12 +1101,12 @@
 			class="btn-group"
 			default="1"
 			label="Organisationen :"
-			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Layout2)">
+			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Layout1)">
 			
 			<option
-				value="0">ohne Link</option>
+				value="0">mit Link (nur extern)</option>
 			<option
-				value="1">mit Link</option>
+				value="1">mit Link (intern+extern)</option>
 	  </field>
 	  
 	  <field
@@ -1083,12 +1115,12 @@
 			class="btn-group"
 			default="1"
 			label="Fahrzeuge :"
-			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Layout2)">
+			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Layout1)">
 			
 			<option
-				value="0">ohne Link</option>
+				value="0">mit Link (nur extern)</option>
 			<option
-				value="1">mit Link</option>
+				value="1">mit Link (intern+extern)</option>
 	  </field>
 	  
 	  <field
@@ -1098,6 +1130,19 @@
 			default="1"
 			label="Fahrzeuge-Bilder :"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge auch als Bild dargestellt werden sollen. (nur im Layout2)">
+			
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
+			name="display_detail_ausruestung"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Ausrüstung :"
+			description="Hier können Sie einstellen, ob die eingesetzte Ausrüstung angezeigt werden soll.">
 			
 			<option
 				value="0">Verbergen</option>
@@ -1116,6 +1161,70 @@
 			description="Thumbsbreite der Bildergallerie. z.b. 100px !!" 
 			/>
 			
+
+		<field
+			name="spacer13"
+			type="spacer"
+			hr="true"
+		/>
+			<field 
+				name="detail_gmap_zoom_level" 
+				type="integer" 
+				default="12" 
+				label="Zoom-Level" 
+				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
+				first="1" 
+				last="18" 
+				step="1" />
+			<field name="detail_map_height" 
+				type="text" 	
+				default="250px" 
+				label="Höhe der Karte (Detailansicht) :" 
+				description="Bitte nur so angeben : z.b. 250px !!" 
+			/>
+	  		<field
+				name="display_detail_einsatz_marker"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="Einsatz-Marker :"
+				description="Hier können Sie einstellen, ob die Einsatzort-Markierung generell angezeigt werden soll.">
+					<option
+						value="0">Aus</option>
+					<option
+						value="1">An</option>
+	  		</field>
+			<field
+				name="display_map_route"
+				type="radio"
+				class="btn-group"
+				default="true"
+				label="Streckenverlauf :"
+				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
+					<option
+						value="false">Aus</option>
+					<option
+						value="true">An</option>
+			</field>
+	  		<field
+				name="display_detail_einsatzgebiet"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="Einsatzgebiet :"
+				description="Hier können Sie einstellen, ob das Einsatzgebiet auf der Karte angezeigt werden sollen.">
+					<option
+						value="0">Verbergen</option>
+					<option
+						value="1">Anzeigen</option>
+	  		</field>
+
+<field name="note_detail_map" 
+		type="note" 
+		label="Um weitere Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
+		class="alert alert-warning" 
+		description=""
+		/>	
 		<field
 			name="spacer546547"
 			type="spacer"
@@ -1144,19 +1253,6 @@
 			buttons="true"
 			hide="readmore,pagebreak"
             filter="raw" /> 
-
-		<field
-			name="spacer13"
-			type="spacer"
-			hr="true"
-		/>
-
-<field name="note_detail_map" 
-		type="note" 
-		label="Um Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
-		class="alert alert-warning" 
-		description=""
-		/>	
 	  
 	</fieldset>
 	
@@ -1233,6 +1329,36 @@
 				label="Höhe der Karte :" 
 				description="Bitte nur so angeben : z.b. 450 (ohne px) !!" 
 			/>
+	  <field name="display_einsatzkarte_zoom_level" type="list" default="14" label="Zoom-Level :" description="">
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+	  </field>
+	  
+	  <field name="display_einsatzkarte_max_zoom_level" type="list" default="14" label="Max-Zoom-Level :" description="Maximal  durch User möglicher Zoom">
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+	  </field>
+
 	  <field
 			name="display_einsatzkarte_organisationen"
 			type="radio"
@@ -1244,48 +1370,6 @@
 				value="0">Verbergen</option>
 			<option
 				value="1">Anzeigen</option>
-	  </field>
-			<field name="einsatzkarte_orga_image" 
-				type="imagelist" 
-				default="haus_rot.png" label="Orga-Icon wählen :" 
-				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-				directory="images/com_einsatzkomponente/images/map/icons/" 
-				exclude="index.html" 
-				hide_default="true" 
-				hide_none="true" 
-				stripext="" 
-			/>
-	  <field
-			name="einsatzkarte_gmap_icon"
-			type="radio"
-			class="btn-group"
-			default="14"
-			label="Größe der Gmap-Icons :"
-			description="">
-			<option
-				value="14">14 x 14</option>
-			<option
-				value="24">24 x 24</option>
-			<option
-				value="32">32 x 32</option>
-			<option
-				value="48">48 x 48</option>
-	  </field>
-	  <field
-			name="einsatzkarte_gmap_icon_orga"
-			type="radio"
-			class="btn-group"
-			default="24"
-			label="Größe der Organisation-Icons :"
-			description="">
-			<option
-				value="14">14 x 14</option>
-			<option
-				value="24">24 x 24</option>
-			<option
-				value="32">32 x 32</option>
-			<option
-				value="48">48 x 48</option>
 	  </field>
 		<field
 			name="spacer6456433"

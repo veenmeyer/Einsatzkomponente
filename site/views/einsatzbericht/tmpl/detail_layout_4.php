@@ -89,6 +89,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     </td>
   </tr>
 
+ <?php if( $this->item->date3>1) : ?>
   <tr>
     <td class="layout4_row_10" width="250px">Einsatzdauer:</td>
     <td class="layout4_row_10"><?php ?>
@@ -128,7 +129,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 		?>	
 	</td>
   </tr>  
-  
+ <?php endif;?>
+ 
   <tr>
     <td class="layout4_row_10" width="250px">Mannschaftsst&auml;rke:</td>
     <td class="layout4_row_10">
@@ -174,8 +176,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$data[] = '<li style="margin:0;"><a href="'.$results[0]->link.'" target="_blank" alt="'.$results[0]->link.'">'.$results[0]->name.'</a></li>';
 					endif;
 					else:
+					if ($results[0]->link) :
+					$data[] = '<li style="margin:0;"><a href="'.$results[0]->link.'" target="_blank" alt="'.$results[0]->link.'">'.$results[0]->name.'</a></li>';
+					else:
 					$data[] = '<li style="margin:0;">'.$results[0]->name.'</li>';
 					endif;
+					endif;
+
 										
 				endforeach;
 				$this->item->auswahl_orga = implode('',$data); ?>
@@ -206,6 +213,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$results = $db->loadObjectList();
 					$data[] = $results[0]->name;
 					if ($results[0]->state == '2'): $results[0]->name = $results[0]->name.' (a.D.)';endif;
+					
 					if ($this->params->get('display_detail_fhz_links','1')) :
 					if (!$results[0]->link) :
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self"><img width="90px" style="margin-top:15px;"  src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>&nbsp;&nbsp;<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</span>';					
@@ -213,10 +221,15 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
 					endif;
 					else:
+					
+					if ($results[0]->link) :
+					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
+					else:
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" />&nbsp;&nbsp;'.$results[0]->name.'</span>';
 					endif;
-										
-				endforeach;
+					endif;
+
+					endforeach;
 				$this->item->vehicles = implode(', ',$data); 
 				$vehicles_images = implode(' ',$vehicles_images); 
 				$vehicles_list = implode('',$vehicles_list); ?>

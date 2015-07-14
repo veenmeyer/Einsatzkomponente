@@ -21,21 +21,20 @@ $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
-
- 
 $app	= JFactory::getApplication();
 $params = $app->getParams('com_einsatzkomponente');
 $gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 
 
 // Daten aus der Bilder-Galerie holen 
-if (!$this->item->id == 0)
-	{
+if (!$this->item->id == 0) :
+if ($params->get('eiko')) : 
+
 	$db = JFactory::getDBO();
 	$query = 'SELECT id, thumb, comment FROM `#__eiko_images` WHERE `report_id`="'.$this->item->id.'" AND `state`="1" ORDER BY `ordering` ASC';
 	$db->setQuery($query);
 	$rImages = $db->loadObjectList();
-	}
+    endif;endif;
 	
 // Import CSS
 $document = JFactory::getDocument();
@@ -156,7 +155,42 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 						jQuery('#jform_vehicles option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});
-				</script>	
+				</script>
+				
+			<div class="control-group hide_ausruestung">
+				<div class="control-label line"><?php echo $this->form->getLabel('ausruestung'); ?></div>
+				<div class="controls hideme"><?php echo $this->form->getInput('ausruestung'); ?></div>
+				<?php if (!$params->get('eiko','0')) : ?>
+				<style>
+				.hideme {display:none;}
+				.line {text-decoration: line-through;}
+				</style>
+				<?php endif;?>
+			</div>
+				<?php if (!$params->get('display_detail_ausruestung','1')) : ?>
+				<style>
+				.hide_ausruestung {display:none;}
+				</style>
+				<?php endif;?>
+			
+			<?php
+				foreach((array)$this->item->ausruestung as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="ausruestung" name="jform[ausruestunghidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>
+			<script type="text/javascript">
+				jQuery.noConflict();
+				jQuery('input:hidden.ausruestung').each(function(){
+					var name = jQuery(this).attr('name');
+					if(name.indexOf('auswahlorga_hidden')){
+						jQuery('#jform_ausruestung option[value="'+jQuery(this).val()+'"]').attr('selected',true);
+					}
+				});
+			</script>			
+   
+				
            </div>			
 <!--			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('department'); ?></div>
@@ -165,10 +199,6 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 -->	
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Einsatzbericht :</h1>
-			<div class="control-group" style="height:100px;">
-				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
-			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('summary'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('summary'); ?></div>
@@ -177,7 +207,82 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="control-label"><?php echo $this->form->getLabel('desc'); ?></div>
 				<br/><div class="controls"><?php echo $this->form->getInput('desc'); ?></div>
 			</div>
-          	</div>  
+          	</div> 
+			
+<script>
+		jQuery.noConflict();
+        jQuery(function(){
+            jQuery('#add-file-field').click(function(){
+
+            jQuery("#text").append('<div class="added-field"><input name="data[]" type="file"/><input type="button" class="remove-btn" value="entfernen"></div>');
+            });
+            jQuery('.remove-btn').live('click',function(){
+            jQuery(this).parent().remove();
+            });
+			
+});
+</script>
+
+    		<div class="fltlft well" style="width:80%;">
+    		<br/><h1>Einsatzbilder :</h1>
+			<div class="control-group" style="height:100px;">
+			Bildupload für Titelbild:
+				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
+			</div>
+			
+			<?php if ($params->get('eiko')) : ?>
+			<div class="control-group" style="height:100px;">
+			Bilderupload für Bildergalerie:
+			<div id="text">
+            <div ><input multiple class="" name="data[]" id="file" type="file"/></div>
+            <!-- This is where the new file field will appear -->
+			</div>
+
+		    <br/><input class="btn btn-default btn-xs dropdown-toggle" type="button" id="add-file-field" name="add" value="weiteres Bild einzelnd hinzufügen" />
+        <!-- Here u can add image for add button(Like Below) just call the id="add-file-field" into ur image tag thats it..-->
+        <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
+		<!--http://www.fyneworks.com/jquery/multifile/-->
+			</div>
+		<?php else:?>	
+			<div class="control-group" style="height:100px;">
+			Bilderupload für Bildergalerie:
+			<div id="text">
+            <div ><input title ="Diese Funktion ist für Premiumbenutzer freigeschaltet" multiple class="" name="data[]" id="file"  disabled type="file"/></div>
+			<span style="font-weight:bold;color:#ff0000;">Diese Funktion steht nur für Premiumbenutzer zur Verfügung.</span>
+			</div>
+
+		    <br/><input class="btn btn-default btn-xs dropdown-toggle"  disabled type="button" id="add-file-field" name="add" value="weiteres Bild einzelnd hinzufügen" />
+			</div>
+		<?php endif;?>		
+			</div>
+<?php if (!$this->params->get('eiko')) : ?>
+<?php if (!$this->item->id == 0 && count($rImages)>'0' ): ?>
+	<div class="fltlft well" style="width:80%;">
+        <table>
+        
+  			<ul class="thumbnails inline">
+			<?php 
+			for ($i = 0;$i < count($rImages);++$i) {
+			$fileName = JURI::base().$rImages[$i]->thumb;
+			?>   
+            <li class="span2">  
+            <div class="thumbnail">
+            <a href="index.php?option=com_einsatzkomponente&task=einsatzbilderbearbeiten.edit&id=<?php echo $rImages[$i]->id;?>" target="_self" class="thumbnail" title ="<?php echo $rImages[$i]->comment;?>">
+			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
+            </a>
+            <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
+            <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
+            </div>
+            </li>
+			<?php 	} ?>
+            </ul>
+       </table>
+	</div>
+<?php endif;?>
+<?php endif;?>
+
+
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Quelle oder weiterführende Informationen :</h1>
 			<div class="control-group">
@@ -222,32 +327,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			</div>
  			<?php  endif; ?>
             
-            <!--Slider für Bildergalerie-->
             
-<?php if (!$this->item->id == 0 && count($rImages)>'0' )	{ ?>
-	<div class="fltlft well" style="width:80%;">
-    <br/><h1>Einsatzbilder :</h1>
-        <table>
-        
-			<?php 
-			for ($i = 0;$i < count($rImages);++$i) {
-			$fileName = '../'.$rImages[$i]->thumb;
-			?>   
-  			<ul class="thumbnails inline">
-            <li class="span2">  
-            <div class="thumbnail">
-            <a href="index.php?option=com_einsatzkomponente&task=einsatzbilderbearbeiten.edit&id=<?php echo $rImages[$i]->id;?>" target="_self" class="thumbnail" title ="<?php echo $rImages[$i]->comment;?>">
-			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
-            </a>
-            <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
-            <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
-            </div>
-            </li>
-			<?php 	} ?>
-            </ul>
-       </table>
-	</div>
-<?php }?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
@@ -264,6 +344,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			<button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
 			<?php echo JText::_('or'); ?>
 			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
+			<input type='hidden' name="action" value="Filedata" />
 			<input type="hidden" name="option" value="com_einsatzkomponente" />
 			<input type="hidden" name="task" value="einsatzbericht.save" />
 			<?php echo JHtml::_('form.token'); ?>
@@ -280,7 +361,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 
 	  
 function codeAddress2() {
-    var address = document.getElementById("jform_address").value;
+    var address = document.getElementById("jform_address").value+"<?php echo ' '.$params->get('ort_geocode','');?>";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);

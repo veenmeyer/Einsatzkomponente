@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
     <name>com_einsatzkomponente</name>
-    <creationDate>2015-05-11</creationDate>
-    <copyright>Copyright (C) 2013 by Ralf Meyer. All rights reserved.</copyright>
+    <creationDate>2015-07-12</creationDate>
+    <copyright>Copyright (C) 2015 by Ralf Meyer. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Ralf Meyer</author>
     <authorEmail>webmaster@feuerwehr-veenhusen.de</authorEmail>
     <authorUrl>http://einsatzkomponente.de</authorUrl>
-    <version>3.07_beta</version>
+    <version>3.07</version>
 	
     <description>
             <![CDATA[
 			<h1>Einsatzkomponente</h1><h3>für das Joomla-CMS</h3>
 			<div style="clear: both;"></div>
-			<p>Copyright (C) 2014 Ralf Meyer</p>
+			<p>Copyright (C) 2015 Ralf Meyer</p>
 			<p>Website: <a href='http://www.einsatzkomponente.de'>www.einsatzkomponente.de</a></p>
 			]]>
 	</description>

@@ -50,9 +50,9 @@ class EinsatzkomponenteViewEinsatzfahrzeug extends JViewLegacy {
                 throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
             }
         }
-        if($this->item->state === '0') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'0'); endif;
+        if(isset($this->item->state) === '0') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'0'); endif;
         //if($this->item->state === '2') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'2'); endif;
-        if($this->item->state === '-2') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'-2'); endif;
+        if(isset($this->item->state) === '-2') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'-2'); endif;
         
         $this->_prepareDocument();
         parent::display($tpl);

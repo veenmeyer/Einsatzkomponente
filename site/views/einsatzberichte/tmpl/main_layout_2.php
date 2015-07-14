@@ -9,9 +9,6 @@
 // no direct access
 defined('_JEXEC') or die;
 
-//Load admin language file
-$lang = JFactory::getLanguage();
-$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 //print_r($this->pagination);
 //echo $this->selectedYear;
 ?>
@@ -35,7 +32,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php // Filter ------------------------------------------------------------------------------------
 	
 
-?><form action="#" method=post><?php
+?>
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
+<?php
 if (!$this->params->get('anzeigejahr')) : 
 	$years[] = JHTML::_('select.option', '', JTEXT::_('Bitte das Jahr auswählen')  , 'id', 'title');
 	$years[] = JHTML::_('select.option', '9999', JTEXT::_('Alle Einsätze anzeigen')  , 'id', 'title');
@@ -56,7 +55,6 @@ endif;
 	?><?php 
 	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
 	endif;?>
-	</form>
 </div>
 <?php // Filter ENDE   -------------------------------------------------------------------------------
  
@@ -198,13 +196,13 @@ echo $string;
    
 <?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <th colspan="6"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2013 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+            <th colspan="6"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
         </tr>
 <?php endif;?>
 
     </tfoot>
 </table>
-
+	</form>
 <?php echo $this->modulepos_1;?>
 
 

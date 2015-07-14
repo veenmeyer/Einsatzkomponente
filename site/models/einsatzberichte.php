@@ -29,23 +29,96 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
      *
      * @since	1.6
      */
-    protected function populateState($ordering = null, $direction = null) {
-        
+    protected function populateState($ordering = null, $direction = null)
+    {
+
+
         // Initialise variables.
         $app = JFactory::getApplication();
+
         // List state information
         $limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
         $this->setState('list.limit', $limit);
-        $limitstart = JFactory::getApplication()->input->getInt('limitstart', 0);
+
+        $limitstart = $app->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
-        
-        
-		if(empty($ordering)) {
-			$ordering = 'a.ordering';
-		}
-        
-        // List state information.
-        parent::populateState($ordering, $direction);
+
+        if ($list = $app->getUserStateFromRequest($this->context . '.list', 'list', array(), 'array'))
+        {
+            foreach ($list as $name => $value)
+            {
+                // Extra validations
+                switch ($name)
+                {
+                    case 'fullordering':
+                        $orderingParts = explode(' ', $value);
+
+                        if (count($orderingParts) >= 2)
+                        {
+                            // Latest part will be considered the direction
+                            $fullDirection = end($orderingParts);
+
+                            if (in_array(strtoupper($fullDirection), array('ASC', 'DESC', '')))
+                            {
+                                $this->setState('list.direction', $fullDirection);
+                            }
+
+                            unset($orderingParts[count($orderingParts) - 1]);
+
+                            // The rest will be the ordering
+                            $fullOrdering = implode(' ', $orderingParts);
+
+                            if (in_array($fullOrdering, $this->filter_fields))
+                            {
+                                $this->setState('list.ordering', $fullOrdering);
+                            }
+                        }
+                        else
+                        {
+                            $this->setState('list.ordering', $ordering);
+                            $this->setState('list.direction', $direction);
+                        }
+                        break;
+
+                    case 'ordering':
+                        if (!in_array($value, $this->filter_fields))
+                        {
+                            $value = $ordering;
+                        }
+                        break;
+
+                    case 'direction':
+                        if (!in_array(strtoupper($value), array('ASC', 'DESC', '')))
+                        {
+                            $value = $direction;
+                        }
+                        break;
+
+                    case 'limit':
+                        $limit = $value;
+                        break;
+
+                    // Just to keep the default case
+                    default:
+                        $value = $value;
+                        break;
+                }
+
+                $this->setState('list.' . $name, $value);
+            }
+        }
+
+        // Receive & set filters
+        if ($filters = $app->getUserStateFromRequest($this->context . '.filter', 'filter', array(), 'array'))
+        {
+            foreach ($filters as $name => $value)
+            {
+                $this->setState('filter.' . $name, $value);
+            }
+        }
+
+        $this->setState('list.ordering', $app->input->get('filter_order'));
+        $this->setState('list.direction', $app->input->get('filter_order_Dir'));
     }
     /**
      * Build an SQL query to load the list data.
@@ -78,6 +151,9 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		$query->select('veh.name AS mission_car');
 		$query->select('veh.ordering AS vehicle_ordering');
 		$query->join('LEFT', '#__eiko_fahrzeuge AS veh ON veh.id = a.vehicles');
+		// Join over the foreign key 'ausruestung'
+		$query->select('#__eiko_ausruestung_1662678.name AS ausruestung_name_1662678');
+		$query->join('LEFT', '#__eiko_ausruestung AS #__eiko_ausruestung_1662678 ON #__eiko_ausruestung_1662678.id = a.ausruestung');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
@@ -88,7 +164,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->escape($search, true).'%');
-                $query->where('( a.address LIKE '.$search.'  OR  a.summary LIKE '.$search.'  OR  a.boss LIKE '.$search.'  OR  a.boss2 LIKE '.$search.'  OR  a.desc LIKE '.$search.' )');
+                $query->where('( a.address LIKE '.$search.'  OR  a.summary LIKE '.$search.' OR  a.ausruestung LIKE '.$search.' OR  a.boss LIKE '.$search.'  OR  a.boss2 LIKE '.$search.'  OR  a.desc LIKE '.$search.' )');
 			}
 		}
         
@@ -107,6 +183,11 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		$filter_auswahl_orga = $this->state->get("filter.auswahl_orga");
 		if ($filter_auswahl_orga) {
 			$query->where("a.auswahl_orga = '".$filter_auswahl_orga."'");
+		}
+		//Filtering ausruestung
+		$filter_ausruestung = $this->state->get("filter.ausruestung");
+		if ($filter_ausruestung) {
+			$query->where("a.ausruestung = '".$filter_ausruestung."'");
 		}
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");

@@ -137,7 +137,18 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				echo '<input type="hidden" class="vehicles" name="jform[vehicleshidden]['.$value.']" value="'.$value.'" />';
 					endif;
 				endforeach;
-				
+	?>
+<script>
+function displayVals() {
+var multipleValues = jQuery( "#jform_vehicles" ).val() || [];
+jQuery( "#fahrzeug" ).val(multipleValues.join( ", " ) );
+}
+jQuery( "select" ).change( displayVals );
+displayVals();
+</script>
+
+<?php
+			
 				
 			?>
 			<script type="text/javascript">
@@ -149,7 +160,40 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 					}
 				});
 				</script>	
-                
+   
+			<div class="control-group hide_ausruestung">
+				<div class="control-label line"><?php echo $this->form->getLabel('ausruestung'); ?></div>
+				<div class="controls hideme"><?php echo $this->form->getInput('ausruestung'); ?></div>
+				<?php if (!$params->get('eiko','0')) : ?>
+				<style>
+				.hideme {display:none;}
+				.line {text-decoration: line-through;}
+				</style>
+				<?php endif;?>
+			</div>
+				<?php if (!$params->get('display_detail_ausruestung','1')) : ?>
+				<style>
+				.hide_ausruestung {display:none;}
+				</style>
+				<?php endif;?>
+			
+			<?php
+				foreach((array)$this->item->ausruestung as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="ausruestung" name="jform[ausruestunghidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>
+			<script type="text/javascript">
+				jQuery.noConflict();
+				jQuery('input:hidden.ausruestung').each(function(){
+					var name = jQuery(this).attr('name');
+					if(name.indexOf('auswahlorga_hidden')){
+						jQuery('#jform_ausruestung option[value="'+jQuery(this).val()+'"]').attr('selected',true);
+					}
+				});
+			</script>			
+   
                 
            </div>		
            
@@ -164,17 +208,6 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 //			$vehicles = implode(',',$array);
 
 //echo '<input id="fahrzeug"/>';
-?>
-<script>
-function displayVals() {
-var multipleValues = jQuery( "#jform_vehicles" ).val() || [];
-jQuery( "#fahrzeug" ).val(multipleValues.join( ", " ) );
-}
-jQuery( "select" ).change( displayVals );
-displayVals();
-</script>
-
-<?php
 
 
 ?>
@@ -186,10 +219,6 @@ displayVals();
 -->			
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Einsatzbericht :</h1>
-			<div class="control-group" style="height:100px;">
-				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
-			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('summary'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('summary'); ?></div>
@@ -199,6 +228,69 @@ displayVals();
 				<div class="controls"><?php echo $this->form->getInput('desc'); ?></div>
 			</div>
           	</div>  
+			
+<script>
+		jQuery.noConflict();
+        jQuery(function(){
+            jQuery('#add-file-field').click(function(){
+
+            jQuery("#text").append('<div class="added-field"><input name="data[]" type="file"/><input type="button" class="remove-btn" value="entfernen"></div>');
+            });
+            jQuery('.remove-btn').live('click',function(){
+            jQuery(this).parent().remove();
+            });
+			
+});
+</script>
+
+    		<div class="fltlft well" style="width:80%;">
+    		<br/><h1>Einsatzbilder :</h1>
+			<div class="control-group" style="height:100px;">
+				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
+			</div>
+			
+			<div class="control-group" style="height:100px;">
+			Bilderupload für Bildergalerie:
+			<div id="text">
+            <div ><input multiple class="" name="data[]" id="file" type="file"/></div>
+            <!-- This is where the new file field will appear -->
+			</div>
+
+		    <br/><input class="btn btn-default btn-xs dropdown-toggle" type="button" id="add-file-field" name="add" value="weiteres Bild einzelnd hinzufügen" />
+        <!-- Here u can add image for add button(Like Below) just call the id="add-file-field" into ur image tag thats it..-->
+        <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
+		<!--http://www.fyneworks.com/jquery/multifile/-->
+     
+			</div>
+			
+            <!--Slider für Bildergalerie-->
+            
+<?php if (!$this->item->id == 0 && count($rImages)>'0' )	{ ?>
+	<div class="fltlft well" style="width:80%;">
+    <br/><h1>Einsatzbilder :</h1>
+        <table>
+        
+			<?php 
+			for ($i = 0;$i < count($rImages);++$i) {
+			$fileName = '../'.$rImages[$i]->thumb;
+			?>   
+  			<ul class="thumbnails inline">
+            <li class="span2">  
+            <div class="thumbnail">
+            <a href="index.php?option=com_einsatzkomponente&task=einsatzbilderbearbeiten.edit&id=<?php echo $rImages[$i]->id;?>" target="_self" class="thumbnail" title ="<?php echo $rImages[$i]->comment;?>">
+			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
+            </a>
+            <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
+            <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
+            </div>
+            </li>
+			<?php 	} ?>
+            </ul>
+       </table>
+	</div>
+<?php }?>
+			
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Quelle oder weiterführende Informationen :</h1>
 			<div class="control-group">
@@ -243,32 +335,6 @@ displayVals();
 			</div>
  			<?php  endif; ?>
             
-            <!--Slider für Bildergalerie-->
-            
-<?php if (!$this->item->id == 0 && count($rImages)>'0' )	{ ?>
-	<div class="fltlft well" style="width:80%;">
-    <br/><h1>Einsatzbilder :</h1>
-        <table>
-        
-			<?php 
-			for ($i = 0;$i < count($rImages);++$i) {
-			$fileName = '../'.$rImages[$i]->thumb;
-			?>   
-  			<ul class="thumbnails inline">
-            <li class="span2">  
-            <div class="thumbnail">
-            <a href="index.php?option=com_einsatzkomponente&task=einsatzbilderbearbeiten.edit&id=<?php echo $rImages[$i]->id;?>" target="_self" class="thumbnail" title ="<?php echo $rImages[$i]->comment;?>">
-			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
-            </a>
-            <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
-            <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
-            </div>
-            </li>
-			<?php 	} ?>
-            </ul>
-       </table>
-	</div>
-<?php }?>
 	
     		<div class="fltlft well" style="width:80%;">
 
@@ -296,6 +362,7 @@ displayVals();
     	</div></div>
    </div>     
         <input type="hidden" name="task" value="" />
+			<input type='hidden' name="action" value="Filedata" />
         <?php echo JHtml::_('form.token'); ?>
         
     </div>
@@ -314,7 +381,7 @@ displayVals();
 
 	  
 function codeAddress2() {
-    var address = document.getElementById("jform_address").value;
+    var address = document.getElementById("jform_address").value+"<?php echo ' '.$params->get('ort_geocode','');?>";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
@@ -327,7 +394,6 @@ function codeAddress2() {
       } else {
             document.getElementById("jform_address").style.color = "red";
             document.getElementById("jform_address").style.border = "solid red 2px";
-        	<!--alert("Geocode war nicht erfolgreich. Geben sie eine andere Adresse ein, oder markieren Sie zusätzlich den Einsatzort auf der Karte (siehe weiter unten)");-->
       }
     });
   }	 

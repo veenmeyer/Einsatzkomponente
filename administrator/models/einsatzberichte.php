@@ -107,6 +107,10 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		//Filtering auswahl_orga
 		$this->setState('filter.auswahl_orga', $app->getUserStateFromRequest($this->context.'.filter.auswahl_orga', 'filter_auswahl_orga', '', 'string'));
 
+		//Filtering ausruestung
+		$this->setState('filter.ausruestung', $app->getUserStateFromRequest($this->context.'.filter.ausruestung', 'filter_ausruestung', '', 'string'));
+
+
 
 		//Filtering created_by
 		$this->setState('filter.created_by', $app->getUserStateFromRequest($this->context.'.filter.created_by', 'filter_created_by', '', 'string'));
@@ -174,6 +178,9 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		// Join over the foreign key 'auswahl_orga'
 		$query->select('#__eiko_organisationen_1662678.name AS organisationen_name_1662678');
 		$query->join('LEFT', '#__eiko_organisationen AS #__eiko_organisationen_1662678 ON #__eiko_organisationen_1662678.id = a.auswahl_orga');
+		// Join over the foreign key 'auswahl_orga'
+		$query->select('#__eiko_ausruestung_1662678.name AS ausruestung_name_1662678');
+		$query->join('LEFT', '#__eiko_ausruestung AS #__eiko_ausruestung_1662678 ON #__eiko_ausruestung_1662678.id = a.ausruestung');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
