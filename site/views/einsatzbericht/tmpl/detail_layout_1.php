@@ -101,7 +101,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'); ?> 
               </span></td>
               <td class="eiko_td1_2">
-			  <?php echo '<span class="mobile_show_320"><b>Details:</b><br/></span>'; ?> 
+			  <?php echo '<span class="mobile_show_320"><b>Details:</b><br/><br/></span>'; ?> 
 			  <span class="eiko_einsatzort_value_2"><?php echo $this->item->address.''; ?>
 			<?php if ($this->params->get('gmap_action','0')) : ?>
             <?php if( $this->item->gmap ) : ?>
