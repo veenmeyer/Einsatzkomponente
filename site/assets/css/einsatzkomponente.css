@@ -485,7 +485,10 @@ h4, h5 {
 	}
 	
 .eiko_fahrzeugaufgebot_2 {
-	}	
+	}
+.eiko_fahrzeugaufgebot_2 a {
+	text-decoration: none !important;
+	}
 	
 .eiko_detail_image_2 {
 	margin-left:40px !important;
@@ -679,13 +682,4 @@ padding-right:5px;
 .eiko_icon {width:30px;}
 .eiko_nowrap {white-space: nowrap;}
 
-.eiko_distance_road {font-size:smaller;}
-
-
-
-
-
-
-
-
-
+.eiko_distance_road {font-size:smaller;padding-bottom:2em;}

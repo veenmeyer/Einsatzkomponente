@@ -101,11 +101,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'); ?> 
               </span></td>
               <td class="eiko_td1_2">
-			  <?php echo '<span class="mobile_show_320"><b>Details:</b><br/></span><br/>'; ?> 
+			  <?php echo '<span class="mobile_show_320"><b>Details:</b><br/><br/></span>'; ?> 
 			  <span class="eiko_einsatzort_value_2"><?php echo $this->item->address.''; ?>
 			<?php if ($this->params->get('gmap_action','0')) : ?>
             <?php if( $this->item->gmap ) : ?>
-              <div class="eiko_distance_road hasTooltip" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !" id="distance_road"></div><br/>
+              <div class="eiko_distance_road hasTooltip" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !" id="distance_road"></div>
             <?php endif;?>
             <?php endif;?>
               </span></td>
@@ -340,7 +340,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 				endforeach; 
   
  ?>
- <div><ul><b>u.a. eingesetzte Ausrüstung :</b> <?php echo $ausruestung;?></ul></div> 
+ <div><b>u.a. eingesetzte Ausrüstung:</b> <ul><?php echo $ausruestung;?></ul></div> 
  <?php endif;?>
  <?php endif;?>
  <?php endif;?>
