@@ -89,9 +89,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Einsatzkarte ENDE-->
 
 
-<div class="eiko_content_2"> <!-- eiko_content -->
+<div class="eiko_content_2 eiko_detailbox_2"> <!-- eiko_content -->
   
-    <div class="eiko_detailbox_2">
     <table class="eiko_table1_2">
       <tr>
         <td class="eiko_td_spalte1_2">
