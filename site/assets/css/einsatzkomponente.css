@@ -679,13 +679,4 @@ padding-right:5px;
 .eiko_icon {width:30px;}
 .eiko_nowrap {white-space: nowrap;}
 
-.eiko_distance_road {font-size:smaller;}
-
-
-
-
-
-
-
-
-
+.eiko_distance_road {font-size:smaller;padding-bottom:2em;}
