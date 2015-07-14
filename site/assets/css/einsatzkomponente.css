@@ -485,7 +485,10 @@ h4, h5 {
 	}
 	
 .eiko_fahrzeugaufgebot_2 {
-	}	
+	}
+.eiko_fahrzeugaufgebot_2 a {
+	text-decoration: none !important;
+	}
 	
 .eiko_detail_image_2 {
 	margin-left:40px !important;
