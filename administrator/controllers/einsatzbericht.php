@@ -18,10 +18,10 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
         $this->view_list = 'einsatzberichte';
         parent::__construct();
     }
-    function pdf()
-     {
-     	$this->setRedirect('http://www.google.de');
-     	$this->redirect;
+    //function pdf()
+     //{
+     	//$this->setRedirect('http://www.google.de');
+     	//$this->redirect;
      	//Hier wird das PDF-Grundgerüst erstellt
 	//$pdf=new FPDF('P','mm','A4');
 	
@@ -38,7 +38,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//$pdf->Cell(40,10,'Hallo Welt');
 	//$pdf->Output();
      	
-     }
+     //}
      function swf()  
     {    
 	
