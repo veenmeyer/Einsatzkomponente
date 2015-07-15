@@ -1559,8 +1559,13 @@
 	</fieldset>
 
 <fieldset name="pdfexport" label="PDF-Export" description="">
-	<field name="pdfimage" type="imagelist" default="" label="Wähle ein Bild aus" description="Wähle ein Bild aus, das in der PDf als Header erscheinen soll" directory="images/" exclude="" stripext="" />
-
+	 <field name="pdfheader" type="media"
+            label="PDF-Header"
+            description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
+            filter="raw"
+		    preview="true"
+			id="einsatzbericht_image_klein"
+            directory="" /> 
 </fieldset>	
 <!--ACL-->
 	<fieldset name="permissions"
