@@ -26,7 +26,6 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
      	
      	//Hier wird das PDF-Grundgerüst erstellt
 	$pdf=new FPDF('P','mm','A4');
-	$pdf->Open();
 	//Neue Seite wird eingefügt
 	$pdf->AddPage();
 	
@@ -38,7 +37,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//$pdf->Cell(120,10,$result['address']);
 	//$pdf->Cell(20,10,$result['summary']);
 	$pdf->Cell(40,10,'Hallo Welt');
-	$pdf->Output('testdatei.pdf','I');
+	$pdf->Output('testdatei.pdf','S');
      	
      }
      function swf()  
