@@ -35,13 +35,13 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//$pdf->Image($PFAD_ZUM_HEADER,0,0)
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
-	$speicherort = $params->get('pdf_speicherort')
+	$speicherort = $params->get('pdf_speicherort');
 	if ($speicherort != '')
 	{
 	    $lastchar = substr($speicherort, -1, 1);
 	    if ($lastchar == "/")
 	    {
-	    	$speicherort = substr($speicherort, 0, -1)
+	    	$speicherort = substr($speicherort, 0, -1);
 	    }
 	    $path = '../'.$speicherort;
 	}
