@@ -18,6 +18,27 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
         $this->view_list = 'einsatzberichte';
         parent::__construct();
     }
+    function pdf()
+     {
+     	$this->setRedirect('http://www.google.de');
+     	$this->redirect;
+     	//Hier wird das PDF-Grundgerüst erstellt
+	//$pdf=new FPDF('P','mm','A4');
+	
+	//Neue Seite wird eingefügt
+	//$pdf->AddPage();
+	
+	//Schriftart und -größe wird definiert 
+	//$pdf->SetFont('Arial','',16);
+	//Header-Image
+	//$pdf->Image($PFAD_ZUM_HEADER,0,0)
+	//$pdf->Cell(20,10,$this->form-getInput(''));
+	//$pdf->Cell(120,10,$result['address']);
+	//$pdf->Cell(20,10,$result['summary']);
+	//$pdf->Cell(40,10,'Hallo Welt');
+	//$pdf->Output();
+     	
+     }
      function swf()  
     {    
 	
