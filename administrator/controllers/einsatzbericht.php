@@ -21,8 +21,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
     public function pdf()
      {
      	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
-     	$this->setRedirect('http://www.google.de');
-     	$this->redirect;
+     	//$this->setRedirect('http://www.google.de');
+     	//$this->redirect;
      	
      	//Hier wird das PDF-Grundgerüst erstellt
 	$pdf=new FPDF('P','mm','A4');
