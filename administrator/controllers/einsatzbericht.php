@@ -37,7 +37,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//$pdf->Cell(120,10,$result['address']);
 	//$pdf->Cell(20,10,$result['summary']);
 	$pdf->Cell(40,10,'Hallo Welt');
-	$pdf->Output('testdatei.pdf','S');
+	$pdf->Output('testdatei.pdf','F');
      	
      }
      function swf()  
