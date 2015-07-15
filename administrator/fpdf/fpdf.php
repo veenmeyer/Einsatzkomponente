@@ -6,7 +6,15 @@
 * Date:    2011-06-18                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
-
+/**
+ * @version     3.08 R1
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ */
+// No direct access
+defined('_JEXEC') or die;
 define('FPDF_VERSION','1.7');
 
 class FPDF
