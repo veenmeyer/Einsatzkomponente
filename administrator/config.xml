@@ -12,7 +12,7 @@
 		label="Speicherort der Einsatzbilder :" 
 		class="alert alert-info" 
 		description="Bitte gebe hier an, in welchem Ordner die Einsatzbilder gespeichert werden sollen. Empfohlen wird : images/com_einsatzkomponente/einsatzbilder"
-		/>	
+		/>
 		
 
 			<field name="uploadpath" 
@@ -1564,7 +1564,7 @@
 		type="note" 
 		label="PDF-Export Einstellungen:" 
 		class="alert alert-info" 
-		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen."
+		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen.<br>Es kann außerden ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
 	/>
 	 <field 
 	 	name="pdfheader" type="media"
