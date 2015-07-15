@@ -1581,7 +1581,7 @@
         	type="text"
         	default="documents/"
         	label="PDF-Speicherort"
-        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien" size="10"
+        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: documents/" size="10"
         />
         <field
 		name="pdf_show_id"
