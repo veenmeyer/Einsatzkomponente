@@ -1577,7 +1577,7 @@
             	directory="" 
         />
         <field 
-        	name="mytextvalue"
+        	name="pdf_speicherort"
         	type="text"
         	default="documents/"
         	label="PDF-Speicherort"
