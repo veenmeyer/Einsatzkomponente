@@ -33,11 +33,21 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$pdf->SetFont('Arial','',16);
 	//Header-Image
 	//$pdf->Image($PFAD_ZUM_HEADER,0,0)
-	//$pdf->Cell(20,10,$this->form-getInput(''));
-	//$pdf->Cell(120,10,$result['address']);
-	//$pdf->Cell(20,10,$result['summary']);
+	
+	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
+	$speicherort = $params->get('pdf_speicherort')
+	if ($speicherort != '')
+	{
+	    $lastchar = substr($speicherort, -1, 1);
+	    if ($lastchar == "/")
+	    {
+	    	$speicherort = substr($speicherort, 0, -1)
+	    }
+	    $path = '../'.$speicherort;
+	}
+	
 	$pdf->Cell(40,10,'Hallo Welt');
-	$pdf->Output('../documents/testdatei.pdf','F');
+	$pdf->Output($path.'/testdatei.pdf','F');
 	$rep_id = JFactory::getApplication()->input->get('id', '0');
 	$msg    = JText::_( 'PDF-Datei wurde in den Ordner "documents/" exportiert.' );
         $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$rep_id, $msg); 
