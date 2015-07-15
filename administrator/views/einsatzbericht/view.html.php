@@ -26,7 +26,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy
 	public function display($tpl = null)
 	{
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
-		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/fpdf.php'; //PHP PDF-Export Klasse laden
+		//require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/fpdf.php'; //PHP PDF-Export Klasse laden
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
 		$this->form		= $this->get('Form');
