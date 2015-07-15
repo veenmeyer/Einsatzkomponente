@@ -1567,14 +1567,22 @@
 		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerden ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
 	/>
 	 <field 
-	 	name="pdfheader" type="media"
+	 	name="pdf_header"
+	 	type="media"
             	label="PDF-Header"
             	description="Wähle hier ein Bild aus, welches beim PDD-Export in der PDf als Header eingefügt werden soll" 
             	filter="raw"
             	preview="true"
         	id="pdfexport"
             	directory="" 
-        /> 
+        />
+        <field 
+        	name="mytextvalue"
+        	type="text"
+        	default="documents/"
+        	label="PDF-Speicherort"
+        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien" size="10"
+        />
         <field
 		name="pdf_show_id"
 		type="radio"
