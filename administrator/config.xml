@@ -1559,13 +1559,21 @@
 	</fieldset>
 
 <fieldset name="pdfexport" label="PDF-Export" description="">
-	 <field name="pdfheader" type="media"
-            label="PDF-Header"
-            description="Wähle hier ein Bild aus, welches beim PDD-Export in der PDf als Header eingefügt werden soll" 
-            filter="raw"
-            preview="true"
-            id="pdfexport"
-            directory="" 
+	<field 
+		name="note_pdfexport" 
+		type="note" 
+		label="PDF-Export Einstellungen:" 
+		class="alert alert-info" 
+		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen."
+	/>
+	 <field 
+	 	name="pdfheader" type="media"
+            	label="PDF-Header"
+            	description="Wähle hier ein Bild aus, welches beim PDD-Export in der PDf als Header eingefügt werden soll" 
+            	filter="raw"
+            	preview="true"
+        	id="pdfexport"
+            	directory="" 
         /> 
         <field
 		name="pdf_show_id"
