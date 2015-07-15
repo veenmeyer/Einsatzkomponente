@@ -1561,10 +1561,10 @@
 <fieldset name="pdfexport" label="PDF-Export" description="">
 	 <field name="pdfheader" type="media"
             label="PDF-Header"
-            description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
+            description="Wähle hier ein Bild aus, welches beim PDD-Export in der PDf als Header eingefügt werden soll" 
             filter="raw"
 		    preview="true"
-			id="einsatzbericht_image_klein"
+			id="pdfexport"
             directory="" /> 
 </fieldset>	
 <!--ACL-->
