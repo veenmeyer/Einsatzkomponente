@@ -339,7 +339,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 				endforeach; 
   
  ?>
- <div><b>u.a. eingesetzte Ausrüstung:</b> <ul><?php echo $ausruestung;?></ul></div> 
+ <div class="eiko_ausruestung"><b>u.a. eingesetzte Ausrüstung:</b> <ul><?php echo $ausruestung;?></ul></div> 
  <?php endif;?>
  <?php endif;?>
  <?php endif;?>
