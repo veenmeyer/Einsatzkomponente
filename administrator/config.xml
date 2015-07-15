@@ -1558,8 +1558,10 @@
 		
 	</fieldset>
 
+<fieldset name="pdfexport" label="PDF-Export" description="">
+	<field name="pdfimage" type="imagelist" default="" label="Wähle ein Bild aus" description="Wähle ein Bild aus, das in der PDf als Header erscheinen soll" directory="images/" exclude="" stripext="" />
 
-	
+</fieldset>	
 <!--ACL-->
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
