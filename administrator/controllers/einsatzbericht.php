@@ -48,9 +48,9 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$fahrz_all = "";
 	
 	foreach ($fahrz_arr as $key => $value) {
-	    $fahrz_all .=$value->name.", ";
+	    $fahrz_all .=" ".$value->name.",";
 	}
-	//Entferne das Komman am Ende
+	//Entferne das Komma am Ende
 	$fahrz_all = substr($fahrz_all, 0, -1);
 	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
@@ -60,9 +60,9 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$orga_arr = $db->loadObjectList();
 	$orgas_all = "";
 	foreach ($orga_arr as $key => $value) {
-	    $orgas_all .=$value->name.", ";
+	    $orgas_all .=" ".$value->name.",";
 	}
-	//Entferne das Komman am Ende
+	//Entferne das Komma am Ende
 	$orgas_all = substr($orgas_all, 0, -1);
 	
 	//Variablendeklaraion für die PDF
