@@ -46,9 +46,12 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$anz_fahrz = $db->getNumRows();
 	$fahrz_arr = $db->loadObjectList();
 	$fahrz_all = "";
-	
+	$i = 0;
 	foreach ($fahrz_arr as $key => $value) {
-	    $fahrz_all .=" ".$value->name.",";
+	    if ($i == 0)
+	    	$fahrz_all .= "";
+	    $fahrz_all .=$value->name.",";
+	    $i += 1;
 	}
 	//Entferne das Komma am Ende
 	$fahrz_all = substr($fahrz_all, 0, -1);
@@ -59,9 +62,14 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$anz_orgas = $db->getNumRows();
 	$orga_arr = $db->loadObjectList();
 	$orgas_all = "";
+	$i = 0;
 	foreach ($orga_arr as $key => $value) {
+	    if ($i == 0)
+	    	$orgas_all .= "";
 	    $orgas_all .=" ".$value->name.",";
+	    $i += 1;
 	}
+	$i = 0;
 	//Entferne das Komma am Ende
 	$orgas_all = substr($orgas_all, 0, -1);
 	
