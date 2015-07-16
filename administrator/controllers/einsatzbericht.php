@@ -43,7 +43,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//$orga_arr = explode(",",$orgas);
 	//$fahrz_arr = explode(",", $fahrzeuge);
 	
-	print_r($fahrzeuge);
+	print_r($orgas);
 	die();
 	$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".implode(",",$fahrzeuge).")";
 	$db->setQuery($query);
