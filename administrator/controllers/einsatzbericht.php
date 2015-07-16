@@ -107,39 +107,39 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$pdf->Ln($height);
 	}
 	//Erstelle die Zellen
-	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatz-ID:');
 	$pdf->Cell($breite_inhalt,$höhe,$id,0,1);
-	$pdf->Cell($breite,$höhe,'Counter:');
+	$pdf->Cell($breite_beschriftung,$höhe,'Counter:');
 	$pdf->Cell($breite_inhalt,$höhe,$counter,0,1);
-	$pdf->Cell($breite,$höhe,'Alarmart');
+	$pdf->Cell($breite_beschriftung,$höhe,'Alarmart');
 	$pdf->Cell($breite_inhalt,$höhe,$alarmart,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzart');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzart');
 	$pdf->Cell($breite_inhalt,$höhe,$einsatzart,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzkategorie');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzkategorie');
 	$pdf->Cell($breite_inhalt,$höhe,$einsatzkat,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzort');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzort');
 	$pdf->Cell($breite_inhalt,$höhe,$ort,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzbeginn');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzbeginn');
 	$pdf->Cell($breite_inhalt,$höhe,$beginn,0,1);
-	$pdf->Cell($breite,$höhe,'Ausrückezeit');
+	$pdf->Cell($breite_beschriftung,$höhe,'Ausrückezeit');
 	$pdf->Cell($breite_inhalt,$höhe,$ausrueck,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzende');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzende');
 	$pdf->Cell($breite_inhalt,$höhe,$ende,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzleiter');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzleiter');
 	$pdf->Cell($breite_inhalt,$höhe,$einsatzleiter,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzführer');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzführer');
 	$pdf->Cell($breite_inhalt,$höhe,$einsatzführer,0,1);
-	$pdf->Cell($breite,$höhe,'Mannschaftsstärke');
+	$pdf->Cell($breite_beschriftung,$höhe,'Mannschaftsstärke');
 	$pdf->Cell($breite_inhalt,$höhe,$mannschaft,0,1);
-	$pdf->Cell($breite,$höhe,'Organisationen');
+	$pdf->Cell($breite_beschriftung,$höhe,'Organisationen');
 	$pdf->Cell($breite_inhalt,$höhe,$organisationen,0,1);
-	$pdf->Cell($breite,$höhe,'Fahrzeuge');
+	$pdf->Cell($breite_beschriftung,$höhe,'Fahrzeuge');
 	$pdf->Cell($breite_inhalt,$höhe,$fahrzeuge,0,1);
-	$pdf->Cell($breite,$höhe,'Ausrüstung');
+	$pdf->Cell($breite_beschriftung,$höhe,'Ausrüstung');
 	$pdf->Cell($breite_inhalt,$höhe,$ausruest,0,1);
-	$pdf->Cell($breite,$höhe,'Kurzbericht');
+	$pdf->Cell($breite_beschriftung,$höhe,'Kurzbericht');
 	$pdf->Cell($breite_inhalt,$höhe,$kurzbericht,0,1);
-	$pdf->Cell($breite,$höhe,'Einsatzbericht');
+	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzbericht');
 	$pdf->MultiCell($breite_inhalt,$höhe,$bericht,0,1);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
