@@ -99,12 +99,13 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$pdf->SetFont('Arial','',12);
 	
 	//Header-Image
-	$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
-	list($width, $height) = $pdf->resizeToFit($img);
-	$pdf->resizeImage($img,0,0);
-	//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
-	$pdf->Ln($height);
-	
+	if (!$params->get('pdf_header') == '') {
+		$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
+		list($width, $height) = $pdf->resizeToFit($img);
+		$pdf->resizeImage($img,0,0);
+		//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
+		$pdf->Ln($height);
+	}
 	//Erstelle die Zellen
 	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
 	$pdf->Cell($breite_inhalt,$höhe,$id,0,1);
