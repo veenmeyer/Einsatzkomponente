@@ -39,30 +39,34 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Varaiblen für Orga- udn Fahrzeugnamen
 	$orgas = $einsatz[0]->orgas;
 	$fahrzeuge = $einsatz[0]->fahrz;
-	print("1. Fahrzeuge: ".$fahrzeuge);
+	/*print("1. Fahrzeuge: ".$fahrzeuge);
 	print("<br>");
 	print("2. Orgas: ".$orgas);
-	print("<br>");
+	print("<br>");*/
 	$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
-	print("3. FHZ-Query: ".$query);
-	print("<br>");
+	/*print("3. FHZ-Query: ".$query);
+	print("<br>");*/
 	$db->setQuery($query);
+	$anz_fahrz = $db->getNumRows();
 	$fahrz_arr = $db->loadObjectList();
 	
-	print("4. FHZ-Array: ");
-	print_r($fahrz_arr);
+	print("4. FHZ-Array: ".$anz_fahrz);
+	/*print_r($fahrz_arr);*/
 	print("<br>");
 	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
-	print("5. Orga-Query: ".$query);
-	print("<br>");
+	/*print("5. Orga-Query: ".$query);
+	print("<br>");*/
 	$db->setQuery($query);
+	
+	$anz_orgas = $db->getNumRows();
 	$orga_arr = $db->loadObjectList();
 	
-	print("6. Orga-Array: ");
-	print_r($orga_arr);
-	print("<br>");
+	print("6. Orga-Array: ".$anz_orgas);
+	/*print_r($orga_arr);
+	print("<br>");*/
 	die();
+	
 	//Variablendeklaraion für die PDF
 	$id = $einsatz[0]->id;
 	$counter = $einsatz[0]->counter;
