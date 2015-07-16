@@ -47,8 +47,10 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	print("3. FHZ-Query: ".$query);
 	print("<br>");
 	$db->setQuery($query);
-	$fahrz_arr = $db->loadObjectList();
-	print_r("4. FHZ-Array: ".$fahrz_arr);
+	$fahrz_arr = $db->loadObjectList;
+	
+	print("4. FHZ-Array: ");
+	print_r($fahrz_arr);
 	print("<br>");
 	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN ('".$orgas."')";
@@ -56,8 +58,9 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	print("<br>");
 	$db->setQuery($query);
 	$orga_arr = $db->loadObjectList();
-		
-	print_r("6. Orga-Array: ".$orga_arr);
+	
+	print("6. Orga-Array: ");
+	print_r($orga_arr);
 	print("<br>");
 	die();
 	//Variablendeklaraion für die PDF
