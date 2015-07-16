@@ -1567,15 +1567,15 @@
 		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerden ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
 	/>
 	 <field 
-	 	name="pdf_header"
-	 	type="media"
-            	label="PDF-Header"
-            	description="Wähle hier ein Bild aus, welches beim PDD-Export in der PDf als Header eingefügt werden soll" 
-            	filter="raw"
-            	preview="true"
-        	id="pdfexport"
-            	directory="" 
-        />
+	 	name="pdf_header" 
+	 	type="imagelist" 
+	 	default="" 
+	 	label="PDF-Header" 
+	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als header eingefügt werden soll. Bilder müssen im Ordner 'media/com_einsatzkomponente/pdf/' hinterlegt werden." 
+	 	directory="media/com_einsatzkomponente/pdf/" 
+	 	exclude="" 
+	 	stripext="" />
+
         <field 
         	name="pdf_speicherort"
         	type="text"
