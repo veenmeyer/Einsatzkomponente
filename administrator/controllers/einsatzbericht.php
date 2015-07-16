@@ -21,6 +21,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
     public function pdf()
      {
      	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
+     	$this->item = $this->get('Item');
+     	die(print_r($this->item));
      	$params = JComponentHelper::getParams('com_einsatzkomponente');
      	//$this->setRedirect('http://www.google.de');
      	//$this->redirect;
