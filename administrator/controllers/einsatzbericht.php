@@ -45,6 +45,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	    	$speicherort = substr($speicherort, 0, -1);
 	    }
 	    $path = '../'.$speicherort;
+	    die($path);
 	}
 	
 	$pdf->Cell(40,10,'Hallo Welt');
