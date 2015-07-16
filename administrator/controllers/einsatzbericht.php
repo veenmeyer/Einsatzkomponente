@@ -91,7 +91,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$mannschaft = $einsatz[0]->pers;
 	$ausruest = $einsatz[0]->ausruest;
 	$kurzbericht = $einsatz[0]->kurzt;
-	$uebericht = $einsatz[0]->langt;
+	$bericht = $einsatz[0]->langt;
 	$organisationen = $orgas_all;
 	$fahrzeuge = $fahrz_all;
 	
@@ -125,8 +125,34 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$pdf->Cell($breite,$höhe,$counter,0,1);
 	$pdf->Cell($breite,$höhe,'Alarmart');
 	$pdf->Cell($breite,$höhe,$alarmart,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzart');
+	$pdf->Cell($breite,$höhe,$einsatzart,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzkategorie');
 	$pdf->Cell($breite,$höhe,$einsatzkat,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzort');
+	$pdf->Cell($breite,$höhe,$ort,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzbeginn');
+	$pdf->Cell($breite,$höhe,$beginn,0,1);
+	$pdf->Cell($breite,$höhe,'Ausrückezeit');
+	$pdf->Cell($breite,$höhe,$ausrueck,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzende');
+	$pdf->Cell($breite,$höhe,$ende,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzleiter');
+	$pdf->Cell($breite,$höhe,$einsatzleiter,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzführer');
+	$pdf->Cell($breite,$höhe,$einsatzführer,0,1);
+	$pdf->Cell($breite,$höhe,'Mannschaftsstärke');
+	$pdf->Cell($breite,$höhe,$mannschaft,0,1);
+	$pdf->Cell($breite,$höhe,'Organisationen');
+	$pdf->Cell($breite,$höhe,$organisationen,0,1);
+	$pdf->Cell($breite,$höhe,'Fahrzeuge');
+	$pdf->Cell($breite,$höhe,$fahrzeuge,0,1);
+	$pdf->Cell($breite,$höhe,'Ausrüstung');
+	$pdf->Cell($breite,$höhe,$ausruest,0,1);
+	$pdf->Cell($breite,$höhe,'Kurzbericht');
+	$pdf->Cell($breite,$höhe,$kurzbericht,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzbericht');
+	$pdf->Cell($breite,$höhe,$bericht,0,1);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 	$speicherort = $params->get('pdf_speicherort');
