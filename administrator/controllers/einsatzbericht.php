@@ -35,7 +35,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 			WHERE eb.id = ".$rep_id;
 	$db->setQuery($query);
 	$einsatz = $db->loadObjectList();
-	print_r($einsatz[0]));
+	print_r($einsatz[0]);
 	die();
 	
 	//Varaiblen für Orga- udn Fahrzeugnamen
