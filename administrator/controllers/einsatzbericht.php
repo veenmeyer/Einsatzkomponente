@@ -86,7 +86,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$pdf=new FPDF('P','mm','A4');
 	
 	//Definiere die Breite und Höhe der Beschriftungszellen:
-	$breite_beschriftung = 35;
+	$breite_beschriftung = 40;
 	$höhe = 8;
 	
 	//Breite des Inhalts. 0 = bis zum rechten Seitenrand
