@@ -103,22 +103,26 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
      	
      	//Hier wird das PDF-Grundgerüst erstellt
 	$pdf=new FPDF('P','mm','A4');
+	
+	//Definiere die Breite und Höhe der Beschriftungszellen:
+	$breite = 30;
+	$höhe = 8;
 	//Neue Seite wird eingefügt
 	$pdf->AddPage();
 	
 	//Schriftart und -größe wird definiert 
-	$pdf->SetFont('Arial','',16);
+	$pdf->SetFont('Arial','',12);
 	//Header-Image
 	//$pdf->Image($PFAD_ZUM_HEADER,0,0)
 	
-	$pdf->Cell(40,10,'Einsatz-ID:');
-	$pdf->Cell(40,10,$id,0,1);
-	$pdf->Cell(40,10,'Counter:');
-	$pdf->Cell(40,10,$counter,0,1);
-	$pdf->Cell(40,10,'Alarmart');
-	$pdf->Cell(40,10,$alarmart,0,1);
-	$pdf->Cell(40,10,'Einsatzkategorie');
-	$pdf->Cell(40,10,$einsatzkat,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
+	$pdf->Cell($breite,$höhe,$id,0,1);
+	$pdf->Cell($breite,$höhe,'Counter:');
+	$pdf->Cell($breite,$höhe,$counter,0,1);
+	$pdf->Cell($breite,$höhe,'Alarmart');
+	$pdf->Cell($breite,$höhe,$alarmart,0,1);
+	$pdf->Cell($breite,$höhe,'Einsatzkategorie');
+	$pdf->Cell($breite,$höhe,$einsatzkat,0,1);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 	$speicherort = $params->get('pdf_speicherort');
