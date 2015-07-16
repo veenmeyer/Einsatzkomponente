@@ -45,13 +45,13 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	    	$speicherort = substr($speicherort, 0, -1);
 	    }
 	    $path = '../'.$speicherort;
-	    die($path);
+	    die($path." - - - ".$speicherort);
 	}
 	
 	$pdf->Cell(40,10,'Hallo Welt');
 	$pdf->Output($path.'/testdatei.pdf','F');
 	$rep_id = JFactory::getApplication()->input->get('id', '0');
-	$msg    = JText::_( 'PDF-Datei wurde in den Ordner "'.$params->get('pdf_speicherort').'" exportiert.' );
+	$msg    = JText::_( 'PDF-Datei wurde in den Ordner "'.$speicherort.'" exportiert.' );
         $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$rep_id, $msg); 
      	$this->redirect;
      }
