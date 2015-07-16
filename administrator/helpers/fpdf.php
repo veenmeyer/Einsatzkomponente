@@ -77,7 +77,7 @@ var $PDFVersion;         // PDF version number
 const DPI = 96;
 const MM_IN_INCH = 25.4;
 const A4_HEIGHT = 297;
-const A4_WIDTH = 210;
+const A4_WIDTH = 200;
 // tweak these values (in pixels)
 const MAX_WIDTH = 800;
 const MAX_HEIGHT = 500;
