@@ -91,7 +91,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	
 	//Definiere die Breite und Höhe der Beschriftungszellen:
 	$breite_beschriftung = 40;
-	$höhe = 8;
+	$hoehe = 8;
 	
 	//Breite des Inhalts. 0 = bis zum rechten Seitenrand
 	$breite_inhalt = 10;
@@ -111,40 +111,40 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$pdf->Ln($height);
 	}
 	//Erstelle die Zellen
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatz-ID:');
-	$pdf->Cell($breite_inhalt,$höhe,$id,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Counter:');
-	$pdf->Cell($breite_inhalt,$höhe,$counter,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Alarmart');
-	$pdf->Cell($breite_inhalt,$höhe,$alarmart,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzart');
-	$pdf->Cell($breite_inhalt,$höhe,$einsatzart,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzkategorie');
-	$pdf->Cell($breite_inhalt,$höhe,$einsatzkat,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzort');
-	$pdf->Cell($breite_inhalt,$höhe,$ort,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzbeginn');
-	$pdf->Cell($breite_inhalt,$höhe,$beginn,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Ausrückezeit');
-	$pdf->Cell($breite_inhalt,$höhe,$ausrueck,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzende');
-	$pdf->Cell($breite_inhalt,$höhe,$ende,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzleiter');
-	$pdf->Cell($breite_inhalt,$höhe,$einsatzleiter,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzführer');
-	$pdf->Cell($breite_inhalt,$höhe,$einsatzführer,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Mannschaftsstärke');
-	$pdf->Cell($breite_inhalt,$höhe,$mannschaft,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Organisationen');
-	$pdf->Cell($breite_inhalt,$höhe,$organisationen,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Fahrzeuge');
-	$pdf->Cell($breite_inhalt,$höhe,$fahrzeuge,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Ausrüstung');
-	$pdf->Cell($breite_inhalt,$höhe,$ausruest,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Kurzbericht');
-	$pdf->Cell($breite_inhalt,$höhe,$kurzbericht,0,1);
-	$pdf->Cell($breite_beschriftung,$höhe,'Einsatzbericht');
-	$pdf->MultiCell(150,80,$bericht,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatz-ID:');
+	$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Counter:');
+	$pdf->Cell($breite_inhalt,$hoehe,$counter,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Alarmart');
+	$pdf->Cell($breite_inhalt,$hoehe,$alarmart,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzart');
+	$pdf->Cell($breite_inhalt,$hoehe,$einsatzart,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzkategorie');
+	$pdf->Cell($breite_inhalt,$hoehe,$einsatzkat,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzort');
+	$pdf->Cell($breite_inhalt,$hoehe,$ort,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzbeginn');
+	$pdf->Cell($breite_inhalt,$hoehe,$beginn,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Ausrückezeit');
+	$pdf->Cell($breite_inhalt,$hoehe,$ausrueck,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzende');
+	$pdf->Cell($breite_inhalt,$hoehe,$ende,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzleiter');
+	$pdf->Cell($breite_inhalt,$hoehe,$einsatzleiter,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzführer');
+	$pdf->Cell($breite_inhalt,$hoehe,$einsatzführer,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Mannschaftsstärke');
+	$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Organisationen');
+	$pdf->Cell($breite_inhalt,$hoehe,$organisationen,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Fahrzeuge');
+	$pdf->Cell($breite_inhalt,$hoehe,$fahrzeuge,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Ausrüstung');
+	$pdf->Cell($breite_inhalt,$hoehe,$ausruest,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Kurzbericht');
+	$pdf->Cell($breite_inhalt,$hoehe,$kurzbericht,0,1);
+	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzbericht');
+	$pdf->MultiCell(150,80,$hoehe,0,1);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 	$speicherort = $params->get('pdf_speicherort');
