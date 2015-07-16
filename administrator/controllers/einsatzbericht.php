@@ -154,8 +154,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	
 	//Gebe PDF in definiertes Verzeichnis aus und benenne sie mit der Einsatz-ID
-	$pdfname = 'einsatzbericht_id'.$id;
-	$pdf->Output($path.'/'.$pdfname.'.pdf','F');
+	$pdfname = 'einsatzbericht_id'.$id.'.pdf';
+	$pdf->Output($path.'/'.$pdfname,'F');
 	
 	//Nachricht bei Erfolg
 	$msg = JText::_( 'Datei "'.$pdfname.'" wurde in den Ordner "'.$speicherort.'" exportiert.' );
