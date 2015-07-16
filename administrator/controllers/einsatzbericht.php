@@ -39,29 +39,19 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Varaiblen für Orga- udn Fahrzeugnamen
 	$orgas = $einsatz[0]->orgas;
 	$fahrzeuge = $einsatz[0]->fahrz;
-	/*print("1. Fahrzeuge: ".$fahrzeuge);
-	print("<br>");
-	print("2. Orgas: ".$orgas);
-	print("<br>");*/
+	
 	$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
-	/*print("3. FHZ-Query: ".$query);
-	print("<br>");*/
 	$db->setQuery($query);
 	$db->execute();
 	$anz_fahrz = $db->getNumRows();
 	$fahrz_arr = $db->loadObjectList();
 	$fahrz_all = "";
+	
 	foreach ($fahrz_arr as $key => $value) {
 	    $fahrz_all .=$value->name.", ";
 	}
 	
-	/*print("4. FHZ-Array: ".$anz_fahrz);
-	print_r($fahrz_arr);
-	print("<br>");*/
-	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
-	/*print("5. Orga-Query: ".$query);
-	print("<br>");*/
 	$db->setQuery($query);
 	$db->execute();
 	$anz_orgas = $db->getNumRows();
@@ -70,11 +60,6 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	foreach ($orga_arr as $key => $value) {
 	    $orgas_all .=$value->name.", ";
 	}
-	
-	/*print("6. Orga-Array: ".$anz_orgas);
-	print_r($orga_arr);
-	print("<br>");
-	die();*/
 	
 	//Variablendeklaraion für die PDF
 	$id = $einsatz[0]->id;
@@ -95,64 +80,66 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$organisationen = $orgas_all;
 	$fahrzeuge = $fahrz_all;
 	
-	
-	
      	$params = JComponentHelper::getParams('com_einsatzkomponente');
-     	//$this->setRedirect('http://www.google.de');
-     	//$this->redirect;
      	
      	//Hier wird das PDF-Grundgerüst erstellt
 	$pdf=new FPDF('P','mm','A4');
 	
 	//Definiere die Breite und Höhe der Beschriftungszellen:
-	$breite = 35;
+	$breite_beschriftung = 35;
 	$höhe = 8;
+	
+	//Breite des Inhalts. 0 = bis zum rechten Seitenrand
+	$breite_inhalt = 0
+	
 	//Neue Seite wird eingefügt
 	$pdf->AddPage();
 	
 	//Schriftart und -größe wird definiert 
 	$pdf->SetFont('Arial','',12);
+	
 	//Header-Image
 	$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
-	/*list($width, $height) = getimagesize($img);
-	print($width."---".$height);*/
 	list($width, $height) = $pdf->resizeToFit($img);
 	$pdf->resizeImage($img,0,0);
+	//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
 	$pdf->Ln($height);
+	
+	//Erstelle die Zellen
 	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
-	$pdf->Cell($breite,$höhe,$id,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$id,0,1);
 	$pdf->Cell($breite,$höhe,'Counter:');
-	$pdf->Cell($breite,$höhe,$counter,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$counter,0,1);
 	$pdf->Cell($breite,$höhe,'Alarmart');
-	$pdf->Cell($breite,$höhe,$alarmart,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$alarmart,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzart');
-	$pdf->Cell($breite,$höhe,$einsatzart,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$einsatzart,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzkategorie');
-	$pdf->Cell($breite,$höhe,$einsatzkat,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$einsatzkat,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzort');
-	$pdf->Cell($breite,$höhe,$ort,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$ort,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzbeginn');
-	$pdf->Cell($breite,$höhe,$beginn,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$beginn,0,1);
 	$pdf->Cell($breite,$höhe,'Ausrückezeit');
-	$pdf->Cell($breite,$höhe,$ausrueck,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$ausrueck,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzende');
-	$pdf->Cell($breite,$höhe,$ende,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$ende,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzleiter');
-	$pdf->Cell($breite,$höhe,$einsatzleiter,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$einsatzleiter,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzführer');
-	$pdf->Cell($breite,$höhe,$einsatzführer,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$einsatzführer,0,1);
 	$pdf->Cell($breite,$höhe,'Mannschaftsstärke');
-	$pdf->Cell($breite,$höhe,$mannschaft,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$mannschaft,0,1);
 	$pdf->Cell($breite,$höhe,'Organisationen');
-	$pdf->Cell($breite,$höhe,$organisationen,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$organisationen,0,1);
 	$pdf->Cell($breite,$höhe,'Fahrzeuge');
-	$pdf->Cell($breite,$höhe,$fahrzeuge,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$fahrzeuge,0,1);
 	$pdf->Cell($breite,$höhe,'Ausrüstung');
-	$pdf->Cell($breite,$höhe,$ausruest,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$ausruest,0,1);
 	$pdf->Cell($breite,$höhe,'Kurzbericht');
-	$pdf->Cell($breite,$höhe,$kurzbericht,0,1);
+	$pdf->Cell($breite_inhalt,$höhe,$kurzbericht,0,1);
 	$pdf->Cell($breite,$höhe,'Einsatzbericht');
-	$pdf->Cell($breite,$höhe,$bericht,0,1);
+	$pdf->MultiCell($breite_inhalt,$höhe,$bericht,0,1);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 	$speicherort = $params->get('pdf_speicherort');
@@ -165,8 +152,15 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	    }
 	    $path = '../'.$speicherort;
 	}
-	$pdf->Output($path.'/einsatzbericht_id'.$id.'.pdf','F');
-	$msg    = JText::_( 'PDF-Datei wurde in den Ordner "'.$speicherort.'" exportiert.' );
+	
+	//Gebe PDF in definiertes Verzeichnis aus und benenne sie mit der Einsatz-ID
+	$pdfname = 'einsatzbericht_id'.$id;
+	$pdf->Output($path.'/'.$pdfname.'.pdf','F');
+	
+	//Nachricht bei Erfolg
+	$msg = JText::_( 'Datei "'.$pdfname.'" wurde in den Ordner "'.$speicherort.'" exportiert.' );
+	
+	//Leite anschließend zum Einsatzbericht weiter
         $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$rep_id, $msg); 
      	$this->redirect;
      }
