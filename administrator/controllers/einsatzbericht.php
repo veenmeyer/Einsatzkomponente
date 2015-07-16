@@ -90,7 +90,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$höhe = 8;
 	
 	//Breite des Inhalts. 0 = bis zum rechten Seitenrand
-	$breite_inhalt = 0;
+	$breite_inhalt = 10;
 	
 	//Neue Seite wird eingefügt
 	$pdf->AddPage();
