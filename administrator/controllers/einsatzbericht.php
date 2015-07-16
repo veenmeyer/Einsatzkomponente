@@ -47,13 +47,13 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	print("3. FHZ-Query: ".$query);
 	print("<br>");
 	$db->setQuery($query);
-	$fahrz_arr = $db->loadObjectList;
+	$fahrz_arr = $db->loadObjectList();
 	
 	print("4. FHZ-Array: ");
 	print_r($fahrz_arr);
 	print("<br>");
 	
-	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN ('".$orgas."')";
+	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
 	print("5. Orga-Query: ".$query);
 	print("<br>");
 	$db->setQuery($query);
