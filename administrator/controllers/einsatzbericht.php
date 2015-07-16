@@ -90,7 +90,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$einsatzleiter = $einsatz[0]->el;
 	$einsatzfuehrer = $einsatz[0]->ef;
 	$mannschaft = $einsatz[0]->pers;
-	$ausruest = $einsatz[0]->ausruest;
+	//Ausrüstung noch nicht implementiert
+	$ausruest = $ausruest_all;
 	$kurzbericht = $einsatz[0]->kurzt;
 	$bericht = $einsatz[0]->langt;
 	$organisationen = $orgas_all;
@@ -122,6 +123,9 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
 		$pdf->Ln($height);
 	}
+	
+	print($params->get('pdf_show_id'));
+	die();
 	//Erstelle die Zellen
 	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatz-ID:');
 	$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
