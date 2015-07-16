@@ -20,7 +20,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
     }
     public function pdf()
      {
-     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
+     	require_once JPATH_COMPONENT.'/helpers/fpdf_extend.php';
 	$rep_id = JFactory::getApplication()->input->get('id', '0');
 	
 	$db = JFactory::getDBO();
@@ -113,7 +113,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Schriftart und -größe wird definiert 
 	$pdf->SetFont('Arial','',12);
 	//Header-Image
-	$pdf->Image("../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header'),0,0);
+	$pdf->centreImage("../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header'),0,0);
 	
 	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
 	$pdf->Cell($breite,$höhe,$id,0,1);
