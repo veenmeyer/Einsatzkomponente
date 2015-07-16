@@ -113,11 +113,11 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	
 	$pdf->Cell(40,10,'Einsatz-ID:');
 	$pdf->Cell(40,10,$id);
-	$pdf->Cell(40,10,'Counter:',1);
+	$pdf->Cell(40,10,'Counter:',0,1);
 	$pdf->Cell(40,10,$counter);
-	$pdf->Cell(40,10,'Alarmart',1);
+	$pdf->Cell(40,10,'Alarmart',0,1);
 	$pdf->Cell(40,10,$alarmart);
-	$pdf->Cell(40,10,'Einsatzkategorie',1);
+	$pdf->Cell(40,10,'Einsatzkategorie',0,1);
 	$pdf->Cell(40,10,$einsatzkat);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
