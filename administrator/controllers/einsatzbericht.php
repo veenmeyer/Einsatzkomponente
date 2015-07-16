@@ -115,12 +115,10 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Header-Image
 	$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
 	/*list($width, $height) = getimagesize($img);
-	print($width."---".$height);
+	print($width."---".$height);*/
 	list($width, $height) = $pdf->resizeToFit($img);
-	print($width."---".$height);
-	die();*/
 	$pdf->resizeImage($img,0,0);
-	$pdf->Ln($height+5);
+	$pdf->Ln($height);
 	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
 	$pdf->Cell($breite,$höhe,$id,0,1);
 	$pdf->Cell($breite,$höhe,'Counter:');
