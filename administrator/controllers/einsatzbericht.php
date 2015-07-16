@@ -39,21 +39,26 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Varaiblen für Orga- udn Fahrzeugnamen
 	$orgas = $einsatz[0]->orgas;
 	$fahrzeuge = $einsatz[0]->fahrz;
-	print($fahrzeuge);
+	print("1. Fahrzeuge: ".$fahrzeuge);
 	print("<br>");
-	print($orgas);
+	print("2. Orgas: ".$orgas);
 	print("<br>");
 	$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
-	print($query);
+	print("3. FHZ-Query: ".$query);
+	print("<br>");
 	$db->setQuery($query);
 	$fahrz_arr = $db->loadObjectList();
-	print_r($fahrz_arr);
+	print_r("4. FHZ-Array: ".$fahrz_arr);
+	print("<br>");
 	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN ('".$orgas."')";
+	print("5. Orga-Query: ".$query);
+	print("<br>");
 	$db->setQuery($query);
 	$orga_arr = $db->loadObjectList();
 		
-	print_r($orga_arr);
+	print_r("6. Orga-Array: ".$orga_arr);
+	print("<br>");
 	die();
 	//Variablendeklaraion für die PDF
 	$id = $einsatz[0]->id;
