@@ -1571,8 +1571,8 @@
 	 	type="imagelist" 
 	 	default="" 
 	 	label="PDF-Header" 
-	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als header eingefügt werden soll. Bilder müssen im Ordner 'media/com_einsatzkomponente/pdf/' hinterlegt werden." 
-	 	directory="media/com_einsatzkomponente/pdf/" 
+	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'media/com_einsatzkomponente/images/pdf/' hinterlegt werden." 
+	 	directory="media/com_einsatzkomponente/images/pdf/" 
 	 	exclude="" 
 	 	stripext="" />
 
