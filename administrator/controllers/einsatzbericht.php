@@ -50,6 +50,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	foreach ($fahrz_arr as $key => $value) {
 	    $fahrz_all .=$value->name.", ";
 	}
+	//Entferne das Komman am Ende
+	$fahrz_all = substr($fahrz_all, 0, -1);
 	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
 	$db->setQuery($query);
@@ -60,6 +62,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	foreach ($orga_arr as $key => $value) {
 	    $orgas_all .=$value->name.", ";
 	}
+	//Entferne das Komman am Ende
+	$orgas_all = substr($orgas_all, 0, -1);
 	
 	//Variablendeklaraion für die PDF
 	$id = $einsatz[0]->id;
