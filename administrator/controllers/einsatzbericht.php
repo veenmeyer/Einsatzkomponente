@@ -49,7 +49,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$fahrz_arr = $db->loadObjectList();
 	print_r($fahrz_arr);
 	
-	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN ('".$orga."')";
+	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN ('".$orgas."')";
 	$db->setQuery($query);
 	$orga_arr = $db->loadObjectList();
 		
