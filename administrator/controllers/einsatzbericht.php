@@ -35,8 +35,6 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 			WHERE eb.id = ".$rep_id;
 	$db->setQuery($query);
 	$einsatz = $db->loadObjectList();
-	print_r($einsatz[0]);
-	die();
 	
 	//Varaiblen für Orga- udn Fahrzeugnamen
 	$orgas = $einsatz[0]->orgas;
@@ -48,7 +46,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrz_arr.")";
 	$db->setQuery($query);
 	$fahrz_arr1 = $db->loadObjectList();
-	
+	print_r($fahrz_arr1);
+	die();
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orga_arr.")";
 	$db->setQuery($query);
 	$orga_arr1 = $db->loadObjectList();
