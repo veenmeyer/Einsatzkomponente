@@ -144,7 +144,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$pdf->Cell($breite_beschriftung,$hoehe,'Kurzbericht');
 	$pdf->Cell($breite_inhalt,$hoehe,$kurzbericht,0,1);
 	$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzbericht');
-	$pdf->MultiCell(150,80,$hoehe,0,1);
+	$pdf->MultiCell(150,$hoehe,$bericht,0,1);
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 	$speicherort = $params->get('pdf_speicherort');
