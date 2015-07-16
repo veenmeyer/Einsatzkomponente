@@ -113,9 +113,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Schriftart und -größe wird definiert 
 	$pdf->SetFont('Arial','',12);
 	//Header-Image
-	print("Image: ".$params->get('pdf_header')."--");
-	die();
-	$pdf->Image($params->get('pdf_header'),0,0);
+	$pdf->Image("../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header'),0,0);
 	
 	$pdf->Cell($breite,$höhe,'Einsatz-ID:');
 	$pdf->Cell($breite,$höhe,$id,0,1);
