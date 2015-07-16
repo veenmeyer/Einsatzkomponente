@@ -21,8 +21,56 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
     public function pdf()
      {
      	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
-     	$this->item = $this->get('Item');
-     	die($this);
+	$rep_id = JFactory::getApplication()->input->get('id', '0');
+	
+	$db = JFactory::getDBO();
+	$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 
+			  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
+			  eb.date3 as endd, eb.boss as el, eb.boss2 as ef, eb.people as pers, eb.auswahl_orga as orgas, 
+			  eb.vehicles as fahrz, eb.ausruestung as ausruest, eb.summary as kurzt, eb.desc as langt 
+			FROM ffineu_eiko_einsatzberichte eb 
+			INNER JOIN #__eiko_einsatzarten ea ON ea.id = eb.data1 
+			INNER JOIN #__eiko_alarmierungsarten aa ON aa.id = eb.alerting
+			INNER JOIN #__eiko_tickerkat tk ON tk.id = eb.tickerkat
+			WHERE eb.id = ".$rep_id;
+	$db->setQuery($query);
+	$einsatz = $db->loadObjectList();
+	die($einsatz[0]);
+	
+	//Varaiblen für Orga- udn Fahrzeugnamen
+	$orgas = $einsatz[0]->orgas;
+	$fahrzeuge = $einsatz[0]->fahrz;
+	
+	$orga_arr = explode(",",$orgas);
+	$fahrz_arr = explode(",", $fahrzeuge);
+	
+	$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrz_arr.")";
+	$db->setQuery($query);
+	$fahrz_arr1 = $db->loadObjectList();
+	
+	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orga_arr.")";
+	$db->setQuery($query);
+	$orga_arr1 = $db->loadObjectList();
+	
+	//Variablendeklaraion für die PDF
+	$id = $einsatz[0]->id;
+	$counter = $einsatz[0]->counter;
+	$alarmart = $einsatz[0]->alarmart;
+	$einsatzkat = $einsatz[0]->einsatzkat;
+	$einsatzart = $einsatz[0]->einsatzart;
+	$ort = $einsatz[0]->ort;
+	$beginn = $einsatz[0]->startd;
+	$ausrueck = $einsatz[0]->fahrd;
+	$ende = $einsatz[0]->endd;
+	$einsatzleiter = $einsatz[0]->el;
+	$einsatzfuehrer = $einsatz[0]->ef;
+	$mannschaft = $einsatz[0]->pers;
+	$ausruest = $einsatz[0]->ausruest;
+	$kurzbericht = $einsatz[0]->kurzt;
+	$uebericht = $einsatz[0]->langt;
+	
+	
+	
      	$params = JComponentHelper::getParams('com_einsatzkomponente');
      	//$this->setRedirect('http://www.google.de');
      	//$this->redirect;
@@ -51,7 +99,6 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	
 	$pdf->Cell(40,10,'Hallo Welt');
 	$pdf->Output($path.'/testdatei.pdf','F');
-	$rep_id = JFactory::getApplication()->input->get('id', '0');
 	$msg    = JText::_( 'PDF-Datei wurde in den Ordner "'.$speicherort.'" exportiert.' );
         $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$rep_id, $msg); 
      	$this->redirect;
