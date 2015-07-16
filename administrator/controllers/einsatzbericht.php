@@ -50,10 +50,14 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$db->execute();
 	$anz_fahrz = $db->getNumRows();
 	$fahrz_arr = $db->loadObjectList();
+	$fahrz_all = "";
+	foreach ($fahrz_arr as $key => $value) {
+	    $fahrz_all .=$value.", ";
+	}
 	
-	print("4. FHZ-Array: ".$anz_fahrz);
-	/*print_r($fahrz_arr);*/
-	print("<br>");
+	/*print("4. FHZ-Array: ".$anz_fahrz);
+	print_r($fahrz_arr);
+	print("<br>");*/
 	
 	$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
 	/*print("5. Orga-Query: ".$query);
@@ -62,11 +66,15 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$db->execute();
 	$anz_orgas = $db->getNumRows();
 	$orga_arr = $db->loadObjectList();
+	$orgas_all = "";
+	foreach ($orga_arr as $key => $value) {
+	    $orgas_all .=$value.", ";
+	}
 	
-	print("6. Orga-Array: ".$anz_orgas);
-	/*print_r($orga_arr);
-	print("<br>");*/
-	die();
+	/*print("6. Orga-Array: ".$anz_orgas);
+	print_r($orga_arr);
+	print("<br>");
+	die();*/
 	
 	//Variablendeklaraion für die PDF
 	$id = $einsatz[0]->id;
@@ -84,6 +92,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$ausruest = $einsatz[0]->ausruest;
 	$kurzbericht = $einsatz[0]->kurzt;
 	$uebericht = $einsatz[0]->langt;
+	$organisationen = $orgas_all;
+	$fahrzeuge = $fahrz_all;
 	
 	
 	
@@ -101,6 +111,15 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Header-Image
 	//$pdf->Image($PFAD_ZUM_HEADER,0,0)
 	
+	$pdf->Cell(40,10,'Einsatz-ID:');
+	$pdf->Cell(40,10,$id);
+	$pdf->Cell(40,10,'Counter:');
+	$pdf->Cell(40,10,$counter);
+	$pdf->Cell(40,10,'Alarmart');
+	$pdf->Cell(40,10,$alarmart);
+	$pdf->Cell(40,10,'Einsatzkategorie');
+	$pdf->Cell(40,10,$einsatzkat);
+	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 	$speicherort = $params->get('pdf_speicherort');
 	if ($speicherort != '')
@@ -112,8 +131,6 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	    }
 	    $path = '../'.$speicherort;
 	}
-	
-	$pdf->Cell(40,10,'Hallo Welt');
 	$pdf->Output($path.'/testdatei.pdf','F');
 	$msg    = JText::_( 'PDF-Datei wurde in den Ordner "'.$speicherort.'" exportiert.' );
         $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$rep_id, $msg); 
