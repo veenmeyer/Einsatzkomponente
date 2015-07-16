@@ -52,7 +52,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$fahrz_arr = $db->loadObjectList();
 	$fahrz_all = "";
 	foreach ($fahrz_arr as $key => $value) {
-	    $fahrz_all .=$value.", ";
+	    $fahrz_all .=$value->name.", ";
 	}
 	
 	/*print("4. FHZ-Array: ".$anz_fahrz);
@@ -68,7 +68,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	$orga_arr = $db->loadObjectList();
 	$orgas_all = "";
 	foreach ($orga_arr as $key => $value) {
-	    $orgas_all .=$value.", ";
+	    $orgas_all .=$value->name.", ";
 	}
 	
 	/*print("6. Orga-Array: ".$anz_orgas);
