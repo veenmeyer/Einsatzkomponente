@@ -50,7 +50,9 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	foreach ($fahrz_arr as $key => $value) {
 	    if ($i == 0)
 	    	$fahrz_all .= "";
-	    $fahrz_all .=$value->name.",";
+	    else
+	    	$fahrz_all .= " ";
+	    $fahrz_all .= $value->name.",";
 	    $i += 1;
 	}
 	//Entferne das Komma am Ende
@@ -66,7 +68,9 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	foreach ($orga_arr as $key => $value) {
 	    if ($i == 0)
 	    	$orgas_all .= "";
-	    $orgas_all .=" ".$value->name.",";
+	    else
+	    	$orgas_all .= " ";
+	    $orgas_all .= $value->name.",";
 	    $i += 1;
 	}
 	$i = 0;
