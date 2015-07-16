@@ -47,6 +47,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	/*print("3. FHZ-Query: ".$query);
 	print("<br>");*/
 	$db->setQuery($query);
+	$db->execute();
 	$anz_fahrz = $db->getNumRows();
 	$fahrz_arr = $db->loadObjectList();
 	
@@ -58,7 +59,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	/*print("5. Orga-Query: ".$query);
 	print("<br>");*/
 	$db->setQuery($query);
-	
+	$db->execute();
 	$anz_orgas = $db->getNumRows();
 	$orga_arr = $db->loadObjectList();
 	
