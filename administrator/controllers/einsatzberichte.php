@@ -178,15 +178,8 @@ class EinsatzkomponenteControllerEinsatzberichte extends JControllerAdmin
 	}
 	else
 	{
-	    //$model = $this->getModel();
-	    $params = JComponentHelper::getParams('com_einsatzkomponente');
-	    // Make sure the item ids are integers
-	    jimport('joomla.utilities.arrayhelper');
-	    JArrayHelper::toInteger($cid);
 	    $msg = EinsatzkomponenteHelper::pdf($cid);
 	    $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg); 
 	}
     }
-
-    
 }
