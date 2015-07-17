@@ -1093,9 +1093,30 @@ endif;
 			$db->setQuery($query);
 			$einsatz = $db->loadObjectList();
 			
-			//Varaiblen für Orga- und Fahrzeugnamen
+			//Varaible für Organisationen
 			$orgas = $einsatz[0]->orgas;
+			
+			//Prüfe auf Komma am Anfang und Ende (Workaround für einen Updatefehler, wo Komponentenzuordnungen entfernt wurden)
+			$lastchar = substr($orgas, -1, 1);
+			$firstchar = substr($orgas, 0, 1);
+			if ($lastchar == ",")
+			{
+				$orgas = substr($orgas, 0, -1);
+				if ($firstchar == ",")
+					$orgas = substr($orgas, 1);
+			}
+			//Variable für Fahrzeuge
 			$fahrzeuge = $einsatz[0]->fahrz;
+			
+			//Prüfe auf Komman am Anfang und Ende (Workaround für einen Updatefehler, wo Komponentenzuordnungen entfernt wurden)
+			$lastchar = substr($fahrzeuge, -1, 1);
+			$firstchar = substr($fahrzeuge, 0, 1);
+			if ($lastchar == ",")
+			{
+				$fahrzeuge = substr($fahrzeuge, 0, -1);
+				if ($firstchar == ",")
+					$fahrzeuge = substr($fahrzeuge, 1);
+			}
 			
 			$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
 			$db->setQuery($query);
