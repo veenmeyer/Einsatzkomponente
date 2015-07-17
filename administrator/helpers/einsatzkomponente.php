@@ -1085,7 +1085,7 @@ endif;
 					  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
 					  eb.date3 as endd, eb.boss as el, eb.boss2 as ef, eb.people as pers, eb.auswahl_orga as orgas, 
 					  eb.vehicles as fahrz, eb.ausruestung as ausruest, eb.summary as kurzt, eb.desc as langt 
-					FROM ffineu_eiko_einsatzberichte eb 
+					FROM #__eiko_einsatzberichte eb 
 					INNER JOIN #__eiko_einsatzarten ea ON ea.id = eb.data1 
 					INNER JOIN #__eiko_alarmierungsarten aa ON aa.id = eb.alerting
 					INNER JOIN #__eiko_tickerkat tk ON tk.id = eb.tickerkat
