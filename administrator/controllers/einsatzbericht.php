@@ -134,19 +134,19 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	if ($params->get('pdf_show_alarmart') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Alarmart:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($alarmart),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($alarmart),0,1);
 	}
 	if ($params->get('pdf_show_einsatzart') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzart:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($einsatzart),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzart),0,1);
 	}
 	if ($params->get('pdf_show_einsatzkat') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzkategorie:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($einsatzkat),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzkat),0,1);
 	}
 	if ($params->get('pdf_show_ort') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzort:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($ort),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ort),0,1);
 	}
 	if ($params->get('pdf_show_alarmzeit') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzbeginn:');
@@ -162,11 +162,11 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	if ($params->get('pdf_show_einsatzleiter') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzleiter:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($einsatzleiter),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzleiter),0,1);
 	}
 	if ($params->get('pdf_show_einsatzfuehrer') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzführer:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($einsatzführer),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzführer),0,1);
 	}
 	if ($params->get('pdf_show_mannschaft') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Mannschaftsstärke:');
@@ -174,23 +174,23 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	if ($params->get('pdf_show_orgas') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Organisationen:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($organisationen),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
 	}
 	if ($params->get('pdf_show_fahrzeuge') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Fahrzeuge:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($fahrzeuge),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
 	}
 	if ($params->get('pdf_show_ausruestung') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Ausrüstung:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($ausruest),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1);
 	}
 	if ($params->get('pdf_show_kurzbericht') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Kurzbericht:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($kurzbericht),0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($kurzbericht),0,1);
 	}
 	if ($params->get('pdf_show_langbericht') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzbericht:');
-		$pdf->MultiCell(150,$hoehe,utf8_encode($bericht),0,1);
+		$pdf->MultiCell(150,$hoehe,utf8_decode($bericht),0,1);
 	}
 	
 	//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
