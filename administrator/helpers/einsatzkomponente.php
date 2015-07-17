@@ -1104,7 +1104,7 @@ endif;
 				print('<br><br>');
 			}
 			die();
-			foreach ($cid as $key => $rep_id) { {	
+			foreach ($cid as $key => $rep_id) {	
 				//Varaiblen für Orga- udn Fahrzeugnamen
 				$orgas = $einsatz[0]->orgas;
 				$fahrzeuge = $einsatz[0]->fahrz;
@@ -1284,7 +1284,4 @@ endif;
 			return $msg;
 		}
 	}
-
-
-	
 }
