@@ -31,7 +31,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	else
 	{
     	    $msg = EinsatzkomponenteHelper::pdf($cid);
-	    $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg);
+	    $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$cid[0], $msg);
 	}
     }
     /*public function pdf()
