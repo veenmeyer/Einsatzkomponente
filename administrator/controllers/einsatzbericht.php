@@ -23,7 +23,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 	require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 	
-    	$cid = JFactory::getApplication()->input->get('id', array(), '0');
+    	$cid = JFactory::getApplication()->input->get('id', array(), 'array'');
     	$msg = EinsatzkomponenteHelper::pdf($cid);
 	$this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg);
     }
