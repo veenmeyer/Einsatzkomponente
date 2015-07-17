@@ -1073,7 +1073,8 @@ endif;
 	public function pdf($cid)
      	{
 	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
-	     	
+	     	print_r($cid);
+	     	die();
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		// Make sure the item ids are integers
