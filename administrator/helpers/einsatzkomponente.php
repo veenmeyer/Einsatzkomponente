@@ -1073,8 +1073,6 @@ endif;
 	public function pdf($cid)
      	{
 	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
-	     	print_r($cid);
-	     	die();
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		// Make sure the item ids are integers
@@ -1094,12 +1092,8 @@ endif;
 					WHERE eb.id = ".$rep_id;
 			$db->setQuery($query);
 			$einsatz = $db->loadObjectList();
-		/*	print_r($einsatz);
-			print('<br><br>');
-		}
-		die();
-		foreach ($cid as $key => $rep_id) {*/	
-			//Varaiblen für Orga- udn Fahrzeugnamen
+			
+			//Varaiblen für Orga- und Fahrzeugnamen
 			$orgas = $einsatz[0]->orgas;
 			$fahrzeuge = $einsatz[0]->fahrz;
 			
