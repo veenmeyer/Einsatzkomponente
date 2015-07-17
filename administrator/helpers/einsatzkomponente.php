@@ -1276,11 +1276,9 @@ endif;
 				$pdf->Output($path.'/'.$pdfname,'F');
 			}
 			//Nachricht bei Erfolg
-			$msg = JText::_( 'Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
+			$msg = count($cid).JText::_(' Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
 			
-			//Leite anschließend zum Einsatzbericht weiter
-		        $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg); 
-		     	$this->redirect;
+			return $msg;
 		}
 	}
 
