@@ -1070,7 +1070,219 @@ endif;
 		$options = array( 'style' => 'xhtml' );
 		return $renderer->render( $pos, $options, null);  
     }
-
+	public function pdf($cid)
+     	{
+	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
+		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
+		
+		$db = JFactory::getDBO();
+		
+		if (!is_array($cid) || count($cid) < 1)
+		{
+		    JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+		}
+		else
+		{
+			//$model = $this->getModel();
+			$params = JComponentHelper::getParams('com_einsatzkomponente');
+			// Make sure the item ids are integers
+			jimport('joomla.utilities.arrayhelper');
+			JArrayHelper::toInteger($cid);
+				
+			foreach ($cid as $key => $rep_id) {
+				$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 
+						  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
+						  eb.date3 as endd, eb.boss as el, eb.boss2 as ef, eb.people as pers, eb.auswahl_orga as orgas, 
+						  eb.vehicles as fahrz, eb.ausruestung as ausruest, eb.summary as kurzt, eb.desc as langt 
+						FROM ffineu_eiko_einsatzberichte eb 
+						INNER JOIN #__eiko_einsatzarten ea ON ea.id = eb.data1 
+						INNER JOIN #__eiko_alarmierungsarten aa ON aa.id = eb.alerting
+						INNER JOIN #__eiko_tickerkat tk ON tk.id = eb.tickerkat
+						WHERE eb.id = ".$rep_id;
+				$db->setQuery($query);
+				$einsatz = $db->loadObjectList();
+				
+				//Varaiblen für Orga- udn Fahrzeugnamen
+				$orgas = $einsatz[0]->orgas;
+				$fahrzeuge = $einsatz[0]->fahrz;
+				
+				$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
+				$db->setQuery($query);
+				$db->execute();
+				$anz_fahrz = $db->getNumRows();
+				$fahrz_arr = $db->loadObjectList();
+				$fahrz_all = "";
+				$i = 0;
+				foreach ($fahrz_arr as $key => $value) {
+				    if ($i == 0)
+				    	$fahrz_all .= "";
+				    else
+				    	$fahrz_all .= " ";
+				    $fahrz_all .= $value->name.",";
+				    $i += 1;
+				}
+				//Entferne das Komma am Ende
+				$fahrz_all = substr($fahrz_all, 0, -1);
+				
+				$query = "SELECT name FROM #__eiko_organisationen WHERE id IN (".$orgas.")";
+				$db->setQuery($query);
+				$db->execute();
+				$anz_orgas = $db->getNumRows();
+				$orga_arr = $db->loadObjectList();
+				$orgas_all = "";
+				$i = 0;
+				foreach ($orga_arr as $key => $value) {
+				    if ($i == 0)
+				    	$orgas_all .= "";
+				    else
+				    	$orgas_all .= " ";
+				    $orgas_all .= $value->name.",";
+				    $i += 1;
+				}
+				$i = 0;
+				//Entferne das Komma am Ende
+				$orgas_all = substr($orgas_all, 0, -1);
+				
+				//Variablendeklaraion für die PDF
+				$id = $einsatz[0]->id;
+				$counter = $einsatz[0]->counter;
+				$alarmart = $einsatz[0]->alarmart;
+				$einsatzkat = $einsatz[0]->einsatzkat;
+				$einsatzart = $einsatz[0]->einsatzart;
+				$ort = $einsatz[0]->ort;
+				$beginn = $einsatz[0]->startd;
+				$ausrueck = $einsatz[0]->fahrd;
+				$ende = $einsatz[0]->endd;
+				$einsatzleiter = $einsatz[0]->el;
+				$einsatzfuehrer = $einsatz[0]->ef;
+				$mannschaft = $einsatz[0]->pers;
+				//Ausrüstung noch nicht implementiert
+				$ausruest = $ausruest_all;
+				$kurzbericht = $einsatz[0]->kurzt;
+				$bericht = $einsatz[0]->langt;
+				$organisationen = $orgas_all;
+				$fahrzeuge = $fahrz_all;
+				
+			     	$params = JComponentHelper::getParams('com_einsatzkomponente');
+			     	
+			     	//Hier wird das PDF-Grundgerüst erstellt
+				$pdf=new FPDF('P','mm','A4');
+				
+				//Definiere die Breite und Höhe der Beschriftungszellen:
+				$breite_beschriftung = 45;
+				$hoehe = 8;
+				
+				//Breite des Inhalts. 0 = bis zum rechten Seitenrand
+				$breite_inhalt = 10;
+				
+				//Neue Seite wird eingefügt
+				$pdf->AddPage();
+				
+				//Schriftart und -größe wird definiert 
+				$pdf->SetFont('Arial','',12);
+				
+				//Header-Image
+				if (!$params->get('pdf_header') == '') {
+					$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
+					list($width, $height) = $pdf->resizeToFit($img);
+					$pdf->resizeImage($img,0,0);
+					//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
+					$pdf->Ln($height);
+				}
+				//Erstelle die Zellen
+				if ($params->get('pdf_show_id') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
+				}
+				if ($params->get('pdf_show_counter') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,$counter,0,1);
+				}
+				if ($params->get('pdf_show_alarmart') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($alarmart),0,1);
+				}
+				if ($params->get('pdf_show_einsatzart') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzart),0,1);
+				}
+				if ($params->get('pdf_show_einsatzkat') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzkat),0,1);
+				}
+				if ($params->get('pdf_show_ort') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ort),0,1);
+				}
+				if ($params->get('pdf_show_alarmzeit') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMESTART').':');
+					$pdf->Cell($breite_inhalt,$hoehe,$beginn,0,1);
+				}
+				if ($params->get('pdf_show_ausfahrzeit') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2').':');
+					$pdf->Cell($breite_inhalt,$hoehe,$ausrueck,0,1);
+				}
+				if ($params->get('pdf_show_einsatzende') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMEEND').':');
+					$pdf->Cell($breite_inhalt,$hoehe,$ende,0,1);
+				}
+				if ($params->get('pdf_show_einsatzleiter') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzleiter),0,1);
+				}
+				if ($params->get('pdf_show_einsatzfuehrer') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzführer),0,1);
+				}
+				if ($params->get('pdf_show_mannschaft') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
+				}
+				if ($params->get('pdf_show_orgas') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
+				}
+				if ($params->get('pdf_show_fahrzeuge') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
+				}
+				if ($params->get('pdf_show_ausruestung') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1);
+				}
+				if ($params->get('pdf_show_kurzbericht') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY').':'));
+					$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($kurzbericht),0,1);
+				}
+				if ($params->get('pdf_show_langbericht') == 1) {
+					$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC').':'));
+					$pdf->MultiCell(150,$hoehe,utf8_decode($bericht),0,1);
+				}
+				
+				//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
+				$speicherort = $params->get('pdf_speicherort');
+				if ($speicherort != '')
+				{
+				    $lastchar = substr($speicherort, -1, 1);
+				    if ($lastchar == "/")
+				    {
+				    	$speicherort = substr($speicherort, 0, -1);
+				    }
+				    $path = '../'.$speicherort;
+				}
+				
+				//Gebe PDF in definiertes Verzeichnis aus und benenne sie mit der Einsatz-ID
+				$pdfname = 'einsatzbericht_id'.$id.'.pdf';
+				$pdf->Output($path.'/'.$pdfname,'F');
+			}
+			//Nachricht bei Erfolg
+			$msg = JText::_( 'Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
+			
+			//Leite anschließend zum Einsatzbericht weiter
+		        $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg); 
+		     	$this->redirect;
+		}
+	}
 
 
 	
