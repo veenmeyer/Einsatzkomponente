@@ -1105,6 +1105,7 @@ endif;
 				if ($firstchar == ",")
 					$orgas = substr($orgas, 1);
 			}
+			$orgas = preg_replace('/,,+/', ',', $orgas);
 			$orgas .= $rep_id;
 			
 			//Variable für Fahrzeuge
@@ -1119,6 +1120,7 @@ endif;
 				if ($firstchar == ",")
 					$fahrzeuge = substr($fahrzeuge, 1);
 			}
+			$fahrzeuge = preg_replace('/,,+/', ',', $fahrzeuge);
 			
 			$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
 			$db->setQuery($query);
