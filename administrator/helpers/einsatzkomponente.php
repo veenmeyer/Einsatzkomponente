@@ -1075,6 +1075,8 @@ endif;
 	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
 		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
 		
+		print_r($cid);
+		die();
 		$db = JFactory::getDBO();
 		
 		if (!is_array($cid) || count($cid) < 1)
