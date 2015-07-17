@@ -1105,6 +1105,8 @@ endif;
 				if ($firstchar == ",")
 					$orgas = substr($orgas, 1);
 			}
+			$orgas .= $rep_id;
+			
 			//Variable für Fahrzeuge
 			$fahrzeuge = $einsatz[0]->fahrz;
 			
