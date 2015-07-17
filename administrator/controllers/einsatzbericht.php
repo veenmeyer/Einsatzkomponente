@@ -19,7 +19,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
         parent::__construct();
     }
     public function pdf() {
-    	$cid = JFactory::getApplication()->input->get('id', '0');
+    	$cid = JFactory::getApplication()->input->get('id', array(), '0');
     	$msg = EinsatzkomponenteHelper::pdf($cid);
 	$this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg);
     }
