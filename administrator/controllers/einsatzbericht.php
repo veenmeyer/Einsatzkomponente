@@ -125,7 +125,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	//Erstelle die Zellen
 	if ($params->get('pdf_show_id') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT'.'-'.'COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID'));
+		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID'));
 		$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
 	}
 	if ($params->get('pdf_show_counter') == 1) {
