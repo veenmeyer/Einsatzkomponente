@@ -99,7 +99,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy {
 		if ($canDo->get('core.create')) {
 				JToolBarHelper::custom( 'einsatzberichte.article', 'edit','edit', 'Als Artikel erstellen',  true );
 		}
-		JToolBarHelper::custom( 'einsatzberichte.pdf', 'upload','upload', 'Als PDf exportieren',  true );
+		JToolBarHelper::custom( 'einsatzberichte.pdf', 'upload','upload', 'Als PDF exportieren',  true );
         endif;
 		
             if ($canDo->get('core.create')) :
