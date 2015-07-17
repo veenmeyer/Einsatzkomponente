@@ -146,7 +146,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	if ($params->get('pdf_show_ort') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzort:');
-		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($or)t,0,1);
+		$pdf->Cell($breite_inhalt,$hoehe,utf8_encode($ort),0,1);
 	}
 	if ($params->get('pdf_show_alarmzeit') == 1) {
 		$pdf->Cell($breite_beschriftung,$hoehe,'Einsatzbeginn:');
