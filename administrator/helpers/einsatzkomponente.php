@@ -1272,7 +1272,10 @@ endif;
 			$pdf->Output($path.'/'.$pdfname,'F');
 		}
 		//Nachricht bei Erfolg
-		$msg = count($cid).JText::_(' Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
+		if (count($cid) = 1)
+			$msg = count($cid).JText::_(' Einsatz wurden in den Ordner "'.$speicherort.'" exportiert.' );
+		else
+			$msg = count($cid).JText::_(' Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
 		
 		return $msg;
 	}
