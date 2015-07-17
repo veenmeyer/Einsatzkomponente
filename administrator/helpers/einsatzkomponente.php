@@ -1075,8 +1075,6 @@ endif;
 	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
 		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
 		
-		print_r($cid);
-		die();
 		$db = JFactory::getDBO();
 		
 		if (!is_array($cid) || count($cid) < 1)
@@ -1090,7 +1088,11 @@ endif;
 			// Make sure the item ids are integers
 			jimport('joomla.utilities.arrayhelper');
 			JArrayHelper::toInteger($cid);
-				
+			
+			foreach ($cid as $key => $rep_id) {
+				print($rep_id.' --- ');
+			}
+			die();
 			foreach ($cid as $key => $rep_id) {
 				$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 
 						  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
