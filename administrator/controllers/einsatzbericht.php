@@ -18,7 +18,23 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
         $this->view_list = 'einsatzberichte';
         parent::__construct();
     }
-    public function pdf()
+    public function pdf() {
+    	// Check for request forgeries
+	JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+	require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+	
+    	$cid = JFactory::getApplication()->input->get('id', array(), 'array');
+    	if (!is_array($cid) || count($cid) < 1)
+	{
+	    JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+	}
+	else
+	{
+    	    $msg = EinsatzkomponenteHelper::pdf($cid);
+	    $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$cid[0], $msg);
+	}
+    }
+    /*public function pdf()
      {
      	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
 	$rep_id = JFactory::getApplication()->input->get('id', '0');
@@ -215,7 +231,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	//Leite anschließend zum Einsatzbericht weiter
         $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit&id='.$rep_id, $msg); 
      	$this->redirect;
-     }
+     }*/
      function swf()  
      { 
         $pview = JFactory::getApplication()->input->get('view', 'einsatzbericht');
