@@ -125,27 +125,27 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
 	//Erstelle die Zellen
 	if ($params->get('pdf_show_id') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID')));
 		$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
 	}
 	if ($params->get('pdf_show_counter') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER')));
 		$pdf->Cell($breite_inhalt,$hoehe,$counter,0,1);
 	}
 	if ($params->get('pdf_show_alarmart') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($alarmart),0,1);
 	}
 	if ($params->get('pdf_show_einsatzart') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzart),0,1);
 	}
 	if ($params->get('pdf_show_einsatzkat') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzkat),0,1);
 	}
 	if ($params->get('pdf_show_ort') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ort),0,1);
 	}
 	if ($params->get('pdf_show_alarmzeit') == 1) {
@@ -161,35 +161,35 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$pdf->Cell($breite_inhalt,$hoehe,$ende,0,1);
 	}
 	if ($params->get('pdf_show_einsatzleiter') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzleiter),0,1);
 	}
 	if ($params->get('pdf_show_einsatzfuehrer') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzführer),0,1);
 	}
 	if ($params->get('pdf_show_mannschaft') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE')));
 		$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
 	}
 	if ($params->get('pdf_show_orgas') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
 	}
 	if ($params->get('pdf_show_fahrzeuge') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
 	}
 	if ($params->get('pdf_show_ausruestung') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1);
 	}
 	if ($params->get('pdf_show_kurzbericht') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY')));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($kurzbericht),0,1);
 	}
 	if ($params->get('pdf_show_langbericht') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC'));
+		$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC')));
 		$pdf->MultiCell(150,$hoehe,utf8_decode($bericht),0,1);
 	}
 	
