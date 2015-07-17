@@ -1096,31 +1096,33 @@ endif;
 			//Varaible für Organisationen
 			$orgas = $einsatz[0]->orgas;
 			
-			//Prüfe auf Komma am Anfang und Ende (Workaround für einen Updatefehler, wo Komponentenzuordnungen entfernt wurden)
-			$lastchar = substr($orgas, -1, 1);
-			$firstchar = substr($orgas, 0, 1);
-			if ($lastchar == ",")
-			{
-				$orgas = substr($orgas, 0, -1);
-				if ($firstchar == ",")
-					$orgas = substr($orgas, 1);
-			}
-			$orgas = preg_replace('/,,+/', ',', $orgas);
-			$orgas .= $rep_id;
+			//Prüfe auf Kommas am Anfang und Ende (Workaround für einen Updatefehler, wo Komponentenzuordnungen entfernt wurden)
+				$lastchar = substr($orgas, -1, 1);
+				$firstchar = substr($orgas, 0, 1);
+				if ($lastchar == ",")
+				{
+					$orgas = substr($orgas, 0, -1);
+					if ($firstchar == ",")
+						$orgas = substr($orgas, 1);
+				}
+				//Ersetze doppelte Kommas durch ein einzelnes
+				$orgas = preg_replace('/,,+/', ',', $orgas);
+				$orgas .= $rep_id;
 			
 			//Variable für Fahrzeuge
 			$fahrzeuge = $einsatz[0]->fahrz;
 			
-			//Prüfe auf Komman am Anfang und Ende (Workaround für einen Updatefehler, wo Komponentenzuordnungen entfernt wurden)
-			$lastchar = substr($fahrzeuge, -1, 1);
-			$firstchar = substr($fahrzeuge, 0, 1);
-			if ($lastchar == ",")
-			{
-				$fahrzeuge = substr($fahrzeuge, 0, -1);
-				if ($firstchar == ",")
-					$fahrzeuge = substr($fahrzeuge, 1);
-			}
-			$fahrzeuge = preg_replace('/,,+/', ',', $fahrzeuge);
+			//Prüfe auf Kommas am Anfang und Ende (Workaround für einen Updatefehler, wo Komponentenzuordnungen entfernt wurden)
+				$lastchar = substr($fahrzeuge, -1, 1);
+				$firstchar = substr($fahrzeuge, 0, 1);
+				if ($lastchar == ",")
+				{
+					$fahrzeuge = substr($fahrzeuge, 0, -1);
+					if ($firstchar == ",")
+						$fahrzeuge = substr($fahrzeuge, 1);
+				}
+				//Ersetze doppelte Kommas durch ein einzelnes
+				$fahrzeuge = preg_replace('/,,+/', ',', $fahrzeuge);
 			
 			$query = "SELECT name FROM #__eiko_fahrzeuge WHERE id IN (".$fahrzeuge.")";
 			$db->setQuery($query);
