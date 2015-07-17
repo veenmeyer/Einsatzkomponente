@@ -141,11 +141,11 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzart),0,1);
 	}
 	if ($params->get('pdf_show_einsatzkat') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE'));
+		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE'));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzkat),0,1);
 	}
 	if ($params->get('pdf_show_ort') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'));
+		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'));
 		$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ort),0,1);
 	}
 	if ($params->get('pdf_show_alarmzeit') == 1) {
@@ -153,7 +153,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$pdf->Cell($breite_inhalt,$hoehe,$beginn,0,1);
 	}
 	if ($params->get('pdf_show_ausfahrzeit') == 1) {
-		$pdf->Cell($breite_beschriftung,$hoehe,JText::('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2'));
+		$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2'));
 		$pdf->Cell($breite_inhalt,$hoehe,$ausrueck,0,1);
 	}
 	if ($params->get('pdf_show_einsatzende') == 1) {
