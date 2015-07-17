@@ -1100,11 +1100,11 @@ endif;
 						WHERE eb.id = ".$rep_id;
 				$db->setQuery($query);
 				$einsatz = $db->loadObjectList();
-				print_r($einsatz);
+			/*	print_r($einsatz);
 				print('<br><br>');
 			}
 			die();
-			foreach ($cid as $key => $rep_id) {	
+			foreach ($cid as $key => $rep_id) {*/	
 				//Varaiblen für Orga- udn Fahrzeugnamen
 				$orgas = $einsatz[0]->orgas;
 				$fahrzeuge = $einsatz[0]->fahrz;
