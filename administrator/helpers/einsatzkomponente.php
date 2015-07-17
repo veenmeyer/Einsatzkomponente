@@ -1075,8 +1075,6 @@ endif;
 	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
 		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
 		
-		$db = JFactory::getDBO();
-		
 		if (!is_array($cid) || count($cid) < 1)
 		{
 		    JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
@@ -1090,10 +1088,21 @@ endif;
 			JArrayHelper::toInteger($cid);
 			
 			foreach ($cid as $key => $rep_id) {
-				print($rep_id.' --- ');
+				print($rep_id);
+				$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 
+						  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
+						  eb.date3 as endd, eb.boss as el, eb.boss2 as ef, eb.people as pers, eb.auswahl_orga as orgas, 
+						  eb.vehicles as fahrz, eb.ausruestung as ausruest, eb.summary as kurzt, eb.desc as langt 
+						FROM ffineu_eiko_einsatzberichte eb 
+						INNER JOIN #__eiko_einsatzarten ea ON ea.id = eb.data1 
+						INNER JOIN #__eiko_alarmierungsarten aa ON aa.id = eb.alerting
+						INNER JOIN #__eiko_tickerkat tk ON tk.id = eb.tickerkat
+						WHERE eb.id = ".$rep_id;
+				print($query);
 			}
 			die();
 			foreach ($cid as $key => $rep_id) {
+				$db = JFactory::getDBO();
 				$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 
 						  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
 						  eb.date3 as endd, eb.boss as el, eb.boss2 as ef, eb.people as pers, eb.auswahl_orga as orgas, 
