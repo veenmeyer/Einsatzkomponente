@@ -217,35 +217,32 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
      	$this->redirect;
      }
      function swf()  
-    {    
-	
-        $pview      = JFactory::getApplication()->input->get('view', 'einsatzbericht');
-		$rep_id      = JFactory::getApplication()->input->get('id', '0');
+     { 
+        $pview = JFactory::getApplication()->input->get('view', 'einsatzbericht');
+	$rep_id = JFactory::getApplication()->input->get('id', '0');
 
-		if (parent::save()) :
-		if ($rep_id == '0') :
+	if (parent::save()) :
+	    if ($rep_id == '0') :
 		$db = JFactory::getDBO();
 		$query = "SELECT id FROM #__eiko_einsatzberichte ORDER BY id DESC LIMIT 1";
 		$db->setQuery($query);
 		$rows = $db->loadObjectList();
 		$rep_id      = $rows[0]->id;
 		$msg    = JText::_( 'Neuer Einsatzbericht gespeichert ! Sie können jetzt die Einsatzbilder zu diesem Einsatz hinzufügen.' );
-        $this->setRedirect('index.php?option=com_einsatzkomponente&view=swfupload&pview='.$pview.'&rep_id='.$rep_id.'', $msg); 
-		endif;
+	        $this->setRedirect('index.php?option=com_einsatzkomponente&view=swfupload&pview='.$pview.'&rep_id='.$rep_id.'', $msg); 
+	    endif;
+	else:
+            $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit', $msg); 
+	endif;
 		
-		else:
-        $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzbericht&layout=edit', $msg); 
-		endif;
-		
-		if (!$rep_id == '0') :
-        //$msg    = JText::_( '' );  
-        $this->setRedirect('index.php?option=com_einsatzkomponente&view=swfupload&pview='.$pview.'&rep_id='.$rep_id.'', $msg); 
-		endif;
-		
-    }
+	if (!$rep_id == '0') :
+            //$msg    = JText::_( '' );  
+            $this->setRedirect('index.php?option=com_einsatzkomponente&view=swfupload&pview='.$pview.'&rep_id='.$rep_id.'', $msg); 
+	endif;
+	}
 	//function  
 
-    function save($key = NULL, $urlVar = NULL) {
+    	function save($key = NULL, $urlVar = NULL) {
 
 		// Check for request forgeries
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
@@ -283,10 +280,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	endif;
     //print_r ($send);break;
     }
-	
 }
-
-
 	    function sendMail_auto($cid,$status) {
 
 		
