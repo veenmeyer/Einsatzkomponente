@@ -12,7 +12,7 @@
 		label="Speicherort der Einsatzbilder :" 
 		class="alert alert-info" 
 		description="Bitte gebe hier an, in welchem Ordner die Einsatzbilder gespeichert werden sollen. Empfohlen wird : images/com_einsatzkomponente/einsatzbilder"
-		/>	
+		/>
 		
 
 			<field name="uploadpath" 
@@ -1558,8 +1558,270 @@
 		
 	</fieldset>
 
+<fieldset name="pdfexport" label="PDF-Export" description="">
+	<field 
+		name="note_pdfexport" 
+		type="note" 
+		label="PDF-Export Einstellungen:" 
+		class="alert alert-info" 
+		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerden ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
+	/>
+	 <field 
+	 	name="pdf_header" 
+	 	type="imagelist" 
+	 	default="" 
+	 	label="PDF-Header" 
+	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'media/com_einsatzkomponente/images/pdf/' hinterlegt werden." 
+	 	directory="media/com_einsatzkomponente/images/pdf/" 
+	 	exclude="" 
+	 	stripext="" />
 
-	
+        <field 
+        	name="pdf_speicherort"
+        	type="text"
+        	default="documents/"
+        	label="PDF-Speicherort"
+        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: documents/" size="10"
+        />
+        <field
+		name="pdf_show_id"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die ID des Einsatzes in die PDF eingefügt werden soll."
+		label="Einsatz-ID in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_counter"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob der Counter in die PDF eingefügt werden soll."
+		label="Einsatz-Counter in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_alarmart"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die Alarmierungsart in die PDF eingefügt werden soll."
+		label="Alarmierungsart in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_einsatzart"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die Einsatzart in die PDF eingefügt werden soll."
+		label="Einsatzart in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_einsatzkat"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die Einsatzkategorie in die PDF eingefügt werden soll."
+		label="Einsatzkategorie in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_ort"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob der Einsatzort in die PDF eingefügt werden soll."
+		label="Einsatzort in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_alarmzeit"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die Alarmierungszeit in die PDF eingefügt werden soll."
+		label="Alarmierungszeit in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_ausfahrzeit"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die Ausfahrzeit in die PDF eingefügt werden soll."
+		label="Ausfahrzeit in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_einsatzende"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob das Einsatzende in die PDF eingefügt werden soll."
+		label="Einsatzende in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_einsatzleiter"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob der Einsatzleiter in die PDF eingefügt werden soll."
+		label="Einsatzleiter in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_einsatzfuehrer"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob der Einsatzführer in die PDF eingefügt werden soll."
+		label="Einsatzführer in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_mannschaft"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die Mannschaftsstärke in die PDF eingefügt werden soll."
+		label="Mannschaftsstärke in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_orgas"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die beteiligten Organisationen in die PDF eingefügt werden soll."
+		label="Organisationen in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_fahrzeuge"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die eingesetzten Fahrzeuge in die PDF eingefügt werden soll."
+		label="Fahrzeuge in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_ausruestung"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob die eingesetzte Ausrüstung in die PDF eingefügt werden soll."
+		label="Ausrüstung in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_kurzbericht"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob der Kurzbericht in die PDF eingefügt werden soll."
+		label="Kurzbericht in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+        <field
+		name="pdf_show_langbericht"
+		type="radio"
+		class="btn-group"
+		default="1"
+		description="Wähle hier aus, ob der Einsatzbericht in die PDF eingefügt werden soll."
+		label="Einsatzbericht in PDF:" >
+		<option value="0">
+			Nein
+		</option>
+		<option value="1">
+			Ja
+		</option>
+	</field>
+</fieldset>	
 <!--ACL-->
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"

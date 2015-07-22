@@ -91,6 +91,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy
 			JToolBarHelper::cancel('einsatzbericht.cancel', 'JTOOLBAR_CLOSE');
 		}
 			JToolBarHelper::custom( 'einsatzbericht.swf', 'upload','upload', 'Flash Uploader',  false );
+			JToolBarHelper::custom( 'einsatzbericht.pdf', 'upload','upload', 'PDF-Export',  false );
 	}
 	
 }
