@@ -269,8 +269,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 				endforeach;
 				
 				// sonstige Fahrzeuge anzeigen lassen
+				if( $this->item->vehicles ) :
 				if ($sonstige = EinsatzkomponenteHelper::getFahrzeuge_mission($array_vehicle,'','sonstige Kräfte')) : echo $sonstige; endif;
 				if ($sonstige = EinsatzkomponenteHelper::getFahrzeuge_mission_image($array_vehicle,'')) : $vehicles_images .= $sonstige; endif;
+				endif;
 			?>
 				
             <?php endif;?>
@@ -282,7 +284,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
         </td>
         <td class="eiko_td4_2"></td>
       </tr>
-				<?php if ($this->params->get('display_detail_fhz_images','1')) :?>
+				<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
                 <tr class="mobile_hide_320">
                 <td class="eiko_fahrzeugaufgebot_2" style="margin-bottom:10px;padding-bottom:10px;" colspan="2">
 				<?php echo '<span class="mobile_hide_320">'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLE').' </span>'; ?> 
