@@ -97,7 +97,38 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
    			</div>
             <input class='btn btn-warning' type='button' onclick='clearMap();return false;' value='Koordinatenliste l&ouml;schen'/>
             <input class='btn btn-warning' type='button' onclick='resetarea()' value='Koordinatenliste zur&uuml;cksetzen'/>
-          
+						<!-- Button to trigger modal -->
+						<a href="#myModal" role="button" class="btn" data-toggle="modal">Tipp zum Einsatzgebiet</a>
+     
+						<!-- Modal -->
+						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Tipps zum Erstellen des Einsatzgebietes</h3>
+						</div>
+						<div class="modal-body"><br/><br/>
+    1. Sucht im Internet nach dem amtlichen Gemeindeschlüssel<br/>
+    2. Ruft die Seite overpass-turbo.eu	auf<br/>
+    3. Drück den Button „Wizard“<br/>
+    4. Gebt in das freie Feld folgendes ein: „de:amtlicher_gemeindeschluessel="XXXXXX"“. Die äußersten Anführungszeichen nicht mit kopieren und für die XX den Gemeindeschlüssel einfügen.<br/>
+    5. Anschließend auf „Abfrage erstellen und ausführen“ klicken<br/>
+    6. Nun wird auf der Karte die Gemeinde farblich angezeigt.<br/>
+    7. Drück den Button Export.<br/>
+    8. Wähle GPX aus.<br/>
+    9. Datei auf dem Desktop speichern.<br/>
+    10.Datei mit einem Editor öffnen, zu empfehlen ist Webocton Scriptly.<br/>
+    11.Alle Zeilen löschen, außer der mit den Koordinaten.<br/>
+    12.Über die Funktion Suchen und Ersetzen, die Zwischenräume von lon=>lat mit einem „ , “ ersetzen. Anschließend die Zwischenräume von lat=>lon mit einem „ | “ ersetzen.<br/>
+    13.Danach sollte eure Zeile so aussehen XX.YYYY,XX.YYYY|XX.YYYY,XX.YYYY|.....<br/>
+    14.Diese Zeile in die Einsatzkompo einfügen und fertig.<br/>
+	<h5>Vielen Dank an Martin Scholtes für diesen Hinweis.</h5>
+						</div>
+						<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</button>
+						<!--<button class="btn btn-primary">Save changes</button> !-->
+						</div>
+						</div>		
+				</div>
             <div id="map" style="width: 810px; height: 400px">Karte</div>
             <input type="hidden"  name="gmap_latitude"  id="gmap_latitude"  value="<?php echo $gmap_latitude; ?>" size="30"/>
             <input type="hidden"  name="gmap_longitude"  id="gmap_longitude"  value="<?php echo $gmap_longitude; ?>" size="30"/>
