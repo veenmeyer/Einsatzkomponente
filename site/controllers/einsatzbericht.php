@@ -160,9 +160,10 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 	}
     
     
-    function cancel() {
+    public function cancel() {
 		$menu = & JSite::getMenu();
         $item = $menu->getActive();
+		$params = JComponentHelper::getParams('com_einsatzkomponente');
         $this->setMessage(JText::_('Einsatzeingabe abgebrochen'));
 		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink', '').'', false)); 
     }

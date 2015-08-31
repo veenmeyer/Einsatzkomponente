@@ -391,6 +391,8 @@ $db->setQuery($query);
 		$results = $db->loadObjectList();
 		
        	$data = array();
+		$bug_data='';
+
 		foreach($results as $result):
 		$data_id = '';
 						$db = JFactory::getDbo();
@@ -412,7 +414,6 @@ $db->setQuery($query);
 		$conditions = array(
 		$db->quoteName('id') . ' = '.$result->id.'' );
 		$query->update($db->quoteName('#__eiko_einsatzberichte'))->set($fields)->where($conditions);
-		$bug_data='';
 		$db->setQuery($query);
 			try {
 				$result = $db->execute();

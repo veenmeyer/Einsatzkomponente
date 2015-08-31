@@ -64,16 +64,6 @@
             size="60"
             maxlength="100" /> 
 			
-	  <field
-			name="gmap"
-			type="radio"
-			class="btn-group"
-			default="1"
-			label="Einsatzort auf Karte :"
-			description="Hier können Sie einstellen, ob die Einsatzort-Markierung in diesem Einsatzbericht angezeigt werden soll.">
-				<option	value="0">Verbergen</option>
-				<option	value="1">Anzeigen</option>
-	   </field>
 
        <field name="date1" type="calendar" class="inputbox"
             required="true" 
@@ -268,9 +258,12 @@
 			      	
          	<field
         	name="status_fb"
-        	type="radio"
+        	type="list"
         	class="btn-group"
         	default="1"
+            disabled="0"
+            filter="raw"
+			multiple="false"
         	label="Anzeige Buttons sozialer Netzwerke:"
         	description="Hier können Sie einstellen, ob Links zu den sozialen Netzwerken im Detailbericht angezeigt werden sollen. Bei einigen Einsätzen sicherlich ganz nützlich ... (Wenn die Buttons angezeigt werden sollen, muss aber auch die entsprechende Einstellung unter OPTIONEN aktiviert sein.)">
             	<option
@@ -279,7 +272,22 @@
                 	value="1">Anzeigen</option>
    			</field>
 			
-       <field name="status" type="list"
+	  <field
+			name="gmap"
+			type="list"
+			class="btn-group"
+			default="1"
+            disabled="0"
+            filter="raw"
+			multiple="false"
+			label="Einsatzort auf Karte :"
+			description="Hier können Sie einstellen, ob die Einsatzort-Markierung in diesem Einsatzbericht angezeigt werden soll.">
+				<option	value="0">Verbergen</option>
+				<option	value="1">Anzeigen</option>
+	   </field>
+
+       <field name="status" 
+			type="list"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_STATUS"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_STATUS" 
             default="0"

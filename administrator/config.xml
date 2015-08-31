@@ -1564,7 +1564,7 @@
 		type="note" 
 		label="PDF-Export Einstellungen:" 
 		class="alert alert-info" 
-		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerden ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
+		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerdem ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
 	/>
 	 <field 
 	 	name="pdf_header" 
