@@ -71,7 +71,7 @@ if ($this->item->name)
 	echo '<div class="control-label">';echo JText::_('Zugeordnete Fahrzeuge :');echo '</div>';
 	echo '<div class="controls"><ul class="adminformlist">';
 $database			= JFactory::getDBO();
-$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$this->item->id.'" ORDER BY ordering ASC ' ;
+$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$this->item->id.'" ORDER BY ordering,state ASC ' ;
 $database->setQuery( $query );
 $total = $database->loadObjectList();	
 		if ($total) {
@@ -81,7 +81,10 @@ $total = $database->loadObjectList();
 		echo $totale->name;
 		if ($totale->detail2): echo ' ( '.$totale->detail2.' )'; endif;
 		if ($totale->detail1): echo ' '.$totale->detail1; endif;
-		echo '</a></li>'; 
+		echo '</a>';
+                if ($totale->state == 2): echo ' (Fahrzeug Au&szlig;er Dienst) '; endif;
+                if ($totale->state == 0): echo ' (Fahrzeug deaktiviert!) '; endif;
+                echo '</li>';
 		endforeach; 
 		}
 		else
