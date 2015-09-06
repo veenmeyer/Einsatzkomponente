@@ -33,7 +33,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 <?php foreach ($this->items as $item) :?>
 <?php if ($item->gmap_latitude >= '3') :?>
 	<?php
-	$orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($item->name);  
+	$orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($item->id);  
 	?>
         
 	<tr>
