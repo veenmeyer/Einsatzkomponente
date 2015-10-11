@@ -481,13 +481,12 @@ else {
 
 // ------------------------------------------------------------------------------------------------------------
 // ------------------ ADD ausruestung zu Fahrzeuge --------------------------------------------------
-	$check_update = '';
+	$check_update = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_fahrzeuge` where Field="ausruestung"');
+	$db->setQuery('select ausruestung from `#__eiko_fahrzeuge`');
 	try {
-	$check_update = $db->execute();
-	} catch (Exception $e) {print_r($e);$bug='1';}
-	$check_update = $check_update->num_rows;
+	$check_update = $db->execute();$check_update='1';
+	} catch (Exception $e) {$check_update='0';}
 	
 	if (!$check_update) :
 	
@@ -496,7 +495,7 @@ else {
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
-	} catch (Exception $e) {print_r($e);$bug='1';}	
+	} catch (Exception $e) {print_r($e);$bug='1';}	 
 	
 	endif;
 
