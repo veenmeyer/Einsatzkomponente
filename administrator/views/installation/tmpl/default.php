@@ -17,7 +17,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 @set_time_limit(0);
 // try to increase memory limit
 if ((int) ini_get('memory_limit') < 32) {
-          @ini_set('memory_limit', '64M');
+          @ini_set('memory_limit', '128M');
 		}
 // Versions-Nummer 
 $db = JFactory::getDbo();
@@ -30,7 +30,7 @@ $bug='0';
 ?>
 <div align="left">
 <?php
-		echo '<h2>'.JTEXT::_('Installationsmanager für die Einsatzkomponente Version ').$params['version'].'</h2>'; 
+		echo '<h2>'.JTEXT::_('Installations- und Updatemanager für die Einsatzkomponente Version ').$params['version'].'</h2>'; 
 		
 		?>
 		<a target="_blank" href="http://www.einsatzkomponente.de/index.php"><img border=0  src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg"/></a><br/><br/>
@@ -159,7 +159,7 @@ if (!$check_status_fb) {
 	}	
 }
 else {
-	}
+	} 
 	
 	$db = JFactory::getDbo();
 	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="article_id"');
@@ -282,13 +282,12 @@ foreach($eiko_tickerkat as $data){
 	}	
 
 // ------------------------------------------------------------------------------------------------------------
-	$check_update = '';
+	$check_update = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="auswahl_orga"');
+	$db->setQuery('select `auswahl_orga` from `#__eiko_einsatzberichte`'); 
 	try {
-	$check_update = $db->execute();
-	} catch (Exception $e) { }
-	$check_update = $check_update->num_rows;
+	$result = $db->loadObjectList();$check_update = '1';
+	} catch (Exception $e) {$check_update = '0'; }
 	
 	if (!$check_update) :
 	$db = JFactory::getDbo();
@@ -438,15 +437,15 @@ $db->setQuery($query);
 endif;	
 
 // ------------------ ADD gmap_icon zu Organisationen --------------------------------------------------
-	$check_gmap_icon = '';
+	$check_gmap_icon = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_organisationen` where Field="gmap_icon_orga"');
+	$db->setQuery('select gmap_icon_orga from `#__eiko_organisationen`');
 	try {
-	$check_gmap_icon = $db->execute();
+	$check_gmap_icon = $db->execute();$check_gmap_icon='1';
 	} catch (Exception $e) {
-	print_r($e);$bug='1';
+	$check_gmap_icon='0';
 	}	
-$check_gmap_icon = $check_gmap_icon->num_rows;
+
 if (!$check_gmap_icon) {
 	
 	$db = JFactory::getDbo();
@@ -462,13 +461,12 @@ else {
 	}
 
 // ------------------ ADD ausruestung zu Einsatzberichte --------------------------------------------------
-	$check_update = '';
+	$check_update = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="ausruestung"');
+	$db->setQuery('select ausruestung from `#__eiko_einsatzberichte`');
 	try {
-	$check_update = $db->execute();
-	} catch (Exception $e) {print_r($e);$bug='1';}
-	$check_update = $check_update->num_rows;
+	$check_update = $db->execute();$check_update='1';
+	} catch (Exception $e) {$check_update='0';}
 	
 	if (!$check_update) :
 	
@@ -539,22 +537,6 @@ $sql="CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (
 endif;
 	
 
-// ------------------------------------ Alte Datenbanken vorhanden ? ---------------------------------------
-
-	$check_db = '';
-	$db = JFactory::getDbo();
-	$db->setQuery('SELECT id from #__reports');
-	try {
-	// Execute the query in Joomla 3.0.
-	$check_db = $db->execute();
-	} catch (Exception $e) {
-	echo 'Frühere Datenbanktabellen #__reports_* <span class="label label-success">sind ncht vorhanden !!!!</span>.<br/><br/>';
-	}	
-	
-	if ($check_db) : 
-	echo 'Frühere Datenbanktabellen #__reports_* <span class="label label-important">sind vorhanden !!!!</span>.<br/><br/>';$bug ='2';
-	endif;
-
 
 // ---------------------- Fehler in auswahl_orga beheben, das letzte "," löschen -----------------------------------------------
 
@@ -592,13 +574,15 @@ endif;
 		endforeach;
 // ------------------------------------------------------------------------------------------------------------
 
+
+
 ?>
 <?php echo '<br/><br/>';?>
 
 <?php if ($bug == '0') : ?>
 <?php echo '<span class="label label-success">Installation erfolgreich ...</span><br/><br/>';?>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
-<div align="center">
+<div align="left">
 <input
    type="button"
    class="btn btn-primary"
@@ -624,16 +608,34 @@ endif;
    title=""
    onclick="window.location='index.php?option=com_einsatzkomponente&view=kontrollcenter'"
    />
-<input
-   type="button"
-   class="btn btn-danger"
-   value=" alte Datenbanktabellen importieren ? "
-   title=""
-   onclick="window.location='index.php?option=com_einsatzkomponente&view=datenimport'"
-   />   </div>
+  </div>
 </form>
 <?php endif; ?>
 
+
 </div>
+<hr>
 <?php
+// ------------------------------------ Alte Datenbanken vorhanden ? ---------------------------------------
+
+	$check_db = '';
+	$db = JFactory::getDbo();
+	$db->setQuery('SELECT id from #__reports');
+	try {
+	// Execute the query in Joomla 3.0.
+	$check_db = $db->execute();
+	} catch (Exception $e) {
+	echo '<span class="label label-success">Hinweis:</span> Ein Import von Einsatzdaten aus früheren Versionen der Einsatzkomponente ist möglich.<br/>Dazu bitte die Datenbanktabellen _reports_* einfach in diese Datenbank kopieren und die Installation erneut vornehmen.<br/>Für weitere Informationen bitte ans Forum wenden, wir unterstützen hierbei natürlich sehr gerne.';
+	}	
+	
+	if ($check_db) : 
+	echo '<span class="label label-success">Hinweis:</span> Frühere Datenbanktabellen #__reports_* importieren ? <input
+   type="button"
+   class="btn btn-danger"
+   value="Importieren"
+   title=""
+   onclick="window.location=\'index.php?option=com_einsatzkomponente&view=datenimport\'"
+   /><br/>(Achtung alle vorhandenen Daten werden überschrieben)<br/>';
+    endif;
+
 ?>
