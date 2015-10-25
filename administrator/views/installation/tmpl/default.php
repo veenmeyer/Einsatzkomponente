@@ -13,20 +13,150 @@ jimport( 'joomla.filesystem.folder' );
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
-// try to set time limit
-@set_time_limit(0);
-// try to increase memory limit
-if ((int) ini_get('memory_limit') < 32) {
-          @ini_set('memory_limit', '128M');
-		}
+
 // Versions-Nummer 
 $db = JFactory::getDbo();
 $db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 $params = json_decode( $db->loadResult(), true );
 	
+$bak_date      = JFactory::getApplication()->input->get('backup', false);
+
+// DB-Sicherung wieder herstellen
+if ($bak_date) :
+$queries[] = "DROP TABLE #__eiko_alarmierungsarten";
+$queries[] = "CREATE TABLE #__eiko_alarmierungsarten LIKE #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten";
+$queries[] = "ALTER TABLE #__eiko_alarmierungsarten DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_alarmierungsarten SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten";
+$queries[] = "ALTER TABLE #__eiko_alarmierungsarten ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_ausruestung";
+$queries[] = "CREATE TABLE #__eiko_ausruestung LIKE #__bak_sicherung_".$bak_date."_eiko_ausruestung";
+$queries[] = "ALTER TABLE #__eiko_ausruestung DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_ausruestung SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_ausruestung";
+$queries[] = "ALTER TABLE #__eiko_ausruestung ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_einsatzarten";
+$queries[] = "CREATE TABLE #__eiko_einsatzarten LIKE #__bak_sicherung_".$bak_date."_eiko_einsatzarten";
+$queries[] = "ALTER TABLE #__eiko_einsatzarten DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_einsatzarten SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_einsatzarten";
+$queries[] = "ALTER TABLE #__eiko_einsatzarten ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_einsatzberichte";
+$queries[] = "CREATE TABLE #__eiko_einsatzberichte LIKE #__bak_sicherung_".$bak_date."_eiko_einsatzberichte";
+$queries[] = "ALTER TABLE #__eiko_einsatzberichte DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_einsatzberichte SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_einsatzberichte";
+$queries[] = "ALTER TABLE #__eiko_einsatzberichte ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_fahrzeuge";
+$queries[] = "CREATE TABLE #__eiko_fahrzeuge LIKE #__bak_sicherung_".$bak_date."_eiko_fahrzeuge";
+$queries[] = "ALTER TABLE #__eiko_fahrzeuge DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_fahrzeuge SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_fahrzeuge";
+$queries[] = "ALTER TABLE #__eiko_fahrzeuge ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_gmap_config";
+$queries[] = "CREATE TABLE #__eiko_gmap_config LIKE #__bak_sicherung_".$bak_date."_eiko_gmap_config";
+$queries[] = "ALTER TABLE #__eiko_gmap_config DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_gmap_config SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_gmap_config";
+$queries[] = "ALTER TABLE #__eiko_gmap_config ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_images";
+$queries[] = "CREATE TABLE #__eiko_images LIKE #__bak_sicherung_".$bak_date."_eiko_images";
+$queries[] = "ALTER TABLE #__eiko_images DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_images SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_images";
+$queries[] = "ALTER TABLE #__eiko_images ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_organisationen";
+$queries[] = "CREATE TABLE #__eiko_organisationen LIKE #__bak_sicherung_".$bak_date."_eiko_organisationen";
+$queries[] = "ALTER TABLE #__eiko_organisationen DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_organisationen SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_organisationen";
+$queries[] = "ALTER TABLE #__eiko_organisationen ENABLE KEYS";
+
+$queries[] = "DROP TABLE #__eiko_tickerkat";
+$queries[] = "CREATE TABLE #__eiko_tickerkat LIKE #__bak_sicherung_".$bak_date."_eiko_tickerkat";
+$queries[] = "ALTER TABLE #__eiko_tickerkat DISABLE KEYS";
+$queries[] = "INSERT INTO #__eiko_tickerkat SELECT * FROM #__bak_sicherung_".$bak_date."_eiko_tickerkat";
+$queries[] = "ALTER TABLE #__eiko_tickerkat ENABLE KEYS";
+
+foreach ($queries as $sql) {
+	$db = JFactory::getDbo();
+	$query = "$sql";
+	$db->setQuery($query);
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	echo 'Fehler in Query: '.$sql.' : <br/><br/>';  
+	print_r ($e).'<br/><br/>';$bug = '1';
+	}
+}
+
+endif;
+if ($bug) : echo 'Backup-Fehler: Wenden Sie sich an: support@einsatzkomponente.de';exit; endif;
+
+
+// DB-Sicherung anlegen
 
 $bug='0';	
-		
+$bak_date = date('Y_m_d_H_i',time());
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten LIKE #__eiko_alarmierungsarten";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten SELECT * FROM #__eiko_alarmierungsarten";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_ausruestung LIKE #__eiko_ausruestung";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_ausruestung DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_ausruestung SELECT * FROM #__eiko_ausruestung";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_ausruestung ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_einsatzarten LIKE #__eiko_einsatzarten";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_einsatzarten DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_einsatzarten SELECT * FROM #__eiko_einsatzarten";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_einsatzarten ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_einsatzberichte LIKE #__eiko_einsatzberichte";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_einsatzberichte DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_einsatzberichte SELECT * FROM #__eiko_einsatzberichte";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_einsatzberichte ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_fahrzeuge LIKE #__eiko_fahrzeuge";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_fahrzeuge DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_fahrzeuge SELECT * FROM #__eiko_fahrzeuge";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_fahrzeuge ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_gmap_config LIKE #__eiko_gmap_config";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_gmap_config DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_gmap_config SELECT * FROM #__eiko_gmap_config";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_gmap_config ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_images LIKE #__eiko_images";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_images DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_images SELECT * FROM #__eiko_images";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_images ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_organisationen LIKE #__eiko_organisationen";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_organisationen DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_organisationen SELECT * FROM #__eiko_organisationen";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_organisationen ENABLE KEYS";
+
+$queries[] = "CREATE TABLE #__bak_sicherung_".$bak_date."_eiko_tickerkat LIKE #__eiko_tickerkat";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_tickerkat DISABLE KEYS";
+$queries[] = "INSERT INTO #__bak_sicherung_".$bak_date."_eiko_tickerkat SELECT * FROM #__eiko_tickerkat";
+$queries[] = "ALTER TABLE #__bak_sicherung_".$bak_date."_eiko_tickerkat ENABLE KEYS";
+
+foreach ($queries as $sql) {
+	$db = JFactory::getDbo();
+	$query = "$sql";
+	$db->setQuery($query);
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	echo 'Fehler in Query: '.$sql.' : <br/><br/>';  
+	print_r ($e).'<br/><br/>';$bug = '1';
+	}
+echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden wieder eingespielt</span>. (Name : #_bak_sicherung_'.$bak_date.'_eiko_*)</b><br/><br/>';
+}
+
+
 ?>
 <div align="left">
 <?php
@@ -35,6 +165,33 @@ $bug='0';
 		?>
 		<a target="_blank" href="http://www.einsatzkomponente.de/index.php"><img border=0  src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg"/></a><br/><br/>
         <?php
+
+if ($bug) : echo 'Backup-Fehler: Installation abgebrochen !! Wenden Sie sich an: support@einsatzkomponente.de';exit; endif;
+
+// try to set time limit
+@set_time_limit(0);
+
+// try to increase memory limit
+echo 'memory_limit: '.ini_get('memory_limit').'<br/>';
+echo 'upload_max_filesize: '.ini_get('upload_max_filesize').'<br/>';
+echo 'post_max_size'.ini_get('post_max_size').'<br/>';
+if ((int) ini_get('memory_limit') < 256) {
+          @ini_set('memory_limit', '256M');
+		  echo 'memory_limit geändert auf: '.ini_get('memory_limit').'<br/>';
+		}
+if ((int) ini_get('upload_max_filesize') < 32) {
+          @ini_set('upload_max_filesize', '32M');
+		  echo 'upload_max_filesize geändert auf: '.ini_get('upload_max_filesize').'<br/>';
+		}
+if ((int) ini_get('post_max_size') < 8) {
+          @ini_set('post_max_size', '8M');
+		  echo 'post_max_size geändert auf: '.ini_get('post_max_size').'<br/>';
+		}
+
+
+echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden erstellt</span>. (Name : #_bak_sicherung_'.$bak_date.'_eiko_*)</b><br/><br/>';
+
+		
 // ------------------ Fahrzeugbilder -------------------------------------------------------------------------
 	$discr = "Image-Ordner für die Einsatzkomponente";
 	$dir = JPATH_ROOT.'/images/com_einsatzkomponente'; 
@@ -636,5 +793,8 @@ endif;
    onclick="window.location=\'index.php?option=com_einsatzkomponente&view=datenimport\'"
    /><br/>(Achtung alle vorhandenen Daten werden überschrieben)<br/>';
     endif;
+	
+
+
 
 ?>
