@@ -22,7 +22,7 @@ $params = json_decode( $db->loadResult(), true );
 $bak_date      = JFactory::getApplication()->input->get('backup', false);
 
 // DB-Sicherung wieder herstellen
-if ($bak_date) :
+if ($bak_date) : 
 $queries[] = "DROP TABLE #__eiko_alarmierungsarten";
 $queries[] = "CREATE TABLE #__eiko_alarmierungsarten LIKE #__bak_sicherung_".$bak_date."_eiko_alarmierungsarten";
 $queries[] = "ALTER TABLE #__eiko_alarmierungsarten DISABLE KEYS";
@@ -87,10 +87,16 @@ foreach ($queries as $sql) {
 	echo 'Fehler in Query: '.$sql.' : <br/><br/>';  
 	print_r ($e).'<br/><br/>';$bug = '1';
 	}
+	
+	
 }
 
+if ($bug) : echo 'Backup-Fehler: Wenden Sie sich an: support@einsatzkomponente.de';exit; 
+else:
+	echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden wieder eingespielt</span>. (Name : #_bak_sicherung_'.$bak_date.'_eiko_*)</b><br/><br/>';
 endif;
-if ($bug) : echo 'Backup-Fehler: Wenden Sie sich an: support@einsatzkomponente.de';exit; endif;
+
+endif;
 
 
 // DB-Sicherung anlegen
@@ -153,9 +159,7 @@ foreach ($queries as $sql) {
 	echo 'Fehler in Query: '.$sql.' : <br/><br/>';  
 	print_r ($e).'<br/><br/>';$bug = '1';
 	}
-echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden wieder eingespielt</span>. (Name : #_bak_sicherung_'.$bak_date.'_eiko_*)</b><br/><br/>';
 }
-
 
 ?>
 <div align="left">
