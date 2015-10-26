@@ -13,13 +13,40 @@ jimport( 'joomla.filesystem.folder' );
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
-
+?>
+<hr>
+<form action="#" method="post" name="repairForm" id="repairForm">
+<input type="text" name="repair" />
+<input type="submit" name="repair-submit" value="Support-Code" />
+<hr>
+<?php
 // Versions-Nummer 
 $db = JFactory::getDbo();
 $db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 $params = json_decode( $db->loadResult(), true );
 	
-$bak_date      = JFactory::getApplication()->input->get('backup', false);
+$bak_date     	= JFactory::getApplication()->input->get('backup', false);
+$repair      	= JFactory::getApplication()->input->get('repair', false);
+
+
+// DB-Service
+$repair_array ['112'] = "CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,`asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',`name` VARCHAR(255)  NOT NULL ,`image` VARCHAR(255)  NOT NULL ,`beschreibung` TEXT NOT NULL ,`created_by` INT(11)  NOT NULL ,`checked_out` INT(11)  NOT NULL ,`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',`ordering` INT(11)  NOT NULL ,`state` TINYINT(1)  NOT NULL ,PRIMARY KEY (`id`)) DEFAULT COLLATE=utf8_general_ci;";
+
+$repair_array ['113'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `ausruestung` TEXT NOT NULL AFTER `vehicles`;";
+$repair_array ['999'] = "DROP TABLE `#__bak_sicherung_%`;";
+
+if ($repair) : 
+	$db = JFactory::getDbo();
+	$query = $repair_array[$repair];
+	$db->setQuery($query);
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	echo 'Fehler in Query: '.$query.' : <br/><br/>';  
+	print_r ($e).'<br/><br/>';exit;
+	}
+	echo 'Query erfolgreich ausgef&uml;hrt : <br/>'.$query;exit;
+endif;
 
 // DB-Sicherung wieder herstellen
 if ($bak_date) : 
@@ -797,8 +824,5 @@ endif;
    onclick="window.location=\'index.php?option=com_einsatzkomponente&view=datenimport\'"
    /><br/>(Achtung alle vorhandenen Daten werden überschrieben)<br/>';
     endif;
-	
+	?>
 
-
-
-?>
