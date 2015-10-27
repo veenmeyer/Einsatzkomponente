@@ -14,11 +14,13 @@ jimport( 'joomla.filesystem.folder' );
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 ?>
-<hr>
+<meta charset="utf-8">
+<br/><br/>
+<div class="well">
 <form action="#" method="post" name="repairForm" id="repairForm">
 <input type="text" name="repair" />
-<input type="submit" name="repair-submit" value="Support-Code" />
-<hr>
+<input class="btn btn-primary" type="submit" name="repair-submit" value="Support-Code" />
+</div>
 <?php
 // Versions-Nummer 
 $db = JFactory::getDbo();
@@ -45,10 +47,13 @@ if ($repair) :
 	try {
 	$result = $db->execute();
 	} catch (Exception $e) {
-	echo 'Fehler in Query: '.$query.' : <br/><br/>';  
+	echo '<h2>Fehler in Query: '.$query.' : </h2>';  
 	print_r ($e).'<br/><br/>';exit;
 	}
-	echo 'Query erfolgreich ausgef&uml;hrt : <br/>'.$query;exit;
+	echo '<h2>Query erfolgreich ausgeführt</h2>'.$query;
+	echo '<br/><h2>Bitte 1 Minute warten ...</h2><br/><br/>';
+	?><meta http-equiv="refresh" content="65"; url="<?php echo $_SERVER['PHP_SELF']; ?>" /><?php
+	exit;
 endif;
 
 // DB-Sicherung wieder herstellen
@@ -186,8 +191,8 @@ foreach ($queries as $sql) {
 	try {
 	$result = $db->execute();
 	} catch (Exception $e) {
-	echo 'Fehler in Query: '.$sql.' : <br/><br/>';  
-	print_r ($e).'<br/><br/>';$bug = '1';
+	print_r ($e).exit;  
+	$bug = '1';
 	}
 }
 
@@ -202,9 +207,11 @@ foreach ($queries as $sql) {
 
 if ($bug) : echo 'Backup-Fehler: Installation abgebrochen !! Wenden Sie sich an: support@einsatzkomponente.de';exit; endif;
 
+
+echo '<div class="well">';
 // try to set time limit
 @set_time_limit(0);
-
+echo '<h2>PHP-Einstellungen:</h2>';
 // try to increase memory limit
 echo 'memory_limit: '.ini_get('memory_limit').'<br/>';
 echo 'upload_max_filesize: '.ini_get('upload_max_filesize').'<br/>';
@@ -221,7 +228,10 @@ if ((int) ini_get('post_max_size') < 8) {
           @ini_set('post_max_size', '8M');
 		  echo 'post_max_size geändert auf: '.ini_get('post_max_size').'<br/>';
 		}
+echo '</div>';
 
+echo '<div class="well">';
+echo '<h2>Installation/Update :</h2>';
 
 echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden erstellt</span>. (Name : #_bak_sicherung_'.$bak_date.'_eiko_*)</b><br/><br/>';
 
@@ -770,7 +780,7 @@ endif;
 <?php echo '<br/><br/>';?>
 
 <?php if ($bug == '0') : ?>
-<?php echo '<span class="label label-success">Installation erfolgreich ...</span><br/><br/>';?>
+<?php echo '<span class="label label-success"><h1>Installation erfolgreich ...</h1></span><br/><br/>';?>
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 <div align="left">
 <input
@@ -784,7 +794,7 @@ endif;
 <?php endif; ?>
 
 <?php if ($bug == '1') : ?>
-<?php echo '<span class="label label-important">Installation nicht erfolgreich ...</span><br/><br/>Versuchen Sie es nochmal, oder wenden Sie sich an das Supportforum : <a href="http://www.einsatzkomponente.de" target="_blank">http://www.einsatzkomponente.de</a>';?>
+<?php echo '<span class="label label-important"><h1>Installation nicht erfolgreich ...</h1></span><br/><br/>Versuchen Sie es nochmal, oder wenden Sie sich an das Supportforum : <a href="http://www.einsatzkomponente.de" target="_blank">http://www.einsatzkomponente.de</a>';?>
 <?php endif; ?>
 
 <?php if ($bug == '2') : ?>
@@ -804,6 +814,7 @@ endif;
 
 
 </div>
+</div>
 <hr>
 <?php
 // ------------------------------------ Alte Datenbanken vorhanden ? ---------------------------------------
@@ -815,17 +826,17 @@ endif;
 	// Execute the query in Joomla 3.0.
 	$check_db = $db->execute();
 	} catch (Exception $e) {
-	echo '<span class="label label-success">Hinweis:</span> Ein Import von Einsatzdaten aus früheren Versionen der Einsatzkomponente ist möglich.<br/>Dazu bitte die Datenbanktabellen _reports_* einfach in diese Datenbank kopieren und die Installation erneut vornehmen.<br/>Für weitere Informationen bitte ans Forum wenden, wir unterstützen hierbei natürlich sehr gerne.';
+	echo '<div class="well"><span class="label label-success">Hinweis:</span> Ein Import von Einsatzdaten aus früheren Versionen der Einsatzkomponente ist möglich.<br/>Dazu bitte die Datenbanktabellen _reports_* einfach in diese Datenbank kopieren und die Installation erneut vornehmen.<br/>Für weitere Informationen bitte ans Forum wenden, wir unterstützen hierbei natürlich sehr gerne.</div>';
 	}	
 	
 	if ($check_db) : 
-	echo '<span class="label label-success">Hinweis:</span> Frühere Datenbanktabellen #__reports_* importieren ? <input
+	echo '<div class="well"><span class="label label-success">Hinweis:</span> Frühere Datenbanktabellen #__reports_* importieren ? <input
    type="button"
    class="btn btn-danger"
    value="Importieren"
    title=""
    onclick="window.location=\'index.php?option=com_einsatzkomponente&view=datenimport\'"
-   /><br/>(Achtung alle vorhandenen Daten werden überschrieben)<br/>';
+   /><br/>(Achtung alle vorhandenen Daten werden überschrieben)<br/></div>';
     endif;
 	?>
 
