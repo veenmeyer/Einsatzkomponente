@@ -37,7 +37,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
         </th>
     <?php endif; ?>
 
-    				<th class='left'>
+    				<th class='nowrap center'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_AUSRUESTUNGEN_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 
