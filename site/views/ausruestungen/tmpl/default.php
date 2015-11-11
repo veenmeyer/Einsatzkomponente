@@ -79,9 +79,9 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
                     <a class="btn btn-micro <?php echo $class; ?>"
                        href="<?php echo ($canEdit || $canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestung.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
                         <?php if ($item->state == 1): ?>
-                            <i class="glyphicon-ok"></i>
+                            <i class="icon-publish"></i>
                         <?php else: ?>
-                            <i class="glyphicon-remove"></i>
+                            <i class="icon-unpublish"></i>
                         <?php endif; ?>
                     </a>
                 </td>
