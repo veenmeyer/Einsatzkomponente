@@ -17,7 +17,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 <?php if ($this->item) : ?>
 
     <div class="item_fields">
-        <table class="table">
+        <table class="table eiko_table_ausruestung">
             <tr>
 			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_ID'); ?></th>
 			<td><?php echo $this->item->id; ?></td>
