@@ -18,7 +18,7 @@ JHtml::_('behavior.framework', true);
 print_r ($this->reports);
 
 ?>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script> 
 
 <style type="text/css">
 html, body { height: 100%; } 
