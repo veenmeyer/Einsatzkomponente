@@ -659,10 +659,10 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<a href="'.$menu_link.'" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
 	endif;
 	if( !$menu_link) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht.'.$id)):
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';

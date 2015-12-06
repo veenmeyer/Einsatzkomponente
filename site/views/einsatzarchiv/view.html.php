@@ -15,7 +15,7 @@ jimport('joomla.application.component.view');
 /**
  * View class for a list of Einsatzkomponente.
  */
-class EinsatzkomponenteViewEinsatzberichte_neu extends JViewLegacy {
+class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 
     protected $items;
     protected $pagination;

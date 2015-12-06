@@ -15,13 +15,13 @@ require_once JPATH_COMPONENT.'/controller.php';
 /**
  * Einsatzberichte list controller class.
  */
-class EinsatzkomponenteControllerEinsatzberichte_neu extends EinsatzkomponenteController
+class EinsatzkomponenteControllerEinsatzarchiv extends EinsatzkomponenteController
 {
 	/**
 	 * Proxy for getModel.
 	 * @since	1.6
 	 */
-	public function &getModel($name = 'Einsatzberichte_neu', $prefix = 'EinsatzkomponenteModel', $config = array())
+	public function &getModel($name = 'Einsatzarchiv', $prefix = 'EinsatzkomponenteModel', $config = array())
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;
