@@ -17,14 +17,14 @@ jimport('joomla.application.component.view');
  *
  * @since  1.6
  */
-class EinsatzkomponenteViewOrganisation extends JViewLegacy
+class EinsatzkomponenteViewOrganisationform extends JViewLegacy
 {
-
 	protected $state;
 	protected $item;
 	protected $form;
 	protected $params;
-	protected $orga_fahrzeuge;
+	protected $canSave;
+	protected $gmap_config;
 
 	/**
 	 * Display the view
@@ -38,19 +38,15 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy
 	public function display($tpl = null)
 	{
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
-
 		$app  = JFactory::getApplication();
 		$user = JFactory::getUser();
 
-		$this->state  = $this->get('State');
-		$this->item   = $this->get('Data');
-		$this->params = $app->getParams('com_einsatzkomponente');
-		$this->orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($this->item->id);  
-
-		if (!empty($this->item))
-		{
-			$this->form = $this->get('Form');
-		}
+		$this->state   = $this->get('State');
+		$this->item    = $this->get('Data');
+		$this->params  = $app->getParams('com_einsatzkomponente');
+		$this->canSave = $this->get('CanSave');
+		$this->form		= $this->get('Form');
+		$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -59,16 +55,6 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy
 		}
 
 		
-
-		if ($this->_layout == 'edit')
-		{
-			$authorised = $user->authorise('core.create', 'com_einsatzkomponente');
-
-			if ($authorised !== true)
-			{
-				throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
-			}
-		}
 
 		$this->_prepareDocument();
 
@@ -89,7 +75,7 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy
 		$title = null;
 
 		// Because the application sets a default page title,
-		// We need to get it from the menu item itself
+		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
 
 		if ($menu)

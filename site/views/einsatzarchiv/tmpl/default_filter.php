@@ -73,15 +73,30 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 			
 		<div class="js-stools-field-filter">
 		
+		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
 		<?php echo $filters['filter_auswahl_orga']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+		
+		<?php if ($params->get('show_filter_data1','1')) : ?>
 		<?php echo $filters['filter_data1']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_tickerkat','1')) : ?>
 		<?php echo $filters['filter_tickerkat']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_alerting','1')) : ?>
 		<?php echo $filters['filter_alerting']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_vehicles','1')) : ?>
 		<?php echo $filters['filter_vehicles']->input; ?>
+		<?php endif; ?>
+		
 		</div>
 		
 		
