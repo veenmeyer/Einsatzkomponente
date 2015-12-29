@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Organisationsübersicht" option="View">
+	<layout title="Organisations-Übersicht" option="View">
         <message>
                         <![CDATA[(*NeueVersion mit neuen Filtern* Layout und Filtereinstellungen auswählbar)]]>
         </message>
@@ -68,7 +68,7 @@ description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu 
 		  />	
 
 			
-			<field name="main_layout" 
+			<field name="organisation_layout" 
 			type="list" 
 			default="organisationen_layout_1.php" 
 			label="Bitte wählen Sie ein Layout für die Organisationsübersicht aus :" 
@@ -94,17 +94,17 @@ description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu 
 		  description="Hier können Sie jetzt das Aussehen der Detailansicht festlegen. Die Option Layout 5 und 6 ist für ein eigenes Layout reserviert. Nähere Informationen darüber gibt es im Forum."
 		  />	
 		
-			<field name="detail_layout" 
+			<field name="orga_detail_layout" 
 			type="list" 
-			default="detail_layout_1.php" 
+			default="organisation_layout_1.php" 
 			label="Bitte wählen Sie ein Layout für die Detailansicht aus :" 
 			description="Layout 5 und sind in der Standard-Installation nicht enthalten und für ein eigenes Layout reseveriert !!">
-  				<option value="detail_layout_1.php">detail_layout_1</option>
-  				<option value="detail_layout_2.php">detail_layout_2</option>
-				<option value="detail_layout_3.php">detail_layout_3</option>
-				<option value="detail_layout_4.php">detail_layout_4</option>
-				<option value="detail_layout_5.php">detail_layout_5</option>
-				<option value="detail_layout_6.php">detail_layout_6</option>
+  				<option value="organisation_layout_1.php">organisation_layout_1</option>
+  				<option value="organisation_layout_2.php">organisation_layout_2</option>
+				<option value="organisation_layout_3.php">organisation_layout_3</option>
+				<option value="organisation_layout_4.php">organisation_layout_4</option>
+				<option value="organisation_layout_5.php">organisation_layout_5</option>
+				<option value="organisation_layout_6.php">organisation_layout_6</option>
 			</field>			
 			
 		<field

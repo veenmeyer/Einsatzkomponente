@@ -26,18 +26,15 @@
                 
             directory="com_einsatzkomponente/images/tools/" /> 
 
-       <field name="beschreibung" type="textarea"
-                
+
+    <field name="beschreibung" type="editor"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_BESCHREIBUNG"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_AUSRUESTUNG_BESCHREIBUNG" 
-                
-                
-                
-            class="eiko_ausruestung_beschreibung"
-            filter="safehtml"
-            option_on="Yes"
-            option_off="Yes" /> 
-
+            width="60%"
+            height="350px"
+			buttons="true"
+			hide="readmore,pagebreak"
+            filter="raw" />
  
 
        <field name="created_by" type="createdby" default="" 
@@ -63,7 +60,7 @@
 
  </fieldset> 
 
- <fieldset
+ <fieldset 
                         name="accesscontrol">
                        <field name="asset_id" type="hidden" filter="unset" />
                        <field name="rules"

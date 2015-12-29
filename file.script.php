@@ -19,7 +19,7 @@ class com_einsatzkomponenteInstallerScript {
    }
 										
 	public function update($parent) {
-		// $parent is the class calling this method
+		// $parent is the class calling this method 
 		$parent->getParent()->setRedirectURL('index.php?option=com_einsatzkomponente&view=installation');
 		
    }

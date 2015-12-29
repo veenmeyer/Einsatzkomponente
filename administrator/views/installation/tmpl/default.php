@@ -216,7 +216,7 @@ echo '<h2>PHP-Einstellungen:</h2>';
 // try to increase memory limit
 echo 'memory_limit: '.ini_get('memory_limit').'<br/>';
 echo 'upload_max_filesize: '.ini_get('upload_max_filesize').'<br/>';
-echo 'post_max_size'.ini_get('post_max_size').'<br/>';
+echo 'post_max_size: '.ini_get('post_max_size').'<br/>';
 if ((int) ini_get('memory_limit') < 256) {
           @ini_set('memory_limit', '256M');
 		  echo 'memory_limit geändert auf: '.ini_get('memory_limit').'<br/>';
@@ -774,6 +774,11 @@ endif;
 	
 		endforeach;
 // ------------------------------------------------------------------------------------------------------------
+
+		if (!file_exists('../images/com_einsatzkomponente/pdf')) {
+		if(mkdir('../images/com_einsatzkomponente/pdf', 0755, true)) {
+			echo 'Der Ordner `../images/com_einsatzkomponente/pdf` <span class="label label-success">wurde erstellt.</span>.<br/><br/>'; 
+		}}
 
 
 

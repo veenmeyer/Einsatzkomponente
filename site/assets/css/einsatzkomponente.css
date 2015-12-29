@@ -64,13 +64,21 @@
 	color: #ffffff !important; 
 	border-spacing: 1px !important;
 	font-size:smaller !important; 
-	line-height:10px !important;
 	text-align:left !important;
+	padding-left: 10px !important;
+	padding-top: 10px !important;
+	padding-right: 10px !important;
+	padding-bottom: 10px !important;
 }
 .fahrzeug_box_3 {
 	background-color:#FFFFFF !important;
 	font-size:smaller !important; 
 	line-height:14px !important;
+	border: 1px solid !important;
+	margin-left: 10px !important;
+	margin-top: 10px !important;
+	margin-right: 10px !important;
+	margin-bottom: 10px !important;
 }
 .fahrzeug_4 {
 	background-color:#c00c00 !important;
@@ -82,7 +90,12 @@
 	background: #c00c00 !important; 
 	border-spacing: 1px !important;
 	text-align:left !important;
-}
+	padding-left: 10px !important;
+	padding-top: 10px !important;
+	padding-right: 10px !important;
+	padding-bottom: 10px !important;
+	}
+
 
 .fahrzeug_box_7 {
 	

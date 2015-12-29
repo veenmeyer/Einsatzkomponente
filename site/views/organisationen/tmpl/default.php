@@ -38,7 +38,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 <?php endif;?>
 
 <?php
-require_once JPATH_SITE.'/components/com_einsatzkomponente/views/organisationen/tmpl/'.$this->params->get('main_layout','organisationen_layout_1.php').''; 
+require_once JPATH_SITE.'/components/com_einsatzkomponente/views/organisationen/tmpl/'.$this->params->get('organisation_layout','organisationen_layout_1.php').''; 
 
 ?>
 

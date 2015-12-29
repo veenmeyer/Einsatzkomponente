@@ -246,7 +246,7 @@ if (empty($list['direction']))
 			        $app = JFactory::getApplication();
 					$params = $app->getParams('com_einsatzkomponente');
 					$array = array();
-					$filter_orga = $this->state->get("filter.orga");
+					$filter_orga = $params->get('filter_orga');
 					if ($filter_orga) :
 					foreach((array)$params->get('filter_orga') as $value): 
 							if(!is_array($value)):

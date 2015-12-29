@@ -1293,6 +1293,10 @@ endif;
 			    $path = '../'.$speicherort;
 			}
 			
+		if (!file_exists($path)) {
+		if(mkdir($path, 0755, true)) {
+		}}
+
 			//Gebe PDF in definiertes Verzeichnis aus und benenne sie mit der Einsatz-ID
 			$pdfname = 'einsatzbericht_id'.$id.'.pdf';
 			$pdf->Output($path.'/'.$pdfname,'F');

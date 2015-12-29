@@ -26,7 +26,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php endif;?>
 
 <?php
-require_once JPATH_SITE.'/components/com_einsatzkomponente/views/organisation/tmpl/'.$this->params->get('organisation_layout','organisation_layout_1.php').''; 
+require_once JPATH_SITE.'/components/com_einsatzkomponente/views/organisation/tmpl/'.$this->params->get('orga_detail_layout','organisation_layout_1.php').''; 
 
 
 ?> 

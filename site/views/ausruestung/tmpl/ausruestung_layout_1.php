@@ -18,32 +18,44 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 
     <div class="item_fields">
         <table class="table eiko_table_ausruestung">
-            <tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_ID'); ?></th>
-			<td><?php echo $this->item->id; ?></td>
-</tr>
+
+<?php if ($this->params->get('show_ausruestung_beschreibung','0')) : ?>
+<?php if( $this->item->beschreibung) : ?>
 <tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_NAME'); ?></th>
+	<?php jimport('joomla.html.content'); ?>  
+	<?php $Desc = JHTML::_('content.prepare', $this->item->beschreibung); ?>
+	<div class="eiko_ausruestung_desc">
+	<?php echo $Desc;?>
+	<br/>
+			</div>
+</tr>
+<?php endif;?>
+<?php endif;?>
+
+<?php if (!$this->params->get('show_ausruestung_beschreibung','1')) : ?>
+
+<tr>
 			<td><?php echo $this->item->name; ?></td>
 </tr>
+
+<?php if( $this->item->image) : ?>
 <tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_IMAGE'); ?></th>
-			<td><img src="<?php echo $this->item->image; ?>" alt="<?php echo $this->item->name; ?>" style="width: 100%;" </td>
+			<td colspan="2">
+			<img src="<?php echo $this->item->image; ?>" alt="<?php echo $this->item->name; ?>" style="width: 100%;" class ="eiko_ausruestung_detail_image"/> 
+			</td>
 </tr>
+<?php endif;?>
+
+<?php if( $this->item->beschreibung) : ?>
 <tr>
 			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_BESCHREIBUNG'); ?></th>
 			<td><?php echo $this->item->beschreibung; ?></td>
 </tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_CREATED_BY'); ?></th>
-			<td><?php echo $this->item->created_by_name; ?></td>
-</tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_STATE'); ?></th>
-			<td>
-			<i class="icon-<?php echo ($this->item->state == 1) ? 'publish' : 'unpublish'; ?>"></i></td>
-</tr>
+<?php endif;?>
 
+<?php endif;?>
+	
+		
         </table>
     </div>
     <?php if($canEdit && $this->item->checked_out == 0): ?>

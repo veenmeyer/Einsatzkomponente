@@ -1,63 +1,71 @@
 <?php
-/**
- * @version     3.0.0
- * @package     com_einsatzkomponente
- * @copyright   Copyright (C) by Ralf Meyer 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
- */
 
+/**
+ * @version    CVS: 3.9
+ * @package    Com_Einsatzkomponente
+ * @author     Ralf Meyer <ralf.meyer@einsatzkomponente.de>
+ * @copyright  Copyright (C) 2015. Alle Rechte vorbehalten.
+ * @license    GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ */
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modelitem');
 jimport('joomla.event.dispatcher');
 
+use Joomla\Utilities\ArrayHelper;
 /**
  * Einsatzkomponente model.
+ *
+ * @since  1.6
  */
-class EinsatzkomponenteModelEinsatzfahrzeug extends JModelForm
+class EinsatzkomponenteModelEinsatzfahrzeug extends JModelItem
 {
-    
-    var $_item = null;
-    
 	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @since	1.6
+	 * @return void
+	 *
+	 * @since    1.6
+	 *
 	 */
 	protected function populateState()
 	{
 		$app = JFactory::getApplication('com_einsatzkomponente');
 
 		// Load state from the request userState on edit or from the passed variable on default
-        if (JFactory::getApplication()->input->get('layout') == 'edit') {
-            $id = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzfahrzeug.id');
-        } else {
-            $id = JFactory::getApplication()->input->get('id');
-            JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzfahrzeug.id', $id);
-        }
+		if (JFactory::getApplication()->input->get('layout') == 'edit')
+		{
+			$id = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzfahrzeug.id');
+		}
+		else
+		{
+			$id = JFactory::getApplication()->input->get('id');
+			JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzfahrzeug.id', $id);
+		}
+
 		$this->setState('einsatzfahrzeug.id', $id);
 
 		// Load the parameters.
-		$params = $app->getParams();
-        $params_array = $params->toArray();
-        if(isset($params_array['item_id'])){
-            $this->setState('einsatzfahrzeug.id', $params_array['item_id']);
-        }
-		$this->setState('params', $params);
+		$params       = $app->getParams();
+		$params_array = $params->toArray();
 
+		if (isset($params_array['item_id']))
+		{
+			$this->setState('einsatzfahrzeug.id', $params_array['item_id']);
+		}
+
+		$this->setState('params', $params);
 	}
-        
 
 	/**
-	 * Method to get an ojbect.
+	 * Method to get an object.
 	 *
-	 * @param	integer	The id of the object to get.
+	 * @param   integer  $id  The id of the object to get.
 	 *
-	 * @return	mixed	Object on success, false on failure.
+	 * @return  mixed    Object on success, false on failure.
 	 */
 	public function &getData($id = null)
 	{
@@ -65,7 +73,8 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelForm
 		{
 			$this->_item = false;
 
-			if (empty($id)) {
+			if (empty($id))
+			{
 				$id = $this->getState('einsatzfahrzeug.id');
 			}
 
@@ -78,53 +87,135 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelForm
 				// Check published state.
 				if ($published = $this->getState('filter.published'))
 				{
-					if ($table->state != $published) {
+					if ($table->state != $published)
+					{
 						return $this->_item;
 					}
 				}
 
 				// Convert the JTable to a clean JObject.
-				$properties = $table->getProperties(1);
-				$this->_item = JArrayHelper::toObject($properties, 'JObject');
-			} elseif ($error = $table->getError()) {
-				$this->setError($error);
+				$properties  = $table->getProperties(1);
+				$this->_item = ArrayHelper::toObject($properties, 'JObject');
 			}
+		}
+
+		
+
+			if (isset($this->_item->department) && $this->_item->department != '') {
+				if(is_object($this->_item->department)){
+					$this->_item->department = JArrayHelper::fromObject($this->_item->department);
+				}
+				$values = (is_array($this->_item->department)) ? $this->_item->department : explode(',',$this->_item->department);
+
+				$textValue = array();
+				foreach ($values as $value){
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+							->select('name')
+							->from('`#__eiko_organisationen`')
+							->where('id = ' . $db->quote($db->escape($value)));
+					$db->setQuery($query);
+					$results = $db->loadObject();
+					if ($results) {
+						$textValue[] = $results->name;
+					}
+				}
+
+			$this->_item->department = !empty($textValue) ? implode(', ', $textValue) : $this->_item->department;
+
+			}
+
+			if (isset($this->_item->ausruestung) && $this->_item->ausruestung != '') {
+				if(is_object($this->_item->ausruestung)){
+					$this->_item->ausruestung = JArrayHelper::fromObject($this->_item->ausruestung);
+				}
+				$values = (is_array($this->_item->ausruestung)) ? $this->_item->ausruestung : explode(',',$this->_item->ausruestung);
+
+				$textValue = array();
+				foreach ($values as $value){
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+							->select('name')
+							->from('`#__eiko_ausruestung`')
+							->where('id = ' . $db->quote($db->escape($value)));
+					$db->setQuery($query);
+					$results = $db->loadObject();
+					if ($results) {
+						$textValue[] = $results->name;
+					}
+				}
+
+			$this->_item->ausruestung = !empty($textValue) ? implode(', ', $textValue) : $this->_item->ausruestung;
+
+			}if (isset($this->_item->created_by) )
+		{
+			$this->_item->created_by_name = JFactory::getUser($this->_item->created_by)->name;
 		}
 
 		return $this->_item;
 	}
-    
-	public function getTable($type = 'Einsatzfahrzeug', $prefix = 'EinsatzkomponenteTable', $config = array())
-	{   
-        $this->addTablePath(JPATH_COMPONENT_ADMINISTRATOR.'/tables');
-        return JTable::getInstance($type, $prefix, $config);
-	}     
 
-    
+	/**
+	 * Get an instance of JTable class
+	 *
+	 * @param   string  $type    Name of the JTable class to get an instance of.
+	 * @param   string  $prefix  Prefix for the table class name. Optional.
+	 * @param   array   $config  Array of configuration values for the JTable object. Optional.
+	 *
+	 * @return  JTable|bool JTable if success, false on failure.
+	 */
+	public function getTable($type = 'Einsatzfahrzeug', $prefix = 'EinsatzkomponenteTable', $config = array())
+	{
+		$this->addTablePath(JPATH_ADMINISTRATOR . '/components/com_einsatzkomponente/tables');
+
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Get the id of an item by alias
+	 *
+	 * @param   string  $alias  Item alias
+	 *
+	 * @return  mixed
+	 */
+	public function getItemIdByAlias($alias)
+	{
+		$table = $this->getTable();
+
+		$table->load(array('alias' => $alias));
+
+		return $table->id;
+	}
+
 	/**
 	 * Method to check in an item.
 	 *
-	 * @param	integer		The id of the row to check out.
-	 * @return	boolean		True on success, false on failure.
-	 * @since	1.6
+	 * @param   integer  $id  The id of the row to check out.
+	 *
+	 * @return  boolean True on success, false on failure.
+	 *
+	 * @since    1.6
 	 */
 	public function checkin($id = null)
 	{
 		// Get the id.
-		$id = (!empty($id)) ? $id : (int)$this->getState('einsatzfahrzeug.id');
+		$id = (!empty($id)) ? $id : (int) $this->getState('einsatzfahrzeug.id');
 
-		if ($id) {
-            
+		if ($id)
+		{
 			// Initialise the table
 			$table = $this->getTable();
 
 			// Attempt to check the row in.
-            if (method_exists($table, 'checkin')) {
-                if (!$table->checkin($id)) {
-                    $this->setError($table->getError());
-                    return false;
-                }
-            }
+			if (method_exists($table, 'checkin'))
+			{
+				if (!$table->checkin($id))
+				{
+					return false;
+				}
+			}
 		}
 
 		return true;
@@ -133,17 +224,19 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelForm
 	/**
 	 * Method to check out an item for editing.
 	 *
-	 * @param	integer		The id of the row to check out.
-	 * @return	boolean		True on success, false on failure.
-	 * @since	1.6
+	 * @param   integer  $id  The id of the row to check out.
+	 *
+	 * @return  boolean True on success, false on failure.
+	 *
+	 * @since    1.6
 	 */
 	public function checkout($id = null)
 	{
 		// Get the user id.
-		$id = (!empty($id)) ? $id : (int)$this->getState('einsatzfahrzeug.id');
+		$id = (!empty($id)) ? $id : (int) $this->getState('einsatzfahrzeug.id');
 
-		if ($id) {
-            
+		if ($id)
+		{
 			// Initialise the table
 			$table = $this->getTable();
 
@@ -151,107 +244,68 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelForm
 			$user = JFactory::getUser();
 
 			// Attempt to check the row out.
-            if (method_exists($table, 'checkout')) {
-                if (!$table->checkout($user->get('id'), $id)) {
-                    $this->setError($table->getError());
-                    return false;
-                }
-            }
+			if (method_exists($table, 'checkout'))
+			{
+				if (!$table->checkout($user->get('id'), $id))
+				{
+					return false;
+				}
+			}
 		}
 
 		return true;
-	}    
-    
-	/**
-	 * Method to get the profile form.
-	 *
-	 * The base form is loaded from XML 
-     * 
-	 * @param	array	$data		An optional array of data for the form to interogate.
-	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
-	 * @return	JForm	A JForm object on success, false on failure
-	 * @since	1.6
-	 */
-	public function getForm($data = array(), $loadData = true)
-	{
-		// Get the form.
-		$form = $this->loadForm('com_einsatzkomponente.einsatzfahrzeug', 'einsatzfahrzeug', array('control' => 'jform', 'load_data' => $loadData));
-		if (empty($form)) {
-			return false;
-		}
-
-		return $form;
 	}
 
 	/**
-	 * Method to get the data that should be injected in the form.
+	 * Get the name of a category by id
 	 *
-	 * @return	mixed	The data for the form.
-	 * @since	1.6
+	 * @param   int  $id  Category id
+	 *
+	 * @return  Object|null	Object if success, null in case of failure
 	 */
-	protected function loadFormData()
+	public function getCategoryName($id)
 	{
-		$data = $this->getData(); 
-        
-        return $data;
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query
+			->select('title')
+			->from('#__categories')
+			->where('id = ' . $id);
+		$db->setQuery($query);
+
+		return $db->loadObject();
 	}
 
 	/**
-	 * Method to save the form data.
+	 * Publish the element
 	 *
-	 * @param	array		The form data.
-	 * @return	mixed		The user id on success, false on failure.
-	 * @since	1.6
+	 * @param   int  $id     Item id
+	 * @param   int  $state  Publish state
+	 *
+	 * @return  boolean
 	 */
-	public function save($data)
+	public function publish($id, $state)
 	{
-		$id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('einsatzfahrzeug.id');
-        $state = (!empty($data['state'])) ? 1 : 0;
-        $user = JFactory::getUser();
+		$table = $this->getTable();
+		$table->load($id);
+		$table->state = $state;
 
-        if($id) {
-            //Check the user can edit this item
-            $authorised = $user->authorise('core.edit', 'com_einsatzkomponente.einsatzfahrzeug'.$id) || $authorised = $user->authorise('core.edit.own', 'com_einsatzkomponente.einsatzfahrzeug'.$id);
-            if($user->authorise('core.edit.state', 'com_einsatzkomponente.einsatzfahrzeug'.$id) !== true && $state == 1){ //The user cannot edit the state of the item.
-                $data['state'] = 0;
-            }
-        } else {
-            //Check the user can create new items in this section
-            $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
-            if($user->authorise('core.edit.state', 'com_einsatzkomponente.einsatzfahrzeug'.$id) !== true && $state == 1){ //The user cannot edit the state of the item.
-                $data['state'] = 0;
-            }
-        }
-
-        if ($authorised !== true) {
-            JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
-            return false;
-        }
-        
-        $table = $this->getTable();
-        if ($table->save($data) === true) {
-            return $id;
-        } else {
-            return false;
-        }
-        
+		return $table->store();
 	}
-    
-     function delete($data)
-    {
-        $id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('einsatzfahrzeug.id');
-        if(JFactory::getUser()->authorise('core.delete', 'com_einsatzkomponente.einsatzfahrzeug'.$id) !== true){
-            JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
-            return false;
-        }
-        $table = $this->getTable();
-        if ($table->delete($data['id']) === true) {
-            return $id;
-        } else {
-            return false;
-        }
-        
-        return true;
-    }
-    
+
+	/**
+	 * Method to delete an item
+	 *
+	 * @param   int  $id  Element id
+	 *
+	 * @return  bool
+	 */
+	public function delete($id)
+	{
+		$table = $this->getTable();
+
+		return $table->delete($id);
+	}
+
+	
 }

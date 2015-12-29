@@ -49,7 +49,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  '', 'a.detail2', $listDirn, $listOrder); ?>
 				</th>
-
+				<th><?php echo 'Letzter Eintrag'; ?>:</th>
 
 							<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
@@ -92,6 +92,19 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 
 					<?php echo $item->detail2; ?>
 				</td>
+				
+				<?php // letzter Einsatz   
+				$database			= JFactory::getDBO();
+				$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$item->id.'",auswahl_orga) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
+				$database->setQuery( $query );
+				$total = $database->loadObjectList();
+				?>
+				<?php if ($total) : ?>
+				<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+				<?php else: ?>
+				<td><?php echo '-'; ?></td>
+				<?php endif;?>
+
 				
 								<?php if ($canEdit || $canDelete): ?>
 					<td class="center">

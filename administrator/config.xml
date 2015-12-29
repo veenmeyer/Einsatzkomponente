@@ -1571,17 +1571,17 @@
 	 	type="imagelist" 
 	 	default="" 
 	 	label="PDF-Header" 
-	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'media/com_einsatzkomponente/images/pdf/' hinterlegt werden." 
-	 	directory="media/com_einsatzkomponente/images/pdf/" 
+	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'images/com_einsatzkomponente/pdf' hinterlegt werden." 
+	 	directory="images/com_einsatzkomponente/pdf" 
 	 	exclude="" 
 	 	stripext="" />
 
         <field 
         	name="pdf_speicherort"
         	type="text"
-        	default="documents/"
+        	default="images/com_einsatzkomponente/pdf"   
         	label="PDF-Speicherort"
-        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: documents/" size="10"
+        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: images/com_einsatzkomponente/pdf" size="10"
         />
         <field
 		name="pdf_show_id"

@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_organisationen` (
 `detail5` VARCHAR(255)  NOT NULL ,
 `detail6_label` VARCHAR(255)  NOT NULL DEFAULT 'Detail6',
 `detail6` VARCHAR(255)  NOT NULL ,
-`detail7_label` VARCHAR(255)  NOT NULL DEFAULT 'letzter_einsatz',
+`detail7_label` VARCHAR(255)  NOT NULL DEFAULT 'Detail7',
 `detail7` VARCHAR(255)  NOT NULL ,
 `link` VARCHAR(255)  NOT NULL ,
 `gmap_latitude` VARCHAR(255)  NOT NULL ,
