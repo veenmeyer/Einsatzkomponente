@@ -31,7 +31,10 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 
 require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 
-
+if ($this->params->get('eiko')) : 
 require_once JPATH_SITE.'/components/com_einsatzkomponente/views/ausruestungen/tmpl/'.$this->params->get('ausruestungen_layout','ausruestungen_layout_1.php').''; 
+else:
+echo 'Zur Zeit ist keine Anzeige möglich';
+endif;
 
 ?> 

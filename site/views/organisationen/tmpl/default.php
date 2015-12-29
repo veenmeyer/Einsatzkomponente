@@ -35,6 +35,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 <div class="page-header eiko_header_main">
 <h1 class="eiko_header_main_h1"> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1> 
 </div>
+<br/>
 <?php endif;?>
 
 <?php

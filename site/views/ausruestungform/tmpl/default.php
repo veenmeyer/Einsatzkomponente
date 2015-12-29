@@ -24,6 +24,7 @@ $doc->addScript(JUri::base() . '/components/com_einsatzkomponente/assets/js/form
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
+if ($this->params->get('eiko')) : 
 ?>
 <script type="text/javascript">
 
@@ -102,3 +103,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 
     </div>
 </form>
+<?php 
+else: 
+echo 'Keine Eingabe möglich';
+endif;

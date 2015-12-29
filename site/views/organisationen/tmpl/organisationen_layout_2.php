@@ -73,6 +73,14 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 <?php endforeach; ?>
         
 </tbody>
+<tfoot>
+<?php if (!$this->params->get('eiko')) : ?>
+        <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
+            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+        </tr>
+	<?php endif; ?>
+</tfoot>
+
 </table>
 
 

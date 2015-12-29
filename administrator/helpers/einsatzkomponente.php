@@ -297,7 +297,7 @@ class EinsatzkomponenteHelper
     public static function getOrga_fahrzeuge($orga_id) {
  		// Funktion : Feuerwehrliste aus DB holen
 		$db = JFactory::getDBO();
-		$query = 'SELECT * FROM `#__eiko_fahrzeuge` WHERE department = "'.$orga_id.'" ORDER BY `ordering`';
+		$query = 'SELECT * FROM `#__eiko_fahrzeuge` WHERE department = "'.$orga_id.'" and (state = 1 or state = 2) ORDER BY `ordering`';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;

@@ -20,13 +20,10 @@ jimport('joomla.application.component.view');
 class EinsatzkomponenteViewEinsatzfahrzeuge extends JViewLegacy
 {
 	protected $items;
-
 	protected $pagination;
-
 	protected $state;
-
 	protected $params;
-
+    protected $version;
 	/**
 	 * Display the view
 	 *
@@ -38,6 +35,7 @@ class EinsatzkomponenteViewEinsatzfahrzeuge extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
+		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 		$app = JFactory::getApplication();
 
 		$this->state      = $this->get('State');
@@ -46,6 +44,9 @@ class EinsatzkomponenteViewEinsatzfahrzeuge extends JViewLegacy
 		$this->params     = $app->getParams('com_einsatzkomponente');
 		$this->filterForm = $this->get('FilterForm');
 		$this->activeFilters = $this->get('ActiveFilters');
+
+		//Komponentenversion aus Datenbank lesen
+		$this->version 		= EinsatzkomponenteHelper::getVersion (); 
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
