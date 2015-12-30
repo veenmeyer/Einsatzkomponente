@@ -42,11 +42,8 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                 'vehicles', 'a.vehicles',
                 'ausruestung', 'a.ausruestung',
                 'boss', 'a.boss',
-                'boss_ftm', 'a.boss_ftm',
                 'boss2', 'a.boss2',
-                'boss2_ftm', 'a.boss2_ftm',
                 'people', 'a.people',
-                'people_ftm', 'a.people_ftm',
                 'desc', 'a.desc',
                 'gmap_report_latitude', 'a.gmap_report_latitude',
                 'gmap_report_longitude', 'a.gmap_report_longitude',
@@ -202,7 +199,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                 $query->where('a.id = ' . (int) substr($search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
-                $query->where('( a.alerting LIKE '.$search.'  OR  a.tickerkat LIKE '.$search.' OR  a.data1 LIKE '.$search.' OR  a.address LIKE '.$search.'  OR  a.summary LIKE '.$search.'  OR  a.auswahl_orga LIKE '.$search.'  OR  a.vehicles LIKE '.$search.'  OR  a.ausruestung LIKE '.$search.'  OR  a.boss LIKE '.$search.'  OR  a.boss_ftm LIKE '.$search.'  OR  a.boss2 LIKE '.$search.'  OR  a.boss2_ftm LIKE '.$search.'  OR  a.people_ftm LIKE '.$search.'  OR  a.desc LIKE '.$search.' )');
+                $query->where('( a.alerting LIKE '.$search.'  OR  a.tickerkat LIKE '.$search.' OR  a.data1 LIKE '.$search.' OR  a.address LIKE '.$search.'  OR  a.summary LIKE '.$search.'  OR  a.auswahl_orga LIKE '.$search.'  OR  a.vehicles LIKE '.$search.'  OR  a.ausruestung LIKE '.$search.'  OR  a.boss LIKE '.$search.'  OR a.boss2 LIKE '.$search.'  OR a.desc LIKE '.$search.' )');
             }
         }
 
@@ -254,23 +251,6 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 			$query->where("FIND_IN_SET(" . $filter_ausruestung. ",a.ausruestung)");
 		}
 
-		//Filtering boss_ftm
-		$filter_boss_ftm = $this->state->get("filter.boss_ftm");
-		if ($filter_boss_ftm) {
-			$query->where("a.boss_ftm = '".$db->escape($filter_boss_ftm)."'");
-		}
-
-		//Filtering boss2_ftm
-		$filter_boss2_ftm = $this->state->get("filter.boss2_ftm");
-		if ($filter_boss2_ftm) {
-			$query->where("a.boss2_ftm = '".$db->escape($filter_boss2_ftm)."'");
-		}
-
-		//Filtering people_ftm
-		$filter_people_ftm = $this->state->get("filter.people_ftm");
-		if ($filter_people_ftm) {
-			$query->where("FIND_IN_SET(" . $filter_people_ftm. ",a.people_ftm)");
-		}
 
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");
