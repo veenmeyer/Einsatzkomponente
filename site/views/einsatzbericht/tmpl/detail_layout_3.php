@@ -107,17 +107,16 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
             <!--Einsatzkarte-->
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
-			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
             <?php if( $this->item->gmap ) : ?>
+            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1') :?> 
+			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
   			<div class="distance100">&nbsp;</div>
    			<h3>Einsatzort</h3> 
   			<div id="map-canvas"  style="width:100%; height:<?php echo $this->params->get('detail_map_height','250px');?>;">
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
 			</div>
             <?php endif;?>
-            <?php endif;?>
 			<?php if ($this->params->get('gmap_action','0')=='2') : ?>
-            <?php if( $this->item->gmap ) : ?>
   			<div class="distance100">&nbsp;</div>
   			<h3>Einsatzort</h3> 
 			<body onLoad="drawmap();"></body>
@@ -126,6 +125,9 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			<div id="map" style="width:100%; height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
             <?php endif;?>
+			<?php else:?> 
+			<?php echo '<span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span><br/><br/>';?>
+			<?php endif;?>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzkarte ENDE-->

@@ -1167,6 +1167,18 @@
 			type="spacer"
 			hr="true"
 		/>
+	  		<field
+				name="display_detail_map_for_only_user"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="Einstellung Karte :"
+				description="Hier können Sie einstellen, wem die Einsatzkarte angezeigt werden soll.">
+					<option
+						value="0">öffentlich</option>
+					<option
+						value="1">nur für registrierte User</option>
+	  		</field>
 			<field 
 				name="detail_gmap_zoom_level" 
 				type="integer" 
