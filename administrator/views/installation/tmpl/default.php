@@ -15,7 +15,7 @@ $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 
 $bak_date = false;
-
+$bug = '0';
 ?>
 <meta charset="utf-8">
 <br/><br/>
@@ -31,7 +31,7 @@ $db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsat
 $params = json_decode( $db->loadResult(), true );
 	
 $repair      	= JFactory::getApplication()->input->get('repair', false);
-
+$restore      	= JFactory::getApplication()->input->get('restore', false);
 
 // DB-Service
 
@@ -41,7 +41,7 @@ $repair_array ['112'] = "CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (`id` 
 
 $repair_array ['113'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `ausruestung` TEXT NOT NULL AFTER `vehicles`;";
 $repair_array ['114'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `auswahl_orga` TEXT NOT NULL AFTER `tickerkat`;";
-$repair_array ['999'] = "DROP TABLE `#__bak_sicherung_%`;";
+
 
 if ($repair) : 
 	$db = JFactory::getDbo();
@@ -60,7 +60,7 @@ if ($repair) :
 endif;
 
 // DB-Sicherung wieder herstellen
-if ($bak_date) : 
+if ($restore) : 
 $queries[] = "DROP TABLE #__eiko_alarmierungsarten";
 $queries[] = "CREATE TABLE #__eiko_alarmierungsarten LIKE #__bak_eiko_alarmierungsarten";
 $queries[] = "ALTER TABLE #__eiko_alarmierungsarten DISABLE KEYS";
@@ -741,9 +741,7 @@ endif;
 // ------------------------------------------------------------------------------------------------------------
 
 		if (!file_exists('../images/com_einsatzkomponente/pdf')) {
-		if(mkdir('../images/com_einsatzkomponente/pdf', 0755, true)) {
-			echo 'Der Ordner `../images/com_einsatzkomponente/pdf` <span class="label label-success">wurde erstellt.</span>.<br/><br/>'; 
-		}}
+		mkdir('../images/com_einsatzkomponente/pdf', 0755, true); }
 
 
 
