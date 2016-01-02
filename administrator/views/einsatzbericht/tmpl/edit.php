@@ -250,7 +250,7 @@ displayVals();
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
 			
-			<div class="control-group" style="height:100px;">
+			<div class="control-group" style="">
 			Bilderupload für Bildergalerie:
 			<div id="text">
             <div ><input multiple class="" name="data[]" id="file" type="file"/></div>
@@ -262,7 +262,7 @@ displayVals();
         <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
 		<!--http://www.fyneworks.com/jquery/multifile/-->
      
-			</div>
+			</div></div>
 			
             <!--Slider für Bildergalerie-->
             
@@ -359,7 +359,7 @@ displayVals();
 
             <input type="hidden" name="jform[status]" value="<?php echo $this->item->status; ?>" />
             </fieldset>
-    	</div></div>
+    	</div>
    </div>     
         <input type="hidden" name="task" value="" />
 			<input type='hidden' name="action" value="Filedata" />

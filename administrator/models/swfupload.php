@@ -88,8 +88,47 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 		else  {}
 		
 		
+		
+		// Exif-Information --- Bild richtig drehen
+	    $bild = $uploadPath;
+		$image = imagecreatefromstring(file_get_contents($bild));
+		$exif = exif_read_data($bild);
+		if(!empty($exif['Orientation'])) {
+			switch($exif['Orientation']) {
+				case 8:
+					$image = imagerotate($image,90,0);
+					break;
+				case 3:
+					$image = imagerotate($image,180,0);
+					break;
+				case 6:
+					$image = imagerotate($image,-90,0);
+					break;
+			}
+		}
+		 
+		// scale image
+		list( $original_breite, $original_hoehe, $typ, $imgtag, $bits, $channels, $mimetype ) = @getimagesize( $bild );
+		$ratio = imagesx($image)/imagesy($image); // width/height
+		if($ratio > 1) {
+			$width = $original_breite;
+			$height = round($original_breite/$ratio);
+		} else {
+			$width = round($original_hoehe*$ratio);
+			$height = $original_hoehe;
+		}
+		$scaled = imagecreatetruecolor($width, $height);
+		imagecopyresampled($scaled, $image, 0, 0, 0, 0, $width, $height, imagesx($image), imagesy($image));
+		 
+		imagejpeg($scaled, $bild);
+		//imagedestroy($image);
+		imagedestroy($scaled);
+
+		
+		
 		// thumbs erstellen und unter /thumbs abspeichern
 	    $bild = $uploadPath;
+
 		list( $original_breite, $original_hoehe, $typ, $imgtag, $bits, $channels, $mimetype ) = @getimagesize( $bild );
 		$speichern = $uploadPath_thumb;
      	$originalbild = imagecreatefromjpeg( $bild ); 
