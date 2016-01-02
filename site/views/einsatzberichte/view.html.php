@@ -63,6 +63,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		  //----Modulposition laden ----
 		$this->modulepos_1 = '<div class="mod_eiko1">'.EinsatzkomponenteHelper::module ('eiko1').'</div>'; 
 		$this->modulepos_2 = '<div class="mod_eiko2">'.EinsatzkomponenteHelper::module ('eiko2').'</div>'; 
+		
 		$selectedYear = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedYear", 'year', $selectedYear );
 		$selectedEinsatzart = '';
 		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', '' );

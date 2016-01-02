@@ -36,6 +36,7 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
                 'image', 'a.image',
      //           'images', 'a.images',
                 'date1', 'a.date1',
+                'year', 'a.date1',
                 'date2', 'a.date2',
                 'date3', 'a.date3',
                 'address', 'a.address',
@@ -163,6 +164,9 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
 
 if (!$app->input->getInt('list', 0)) : // Prüfen ob zurück aus Detailansicht
 $params = $app->getParams('com_einsatzkomponente');
+
+$this->setState('filter.year', $params->get('filter_year',''));
+$app->setUserState( $this->context . '.filter.year',  $params->get('filter_year','') );
 
 $this->setState('filter.auswahl_orga', $params->get('filter_auswahl_orga',''));
 $app->setUserState( $this->context . '.filter.auswahl_orga',  $params->get('filter_auswahl_orga','') );
@@ -357,6 +361,12 @@ $query->where('a.state = 1');
 		if ($filter_created_by) {
 			$query->where("a.created_by = '".$db->escape($filter_created_by)."'");
 		}
+		
+		//Filtering year
+		$filter_year = $this->state->get("filter.year");
+		if ($filter_year) {
+			$query->where("a.date1 LIKE '".$db->escape($filter_year)."%'");
+		}
 
         // Add the list ordering clause.
         $orderCol = $this->state->get('list.ordering');
@@ -396,13 +406,23 @@ $query->where('a.state = 1');
 			return false;
 		}
 
+
 		// Add the items to the internal cache.
 		$this->cache[$store] = $items;
 
-		
         foreach($items as $item){
 	
 
+			if ($item->date1) {
+				$item->date1 		= strtotime($item->date1);
+				$item->date1_month 	= date('n', $item->date1);
+				$item->date1_year 	= date('Y', $item->date1);
+			}
+	
+	
+	
+	
+	
 			if (isset($item->alerting) && $item->alerting != '') {
 					$db = JFactory::getDbo();
 					$query = $db->getQuery(true);
@@ -652,6 +672,9 @@ $query->where('a.state = 1');
 }
         return $items;
     }
+	
+
+	
 
     /**
      * Overrides the default function to check Date fields format, identified by

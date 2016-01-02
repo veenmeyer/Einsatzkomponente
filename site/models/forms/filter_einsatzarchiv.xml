@@ -2,7 +2,10 @@
 <form>
     <fields name="filter">
 	
- <field name="auswahl_orga" type="sql" class="inputbox" onchange="this.form.submit();"
+ <field name="year" type="sql" class="inputbox" onchange="this.form.submit();"
+                                    query="SELECT '' AS `id`, '- Jahr -' AS `title` UNION SELECT Year(date1) as id, Year(date1) as title FROM `#__eiko_einsatzberichte` WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" key_field="id" value_field="title"/> 
+
+<field name="auswahl_orga" type="sql" class="inputbox" onchange="this.form.submit();"
                                     query="SELECT '' AS `id`, '- Organisation -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_organisationen`" key_field="id" value_field="name"/> 
 									
  <field name="data1" type="sql" class="inputbox" onchange="this.form.submit();"

@@ -73,6 +73,11 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 			
 		<div class="js-stools-field-filter">
 		
+		<?php if ($params->get('show_filter_year','1')) : ?>
+		<?php echo $filters['filter_year']->input; ?>
+		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
 		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
 		<?php echo $filters['filter_auswahl_orga']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
@@ -99,13 +104,6 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 		
 		</div>
 		
-		
-		<div class="js-stools-field-filter" style ="float:right;">
-		<?php echo 'Filter ab Datum '.$filters['filter_date1_from_dateformat']->input; ?>
-		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
-		<?php echo 'Filter bis Datum '.$filters['filter_date1_to_dateformat']->input; ?>
- 
-		</div>
 
 		<?php endif; ?>
     </div>
@@ -125,7 +123,8 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 				 	case 'alerting': $active_name .= '<span class="label label-info">Alarmierungsart</span> ';break; 
 				 	case 'data1': $active_name .= '<span class="label label-info">Einsatzart</span> ';break; 
 					case 'tickerkat': $active_name .= '<span class="label label-info">Einsatzkategorie</span> ';break; 
-				 	case 'auswahl_orga': $active_name .= '<span class="label label-info">Organisation</span> ';break; 
+				 	case 'auswahl_orga': $active_name .= '<span class="label label-info">Organisation</span> ';break;
+				 	case 'year': $active_name .= '<span class="label label-info">Jahr</span> ';break; 
 				 	default: $active_name = '';break; 
 				}  ?>
 

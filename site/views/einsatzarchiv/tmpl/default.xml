@@ -155,25 +155,24 @@
 />
 	
 <field
-		name="show_filter_date1"
+		name="show_filter_year"
 		type="radio"
 		class="btn-group"
 		default="1"
-		label="Filter Datum :"
+		label="Filter Jahr :"
 		description="">
 			<option	value="0">verstecken</option>
 			<option	value="1">anzeigen</option>
 </field>
 
+ <field name="filter_year" 
+		type="sql" 
+		class="inputbox" 
+		label="Jahr :"
+        query="SELECT '' AS `id`, '- alle anzeigen -' AS `title` UNION SELECT Year(date1) as id, Year(date1) as title FROM `#__eiko_einsatzberichte` WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" 
+		key_field="id" 
+		value_field="title"/> 
 
- 		<!-- Keep "_dateformat" suffix for date validation on form submit -->
-		<field name="filter_date1_from_dateformat" type="calendar"
-            label="ab Datum :"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY" />
-		<!-- Keep "_dateformat" suffix for date validation on form submit -->
-		<field name="filter_date1_to_dateformat" type="calendar"
-            label="bis Datum :"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY" /> 
 
 <field
 		name="spacer5"

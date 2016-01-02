@@ -6,11 +6,12 @@
         </message>
 	</layout>
 
-	<fields name="params">
+	<fields name="params" type="fields">
+	
 		<fieldset 
             name="basic"
-			label="Filter">
-
+			label="Filter"
+			addfieldpath="/administrator/components/com_einsatzkomponente/models/fields">
 			
 			
 <field name="note_filter_auswahl" 
@@ -28,7 +29,7 @@
 		hr="true"
 />
 
-       <field name="filter_fahrzeuge" type="sql" class="inputbox"
+       <!--<field name="filter_fahrzeuge" type="sql" class="inputbox"
             label="Fahrzeuge"
             description="" 
             required="false" 
@@ -36,11 +37,15 @@
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
+         /> -->
+
+			 <field name="filter_fahrzeuge" type="einsatzfahrzeuge" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
+						
          /> 
 
-
-
-<field
+		 <field
 		name="spacer65"
 		type="spacer"
 		hr="true"
