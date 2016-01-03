@@ -636,6 +636,24 @@
 			type="spacer"
 			hr="true"
 		/>
+		
+	  <!--<field
+			name="limit"
+			type="radio"
+			class="btn-group"
+			default="10"
+			label="Listenlänge :"
+			description="">
+			<option
+				value="0">Unbegrenzt</option>
+			<option	value="5">5</option>
+			<option	value="10">10</option>
+			<option	value="15">15</option>
+			<option	value="20">20</option>
+			<option	value="50">50</option>
+			<option	value="100">100</option>
+	  </field> -->
+	  
 	  <field
 			name="display_home_map"
 			type="radio"
@@ -1558,7 +1576,18 @@
 		label="Bitte beachten :" 
 		description="Weitere Einstellungen können Sie anschließend direkt im Joomla-Artikel vornehmen, bzw. über die Kategorie und/oder Menüpunkten festlegen." 
 />
-		
+		<field
+			name="article_frontend"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Joomla-Artikel direkt nach Eintrag im Frontend erstellen ?"
+			label="Joomla-Artikel Frontend:" >
+			<option
+				value="0">Nein</option>
+			<option
+				value="1">Ja</option>
+		</field>
 	</fieldset>
 	
 	

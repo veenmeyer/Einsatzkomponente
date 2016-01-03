@@ -664,9 +664,16 @@ return $gmap; }
 	if( !$menu_link) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
 	endif; 
-	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht.'.$id)):
+	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
+		$user=JFactory::getUser();
+		$query = 'SELECT created_by FROM `#__eiko_einsatzberichte` WHERE state="1" AND id ="'.$id.'"';
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		$result = $db->loadResult();
+	if ($user->id == $result OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
     $navbar .='<strong>Editieren</strong></a>';
+	endif;
     endif;
 	
 	$navbar .='</div>';
@@ -926,10 +933,8 @@ endif;
 
 		// Check for request forgeries
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
 		// Get items to remove from the request.
-		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
-		
+		if (!$cid) : $cid = JFactory::getApplication()->input->get('cid', array(), 'array'); endif;
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
@@ -1184,6 +1189,7 @@ endif;
 			$bericht = $einsatz[0]->langt;
 			$organisationen = $orgas_all;
 			$fahrzeuge = $fahrz_all;
+			$bericht = strip_tags($bericht);
 			
 		     	$params = JComponentHelper::getParams('com_einsatzkomponente');
 		     	
@@ -1201,7 +1207,7 @@ endif;
 			$pdf->AddPage();
 			
 			//Schriftart und -größe wird definiert 
-			$pdf->SetFont('Arial','',12);
+			$pdf->SetFont('Arial','',10);
 			
 			//Header-Image
 			if (!$params->get('pdf_header') == '') {
@@ -1213,13 +1219,24 @@ endif;
 			}
 			//Erstelle die Zellen
 			if ($params->get('pdf_show_id') == 1) {
+				$pdf->SetFont('Arial','',8);
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
+				$pdf->SetFont('Arial','',10);
 			}
 			if ($params->get('pdf_show_counter') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER').':'));
+				$pdf->SetFont('Arial','',8);
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('WEB-Zugriffe').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,$counter,0,1);
+				$pdf->SetFont('Arial','',10);
 			}
+			if ($params->get('pdf_show_kurzbericht') == 1) {
+				if ($kurzbericht) {
+				$pdf->SetFont('Arial','',14);
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY').':'));
+				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($kurzbericht),0,1);
+				$pdf->SetFont('Arial','',10);
+			}}
 			if ($params->get('pdf_show_alarmart') == 1) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($alarmart),0,1);
@@ -1240,46 +1257,55 @@ endif;
 				$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMESTART').':');
 				$pdf->Cell($breite_inhalt,$hoehe,$beginn,0,1);
 			}
-			if ($params->get('pdf_show_ausfahrzeit') == 1) {
+			if ($params->get('pdf_show_ausfahrzeit') == 1 AND $ausrueck != "0000-00-00 00:00:00") {
 				$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2').':');
 				$pdf->Cell($breite_inhalt,$hoehe,$ausrueck,0,1);
 			}
-			if ($params->get('pdf_show_einsatzende') == 1) {
+			if ($params->get('pdf_show_einsatzende') == 1 AND $ende != "0000-00-00 00:00:00") {
 				$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMEEND').':');
 				$pdf->Cell($breite_inhalt,$hoehe,$ende,0,1);
 			}
 			if ($params->get('pdf_show_einsatzleiter') == 1) {
+				if ($einsatzleiter) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzleiter),0,1);
-			}
+			}}
 			if ($params->get('pdf_show_einsatzfuehrer') == 1) {
+				if ($einsatzführer) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzführer),0,1);
-			}
+			}}
 			if ($params->get('pdf_show_mannschaft') == 1) {
+				if ($mannschaft) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
-			}
+			}}
+			
 			if ($params->get('pdf_show_orgas') == 1) {
+				if ($organisationen) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
-			}
+			}}
+			
 			if ($params->get('pdf_show_fahrzeuge') == 1) {
+				if ($fahrzeuge) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
-			}
+			}}
+			
 			if ($params->get('pdf_show_ausruestung') == 1) {
+				if ($ausruest) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1);
-			}
-			if ($params->get('pdf_show_kurzbericht') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($kurzbericht),0,1);
-			}
+			}}
+			
+			
 			if ($params->get('pdf_show_langbericht') == 1) {
+				if ($bericht) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC').':'));
 				$pdf->MultiCell(150,$hoehe,utf8_decode($bericht),0,1);
-			}
+			}}
+			
 			
 			//prüfe Pfadangabe auf "/" am Ende und schneide dieses Zeichen ab wenn nötig
 			$speicherort = $params->get('pdf_speicherort');
