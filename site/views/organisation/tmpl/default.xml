@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_EINSATZKOMPONENTE_TITLE_ITEM_VIEW_ORGANISATION" option="View">
+    <layout title="Organisation Detailanzeige" option="View">
         <message>
-                        <![CDATA[COM_EINSATZKOMPONENTE_TITLE_ITEM_VIEW_ORGANISATION_DESC]]>
+                        <![CDATA[]]>
         </message>
     </layout>
     <fields name="params">
@@ -17,23 +17,12 @@
                 type="sql"
                 key_field="id" 
                 value_field="name"
-                label="COM_EINSATZKOMPONENTE_ITEM_ORGA_SELECT_LABEL"
+                label="Wähle eine Organisation aus"
                 require="true"
                 description="JGLOBAL_SHOW_TITLE_DESC">
             </field>
 			
 	
-			<field name="organisation_layout" 
-			type="list" 
-			default="organisation_layout_1.php" 
-			label="Bitte wählen Sie ein Layout für die Organisations-Detailansicht aus :" 
-			description="">
-  				<option value="organisation_layout_1.php">organisation_layout_1</option>
-  				<option value="organisation_layout_2.php">organisation_layout_2</option>
-				<option value="organisation_layout_3.php">leer</option>
-				<option value="organisation_layout_4.php">leer</option>
-				<option value="organisation_layout_5.php">leer</option>
-			</field>			
 
 			</fieldset>
     </fields>

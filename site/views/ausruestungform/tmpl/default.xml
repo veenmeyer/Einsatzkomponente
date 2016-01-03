@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_EINSATZKOMPONENTE_TITLE_FORM_VIEW_AUSRUESTUNG" option="View">
+    <layout title="Ausrüstung anlegen" option="View">
         <message>
-                        <![CDATA[COM_EINSATZKOMPONENTE_TITLE_FORM_VIEW_AUSRUESTUNG_DESC]]>
+                        <![CDATA[]]>
         </message>
     </layout>
     <fields name="params">
@@ -15,7 +15,7 @@
                 type="sql"
                 key_field="id" 
                 value_field="id"
-                label="COM_EINSATZKOMPONENTE_ITEM_ID_SELECT_LABEL_FORM"
+                label="Wähle die ID zu bearbeitende ID aus (0 für Neuanlage)"
                 require="true"
                 description="JGLOBAL_SHOW_TITLE_DESC">
             </field>

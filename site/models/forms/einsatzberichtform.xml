@@ -197,13 +197,8 @@
             size="100"
             maxlength="500" /> 
 			
-       <field name="einsatzticker" type="hidden"
-            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZTICKER"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_EINSATZTICKER" 
-            default="0"
-            class="eiko_einsatzticker"
-            filter="safehtml" /> 
-       <field name="notrufticker" type="hidden"
+
+			<field name="notrufticker" type="hidden"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_NOTRUFTICKER"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_NOTRUFTICKER" 
             default="0"
@@ -319,6 +314,21 @@
             class="eiko_counter"
             filter="int"
             size="20" /> 
+			
+       <field name="einsatzticker" 
+			type="list"
+        	description="Hier können Sie Einstellen, ob nach dem abspeichern des Berichtes, ein Joomla-Artikel daraus erstellt werden soll."
+            label="Joomla-Artikel erstellen ?" 
+            default="0"
+            class="btn-group"
+            filter="raw"
+            multiple="false">
+                <option value="0">Nein</option>
+                <option value="1">Ja</option>
+        </field> 
+
+			
+			
         <field name="state"
              type="list"
              label="JSTATUS"

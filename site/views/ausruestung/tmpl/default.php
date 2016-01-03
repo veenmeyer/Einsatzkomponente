@@ -1,59 +1,32 @@
-<?php
+<?php 
 /**
- * @version     3.0.7
+ * @version     3.0.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2015. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
- * @author      Ralf Meyer <ralf.meyer@mail.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
 
-$canEdit = JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente.' . $this->item->id);
-if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente' . $this->item->id)) {
-	$canEdit = JFactory::getUser()->id == $this->item->created_by;
-}
-?>
-<?php if ($this->item) : ?>
+//Load admin language file
+$lang = JFactory::getLanguage();
+$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
-    <div class="item_fields">
-        <table class="table eiko_table_ausruestung">
-            <tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_ID'); ?></th>
-			<td><?php echo $this->item->id; ?></td>
-</tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_NAME'); ?></th>
-			<td><?php echo $this->item->name; ?></td>
-</tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_IMAGE'); ?></th>
-			<td><img src="<?php echo $this->item->image; ?>" alt="<?php echo $this->item->name; ?>" style="width: 100%;" </td>
-</tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_BESCHREIBUNG'); ?></th>
-			<td><?php echo $this->item->beschreibung; ?></td>
-</tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_CREATED_BY'); ?></th>
-			<td><?php echo $this->item->created_by_name; ?></td>
-</tr>
-<tr>
-			<th><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_STATE'); ?></th>
-			<td>
-			<i class="icon-<?php echo ($this->item->state == 1) ? 'publish' : 'unpublish'; ?>"></i></td>
-</tr>
 
-        </table>
-    </div>
-    <?php if($canEdit && $this->item->checked_out == 0): ?>
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestung.edit&id='.$this->item->id); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_EDIT_ITEM"); ?></a>
-	<?php endif; ?>
-								<?php if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.ausruestung.'.$this->item->id)):?>
-									<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestung.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_DELETE_ITEM"); ?></a>
-								<?php endif; ?>
-    <?php
-else:
-    echo JText::_('COM_EINSATZKOMPONENTE_ITEM_NOT_LOADED');
-endif;
 ?>
+
+<!--Page Heading-->
+<?php if ($this->params->get('show_page_heading', 1)) : ?>
+<div class="page-header eiko_header_main">
+<h1 class="eiko_header_main_h1"> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1> 
+<input type="button" class="btn eiko_back_button" value="Zurück" onClick="history.back();">
+</div>
+<br/>
+<?php endif;?>
+
+<?php
+require_once JPATH_SITE.'/components/com_einsatzkomponente/views/ausruestung/tmpl/'.$this->params->get('ausruestung_detail_layout','ausruestung_layout_1.php').''; 
+
+
+?> 

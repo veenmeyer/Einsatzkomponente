@@ -21,11 +21,13 @@ class EinsatzkomponenteViewAusruestungen extends JViewLegacy {
     protected $pagination;
     protected $state;
     protected $params;
-
+    protected $version;
     /**
      * Display the view
      */
     public function display($tpl = null) {
+		
+		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
         $app = JFactory::getApplication();
 
         $this->state = $this->get('State');
@@ -33,6 +35,9 @@ class EinsatzkomponenteViewAusruestungen extends JViewLegacy {
         $this->pagination = $this->get('Pagination');
         $this->params = $app->getParams('com_einsatzkomponente');
         
+		//Komponentenversion aus Datenbank lesen
+		$this->version 		= EinsatzkomponenteHelper::getVersion (); 
+
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {

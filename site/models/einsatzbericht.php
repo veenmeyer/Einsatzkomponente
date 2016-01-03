@@ -187,15 +187,17 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
         $state = (!empty($data['state'])) ? 1 : 0;
         $user = JFactory::getUser();
         if($id) {
+			
+			
             //Check the user can edit this item
-            $authorised = $user->authorise('core.edit', 'com_einsatzkomponente.einsatzbericht'.$id) || $authorised = $user->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht'.$id);
-            if($user->authorise('core.edit.state', 'com_einsatzkomponente.einsatzbericht'.$id) !== true && $state == 1){ //The user cannot edit the state of the item.
+            $authorised = $user->authorise('core.edit', 'com_einsatzkomponente') || $authorised = $user->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht');
+            if($user->authorise('core.edit.state', 'com_einsatzkomponente') !== true && $state == 1){ //The user cannot edit the state of the item.
                 $data['state'] = 0;
             }
         } else {
             //Check the user can create new items in this section
             $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
-            if($user->authorise('core.edit.state', 'com_einsatzkomponente.einsatzbericht'.$id) !== true && $state == 1){ //The user cannot edit the state of the item.
+            if($user->authorise('core.edit.state', 'com_einsatzkomponente') !== true && $state == 1){ //The user cannot edit the state of the item.
                 $data['state'] = 0;
             }
         }
@@ -224,7 +226,7 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
      public function delete($data)
     {
         $id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('einsatzbericht.id');
-        if(JFactory::getUser()->authorise('core.delete', 'com_einsatzkomponente.einsatzbericht'.$id) !== true){
+        if(JFactory::getUser()->authorise('core.delete', 'com_einsatzkomponente') !== true){
             JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
             return false;
         }
@@ -330,6 +332,43 @@ while($count < $count_data)
         if (!JFolder::exists(JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').'/thumbs')) 
 		{ JFolder::create(JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').'/thumbs');        }
 		else  {}
+		
+		
+		// Exif-Information --- Bild richtig drehen
+	    $bild = $uploadPath;
+		$image = imagecreatefromstring(file_get_contents($bild));
+		$exif = exif_read_data($bild);
+		if(!empty($exif['Orientation'])) {
+			switch($exif['Orientation']) {
+				case 8:
+					$image = imagerotate($image,90,0);
+					break;
+				case 3:
+					$image = imagerotate($image,180,0);
+					break;
+				case 6:
+					$image = imagerotate($image,-90,0);
+					break;
+			}
+		}
+		 
+		// scale image
+		list( $original_breite, $original_hoehe, $typ, $imgtag, $bits, $channels, $mimetype ) = @getimagesize( $bild );
+		$ratio = imagesx($image)/imagesy($image); // width/height
+		if($ratio > 1) {
+			$width = $original_breite;
+			$height = round($original_breite/$ratio);
+		} else {
+			$width = round($original_hoehe*$ratio);
+			$height = $original_hoehe;
+		}
+		$scaled = imagecreatetruecolor($width, $height);
+		imagecopyresampled($scaled, $image, 0, 0, 0, 0, $width, $height, imagesx($image), imagesy($image));
+		 
+		imagejpeg($scaled, $bild);
+		//imagedestroy($image);
+		imagedestroy($scaled);
+
 		
 		// thumbs erstellen und unter /thumbs abspeichern
 	    $bild = $uploadPath;

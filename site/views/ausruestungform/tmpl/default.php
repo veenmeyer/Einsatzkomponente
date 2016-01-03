@@ -9,10 +9,11 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::_('behavior.keepalive');
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select');
+JHtml::_('behavior.keepalive');
 
 //Load admin language file
 $lang = JFactory::getLanguage();
@@ -20,84 +21,75 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 $doc = JFactory::getDocument();
 $doc->addScript(JUri::base() . '/components/com_einsatzkomponente/assets/js/form.js');
 
-
+// Import CSS
+$document = JFactory::getDocument();
+$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
+if ($this->params->get('eiko')) : 
 ?>
-</style>
 <script type="text/javascript">
-    if (jQuery === 'undefined') {
-        document.addEventListener("DOMContentLoaded", function(event) { 
-            jQuery('#form-ausruestung').submit(function(event) {
-                
-            });
 
+    Joomla.submitbutton = function(task)
+    {
+        if (task == 'ausruestung.cancel') {
+            Joomla.submitform(task, document.getElementById('ausruestung-form'));
+        }
+        else {
             
-    } else {
-        jQuery(document).ready(function() {
-            jQuery('#form-ausruestung').submit(function(event) {
+            if (task != 'ausruestung.cancel' && document.formvalidator.isValid(document.id('ausruestung-form'))) {
                 
-            });
-
-            
+                Joomla.submitform(task, document.getElementById('ausruestung-form'));
+            }
+            else {
+                alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED')); ?>');
+            }
+        }
     }
 </script>
 
-<div class="ausruestung-edit front-end-edit">
-    <?php if (!empty($this->item->id)): ?>
-        <h1>Edit <?php echo $this->item->id; ?></h1>
-    <?php else: ?>
-        <h1>Add</h1>
-    <?php endif; ?>
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&layout=edit&id=' . (int) $this->item->id); ?>" method="post" enctype="multipart/form-data" name="adminForm" id="ausruestung-form" class="form-validate">
 
-    <form id="form-ausruestung" action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestung.save'); ?>" method="post" class="form-validate form-horizontal" enctype="multipart/form-data">
-        
-	<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
+    <div class="form-horizontal">
+        <?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('name'); ?></div>
-	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
-	</div>
-	<div class="control-group">
-		<div class="control-label"><?php echo $this->form->getLabel('beschreibung'); ?></div>
-		<div class="controls"><?php echo $this->form->getInput('beschreibung'); ?></div>
-	</div>
-	<?php if(empty($this->item->created_by)): ?>
-		<input type="hidden" name="jform[created_by]" value="<?php echo JFactory::getUser()->id; ?>" />
-	<?php else: ?>
-		<input type="hidden" name="jform[created_by]" value="<?php echo $this->item->created_by; ?>" />
-	<?php endif; ?>
-	<input type="hidden" name="jform[checked_out]" value="<?php echo $this->item->checked_out; ?>" />
+        <?php echo JHtml::_('bootstrap.addTab', 'myTab', 'general', JText::_('COM_EINSATZKOMPONENTE_TITLE_AUSRUESTUNG', true)); ?>
+        <div class="row-fluid">
+            <div class="span10 form-horizontal">
+                <fieldset class="adminform">
 
-	<input type="hidden" name="jform[checked_out_time]" value="<?php echo $this->item->checked_out_time; ?>" />
+                    				<input type="hidden" name="jform[id]" value="<?php echo $this->item->id; ?>" />
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('name'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('name'); ?></div>
+			</div>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
+			</div>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('beschreibung'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('beschreibung'); ?></div>
+			</div>
+				<?php if(empty($this->item->created_by)){ ?>
+					<input type="hidden" name="jform[created_by]" value="<?php echo JFactory::getUser()->id; ?>" />
 
-	<input type="hidden" name="jform[ordering]" value="<?php echo $this->item->ordering; ?>" />
+				<?php } 
+				else{ ?>
+					<input type="hidden" name="jform[created_by]" value="<?php echo $this->item->created_by; ?>" />
 
-	<input type="hidden" name="jform[state]" value="<?php echo $this->item->state; ?>" />
-				<div class="fltlft" <?php if (!JFactory::getUser()->authorise('core.admin','einsatzkomponente')): ?> style="display:none;" <?php endif; ?> >
-                <?php echo JHtml::_('sliders.start', 'permissions-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-                <?php echo JHtml::_('sliders.panel', JText::_('ACL Configuration'), 'access-rules'); ?>
-                <fieldset class="panelform">
-                    <?php echo $this->form->getLabel('rules'); ?>
-                    <?php echo $this->form->getInput('rules'); ?>
+				<?php } ?>				<input type="hidden" name="jform[checked_out]" value="<?php echo $this->item->checked_out; ?>" />
+				<input type="hidden" name="jform[checked_out_time]" value="<?php echo $this->item->checked_out_time; ?>" />
+				<input type="hidden" name="jform[ordering]" value="<?php echo $this->item->ordering; ?>" />
+				<input type="hidden" name="jform[state]" value="<?php echo $this->item->state; ?>" />
+
+
                 </fieldset>
-                <?php echo JHtml::_('sliders.end'); ?>
             </div>
-				<?php if (!JFactory::getUser()->authorise('core.admin','einsatzkomponente')): ?>
-                <script type="text/javascript">
-                    jQuery.noConflict();
-                    jQuery('.tab-pane select').each(function(){
-                       var option_selected = jQuery(this).find(':selected');
-                       var input = document.createElement("input");
-                       input.setAttribute("type", "hidden");
-                       input.setAttribute("name", jQuery(this).attr('name'));
-                       input.setAttribute("value", option_selected.val());
-                       document.getElementById("form-ausruestung").appendChild(input);
-                    });
-                </script>
-             <?php endif; ?>
+        </div>
+        <?php echo JHtml::_('bootstrap.endTab'); ?>
+        
+
+        <?php echo JHtml::_('bootstrap.endTabSet'); ?>
+
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="validate btn btn-primary"><?php echo JText::_('JSUBMIT'); ?></button>
@@ -108,5 +100,10 @@ $doc->addScript(JUri::base() . '/components/com_einsatzkomponente/assets/js/form
         <input type="hidden" name="option" value="com_einsatzkomponente" />
         <input type="hidden" name="task" value="ausruestungform.save" />
         <?php echo JHtml::_('form.token'); ?>
-    </form>
-</div>
+
+    </div>
+</form>
+<?php 
+else: 
+echo 'Keine Eingabe möglich';
+endif;

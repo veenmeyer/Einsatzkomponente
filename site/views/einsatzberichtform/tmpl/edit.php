@@ -225,14 +225,14 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Einsatzbilder :</h1>
-			<div class="control-group" style="height:100px;">
+			<div class="control-group" style="">
 			Bildupload für Titelbild:
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
 			
 			<?php if ($params->get('eiko')) : ?>
-			<div class="control-group" style="height:100px;">
+			<div class="control-group" style="">
 			Bilderupload für Bildergalerie:
 			<div id="text">
             <div ><input multiple class="" name="data[]" id="file" type="file"/></div>
@@ -301,10 +301,6 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
     		
 				<input type="hidden" name="jform[updatedate]" value="<?php echo $this->item->updatedate; ?>" />
 			<div class="control-group">
-				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
-				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>
-			</div>
-			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('notrufticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('notrufticker'); ?></div>
 			</div>
@@ -327,19 +323,24 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			</div>
  			<?php  endif; ?>
             
-            
+			<div class="fltlft well" style="width:80%;">
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
 			</div>
-			<div class="control-group">
+			<!--<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
+			</div> -->
+
+			<?php if ($params->get('article_frontpage','1')) :	?>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>
 			</div>
-
-
-
+			<?php endif;?>
         
+		<br/><br/>
 		<div>
 			<button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
 			<?php echo JText::_('or'); ?>
@@ -348,7 +349,9 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			<input type="hidden" name="option" value="com_einsatzkomponente" />
 			<input type="hidden" name="task" value="einsatzbericht.save" />
 			<?php echo JHtml::_('form.token'); ?>
-		</div>
+		</div>			
+	</div>
+
 	</form>
 </div>
 <!-- Javascript für GMap-Anzeige -->

@@ -18,6 +18,7 @@ class EinsatzkomponenteViewOrganisationen extends JViewLegacy
 	protected $pagination;
 	protected $state;
     protected $params;
+    protected $version;
 	/**
 	 * Display the view
 	 */
@@ -32,6 +33,9 @@ class EinsatzkomponenteViewOrganisationen extends JViewLegacy
         $this->params       = $app->getParams('com_einsatzkomponente');
 		//print_r ($this->items);break;
 		
+		//Komponentenversion aus Datenbank lesen
+		$this->version 		= EinsatzkomponenteHelper::getVersion (); 
+
 		$document = JFactory::getDocument();
 
 		if ($this->params->get('display_orga_bootstrap','0')) :

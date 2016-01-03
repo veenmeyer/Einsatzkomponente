@@ -61,22 +61,24 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  
             <!--Einsatzkarte-->
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
-			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
             <?php if( $this->item->gmap ) : ?>
+            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1') :?> 
+			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
             <td style="float:right;">
 			<div  id="map-canvas" style="min-width:350px;width:100%;border:solid #000 1px;height:<?php echo $this->params->get('detail_map_height','250px');?>"></div>
             <div id="distance_direct" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !"></div>
             </td>
             <?php endif;?>
-            <?php endif;?>
 			<?php if ($this->params->get('gmap_action','0')=='2') : ?>
-            <?php if( $this->item->gmap ) : ?>
             <td style="float:right;">
 				<body onLoad="drawmap();">
 				<div id="map" style="min-width:350px;width:100%;border:solid #000 1px;height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
 				<div class="hide"><p>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</p></div>
             </td>
             <?php endif;?>
+			<?php else:?> 
+			<?php echo '<span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span><br/><br/>';?>
+			<?php endif;?>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzkarte ENDE-->

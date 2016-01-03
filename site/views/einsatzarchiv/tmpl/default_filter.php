@@ -2,6 +2,13 @@
 
 defined('JPATH_BASE') or die;
 
+$app = JFactory::getApplication();
+$params = $app->getParams('com_einsatzkomponente');
+
+if ($params->get('show_filter','1')) :
+
+
+
 $data = $displayData;
 
 // Receive overridable options
@@ -14,6 +21,7 @@ $customOptions = array(
     'searchFieldSelector' => '#filter_search',
     'orderFieldSelector' => '#list_fullordering'
 );
+
 
 $data['options'] = array_unique(array_merge($customOptions, $data['options']));
 
@@ -31,6 +39,7 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
     <div class="clearfix">
         <div class="js-stools-container-bar">
 
+		<?php if ($params->get('show_filter_search','1')) : ?>
             <label for="filter_search" class="element-invisible" aria-invalid="false"><?php echo JText::_('Suchen'); ?></label>
 
             <div class="btn-wrapper input-append">
@@ -39,6 +48,7 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
                     <i class="icon-search"></i>
                 </button>
             </div>
+		<?php endif; ?>
             <?php if ($filters) : ?>
             <div class="btn-wrapper hidden-phone">
                 <button type="button" class="btn hasTooltip js-stools-btn-filter" title=""
@@ -54,17 +64,75 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
             </div>
         </div>
     </div>
+	
+	
     <!-- Filters div -->
     <div class="js-stools-container-filters hidden-phone clearfix" style="">
         <?php // Load the form filters ?>
         <?php if ($filters) : ?>
-            <?php foreach ($filters as $fieldName => $field) : ?>
-                <?php if ($fieldName != 'filter_search') : ?>
-                    <div class="js-stools-field-filter">
-                        <?php echo $field->input; ?>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
+			
+		<div class="js-stools-field-filter">
+		
+		<?php if ($params->get('show_filter_year','1')) : ?>
+		<?php echo $filters['filter_year']->input; ?>
+		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
+		<?php echo $filters['filter_auswahl_orga']->input; ?>
+		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+		
+		<?php if ($params->get('show_filter_data1','1')) : ?>
+		<?php echo $filters['filter_data1']->input; ?>
+		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_tickerkat','1')) : ?>
+		<?php echo $filters['filter_tickerkat']->input; ?>
+		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_alerting','1')) : ?>
+		<?php echo $filters['filter_alerting']->input; ?>
+		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
+		<?php endif; ?>
+
+		<?php if ($params->get('show_filter_vehicles','1')) : ?>
+		<?php echo $filters['filter_vehicles']->input; ?>
+		<?php endif; ?>
+		
+		</div>
+		
+
+		<?php endif; ?>
     </div>
+	
+
+ 
+		<div>
+		<?php $active_name = ''; ?>
+		<?php $active = $data['view']->activeFilters;?>
+		<?php if($active): ?>
+		<?php $active_name = 'Aktive Filter : '; ?>
+            <?php foreach ($active as $fieldName => $field) : ?>
+						
+				<?php switch ($fieldName) 
+				 { 
+				 	case 'vehicles': $active_name .= '<span class="label label-info">Fahrzeug</span> ';break; 
+				 	case 'alerting': $active_name .= '<span class="label label-info">Alarmierungsart</span> ';break; 
+				 	case 'data1': $active_name .= '<span class="label label-info">Einsatzart</span> ';break; 
+					case 'tickerkat': $active_name .= '<span class="label label-info">Einsatzkategorie</span> ';break; 
+				 	case 'auswahl_orga': $active_name .= '<span class="label label-info">Organisation</span> ';break;
+				 	case 'year': $active_name .= '<span class="label label-info">Jahr</span> ';break; 
+				 	default: $active_name = '';break; 
+				}  ?>
+
+            <?php endforeach; ?>
+			<?php echo $active_name;?>
+		<?php endif; ?>
+		</div>
+
 </div>
+
+<?php endif;?>

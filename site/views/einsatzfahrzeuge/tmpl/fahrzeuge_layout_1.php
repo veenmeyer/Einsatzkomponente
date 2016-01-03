@@ -1,62 +1,172 @@
 <?php
 /**
- * @version     3.0.0
- * @package     com_einsatzkomponente
- * @copyright   Copyright (C) by Ralf Meyer 2013. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @version    CVS: 3.9
+ * @package    Com_Einsatzkomponente
+ * @author     Ralf Meyer <ralf.meyer@einsatzkomponente.de>
+ * @copyright  Copyright (C) 2015. Alle Rechte vorbehalten.
+ * @license    GNU General Public License Version 2 oder später; siehe LICENSE.txt
  */
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
+
+require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 
 ?>
 
-<!--Page Heading-->
-<?php if ($this->params->get('show_page_heading', 1)) : ?>
-<div class="page-header">
-<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
-</div>
-<?php endif;?>
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge'); ?>" method="post"
+      name="adminForm" id="adminForm">
 
-<table>
-<tr>
-        <?php $show = false; ?>
-        <?php $n='3';foreach ($this->items as $item) :?>
-				<?php if($item->state == 1 or $item->state == 2):
-				$show = true;?>
-				<?php if ($item->state == '2'): $item->name = $item->name.' (a.D.)';endif;?>
-<?php $n--;?>
-<?php if ($this->params->get('abfragewehr_fhz','0')) :?>
-<?php if ($this->params->get('anzeigewehr_fhz','') == $item->department) :?>
-<td width="33%">
-<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . (int)$item->id); ?>"><?php echo '<img style="padding-right:3px;margin-right:3px;max-height:150px;" src="'.JURI::Root().$item->image.'"  alt="'.$item->name.'" title="'.$item->name.'"/><br/>'.$item->name.''; ?></a>
-</td>
-<?php endif;?>
-<?php else:?>
-<td width="33%">
-<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . (int)$item->id); ?>"><?php echo '<img style="padding-right:3px;margin-right:3px;max-height:150px;" src="'.JURI::Root().$item->image.'"  alt="'.$item->name.'" title="'.$item->name.'"/><br/>'.$item->name.''; ?></a>
-</td>
-<?php endif;?>
+	<?php //echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
+	<table class="table" id="organisationList">
+		<thead>
+		<tr>
 
+		<th>
+		</th>
+							<th class=''>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE_NAME', 'a.name', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
+				<?php echo JHtml::_('grid.sort',  'Beschreibung', 'a.detail1', $listDirn, $listOrder); ?>
+				</th>
+				<th class=''>
+				<?php echo JHtml::_('grid.sort',  '', 'a.detail2', $listDirn, $listOrder); ?>
+				</th>
+				
+				<th><?php echo 'Letzter Eintrag'; ?>:</th>
+
+				<?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
+				<th>
+				<?php echo 'Organisation'; ?>
+				</th>
+				<?php endif;?>
+
+							<?php if ($canEdit || $canDelete): ?>
+					<th class="center">
+				<?php echo JText::_('Actions'); ?>
+				</th>
+				<?php endif; ?>
+
+		</tr>
+		</thead>
+		<tfoot>
+		<tr>
+			<td colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>">
+				<?php echo $this->pagination->getListFooter(); ?>
+			</td>
+		</tr>
+<?php if (!$this->params->get('eiko')) : ?>
+        <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
+            <th colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+        </tr>
+	<?php endif; ?>
+		</tfoot>
+		<tbody>
+		<?php foreach ($this->items as $i => $item) : ?> 
+			<?php $canEdit = $user->authorise('core.edit', 'com_einsatzkomponente'); ?>
+
+							<?php if (!$canEdit && $user->authorise('core.edit.own', 'com_einsatzkomponente')): ?>
+					<?php $canEdit = JFactory::getUser()->id == $item->created_by; ?>
+				<?php endif; ?>
+
+			<tr class="row<?php echo $i % 2; ?>">
+
+				<td>
+					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="margin-right:10px;width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->name;?>"/>
+
+				</td>
+				
+				<td>
+				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
+					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzfahrzeuge.', $canCheckin); ?>
+				<?php endif; ?>
+				<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id='.(int) $item->id); ?>">
+				<?php echo $this->escape($item->name); ?></a>
+				</td>
+				
+				
+				<td>
+
+					<?php echo $item->detail1; ?>
+				</td>
+				<td>
+
+					<?php echo $item->detail2; ?>
+				</td>
+				
+				<?php // letzter Einsatz   
+				$database			= JFactory::getDBO();
+				$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
+				$database->setQuery( $query );
+				$total = $database->loadObjectList();
+				?>
+				<?php if ($total) : ?>
+				<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+				<?php else: ?>
+				<td><?php echo '-'; ?></td>
+				<?php endif;?>
+
+				
+           <?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
+           <?php 					
+					$data = array();
+					foreach(explode(',',$item->department) as $value):
+						if($value){
+							$data[] = '<!-- <span class="label label-info"> --!>'.$value.'<!-- </span>--!>'; 
+						}
+					endforeach;
+					$department=  implode('</br>',$data); 
+?>
+		   <td nowrap class="eiko_td_organisationen_main_1 mobile_hide_480"> <?php echo $department;?></td>
+           <?php endif;?>
+				
+				
+								<?php if ($canEdit || $canDelete): ?>
+					<td class="center">
+						<?php if ($canEdit): ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
 						<?php endif; ?>
-<?php if ($n == '0') : echo '</tr><tr>'; $n='3';endif;?>
+						<?php if ($canDelete): ?>
+							<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></button>
+						<?php endif; ?>
+					</td>
+				<?php endif; ?>
 
-        <?php endforeach; ?>
-        <?php if(!$show): ?>
-            There are no items in the list
-        <?php endif; ?>
-</tr></table>
+			</tr>
+			
+			
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+
+	<?php if ($canCreate) : ?>
+		<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.edit&id=0', false, 2); ?>"
+		   class="btn btn-success btn-small"><i
+				class="icon-plus"></i>
+			<?php echo JText::_('Neues Fahrzeug anlegen'); ?></a>
+	<?php endif; ?>
+
+	<input type="hidden" name="task" value=""/>
+	<input type="hidden" name="boxchecked" value="0"/>
+	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
+	<?php echo JHtml::_('form.token'); ?>
+</form>
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function () {
+		jQuery('.delete-button').click(deleteItem);
+	});
+
+	function deleteItem() {
+		var item_id = jQuery(this).attr('data-item-id');
+		<?php if($canDelete) : ?>
+		if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_DELETE_MESSAGE'); ?>")) {
+			window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.remove&id=', false, 2) ?>' + item_id;
+		}
+		<?php endif; ?>
+	}
+</script>
 
 
-
-
-
-
-<?php if($show): ?>
-    <div class="pagination">
-        <p class="counter">
-            <?php echo $this->pagination->getPagesCounter(); ?>
-        </p>
-        <?php echo $this->pagination->getPagesLinks(); ?>
-    </div>
-<?php endif; ?>

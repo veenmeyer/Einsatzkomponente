@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_EINSATZKOMPONENTE_TITLE_ITEM_VIEW_AUSRUESTUNG" option="View">
+    <layout title="Ausrüstung Detailanzeige" option="View">
         <message>
-                        <![CDATA[COM_EINSATZKOMPONENTE_TITLE_ITEM_VIEW_AUSRUESTUNG_DESC]]>
+                        <![CDATA[]]>
         </message>
     </layout>
     <fields name="params">

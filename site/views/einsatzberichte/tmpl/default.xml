@@ -2,7 +2,7 @@
 <metadata>
 	<layout title="Einsatzberichte" option="View">
         <message>
-                        <![CDATA[(Bitte das gewünschte Layout in den Parametereinstellungen auswählen)]]>
+                        <![CDATA[(*AlteVersion* Layout und Filtereinstellungen auswählbar)]]>
         </message>
 	</layout>
 	<fields name="params">

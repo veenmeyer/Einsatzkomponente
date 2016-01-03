@@ -222,8 +222,27 @@ if (!JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente'))
 		}
 
 		
+		// Filter Menüparameter 
+			        $app = JFactory::getApplication();
+					$params = $app->getParams('com_einsatzkomponente');
+					$array = array();
+					$filter_ausruestung = $params->get('filter_ausruestung');
+					if ($filter_ausruestung) :
+					foreach((array)$params->get('filter_ausruestung') as $value): 
+							if(!is_array($value)):
+							$array[] = $value;
+							endif;
+					endforeach;
+					
+					$string = '';
+					foreach($array as $value):
+					$string .= 'a.id = '.$value.' OR ';
+					endforeach;
+				$string = substr ( $string, 0, -3 );
+			$query->where($string);
+			endif;
 
-		// Add the list ordering clause.
+			// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering');
 		$orderDirn = $this->state->get('list.direction');
 		if ($orderCol && $orderDirn)
@@ -237,29 +256,6 @@ if (!JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente'))
 	public function getItems()
 	{
 		$items = parent::getItems();
-		foreach($items as $item){
-	
-
-			if (isset($item->fahrzeug)) {
-				$values = explode(',', $item->fahrzeug);
-
-				$textValue = array();
-				foreach ($values as $value){
-					if(!empty($value)){
-						$db = JFactory::getDbo();
-						$query = "SELECT `id`, `name` AS val FROM `#__eiko_fahrzeuge` HAVING id LIKE '" . $value . "'";
-						$db->setQuery($query);
-						$results = $db->loadObject();
-						if ($results) {
-							$textValue[] = $results->val;
-						}
-					}
-				}
-
-			$item->fahrzeug = !empty($textValue) ? implode(', ', $textValue) : $item->fahrzeug;
-
-			}
-}
 
 		return $items;
 	}

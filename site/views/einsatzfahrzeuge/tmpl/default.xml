@@ -1,31 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Einsatzfahrzeuge" option="View">
+	<layout title="Einsatzfahrzeug-Übersicht" option="View">
+        <message>
+                        <![CDATA[(*NeueVersion mit neuen Filtern* Layout und Filtereinstellungen auswählbar)]]>
+        </message>
 	</layout>
-	<fields name="params">
+
+	<fields name="params" type="fields">
+	
 		<fieldset 
             name="basic"
-			label="Parametereinstellungen">
+			label="Filter"
+			addfieldpath="/administrator/components/com_einsatzkomponente/models/fields">
 			
 			
-			
-		 <field name="note_fahrzeuge_layout" 
+<field name="note_filter_auswahl" 
 		  type="note" 
+		  class="alert alert-grey"
+		  label="Auswahl filtern nach :" 
+		  description="Hier können Sie die Filter voreinstellen."
+		  />	
+
+
+		
+<field
+		name="spacer10"
+		type="spacer"
+		hr="true"
+/>
+
+       <!--<field name="filter_fahrzeuge" type="sql" class="inputbox"
+            label="Fahrzeuge"
+            description="" 
+            required="false" 
+            query="SELECT `id`, `name` FROM `#__eiko_fahrzeuge` WHERE `state`='1' ORDER BY `ordering` ASC"
+			key_field="id"       		
+			value_field="name"
+			multiple="multiple"
+         /> -->
+
+			 <field name="filter_fahrzeuge" type="einsatzfahrzeuge" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_VEHICLES" 
+						
+         /> 
+
+		 <field
+		name="spacer65"
+		type="spacer"
+		hr="true"
+/>
+
+
+		</fieldset>
+		
+		<fieldset 
+            name="advanced"
+			label="Layout">
+			
+<field name="note22" 
+type="note" 
+class="alert alert-info" 
+label="Eigene Layouts verwenden" 
+description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu verwenden, die bei einem Update nicht überschrieben werden. Weitere Informationen hierzu gibt es im Forum http://www.einsatzkomponente.de" 
+/>
+
+		 <field name="note_main_layout" 
+		  type="note" 
+		  class="alert alert-grey"
 		  label="Auswahl des Layout für die Fahrzeugübersicht :" 
-		  description="Hier können Sie jetzt das Aussehen der Fahrzeugübersicht festlegen. Sie können hier auch eigene Layouts angeben, nähere Informationen darüber gibt es im Forum."
+		  description="Hier können Sie jetzt das Aussehen der Fahrzeugübersicht festlegen. Die Option Layout 5 und 6 sind für eigene Layouts reserviert. Nähere Informationen darüber gibt es im Forum."
 		  />	
 
 			
-			<field name="fahrzeuge_layout" 
+			<field name="fahrzeuge_main_layout" 
 			type="list" 
 			default="fahrzeuge_layout_1.php" 
 			label="Bitte wählen Sie ein Layout für die Fahrzeugübersicht aus :" 
-			description="">
+			description="Layout 5+6 sind in der Standard-Installation nicht enthalten und für eigene Layout reseveriert !!">
   				<option value="fahrzeuge_layout_1.php">fahrzeuge_layout_1</option>
   				<option value="fahrzeuge_layout_2.php">fahrzeuge_layout_2</option>
-				<option value="fahrzeuge_layout_3.php">leer</option>
-				<option value="fahrzeuge_layout_4.php">leer</option>
-				<option value="fahrzeuge_layout_5.php">leer</option>
+				<option value="fahrzeuge_layout_3.php">fahrzeuge_layout_3</option>
+				<option value="fahrzeuge_layout_4.php">fahrzeuge_layout_4</option>
+				<option value="fahrzeuge_layout_5.php">fahrzeuge_layout_5</option>
+				<option value="fahrzeuge_layout_6.php">fahrzeuge_layout_6</option>
 			</field>			
 			
 		<field
@@ -34,22 +92,24 @@
 			hr="true"
 		/>
 		
-		 <field name="note_fahrzeug_layout" 
+		 <field name="note_detail_layout" 
 		  type="note" 
-		  label="Auswahl des Layout für die Fahrzeug-Detailansicht :" 
-		  description="Hier können Sie jetzt das Aussehen der Fahrzeug-Detailansicht festlegen."
+		  class="alert alert-grey"
+		  label="Auswahl des Layout für die Detailansicht :" 
+		  description="Hier können Sie jetzt das Aussehen der Detailansicht festlegen. Die Option Layout 5 und 6 ist für ein eigenes Layout reserviert. Nähere Informationen darüber gibt es im Forum."
 		  />	
 		
-			<field name="fahrzeug_layout" 
+			<field name="fahrzeuge_detail_layout" 
 			type="list" 
 			default="fahrzeug_layout_1.php" 
 			label="Bitte wählen Sie ein Layout für die Detailansicht aus :" 
-			description="">
+			description="Layout 5 und sind in der Standard-Installation nicht enthalten und für ein eigenes Layout reseveriert !!">
   				<option value="fahrzeug_layout_1.php">fahrzeug_layout_1</option>
   				<option value="fahrzeug_layout_2.php">fahrzeug_layout_2</option>
-				<option value="fahrzeug_layout_3.php">leer</option>
-				<option value="fahrzeug_layout_4.php">leer</option>
-				<option value="fahrzeug_layout_5.php">leer</option>
+				<option value="fahrzeug_layout_3.php">fahrzeug_layout_3</option>
+				<option value="fahrzeug_layout_4.php">fahrzeug_layout_4</option>
+				<option value="fahrzeug_layout_5.php">fahrzeug_layout_5</option>
+				<option value="fahrzeug_layout_6.php">fahrzeug_layout_6</option>
 			</field>			
 			
 		<field
@@ -58,35 +118,132 @@
 			hr="true"
 		/>
 		
-			
-		 <field name="note_custom" 
+<field
+		name="show_fahrzeuge_beschreibung"
+		type="radio"
+		class="btn-group"
+		default="0"
+		label="Nur Feld `Beschreibung` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+
+<field
+		name="show_fahrzeuge_link"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Link` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+	
+
+<field
+		name="show_fahrzeuge_orga"
+		type="radio"
+		class="btn-group"
+		default="0"
+		label="Feld `Organisation` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+
+		 <field name="note_detail_layout_short" 
 		  type="note" 
-		  label="Diverse Einstellungen :" 
+		  class="alert alert-grey"
+		  label="Einstellungen für die Fahrzeug-Detailansicht (Kurzinfo) :" 
 		  description=""
 		  />	
-			
-		<field name="abfragewehr_fhz" type="radio" 			
+
+		  <field
+		name="show_fahrzeuge_detail_1"
+		type="radio"
 		class="btn-group"
-		default="0" label="Sollen nur Fahrzeuge einer bestimmten Organisation angezeigt werden ?" 
+		default="1"
+		label="Feld `Detail 1` anzeigen :"
 		description="">
-        <option value="0">nein</option>
-        <option value="1">ja</option> 
-		</field>
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+<field
+		name="show_fahrzeuge_detail_2"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Detail 2` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+<field
+		name="show_fahrzeuge_detail_3"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Detail 3` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+<field
+		name="show_fahrzeuge_detail_4"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Detail 4` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+<field
+		name="show_fahrzeuge_detail_5"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Detail 5` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+<field
+		name="show_fahrzeuge_detail_6"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Detail 6` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+<field
+		name="show_fahrzeuge_detail_7"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Detail 7` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
 
-       <field name="anzeigewehr_fhz" type="sql" label="Wenn ja, von welcher Organisation anzeigen:"
-              query="SELECT 0 AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name`,`ordering` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC" 
-			key_field="id" 
-			value_field="name"
-             /> 
-
-			
-		<field
-			name="spacer13"
-			type="spacer"
-			hr="true"
-		/>
-
+<field
+		name="show_fahrzeuge_desc"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Beschreibung` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+	
 
 		</fieldset>
+			
 	</fields>
+
 </metadata>

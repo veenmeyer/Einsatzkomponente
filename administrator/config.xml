@@ -636,6 +636,24 @@
 			type="spacer"
 			hr="true"
 		/>
+		
+	  <!--<field
+			name="limit"
+			type="radio"
+			class="btn-group"
+			default="10"
+			label="Listenlänge :"
+			description="">
+			<option
+				value="0">Unbegrenzt</option>
+			<option	value="5">5</option>
+			<option	value="10">10</option>
+			<option	value="15">15</option>
+			<option	value="20">20</option>
+			<option	value="50">50</option>
+			<option	value="100">100</option>
+	  </field> -->
+	  
 	  <field
 			name="display_home_map"
 			type="radio"
@@ -804,7 +822,7 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Monatsnamen :"
+			label="Monatsnamen (als Trennung) :"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
@@ -812,6 +830,20 @@
 			<option
 				value="1">Anzeigen</option>
 	  </field>
+	  	  <field
+			name="display_home_jahr"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Jahr (als Trennung) :"
+			description="Funktion nur beim Standard-Layout">
+			
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+
 	  <field
 			name="display_list_icon"
 			type="radio"
@@ -1167,6 +1199,18 @@
 			type="spacer"
 			hr="true"
 		/>
+	  		<field
+				name="display_detail_map_for_only_user"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="Anzeige Karte :"
+				description="Hier können Sie einstellen, wem die Einsatzkarte angezeigt werden soll.">
+					<option
+						value="0">nur für registrierte User</option>
+					<option
+						value="1">öffentlich</option>
+	  		</field>
 			<field 
 				name="detail_gmap_zoom_level" 
 				type="integer" 
@@ -1532,7 +1576,18 @@
 		label="Bitte beachten :" 
 		description="Weitere Einstellungen können Sie anschließend direkt im Joomla-Artikel vornehmen, bzw. über die Kategorie und/oder Menüpunkten festlegen." 
 />
-		
+		<field
+			name="article_frontend"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Joomla-Artikel direkt nach Eintrag im Frontend erstellen ?"
+			label="Joomla-Artikel Frontend:" >
+			<option
+				value="0">Nein</option>
+			<option
+				value="1">Ja</option>
+		</field>
 	</fieldset>
 	
 	
@@ -1547,7 +1602,15 @@
 />
 		
 
-		<field name="main_css" type="textarea" filter="raw" default="" label="Einsatz-Übersicht" description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." rows="10" cols="40" />
+		<field 	name="main_css" 
+				type="textarea" 
+				filter="raw" 
+				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,.eiko_einsatzarchiv_jahr_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_jahr_div {color:#ffffff !important;} .eiko_einsatzarchiv_monat_tr,.eiko_einsatzarchiv_monat_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_monat_div {color:#ffffff !important;}" 
+				label="Einsatz-Übersicht" 
+				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
+				rows="10" 
+				cols="40" />
+				
 		<field name="detail_css" type="textarea" filter="raw" default="" label="Einsatz-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Detailansicht ein." rows="10" cols="40" />
 		<field name="fahrzeuge_css" type="textarea" filter="raw" default="" label="Fahrzeug-Übersicht" description="Füge hier den zusätzlichen CSS-Code für Fahrzeug-Übersicht ein." rows="10" cols="40" />
 		<field name="fahrzeug_css" type="textarea" filter="raw" default="" label="Fahrzeug-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Fahrzeug-Detailansicht ein." rows="10" cols="40" />
@@ -1571,17 +1634,17 @@
 	 	type="imagelist" 
 	 	default="" 
 	 	label="PDF-Header" 
-	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'media/com_einsatzkomponente/images/pdf/' hinterlegt werden." 
-	 	directory="media/com_einsatzkomponente/images/pdf/" 
+	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'images/com_einsatzkomponente/pdf' hinterlegt werden." 
+	 	directory="images/com_einsatzkomponente/pdf" 
 	 	exclude="" 
 	 	stripext="" />
 
         <field 
         	name="pdf_speicherort"
         	type="text"
-        	default="documents/"
+        	default="images/com_einsatzkomponente/pdf"   
         	label="PDF-Speicherort"
-        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: documents/" size="10"
+        	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: images/com_einsatzkomponente/pdf" size="10"
         />
         <field
 		name="pdf_show_id"

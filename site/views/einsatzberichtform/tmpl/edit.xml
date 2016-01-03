@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Einsatzbericht eintragen" option="View">
+	<layout title="Einsatzbericht anlegen" option="View">
 	</layout>
 	<fields name="params">
 		<fieldset 
@@ -12,7 +12,7 @@
                 type="sql"
                 key_field="id" 
                 value_field="id"
-    			label="COM_EINSATZKOMPONENTE_ITEM_ID_SELECT_LABEL_FORM"
+                label="Wähle die ID zu bearbeitende ID aus (0 für Neuanlage)"
                 require="true"
     			description="JGLOBAL_SHOW_TITLE_DESC">
             </field>

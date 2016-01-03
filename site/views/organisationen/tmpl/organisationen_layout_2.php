@@ -8,78 +8,86 @@
  */
 // no direct access
 defined('_JEXEC') or die;
+require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+
 ?>
-<!--Page Heading-->
-<?php if ($this->params->get('show_page_heading', 1)) : ?>
-<div class="page-header">
-<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
-</div>
+
+
+<table width="100%" class="table table-striped table-bordered" id="example" border="0" cellspacing="0" cellpadding="0">
+    <!--<thead>
+        <tr>
+            <th width="">Organisation</th>
+            <th width=""><?php echo $this->items[0]->detail2_label; ?></th>
+        </tr>
+        <tr><th colspan="6"><hr /></th></tr>
+    </thead>-->
+    
+ <tbody>
+
+<?php foreach ($this->items as $item) :?>
+<?php if ($item->gmap_latitude >= '3') :?>
+	<?php
+	$orga_fahrzeuge = EinsatzkomponenteHelper::getOrga_fahrzeuge($item->id);  
+	?>
+        
+	<tr>
+    <td>    
+ 	<?php if ($this->params->get('display_orga_links','1')) :?>
+           
+		<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&id=' . (int)$item->id); ?>"><?php echo $item->name; ?></a>
+		<br/><?php echo $item->detail1; ?>
+		<?php else: ?>	
+    	<?php echo $item->name; ?>
+        <br/><?php echo $item->detail1; ?>
+		<?php endif; ?>
+	</td>
+    <td>
+    <?php 
+				$array = array();
+				foreach((array)$orga_fahrzeuge as $value): 
+					if(!is_array($value)):
+						$array[] = $value;
+					endif;
+				endforeach; ?>
+				<div class="items">
+                <ul class="items_list">
+                <?php foreach($array as $value): ?>
+				<?php if ($value->state == '2'): $value->name = $value->name.' (a.D.)';endif;?>
+				<li>
+		<?php if ($this->params->get('display_orga_fhz_links','1')) :?>
+					<?php if (!$value->link) :?>
+					<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
+					<?php else :?>
+					<a title ="<?php echo $value->detail2;?>" target="_blank" href="<?php echo $value->link; ?>"><?php echo $value->name; ?></a>
+					<?php endif; ?>		
+                    <?php else: ?>	
+                    <?php echo $value->name; ?>		
+					<?php endif; ?>
+				</li>
+				<?php endforeach; ?>
+				</ul> 
+                </div>
+    </td>
+    </tr>
 <?php endif;?>
-<div class="items">
-    <ul class="items_list">
-        <?php $show = false; ?>
-        <?php foreach ($this->items as $item) :?>
-                
-				<?php
-					if($item->state == 1 || ($item->state == 0 && JFactory::getUser()->authorise('core.edit.own',' com_einsatzkomponente.organisation.'.$item->id))):
-						$show = true;
-						?>
-							<li>
-								<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&id=' . (int)$item->id); ?>"><?php echo $item->name; ?></a>
-								<?php
-									if(JFactory::getUser()->authorise('core.edit.state','com_einsatzkomponente.organisation'.$item->id)):
-									?>
-										<a href="javascript:document.getElementById('form-organisation-state-<?php echo $item->id; ?>').submit()"><?php if($item->state == 1):?>Unpublish<?php else:?>Publish<?php endif; ?></a>
-										<form id="form-organisation-state-<?php echo $item->id ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisation.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
-											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
-											<input type="hidden" name="jform[ordering]" value="<?php echo $item->ordering; ?>" />
-											<input type="hidden" name="jform[name]" value="<?php echo $item->name; ?>" />
-											<input type="hidden" name="jform[detail1]" value="<?php echo $item->detail1; ?>" />
-											<input type="hidden" name="jform[link]" value="<?php echo $item->link; ?>" />
-											<input type="hidden" name="jform[gmap_latitude]" value="<?php echo $item->gmap_latitude; ?>" />
-											<input type="hidden" name="jform[gmap_longitude]" value="<?php echo $item->gmap_longitude; ?>" />
-											<input type="hidden" name="jform[ffw]" value="<?php echo $item->ffw; ?>" />
-											<input type="hidden" name="jform[state]" value="<?php echo (int)!((int)$item->state); ?>" />
-											<input type="hidden" name="option" value="com_einsatzkomponente" />
-											<input type="hidden" name="task" value="organisation.save" />
-											<?php echo JHtml::_('form.token'); ?>
-										</form>
-									<?php
-									endif;
-									if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.organisation'.$item->id)):
-									?>
-										<a href="javascript:document.getElementById('form-organisation-delete-<?php echo $item->id; ?>').submit()">Delete</a>
-										<form id="form-organisation-delete-<?php echo $item->id; ?>" style="display:inline" action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisation.remove'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
-											<input type="hidden" name="jform[id]" value="<?php echo $item->id; ?>" />
-											<input type="hidden" name="jform[ordering]" value="<?php echo $item->ordering; ?>" />
-											<input type="hidden" name="jform[name]" value="<?php echo $item->name; ?>" />
-											<input type="hidden" name="jform[detail1]" value="<?php echo $item->detail1; ?>" />
-											<input type="hidden" name="jform[link]" value="<?php echo $item->link; ?>" />
-											<input type="hidden" name="jform[gmap_latitude]" value="<?php echo $item->gmap_latitude; ?>" />
-											<input type="hidden" name="jform[gmap_longitude]" value="<?php echo $item->gmap_longitude; ?>" />
-											<input type="hidden" name="jform[ffw]" value="<?php echo $item->ffw; ?>" />
-											<input type="hidden" name="jform[state]" value="<?php echo $item->state; ?>" />
-											<input type="hidden" name="jform[created_by]" value="<?php echo $item->created_by; ?>" />
-											<input type="hidden" name="option" value="com_einsatzkomponente" />
-											<input type="hidden" name="task" value="organisation.remove" />
-											<?php echo JHtml::_('form.token'); ?>
-										</form>
-									<?php
-									endif;
-								?>
-							</li>
-						<?php endif; ?>
-        <?php endforeach; ?>
-        <?php if(!$show): ?>
-            There are no items in the list
-        <?php endif; ?>
-    </ul>
-</div>
-<?php if($show): ?>
+<?php endforeach; ?>
+        
+</tbody>
+<tfoot>
+<?php if (!$this->params->get('eiko')) : ?>
+        <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
+            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+        </tr>
+	<?php endif; ?>
+</tfoot>
+
+</table>
+
+
+
     <div class="pagination">
         <p class="counter">
             <?php echo $this->pagination->getPagesCounter(); ?>
         </p>
         <?php echo $this->pagination->getPagesLinks(); ?>
     </div>
-<?php endif; ?>
