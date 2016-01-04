@@ -27,6 +27,7 @@ class JFormFieldeinsatzfahrzeuge extends JFormField
          * @since       1.6
          */
         protected function getInput()
+		{
                 // Initialize variables.
 				$selected = '';
                 $html = array();
@@ -44,7 +45,7 @@ class JFormFieldeinsatzfahrzeuge extends JFormField
                         $vehicles = $db->loadObjectList();
                                 foreach ($vehicles as $vehicle) {
 										foreach ($this->value as $value) {
-										if ($value[0] == $vehicle->id) : $selected = 'selected';endif;
+										if ($value == $vehicle->id) : $selected = 'selected';endif;
 										}
                                         $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' ( '.$org->name.' ) </option>';
 										$selected = '';
