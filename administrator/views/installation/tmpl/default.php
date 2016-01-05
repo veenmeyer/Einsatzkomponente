@@ -10,6 +10,12 @@
 defined('_JEXEC') or die;
 jimport( 'joomla.filesystem.file' );
 jimport( 'joomla.filesystem.folder' );
+
+if (JFolder::delete(JPATH_ROOT.'/components/com_einsatzkomponente/views/einsatzberichte_neu')): endif;
+if (JFile::delete(JPATH_ROOT.'/components/com_einsatzkomponente/models/einsatzberichte_neu.php')): endif;
+if (JFile::delete(JPATH_ROOT.'/components/com_einsatzkomponente/models/forms/filter_einsatzberichte_neu.xml')) : endif;
+if (JFile::delete(JPATH_ROOT.'/components/com_einsatzkomponente/controllers/einsatzberichte_neu.php')) : endif;
+
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');

@@ -316,11 +316,12 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					<b><u>Ungef&auml;hrer Einsatzort:</u></b>
 				</td>
 			</tr>
+			<?php $user	= JFactory::getUser();?>
             <?php if( $this->item->gmap) : ?> 
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>			
 			<td class="layout4_row_14" colspan="2">
-            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1') :?> 
+            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
 			<?php if ($this->params->get('gmap_action','0') == '1') :?>
   			<div id="map-canvas" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;">
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>

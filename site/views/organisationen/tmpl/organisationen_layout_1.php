@@ -53,7 +53,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 
 							<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
-				<?php echo JText::_('Actions'); ?>
+				<?php echo JText::_('Edit'); ?>
 				</th>
 				<?php endif; ?>
 
@@ -114,11 +114,11 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 								<?php if ($canEdit || $canDelete): ?>
 					<td class="center">
 						<?php if ($canEdit): ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisationform.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
+							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisationform.edit&id=' . (int) $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
 						<?php endif; ?>
-						<?php if ($canDelete): ?>
-							<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></button>
-						<?php endif; ?>
+						<?php //if ($canDelete): ?>
+							<!--<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></button> -->
+						<?php //endif; ?>
 					</td>
 				<?php endif; ?>
 
@@ -140,7 +140,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 				
 		<?php if ($this->params->get('display_orga_fhz_links','1')) :?>
 					<?php if (!$value->link) :?>
-					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>">
+					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . (int) $value->id); ?>">
 					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="margin-right:10px;width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $value->image;?>" title="<?php echo $value->name;?>"/>
 					</a>
 					<?php else :?>

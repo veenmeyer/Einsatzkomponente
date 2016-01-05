@@ -34,6 +34,18 @@ class EinsatzkomponenteViewAusruestung extends JViewLegacy {
         $this->item = $this->get('Data');
         $this->params = $app->getParams('com_einsatzkomponente');
 
+		$document = JFactory::getDocument();
+
+		if ($this->params->get('display_ausruestung_bootstrap','1')) :
+		// Import Bootstrap
+ 		$document->addScript('media/jui/js/bootstrap.min.js');	
+ 		$document->addStyleSheet('media/jui/css/bootstrap.min.css');
+ 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
+		endif;
+		$document->addStyleDeclaration($this->params->get('ausruestung_css','')); 
+		
+		
+		
         if (!empty($this->item)) {
             
 		$this->form		= $this->get('Form');

@@ -72,9 +72,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <div class="eiko_clearfix"></div>
 			
             <!--Einsatzkarte-->
+			<?php $user	= JFactory::getUser();?>
             <?php if( $this->item->gmap) : ?> 
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
-            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1') :?> 
+            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
 			<?php if ($this->params->get('gmap_action','0') == '1') :?> 
   			<div id="map-canvas" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;">
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
