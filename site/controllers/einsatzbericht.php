@@ -103,16 +103,25 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
             $model->checkin($return);
         }
 		
-		
-		
+		$cid_article = '';
+        if (!$return) {
+		$db = JFactory::getDBO();
+		$query = "SELECT id FROM #__eiko_einsatzberichte ORDER BY id DESC LIMIT 1";
+		$db->setQuery($query);
+		$rows = $db->loadObjectList();
+		$cid_article      = $rows[0]->id;
+        }
 		
 		// Joomla-Artikel erstellen
-		if ($return) {
+		if ($return OR $cid_article) {
 		
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		if ( $params->get('article_frontend', '0') ): 
 		$data = JFactory::getApplication()->input->get('jform', array(), 'array');
 		$cid = $data['id'];
+		
+		if (!$cid) : $cid = $cid_article;endif;
+		
 		$article = $data['einsatzticker'];
 		if ($article): 
 		// Check for request forgeries
