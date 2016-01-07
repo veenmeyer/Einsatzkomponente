@@ -16,7 +16,6 @@ jimport( 'joomla.filesystem.folder' );
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 
-$bak_date = false;
 $bug = '0';
 ?>
 <meta charset="utf-8">
@@ -61,82 +60,8 @@ if ($repair) :
 	exit;
 endif;
 
-// DB-Sicherung wieder herstellen
-if ($restore) : 
-$queries[] = "DROP TABLE #__eiko_alarmierungsarten";
-$queries[] = "CREATE TABLE #__eiko_alarmierungsarten LIKE #__bak_eiko_alarmierungsarten";
-$queries[] = "ALTER TABLE #__eiko_alarmierungsarten DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_alarmierungsarten SELECT * FROM #__bak_eiko_alarmierungsarten";
-$queries[] = "ALTER TABLE #__eiko_alarmierungsarten ENABLE KEYS";
 
-$queries[] = "DROP TABLE #__eiko_ausruestung";
-$queries[] = "CREATE TABLE #__eiko_ausruestung LIKE #__bak_eiko_ausruestung";
-$queries[] = "ALTER TABLE #__eiko_ausruestung DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_ausruestung SELECT * FROM #__bak_eiko_ausruestung";
-$queries[] = "ALTER TABLE #__eiko_ausruestung ENABLE KEYS";
 
-$queries[] = "DROP TABLE #__eiko_einsatzarten";
-$queries[] = "CREATE TABLE #__eiko_einsatzarten LIKE #__bak_eiko_einsatzarten";
-$queries[] = "ALTER TABLE #__eiko_einsatzarten DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_einsatzarten SELECT * FROM #__bak_eiko_einsatzarten";
-$queries[] = "ALTER TABLE #__eiko_einsatzarten ENABLE KEYS";
-
-$queries[] = "DROP TABLE #__eiko_einsatzberichte";
-$queries[] = "CREATE TABLE #__eiko_einsatzberichte LIKE #__bak_eiko_einsatzberichte";
-$queries[] = "ALTER TABLE #__eiko_einsatzberichte DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_einsatzberichte SELECT * FROM #__bak_eiko_einsatzberichte";
-$queries[] = "ALTER TABLE #__eiko_einsatzberichte ENABLE KEYS";
-
-$queries[] = "DROP TABLE #__eiko_fahrzeuge";
-$queries[] = "CREATE TABLE #__eiko_fahrzeuge LIKE #__bak_eiko_fahrzeuge";
-$queries[] = "ALTER TABLE #__eiko_fahrzeuge DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_fahrzeuge SELECT * FROM #__bak_eiko_fahrzeuge";
-$queries[] = "ALTER TABLE #__eiko_fahrzeuge ENABLE KEYS";
-
-$queries[] = "DROP TABLE #__eiko_gmap_config";
-$queries[] = "CREATE TABLE #__eiko_gmap_config LIKE #__bak_eiko_gmap_config";
-$queries[] = "ALTER TABLE #__eiko_gmap_config DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_gmap_config SELECT * FROM #__bak_eiko_gmap_config";
-$queries[] = "ALTER TABLE #__eiko_gmap_config ENABLE KEYS";
-
-$queries[] = "DROP TABLE #__eiko_images";
-$queries[] = "CREATE TABLE #__eiko_images LIKE #__bak_eiko_images";
-$queries[] = "ALTER TABLE #__eiko_images DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_images SELECT * FROM #__bak_eiko_images";
-$queries[] = "ALTER TABLE #__eiko_images ENABLE KEYS";
-
-$queries[] = "DROP TABLE #__eiko_organisationen";
-$queries[] = "CREATE TABLE #__eiko_organisationen LIKE #__bak_eiko_organisationen";
-$queries[] = "ALTER TABLE #__eiko_organisationen DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_organisationen SELECT * FROM #__bak_eiko_organisationen";
-$queries[] = "ALTER TABLE #__eiko_organisationen ENABLE KEYS";
-
-$queries[] = "DROP TABLE #__eiko_tickerkat";
-$queries[] = "CREATE TABLE #__eiko_tickerkat LIKE #__bak_eiko_tickerkat";
-$queries[] = "ALTER TABLE #__eiko_tickerkat DISABLE KEYS";
-$queries[] = "INSERT INTO #__eiko_tickerkat SELECT * FROM #__bak_eiko_tickerkat";
-$queries[] = "ALTER TABLE #__eiko_tickerkat ENABLE KEYS";
-
-foreach ($queries as $sql) {
-	$db = JFactory::getDbo();
-	$query = "$sql";
-	$db->setQuery($query);
-	try {
-	$result = $db->execute();
-	} catch (Exception $e) {
-	echo 'Fehler in Query: '.$sql.' : <br/><br/>';  
-	print_r ($e).'<br/><br/>';$bug = '1';
-	}
-	
-	
-}
-
-if ($bug) : echo 'Backup-Fehler: Wenden Sie sich an: support@einsatzkomponente.de';exit; 
-else:
-	echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden wieder eingespielt</span>. (Name : #_bak_eiko_*)</b><br/><br/>';
-endif;
-
-endif;
 
 
 
@@ -180,7 +105,6 @@ echo '</div>';
 echo '<div class="well">';
 echo '<h2>Installation/Update :</h2>';
 
-echo '<br/><b>Sicherheitskopien der Eiko-DB-Tabellen <span class="label label-success">wurden erstellt</span>. (Name : #_bak_eiko_*)</b><br/><br/>';
 
 
 	// ------------------ Fahrzeugbilder -------------------------------------------------------------------------
