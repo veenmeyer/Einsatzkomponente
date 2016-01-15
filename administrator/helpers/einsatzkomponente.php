@@ -357,7 +357,7 @@ class EinsatzkomponenteHelper
 						$vehicles_image .= '<a href="'.$vehicle->link.'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
 						endif;
 						else:
-						$vehicles_image .= '<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/>';
+						$vehicles_image .= '&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/>';
 						endif;
 						
 						endif;
