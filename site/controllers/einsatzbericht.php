@@ -103,16 +103,25 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
             $model->checkin($return);
         }
 		
-		
-		
+		$cid_article = '';
+        if (!$return) {
+		$db = JFactory::getDBO();
+		$query = "SELECT id FROM #__eiko_einsatzberichte ORDER BY id DESC LIMIT 1";
+		$db->setQuery($query);
+		$rows = $db->loadObjectList();
+		$cid_article      = $rows[0]->id;
+        }
 		
 		// Joomla-Artikel erstellen
-		if ($return) {
+		if ($return OR $cid_article) {
 		
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		if ( $params->get('article_frontend', '0') ): 
 		$data = JFactory::getApplication()->input->get('jform', array(), 'array');
 		$cid = $data['id'];
+		
+		if (!$cid) : $cid = $cid_article;endif;
+		
 		$article = $data['einsatzticker'];
 		if ($article): 
 		// Check for request forgeries
@@ -179,7 +188,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 					$auswahl_orga=  implode(',',$data); 
 
 					$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
-		$orgas       = '<br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte: '.$orgas.'</div>';
+		$orgas       = '<br/><br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte :  '.$orgas.'</div>';
 		$query->set('`fulltext`="'.$db->escape($result[0]->desc).$orgas.'"');
 		else:
 		$query->set('`fulltext`="'.$db->escape($result[0]->desc).'"');
@@ -196,7 +205,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		$query->set('`checked_out_time`="0000-00-00 00:00:00.000000"');
 		$query->set('`publish_up`="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"'); 
 		$query->set('`publish_down`="0000-00-00 00:00:00.000000"');
-		$query->set('`images`="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}"');
+		$query->set('`images`="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"'.$result[0]->summary.'\",\"image_intro_caption\":\"'.$result[0]->summary.'\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"'.$result[0]->summary.'\",\"image_fulltext_caption\":\"'.$result[0]->summary.'\"}"');
 		$query->set('`urls`="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
 		$query->set('`attribs`="{\"show_title\":"",\"link_titles\":"",\"show_tags\":"",\"show_intro\":"",\"info_block_position\":"",\"show_category\":"",\"link_category\":"",\"show_parent_category\":"",\"link_parent_category\":"",\"show_author\":"",\"link_author\":"",\"show_create_date\":"",\"show_modify_date\":"",\"show_publish_date\":"",\"show_item_navigation\":"",\"show_icons\":"",\"show_print_icon\":"",\"show_email_icon\":"",\"show_vote\":"",\"show_hits\":"",\"show_noauth\":"",\"urls_position\":"",\"alternative_readmore\":"",\"article_layout\":"",\"show_publishing_options\":"",\"show_article_options\":"",\"show_urls_images_backend\":"",\"show_urls_images_frontend\":""}"');
 		$query->set('`version`="1"');

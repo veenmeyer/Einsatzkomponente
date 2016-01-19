@@ -106,9 +106,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php endif; ?>
 
             <!--Einsatzkarte-->
+			<?php $user	= JFactory::getUser();?>
+            <?php if( $this->item->gmap) : ?> 
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
-            <?php if( $this->item->gmap ) : ?>
-            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1') :?> 
+            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
 			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
   			<div class="distance100">&nbsp;</div>
    			<h3>Einsatzort</h3> 

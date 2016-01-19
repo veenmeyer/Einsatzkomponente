@@ -95,7 +95,7 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelItem
 
 				// Convert the JTable to a clean JObject.
 				$properties  = $table->getProperties(1);
-				$this->_item = ArrayHelper::toObject($properties, 'JObject');
+				$this->_item = JArrayHelper::toObject($properties, 'JObject');
 			}
 		}
 

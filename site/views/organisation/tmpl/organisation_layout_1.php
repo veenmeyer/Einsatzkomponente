@@ -175,9 +175,9 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 	<?php if($canEdit): ?>
 		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisationform.&id='.$this->item->id); ?>"><?php echo JText::_("Bearbeiten"); ?></a>
 	<?php endif; ?>
-								<?php if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.organisation.'.$this->item->id)):?>
-									<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisation.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("Löschen"); ?></a>
-								<?php endif; ?>
+								<?php //if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.organisation.'.$this->item->id)):?>
+									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisation.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("Löschen"); ?></a> -->
+								<?php //endif; ?>
 	<?php
 else:
 	echo JText::_('COM_EINSATZKOMPONENTE_ITEM_NOT_LOADED');

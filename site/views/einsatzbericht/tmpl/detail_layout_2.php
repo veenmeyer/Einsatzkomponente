@@ -60,9 +60,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php endif;?>
  
             <!--Einsatzkarte-->
+			<?php $user	= JFactory::getUser();?>
+            <?php if( $this->item->gmap) : ?> 
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
-            <?php if( $this->item->gmap ) : ?>
-            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1') :?> 
+            <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
 			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
             <td style="float:right;">
 			<div  id="map-canvas" style="min-width:350px;width:100%;border:solid #000 1px;height:<?php echo $this->params->get('detail_map_height','250px');?>"></div>
