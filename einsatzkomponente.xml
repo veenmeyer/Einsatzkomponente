@@ -52,7 +52,7 @@
 	
     <administration>
         <menu img="components/com_einsatzkomponente/assets/images/s_com_einsatzkomponente.png" >COM_EINSATZKOMPONENTE</menu>
-        <submenu>
+        <submenu> 
 			<menu link="option=com_einsatzkomponente&amp;view=kontrollcenter" view="kontrollcenter" img="components/com_einsatzkomponente/assets/images/s_com_einsatzkomponente.png" alt="Einsatzkomponente/Kontrollcenter">COM_EINSATZKOMPONENTE_TITLE_KONTROLLCENTER</menu>
 			<menu link="option=com_einsatzkomponente&amp;view=einsatzberichte" view="einsatzberichte" img="components/com_einsatzkomponente/assets/images/s_einsatzberichte.png" alt="Einsatzkomponente/Einsatzberichte">COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE</menu>
 			<menu link="option=com_einsatzkomponente&amp;view=kategorien" view="kategorien" img="components/com_einsatzkomponente/assets/images/s_kategorien.png" alt="Einsatzkomponente/Kategorien">COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN</menu>
@@ -68,6 +68,7 @@
             <filename>access.xml</filename>
             <filename>config.xml</filename>
             <filename>controller.php</filename>
+            <filename>CHANGELOG.php</filename>
             <filename>index.html</filename>
             <filename>einsatzkomponente.php</filename>
             <folder>controllers</folder>
