@@ -332,6 +332,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
    				<div id="map" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
 			<?php endif;?>
+			<?php if ($this->params->get('gmap_action','0')) : ?>
+            <?php if( $this->item->gmap ) : ?>
+              <div style ="text-align:center;" class="eiko_distance_road hasTooltip" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !" id="distance_road"></div>
+            <?php endif;?>
+            <?php endif;?>
 			<?php else:?> 
 			<?php echo '<span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span>';?>
 			<?php endif;?>
