@@ -145,7 +145,7 @@ if ($this->params->get('display_home_pagination')) :
            <!--Anzeige des Monatsnamen-->
 		   <?php if ($this->params->get('display_home_monat','1')) : ?>
            <?php if (date('n', $curTime) != $m) : ?>
-		   <tr style="border-bottom:1px #666666  dotted;"><td colspan="<?php echo $col;?>">
+		   <tr style="border-bottom:1px #666666  dotted;"><td colspan="<?php echo $col;?>" class="eiko_td_month_main_1">
            <?php $m=date('n', $curTime);?>
 		   <?php echo '<h3>';?>
            <?php echo $this->monate[$m];?>
