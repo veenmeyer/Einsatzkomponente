@@ -232,13 +232,16 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					endforeach;
 				$this->item->vehicles = implode(', ',$data); 
 				$vehicles_images = implode(' ',$vehicles_images); 
-				$vehicles_list = implode('',$vehicles_list); ?>
+				$vehicles_list = implode('<br/>',$vehicles_list); ?>
             <?php endif;?>
             
             <?php if( $this->item->vehicles ) : ?>
 			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Fahrzeuge am Einsatzort:').'</u></span>'; ?>:
-			<!--<?php echo '<span>'.$this->item->vehicles.'</span>';?>-->			
-			<?php echo '<br/><br/>'.$vehicles_images;?>
+			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
+			<?php echo '<br/><br/>'.$vehicles_images;?> 
+            <?php else:?>
+			<?php echo '<br/><br/>'.$vehicles_list;?>	
+            <?php endif;?>
             <?php endif;?>
 	</div>			            
     </td>
@@ -311,14 +314,14 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  
  
 <!--Einsatzkarte-->
+			<?php $user	= JFactory::getUser();?>
+            <?php if( $this->item->gmap) : ?> 
+            <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>
 				<td colspan="2">
 					<b><u>Ungef&auml;hrer Einsatzort:</u></b>
 				</td>
 			</tr>
-			<?php $user	= JFactory::getUser();?>
-            <?php if( $this->item->gmap) : ?> 
-            <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>			
 			<td class="layout4_row_14" colspan="2">
             <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 

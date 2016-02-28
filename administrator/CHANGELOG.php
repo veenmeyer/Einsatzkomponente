@@ -4,5 +4,5 @@
 <ul>
 <li> diverse kleinere Änderungen <li>
 <li> Entfernungsanzeige unter der Karte im Detail-Layout4 hinzugefügt <li>
-
+<li> diverse kleinere Änderungen im Detail-Layout4 <li>
 </ul>
