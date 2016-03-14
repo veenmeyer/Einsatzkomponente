@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
     <name>com_einsatzkomponente</name>
-    <creationDate>2016-02-28</creationDate>
-    <copyright>Copyright (C) 2015 by Ralf Meyer. All rights reserved.</copyright>
+    <creationDate>2016-03-14</creationDate>
+    <copyright>Copyright (C) 2016 by Ralf Meyer. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Ralf Meyer</author>
     <authorEmail>webmaster@feuerwehr-veenhusen.de</authorEmail>
