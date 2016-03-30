@@ -13,11 +13,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('formbehavior.chosen', 'select');
-endif;
+
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0)
 	{
