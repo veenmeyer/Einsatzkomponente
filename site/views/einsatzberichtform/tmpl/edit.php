@@ -355,7 +355,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 	</form>
 </div>
 <!-- Javascript für GMap-Anzeige -->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script> 
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&sensor=false"></script> 
 <script type="text/javascript"> 
       var map = null;
       var marker = null;

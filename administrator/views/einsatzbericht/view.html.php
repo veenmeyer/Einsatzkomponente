@@ -31,27 +31,12 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy
 		$this->form		= $this->get('Form');
 		$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 		
- 		$document = JFactory::getDocument();
-		// Import Jquery
-		$version = new JVersion;
-		if ($version->isCompatible('3.0')) :
-		else:
-		$document->addScript('../components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
-		endif;
-		// prüfen ob jquery geladen wurde
-		echo "<script type=\"text/javascript\">
-		if(typeof jQuery == \"function\")
-		else
-		  alert(\"jQuery nicht geladen\");
-		</script>";
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
             throw new Exception(implode("\n", $errors));
 		}
 		
-		// Load JQuery Framework
-		//JHtml::_('jquery.framework');   // added_130207
 		$this->addToolbar();
 		parent::display($tpl);
 	}
