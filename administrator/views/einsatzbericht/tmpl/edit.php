@@ -118,7 +118,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				jQuery.noConflict();
 				jQuery('input:hidden.auswahl_orga').each(function(){
 					var name = jQuery(this).attr('name');
-					if(name.indexOf('auswahlorga_hidden')){
+					if(name.indexOf('auswahl_orgahidden')){
 						jQuery('#jform_auswahl_orga option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});
@@ -140,12 +140,12 @@ function displayVals() {
 var multipleValues = jQuery( "#jform_vehicles" ).val() || [];
 jQuery( "#fahrzeug" ).val(multipleValues.join( ", " ) );
 }
-jQuery( "select" ).change( displayVals );
+jQuery( "select" ).change( displayVals ); 
 displayVals();
 </script>
 
 <?php
-			
+//echo '<input type="text" id="fahrzeug">  />';			
 				
 			?>
 			<script type="text/javascript">
@@ -185,7 +185,7 @@ displayVals();
 				jQuery.noConflict();
 				jQuery('input:hidden.ausruestung').each(function(){
 					var name = jQuery(this).attr('name');
-					if(name.indexOf('auswahlorga_hidden')){
+					if(name.indexOf('ausruestunghidden')){
 						jQuery('#jform_ausruestung option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});

@@ -38,7 +38,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                 'date3', 'a.date3',
                 'address', 'a.address',
                 'summary', 'a.summary',
-                'auswahlorga', 'a.auswahlorga',
+                'auswahl_orga', 'a.auswahl_orga',
                 'vehicles', 'a.vehicles',
                 'ausruestung', 'a.ausruestung',
                 'boss', 'a.boss',
