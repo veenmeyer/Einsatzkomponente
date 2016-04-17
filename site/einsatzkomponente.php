@@ -20,6 +20,17 @@ jimport('joomla.application.component.controller');
 // Execute the task.
 $controller	= JControllerLegacy::getInstance('Einsatzkomponente');
 
+		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		
+		$db = JFactory::getDbo();
+		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
+		$parameter = json_decode( $db->loadResult(), true );
+        $version = $parameter['version'];
+
+		//------------------------------------------------------------------------
+        if($version!=str_replace("Premium","",$version)):
+		$params->set('eiko', '1');
+		endif;  
 
 
 

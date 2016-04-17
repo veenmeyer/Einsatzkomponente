@@ -50,7 +50,7 @@ defined('_JEXEC') or die;
 		$year_text = $this->selectedYear;
 	}
 	
-	echo '<div style="text-align:center;margin-bottom:20px;"><img src="'.JURI::Root().'images/com_einsatzkomponente/images/years/home'.$year.'.png" title="Eins&auml;tze '.$year_text.'" /></div>';
+	//echo '<div style="text-align:center;margin-bottom:20px;"><img src="'.JURI::Root().'images/com_einsatzkomponente/images/years/home'.$year.'.png" title="Eins&auml;tze '.$year_text.'" /></div>';
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
@@ -85,9 +85,9 @@ if ($this->params->get('display_filter_einsatzarten','1')) :
 echo $this->modulepos_2;
 ?>
 
-<table width="100%" class="table table-striped table-bordered" id="example" border="1" cellspacing="0" cellpadding="0" style="margin-top:20px;">
+<table width="100%" class="table table-striped table-bordered eiko_detail_4_table" id="example" border="1" cellspacing="0" cellpadding="0" style="margin-top:20px;">
     <thead>
-        <tr>
+        <tr class="eiko_detail_4_tr">
            <?php $col ='0';?>
            <?php if ($this->params->get('display_home_number','1') or $this->params->get('display_home_alertimage_num','0')) : ?>
 		   <?php if ($this->params->get('display_home_number','1')):?>            
@@ -140,14 +140,14 @@ if ($this->params->get('display_home_pagination')) :
 			   <tr style="height:20px;">				
 			   </tr>	
 		   <?php } ?>
-		   <tr style="border-bottom:1px #666666  dotted;background-color:#A10F15;text-align:center;color:#FFFFFF;"><td colspan="<?php echo $col;?>">
+		   <tr style="border-bottom:1px #666666  dotted;text-align:center;" class="eiko_detail_4_tr_1"><td colspan="<?php echo $col;?>">
            <?php $m=date('n', $curTime);?>
 		   <?php echo '<h3 style="margin:10px;">';?>
            <?php echo $this->monate[$m];?>
 		   <?php echo date('Y', $curTime);?>
            <?php echo '</h3>';?>
            </td></tr>
-			<tr style="background-color:#BDBDBD;">
+			<tr class="eiko_detail_4_tr_2">
 			   <?php $col ='0';?>
 			   <?php if ($this->params->get('display_home_number','1') or $this->params->get('display_home_alertimage_num','0')) : ?>
 			   <?php if ($this->params->get('display_home_number','1')):?>
@@ -180,7 +180,7 @@ if ($this->params->get('display_home_pagination')) :
            <?php endif;?>
            <!--Anzeige des Monatsnamen ENDE-->
            
-		   <tr>
+		   <tr class="eiko_detail_4_tr_3">
            
            <?php if ($this->params->get('display_home_number','1') or $this->params->get('display_home_alertimage_num','0')) : ?>
            <?php if ($this->params->get('display_home_marker','1')) : ?>
@@ -350,7 +350,7 @@ if ($this->params->get('display_home_pagination')) :
 
     
     <?php if ($this->params->get('display_home_map')) : ?>
-    <tr><td colspan="<?php echo $col;?>">
+    <tr class="eiko_detail_4_tr_4"><td colspan="<?php echo $col;?>">
     <h4>Einsatzgebiet</h4>
 			<?php if ($this->params->get('gmap_action','0') == '1') :?>
   			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">

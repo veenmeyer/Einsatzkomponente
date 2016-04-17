@@ -138,8 +138,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$this->layout_detail_link = ''; 
 		if ($layout_detail) : $this->layout_detail_link = '&layout='.$layout_detail;  endif; // Detailbericht Layout 'default' ?
 		
-		$document = JFactory::getDocument();
-		
+
 		$document = JFactory::getDocument();
         // Import CSS
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');

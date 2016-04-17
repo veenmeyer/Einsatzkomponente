@@ -40,7 +40,8 @@ if (!empty($this->extra_sidebar)) {
 <?php else : ?>
 	<div id="j-main-container">
 <?php endif;?>
- 
+
+							
 		<div id="filter-bar" class="btn-toolbar"></div> 
                
         
@@ -124,7 +125,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 <div class="span5">
 					<div class="well well-small" style=" float:left;">
 						<div class="center">
-							<?php echo '<h4>'.JTEXT::_('Einsatzkomponente Version ');?><?php echo $params['version'].'</h4>';?>
+							<?php echo '<h4>'.JTEXT::_('Einsatzkomponente für das Joomla-CMS ');?><?php echo '</h4>';?>
 						</div>
 						<hr class="hr-condensed">
 						<dl class="dl-horizontal">
@@ -135,21 +136,20 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
                             <?php else:?>
 							<?php echo '<span class="label label-important"> ( nicht validiert ) </span><br/>siehe Optionen / Info';?>
                             <?php endif;?>
+							
+								<?php JHtml::_('behavior.modal'); ?>
+								</br>
+								<div style="display:none;">
+								<div id="eiko-changelog">
+									<?php
+										echo changelog (JPATH_COMPONENT_ADMINISTRATOR.'/CHANGELOG.php');
+									?>
+								</div>
+								</div>
+						<a href="#eiko-changelog" class="modal"><?php echo 'Changelog'; ?></a>
+
                             </dd>
-							<br/>
-							<dt>Premiumfunktionen:</dt>
-							<?php if ($this->params->get('eiko')) : ?>
-							<dd><?php echo '<span style="margin-bottom:5px;" class="label label-success">Mehrfachbild-Upload im Frontend-Edit</span>';?></dd>
-							<?php else:?>
-							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Mehrfach-Bildupload im Frontend-Edit</span>';?></dd>
-							<?php endif;?>
-							<dt></dt>
-							<?php if ($this->params->get('eiko')) : ?>
-							<dd><?php echo '<span style="margin-bottom:5px;" class="label label-success">Option Ausrüstung</span>';?></dd>
-							<?php else:?>
-							<dd><?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Option Ausrüstung</span>';?></dd>
-							<?php endif;?>
-							<br/>
+							<hr>
 							<dt>Release-Datum:</dt>
 							<dd><?php echo $params['creationDate'];?></dd>
 							<dt>Autor:</dt>
@@ -161,14 +161,26 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 							<dt>Lizenz:</dt>
 							<dd>GNU General Public License version 2 or later </dd>
 						</dl>
-</div>
-          
-					<div class="well well-small" style="float:left;">
-					
-						Aktuellste Version: <iframe  frameborder="0" height="30px" width="250px" src="http://www.feuerwehr-veenhusen.de/images/einsatzkomponenteJ30/index.html" scrolling="no"></iframe><br/><a target="_blank" class="btn" href="http://www.einsatzkomponente.de">Download-Link Webseite</a> <a target="_blank" class="btn" href="https://github.com/veenmeyer/Einsatzkomponente">Link zu GitHub</a>			
-
+						<hr>
+							<b>Premiumfunktionen:</b></br>
+							<?php if ($this->params->get('eiko')) : ?>
+							<?php echo '<span style="margin-bottom:5px;" class="label label-success">Mehrfachbild-Upload im Frontend-Edit</span></br>';?>
+							<?php else:?>
+							<?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Mehrfach-Bildupload im Frontend-Edit</span></br>';?>
+							<?php endif;?>
+							<?php if ($this->params->get('eiko')) : ?>
+							<?php echo '<span style="margin-bottom:5px;" class="label label-success">Option Ausrüstung</span></br>';?>
+							<?php else:?>
+							<?php echo '<span style="margin-bottom:5px;text-decoration: line-through;" class="label label-important">Option Ausrüstung</span></br>';?>
+							<?php endif;?>
+							<hr>
+						<b>Informationen:</b></br>
+						<a target="_blank" style="margin-bottom:5px;" style="margin-bottom:5px;" class="label label-info" href="http://www.einsatzkomponente.de">Download-Link Webseite</a> 
+						<br/>
+						<a target="_blank" style="margin-bottom:5px;" class="label label-info" href="https://github.com/veenmeyer/Einsatzkomponente">Link zu GitHub</a>			
+					</br>
 						<!-- Button to trigger modal -->
-						<a href="#myModal" role="button" class="btn" data-toggle="modal">Verfügbare Module ...</a>
+						<a href="#myModal" role="button" style="margin-bottom:5px;" class="label label-info" data-toggle="modal">Verfügbare Module ...</a>
      
 						<!-- Modal -->
 						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -192,8 +204,23 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</button>
 						<!--<button class="btn btn-primary">Save changes</button> !-->
 						</div>
-						</div>		
-				</div>
+						</div>	
+						<hr>
+						<b>Info PHP-Funktionen:</b></br>
+						
+						<?php 
+							if( ini_get('allow_url_fopen') ) {
+								echo '<span class="label label-success">allow_url_fopen aktiv</span>';
+								} else {
+								echo '<span class="label label-important">allow_url_fopen deaktiviert</span>';
+								}
+						?>
+					<hr>
+						Aktuellste Version: <iframe  frameborder="0" height="30px" width="250px" src="https://www.feuerwehr-veenhusen.de/images/einsatzkomponenteJ30/index.html" scrolling="no"></iframe>
+						
+</div> 
+          
+
 				
 						
 					</td>
@@ -206,7 +233,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 						<div class="alert alert-block alert-info">
 						<button class="close" data-dismiss="alert" type="button">×</button>
 						<p> </p>
-						<h4 style="margin-bottom:5px;">Nützliche Links</h4>
+						<h4 style="margin-bottom:5px;">Weitere Links</h4>
 						<ul>
 						<li>
 						<a target="_blank" href="http://einsatzkomponente.de" style="text-decoration:underline">Supportforum für die Einsatzkomponente</a>
@@ -215,7 +242,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 						<a target="_blank" href="http://www.leitstelle-joomla.de" style="text-decoration:underline">Testseite für die Einsatzkomponente V3.x für J3</a>
 						</li>
 						<li>
-						<a target="_blank" href="http://www.feuerwehr-veenhusen.de" style="text-decoration:underline">Freiwillige Feuerwehr Veenhusen </a><font-size:small>(über ein paar nette im Gästebuch würde ich mich sehr freuen  lg Ralf Meyer )</font-size>
+						<a target="_blank" href="https://www.feuerwehr-veenhusen.de" style="text-decoration:underline">Freiwillige Feuerwehr Veenhusen </a><font-size:small>(über ein paar nette im Gästebuch würde ich mich sehr freuen  lg Ralf Meyer )</font-size>
 						</li>
 						</ul>
 						</div>
@@ -226,7 +253,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 			<tfoot>
 				<tr>
 					<td colspan="10">
-						<?php echo 'Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+						<?php echo 'Copyright (C) 2016 by Ralf Meyer. All rights reserved.
  *  GNU General Public License version 2 or later'; ?>
 					</td>
 				</tr>
@@ -237,4 +264,51 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>     
-		
+	
+<?php	
+	function changelog($file, $onlyLast = false)
+	{
+		$ret = '';
+
+		$lines = @file($file);
+
+		if(empty($lines)) return $ret;
+
+		array_shift($lines);
+
+		foreach($lines as $line)
+		{
+			$line = trim($line);
+
+			if(empty($line)) continue;
+
+			$type = substr($line,0,1);
+
+			switch($type)
+			{
+				case '=':
+					continue;
+					break;
+				case '-':
+					$ret .= '<li><span style="font-size:8pt;color:#ff0000;">Removed:</span> '.substr($line, 1).'</li>';
+					break;
+				case '+':
+					$ret .= '<li><span style="font-size:8pt;color:#ff0000;">Added:</span> '.substr($line, 1)."</li>";
+					break;
+				case '#':
+					$ret .= '<li><span style="font-size:8pt;color:#00e600;">Bugfix:</span> '.substr($line, 1)."</li>";
+					break;
+
+				default:
+
+
+
+					$ret .= $line;
+					break;
+			}
+		}
+
+		return $ret;
+	}
+	
+?>
