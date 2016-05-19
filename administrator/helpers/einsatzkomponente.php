@@ -125,6 +125,15 @@ class EinsatzkomponenteHelper
 		return $result;
 	}
 	
+    public static function ermittle_einsatz_nummer ($selectedDate) {
+		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'" ' ;
+		//return $query;
+		$db	= JFactory::getDBO();
+		$db->setQuery( $query );
+		$result = $db->loadObjectList();
+        return $result[0]->total;
+    }
+
     public static function count_einsatz_daten_bestimmtes_jahr ($selectedYear) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
 		$query = 'SELECT COUNT(r.id) as total FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC ' ;
