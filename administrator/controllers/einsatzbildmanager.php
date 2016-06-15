@@ -139,7 +139,19 @@ class EinsatzkomponenteControllerEinsatzbildmanager extends JControllerAdmin
 	    	$sourcename = basename($source);        
 			$sourcepath = str_replace($sourcename, "", $source); 
 			//$sourcepath = str_replace(JPATH_ROOT.'/', "", $sourcepath); 
+			
+		$reportid = $einsatzbild[0]->report_id;
+			
+		if($params->get('new_dir', '1')){
+			if(!file_exists('../'.$uploadPath_thumb.$reportid)){
+				mkdir('../'.$uploadPath_thumb.$reportid, 0755, true);
+			}
+			$rThumbFileName = $uploadPath_thumb.$reportid.'/'.$sourcename;
+		}
+		else{
 			$rThumbFileName = $uploadPath_thumb.$sourcename;
+		}
+			
 			$target = JPATH_ROOT.'/'.$rThumbFileName;
 			
 			if (file_exists($source)) {
