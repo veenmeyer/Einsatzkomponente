@@ -126,7 +126,7 @@ class EinsatzkomponenteHelper
 	}
 	
     public static function ermittle_einsatz_nummer ($selectedDate) {
-		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'" ' ;
+		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'" WHERE state="1" or state="2" ' ;
 		//return $query;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
