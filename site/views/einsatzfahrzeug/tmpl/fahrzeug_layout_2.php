@@ -127,6 +127,11 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 	$canEdit = JFactory::getUser()->id == $this->item->created_by;
 }
 ?>
+
+
+
+<!--  Orignal Items deaktivert
+
 <?php if ($this->item) : ?>
 
 	<div class="item_fields">
@@ -237,3 +242,5 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 else:
 	echo JText::_('COM_EINSATZKOMPONENTE_ITEM_NOT_LOADED');
 endif;
+?>
+-->
