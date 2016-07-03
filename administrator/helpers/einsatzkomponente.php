@@ -133,6 +133,7 @@ class EinsatzkomponenteHelper
 		$result = $db->loadObjectList();
         return $result[0]->total;
     }
+	
 
     public static function count_einsatz_daten_bestimmtes_jahr ($selectedYear) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
