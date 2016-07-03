@@ -1662,7 +1662,7 @@
 		<field 	name="main_css" 
 				type="textarea" 
 				filter="raw" 
-				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,.eiko_einsatzarchiv_jahr_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_jahr_div {color:#ffffff !important;} .eiko_einsatzarchiv_monat_tr,.eiko_einsatzarchiv_monat_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_monat_div {color:#ffffff !important;}" 
+				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}" 
 				label="Einsatz-Übersicht" 
 				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
 				rows="10" 

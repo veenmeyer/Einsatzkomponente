@@ -1,7 +1,8 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
-<h3>Changelog <small>Version 3.12</small></h3>
+<h3>Changelog <small>Version 3.13</small></h3>
 <ul>
++ Einsatznummern in der Einsatzübersicht
 # Backend-Übersichten Filter repariert 
 # Auswahl der Optionen bearbeitet
 # http gegen https - GoogleMaps ausgetauscht (Einsatzkarte)
