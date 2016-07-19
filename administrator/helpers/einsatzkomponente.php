@@ -146,7 +146,7 @@ class EinsatzkomponenteHelper
 
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.ausruestung,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
+		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.ausruestung,r.state,rd.title as einsatzart,r.tickerkat,r.gmap FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();

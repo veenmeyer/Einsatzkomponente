@@ -42,17 +42,17 @@ function preflight( $type, $parent ) {
 		jimport( 'joomla.filesystem.file' );
 		jimport( 'joomla.filesystem.folder' );
 
-		if( JFile::exists(JPATH_ROOT.'/components/com_einsatzkomponente/views/einsatzberichte_neu') )
+		if( JFolder::exists(JPATH_ROOT.'/components/com_einsatzkomponente/views/einsatzberichte_neu') )
 		{
 		JFolder::delete(JPATH_ROOT.'/components/com_einsatzkomponente/views/einsatzberichte_neu');
 		}	
 		if( JFile::exists(JPATH_ROOT.'/components/com_einsatzkomponente/models/forms/filter_einsatzberichte_neu.xml') )
 		{
-		JFolder::delete(JPATH_ROOT.'/components/com_einsatzkomponente/models/forms/filter_einsatzberichte_neu.xml');
+		JFile::delete(JPATH_ROOT.'/components/com_einsatzkomponente/models/forms/filter_einsatzberichte_neu.xml');
 		}	
 		if( JFile::exists(JPATH_ROOT.'/components/com_einsatzkomponente/controllers/einsatzberichte_neu.php') )
 		{
-		JFolder::delete(JPATH_ROOT.'/components/com_einsatzkomponente/controllers/einsatzberichte_neu.php');
+		JFile::delete(JPATH_ROOT.'/components/com_einsatzkomponente/controllers/einsatzberichte_neu.php');
 		}	
 		
 		

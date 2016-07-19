@@ -157,7 +157,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$gmap_zoom_level 	= $this->params->get('detail_gmap_zoom_level','12'); 
 		$gmap_onload 		= $this->params->get('detail_gmap_onload','HYBRID');
 		$zoom_control 		= $this->params->get('detail_zoom_control','false');
-		$document->addScript('https://maps.googleapis.com/maps/api/js?v=3.exp');			
+		$document->addScript('//maps.googleapis.com/maps/api/js?key='.$this->params->get('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E').' ');		
 		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route) );											
 		endif;
 		

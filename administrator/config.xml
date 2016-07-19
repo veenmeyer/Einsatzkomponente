@@ -2,7 +2,7 @@
 <config>
 	
 <!--Bildereinstellungen-->
-<fieldset name="config"	description="" label="Bilder Einstellungen">
+<fieldset name="Bilder_Einstellungen"	label="Bilder Einstellungen">
 <!--<field name="note1" type="note" class="alert alert-info" label="LOREMIPSUM" description="LOREMIPSUM_DESC" />
 <field name="note11" type="note" label="LOREMIPSUM" />
 -->	
@@ -176,7 +176,7 @@
 	
 	
 <!--GMap-Einstellungen-->
-<fieldset name="component" label="Kartenfunktion" description="">
+<fieldset name="Kartenfunktion" label="Kartenfunktion" description="">
 
 <field name="note_kartenfunktion" 
 		type="note" 
@@ -199,7 +199,25 @@
 					<option
 						value="2">OpenStreetMap</option>
 				</field>
-	  
+				
+		<field
+			name="gmapkey"
+			type="text"
+			default ="AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"
+			label="Google Api-Key"
+			width ="100"
+			hint="GoogleMap Api-Key benötigt"
+			showon="gmap_action:1"
+			description="Google Api-Key"
+		 />
+		<field name="note_key_map" 
+			type="note" 
+			showon="gmap_action:1"
+			label="Bitte beantragen Sie hier einen eigenen Google-Api-Key:  https://console.developers.google.com" 
+			class="alert alert-warning" 
+			description=""
+		/>	
+		 
 <field name="note_detail_map" 
 		type="note" 
 		showon="gmap_action:1,2"
