@@ -2,6 +2,8 @@
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 <h3>Changelog <small>Version 3.13</small></h3>
 <ul>
+# User-Berechtigung EINSATZ ANLEGEN korrigiert. edit-create
+# Joomla-Artikel-Export -> Detailansicht -> Übersicht Link repeariert
 + fehlende index.html's im Frontend hinzugefüg
 + neue bootstrap.min.css V3.3.7 hinzugefügt
 + GoogleApiKey für Maps hinzugefügt
