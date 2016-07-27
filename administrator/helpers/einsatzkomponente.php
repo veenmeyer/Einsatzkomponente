@@ -972,7 +972,8 @@ endif;
 		$max = $db->loadResult();
 		$asset_id = $max+1;
 
-				$link = JRoute::_( JURI::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id); 
+		$link = JRoute::_( JURI::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id).'&Itemid='.$params->get('homelink','');
+		
 		$image_intro = str_replace('/', '\/', $result[0]->image);
 		$image_intro = $db->escape($image_intro);
 		if (str_replace('\/com_einsatzkomponente\/einsatzbilder\/thumbs', '', $image_intro)):
