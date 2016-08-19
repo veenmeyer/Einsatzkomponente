@@ -2,6 +2,7 @@
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 <h3>Changelog <small>Version 3.13</small></h3>
 <ul>
+# Alle im entsprechenden Verzeichniss vorhandene Wasserzeichen werden jetzt aufgelistet
 # Fehler in der Sortierung nach Counter-Anzahl behoben
 - neue bootstrap.min.css V3.3.7 (bringt zu viele Layoutfehler)
 # Fatal error: Call to a member function getData() in Fahrzeug-und Organisationsdetail
