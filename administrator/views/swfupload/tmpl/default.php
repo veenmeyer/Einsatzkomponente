@@ -44,7 +44,8 @@ $reportDb = $db->loadObjectList();
 				</div> 
 		
 						<!-- Button to trigger modal -->
-						<a href="#myModal" role="button" class="btn" data-toggle="modal">Wasserzeichen auswählen</a>
+						<br/>
+						<a href="#myModal" role="button" class="btn" data-toggle="modal">Temponäres Wasserzeichen auswählen</a>
 		
 						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-header">
@@ -52,21 +53,36 @@ $reportDb = $db->loadObjectList();
 						<h3 id="myModalLabel">Standard-Wasserzeichen: <?php echo $watermark;?></h3>
 						</div>
 						<div class="modal-body">
+
+<?php
+jimport('joomla.filesystem.folder');
+$png_files = JFolder::files('../administrator/components/com_einsatzkomponente/assets/images/watermark/', '.png');
+
+$list = '<select id="watermark_image" name="watermark_image" onchange="changeText_watermark()">';
+foreach ($png_files as $file) {
+	if ($watermark == $file) {
+		   $list .= '<option value="'.$file.'" selected>'.$file.'</option>';
+
+	}
+	else {
+   $list .= '<option value="'.$file.'">'.$file.'</option>';
+	}
+}
+$list .= '</select>'; 
+?>
+
 						
 <div class="control-group">
 	<div class="control-label">
 	<label id="jform_watermark_image-lbl" for="jform_watermark_image" class="hasTooltip" title="">
 	Wasserzeichen wählen :</label>									
 	</div>
-	<div class="controls">
-		<select id="watermark_image" name="watermark_image" onchange="changeText_watermark()">  
-		<option value="presse_watermark.png">presse_watermark.png</option>
-		<option value="watermark.png" selected="selected">watermark.png</option>
-		</select>
+	<div class="controls">  
+	<?php echo $list;?>
 	</div>
 </div>					
 						
-						<strong>Wasserzeichen wählen </strong><br/>Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!
+						<strong>Temponäres Wasserzeichen wählen </strong><br/>Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!
 						
 						<h4>Mehr Infos dazu auf www.einsatzkomponente.de</h4>
 						</div>

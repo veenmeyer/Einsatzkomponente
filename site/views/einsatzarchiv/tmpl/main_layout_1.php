@@ -21,10 +21,12 @@ defined('_JEXEC') or die;
         <thead >
             <tr class="mobile_hide_480 ">
 			
+				<?php if ($this->params->get('display_home_number','1') ) : ?>
 				<th class='left'>
 				<?php echo 'Nr.'; ?>
 				</th>
-
+				<?php endif;?>
+				
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1', 'a.date1', $listDirn, $listOrder); ?>
 				</th>
@@ -84,7 +86,7 @@ defined('_JEXEC') or die;
     <tbody>
 	
 	<?php 	$m ='';
-			$y='';
+			$y=''; //print_r ($this->items);
 	?>
     <?php foreach ($this->items as $i => $item) : ?>
         <?php $canEdit = $user->authorise('core.edit', 'com_einsatzkomponente'); ?>
@@ -109,7 +111,7 @@ defined('_JEXEC') or die;
 		   <tr class="eiko_einsatzarchiv_monat_tr"><td class="eiko_einsatzarchiv_monat_td" colspan="7">
            <?php $m= $item->date1_month;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_monat_div">';?>
-           <?php echo $this->monate[$m];?>
+           <?php echo 'Monat: <b>'.$this->monate[$m].'</b>';?>
            <?php echo '</div>';?>
            </td></tr>
            <?php endif;?>
@@ -117,9 +119,17 @@ defined('_JEXEC') or die;
 
 		   <tr class="row<?php echo $i % 2; ?>">
 
-			<td>
-			<?php //echo $item->number;?>
+           <?php if ($this->params->get('display_home_number','1') ) : ?>
+           <?php if ($this->params->get('display_home_marker','1')) : ?>
+		   <td class="eiko_td_marker_main_1" style="background-color:<?php echo $item->marker;?>;" >
+           <?php else:?>
+		   <td class="eiko_td_marker_main_1">
+           <?php endif;?>
+			<?php echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1).'</span>';?> 
 			</td>
+           <?php endif;?>
+		   
+		   
            <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
 		   <td class="eiko_td_kalender_main_1"> 
 			<div class="home_cal_icon">

@@ -91,8 +91,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
  <?php if( $this->item->date3>1) : ?>
   <tr>
-    <td class="layout4_row_10" width="250px">Einsatzdauer:</td>
-    <td class="layout4_row_10"><?php ?>
+    <td class="layout4_row_100" width="250px">Einsatzdauer:</td>
+    <td class="layout4_row_100"><?php ?>
 		<?php 
 			$diff =  strtotime($this->item->date3)- strtotime($this->item->date1);
             $diff = $diff/60;
