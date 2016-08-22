@@ -106,11 +106,32 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div>-->
 				
+		<div class="control-group">
+			<div class="controls">
+
+				<?php if ($this->canSave): ?>
+					<button type="submit" class="validate btn btn-primary">
+						<?php echo JText::_('JSUBMIT'); ?>
+					</button>
+				<?php endif; ?>
+				<a class="btn"
+				   href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.cancel'); ?>"
+				   title="<?php echo JText::_('JCANCEL'); ?>">
+					<?php echo JText::_('JCANCEL'); ?>
+				</a>
+			</div>
+		</div>
+
+		<input type="hidden" name="option" value="com_einsatzkomponente"/>
+		<input type="hidden" name="task"
+			   value="einsatzfahrzeugform.save"/>
+		<?php echo JHtml::_('form.token'); ?>
+				
+				
             </fieldset>
     	</div>
         
-        <input type="hidden" name="task" value="" />
-        <?php echo JHtml::_('form.token'); ?>
+		
         
     </div>
 </form>

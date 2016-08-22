@@ -65,7 +65,7 @@ document.onkeypress = stopRKey;
         
         if($this->_layout == 'edit') {
             
-            $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
+            $authorised = $user->authorise('core.edit', 'com_einsatzkomponente');
             if ($authorised !== true) {
                 throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
             }

@@ -56,6 +56,12 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
         <h1>Einsatzbericht bearbeiten ID-Nr.<?php echo $this->item->id; ?></h1>
     <?php else: ?>
         <h1>Bitte geben Sie die Einsatzdaten ein :</h1>
+	<?php   $authorised = JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente');
+            if ($authorised !== true) {
+                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+            }
+	?>
+
     <?php endif; ?>
     <form id="form-einsatzbericht" action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 	<div class="fltlft well" style="width:80%;">
@@ -63,7 +69,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 			</div>
-            <?php if (JFactory::getUser()->authorise('core.admin','einsatzkomponente')): ?>
+            <?php if (JFactory::getUser()->authorise('core.admin','com_einsatzkomponente')): ?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('counter'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('counter'); ?></div>

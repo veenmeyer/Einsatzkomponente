@@ -170,8 +170,7 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
 			
               <!-- Javascript für GMap-Anzeige -->
 			  
-<?php if(isset($_SERVER['HTTPS'])) : $ssl='https://'; else:	$ssl='http://'; endif;?>
-<script type="text/javascript" src="<?php echo $ssl;?>maps.google.com/maps/api/js?v=3&sensor=false"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
 
               <script type="text/javascript"> 
                     var map = null;
