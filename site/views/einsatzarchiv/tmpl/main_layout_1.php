@@ -52,6 +52,13 @@ defined('_JEXEC') or die;
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>
 				</th> 
 				<?php endif; ?>
+				
+				<?php if ($this->params->get('display_home_presse','0') ) : ?>
+				<th class='left'>
+				<?php echo 'Pressebericht'; ?>
+				</th>
+				<?php endif;?>
+				
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_VEHICLES', 'a.vehicles', $listDirn, $listOrder); ?>
 				</th> -->
@@ -220,7 +227,15 @@ defined('_JEXEC') or die;
 		   <td nowrap class="eiko_td_organisationen_main_1 mobile_hide_480"> <?php echo $auswahl_orga;?></td>
            <?php endif;?>
 		   
-		<!--		<td>
+				<?php if ($this->params->get('display_home_presse','0')) : ?>
+				<td class="mobile_hide_480 ">
+					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
+					<?php echo '+Presselinks'; ?>
+					<?php endif;?>
+				</td>
+				<?php endif; ?>
+
+				<!--		<td>
 
 					<?php echo $item->vehicles; ?>
 				</td> -->
