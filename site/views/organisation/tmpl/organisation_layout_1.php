@@ -31,7 +31,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 	<br/>
 			<?php if ($this->params->get('show_orga_link','1')) : ?>
 			<?php if( $this->item->link) : ?>
-			<?php echo '<li>Link zur Webseite: <a href="" target="blank" class="eiko_orga_link">'.$this->item->link.'</a></li>'; ?>
+			<?php echo '<li>Link zur Webseite: <a href="'.$this->item->link.'" target="blank" class="eiko_orga_link">'.$this->item->link.'</a></li>'; ?>
 			<br/>
 			<?php endif;?>
 			<?php endif;?>
@@ -103,7 +103,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 			
 			<?php if ($this->params->get('show_orga_link','1')) : ?>
 			<?php if( $this->item->link) : ?>
-			<?php echo '<li>Link zur Webseite: <a href="" target="blank" class="eiko_orga_link">'.$this->item->link.'</a></li>'; ?>
+			<?php echo '<li>Link zur Webseite: <a href="'.$this->item->link.'" target="blank" class="eiko_orga_link">'.$this->item->link.'</a></li>'; ?>
 			<?php endif;?>
 			<?php endif;?>
         </ul>
