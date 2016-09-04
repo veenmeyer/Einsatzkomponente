@@ -141,6 +141,23 @@
             query="SELECT name FROM `#__eiko_organisationen` WHERE `state` = '1' ORDER BY `ordering` ASC"
             key_field="name"
             value_field="name" />
+
+       <field name="ausruestung" type="sql" class="inputbox"
+            label="Beladung / Ausrüstung"
+            description="" 
+            required="false" 
+            query="SELECT `id`, `name` FROM `#__eiko_ausruestung` WHERE `state`='1' ORDER BY `ordering` ASC"
+			key_field="id"       		
+			value_field="name"
+			multiple="multiple"
+         /> 
+
+       <field name="ausruestung" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Ausrüstung -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_ausruestung`" key_field="id" value_field="val"
+             /> 
+			
+			
     <field name="link" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZFAHRZEUG_LINK"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZFAHRZEUG_LINK" 
