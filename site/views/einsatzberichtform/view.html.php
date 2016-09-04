@@ -17,6 +17,7 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
     protected $item;
     protected $form;
     protected $params;
+	protected $copy;
     /**
      * Display the view
      */
@@ -25,7 +26,9 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
         
 		$app	= JFactory::getApplication();
         $user		= JFactory::getUser();
-        
+       
+	    $this->copy  = JFactory::getApplication()->input->getInt('copy','0');
+
         $this->state = $this->get('State');
         $this->item = $this->get('Data');
         $this->params = $app->getParams('com_einsatzkomponente');
@@ -71,6 +74,7 @@ document.onkeypress = stopRKey;
             }
         }
         
+ 
         $this->_prepareDocument();
         parent::display($tpl);
     }

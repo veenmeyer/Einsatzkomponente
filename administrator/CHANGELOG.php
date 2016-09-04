@@ -2,6 +2,7 @@
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 <h3>Changelog <small>Version 3.13</small></h3>
 <ul>
++ Einsatzbericht im Frontend kopieren
 + Info zu Pressebericht in Einsatzübersicht
 # externer Link in Organisations-Detailansicht korrigiert
 # Alle im entsprechenden Verzeichniss vorhandene Wasserzeichen werden jetzt aufgelistet

@@ -25,7 +25,6 @@ $app	= JFactory::getApplication();
 $params = $app->getParams('com_einsatzkomponente');
 $gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 
-
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0) :
 if ($params->get('eiko')) : 
@@ -53,7 +52,15 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 
 <div class="einsatzbericht-edit front-end-edit">
     <?php if(!empty($this->item->id)): ?>
+		<?php if ($this->copy == 0) : ?>
         <h1>Einsatzbericht bearbeiten ID-Nr.<?php echo $this->item->id; ?></h1>
+		<?php JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.copy', 0);?>
+		<?php endif; ?>
+		<?php if (!$this->copy == 0) : ?>
+        <h1>Einsatzbericht ID-Nr.<?php echo $this->item->id; ?> kopieren</h1>
+		<?php JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.copy', 1);?>
+		<?php endif;?>
+			
     <?php else: ?>
         <h1>Bitte geben Sie die Einsatzdaten ein :</h1>
 	<?php   $authorised = JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente');
