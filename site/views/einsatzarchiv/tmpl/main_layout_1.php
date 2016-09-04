@@ -21,10 +21,12 @@ defined('_JEXEC') or die;
         <thead >
             <tr class="mobile_hide_480 ">
 			
+				<?php if ($this->params->get('display_home_number','1') ) : ?>
 				<th class='left'>
 				<?php echo 'Nr.'; ?>
 				</th>
-
+				<?php endif;?>
+				
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1', 'a.date1', $listDirn, $listOrder); ?>
 				</th>
@@ -50,6 +52,13 @@ defined('_JEXEC') or die;
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>
 				</th> 
 				<?php endif; ?>
+				
+				<?php if ($this->params->get('display_home_presse','0') ) : ?>
+				<th class='left'>
+				<?php echo 'Pressebericht'; ?>
+				</th>
+				<?php endif;?>
+				
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_VEHICLES', 'a.vehicles', $listDirn, $listOrder); ?>
 				</th> -->
@@ -84,7 +93,7 @@ defined('_JEXEC') or die;
     <tbody>
 	
 	<?php 	$m ='';
-			$y='';
+			$y=''; //print_r ($this->items);
 	?>
     <?php foreach ($this->items as $i => $item) : ?>
         <?php $canEdit = $user->authorise('core.edit', 'com_einsatzkomponente'); ?>
@@ -109,7 +118,7 @@ defined('_JEXEC') or die;
 		   <tr class="eiko_einsatzarchiv_monat_tr"><td class="eiko_einsatzarchiv_monat_td" colspan="7">
            <?php $m= $item->date1_month;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_monat_div">';?>
-           <?php echo $this->monate[$m];?>
+           <?php echo 'Monat: <b>'.$this->monate[$m].'</b>';?>
            <?php echo '</div>';?>
            </td></tr>
            <?php endif;?>
@@ -117,9 +126,17 @@ defined('_JEXEC') or die;
 
 		   <tr class="row<?php echo $i % 2; ?>">
 
-			<td>
-			<?php //echo $item->number;?>
+           <?php if ($this->params->get('display_home_number','1') ) : ?>
+           <?php if ($this->params->get('display_home_marker','1')) : ?>
+		   <td class="eiko_td_marker_main_1" style="background-color:<?php echo $item->marker;?>;" >
+           <?php else:?>
+		   <td class="eiko_td_marker_main_1">
+           <?php endif;?>
+			<?php echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1).'</span>';?> 
 			</td>
+           <?php endif;?>
+		   
+		   
            <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
 		   <td class="eiko_td_kalender_main_1"> 
 			<div class="home_cal_icon">
@@ -210,7 +227,15 @@ defined('_JEXEC') or die;
 		   <td nowrap class="eiko_td_organisationen_main_1 mobile_hide_480"> <?php echo $auswahl_orga;?></td>
            <?php endif;?>
 		   
-		<!--		<td>
+				<?php if ($this->params->get('display_home_presse','0')) : ?>
+				<td class="mobile_hide_480 ">
+					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
+					<?php echo '+Presselinks'; ?>
+					<?php endif;?>
+				</td>
+				<?php endif; ?>
+
+				<!--		<td>
 
 					<?php echo $item->vehicles; ?>
 				</td> -->
@@ -296,6 +321,28 @@ defined('_JEXEC') or die;
     <?php echo JHtml::_('form.token'); ?>
 </form>
 
+
+
+    <?php if ($this->params->get('display_home_map')) : ?>
+    <tr><td colspan="<?php echo $col;?>" class="eiko_td_gmap_main_1">
+    <h4>Einsatzgebiet</h4>
+			<?php if ($this->params->get('gmap_action','0') == '1') :?>
+  			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+			</div>
+            <?php endif;?>
+			<?php if ($this->params->get('gmap_action','0') == '2') :?>
+<body onLoad="drawmap();">
+				<!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
+				<div id="description" class="">Einsatzkarte</div>-->
+   				<div id="map" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;"></div> 
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+            <?php endif;?>
+            </td></tr>
+    <?php endif;?>
+	
+
+	
 <?php echo '<span class="mobile_hide_320">'.$this->modulepos_1.'</span>'; ?>
 
 

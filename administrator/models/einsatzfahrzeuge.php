@@ -42,6 +42,7 @@ class EinsatzkomponenteModeleinsatzfahrzeuge extends JModelList
                 'detail7_label', 'a.detail7_label',
                 'detail7', 'a.detail7',
                 'department', 'a.department',
+                'ausruestung', 'a.ausruestung',
                 'link', 'a.link',
                 'image', 'a.image',
                 'desc', 'a.desc',
@@ -111,6 +112,9 @@ class EinsatzkomponenteModeleinsatzfahrzeuge extends JModelList
 			)
 		);
 		$query->from('`#__eiko_fahrzeuge` AS a');
+		// Join over the foreign key 'auswahl_orga'
+		$query->select('#__eiko_ausruestung_1662678.name AS ausruestung_name_1662678');
+		$query->join('LEFT', '#__eiko_ausruestung AS #__eiko_ausruestung_1662678 ON #__eiko_ausruestung_1662678.id = a.ausruestung');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
@@ -144,4 +148,37 @@ class EinsatzkomponenteModeleinsatzfahrzeuge extends JModelList
         }
 		return $query;
 	}
+	
+    public function getItems() {
+        $items = parent::getItems();
+        
+		foreach ($items as $oneItem) {
+
+			if (isset($oneItem->ausruestung)) {
+				$values = explode(',', $oneItem->ausruestung);
+
+				$textValue = array();
+				foreach ($values as $value){
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+							->select('name')
+							->from('`#__eiko_ausruestung`')
+							->where('id = ' . $db->quote($db->escape($value)));
+					$db->setQuery($query);
+					$results = $db->loadObject();
+					if ($results) {
+						$textValue[] = $results->name;
+					}
+				}
+
+			$oneItem->ausruestung = !empty($textValue) ? implode(', ', $textValue) : $oneItem->ausruestung;
+
+			}
+
+
+		}
+        return $items;
+    }
+	
 }

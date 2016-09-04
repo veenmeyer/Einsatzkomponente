@@ -217,7 +217,10 @@ if (!empty($this->extra_sidebar)) {
 					</td>
                 <?php endif; ?>
 					<td class="center ">
-						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+					<?php $curTime = strtotime($item->date1);?>
+					<?php echo '<small>#'.EinsatzkomponenteHelper::ermittle_einsatz_nummer($curTime).'/'.date('Y', $curTime).'</small>';?>						
+					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+						
 					</td>
                 <?php if (isset($this->items[0]->state)): ?>
 					<td class="center">

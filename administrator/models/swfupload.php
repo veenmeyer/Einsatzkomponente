@@ -28,6 +28,7 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 		//so we will leave it as that
 		$fieldName = 'Filedata';
  
+		ini_set('memory_limit', -1);
 		
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
  
@@ -231,7 +232,7 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	$image_resize = $params->get('image_resize', 'true');
     if ($image_resize === 'true'):
 	$newwidth = $params->get('image_resize_max_width', '800');
-	$newheight = $params->get('image_resize_max_width', '600');
+	$newheight = $params->get('image_resize_max_height', '600'); 
     list($width, $height) = getimagesize($source);
     if($width > $height && $newheight < $height){
         $newheight = $height / ($width / $newwidth);
@@ -244,6 +245,7 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
     $thumb = imagecreatetruecolor($newwidth, $newheight);
     $source_name = imagecreatefromjpeg($source);
     imagecopyresized($thumb, $source_name, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+	//imagecopyresampled($thumb, $source_name, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 	imagejpeg($thumb, $destination, 100);  
 	endif;
 
@@ -265,6 +267,10 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	imagedestroy ($source_img);
 	imagedestroy ($watermark_img);
 	endif;
+	
+	
+	
+	
 			
 			
 			exit(0);

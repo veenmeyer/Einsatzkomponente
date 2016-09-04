@@ -20,6 +20,7 @@ class EinsatzkomponenteViewGmapkonfiguration extends JViewLegacy
 	protected $state;
 	protected $item;
 	protected $form;
+	protected $params;
 
 	/**
 	 * Display the view
@@ -29,6 +30,7 @@ class EinsatzkomponenteViewGmapkonfiguration extends JViewLegacy
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
 		$this->form		= $this->get('Form');
+		$this->params = JComponentHelper::getParams('com_einsatzkomponente');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

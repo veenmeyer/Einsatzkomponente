@@ -2,7 +2,7 @@
 <config>
 	
 <!--Bildereinstellungen-->
-<fieldset name="config"	description="" label="Bilder Einstellungen">
+<fieldset name="Bilder_Einstellungen"	label="Bilder Einstellungen">
 <!--<field name="note1" type="note" class="alert alert-info" label="LOREMIPSUM" description="LOREMIPSUM_DESC" />
 <field name="note11" type="note" label="LOREMIPSUM" />
 -->	
@@ -176,7 +176,7 @@
 	
 	
 <!--GMap-Einstellungen-->
-<fieldset name="component" label="Kartenfunktion" description="">
+<fieldset name="Kartenfunktion" label="Kartenfunktion" description="">
 
 <field name="note_kartenfunktion" 
 		type="note" 
@@ -199,7 +199,25 @@
 					<option
 						value="2">OpenStreetMap</option>
 				</field>
-	  
+				
+		<field
+			name="gmapkey"
+			type="text"
+			default ="AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"
+			label="Google Api-Key"
+			width ="100"
+			hint="GoogleMap Api-Key benötigt"
+			showon="gmap_action:1"
+			description="Google Api-Key"
+		 />
+		<field name="note_key_map" 
+			type="note" 
+			showon="gmap_action:1"
+			label="Bitte beantragen Sie hier einen eigenen Google-Api-Key:  https://console.developers.google.com" 
+			class="alert alert-warning" 
+			description=""
+		/>	
+		 
 <field name="note_detail_map" 
 		type="note" 
 		showon="gmap_action:1,2"
@@ -963,6 +981,19 @@
 				value="1">Anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_presse"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="Info zu Pressebericht :"
+			description="Funktion nur beim Menüpunkt Einsatzarchiv">
+			
+			<option
+				value="0">Ausblenden</option> 
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
 			name="display_home_image_nopic"
 			type="radio"
 			class="btn-group"
@@ -1662,7 +1693,7 @@
 		<field 	name="main_css" 
 				type="textarea" 
 				filter="raw" 
-				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,.eiko_einsatzarchiv_jahr_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_jahr_div {color:#ffffff !important;} .eiko_einsatzarchiv_monat_tr,.eiko_einsatzarchiv_monat_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_monat_div {color:#ffffff !important;}" 
+				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}" 
 				label="Einsatz-Übersicht" 
 				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
 				rows="10" 

@@ -408,7 +408,8 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		//this is the name of the field in the html form, filedata is the default name for swfupload
 		//so we will leave it as that
 		//$fieldName = 'Filedata';
- 
+		
+		ini_set('memory_limit', -1);
 		
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		$count_data=count($_FILES['data']['name']) ;  ######### count the data #####
@@ -612,7 +613,7 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	$image_resize = $params->get('image_resize', 'true');
     if ($image_resize === 'true'):
 	$newwidth = $params->get('image_resize_max_width', '800');
-	$newheight = $params->get('image_resize_max_width', '600');
+	$newheight = $params->get('image_resize_max_height', '600');
     list($width, $height) = getimagesize($source);
     if($width > $height && $newheight < $height){
         $newheight = $height / ($width / $newwidth);

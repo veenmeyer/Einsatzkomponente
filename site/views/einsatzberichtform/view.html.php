@@ -17,6 +17,7 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
     protected $item;
     protected $form;
     protected $params;
+	protected $copy;
     /**
      * Display the view
      */
@@ -25,7 +26,9 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
         
 		$app	= JFactory::getApplication();
         $user		= JFactory::getUser();
-        
+       
+	    $this->copy  = JFactory::getApplication()->input->getInt('copy','0');
+
         $this->state = $this->get('State');
         $this->item = $this->get('Data');
         $this->params = $app->getParams('com_einsatzkomponente');
@@ -65,12 +68,13 @@ document.onkeypress = stopRKey;
         
         if($this->_layout == 'edit') {
             
-            $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
+            $authorised = $user->authorise('core.edit', 'com_einsatzkomponente');
             if ($authorised !== true) {
                 throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
             }
         }
         
+ 
         $this->_prepareDocument();
         parent::display($tpl);
     }
