@@ -244,7 +244,7 @@ if ($this->params->get('display_home_pagination')) :
 				<!--<br /><button class="btn-home" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)">Kurzinfo</button>-->
 				<br />
 			   <?php if ($this->params->get('display_home_links','1')) : ?>
-				<!--<a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">Details</a>-->
+				<a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">Details</a>
 			   <?php endif;?>
 
 				<script type="text/javascript">
