@@ -1166,6 +1166,19 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
+		<field
+			name="display_einsatzdauer"
+			type="radio"
+			class="btn-group"
+			default="1"
+			description="Hier können Sie einstellen, ob die Einsatzdauer angezeigt werden soll. Die Dauer wird aus der Alarmierungszeit und dem Einsatzende errechnet und nur ausgegeben wenn das Einsatzende eingetragen ist.
+			Die Einsatzdauer wird in folgendem Format angegeben: dd Tag(e) hh Std. mm Min."
+			label="Einsatzdauer :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
 
 		<field name="navi_detail_pos" 
 	  		type="list" 
