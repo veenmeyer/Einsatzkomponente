@@ -100,6 +100,10 @@ echo '<span class="mobile_hide_320">'.$this->modulepos_2.'</span>';
             <th class="eiko_th_einsatzbild_main_1 mobile_hide_480" width="">Bild</th>
            <?php $col =$col+1;?>
            <?php endif;?>
+           <?php if ($this->params->get('display_home_presse')) : ?>
+            <th class="eiko_th_presse_main_1 mobile_hide_480" width="">Presselink</th>
+           <?php $col =$col+1;?>
+           <?php endif;?>
 		   <?php if ($this->params->get('display_home_counter','1')) : ?>
 		   <th class="eiko_th_counter mobile_hide_480" width="">Zugriffe</th>
 		   <?php $col =$col+1;?>
@@ -294,7 +298,15 @@ if ($this->params->get('display_home_pagination')) :
            <?php endif;?>
            <?php endif;?>
 		   
-           <?php if ($this->params->get('display_home_counter','1')) : ?>
+			<?php if ($this->params->get('display_home_presse','0')) : ?>
+				<td class="mobile_hide_480 mobile_hide_presse">
+					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
+					<?php echo '+Presselinks'; ?>
+					<?php endif;?>
+				</td>
+			<?php endif; ?>
+
+				<?php if ($this->params->get('display_home_counter','1')) : ?>
 		   <?php echo '<td class="mobile_hide_480 mobile_hide_counter"">';?>
 		   <?php echo $item->counter;?>
 		   <?php echo '</td>';?>

@@ -981,6 +981,19 @@
 				value="1">Anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_presse"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="Info zu Pressebericht :"
+			description="Funktion nur beim Menüpunkt Einsatzarchiv">
+			
+			<option
+				value="0">Ausblenden</option> 
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
 			name="display_home_image_nopic"
 			type="radio"
 			class="btn-group"

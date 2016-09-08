@@ -32,6 +32,7 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 		// Load state from the request userState on edit or from the passed variable on default
         if (JFactory::getApplication()->input->get('layout') == 'edit') {
             $id = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzbericht.id');
+
         } else {
             $id = JFactory::getApplication()->input->get('id');
             JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', $id);
@@ -205,7 +206,18 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
             JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
             return false;
         }
-        
+			
+			
+			// Einsatz kopieren
+			if($user->authorise('core.create', 'com_einsatzkomponente') == true){
+		    $copy = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzbericht.copy');
+        	if (!$copy == 0) :
+            JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', 0);
+            JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.copy', 0);
+            $data['id'] = 0;
+			endif; 
+			}
+
 		$app	= JFactory::getApplication();
 		$params = $app->getParams('com_einsatzkomponente');
         $table = $this->getTable();

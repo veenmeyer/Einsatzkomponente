@@ -216,15 +216,19 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					
 					if ($this->params->get('display_detail_fhz_links','1')) :
 					if (!$results[0]->link) :
+					$vehicles_list[] = '<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</li></a>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self"><img width="90px" style="margin-top:15px;"  src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>&nbsp;&nbsp;<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</span>';					
 					else:
+					$vehicles_list[] = '<li><a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</li></a>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
 					endif;
 					else:
 					
 					if ($results[0]->link) :
+					$vehicles_list[] = '<li><a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</a></li>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
 					else:
+					$vehicles_list[] = '<li>'.$results[0]->name.'</li>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" />&nbsp;&nbsp;'.$results[0]->name.'</span>';
 					endif;
 					endif;
@@ -232,15 +236,15 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					endforeach;
 				$this->item->vehicles = implode(', ',$data); 
 				$vehicles_images = implode(' ',$vehicles_images); 
-				$vehicles_list = implode('<br/>',$vehicles_list); ?>
+				$vehicles_list = implode(' ',$vehicles_list); ?>
             <?php endif;?>
             
             <?php if( $this->item->vehicles ) : ?>
 			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Fahrzeuge am Einsatzort:').'</u></span>'; ?>:
 			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
-			<?php echo '<br/><br/>'.$vehicles_images;?> 
+			<?php echo ''.$vehicles_images;?> 
             <?php else:?>
-			<?php echo '<br/><br/>'.$vehicles_list;?>	
+			<?php echo '<ul>'.$vehicles_list.'</ul>';?>	
             <?php endif;?>
             <?php endif;?>
 	</div>			            

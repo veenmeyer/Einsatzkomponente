@@ -46,7 +46,6 @@ if (!empty($this->extra_sidebar)) {
                
         
 			  <div class="btn-group btn-group-justified">
-						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzberichte">
 		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/liste.png" /><br/>
 		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?></span>

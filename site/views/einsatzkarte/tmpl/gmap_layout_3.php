@@ -18,7 +18,7 @@ JHtml::_('behavior.framework', true);
 print_r ($this->reports);
 
 ?>
-<script type="text/javascript" src="https://maps.google.com/maps/api/js"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
 
 <style type="text/css">
 html, body { height: 100%; } 

@@ -684,6 +684,10 @@ return $gmap; }
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
     $navbar .='<strong>Editieren</strong></a>';
 	endif;
+	if ($user->id == $result OR JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente')) :
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id.'&copy=1').'" class=" btn eiko_btn_2">';
+    $navbar .='<strong>Kopieren</strong></a>';
+	endif;
     endif;
 	
 	$navbar .='</div>';

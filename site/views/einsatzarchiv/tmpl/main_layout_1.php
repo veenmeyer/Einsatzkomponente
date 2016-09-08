@@ -52,6 +52,13 @@ defined('_JEXEC') or die;
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>
 				</th> 
 				<?php endif; ?>
+				
+				<?php if ($this->params->get('display_home_presse','0') ) : ?>
+				<th class='left'>
+				<?php echo 'Pressebericht'; ?>
+				</th>
+				<?php endif;?>
+				
 		<!--		<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_VEHICLES', 'a.vehicles', $listDirn, $listOrder); ?>
 				</th> -->
@@ -220,7 +227,15 @@ defined('_JEXEC') or die;
 		   <td nowrap class="eiko_td_organisationen_main_1 mobile_hide_480"> <?php echo $auswahl_orga;?></td>
            <?php endif;?>
 		   
-		<!--		<td>
+				<?php if ($this->params->get('display_home_presse','0')) : ?>
+				<td class="mobile_hide_480 ">
+					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
+					<?php echo '+Presselinks'; ?>
+					<?php endif;?>
+				</td>
+				<?php endif; ?>
+
+				<!--		<td>
 
 					<?php echo $item->vehicles; ?>
 				</td> -->
@@ -306,6 +321,28 @@ defined('_JEXEC') or die;
     <?php echo JHtml::_('form.token'); ?>
 </form>
 
+
+
+    <?php if ($this->params->get('display_home_map')) : ?>
+    <tr><td colspan="<?php echo $col;?>" class="eiko_td_gmap_main_1">
+    <h4>Einsatzgebiet</h4>
+			<?php if ($this->params->get('gmap_action','0') == '1') :?>
+  			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+			</div>
+            <?php endif;?>
+			<?php if ($this->params->get('gmap_action','0') == '2') :?>
+<body onLoad="drawmap();">
+				<!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
+				<div id="description" class="">Einsatzkarte</div>-->
+   				<div id="map" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;"></div> 
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+            <?php endif;?>
+            </td></tr>
+    <?php endif;?>
+	
+
+	
 <?php echo '<span class="mobile_hide_320">'.$this->modulepos_1.'</span>'; ?>
 
 
