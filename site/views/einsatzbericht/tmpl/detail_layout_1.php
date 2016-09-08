@@ -144,6 +144,47 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
               <td class="eiko_td2_2"><span class="eiko_date3_value_2"><?php echo date("H:i", strtotime($this->item->date3)).' Uhr'; ?></span></td>
             </tr>
             <?php endif;?>
+            
+            <?php if ($this->params->get('display_einsatzdauer','1') && ($this->item->date3>1) ): ?>
+				<tr class="mobile_hide_320">
+	              <td class="eiko_td1_2 mobile_hide_320">
+	              	<span class="eiko_einsatzdauer_label_2">
+				  		<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
+	              	</span>
+	              </td>
+	              <td class="eiko_td1_2">
+	              	<span class="eiko_einsatzdauer_value_2">
+
+	              	<?php
+						$diff =  strtotime($this->item->date3)- strtotime($this->item->date1);
+			            $diff = $diff/60;
+
+			            if($diff<60):
+			            	if($diff == 0): echo '0 Min.';
+			            	else: echo $diff.' Min.';
+			            	endif;
+
+			            else:
+			            	$diffDate = strtotime($this->item->date3)- strtotime($this->item->date1);
+							$days = floor($diffDate / 24 / 60 / 60 ); // Anzahl Tage = Sekunden /24/60/60
+							$diffDate = $diffDate - ($days*24*60*60); // den verbleibenden Rest berechnen = Stunden
+							$hours = floor($diffDate / 60 / 60); // den Stundenanteil herausrechnen
+							$diffDate = ($diffDate - ($hours*60*60));
+							$minutes = floor($diffDate/60); // den Minutenanteil
+							$diffDate = $diffDate - ($minutes*60);
+							$seconds = floor($diffDate); // die verbleibenden Sekunden
+
+							if($days>0): echo $days.' Tag(e) ' . $hours.' Std. '.$minutes.' Min.';
+							else: echo $hours.' Std. '.$minutes.' Min.';
+							endif;
+			            endif;
+					?>
+
+	              	</span>
+	              </td>
+	            </tr>
+		<?php endif;?>
+            
             <?php if( $this->item->alerting) : ?>
             <tr class="mobile_hide_320">
               <td class="eiko_td1_2 mobile_hide_320"><span class="eiko_alarmart_label_2">
