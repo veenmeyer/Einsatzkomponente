@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	
+
 <!--Bildereinstellungen-->
 <fieldset name="Bilder_Einstellungen"	label="Bilder Einstellungen">
 <!--<field name="note1" type="note" class="alert alert-info" label="LOREMIPSUM" description="LOREMIPSUM_DESC" />
 <field name="note11" type="note" label="LOREMIPSUM" />
--->	
+-->
 
-<field name="note_uploadpath" 
-		type="note" 
-		label="Speicherort der Einsatzbilder :" 
-		class="alert alert-info" 
+<field name="note_uploadpath"
+		type="note"
+		label="Speicherort der Einsatzbilder :"
+		class="alert alert-info"
 		description="Bitte gebe hier an, in welchem Ordner die Einsatzbilder gespeichert werden sollen. Empfohlen wird : images/com_einsatzkomponente/einsatzbilder"
 		/>
-		
 
-			<field name="uploadpath" 
-					type="text" 
-					default="images/com_einsatzkomponente/einsatzbilder" 
-					label="Ordnerpfad für Einsatzbilder :" 
-					description="z.b. images/com_einsatzkomponente/einsatzbilder" 
+
+			<field name="uploadpath"
+					type="text"
+					default="images/com_einsatzkomponente/einsatzbilder"
+					label="Ordnerpfad für Einsatzbilder :"
+					description="z.b. images/com_einsatzkomponente/einsatzbilder"
 					/>
-					
+
 	  		<field
 				name="new_dir"
 				type="radio"
@@ -52,21 +52,21 @@
 			type="spacer"
 			hr="true"
 		/>
-<field name="note_thumbs" 
-		type="note" 
-		label="Einstellungen für die Thumbserstellung :" 
-		class="alert alert-info" 
+<field name="note_thumbs"
+		type="note"
+		label="Einstellungen für die Thumbserstellung :"
+		class="alert alert-info"
 		description="Aus den Einsatzbildern werden für die Einsatzübersicht sogenannte Thumbs (kleine Bider) erstellt, damit die Seite auch bei vielen Einsätzen mit Bildern schneller geladen werden kann."
-		/>	
-			<field name="thumbwidth" 
-			type="text" default="100" 
-			label="Thumbs-Breite(px):" 
-			description="Bitte nur so angeben : z.b. 100  ohne px !!" 
+		/>
+			<field name="thumbwidth"
+			type="text" default="100"
+			label="Thumbs-Breite(px):"
+			description="Bitte nur so angeben : z.b. 100  ohne px !!"
 			/>
-			<field name="thumbhigh" 
-			type="text" default="100" 
-			label="Thumbs-Höhe (px):" 
-			description="Bitte nur so angeben : z.b. 100  ohne px !!" 
+			<field name="thumbhigh"
+			type="text" default="100"
+			label="Thumbs-Höhe (px):"
+			description="Bitte nur so angeben : z.b. 100  ohne px !!"
 			/>
 			<field
 			name="quadratisch"
@@ -85,12 +85,12 @@
 			type="spacer"
 			hr="true"
 		/>
-<field name="note_resize" 
-		type="note" 
-		label="Einstellungen für die Resizefunktion :" 
-		class="alert alert-info" 
+<field name="note_resize"
+		type="note"
+		label="Einstellungen für die Resizefunktion :"
+		class="alert alert-info"
 		description="Sehr hilfreich, wenn die Einsatzbilder zu groß sind ..."
-		/>	
+		/>
 			<field
 			name="image_resize"
 			type="radio"
@@ -98,38 +98,38 @@
 			default="true"
 			label="Resize-Funktion :"
 			description="">
-			
+
 			<option
 				value="false">Aus</option>
 			<option
 				value="true">An</option>
 			</field>
-			<field name="image_resize_max_width" 
-				type="text" 
+			<field name="image_resize_max_width"
+				type="text"
 				showon="image_resize:true"
-				default="800" 
-				label="max. Breite (px) :" 
-				description="Bitte nur so angeben : z.b. 800  ohne px !!" 
+				default="800"
+				label="max. Breite (px) :"
+				description="Bitte nur so angeben : z.b. 800  ohne px !!"
 			/>
-			<field name="image_resize_max_height" 
-				type="text" 	
+			<field name="image_resize_max_height"
+				type="text"
 				showon="image_resize:true"
-				default="600" 
-				label="max. Höhe (px) :" 
-				description="Bitte nur so angeben : z.b. 600  ohne px !!" 
+				default="600"
+				label="max. Höhe (px) :"
+				description="Bitte nur so angeben : z.b. 600  ohne px !!"
 			/>
 			<field
 			name="spacer5"
 			type="spacer"
 			hr="true"
 		/>
-		
-<field name="note_watermark" 
-		type="note" 
-		label="Einstellungen für die Wasserzeichenfunktion :" 
-		class="alert alert-info" 
+
+<field name="note_watermark"
+		type="note"
+		label="Einstellungen für die Wasserzeichenfunktion :"
+		class="alert alert-info"
 		description="Diese Funktion ermöglicht die automatische Integration eines Wasserzeichens. Sie können auch eigene Wasserzeichen hinzufügen, einfach eine PNG-Datei in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkomponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!"
-		/>	
+		/>
 			<field
 			name="watermark_show"
 			type="radio"
@@ -137,53 +137,53 @@
 			default="true"
 			label="Wasserzeichen-Funktion :"
 			description="">
-			
+
 			<option
 				value="false">Aus</option>
 			<option
 				value="true">An</option>
 			</field>
-			
-			<field name="watermark_image" 
-			type="imagelist" 
+
+			<field name="watermark_image"
+			type="imagelist"
 			showon="watermark_show:true"
-			default="watermark.png" label="Wasserzeichen wählen :" 
-			description="Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-			directory="administrator/components/com_einsatzkomponente/assets/images/watermark" 
-			exclude="index.html" 
-			hide_default="true" 
-			hide_none="true" 
-			stripext="" 
+			default="watermark.png" label="Wasserzeichen wählen :"
+			description="Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!"
+			directory="administrator/components/com_einsatzkomponente/assets/images/watermark"
+			exclude="index.html"
+			hide_default="true"
+			hide_none="true"
+			stripext=""
 			/>
-			
-			<field name="watermark_pos_x" 
-			type="text" 
+
+			<field name="watermark_pos_x"
+			type="text"
 			showon="watermark_show:true"
-			default="0" 
-			label="Abstand x (vom li. Rand) :" 
-			description="Bitte nur so angeben : z.b. 5  ohne px !!" 
+			default="0"
+			label="Abstand x (vom li. Rand) :"
+			description="Bitte nur so angeben : z.b. 5  ohne px !!"
 			/>
-			
-			<field name="watermark_pos_y" 
-			type="text" 
+
+			<field name="watermark_pos_y"
+			type="text"
 			showon="watermark_show:true"
-			default="60" 
-			label="Abstand y (vom unt. Rand) :" 
-			description="Bitte nur so angeben : z.b. 60  ohne px !!" 
+			default="60"
+			label="Abstand y (vom unt. Rand) :"
+			description="Bitte nur so angeben : z.b. 60  ohne px !!"
 			/>
 
 </fieldset>
-	
-	
+
+
 <!--GMap-Einstellungen-->
 <fieldset name="Kartenfunktion" label="Kartenfunktion" description="">
 
-<field name="note_kartenfunktion" 
-		type="note" 
-		label="Kartenfunktionen :" 
-		class="alert alert-info" 
+<field name="note_kartenfunktion"
+		type="note"
+		label="Kartenfunktionen :"
+		class="alert alert-info"
 		description="Über diese Option können Sie die Kartenanzeige aktivieren, oder aber auch komplett deaktivieren."
-		/>	
+		/>
 
 				<field
 					name="gmap_action"
@@ -199,7 +199,7 @@
 					<option
 						value="2">OpenStreetMap</option>
 				</field>
-				
+
 		<field
 			name="gmapkey"
 			type="text"
@@ -210,23 +210,23 @@
 			showon="gmap_action:1"
 			description="Google Api-Key"
 		 />
-		<field name="note_key_map" 
-			type="note" 
+		<field name="note_key_map"
+			type="note"
 			showon="gmap_action:1"
-			label="Bitte beantragen Sie hier einen eigenen Google-Api-Key:  https://console.developers.google.com" 
-			class="alert alert-warning" 
+			label="Bitte beantragen Sie hier einen eigenen Google-Api-Key:  https://console.developers.google.com"
+			class="alert alert-warning"
 			description=""
-		/>	
-		 
-<field name="note_detail_map" 
-		type="note" 
+		/>
+
+<field name="note_detail_map"
+		type="note"
 		showon="gmap_action:1,2"
-		label="Hier können Sie verschiedene Einstellungen für die Einsatzkarte vornehmen :" 
-		class="alert alert-info" 
+		label="Hier können Sie verschiedene Einstellungen für die Einsatzkarte vornehmen :"
+		class="alert alert-info"
 		description=""
-		/>	
-			
-				
+		/>
+
+
 			<field
 				name="detail_gmap_onload"
 				type="list"
@@ -239,19 +239,19 @@
       	   			<option value="HYBRID">Hybridkarte (Satellit+Ortsnamen)</option>
            			<option value="SATELLITE">Satellitenkarte</option>
 	  		</field>
-			
 
-			<!--<field name="detail_pointer1_image" 
-				type="imagelist" 
-				default="circle.png" label="Einsatz-Icon wählen :" 
-				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-				directory="images/com_einsatzkomponente/images/map/icons/" 
-				exclude="index.html" 
-				hide_default="true" 
-				hide_none="true" 
-				stripext="" 
+
+			<!--<field name="detail_pointer1_image"
+				type="imagelist"
+				default="circle.png" label="Einsatz-Icon wählen :"
+				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!"
+				directory="images/com_einsatzkomponente/images/map/icons/"
+				exclude="index.html"
+				hide_default="true"
+				hide_none="true"
+				stripext=""
 			/>-->
-			
+
 	  		<field
 				name="display_detail_organisationen"
 				type="radio"
@@ -265,17 +265,17 @@
 					<option
 						value="1">Anzeigen</option>
 	  		</field>
-			
-			<field name="einsatzkarte_orga_image" 
-				type="imagelist" 
+
+			<field name="einsatzkarte_orga_image"
+				type="imagelist"
 				showon="gmap_action:1,2"
-				default="haus_rot.png" label="Orga-Icon wählen :" 
-				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-				directory="images/com_einsatzkomponente/images/map/icons/" 
-				exclude="index.html" 
-				hide_default="true" 
-				hide_none="true" 
-				stripext="" 
+				default="haus_rot.png" label="Orga-Icon wählen :"
+				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!"
+				directory="images/com_einsatzkomponente/images/map/icons/"
+				exclude="index.html"
+				hide_default="true"
+				hide_none="true"
+				stripext=""
 			/>
 	  <field
 			name="einsatzkarte_gmap_icon"
@@ -324,33 +324,33 @@
 					<option
 						value="true">Anzeigen</option>
 	  		</field>
-<field name="note_geocode" 
-		type="note" 
+<field name="note_geocode"
+		type="note"
 		showon="gmap_action:1,2"
-		label="Hier können Sie einen Ort festlegen, der bei der Geocode-Suche berücksichtigt wird :" 
-		class="alert alert-info" 
+		label="Hier können Sie einen Ort festlegen, der bei der Geocode-Suche berücksichtigt wird :"
+		class="alert alert-info"
 		description=""
-		/>	
-			<field name="ort_geocode" 
-				type="text" 
+		/>
+			<field name="ort_geocode"
+				type="text"
 				showon="gmap_action:1,2"
-				default="" 
-				label="Ort oder Postleitzahl :" 
-				description="Es kann dann allerdings nicht in einem anderem Ort mehr gesucht werden !" 
+				default=""
+				label="Ort oder Postleitzahl :"
+				description="Es kann dann allerdings nicht in einem anderem Ort mehr gesucht werden !"
 			/>
 </fieldset>
-	
+
 <!--Weiterleitungen-->
 <fieldset name="weiterleitung" label="Weiterleitung" description="">
-		
 
 
-<field name="note_mail" 
-		type="note" 
-		label="Einstellungen für die Email-Weiterleitung :" 
-		class="alert alert-info" 
+
+<field name="note_mail"
+		type="note"
+		label="Einstellungen für die Email-Weiterleitung :"
+		class="alert alert-info"
 		description="Hier können Sie Einstellungen für die Email-Funktion vornehmen."
-		/>	
+		/>
 		<field
 			name="send_mail_backend"
 			type="radio"
@@ -363,13 +363,13 @@
 			<option
 				value="1">Ja</option>
 		</field>
-		<field name="mail_empfaenger" 
+		<field name="mail_empfaenger"
 			type="text"
 			showon="send_mail_backend:1"
-			default="" 
-			hint="max.mustermann@host.de,presse@presse.net" 
-			label="Emailadressen (manuell)" 
-			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
+			default=""
+			hint="max.mustermann@host.de,presse@presse.net"
+			label="Emailadressen (manuell)"
+			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen."
 			/>
 		<field
 			name="send_mail_auto"
@@ -383,16 +383,16 @@
 			<option
 				value="1">Ja</option>
 		</field>
-		
-		<field name="mail_empfaenger_auto" 
-			type="text" 
+
+		<field name="mail_empfaenger_auto"
+			type="text"
 			showon="send_mail_auto:1"
-			default="" 
-			hint="max.mustermann@host.de,presse@presse.net" 
-			label="Emailadressen (auto)" 
-			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
+			default=""
+			hint="max.mustermann@host.de,presse@presse.net"
+			label="Emailadressen (auto)"
+			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen."
 			/>
-			
+
 		<field
 			name="send_mail_orga"
 			type="radio"
@@ -454,13 +454,13 @@
 				value="1">Anzeigen</option>
 		</field>
 
-<field name="note_social" 
-		type="note" 
-		label="Einstellungen für die sozialen Netzwerke :" 
-		class="alert alert-info" 
+<field name="note_social"
+		type="note"
+		label="Einstellungen für die sozialen Netzwerke :"
+		class="alert alert-info"
 		description="Entscheiden Sie selber, ob diese Buttons auf den Detailanischten angegzeigt werden sollen. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung der Buttons hinzuweisen."
-		/>	
-		
+		/>
+
 		<field
 			name="show_twitter"
 			type="radio"
@@ -473,14 +473,14 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
-			<field 
-				name="twitter_via" 
-				type="text" 
+			<field
+				name="twitter_via"
+				type="text"
 				showon ="show_twitter:1"
-				default="" 
-				label="Twittern VIA :" 
-				description="Geben Sie hier Ihren Twitter-Benutzernamen an, falls vorhanden." 
-				size="30" 
+				default=""
+				label="Twittern VIA :"
+				description="Geben Sie hier Ihren Twitter-Benutzernamen an, falls vorhanden."
+				size="30"
 				/>
 		<field
 			name="show_gplus"
@@ -506,14 +506,14 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
-	  <field name="show_socialbar" 
-	  		type="list" 
-			default="left" 
-			label="Position Socialbuttons :" 
+	  <field name="show_socialbar"
+	  		type="list"
+			default="left"
+			label="Position Socialbuttons :"
 			description="Position der Social-Buttons in der Detailansicht festlegen.">
-				<option 
+				<option
 					value="left">Links</option>
-				<option 	
+				<option
 					value="right">Rechts</option>
 	  </field>
 		<field
@@ -521,12 +521,12 @@
 			type="spacer"
 			hr="true"
 		/>
-<field name="note_rss" 
-		type="note" 
-		label="Einsatzberichte als RSS-Feed zur Verfügung stellen :" 
-		class="alert alert-info" 
+<field name="note_rss"
+		type="note"
+		label="Einsatzberichte als RSS-Feed zur Verfügung stellen :"
+		class="alert alert-info"
 		description="Über diese Option können Sie einstellen, ob Ihre Einsatzberichte als RSS-Feed auf Ihrer Seite zur Verfügung stehen sollen."
-		/>	
+		/>
 			<field
 				name="display_home_rss"
 				type="radio"
@@ -539,23 +539,23 @@
 					<option
 						value="1">An</option>
 			</field>
-		
-			<field name="rss_chars" 
-				type="text" 
+
+			<field name="rss_chars"
+				type="text"
 				showon ="display_home_rss:1"
-				default="1000" 
-				label="Textlänge :" 
-				description="Geben Sie hier an, wieviele Buchstaben der Text des RSS-Feeds anthalten soll." 
-				size="10" 
+				default="1000"
+				label="Textlänge :"
+				description="Geben Sie hier an, wieviele Buchstaben der Text des RSS-Feeds anthalten soll."
+				size="10"
 				/>
-			<field 
-				name="rss_items" 
-				type="text" 
+			<field
+				name="rss_items"
+				type="text"
 				showon ="display_home_rss:1"
-				default="10" 
-				label="Feed-Anzahl :" 
-				description="Geben Sie hier an, wieviele Einsatzberichte im Feed angezeigt werden sollen." 
-				size="10" 
+				default="10"
+				label="Feed-Anzahl :"
+				description="Geben Sie hier an, wieviele Einsatzberichte im Feed angezeigt werden sollen."
+				size="10"
 				/>
 			<field
 				name="display_rss_image"
@@ -570,33 +570,33 @@
 					<option
 						value="1">An</option>
 			</field>
-		
-			<field name="rss_image_width" 
-				type="text" 
+
+			<field name="rss_image_width"
+				type="text"
 				showon ="display_home_rss:1"
-				default="150px" 
-				label="Bildbreite :" 
-				description="Bitte nur so angeben : z.b. 150 px oder z.b. 80% !!" 
+				default="150px"
+				label="Bildbreite :"
+				description="Bitte nur so angeben : z.b. 150 px oder z.b. 80% !!"
 				/>
-			<field 
-				name="rss_image_height" 	
-				type="text" 
+			<field
+				name="rss_image_height"
+				type="text"
 				showon ="display_home_rss:1"
-				default="" 
-				label="Bildhöhe :" 	
-				description="Bitte nur so angeben : z.b. 200 px oder am besten ganz fehlen lassen !!" 
+				default=""
+				label="Bildhöhe :"
+				description="Bitte nur so angeben : z.b. 200 px oder am besten ganz fehlen lassen !!"
 				/>
 		<field
 			name="spacer2"
 			type="spacer"
 			hr="true"
 		/>
-<field name="note_info112" 
-		type="note" 
-		label="Einsatzberichte an Info-Seiten weiterleiten :" 
-		class="alert alert-info" 
+<field name="note_info112"
+		type="note"
+		label="Einsatzberichte an Info-Seiten weiterleiten :"
+		class="alert alert-info"
 		description="Über diese Option können Sie einstellen, ob Ihre Einsatzberichte an Info-Seiten über eine API-Schnittstelle weitergeleitet werden sollen. (Diese Funktion steht zur Zeit nicht zur Verfügung, da es zur Zeit keine Partner für die Schnittstelle gibt.)"
-		/>	
+		/>
 
 				<field
 					name="info112"
@@ -623,25 +623,25 @@
 						<option
 						value="1">JYES</option>
 				</field>
-		
-				<field name="info112_user" 
-						type="text" 
+
+				<field name="info112_user"
+						type="text"
 						showon ="info112:1"
-						default="" 
-						label="Benutzername :" 
-						description="Benutzername bei Info112.net" 
-						size="20" 
+						default=""
+						label="Benutzername :"
+						description="Benutzername bei Info112.net"
+						size="20"
 				/>
-				<field 
-						name="info112_api" 
-						type="text" 
+				<field
+						name="info112_api"
+						type="text"
 						showon ="info112:1"
-						default="" 
-						label="Api-Key :" 
-						description="Api-Key bei Info112.net" 
-						size="20" 
+						default=""
+						label="Api-Key :"
+						description="Api-Key bei Info112.net"
+						size="20"
 						/>
-		
+
 	</fieldset>
 
 
@@ -649,22 +649,22 @@
 
 <fieldset name="einsatzübersicht" label="Einsatzübersicht" description="">
 
-<field name="note_einsatzuebersicht" 
-		type="note" 
-		label="Hier können Sie Ihre Einsatzübersicht anpassen :" 
-		class="alert alert-info" 
+<field name="note_einsatzuebersicht"
+		type="note"
+		label="Hier können Sie Ihre Einsatzübersicht anpassen :"
+		class="alert alert-info"
 		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
-		/>	
-		
-	<field 
-		name="homelink" 
-		type="menuitem" 
-		default="" 
-		label="Menüeintrag für die Einsatzübersicht" 
-		description="" 
+		/>
+
+	<field
+		name="homelink"
+		type="menuitem"
+		default=""
+		label="Menüeintrag für die Einsatzübersicht"
+		description=""
 	/>
-		
-	
+
+
 	  <field
 			name="display_home_bootstrap"
 			type="radio"
@@ -672,7 +672,7 @@
 			default="0"
 			label="Bootstrap CSS+JS :"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
+
 			<option
 				value="0">JNO</option>
 			<option
@@ -683,7 +683,7 @@
 			type="spacer"
 			hr="true"
 		/>
-		
+
 	  <!--<field
 			name="limit"
 			type="radio"
@@ -700,7 +700,7 @@
 			<option	value="50">50</option>
 			<option	value="100">100</option>
 	  </field> -->
-	  
+
 	  <field
 			name="display_home_map"
 			type="radio"
@@ -714,7 +714,7 @@
 			<option
 				value="1">Anzeigen</option>
 	  </field>
-	  
+
 	  <field
 			name="display_home_einsatzgebiet"
 			type="radio"
@@ -728,12 +728,12 @@
 			<option
 				value="1">Anzeigen</option>
 	  </field>
-			<field name="home_map_height" 
-				type="text" 
+			<field name="home_map_height"
+				type="text"
 			showon="gmap_action:1,2"
-				default="250px" 
-				label="Höhe der Karte :" 
-				description="Bitte nur so angeben : z.b. 250px !!" 
+				default="250px"
+				label="Höhe der Karte :"
+				description="Bitte nur so angeben : z.b. 250px !!"
 			/>
 	  <field
 			name="display_home_organisationen"
@@ -760,7 +760,7 @@
 			default="1"
 			label="Filter nach Jahren :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -774,7 +774,7 @@
 			default="1"
 			label="Filter nach Einsatzarten :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -788,7 +788,7 @@
 			default="1"
 			label="Filter nach Organisation :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -806,7 +806,7 @@
 			default="1"
 			label="Einsatznummern :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -819,7 +819,7 @@
 			default="0"
 			label="Alarmierungsart :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -832,7 +832,7 @@
 			default="0"
 			label="Alarmierungsart :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -845,7 +845,7 @@
 			default="1"
 			label="Einsatzartfarbe :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -858,7 +858,7 @@
 			default="1"
 			label="Datumsanzeige :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Datum (Text)</option>
 			<option
@@ -875,7 +875,7 @@
 			default="1"
 			label="Monatsnamen (als Trennung) :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -888,7 +888,7 @@
 			default="1"
 			label="Jahr (als Trennung) :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -902,18 +902,18 @@
 			default="1"
 			label="Einsatzart-Icon :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
 				value="1">Anzeigen</option>
 	  </field>
-	  <field 
-		  name="float_list_icon" 
-		  type="list" 
+	  <field
+		  name="float_list_icon"
+		  type="list"
 		  showon ="display_list_icon:1"
-		  default="right" 
-		  label="Position Einsatzart-Icon :" 
+		  default="right"
+		  label="Position Einsatzart-Icon :"
 		  description="Funktion nur beim Standard-Layout">
 		<option value="left">Links</option>
 		<option value="right">Rechts</option>
@@ -925,18 +925,18 @@
 			default="0"
 			label="Einsatzkateg.-Icon :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
 				value="1">Anzeigen</option>
 	  </field>
-	  <field 
-		  name="float_tickerkat_icon" 
-		  type="list" 
+	  <field
+		  name="float_tickerkat_icon"
+		  type="list"
 		  showon ="display_tickerkat_icon:1"
-		  default="right" 
-		  label="Position Einsatzkateg.-Icon :" 
+		  default="right"
+		  label="Position Einsatzkateg.-Icon :"
 		  description="Funktion nur beim Standard-Layout">
 		<option value="left">Links</option>
 		<option value="right">Rechts</option>
@@ -948,7 +948,7 @@
 			default="1"
 			label="Einsatzbild :"
 			description="Funktion nur beim Standard-Layout und Layout1">
-			
+
 			<option
 				value="0">Ausblenden</option>
 			<option
@@ -961,7 +961,7 @@
 			default="1"
 			label="Zugriffe :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -974,9 +974,9 @@
 			default="0"
 			label="Organisationen :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
-				value="0">Ausblenden</option> 
+				value="0">Ausblenden</option>
 			<option
 				value="1">Anzeigen</option>
 	  </field>
@@ -987,9 +987,9 @@
 			default="0"
 			label="Info zu Pressebericht :"
 			description="Funktion nur beim Menüpunkt Einsatzarchiv">
-			
+
 			<option
-				value="0">Ausblenden</option> 
+				value="0">Ausblenden</option>
 			<option
 				value="1">Anzeigen</option>
 	  </field>
@@ -1000,16 +1000,16 @@
 			default="0"
 			label="Ersatzbild :"
 			description="Zeigt ein Ersatzbild an, wenn kein Foto vorhanden ist. (Pfad: ../images/com_einsatzkomponente/einsatzbilder/nopic.png). Funktion nur beim Standard-Layout und Layout1">
-			
+
 			<option
 				value="0">Nein</option>
 			<option
 				value="1">Ja</option>
 	  </field>
-			<field name="display_home_image_width" 
-			type="text" default="80px" 
-			label="Bildbreite :" 
-			description="Bitte nur so angeben : z.b. 80px !!" 
+			<field name="display_home_image_width"
+			type="text" default="80px"
+			label="Bildbreite :"
+			description="Bitte nur so angeben : z.b. 80px !!"
 			/>
 		<field
 			name="spacer9"
@@ -1023,7 +1023,7 @@
 			default="1"
 			label="Link zum Detailbericht :"
 			description="Funktion nur beim Standard-Layout und Layout1">
-			
+
 			<option
 				value="0">Ausblenden</option>
 			<option
@@ -1037,7 +1037,7 @@
 			default="1"
 			label="Link zum Detailbericht auf Einsatzart :"
 			description="Funktion nur beim Standard-Layout und Layout1">
-			
+
 			<option
 				value="0">Nein</option>
 			<option
@@ -1050,7 +1050,7 @@
 			default="1"
 			label="Link zur JQuery-Kurzinfo :"
 			description="Funktion nur beim Standard-Layout">
-			
+
 			<option
 				value="0">Ausblenden</option>
 			<option
@@ -1068,7 +1068,7 @@
 			default="1"
 			label="Pagination :"
 			description="Funktion nur beim Standard-Layout und Layout1">
-			
+
 			<option
 				value="0">Aus</option>
 			<option
@@ -1078,13 +1078,13 @@
 
 <!--Detailansicht-->
 <fieldset name="detailansicht" label="Detailansicht" description="">
-<field name="note_detailansicht" 
-		type="note" 
-		label="Hier können Sie Ihre Detailansicht anpassen :" 
-		class="alert alert-info" 
+<field name="note_detailansicht"
+		type="note"
+		label="Hier können Sie Ihre Detailansicht anpassen :"
+		class="alert alert-info"
 		description=""
-		/>	
-	
+		/>
+
 	  <field
 			name="display_detail_bootstrap"
 			type="radio"
@@ -1092,7 +1092,7 @@
 			default="0"
 			label="Bootstrap CSS+JS :"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden.(Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
+
 			<option
 				value="0">JNO</option>
 			<option
@@ -1103,7 +1103,7 @@
 			type="spacer"
 			hr="true"
 		/>
-		
+
 	  <field
 			name="display_detail_tickerkat"
 			type="radio"
@@ -1128,7 +1128,7 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
-		
+
 	  <field
 			name="display_detail_einsatzart"
 			type="radio"
@@ -1153,7 +1153,7 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
-		
+
 	  <field
 			name="display_alertingtime"
 			type="radio"
@@ -1166,15 +1166,29 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
+		<field
+			name="display_einsatzdauer"
+			type="radio"
+			class="btn-group"
+			default="1"
+			description="Hier können Sie einstellen, ob die Einsatzdauer angezeigt werden soll. Die Dauer wird aus der Alarmierungszeit und dem Einsatzende errechnet und nur ausgegeben wenn das Einsatzende eingetragen ist.
+			Die Einsatzdauer wird in folgendem Format angegeben: dd Tag(e) hh Std. mm Min."
+			label="Einsatzdauer :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
 
-		<field name="navi_detail_pos" 
-	  		type="list" 
-			default="left" 
-			label="Position Navigation :" 
+
+		<field name="navi_detail_pos"
+	  		type="list"
+			default="left"
+			label="Position Navigation :"
 			description="Position der Navigations-Button der Detailansicht festlegen.">
-				<option 
+				<option
 					value="left">Links</option>
-				<option 	
+				<option
 					value="right">Rechts</option>
 	  </field>
 	  <field
@@ -1201,13 +1215,13 @@
 			default="1"
 			label="Organisationen :"
 			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Layout1)">
-			
+
 			<option
 				value="0">mit Link (nur extern)</option>
 			<option
 				value="1">mit Link (intern+extern)</option>
 	  </field>
-	  
+
 	  <field
 			name="display_detail_fhz_links"
 			type="radio"
@@ -1215,13 +1229,13 @@
 			default="1"
 			label="Fahrzeuge :"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Layout1)">
-			
+
 			<option
 				value="0">mit Link (nur extern)</option>
 			<option
 				value="1">mit Link (intern+extern)</option>
 	  </field>
-	  
+
 	  <field
 			name="display_detail_fhz_images"
 			type="radio"
@@ -1229,7 +1243,7 @@
 			default="1"
 			label="Fahrzeuge-Bilder :"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge auch als Bild dargestellt werden sollen. (nur im Layout2)">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -1242,7 +1256,7 @@
 			default="1"
 			label="Ausrüstung :"
 			description="Hier können Sie einstellen, ob die eingesetzte Ausrüstung angezeigt werden soll.">
-			
+
 			<option
 				value="0">Verbergen</option>
 			<option
@@ -1253,13 +1267,13 @@
 			type="spacer"
 			hr="true"
 		/>
-		
-			<field name="detail_thumbwidth" 
-			type="text" default="100px" 
-			label="Thumbs-Breite (Galerie):" 
-			description="Thumbsbreite der Bildergallerie. z.b. 100px !!" 
+
+			<field name="detail_thumbwidth"
+			type="text" default="100px"
+			label="Thumbs-Breite (Galerie):"
+			description="Thumbsbreite der Bildergallerie. z.b. 100px !!"
 			/>
-			
+
 
 		<field
 			name="spacer13"
@@ -1279,22 +1293,22 @@
 					<option
 						value="1">öffentlich</option>
 	  		</field>
-			<field 
-				name="detail_gmap_zoom_level" 
-				type="integer" 
+			<field
+				name="detail_gmap_zoom_level"
+				type="integer"
 				showon="gmap_action:1,2"
-				default="12" 
-				label="Zoom-Level" 
-				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
-				first="1" 
-				last="18" 
+				default="12"
+				label="Zoom-Level"
+				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12"
+				first="1"
+				last="18"
 				step="1" />
-			<field name="detail_map_height" 
-				type="text" 	
+			<field name="detail_map_height"
+				type="text"
 				showon="gmap_action:1,2"
-				default="250px" 
-				label="Höhe der Karte (Detailansicht) :" 
-				description="Bitte nur so angeben : z.b. 250px !!" 
+				default="250px"
+				label="Höhe der Karte (Detailansicht) :"
+				description="Bitte nur so angeben : z.b. 250px !!"
 			/>
 	  		<field
 				name="display_detail_einsatz_marker"
@@ -1336,13 +1350,13 @@
 						value="1">Anzeigen</option>
 	  		</field>
 
-<field name="note_detail_map" 
-		type="note" 
+<field name="note_detail_map"
+		type="note"
 		showon="gmap_action:1,2"
-		label="Um weitere Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
-		class="alert alert-warning" 
+		label="Um weitere Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus."
+		class="alert alert-warning"
 		description=""
-		/>	
+		/>
 		<field
 			name="spacer546547"
 			type="spacer"
@@ -1356,7 +1370,7 @@
 			default="1"
 			label="Detail-Footer :"
 			description="Hier kann man einen individuellen Text (siehe unten) unterm Einsatzbericht anzeigen lassen.">
-			
+
 			<option
 				value="0">JNO</option>
 			<option
@@ -1371,23 +1385,23 @@
             height="350px"
 			buttons="true"
 			hide="readmore,pagebreak"
-            filter="raw" /> 
-	  
+            filter="raw" />
+
 	</fieldset>
-	
+
 
 <!-- Einsatzkarte -->
 
 <fieldset name="einsatzkarte" label="Einsatzkarte" description="">
 
-<field name="note_einsatzkarte" 
-		type="note" 
+<field name="note_einsatzkarte"
+		type="note"
 		showon="gmap_action:1,2"
-		label="Hier können Sie Ihre Einsatzkarte (Übersicht) anpassen :" 
-		class="alert alert-info" 
+		label="Hier können Sie Ihre Einsatzkarte (Übersicht) anpassen :"
+		class="alert alert-info"
 		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
-		/>	
-		
+		/>
+
 	  <field
 			name="display_einsatzkarte_bootstrap"
 			type="radio"
@@ -1396,7 +1410,7 @@
 			default="0"
 			label="Bootstrap CSS+JS :"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
+
 			<option
 				value="0">JNO</option>
 			<option
@@ -1434,7 +1448,7 @@
 			<option
 				value="1">Anzeigen</option>
 	  </field>
-	  
+
 	  <field
 			name="display_einsatzkarte_einsatzgebiet"
 			type="radio"
@@ -1448,12 +1462,12 @@
 			<option
 				value="1">Anzeigen</option>
 	  </field>
-			<field name="einsatzkarte_map_height" 
+			<field name="einsatzkarte_map_height"
 				type="text"
 				showon="gmap_action:1,2"
-				default="450" 
-				label="Höhe der Karte :" 
-				description="Bitte nur so angeben : z.b. 450 (ohne px) !!" 
+				default="450"
+				label="Höhe der Karte :"
+				description="Bitte nur so angeben : z.b. 450 (ohne px) !!"
 			/>
 	  <field name="display_einsatzkarte_zoom_level" type="list" 			showon="gmap_action:1,2"
  default="14" label="Zoom-Level :" description="">
@@ -1470,7 +1484,7 @@
 		<option value="18">18</option>
 		<option value="19">19</option>
 	  </field>
-	  
+
 	  <field name="display_einsatzkarte_max_zoom_level" type="list" 			showon="gmap_action:1,2"
  default="14" label="Max-Zoom-Level :" description="Maximal  durch User möglicher Zoom">
 		<option value="8">8</option>
@@ -1506,7 +1520,7 @@
 			type="spacer"
 			hr="true"
 		/>
-		
+
 	  <field
 			name="display_einsatzkarte_links"
 			type="radio"
@@ -1515,7 +1529,7 @@
 			default="1"
 			label="Link zum Detailbericht :"
 			description="">
-			
+
 			<option
 				value="0">Ausblenden</option>
 			<option
@@ -1529,17 +1543,17 @@
 		/>
 	</fieldset>
 
-	
-	
+
+
 <fieldset name="orga_uebersicht" label="Organisationsübersicht" description="">
 
-<field name="note_orga_uebersicht" 
-		type="note" 
-		label="Hier können Sie die Übersicht der Organisationen anpassen :" 
-		class="alert alert-info" 
+<field name="note_orga_uebersicht"
+		type="note"
+		label="Hier können Sie die Übersicht der Organisationen anpassen :"
+		class="alert alert-info"
 		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
-		/>	
-	
+		/>
+
 	  <field
 			name="display_orga_bootstrap"
 			type="radio"
@@ -1547,7 +1561,7 @@
 			default="0"
 			label="Bootstrap CSS+JS :"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
+
 			<option
 				value="0">JNO</option>
 			<option
@@ -1565,13 +1579,13 @@
 			default="1"
 			label="Organisationen :"
 			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Standart-Layout)">
-			
+
 			<option
 				value="0">ohne Link</option>
 			<option
 				value="1">mit Link</option>
 	  </field>
-	  
+
 	  <field
 			name="display_orga_fhz_links"
 			type="radio"
@@ -1579,33 +1593,33 @@
 			default="1"
 			label="Fahrzeuge :"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Standart-Layout)">
-			
+
 			<option
 				value="0">ohne Link</option>
 			<option
 				value="1">mit Link</option>
 	  </field>
 
-	
+
 	</fieldset>
-	
-	
-	
+
+
+
 <fieldset name="joomla_article" label="Joomla-Artikel" description="">
-	
-	<field name="note_joomla_article" 
-		type="note" 
-		class="alert alert-info" 
-		label="Einstellungen für den Export als Joomla-Artikel" 
-		description="Hier können Sie diverse Einstellungen für den Export der Einsatzberichte als Joomla-Artikel vornehmen." 
+
+	<field name="note_joomla_article"
+		type="note"
+		class="alert alert-info"
+		label="Einstellungen für den Export als Joomla-Artikel"
+		description="Hier können Sie diverse Einstellungen für den Export der Einsatzberichte als Joomla-Artikel vornehmen."
 />
-		
-	  <field name="article_category" 
-	  		type="category" 
-			label="Joomla-Kategorie :" 
+
+	  <field name="article_category"
+	  		type="category"
+			label="Joomla-Kategorie :"
 			default = "0"
 			extension ="com_content"
-			description="Eine Joomla-Kategorie auswählen, in der die Einsatzberichte exportiert werden sollen." 
+			description="Eine Joomla-Kategorie auswählen, in der die Einsatzberichte exportiert werden sollen."
 			/>
 
 	  <field
@@ -1620,7 +1634,7 @@
 			<option
 				value="1">JYES</option>
 	  </field>
-	  
+
 	  <field
 			name="article_orgas"
 			type="radio"
@@ -1633,36 +1647,36 @@
 			<option
 				value="1">anzeigen</option>
 	  </field>
-	  
-			<field name="article_max_intro" 
-			type="text" 
-			default="400" 
-			label="max. Zeichen Introtext :" 
-			description="" 
+
+			<field name="article_max_intro"
+			type="text"
+			default="400"
+			label="max. Zeichen Introtext :"
+			description=""
 			/>
-			
-	  
-		<field name="article_meta_key" 
-				type="textarea" 
-				filter="raw" 
-				default="feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation" 
-				label="Meta-Schlüsselwörter" 
-				description="Eine durch Kommas getrennte Liste von Schlüsselwörtern, die mit dem HTML-Code ausgegeben wird." 
+
+
+		<field name="article_meta_key"
+				type="textarea"
+				filter="raw"
+				default="feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation"
+				label="Meta-Schlüsselwörter"
+				description="Eine durch Kommas getrennte Liste von Schlüsselwörtern, die mit dem HTML-Code ausgegeben wird."
 				rows="10" cols="40" />
-				
-		<field name="article_meta_desc" 
-				type="textarea" 
-				filter="raw" 
-				default="Einsatzbericht" 
-				label="Meta-Beschreibung" 
-				description="Eine zusätzliche Beschreibung, die mit dem HTML-Code ausgegeben wird. Sie wird im Allgemeinen in den Ergebnissen von Suchmaschinen angezeigt." 
+
+		<field name="article_meta_desc"
+				type="textarea"
+				filter="raw"
+				default="Einsatzbericht"
+				label="Meta-Beschreibung"
+				description="Eine zusätzliche Beschreibung, die mit dem HTML-Code ausgegeben wird. Sie wird im Allgemeinen in den Ergebnissen von Suchmaschinen angezeigt."
 				rows="10" cols="40" />
-				
-	<field name="note_joomla_article_info" 
-		type="note" 
-		class="alert alert-warning" 
-		label="Bitte beachten :" 
-		description="Weitere Einstellungen können Sie anschließend direkt im Joomla-Artikel vornehmen, bzw. über die Kategorie und/oder Menüpunkten festlegen." 
+
+	<field name="note_joomla_article_info"
+		type="note"
+		class="alert alert-warning"
+		label="Bitte beachten :"
+		description="Weitere Einstellungen können Sie anschließend direkt im Joomla-Artikel vornehmen, bzw. über die Kategorie und/oder Menüpunkten festlegen."
 />
 		<field
 			name="article_frontend"
@@ -1677,64 +1691,64 @@
 				value="1">Ja</option>
 		</field>
 	</fieldset>
-	
-	
-	
-<fieldset name="custom_css" label="Custom CSS" description="">
-	
-	<field name="note555" 
-		type="note" 
-		class="alert alert-info" 
-		label="Zusätzlicher CSS-Code" 
-		description="Hier können Sie noch zusätzlichen CSS-Code eingefügen, der dann in den entsprechenden Ansichten automatisch mitgeladen wird." 
-/>
-		
 
-		<field 	name="main_css" 
-				type="textarea" 
-				filter="raw" 
-				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}" 
-				label="Einsatz-Übersicht" 
-				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
-				rows="10" 
+
+
+<fieldset name="custom_css" label="Custom CSS" description="">
+
+	<field name="note555"
+		type="note"
+		class="alert alert-info"
+		label="Zusätzlicher CSS-Code"
+		description="Hier können Sie noch zusätzlichen CSS-Code eingefügen, der dann in den entsprechenden Ansichten automatisch mitgeladen wird."
+/>
+
+
+		<field 	name="main_css"
+				type="textarea"
+				filter="raw"
+				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}"
+				label="Einsatz-Übersicht"
+				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein."
+				rows="10"
 				cols="40" />
-				
+
 		<field name="detail_css" type="textarea" filter="raw" default="" label="Einsatz-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Detailansicht ein." rows="10" cols="40" />
 		<field name="fahrzeuge_css" type="textarea" filter="raw" default="" label="Fahrzeug-Übersicht" description="Füge hier den zusätzlichen CSS-Code für Fahrzeug-Übersicht ein." rows="10" cols="40" />
 		<field name="fahrzeug_css" type="textarea" filter="raw" default="" label="Fahrzeug-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Fahrzeug-Detailansicht ein." rows="10" cols="40" />
 		<field name="organisationen_css" type="textarea" filter="raw" default="" label="Organisations-Übersicht" description="Füge hier den zusätzlichen CSS-Code für die Organisations-Übersicht ein." rows="10" cols="40" />
 		<field name="organisation_css" type="textarea" filter="raw" default="" label="Organisations-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Organisations-Detailansicht ein." rows="10" cols="40" />
 		<field name="ausruestungen_css" type="textarea" filter="raw" default="" label="Ausrüstungs-Übersicht" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstungs-Übersicht ein." rows="10" cols="40" />
-		<field name="ausruestung_css" type="textarea" filter="raw" default="" label="Ausrüstung-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstung-Detailansicht ein." rows="10" cols="40" /> 
-		
+		<field name="ausruestung_css" type="textarea" filter="raw" default="" label="Ausrüstung-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstung-Detailansicht ein." rows="10" cols="40" />
+
 		<field name="edit_css" type="textarea" filter="raw" default="" label="Einsatz-Edit" description="Füge hier den zusätzlichen CSS-Code für die Ansicht des Einsatz-Edit ein." rows="10" cols="40" />
 		<field name="gmap_css" type="textarea" 			showon="gmap_action:1,2"
  filter="raw" default="" label="Einsatzkarte" description="Füge hier den zusätzlichen CSS-Code für die Einsatzkarte ein." rows="10" cols="40" />
-		
+
 	</fieldset>
 
 <fieldset name="pdfexport" label="PDF-Export" description="">
-	<field 
-		name="note_pdfexport" 
-		type="note" 
-		label="PDF-Export Einstellungen:" 
-		class="alert alert-info" 
+	<field
+		name="note_pdfexport"
+		type="note"
+		label="PDF-Export Einstellungen:"
+		class="alert alert-info"
 		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerdem ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
 	/>
-	 <field 
-	 	name="pdf_header" 
-	 	type="imagelist" 
-	 	default="" 
-	 	label="PDF-Header" 
-	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'images/com_einsatzkomponente/pdf' hinterlegt werden." 
-	 	directory="images/com_einsatzkomponente/pdf" 
-	 	exclude="" 
+	 <field
+	 	name="pdf_header"
+	 	type="imagelist"
+	 	default=""
+	 	label="PDF-Header"
+	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'images/com_einsatzkomponente/pdf' hinterlegt werden."
+	 	directory="images/com_einsatzkomponente/pdf"
+	 	exclude=""
 	 	stripext="" />
 
-        <field 
+        <field
         	name="pdf_speicherort"
         	type="text"
-        	default="images/com_einsatzkomponente/pdf"   
+        	default="images/com_einsatzkomponente/pdf"
         	label="PDF-Speicherort"
         	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: images/com_einsatzkomponente/pdf" size="10"
         />
@@ -1976,15 +1990,15 @@
 			Ja
 		</option>
 	</field>
-</fieldset>	
+</fieldset>
 <!--ACL-->
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
 		label="JCONFIG_PERMISSIONS_LABEL"
 	>
-	
-		<field 
-            name="rules" 
+
+		<field
+            name="rules"
             type="rules"
 			component="com_einsatzkomponente"
             class="inputbox"
@@ -1993,12 +2007,12 @@
 			label="JCONFIG_PERMISSIONS_LABEL"
 			section="component" />
 	</fieldset>
-	
-	
+
+
 	<fieldset name="information" label="Info"
 		addfieldpath="/administrator/components/com_einsatzkomponente/models/fields"
 	>
-		<field 
+		<field
 			name="infobox"
 			type="info"
 			label=""
@@ -2011,13 +2025,13 @@
 			description="Validation-Key"
 		 />
 		 <field name="eiko" type="hidden" default="0" />
-	</fieldset> 
-	
-	
-	
-	
-	
-	
+	</fieldset>
+
+
+
+
+
+
 </config>
 <!--
 ########################################################################################
