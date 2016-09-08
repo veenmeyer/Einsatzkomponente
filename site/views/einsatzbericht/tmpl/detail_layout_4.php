@@ -95,30 +95,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     	<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
     </td>
     <td class="layout4_row_100">
-		<?php
-			$diff =  strtotime($this->item->date3)- strtotime($this->item->date1);
-            $diff = $diff/60;
-
-            if($diff<60):
-            	if($diff == 0): echo '0 Min.';
-            	else: echo $diff.' Min.';
-            	endif;
-
-            else:
-            	$diffDate = strtotime($this->item->date3)- strtotime($this->item->date1);
-				$days = floor($diffDate / 24 / 60 / 60 ); // Anzahl Tage = Sekunden /24/60/60
-				$diffDate = $diffDate - ($days*24*60*60); // den verbleibenden Rest berechnen = Stunden
-				$hours = floor($diffDate / 60 / 60); // den Stundenanteil herausrechnen
-				$diffDate = ($diffDate - ($hours*60*60));
-				$minutes = floor($diffDate/60); // den Minutenanteil
-				$diffDate = $diffDate - ($minutes*60);
-				$seconds = floor($diffDate); // die verbleibenden Sekunden
-
-				if($days>0): echo $days.' Tag(e) ' . $hours.' Std. '.$minutes.' Min.';
-				else: echo $hours.' Std. '.$minutes.' Min.';
-				endif;
-            endif;
-		?>
+		<?php echo EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);	?>
 	</td>
   </tr>
  <?php endif;?>

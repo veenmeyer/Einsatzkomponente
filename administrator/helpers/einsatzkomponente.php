@@ -1350,4 +1350,37 @@ endif;
 		
 		return $msg;
 	}
+	
+	
+    public function getEinsatzdauer($date1,$date3) {
+						$einsatzdauer = '';
+						$diff =  strtotime($date3)- strtotime($date1);
+			            $diff = $diff/60;
+
+			            if($diff<60):
+			            	if($diff == 0): $einsatzdauer = '0 Min.';
+			            	else: $einsatzdauer = $diff.' Min.';
+			            	endif;
+
+			            else:
+			            	$diffDate = strtotime($date3)- strtotime($date1);
+							$days = floor($diffDate / 24 / 60 / 60 ); // Anzahl Tage = Sekunden /24/60/60
+							$diffDate = $diffDate - ($days*24*60*60); // den verbleibenden Rest berechnen = Stunden
+							$hours = floor($diffDate / 60 / 60); // den Stundenanteil herausrechnen
+							$diffDate = ($diffDate - ($hours*60*60));
+							$minutes = floor($diffDate/60); // den Minutenanteil
+							$diffDate = $diffDate - ($minutes*60);
+							$seconds = floor($diffDate); // die verbleibenden Sekunden
+
+							if($days>0): $einsatzdauer = $days.' Tag(e) ' . $hours.' Std. '.$minutes.' Min.';
+							else: $einsatzdauer = $hours.' Std. '.$minutes.' Min.';
+							endif;
+			            endif;
+						
+		return $einsatzdauer;
+	}
+	
+	
+	
+	
 }

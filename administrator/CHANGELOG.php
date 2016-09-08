@@ -3,6 +3,7 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
++ Einsatzdauer in detail_layout_1 und 4 hinzugefügt. (Danke an r4id)
 # eingesetzte Fahrzeuge als Textaufzählung in detail_layout_4 korrigiert
 + Detailbutton in Einsatzübersicht main_layout_4 hinzugefügt
 </ul>
