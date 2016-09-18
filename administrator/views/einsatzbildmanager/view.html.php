@@ -26,6 +26,7 @@ class EinsatzkomponenteViewEinsatzbildmanager extends JViewLegacy
 		$this->state		= $this->get('State'); 
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
+		$this->authors	= $this->get('Authors');
 		$this->params = JComponentHelper::getParams('com_einsatzkomponente');
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -105,9 +106,12 @@ class EinsatzkomponenteViewEinsatzbildmanager extends JViewLegacy
         
 		
 		//Filter for the field created_by
-		$this->extra_sidebar .= '<small><label for="filter_created_by">Created by</label></small>';
-		$this->extra_sidebar .= JHtmlList::users('filter_created_by', $this->state->get('filter.created_by'), 1, 'onchange="this.form.submit();"');
-        
+		JHtmlSidebar::addFilter(
+			JText::_('JOPTION_SELECT_AUTHOR'),
+			'filter_created_by',
+			JHtml::_('select.options', $this->authors, "value", "text", $this->state->get('filter.created_by'), true)
+		);
+
 		$options = '';
 		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[] = JHtml::_('select.option', '0', 'JUNPUBLISHED');
@@ -117,8 +121,6 @@ class EinsatzkomponenteViewEinsatzbildmanager extends JViewLegacy
 			'filter_published',
 			JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.state'), true)
 		);
-        $this->extra_sidebar = '';
-        
 	}
     
 	protected function getSortFields()
