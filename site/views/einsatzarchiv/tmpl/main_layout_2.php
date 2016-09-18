@@ -3,7 +3,7 @@
  * @version     3.1.0
  * @package     com_einsatzkomponente
  * @copyright   Copyright (C) 2014. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ * @license     GNU General Public License Version 2 oder spÃ¤ter; siehe LICENSE.txt
  * @author      Ralf Meyer <ralf.meyer@einsatzkomponente.de> - http://einsatzkomponente.de
  */
 // no direct access
@@ -153,7 +153,7 @@ defined('_JEXEC') or die;
 					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
 					
 					<?php if ($this->params->get('display_home_alertimage','0')) : ?>
-					<img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->alerting_image;?>" title="Alarmierung über: <?php echo $item->alerting;?>" />
+					<img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->alerting_image;?>" title="Alarmierung Ã¼ber: <?php echo $item->alerting;?>" />
 					<?php endif;?>
 					<?php if ($this->params->get('display_list_icon')) : ?>
 					<img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" alt="<?php echo $item->list_icon;?>" title="Einsatzart: <?php echo $item->data1;?>"/>
@@ -263,7 +263,7 @@ defined('_JEXEC') or die;
     </tbody>
 	
     <tfoot>
-    				<!--Prüfen, ob Pagination angezeigt werden soll-->
+    				<!--PrÃ¼fen, ob Pagination angezeigt werden soll-->
     				<?php if ($this->params->get('display_home_pagination')) : ?>
 					<tr>
 					<td colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>">
@@ -271,7 +271,7 @@ defined('_JEXEC') or die;
 						<?php echo $this->pagination->getListFooter(); ?><!--Pagination anzeigen-->
 						</form> 
 					</td></tr>
-		   			<?php endif;?><!--Prüfen, ob Pagination angezeigt werden soll   ENDE -->
+		   			<?php endif;?><!--PrÃ¼fen, ob Pagination angezeigt werden soll   ENDE -->
 		
 		<?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
@@ -301,7 +301,7 @@ defined('_JEXEC') or die;
     <h4>Einsatzgebiet</h4>
 			<?php if ($this->params->get('gmap_action','0') == '1') :?>
   			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
-    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript UnterstÃ¼tzung Ihres Browsers!</noscript>
 			</div>
             <?php endif;?>
 			<?php if ($this->params->get('gmap_action','0') == '2') :?>
@@ -309,7 +309,7 @@ defined('_JEXEC') or die;
 				<!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
 				<div id="description" class="">Einsatzkarte</div>-->
    				<div id="map" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;"></div> 
-    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript UnterstÃ¼tzung Ihres Browsers!</noscript>
             <?php endif;?>
             </td></tr>
     <?php endif;?>
@@ -327,7 +327,7 @@ defined('_JEXEC') or die;
 
     function deleteItem() {
         var item_id = jQuery(this).attr('data-item-id');
-        if (confirm("<?php echo JText::_('Möchten Sie diesen Einsatzbericht wirklich löschen ?'); ?>")) {
+        if (confirm("<?php echo JText::_('MÃ¶chten Sie diesen Einsatzbericht wirklich lÃ¶schen ?'); ?>")) {
             window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.remove&id=', false, 2) ?>' + item_id;
         }
     }
