@@ -19,11 +19,18 @@ function EinsatzkomponenteBuildRoute(&$query)
 	if (isset($query['view'])) {
 		$segments[] = implode('/',explode('.',$query['view']));
 		unset($query['view']);
+	}
+	
 //	if (isset($query['layout'])) {
 //		$segments[] = $query['layout'];
 //		unset($query['layout']);
 //	}
+
+	if (isset($query['task'])) {
+		$segments[] = implode('/',explode('.',$query['task']));
+		unset($query['task']);
 	}
+
 	if (isset($query['id'])) {
 		$segments[] = $query['id'];
 		unset($query['id']);
@@ -73,6 +80,7 @@ function EinsatzkomponenteParseRoute($segments)
         else{
             $count--;
             $vars['view'] = array_pop($segments) . '.' . $segment;
+            $vars['task'] = array_pop($segments) . '.' . $segment;
         }
 	}
 	
@@ -81,6 +89,7 @@ function EinsatzkomponenteParseRoute($segments)
 	if ($count)
 	{   
         $vars['view'] = implode('.',$segments);
+        $vars['task'] = implode('.',$segments);
 	}
 	return $vars;
 }
