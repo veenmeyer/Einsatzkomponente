@@ -105,8 +105,10 @@ class EinsatzkomponenteViewEinsatzbildmanager extends JViewLegacy
         
 		
 		//Filter for the field created_by
-		$this->extra_sidebar = '<small><label for="filter_created_by">Created by</label></small>';
+		$this->extra_sidebar  = '<div class="filter-select hidden-phone">';
+		$this->extra_sidebar .= '<small><label for="filter_created_by">Created by</label></small>';
 		$this->extra_sidebar .= JHtmlList::users('filter_created_by', $this->state->get('filter.created_by'), 1, 'onchange="this.form.submit();"');
+		$this->extra_sidebar .= '</div>';
         
 		$options = '';
 		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
