@@ -137,4 +137,29 @@ class EinsatzkomponenteModeleinsatzbildmanager extends JModelList
         }
 		return $query;
 	}
+
+  /**
+   * Build a list of authors
+   *
+   * @return  JDatabaseQuery
+   */
+  public function getAuthors()
+  {
+    // Create a new query object.
+    $db = $this->getDbo();
+    $query = $db->getQuery(true);
+
+    // Construct the query
+    $query->select('u.id AS value, u.name AS text')
+            ->from('#__users AS u')
+            ->join('INNER', '#__eiko_images AS i ON i.created_by = u.id')
+            ->group('u.id, u.name')
+            ->order('u.name');
+
+    // Setup the query
+    $db->setQuery($query);
+
+    // Return the result
+    return $db->loadObjectList();
+  }
 }
