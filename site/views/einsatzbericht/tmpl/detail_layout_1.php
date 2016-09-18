@@ -144,6 +144,26 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
               <td class="eiko_td2_2"><span class="eiko_date3_value_2"><?php echo date("H:i", strtotime($this->item->date3)).' Uhr'; ?></span></td>
             </tr>
             <?php endif;?>
+            
+            <?php if ($this->params->get('display_einsatzdauer','1') && ($this->item->date3>1) ): ?>
+				<tr class="mobile_hide_320">
+	              <td class="eiko_td1_2 mobile_hide_320">
+	              	<span class="eiko_einsatzdauer_label_2">
+				  		<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
+	              	</span>
+	              </td>
+	              <td class="eiko_td1_2">
+	              	<span class="eiko_einsatzdauer_value_2">
+
+	              	<?php
+						echo EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);
+					?>
+
+	              	</span>
+	              </td>
+	            </tr>
+		<?php endif;?>
+            
             <?php if( $this->item->alerting) : ?>
             <tr class="mobile_hide_320">
               <td class="eiko_td1_2 mobile_hide_320"><span class="eiko_alarmart_label_2">

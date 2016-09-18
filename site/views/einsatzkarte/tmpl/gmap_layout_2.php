@@ -150,12 +150,6 @@ endif;
 
 
 
-$database			=JFactory::getDBO();
-$query = 'SELECT COUNT(id) as total FROM #__eiko_einsatzberichte WHERE gmap="1" AND state = "1" ' ;
-$database->setQuery( $query );
-$total = $database->loadObjectList();	
-$totalRecords = $total[0]->total;
-
 
 	  
 // -------------------- Filter Jahr ----------------------------------
@@ -172,8 +166,7 @@ $totalRecords = $total[0]->total;
 	  
 ?>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script> 
- 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
     
     <script type="text/javascript">
     //<![CDATA[
@@ -400,6 +393,7 @@ togglearea = function(opt_enable) {
 	  
 <?php // Marker stellen
 $i = 0;
+$hide = 0;
 while($i < count($reports))
 {
 	
@@ -409,10 +403,13 @@ $year = date("Y",strtotime($reports[$i]->date1));  ### 111225
 $month = date("m",strtotime($reports[$i]->date1)); ### 111225
 $day = date("d",strtotime($reports[$i]->date1));   ### 111225
 
+if ($reports[$i]->gmap AND $reports[$i]->gmap_report_latitude != "0") {
 ?>
 
 var marker = createMarker(new google.maps.LatLng(<?php echo $reports[$i]->gmap_report_latitude;?>,<?php echo $reports[$i]->gmap_report_longitude;?>),"<?php echo $rSummary;?>","<?php echo $reports[$i]->einsatzart;?>","<?php echo $reports[$i]->data1;?>","<?php echo $reports[$i]->icon;?>","<?php echo $reports[$i]->id;?>","<?php echo $reports[$i]->date1;?>","<?php echo $day;?>","<?php echo $month;?>","<?php echo $year;?>","<?php echo $reports[$i]->image;?>","");
 <?php 
+}
+else {$hide++;}
 $i++; 
 } 
 ?>
@@ -537,7 +534,9 @@ polygon.setMap(map);
 		<?php if ($this->params->get('display_einsatzkarte_sidebar','1')) : ?>
 		<div class="well eiko_gmap_sidebar span6" id="side_bar" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px;width:98%;margin-left:0px;"></div>	
 		<?php endif; ?>
-
+		<?php if ($hide) :?>
+		<div><span class="glyphicon glyphicon-info-sign"></span> Es werden insg. <?php echo $hide;?> Einsätze werden aufgrund der Privatsphäre in dieser Karte nicht berücksichtigt.</div>
+		<?php endif;?>
 
 		<div class="row-fluid">
 			<div class="span6" id="details" style="display:none;">Daten werden eingelesen ...</div>

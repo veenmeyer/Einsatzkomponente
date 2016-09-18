@@ -30,6 +30,16 @@ class EinsatzkomponenteTableeinsatzfahrzeug extends JTable {
      */
     public function bind($array, $ignore = '') {
         
+				//Support for multiple or not foreign key field: ausruestung
+			if(isset($array['ausruestung'])):
+				if(is_array($array['ausruestung'])){
+					$array['ausruestung'] = implode(',',$array['ausruestung']);
+				}
+				else if(strrpos($array['ausruestung'], ',') != false){
+					$array['ausruestung'] = explode(',',$array['ausruestung']);
+				}
+			endif;
+
 		if(!JFactory::getUser()->authorise('core.edit.state','com_einsatzkomponente.einsatzfahrzeug.'.$array['id']) && $array['state'] == 1){
 			$array['state'] = 0;
 		}
@@ -46,19 +56,19 @@ class EinsatzkomponenteTableeinsatzfahrzeug extends JTable {
             $registry->loadArray($array['metadata']);
             $array['metadata'] = (string) $registry;
         }
-        if(!JFactory::getUser()->authorise('core.admin', 'com_einsatzkomponente.einsatzfahrzeug.'.$array['id'])){
-            $actions = JFactory::getACL()->getActions('com_einsatzkomponente','einsatzfahrzeug');
-            $default_actions = JFactory::getACL()->getAssetRules('com_einsatzkomponente.einsatzfahrzeug.'.$array['id'])->getData();
-            $array_jaccess = array();
-            foreach($actions as $action){
-                $array_jaccess[$action->name] = $default_actions[$action->name];
-            }
-            $array['rules'] = $this->JAccessRulestoArray($array_jaccess);
-        }
+//        if(!JFactory::getUser()->authorise('core.admin', 'com_einsatzkomponente.einsatzfahrzeug.'.$array['id'])){
+//            $actions = JFactory::getACL()->getActions('com_einsatzkomponente','einsatzfahrzeug');
+//            $default_actions = JFactory::getACL()->getAssetRules('com_einsatzkomponente.einsatzfahrzeug.'.$array['id'])->getData();
+//            $array_jaccess = array();
+//            foreach($actions as $action){
+//                $array_jaccess[$action->name] = $default_actions[$action->name];
+//            }
+//            $array['rules'] = $this->JAccessRulestoArray($array_jaccess);
+//        }
         //Bind the rules for ACL where supported.
-		if (isset($array['rules']) && is_array($array['rules'])) {
-			$this->setRules($array['rules']);
-		}
+//		if (isset($array['rules']) && is_array($array['rules'])) {
+//			$this->setRules($array['rules']);
+//		}
         return parent::bind($array, $ignore);
     }
     
@@ -66,17 +76,17 @@ class EinsatzkomponenteTableeinsatzfahrzeug extends JTable {
      * This function convert an array of JAccessRule objects into an rules array.
      * @param type $jaccessrules an arrao of JAccessRule objects.
      */
-    private function JAccessRulestoArray($jaccessrules){
-        $rules = array();
-        foreach($jaccessrules as $action => $jaccess){
-            $actions = array();
-            foreach($jaccess->getData() as $group => $allow){
-                $actions[$group] = ((bool)$allow);
-            }
-            $rules[$action] = $actions;
-        }
-        return $rules;
-    }
+//    private function JAccessRulestoArray($jaccessrules){
+//        $rules = array();
+//        foreach($jaccessrules as $action => $jaccess){
+//            $actions = array();
+//            foreach($jaccess->getData() as $group => $allow){
+//                $actions[$group] = ((bool)$allow);
+//            }
+//            $rules[$action] = $actions;
+//        }
+//        return $rules;
+//    }
     /**
      * Overloaded check function
      */

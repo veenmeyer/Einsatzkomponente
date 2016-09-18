@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `alerting` TEXT NOT NULL ,
 `gmap_report_latitude` VARCHAR(255)  NOT NULL ,
 `gmap_report_longitude` VARCHAR(255)  NOT NULL ,
-`counter` VARCHAR(255)  NOT NULL ,
+`counter` INT(20)  NOT NULL ,
 `gmap` VARCHAR(255)  NOT NULL ,
 `status_fb` VARCHAR(255)  NOT NULL DEFAULT '1' ,
 `presse_label` VARCHAR(255)  NOT NULL DEFAULT 'Presselink' ,

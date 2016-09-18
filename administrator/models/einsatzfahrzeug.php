@@ -63,6 +63,15 @@ class EinsatzkomponenteModeleinsatzfahrzeug extends JModelAdmin
 		$data = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzfahrzeug.data', array());
 		if (empty($data)) {
 			$data = $this->getItem();
+			
+			//Support for multiple or not foreign key field: ausruestung
+			$array = array();
+			foreach((array)$data->ausruestung as $value): 
+				if(!is_array($value)):
+					$array[] = $value;
+				endif;
+			endforeach;
+			$data->ausruestung = implode(',',$array);
             
 		}
 		return $data;

@@ -13,11 +13,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('formbehavior.chosen', 'select');
-endif;
+
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0)
 	{
@@ -121,7 +118,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				jQuery.noConflict();
 				jQuery('input:hidden.auswahl_orga').each(function(){
 					var name = jQuery(this).attr('name');
-					if(name.indexOf('auswahlorga_hidden')){
+					if(name.indexOf('auswahl_orgahidden')){
 						jQuery('#jform_auswahl_orga option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});
@@ -143,12 +140,12 @@ function displayVals() {
 var multipleValues = jQuery( "#jform_vehicles" ).val() || [];
 jQuery( "#fahrzeug" ).val(multipleValues.join( ", " ) );
 }
-jQuery( "select" ).change( displayVals );
+jQuery( "select" ).change( displayVals ); 
 displayVals();
 </script>
 
 <?php
-			
+//echo '<input type="text" id="fahrzeug">  />';			
 				
 			?>
 			<script type="text/javascript">
@@ -188,7 +185,7 @@ displayVals();
 				jQuery.noConflict();
 				jQuery('input:hidden.ausruestung').each(function(){
 					var name = jQuery(this).attr('name');
-					if(name.indexOf('auswahlorga_hidden')){
+					if(name.indexOf('ausruestunghidden')){
 						jQuery('#jform_ausruestung option[value="'+jQuery(this).val()+'"]').attr('selected',true);
 					}
 				});
@@ -370,8 +367,7 @@ displayVals();
 
 <!-- Javascript für GMap-Anzeige -->
 
-<?php if(isset($_SERVER['HTTPS'])) : $ssl='https://'; else:	$ssl='http://'; endif;?>
-<script type="text/javascript" src="<?php echo $ssl;?>maps.google.com/maps/api/js?v=3&sensor=false"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
 
 <script type="text/javascript"> 
       var map = null;

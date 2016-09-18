@@ -231,6 +231,17 @@ description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu 
 </field>
 
 <field
+		name="show_fahrzeuge_ausruestung"
+		type="radio"
+		class="btn-group"
+		default="1"
+		label="Feld `Beladung/Ausrüstung` anzeigen :"
+		description="">
+			<option	value="0">Nein</option>
+			<option	value="1">JA</option>
+</field>
+
+<field
 		name="show_fahrzeuge_desc"
 		type="radio"
 		class="btn-group"

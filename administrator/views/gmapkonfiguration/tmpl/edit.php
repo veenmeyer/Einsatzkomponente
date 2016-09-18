@@ -194,8 +194,7 @@ $stralarmarea=$stralarmarea.' ];';
 
 <!--Javascript für Gmap-Karte-->
 
-<?php if(isset($_SERVER['HTTPS'])) : $ssl='https://'; else:	$ssl='http://'; endif;?>
-<script type="text/javascript" src="<?php echo $ssl;?>maps.google.com/maps/api/js?v=3&sensor=false"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
 
 </script>
 <script type="text/javascript"> 
@@ -376,7 +375,7 @@ function buildMap() {
   // Add listener for the click event
   g.event.addListener(map, "click", leftClick);
   g.event.addListener(map, "rightclick", rightClick);
-  
+g.event.trigger(map, 'resize');
   drawOverlay();
 }
  
@@ -407,7 +406,7 @@ function rightClick(event) {
     draggable:true, 
 	title:"Center of Map"
   });		 
-map.setCenter(event.latLng);
+map.panTo(event.latLng);
             document.getElementById("jform_start_lat").value=event.latLng.lat();
             document.getElementById("jform_start_lang").value=event.latLng.lng();
 }

@@ -2,7 +2,7 @@
 <config>
 	
 <!--Bildereinstellungen-->
-<fieldset name="config"	description="" label="Bilder Einstellungen">
+<fieldset name="Bilder_Einstellungen"	label="Bilder Einstellungen">
 <!--<field name="note1" type="note" class="alert alert-info" label="LOREMIPSUM" description="LOREMIPSUM_DESC" />
 <field name="note11" type="note" label="LOREMIPSUM" />
 -->	
@@ -106,12 +106,14 @@
 			</field>
 			<field name="image_resize_max_width" 
 				type="text" 
+				showon="image_resize:true"
 				default="800" 
 				label="max. Breite (px) :" 
 				description="Bitte nur so angeben : z.b. 800  ohne px !!" 
 			/>
 			<field name="image_resize_max_height" 
 				type="text" 	
+				showon="image_resize:true"
 				default="600" 
 				label="max. Höhe (px) :" 
 				description="Bitte nur so angeben : z.b. 600  ohne px !!" 
@@ -144,6 +146,7 @@
 			
 			<field name="watermark_image" 
 			type="imagelist" 
+			showon="watermark_show:true"
 			default="watermark.png" label="Wasserzeichen wählen :" 
 			description="Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!" 
 			directory="administrator/components/com_einsatzkomponente/assets/images/watermark" 
@@ -155,6 +158,7 @@
 			
 			<field name="watermark_pos_x" 
 			type="text" 
+			showon="watermark_show:true"
 			default="0" 
 			label="Abstand x (vom li. Rand) :" 
 			description="Bitte nur so angeben : z.b. 5  ohne px !!" 
@@ -162,6 +166,7 @@
 			
 			<field name="watermark_pos_y" 
 			type="text" 
+			showon="watermark_show:true"
 			default="60" 
 			label="Abstand y (vom unt. Rand) :" 
 			description="Bitte nur so angeben : z.b. 60  ohne px !!" 
@@ -171,7 +176,7 @@
 	
 	
 <!--GMap-Einstellungen-->
-<fieldset name="component" label="Kartenfunktion" description="">
+<fieldset name="Kartenfunktion" label="Kartenfunktion" description="">
 
 <field name="note_kartenfunktion" 
 		type="note" 
@@ -194,9 +199,28 @@
 					<option
 						value="2">OpenStreetMap</option>
 				</field>
-	  
+				
+		<field
+			name="gmapkey"
+			type="text"
+			default ="AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"
+			label="Google Api-Key"
+			width ="100"
+			hint="GoogleMap Api-Key benötigt"
+			showon="gmap_action:1"
+			description="Google Api-Key"
+		 />
+		<field name="note_key_map" 
+			type="note" 
+			showon="gmap_action:1"
+			label="Bitte beantragen Sie hier einen eigenen Google-Api-Key:  https://console.developers.google.com" 
+			class="alert alert-warning" 
+			description=""
+		/>	
+		 
 <field name="note_detail_map" 
 		type="note" 
+		showon="gmap_action:1,2"
 		label="Hier können Sie verschiedene Einstellungen für die Einsatzkarte vornehmen :" 
 		class="alert alert-info" 
 		description=""
@@ -206,6 +230,7 @@
 			<field
 				name="detail_gmap_onload"
 				type="list"
+				showon="gmap_action:1,2"
 				label="Kartentyp :"
 				description="Normal: zeigt die normale Standard-2D-Karte / Satellite: zeigt Luftaufnahmen des Geländes an / Hybrid: zeigt eine Mischung aus Satellite und Normal an (Luftaufnahme mit hinterlegten Straßen- Städtenamen) usw. (nur für GoogleMaps)"
 				default="HYBRID"
@@ -230,6 +255,7 @@
 	  		<field
 				name="display_detail_organisationen"
 				type="radio"
+				showon="gmap_action:1,2"
 				class="btn-group"
 				default="1"
 				label="Organisationen Standorte :"
@@ -242,6 +268,7 @@
 			
 			<field name="einsatzkarte_orga_image" 
 				type="imagelist" 
+				showon="gmap_action:1,2"
 				default="haus_rot.png" label="Orga-Icon wählen :" 
 				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
 				directory="images/com_einsatzkomponente/images/map/icons/" 
@@ -253,6 +280,7 @@
 	  <field
 			name="einsatzkarte_gmap_icon"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="14"
 			label="Größe der Gmap-Icons :"
@@ -269,6 +297,7 @@
 	  <field
 			name="einsatzkarte_gmap_icon_orga"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="24"
 			label="Größe der Organisation-Icons :"
@@ -285,6 +314,7 @@
 	  		<field
 				name="display_detail_popup"
 				type="radio"
+				showon="gmap_action:1,2"
 				class="btn-group"
 				default="true"
 				label="Popup (on load) :"
@@ -296,12 +326,14 @@
 	  		</field>
 <field name="note_geocode" 
 		type="note" 
+		showon="gmap_action:1,2"
 		label="Hier können Sie einen Ort festlegen, der bei der Geocode-Suche berücksichtigt wird :" 
 		class="alert alert-info" 
 		description=""
 		/>	
 			<field name="ort_geocode" 
-				type="text" 	
+				type="text" 
+				showon="gmap_action:1,2"
 				default="" 
 				label="Ort oder Postleitzahl :" 
 				description="Es kann dann allerdings nicht in einem anderem Ort mehr gesucht werden !" 
@@ -332,7 +364,10 @@
 				value="1">Ja</option>
 		</field>
 		<field name="mail_empfaenger" 
-			type="text" default="" hint="max.mustermann@host.de,presse@presse.net" 
+			type="text"
+			showon="send_mail_backend:1"
+			default="" 
+			hint="max.mustermann@host.de,presse@presse.net" 
 			label="Emailadressen (manuell)" 
 			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
 			/>
@@ -350,7 +385,10 @@
 		</field>
 		
 		<field name="mail_empfaenger_auto" 
-			type="text" default="" hint="max.mustermann@host.de,presse@presse.net" 
+			type="text" 
+			showon="send_mail_auto:1"
+			default="" 
+			hint="max.mustermann@host.de,presse@presse.net" 
 			label="Emailadressen (auto)" 
 			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
 			/>
@@ -438,6 +476,7 @@
 			<field 
 				name="twitter_via" 
 				type="text" 
+				showon ="show_twitter:1"
 				default="" 
 				label="Twittern VIA :" 
 				description="Geben Sie hier Ihren Twitter-Benutzernamen an, falls vorhanden." 
@@ -503,6 +542,7 @@
 		
 			<field name="rss_chars" 
 				type="text" 
+				showon ="display_home_rss:1"
 				default="1000" 
 				label="Textlänge :" 
 				description="Geben Sie hier an, wieviele Buchstaben der Text des RSS-Feeds anthalten soll." 
@@ -511,6 +551,7 @@
 			<field 
 				name="rss_items" 
 				type="text" 
+				showon ="display_home_rss:1"
 				default="10" 
 				label="Feed-Anzahl :" 
 				description="Geben Sie hier an, wieviele Einsatzberichte im Feed angezeigt werden sollen." 
@@ -519,6 +560,7 @@
 			<field
 				name="display_rss_image"
 				type="radio"
+				showon ="display_home_rss:1"
 				class="btn-group"
 				default="1"
 				label="Anzeige Bild :"
@@ -530,7 +572,8 @@
 			</field>
 		
 			<field name="rss_image_width" 
-				type="text" 	
+				type="text" 
+				showon ="display_home_rss:1"
 				default="150px" 
 				label="Bildbreite :" 
 				description="Bitte nur so angeben : z.b. 150 px oder z.b. 80% !!" 
@@ -538,6 +581,7 @@
 			<field 
 				name="rss_image_height" 	
 				type="text" 
+				showon ="display_home_rss:1"
 				default="" 
 				label="Bildhöhe :" 	
 				description="Bitte nur so angeben : z.b. 200 px oder am besten ganz fehlen lassen !!" 
@@ -569,6 +613,7 @@
 				<field
 					name="info112_debug"
 					type="radio"
+					showon ="info112:1"
 					class="btn-group"
 					default="1"
 					label="Testmodus Info112.net :"
@@ -581,6 +626,7 @@
 		
 				<field name="info112_user" 
 						type="text" 
+						showon ="info112:1"
 						default="" 
 						label="Benutzername :" 
 						description="Benutzername bei Info112.net" 
@@ -589,6 +635,7 @@
 				<field 
 						name="info112_api" 
 						type="text" 
+						showon ="info112:1"
 						default="" 
 						label="Api-Key :" 
 						description="Api-Key bei Info112.net" 
@@ -657,8 +704,9 @@
 	  <field
 			name="display_home_map"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
-			default="1"
+			default="0"
 			label="Karte :"
 			description="">
 			<option
@@ -670,6 +718,7 @@
 	  <field
 			name="display_home_einsatzgebiet"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Einsatzgebiet auf Karte :"
@@ -680,7 +729,8 @@
 				value="1">Anzeigen</option>
 	  </field>
 			<field name="home_map_height" 
-				type="text" 	
+				type="text" 
+			showon="gmap_action:1,2"
 				default="250px" 
 				label="Höhe der Karte :" 
 				description="Bitte nur so angeben : z.b. 250px !!" 
@@ -688,6 +738,7 @@
 	  <field
 			name="display_home_organisationen"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Organisationen auf Karte :"
@@ -860,6 +911,7 @@
 	  <field 
 		  name="float_list_icon" 
 		  type="list" 
+		  showon ="display_list_icon:1"
 		  default="right" 
 		  label="Position Einsatzart-Icon :" 
 		  description="Funktion nur beim Standard-Layout">
@@ -882,6 +934,7 @@
 	  <field 
 		  name="float_tickerkat_icon" 
 		  type="list" 
+		  showon ="display_tickerkat_icon:1"
 		  default="right" 
 		  label="Position Einsatzkateg.-Icon :" 
 		  description="Funktion nur beim Standard-Layout">
@@ -928,6 +981,19 @@
 				value="1">Anzeigen</option>
 	  </field>
 	  <field
+			name="display_home_presse"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="Info zu Pressebericht :"
+			description="Funktion nur beim Menüpunkt Einsatzarchiv">
+			
+			<option
+				value="0">Ausblenden</option> 
+			<option
+				value="1">Anzeigen</option>
+	  </field>
+	  <field
 			name="display_home_image_nopic"
 			type="radio"
 			class="btn-group"
@@ -966,6 +1032,7 @@
 	  <field
 			name="display_home_links_2"
 			type="radio"
+			showon ="display_home_links:1"
 			class="btn-group"
 			default="1"
 			label="Link zum Detailbericht auf Einsatzart :"
@@ -1099,6 +1166,20 @@
 			<option
 				value="1">Anzeigen</option>
 		</field>
+		
+		<field
+			name="display_einsatzdauer"
+			type="radio"
+			class="btn-group"
+			default="1"
+			description="Hier können Sie einstellen, ob die Einsatzdauer angezeigt werden soll. Die Dauer wird aus der Alarmierungszeit und dem Einsatzende errechnet und nur ausgegeben wenn das Einsatzende eingetragen ist.
+			Die Einsatzdauer wird in folgendem Format angegeben: dd Tag(e) hh Std. mm Min."
+			label="Einsatzdauer :" >
+			<option
+				value="0">Verbergen</option>
+			<option
+				value="1">Anzeigen</option>
+		</field>
 
 		<field name="navi_detail_pos" 
 	  		type="list" 
@@ -1202,6 +1283,7 @@
 	  		<field
 				name="display_detail_map_for_only_user"
 				type="radio"
+				showon="gmap_action:1,2"
 				class="btn-group"
 				default="0"
 				label="Anzeige Karte :"
@@ -1214,6 +1296,7 @@
 			<field 
 				name="detail_gmap_zoom_level" 
 				type="integer" 
+				showon="gmap_action:1,2"
 				default="12" 
 				label="Zoom-Level" 
 				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
@@ -1222,6 +1305,7 @@
 				step="1" />
 			<field name="detail_map_height" 
 				type="text" 	
+				showon="gmap_action:1,2"
 				default="250px" 
 				label="Höhe der Karte (Detailansicht) :" 
 				description="Bitte nur so angeben : z.b. 250px !!" 
@@ -1229,6 +1313,7 @@
 	  		<field
 				name="display_detail_einsatz_marker"
 				type="radio"
+				showon="gmap_action:1,2"
 				class="btn-group"
 				default="1"
 				label="Einsatz-Marker :"
@@ -1241,6 +1326,7 @@
 			<field
 				name="display_map_route"
 				type="radio"
+				showon="gmap_action:1,2"
 				class="btn-group"
 				default="true"
 				label="Streckenverlauf :"
@@ -1253,6 +1339,7 @@
 	  		<field
 				name="display_detail_einsatzgebiet"
 				type="radio"
+				showon="gmap_action:1,2"
 				class="btn-group"
 				default="1"
 				label="Einsatzgebiet :"
@@ -1265,6 +1352,7 @@
 
 <field name="note_detail_map" 
 		type="note" 
+		showon="gmap_action:1,2"
 		label="Um weitere Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
 		class="alert alert-warning" 
 		description=""
@@ -1291,6 +1379,7 @@
 
        <field name="display_detail_footer_text" type="editor"
             label="Detailansicht Footer-Text"
+			showon="display_detail_footer:1"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DESC"
 			default="Wichtiger Hinweis: Auf unserer Internetseite berichten wir ausführlich (also auch mit Bildmaterial) über unser Einsatzgeschehen. Bilder werden erst gemacht, wenn das Einsatzgeschehen dies zulässt ! Es werden keine Bilder von Verletzten oder Toten gemacht oder hier veröffentlicht ! Sollten Sie Einwände gegen die hier veröffentlichen Fotos oder Berichte haben, wenden Sie sich bitte vertrauensvoll an unseren Webmaster."            width="60%"
             height="350px"
@@ -1307,6 +1396,7 @@
 
 <field name="note_einsatzkarte" 
 		type="note" 
+		showon="gmap_action:1,2"
 		label="Hier können Sie Ihre Einsatzkarte (Übersicht) anpassen :" 
 		class="alert alert-info" 
 		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
@@ -1315,6 +1405,7 @@
 	  <field
 			name="display_einsatzkarte_bootstrap"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="0"
 			label="Bootstrap CSS+JS :"
@@ -1328,11 +1419,13 @@
 		<field
 			name="spacer43323"
 			type="spacer"
+			showon="gmap_action:1,2"
 			hr="true"
 		/>
 	  <field
 			name="display_einsatzkarte_map"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Karte :"
@@ -1345,6 +1438,7 @@
 	  <field
 			name="display_einsatzkarte_sidebar"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Sidebar :"
@@ -1358,6 +1452,7 @@
 	  <field
 			name="display_einsatzkarte_einsatzgebiet"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Einsatzgebiet auf Karte :"
@@ -1368,12 +1463,14 @@
 				value="1">Anzeigen</option>
 	  </field>
 			<field name="einsatzkarte_map_height" 
-				type="text" 	
+				type="text"
+				showon="gmap_action:1,2"
 				default="450" 
 				label="Höhe der Karte :" 
 				description="Bitte nur so angeben : z.b. 450 (ohne px) !!" 
 			/>
-	  <field name="display_einsatzkarte_zoom_level" type="list" default="14" label="Zoom-Level :" description="">
+	  <field name="display_einsatzkarte_zoom_level" type="list" 			showon="gmap_action:1,2"
+ default="14" label="Zoom-Level :" description="">
 		<option value="8">8</option>
 		<option value="9">9</option>
 		<option value="10">10</option>
@@ -1388,7 +1485,8 @@
 		<option value="19">19</option>
 	  </field>
 	  
-	  <field name="display_einsatzkarte_max_zoom_level" type="list" default="14" label="Max-Zoom-Level :" description="Maximal  durch User möglicher Zoom">
+	  <field name="display_einsatzkarte_max_zoom_level" type="list" 			showon="gmap_action:1,2"
+ default="14" label="Max-Zoom-Level :" description="Maximal  durch User möglicher Zoom">
 		<option value="8">8</option>
 		<option value="9">9</option>
 		<option value="10">10</option>
@@ -1406,6 +1504,7 @@
 	  <field
 			name="display_einsatzkarte_organisationen"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Organisationen auf Karte :"
@@ -1417,6 +1516,7 @@
 	  </field>
 		<field
 			name="spacer6456433"
+			showon="gmap_action:1,2"
 			type="spacer"
 			hr="true"
 		/>
@@ -1424,6 +1524,7 @@
 	  <field
 			name="display_einsatzkarte_links"
 			type="radio"
+			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
 			label="Link zum Detailbericht :"
@@ -1436,6 +1537,7 @@
 	  </field>
 		<field
 			name="spacer45544354"
+			showon="gmap_action:1,2"
 			type="spacer"
 			hr="true"
 		/>
@@ -1605,7 +1707,7 @@
 		<field 	name="main_css" 
 				type="textarea" 
 				filter="raw" 
-				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,.eiko_einsatzarchiv_jahr_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_jahr_div {color:#ffffff !important;} .eiko_einsatzarchiv_monat_tr,.eiko_einsatzarchiv_monat_td {background-color:#ff0000;color:#ffffff;} .eiko_einsatzarchiv_monat_div {color:#ffffff !important;}" 
+				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}" 
 				label="Einsatz-Übersicht" 
 				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
 				rows="10" 
@@ -1620,7 +1722,8 @@
 		<field name="ausruestung_css" type="textarea" filter="raw" default="" label="Ausrüstung-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstung-Detailansicht ein." rows="10" cols="40" /> 
 		
 		<field name="edit_css" type="textarea" filter="raw" default="" label="Einsatz-Edit" description="Füge hier den zusätzlichen CSS-Code für die Ansicht des Einsatz-Edit ein." rows="10" cols="40" />
-		<field name="gmap_css" type="textarea" filter="raw" default="" label="Einsatzkarte" description="Füge hier den zusätzlichen CSS-Code für die Einsatzkarte ein." rows="10" cols="40" />
+		<field name="gmap_css" type="textarea" 			showon="gmap_action:1,2"
+ filter="raw" default="" label="Einsatzkarte" description="Füge hier den zusätzlichen CSS-Code für die Einsatzkarte ein." rows="10" cols="40" />
 		
 	</fieldset>
 

@@ -648,6 +648,14 @@ endif;
 		if (!file_exists('../images/com_einsatzkomponente/pdf')) {
 		mkdir('../images/com_einsatzkomponente/pdf', 0755, true); }
 
+	// Behebt Fehler in der Sortierung nach Counter-Anzahl
+	$db = JFactory::getDbo();
+    $query = 'ALTER TABLE `#__eiko_einsatzberichte` CHANGE `counter` `counter` INT( 20 ) NOT NULL';	
+	$db->setQuery($query); 
+	try {
+	$result = $db->execute();
+	} catch (Exception $e) {
+	}	
 
 
 ?>

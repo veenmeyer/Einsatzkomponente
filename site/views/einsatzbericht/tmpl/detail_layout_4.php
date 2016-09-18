@@ -89,46 +89,15 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     </td>
   </tr>
 
- <?php if( $this->item->date3>1) : ?>
+ <?php if ($this->params->get('display_einsatzdauer','1') && ($this->item->date3>1) ): ?>
   <tr>
-    <td class="layout4_row_10" width="250px">Einsatzdauer:</td>
-    <td class="layout4_row_10"><?php ?>
-		<?php 
-			$diff =  strtotime($this->item->date3)- strtotime($this->item->date1);
-            $diff = $diff/60;
-			
-			if ($diff<60) {	
-				if ($diff == 0) {
-					echo 'k.A.';
-				}
-				else {
-					echo $diff.' Min.';
-				}
-			}
-			else {
-				$diffDate = strtotime($this->item->date3)- strtotime($this->item->date1);
-
-				$days = floor($diffDate / 24 / 60 / 60 ); // Anzahl Tage = Sekunden /24/60/60
-				$diffDate = $diffDate - ($days*24*60*60); // den verbleibenden Rest berechnen = Stunden
-				$hours = floor($diffDate / 60 / 60); // den Stundenanteil herausrechnen
-				$diffDate = ($diffDate - ($hours*60*60));
-				$minutes = floor($diffDate/60); // den Minutenanteil
-				$diffDate = $diffDate - ($minutes*60);
-				$seconds = floor($diffDate); // die verbleibenden Sekunden
-				
-				if ($days>0) {
-					echo $days.' Tag(e), ';
-				}
-				if ($minutes == 0 && $hours == 0) {
-					echo 'k.A.';
-				}
-				else {
-					echo $hours.' Std. und '.$minutes.' Min.';			
-				}								
-			}			
-		?>	
+    <td class="layout4_row_100" width="250px">
+    	<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
+    </td>
+    <td class="layout4_row_100">
+		<?php echo EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);	?>
 	</td>
-  </tr>  
+  </tr>
  <?php endif;?>
  
   <tr>
@@ -216,15 +185,19 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					
 					if ($this->params->get('display_detail_fhz_links','1')) :
 					if (!$results[0]->link) :
+					$vehicles_list[] = '<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</li></a>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self"><img width="90px" style="margin-top:15px;"  src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>&nbsp;&nbsp;<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</span>';					
 					else:
+					$vehicles_list[] = '<li><a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</li></a>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
 					endif;
 					else:
 					
 					if ($results[0]->link) :
+					$vehicles_list[] = '<li><a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</a></li>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
 					else:
+					$vehicles_list[] = '<li>'.$results[0]->name.'</li>';
 					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><img width="90px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" />&nbsp;&nbsp;'.$results[0]->name.'</span>';
 					endif;
 					endif;
@@ -232,13 +205,16 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					endforeach;
 				$this->item->vehicles = implode(', ',$data); 
 				$vehicles_images = implode(' ',$vehicles_images); 
-				$vehicles_list = implode('',$vehicles_list); ?>
+				$vehicles_list = implode(' ',$vehicles_list); ?>
             <?php endif;?>
             
             <?php if( $this->item->vehicles ) : ?>
 			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Fahrzeuge am Einsatzort:').'</u></span>'; ?>:
-			<!--<?php echo '<span>'.$this->item->vehicles.'</span>';?>-->			
-			<?php echo '<br/><br/>'.$vehicles_images;?>
+			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
+			<?php echo ''.$vehicles_images;?> 
+            <?php else:?>
+			<?php echo '<ul>'.$vehicles_list.'</ul>';?>	
+            <?php endif;?>
             <?php endif;?>
 	</div>			            
     </td>
@@ -311,14 +287,14 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  
  
 <!--Einsatzkarte-->
+			<?php $user	= JFactory::getUser();?>
+            <?php if( $this->item->gmap) : ?> 
+            <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>
 				<td colspan="2">
 					<b><u>Ungef&auml;hrer Einsatzort:</u></b>
 				</td>
 			</tr>
-			<?php $user	= JFactory::getUser();?>
-            <?php if( $this->item->gmap) : ?> 
-            <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>			
 			<td class="layout4_row_14" colspan="2">
             <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
@@ -332,6 +308,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
    				<div id="map" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
 			<?php endif;?>
+			<?php if ($this->params->get('gmap_action','0')) : ?>
+            <?php if( $this->item->gmap ) : ?>
+              <div style ="text-align:center;" class="eiko_distance_road hasTooltip" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !" id="distance_road"></div>
+            <?php endif;?>
+            <?php endif;?>
 			<?php else:?> 
 			<?php echo '<span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span>';?>
 			<?php endif;?>

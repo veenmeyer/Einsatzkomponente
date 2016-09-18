@@ -25,7 +25,6 @@ $app	= JFactory::getApplication();
 $params = $app->getParams('com_einsatzkomponente');
 $gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 
-
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0) :
 if ($params->get('eiko')) : 
@@ -53,9 +52,23 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 
 <div class="einsatzbericht-edit front-end-edit">
     <?php if(!empty($this->item->id)): ?>
+		<?php if ($this->copy == 0) : ?>
         <h1>Einsatzbericht bearbeiten ID-Nr.<?php echo $this->item->id; ?></h1>
+		<?php JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.copy', 0);?>
+		<?php endif; ?>
+		<?php if (!$this->copy == 0) : ?>
+        <h1>Einsatzbericht ID-Nr.<?php echo $this->item->id; ?> kopieren</h1>
+		<?php JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.copy', 1);?>
+		<?php endif;?>
+			
     <?php else: ?>
         <h1>Bitte geben Sie die Einsatzdaten ein :</h1>
+	<?php   $authorised = JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente');
+            if ($authorised !== true) {
+                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+            }
+	?>
+
     <?php endif; ?>
     <form id="form-einsatzbericht" action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
 	<div class="fltlft well" style="width:80%;">
@@ -63,7 +76,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="control-label"><?php echo $this->form->getLabel('id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('id'); ?></div>
 			</div>
-            <?php if (JFactory::getUser()->authorise('core.admin','einsatzkomponente')): ?>
+            <?php if (JFactory::getUser()->authorise('core.admin','com_einsatzkomponente')): ?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('counter'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('counter'); ?></div>
@@ -322,12 +335,18 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
             
 			</div>
  			<?php  endif; ?>
-            
+        
+	<?php   $authorised = JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente');
+            if ($authorised) {
+			?>
 			<div class="fltlft well" style="width:80%;">
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
 			</div>
+			<?php
+            }
+	?>
 			<!--<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
@@ -355,7 +374,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 	</form>
 </div>
 <!-- Javascript für GMap-Anzeige -->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script> 
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3&sensor=false"></script> 
 <script type="text/javascript"> 
       var map = null;
       var marker = null;

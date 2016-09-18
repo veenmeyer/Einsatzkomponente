@@ -18,7 +18,7 @@ JHtml::_('behavior.framework', true);
 print_r ($this->reports);
 
 ?>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
 
 <style type="text/css">
 html, body { height: 100%; } 
@@ -60,7 +60,7 @@ gicons["red"] = new google.maps.MarkerImage("mapIcons/marker_red.png",
       new google.maps.Point(0,0),
       // The anchor for this image is at 9,34.
       new google.maps.Point(9, 34));
-  var iconShadow = new google.maps.MarkerImage('http://www.google.com/mapfiles/shadow50.png',
+  var iconShadow = new google.maps.MarkerImage('https://www.google.com/mapfiles/shadow50.png',
       // The shadow image is larger in the horizontal dimension
       // while the position and offset are the same as for the main image.
       new google.maps.Size(37, 34),

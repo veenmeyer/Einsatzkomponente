@@ -32,6 +32,7 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 		// Load state from the request userState on edit or from the passed variable on default
         if (JFactory::getApplication()->input->get('layout') == 'edit') {
             $id = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzbericht.id');
+
         } else {
             $id = JFactory::getApplication()->input->get('id');
             JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', $id);
@@ -205,7 +206,18 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
             JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
             return false;
         }
-        
+			
+			
+			// Einsatz kopieren
+			if($user->authorise('core.create', 'com_einsatzkomponente') == true){
+		    $copy = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzbericht.copy');
+        	if (!$copy == 0) :
+            JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', 0);
+            JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.copy', 0);
+            $data['id'] = 0;
+			endif; 
+			}
+
 		$app	= JFactory::getApplication();
 		$params = $app->getParams('com_einsatzkomponente');
         $table = $this->getTable();
@@ -271,7 +283,8 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 		//this is the name of the field in the html form, filedata is the default name for swfupload
 		//so we will leave it as that
 		//$fieldName = 'Filedata';
- 
+
+		ini_set('memory_limit', -1);
 		
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		$count_data=count($_FILES['data']['name']) ;  ######### count the data #####
@@ -475,7 +488,7 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	$image_resize = $params->get('image_resize', 'true');
     if ($image_resize === 'true'):
 	$newwidth = $params->get('image_resize_max_width', '800');
-	$newheight = $params->get('image_resize_max_width', '600');
+	$newheight = $params->get('image_resize_max_height', '600');
     list($width, $height) = getimagesize($source);
     if($width > $height && $newheight < $height){
         $newheight = $height / ($width / $newwidth);

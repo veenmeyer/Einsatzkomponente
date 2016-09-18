@@ -8,6 +8,7 @@
  */
 // no direct access
 defined('_JEXEC') or die;
+$params = JComponentHelper::getParams('com_einsatzkomponente');
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
@@ -79,6 +80,42 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				<div class="control-label"><?php echo $this->form->getLabel('department'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('department'); ?></div>
 			</div>
+			<div class="control-group hide_ausruestung">
+				<div class="control-label line"><?php echo $this->form->getLabel('ausruestung'); ?></div>
+				<div class="controls hideme"><?php echo $this->form->getInput('ausruestung'); ?></div>
+				<?php if (!$params->get('eiko','0')) : ?>
+				<style>
+				.hideme {display:none;}
+				.line {text-decoration: line-through;}
+				</style>
+				<?php endif;?>
+			</div>
+				<?php if (!$params->get('display_detail_ausruestung','1')) : ?>
+				<style>
+				.hide_ausruestung {display:none;}
+				</style>
+				<?php endif;?>
+			
+			<?php
+				foreach((array)$this->item->ausruestung as $value): 
+					if(!is_array($value)):
+						echo '<input type="hidden" class="ausruestung" name="jform[ausruestunghidden]['.$value.']" value="'.$value.'" />';
+					endif;
+				endforeach;
+			?>
+			<script type="text/javascript">
+				jQuery.noConflict();
+				jQuery('input:hidden.ausruestung').each(function(){
+					var name = jQuery(this).attr('name');
+					if(name.indexOf('ausruestunghidden')){
+						jQuery('#jform_ausruestung option[value="'+jQuery(this).val()+'"]').attr('selected',true);
+					}
+				});
+			</script>			
+   
+                
+		   
+		   
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('link'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('link'); ?></div>

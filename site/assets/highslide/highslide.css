@@ -1,3 +1,8 @@
+
+.highslide:hover img:hover{
+}
+
+
 /**
 * @file: highslide.css 
 * @version: 4.1.9
@@ -18,6 +23,8 @@
 }
 .highslide:hover img {
 	border-color: gray;
+    transform: scale(1.1) !important;
+    clip-path: polygon(5% 5%, 95% 5%, 95% 95%, 5% 95%) !important;
 }
 .highslide-active-anchor img {
 	visibility: hidden;

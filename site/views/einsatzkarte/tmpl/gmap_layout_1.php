@@ -166,7 +166,7 @@ $totalRecords = $total[0]->total;
 	  
 ?>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
  
     
     <script type="text/javascript">
@@ -391,6 +391,8 @@ togglearea = function(opt_enable) {
 	  
 <?php // Marker stellen
 $i = 0;
+$hide = 0;
+
 while($i < count($reports))
 {
 	
@@ -400,10 +402,14 @@ $year = date("Y",strtotime($reports[$i]->date1));  ### 111225
 $month = date("m",strtotime($reports[$i]->date1)); ### 111225
 $day = date("d",strtotime($reports[$i]->date1));   ### 111225
 
-?>
 
+if ($reports[$i]->gmap AND $reports[$i]->gmap_report_latitude != "0") {
+
+?>
 var marker = createMarker(new google.maps.LatLng(<?php echo $reports[$i]->gmap_report_latitude;?>,<?php echo $reports[$i]->gmap_report_longitude;?>),"<?php echo $rSummary;?>","<?php echo $reports[$i]->einsatzart;?>","<?php echo $reports[$i]->data1;?>","<?php echo $reports[$i]->icon;?>","<?php echo $reports[$i]->id;?>","<?php echo $reports[$i]->date1;?>","<?php echo $day;?>","<?php echo $month;?>","<?php echo $year;?>","<?php echo $reports[$i]->image;?>","");
 <?php 
+}
+else {$hide++;}
 $i++; 
 } 
 ?>
@@ -534,6 +540,9 @@ polygon.setMap(map);
 <div class="well eiko_gmap_map well span6" id="map" style="display:none;"></div>
 <?php endif; ?>
 </div>
+<?php if ($hide) :?>
+<div><span class="glyphicon glyphicon-info-sign"></span> Es werden insg. <?php echo $hide;?> Einsätze werden aufgrund der Privatsphäre in dieser Karte nicht berücksichtigt.</div>
+<?php endif;?>
 
 <div class="row-fluid">
 
