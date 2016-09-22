@@ -66,7 +66,21 @@ description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu 
 			type="spacer"
 			hr="true"
 		/>
-		
+<field
+		name="show_all"
+		type="radio"
+		class="btn-group"
+		default="true"
+		label="Einsätze anzeigen : "
+		description="">
+			<option	value="true">nur aktuelles Jahr</option>
+			<option	value="false">alle Einsätze</option>
+</field>
+<field
+		name="spacer10"
+		type="spacer"
+		hr="true"
+/>
 
 
 		</fieldset>
