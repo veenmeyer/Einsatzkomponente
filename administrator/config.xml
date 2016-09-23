@@ -3,9 +3,6 @@
 	
 <!--Bildereinstellungen-->
 <fieldset name="Bilder_Einstellungen"	label="Bilder Einstellungen">
-<!--<field name="note1" type="note" class="alert alert-info" label="LOREMIPSUM" description="LOREMIPSUM_DESC" />
-<field name="note11" type="note" label="LOREMIPSUM" />
--->	
 
 <field name="note_uploadpath" 
 		type="note" 
@@ -240,17 +237,6 @@
            			<option value="SATELLITE">Satellitenkarte</option>
 	  		</field>
 			
-
-			<!--<field name="detail_pointer1_image" 
-				type="imagelist" 
-				default="circle.png" label="Einsatz-Icon wählen :" 
-				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-				directory="images/com_einsatzkomponente/images/map/icons/" 
-				exclude="index.html" 
-				hide_default="true" 
-				hide_none="true" 
-				stripext="" 
-			/>-->
 			
 	  		<field
 				name="display_detail_organisationen"
@@ -683,23 +669,6 @@
 			type="spacer"
 			hr="true"
 		/>
-		
-	  <!--<field
-			name="limit"
-			type="radio"
-			class="btn-group"
-			default="10"
-			label="Listenlänge :"
-			description="">
-			<option
-				value="0">Unbegrenzt</option>
-			<option	value="5">5</option>
-			<option	value="10">10</option>
-			<option	value="15">15</option>
-			<option	value="20">20</option>
-			<option	value="50">50</option>
-			<option	value="100">100</option>
-	  </field> -->
 	  
 	  <field
 			name="display_home_map"

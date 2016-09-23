@@ -31,12 +31,6 @@ function preflight( $type, $parent ) {
  
 	// abort if the release being installed is not newer than the currently installed version
 	if ( $type == 'update' ) :
-		//$oldRelease = $this->getParam('version');
-		//$rel = $oldRelease . ' to ' . $this->release;
-		//if ( version_compare( $this->release, $oldRelease, 'le' ) ) {
-		//	Jerror::raiseWarning(null, 'Incorrect version sequence. Cannot upgrade ' . $rel);
-		//	return false;
-		//}
 		
 		// Überflüssige Files löschen
 		jimport( 'joomla.filesystem.file' );

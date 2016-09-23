@@ -21,11 +21,6 @@ function EinsatzkomponenteBuildRoute(&$query)
 		unset($query['view']);
 	}
 	
-//	if (isset($query['layout'])) {
-//		$segments[] = $query['layout'];
-//		unset($query['layout']);
-//	}
-
 	if (isset($query['task'])) {
 		$segments[] = implode('/',explode('.',$query['task']));
 		unset($query['task']);
@@ -54,21 +49,6 @@ function EinsatzkomponenteParseRoute($segments)
 	// view is always the first element of the array
 	$count = count($segments);//print_r ($segments);exit;
     
-//    if ($count=='3')
-//	{
-//		$count--;
-//		$segment = array_pop($segments) ; 
-//		if (is_numeric($segment)) {
-//			$vars['id'] = $segment;
-//		$count--;
-//		$segment = array_pop($segments) ; 
-//			$vars['layout'] = $segment;
-//		}
-//        else{
-//            $count--;
-//            $vars['view'] = array_pop($segments) . '.' . $segment;
-//        }
-//	}
 	
     if ($count=='2')
 	{
