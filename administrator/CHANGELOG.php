@@ -3,6 +3,7 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
++ Optionen Fahrzeugübersicht
 + Einsatzkarte (alle oder nur aktuelles Jahr anzeigen)
 # Created-by-Filter im Einsatzbildmanager (Danke an mttronc)
 # Google-Api-Key bei Einsatz-Edit im Frontend eingesetzt.
