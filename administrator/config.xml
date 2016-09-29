@@ -1583,7 +1583,7 @@
 		/>	
 	
 	  <field
-			name="display_fahrzeug_bootstrap"
+			name="display_fahrzeuge_bootstrap"
 			type="radio"
 			class="btn-group"
 			default="0"
