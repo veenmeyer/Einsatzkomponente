@@ -155,12 +155,6 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		
 		// Import Jquery
 		JHtml::_('jquery.framework',false);
-		// prüfen ob jquery geladen wurde
-		echo "<script type=\"text/javascript\">
-		if(typeof jQuery == \"function\")
-		else
-		  alert(\"jQuery nicht geladen\");
-		</script>";
 		
 		
 		if ($this->params->get('gmap_action','0') == '1') :
