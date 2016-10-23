@@ -560,7 +560,7 @@
 			<field name="rss_image_width" 
 				type="text" 
 				showon ="display_home_rss:1"
-				default="150px" 
+				default="250px" 
 				label="Bildbreite :" 
 				description="Bitte nur so angeben : z.b. 150 px oder z.b. 80% !!" 
 				/>
@@ -2085,4 +2085,13 @@ http://docs.joomla.org/Timezones_parameter_type
 <field name="mytimezone" type="timezones" default="-10" label="Select a timezone" description="" />
 http://docs.joomla.org/Usergroup_parameter_type
 <field name="myusergroups" type="usergroup" default="" label="Select a user group" description="" />
+
+<field name="reviews" type="repeatable" label="Reviews" filter="raw">
+                    <fieldset hidden="true" name="reviews_modal" repeat="true">
+                        <field name="review" type="textarea" label="Tekst" />
+                        <field name="name" type="text" label="Naam" />
+                    </fieldset>
+</field>
+
+
  -->

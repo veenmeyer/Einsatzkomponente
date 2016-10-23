@@ -26,6 +26,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
     protected $alarmierungsart;			// Daten für Alarmierungsart (Pfad für Icon,Logo,...)
     protected $social;					// Daten für Social-Networks-Buttons
     protected $navbar;					// Daten für Social-Networks-Buttons
+    protected $einsatzdauer;					// Daten für Social-Networks-Buttons
     /**
      * Display the view
      */
@@ -52,7 +53,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$this->einsatzlogo = EinsatzkomponenteHelper::getEinsatzlogo($this->item->data1); 
 		$this->tickerKat = EinsatzkomponenteHelper::getTickerKat($this->item->tickerkat); 
 		$this->alarmierungsart = EinsatzkomponenteHelper::getAlarmierungsart($this->item->alerting); 
-		
+		$this->einsatzdauer = EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);
 		// Get active menu
 		$app	= JFactory::getApplication();
 		$menus	= $app->getMenu();
@@ -70,7 +71,6 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$document->addScript('components/com_einsatzkomponente/assets/highslide/highslide.config.js');		
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/highslide/highslide.css'); 
         
-		
 		
 		//print_r ($this->menu);
 		$this->social = EinsatzkomponenteHelper::getSocial($this->params,$this->item->id,$this->item->summary);
@@ -243,11 +243,12 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		
 		if ($this->params->get('display_detail_bootstrap','0')) :
 		// Import Bootstrap
- 		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
+		JHtml::_('bootstrap.framework');
+		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
 		endif;
-		$document->addStyleDeclaration($this->params->get('detail_css','')); 
+		
+		// Import CSS aus Optionen
+		$document->addStyleDeclaration($this->params->get('detail_css',''));  
 		
 ?>
     <script type="text/javascript">

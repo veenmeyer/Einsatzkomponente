@@ -533,6 +533,9 @@ polygon.setMap(map);
  <?php if ($this->params->get('display_einsatzkarte_sidebar','1')) : ?>
 <div class="well eiko_gmap_sidebar span6" id="side_bar" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px"></div>
 <?php endif; ?>
+ <?php if (!$this->params->get('display_einsatzkarte_sidebar','1')) : ?>
+<div class="well eiko_gmap_sidebar span6" id="side_bar" style="display:none;height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px"></div>
+<?php endif; ?>
  <?php if ($this->params->get('display_einsatzkarte_map','1')) : ?>
 <div class="well eiko_gmap_map well span6" id="map" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px"></div>
 <?php endif; ?>

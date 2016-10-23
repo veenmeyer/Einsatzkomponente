@@ -256,7 +256,7 @@ if ($this->params->get('display_home_pagination')) :
 				</script>
 				<?php endif;?>            
            </td>		   		   
-		   <td align="center"><?php echo '<i class="icon-arrow-right"></i> '.$item->address;?></td>
+		   <td align="center"><?php echo '<i class="icon-location" ></i> '.$item->address;?></td>
            
            <?php if ($this->params->get('display_home_orga','0')) : ?>
            <?php 					$data = array();

@@ -9,7 +9,8 @@
 
 // no direct access
 defined('_JEXEC') or die;  
-JHtml::_('bootstrap.tooltip');
+
+//JHtml::_('bootstrap.tooltip');
 
 require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 $vehicles_images = '';
@@ -156,7 +157,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 	              	<span class="eiko_einsatzdauer_value_2">
 
 	              	<?php
-						echo EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);
+						echo $this->einsatzdauer;
 					?>
 
 	              	</span>

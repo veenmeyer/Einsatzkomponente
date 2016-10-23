@@ -469,31 +469,20 @@ $query->where('a.state = 1');
 					}
 			}
 
-	//		if (isset($item->images) && $item->images != '') {
-	//			if(is_object($item->images)){
-	//				$item->images = JArrayHelper::fromObject($item->images);
-	//			}
-	//			$values = (is_array($item->images)) ? $item->images : explode(',',$item->images);
+			
 
-	//			$textValue = array();
-	//			foreach ($values as $value){
-	//				$db = JFactory::getDbo();
-	//				$query = $db->getQuery(true);
-	//				$query
-	//						->select('image')
-	//						->from('`#__eiko_images`')
-	//						->where('id = ' . $db->quote($db->escape($value)));
-	//				$db->setQuery($query);
-	//				$results = $db->loadObject();
-	//				if ($results) {
-	//					$textValue[] = $results->image;
-	//				}
-	//			}
-
-	//		$item->images = !empty($textValue) ? implode(', ', $textValue) : $item->images;
-
-	//		}
-
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+							->select('count(image)')
+							->from('`#__eiko_images`')
+							->where('report_id = ' . $item->id);
+					$db->setQuery($query);
+					$item->images = $db->loadResult();
+			if ($item->image) { $item->images = $item->images +1;}
+					
+					
+					
 			if (isset($item->auswahl_orga) && $item->auswahl_orga != '') {
 				if(is_object($item->auswahl_orga)){
 					$item->auswahl_orga = JArrayHelper::fromObject($item->auswahl_orga);

@@ -184,6 +184,11 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 	 */
 	public function save($data)
 	{
+			// Hausnummern aus Adresse entfernen !
+			if (isset($data[address]) && $data[address] != '') {
+				$data[address]= preg_replace("/[0-9]/", "", $data[address]); 
+			}
+
 		$id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('einsatzbericht.id');
         $state = (!empty($data['state'])) ? 1 : 0;
         $user = JFactory::getUser();

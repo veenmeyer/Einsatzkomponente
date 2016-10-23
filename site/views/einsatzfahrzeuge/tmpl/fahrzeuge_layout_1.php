@@ -9,7 +9,11 @@
 // No direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+JHtml::_('bootstrap.tooltip');
+JHtml::_('behavior.multiselect');
+JHtml::_('formbehavior.chosen', 'select');
+
 
 ?>
 
@@ -17,7 +21,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
       name="adminForm" id="adminForm">
 
 	<?php //echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
-	<table class="table" id="organisationList">
+	<table class="table" id="fahrzeugList">
 		<thead>
 		<tr>
 

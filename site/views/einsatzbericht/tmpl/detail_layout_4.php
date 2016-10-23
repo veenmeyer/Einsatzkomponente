@@ -95,7 +95,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     	<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
     </td>
     <td class="layout4_row_100">
-		<?php echo EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);	?>
+		<?php echo $this->einsatzdauer;	?>
 	</td>
   </tr>
  <?php endif;?>

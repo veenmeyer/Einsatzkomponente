@@ -236,7 +236,7 @@ if ($this->params->get('display_home_pagination')) :
 		   <?php endif; ?>
            <br />
 
-<?php echo '<span class="eiko_address_main_1"><i class="icon-arrow-right"></i> '.$item->address.'</span>';?>
+<?php echo '<span class="eiko_address_main_1"><i class="icon-location" ></i> '.$item->address.'</span>';?>
 
 			<?php if ($this->params->get('display_home_info','1') or $this->params->get('display_home_links','1')) : ?>
 			<div class="eiko_td_buttons_main_1">

@@ -147,10 +147,10 @@ defined('_JEXEC') or die;
            </td>
            <?php endif;?>
            <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
-		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $item->date1);?><br /><?php echo date('H:i ', $item->date1); ?>Uhr</td>
+		   <td class="eiko_td_datum_main_1"> <?php echo '<i class="icon-calendar" ></i> '.date('d.m.Y ', $item->date1);?><br /><?php echo '<i class="icon-clock" ></i> '.date('H:i ', $item->date1); ?>Uhr</td>
            <?php endif;?>
            <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
-		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $item->date1);?></td>
+		   <td class="eiko_td_datum_main_1"> <?php echo '<i class="icon-calendar" ></i> '.date('d.m.Y ', $item->date1);?></td>
            <?php endif;?>
            <?php if ($this->params->get('display_home_date_image','1')=='3') : ?>
 		   <td class="eiko_td_kalender_main_1"> 
@@ -182,8 +182,7 @@ defined('_JEXEC') or die;
 					<span class="eiko_nowrap"><b><?php echo $item->data1; ?></b></span></a>
 					<br/>
 					<?php if ($item->address): ?>
-					<?php //echo '<i class="icon-arrow-right"></i> '.$this->escape($item->address); ?>
-					<?php echo ''.$this->escape($item->address); ?>
+					<?php echo '<i class="icon-location" ></i> '.$this->escape($item->address); ?>
 					<br/>
 					<?php endif;?>
 
@@ -263,12 +262,12 @@ defined('_JEXEC') or die;
                 <?php $class = ($canEdit || $canChange) ? 'active' : 'disabled'; ?>
                 <td class="center">
 					<?php if ($canEdit): ?>
-                    <a class="btn btn-micro <?php echo $class; ?>"
+                    <a class="btn btn-mini <?php echo $class; ?>"
                        href="<?php echo ($canEdit || $canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
                         <?php if ($item->state == 1): ?>
-                            <i class="icon-publish"></i>
+                            <i class="icon-save"></i>
                         <?php else: ?>
-                            <i class="icon-unpublish"></i>
+                            <i class="icon-radio-unchecked"></i>
                         <?php endif; ?>
                     </a>
 					<?php endif; ?>

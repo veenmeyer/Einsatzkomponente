@@ -255,7 +255,33 @@ if (!JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente'))
 
 	public function getItems()
 	{
-		$items = parent::getItems();
+		//$items = parent::getItems();
+		
+		$store = $this->getStoreId();
+
+		// Try to load the data from internal storage.
+		if (isset($this->cache[$store]))
+		{
+			return $this->cache[$store];
+		}
+
+		// Load the list items.
+		$query = $this->_getListQuery();
+
+		try
+		{
+			$items = $this->_getList($query, $this->getStart(), $this->getState('list.limit'));
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
+
+			return false;
+		}
+
+
+		// Add the items to the internal cache.
+		$this->cache[$store] = $items;
 
 		return $items;
 	}

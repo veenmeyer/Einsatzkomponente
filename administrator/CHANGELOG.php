@@ -3,6 +3,9 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
++ RSS-Feed für Einsatzarchiv-Übersicht hinzugefügt
+# Bootstrap CSS + JS werden jetzt direkt aus Joomla verwendet
++ main_layout_3 für Einsatzarchiv hinzugefügt
 + Optionen Fahrzeugübersicht
 + Einsatzkarte (alle oder nur aktuelles Jahr anzeigen)
 # Created-by-Filter im Einsatzbildmanager (Danke an mttronc)
