@@ -106,7 +106,7 @@ class EinsatzkomponenteViewEinsatzbildmanager extends JViewLegacy
         
 		
 		//Filter for the field created_by
-		$this->extra_sidebar .= '<div class="div_side_filter">';
+		$this->extra_sidebar = '<div class="div_side_filter">';
 		$this->extra_sidebar .= '<small><label for="filter_created_by">Erstellt von</label></small>';
 		$this->extra_sidebar .= JHtmlList::users('filter_created_by', $this->state->get('filter.created_by'), 1, 'onchange="this.form.submit();"');
 		$this->extra_sidebar .= '</div>';

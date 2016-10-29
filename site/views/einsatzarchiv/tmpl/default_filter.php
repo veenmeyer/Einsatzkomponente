@@ -5,7 +5,6 @@ defined('JPATH_BASE') or die;
 $app = JFactory::getApplication();
 $params = $app->getParams('com_einsatzkomponente');
 
-if ($params->get('show_filter','1')) :
 
 
 
@@ -30,6 +29,13 @@ $filters = false;
 if (isset($data['view']->filterForm)) {
     $filters = $data['view']->filterForm->getGroup('filter');
 }
+
+
+
+
+
+
+if ($params->get('show_filter','1')) {
 
 // Load search tools
 JHtml::_('searchtools.form', $formSelector, $data['options']);
@@ -140,4 +146,4 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 
 </div>
 
-<?php endif;?>
+<?php } ?>
