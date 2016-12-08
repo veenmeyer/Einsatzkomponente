@@ -1600,8 +1600,47 @@
 			type="spacer"
 			hr="true"
 		/> 
+	  <field
+			name="show_fahrzeuge_detail1"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Anzeige Beschreibung :"
+			description="">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+	  <field
+			name="show_fahrzeuge_detail2"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Anzeige Detail2 :"
+			description="">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+	  <field
+			name="show_fahrzeuge_einsatz"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="Anzeige letzter Einsatz :"
+			description="Option letztes Einsatzdatum des Fahrzeuges anzeigen.">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
 
-	
+	  
 	</fieldset>
 	
 	

@@ -127,7 +127,7 @@ defined('_JEXEC') or die;
 					<?php $vehicles = count($vehicles); ?>
 		  			<?php $auswahl_orga = explode (",",$item->auswahl_orga);?>
 					<?php $auswahl_orga = count($auswahl_orga); ?>
-					<?php $strength = $people + ($vehicles*20) + ($auswahl_orga*30) ; ?>
+					<?php $strength = ($people*0.5) + ($vehicles*2) + ($auswahl_orga*15) ; ?>
 					<div class="progress progress-danger progress-striped hasTooltip" style="margin-top:-12px;margin-bottom:5px;color:#000000 !important;width:180px;" title="Einsatzkraft: <?php if ($auswahl_orga) :echo $auswahl_orga;?> Organisation(en) //<?php endif;?> <?php if ($vehicles):echo $vehicles;?> Einsatzfahrzeug(e) <?php endif;?><?php if ($people) :echo '// '.$people;?> Einsatzkräfte <?php endif;?>">
 					<div class="bar" style="color:#000000 !important;width:<?php echo $strength;?>px"></div></div>
 
@@ -177,7 +177,7 @@ defined('_JEXEC') or die;
 						<?php if ($item->gmap & $item->gmap_report_latitude): ?>
 							</br></br>
 	
-							<img class="eiko_karte_klein" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&zoom=14&size=150x84&maptype=roadmap&markers=color:red%7Clabel:x%7C<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&key=<?php echo $this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E");?>" width="<?php echo $this->params->get('display_home_image_width','150px');?>;" alt="Einsatzkarte <?php echo $item->summary;?>">		  
+							<img class="img-rounded eiko_karte_klein" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&zoom=14&size=150x84&maptype=roadmap&markers=color:red%7Clabel:x%7C<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&key=<?php echo $this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E");?>" width="<?php echo $this->params->get('display_home_image_width','150px');?>;" alt="Einsatzkarte <?php echo $item->summary;?>">		  
 
 						<?php endif;?>
 					<?php endif;?>
@@ -206,7 +206,7 @@ defined('_JEXEC') or die;
 		  <?php if ($this->params->get('gmap_action','0') == '1') :?>
 			<?php if ($item->gmap & $item->gmap_report_latitude): ?>
 				</br></br>
-				<img class="eiko_karte_klein" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&zoom=14&size=150x84&maptype=roadmap&markers=color:red%7Clabel:x%7C<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&key=<?php echo $this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E");?>" width="<?php echo $this->params->get('display_home_image_width','150px');?>;" alt="Einsatzkarte <?php echo $item->summary;?>">		  
+				<img class="img-rounded eiko_karte_klein" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&zoom=14&size=150x84&maptype=roadmap&markers=color:red%7Clabel:x%7C<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&key=<?php echo $this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E");?>" width="<?php echo $this->params->get('display_home_image_width','150px');?>;" alt="Einsatzkarte <?php echo $item->summary;?>">		  
 			<?php endif;?>
 		<?php endif;?>
 		

@@ -30,15 +30,23 @@ JHtml::_('formbehavior.chosen', 'select');
 							<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
+				
+				<?php if ($this->params->get('show_fahrzeuge_detail1','1')) : ?>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  'Beschreibung', 'a.detail1', $listDirn, $listOrder); ?>
 				</th>
+				<?php endif;?>
+	
+				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  '', 'a.detail2', $listDirn, $listOrder); ?>
 				</th>
+				<?php endif;?>
 				
+				<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
 				<th><?php echo 'Letzter Eintrag'; ?>:</th>
-
+				<?php endif; ?>
+				
 				<?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
 				<th>
 				<?php echo 'Organisation'; ?>
@@ -88,28 +96,32 @@ JHtml::_('formbehavior.chosen', 'select');
 				<?php echo $this->escape($item->name); ?></a>
 				</td>
 				
-				
-				<td>
-
-					<?php echo $item->detail1; ?>
-				</td>
-				<td>
-
-					<?php echo $item->detail2; ?>
-				</td>
-				
-				<?php // letzter Einsatz   
-				$database			= JFactory::getDBO();
-				$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
-				$database->setQuery( $query );
-				$total = $database->loadObjectList();
-				?>
-				<?php if ($total) : ?>
-				<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
-				<?php else: ?>
-				<td><?php echo '-'; ?></td>
+				<?php if ($this->params->get('show_fahrzeuge_detail1','1')) : ?>
+					<td>
+						<?php echo $item->detail1; ?>
+					</td>
 				<?php endif;?>
+				
+				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
+					<td>
 
+						<?php echo $item->detail2; ?>
+					</td>
+				<?php endif;?>
+				
+				<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
+					<?php // letzter Einsatz   
+					$database			= JFactory::getDBO();
+					$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
+					$database->setQuery( $query );
+					$total = $database->loadObjectList();
+					?>
+					<?php if ($total) : ?>
+					<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+					<?php else: ?>
+					<td><?php echo '-'; ?></td>
+					<?php endif;?>
+				<?php endif;?>
 				
            <?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
            <?php 					

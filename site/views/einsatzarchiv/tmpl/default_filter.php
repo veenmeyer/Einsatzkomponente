@@ -30,10 +30,18 @@ if (isset($data['view']->filterForm)) {
     $filters = $data['view']->filterForm->getGroup('filter');
 }
 
+?>
 
 
+<!--RSS-Feed Imag-->
+<?php if ($params->get('display_home_rss','1')) : ?>
+<div class="btn-wrapper  eiko_rss_main_1" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzarchiv&format=feed&type=rss"><span class="icon-feed" style="color:#cccccc;font-size:24px;"> </span> </a></div>
 
+ <!--<div class="btn-wrapper  eiko_rss_main_1" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzarchiv&format=json&type=json"><span class="icon-feed" style="color:#000000;font-size:24px;"> </span></a></div> -->
 
+<?php endif;?>
+
+<?php
 
 if ($params->get('show_filter','1')) {
 
@@ -45,10 +53,6 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
     <div class="clearfix">
         <div class="js-stools-container-bar">
 		
-<!--RSS-Feed Imag-->
-<?php if ($params->get('display_home_rss','1')) : ?>
-<div class="btn-wrapper  eiko_rss_main_1" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzarchiv&format=feed&type=rss"><img src="<?php echo JURI::Root();?>/components/com_einsatzkomponente/assets/images/livemarks.png" class="hasTooltip eiko_rss_icon_main_1" border="0" title="RSS-Feed" alt="rss-feed-image"></a></div>
-<?php endif;?>
 
 		<?php if ($params->get('show_filter_search','1')) : ?>
             <!--<label for="filter_search" class="element-invisible" aria-invalid="false"><?php echo JText::_('Suchen'); ?></label> -->

@@ -28,7 +28,7 @@ defined('_JEXEC') or die;
 
 <!--RSS-Feed Imag-->
 <?php if ($this->params->get('display_home_rss','1')) : ?>
-<div style="float:right;" class="eiko_rss" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzberichte&format=feed&type=rss"><img src="<?php echo JURI::Root();?>/components/com_einsatzkomponente/assets/images/livemarks.png" class="eiko_rss_icon" border="0" alt="rss-feed-image"></a></div>
+<div style="float:right;" class="eiko_rss" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzberichte&format=feed&type=rss"><span class="icon-feed" style="color:#cccccc;font-size:24px;"> </span> </a></div>
 <?php endif; ?>
 
 

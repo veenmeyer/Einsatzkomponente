@@ -209,7 +209,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php endif;?>
             
             <?php if( $this->item->vehicles ) : ?>
-			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Fahrzeuge am Einsatzort:').'</u></span>'; ?>:
+			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Fahrzeuge am Einsatzort:').'</u></span><br/>'; ?>
 			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
 			<?php echo ''.$vehicles_images;?> 
             <?php else:?>

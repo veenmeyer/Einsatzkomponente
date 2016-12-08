@@ -133,17 +133,18 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 					<?php endif;?>
 					<?php endif;?>
 					
-					<?php // letzter Einsatz   
-					$database			= JFactory::getDBO();
-					$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$this->item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
-					$database->setQuery( $query );
-					$total = $database->loadObjectList();
-					?>
-					<?php if ($total) : ?>
-					<br/><li>Letzter Eintrag in unserem Einsatzarchiv : 
-					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
-					<?php endif; ?>
-					
+					<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
+						<?php // letzter Einsatz   
+						$database			= JFactory::getDBO();
+						$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$this->item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
+						$database->setQuery( $query );
+						$total = $database->loadObjectList();
+						?>
+						<?php if ($total) : ?>
+						<br/><li>Letzter Eintrag in unserem Einsatzarchiv : 
+						<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
+						<?php endif; ?>
+					<?php endif;?>
 <!-- Ausrüstung anzeigen -->  
 <?php 	if ($this->params->get('show_fahrzeuge_ausruestung','0')) : 
 		if(!$this->item->ausruestung == '') :
