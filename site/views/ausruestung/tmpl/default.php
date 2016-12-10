@@ -17,12 +17,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 ?>
 
 <!--Page Heading-->
+<!--Page Heading-->
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <div class="page-header eiko_header_main">
-<h1 class="eiko_header_main_h1"> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1> 
-<input type="button" class="btn eiko_back_button" value="Zurück" onClick="history.back();">
+<h1 class="ftm_header_h1"><?php echo $this->escape($this->params->get('page_heading')); ?> <span class="icon-info-2"> </span> <br/><small><?php echo $this->item->name; ?></small> </h1> 
 </div>
-<br/>
 <?php endif;?>
 
 <?php

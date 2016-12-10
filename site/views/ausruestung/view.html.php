@@ -40,6 +40,7 @@ class EinsatzkomponenteViewAusruestung extends JViewLegacy {
 		// Import Bootstrap
 		JHtml::_('bootstrap.framework');
 		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
+		$document->addStyleSheet($this->baseurl.'/media/jui/css/icomoon.css');
 		endif;
 		
 		// Import CSS aus Optionen

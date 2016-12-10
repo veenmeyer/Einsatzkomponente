@@ -1644,6 +1644,37 @@
 	</fieldset>
 	
 	
+<fieldset name="ausruestung_uebersicht" label="Ausrüstungübersicht" description="">
+
+<field name="note_ausruestung_uebersicht" 
+		type="note" 
+		label="Hier können Sie die Übersicht der Ausruestungen anpassen :" 
+		class="alert alert-info" 
+		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
+		/>	
+	
+	  <field
+			name="display_ausruestung_bootstrap"
+			type="radio"
+			class="btn-group"
+			default="0"
+			label="Bootstrap CSS+JS :"
+			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+		<field
+			name="spacer54514"
+			type="spacer"
+			hr="true"
+		/> 
+
+	  
+	</fieldset>
+	
 	
 <fieldset name="joomla_article" label="Joomla-Artikel" description="">
 	
