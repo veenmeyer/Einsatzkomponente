@@ -143,7 +143,7 @@
             value_field="name" />
 			
        <field name="ausruestung" type="sql" class="inputbox"
-            label="Beladung / Ausrüstung"
+            label="COM_EINSATZKOMPONENTE_BELADUNG_AUSRUESTUNG"
             description="" 
             required="false" 
             query="SELECT `id`, `name` FROM `#__eiko_ausruestung` WHERE `state`='1' ORDER BY `ordering` ASC"

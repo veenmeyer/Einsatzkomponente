@@ -2,21 +2,21 @@
 <config>
 	
 <!--Bildereinstellungen-->
-<fieldset name="Bilder_Einstellungen"	label="Bilder Einstellungen">
+<fieldset name="Bilder_Einstellungen"	label="COM_EINSATZKOMPONENTE_OPTION_BILDER_EINSTELLUNGEN">
 
 <field name="note_uploadpath" 
 		type="note" 
-		label="Speicherort der Einsatzbilder :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_BILDER_SPEICHERORT" 
 		class="alert alert-info" 
-		description="Bitte gebe hier an, in welchem Ordner die Einsatzbilder gespeichert werden sollen. Empfohlen wird : images/com_einsatzkomponente/einsatzbilder"
+		description="COM_EINSATZKOMPONENTE_OPTION_1"
 		/>
 		
 
 			<field name="uploadpath" 
 					type="text" 
 					default="images/com_einsatzkomponente/einsatzbilder" 
-					label="Ordnerpfad für Einsatzbilder :" 
-					description="z.b. images/com_einsatzkomponente/einsatzbilder" 
+					label="COM_EINSATZKOMPONENTE_OPTION_BILDER_SPEICHERORT" 
+					description="COM_EINSATZKOMPONENTE_OPTION_2" 
 					/>
 					
 	  		<field
@@ -24,24 +24,24 @@
 				type="radio"
 				class="btn-group"
 				default="1"
-				label="Bilder in Unterordner :"
-				description="Hier können Sie einstellen, ob pro Einsatz ein Bilderordner erstellt werden soll.">
+				label="COM_EINSATZKOMPONENTE_OPTION_BILDER_IN_UNTERORDNER"
+				description="COM_EINSATZKOMPONENTE_OPTION_3">
 					<option
-						value="0">Nein</option>
+						value="0">JNO</option>
 					<option
-						value="1">Ja</option>
+						value="1">JYES</option>
 	  		</field>
 	  		<field
 				name="titelbild_auto"
 				type="radio"
 				class="btn-group"
 				default="1"
-				label="Titelbild Automatisch :"
-				description="Soll das Titelbild automatisch gesetzt werden, wenn Bilder hochgeladen werden ?">
+				label="COM_EINSATZKOMPONENTE_OPTION_TITELBILD_AUTOMATISCH"
+				description="COM_EINSATZKOMPONENTE_OPTION_4">
 					<option
-						value="0">Nein</option>
+						value="0">JNO</option>
 					<option
-						value="1">Ja</option>
+						value="1">JYES</option>
 	  		</field>
 
 		<field
@@ -51,18 +51,18 @@
 		/>
 <field name="note_thumbs" 
 		type="note" 
-		label="Einstellungen für die Thumbserstellung :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_THUMBSERSTELLUNG" 
 		class="alert alert-info" 
 		description="Aus den Einsatzbildern werden für die Einsatzübersicht sogenannte Thumbs (kleine Bider) erstellt, damit die Seite auch bei vielen Einsätzen mit Bildern schneller geladen werden kann."
 		/>	
 			<field name="thumbwidth" 
 			type="text" default="100" 
-			label="Thumbs-Breite(px):" 
+			label="COM_EINSATZKOMPONENTE_OPTION_THUMBS_BREITE_PX" 
 			description="Bitte nur so angeben : z.b. 100  ohne px !!" 
 			/>
 			<field name="thumbhigh" 
 			type="text" default="100" 
-			label="Thumbs-Höhe (px):" 
+			label="COM_EINSATZKOMPONENTE_OPTION_THUMBS_HOEHE_PX" 
 			description="Bitte nur so angeben : z.b. 100  ohne px !!" 
 			/>
 			<field
@@ -70,12 +70,12 @@
 			type="radio"
 			class="btn-group"
 			default="false"
-			label="Form der Thumbs :"
+			label="COM_EINSATZKOMPONENTE_OPTION_THUMB_FORM"
 			description="Hier kann das Aussehen der Thumbs ausgwählt werden.">
 			<option
-				value="false">Rechteckig</option>
+				value="false">COM_EINSATZKOMPONENTE_OPTION_RECHTECKIG</option>
 			<option
-				value="true">Quadratisch</option>
+				value="true">COM_EINSATZKOMPONENTE_OPTION_QUADRATISCH</option>
 			</field>
 		<field
 			name="spacer4"
@@ -84,7 +84,7 @@
 		/>
 <field name="note_resize" 
 		type="note" 
-		label="Einstellungen für die Resizefunktion :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSTELLUNG_RESIZEFUNKTION" 
 		class="alert alert-info" 
 		description="Sehr hilfreich, wenn die Einsatzbilder zu groß sind ..."
 		/>	
@@ -93,26 +93,26 @@
 			type="radio"
 			class="btn-group"
 			default="true"
-			label="Resize-Funktion :"
+			label="COM_EINSATZKOMPONENTE_OPTION_RESIZEFUNKTION"
 			description="">
 			
 			<option
-				value="false">Aus</option>
+				value="false">JNO</option>
 			<option
-				value="true">An</option>
+				value="true">JYES</option>
 			</field>
 			<field name="image_resize_max_width" 
 				type="text" 
 				showon="image_resize:true"
 				default="800" 
-				label="max. Breite (px) :" 
+				label="COM_EINSATZKOMPONENTE_OPTION_MAX_BREITE_PX" 
 				description="Bitte nur so angeben : z.b. 800  ohne px !!" 
 			/>
 			<field name="image_resize_max_height" 
 				type="text" 	
 				showon="image_resize:true"
 				default="600" 
-				label="max. Höhe (px) :" 
+				label="COM_EINSATZKOMPONENTE_OPTION_MAX_HOEHE_PX" 
 				description="Bitte nur so angeben : z.b. 600  ohne px !!" 
 			/>
 			<field
@@ -123,7 +123,7 @@
 		
 <field name="note_watermark" 
 		type="note" 
-		label="Einstellungen für die Wasserzeichenfunktion :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSTELLUNG_WASSERZEICHENFUNKTION" 
 		class="alert alert-info" 
 		description="Diese Funktion ermöglicht die automatische Integration eines Wasserzeichens. Sie können auch eigene Wasserzeichen hinzufügen, einfach eine PNG-Datei in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkomponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!"
 		/>	
@@ -132,19 +132,20 @@
 			type="radio"
 			class="btn-group"
 			default="true"
-			label="Wasserzeichen-Funktion :"
+			label="COM_EINSATZKOMPONENTE_OPTION_WASSERZEICHENFUNKTION"
 			description="">
 			
 			<option
-				value="false">Aus</option>
+				value="false">JNO</option>
 			<option
-				value="true">An</option>
+				value="true">JYES</option>
 			</field>
 			
 			<field name="watermark_image" 
 			type="imagelist" 
 			showon="watermark_show:true"
-			default="watermark.png" label="Wasserzeichen wählen :" 
+			default="watermark.png" 
+			label="COM_EINSATZKOMPONENTE_OPTION_WASSERZEICHEN_WAEHLEN" 
 			description="Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!" 
 			directory="administrator/components/com_einsatzkomponente/assets/images/watermark" 
 			exclude="index.html" 
@@ -157,7 +158,7 @@
 			type="text" 
 			showon="watermark_show:true"
 			default="0" 
-			label="Abstand x (vom li. Rand) :" 
+			label="COM_EINSATZKOMPONENTE_OPTION_ABSTAND_LINKS" 
 			description="Bitte nur so angeben : z.b. 5  ohne px !!" 
 			/>
 			
@@ -165,7 +166,7 @@
 			type="text" 
 			showon="watermark_show:true"
 			default="60" 
-			label="Abstand y (vom unt. Rand) :" 
+			label="COM_EINSATZKOMPONENTE_OPTION_ABSTAND_RECHTS" 
 			description="Bitte nur so angeben : z.b. 60  ohne px !!" 
 			/>
 
@@ -173,13 +174,13 @@
 	
 	
 <!--GMap-Einstellungen-->
-<fieldset name="Kartenfunktion" label="Kartenfunktion" description="">
+<fieldset name="Kartenfunktion" label="COM_EINSATZKOMPONENTE_OPTION_KARTENFUNKTION" description="">
 
 <field name="note_kartenfunktion" 
 		type="note" 
-		label="Kartenfunktionen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSTELLUNGEN_KARTENFUNKTIONEN" 
 		class="alert alert-info" 
-		description="Über diese Option können Sie die Kartenanzeige aktivieren, oder aber auch komplett deaktivieren."
+		description="COM_EINSATZKOMPONENTE_OPTION_MAP_1"
 		/>	
 
 				<field
@@ -187,21 +188,21 @@
 					type="radio"
 					class="btn-group"
 					default="1"
-					label="GMaps Funktionen erlauben :"
+					label="COM_EINSATZKOMPONENTE_OPTION_GMAP_ERLAUBEN"
 					description="Kartenfunktionen">
 					<option
-						value="0">Keine</option>
+						value="0">COM_EINSATZKOMPONENTE_OPTION_KEINE</option>
 					<option
-						value="1">GoogleMaps</option>
+						value="1">COM_EINSATZKOMPONENTE_OPTION_GOOGLEMAPS</option>
 					<option
-						value="2">OpenStreetMap</option>
+						value="2">COM_EINSATZKOMPONENTE_OPTION_OPENSTREETMAPS</option>
 				</field>
 				
 		<field
 			name="gmapkey"
 			type="text"
 			default ="AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"
-			label="Google Api-Key"
+			label="COM_EINSATZKOMPONENTE_OPTION_GOOGLE_API_KEY"
 			width ="100"
 			hint="GoogleMap Api-Key benötigt"
 			showon="gmap_action:1"
@@ -210,7 +211,7 @@
 		<field name="note_key_map" 
 			type="note" 
 			showon="gmap_action:1"
-			label="Bitte beantragen Sie hier einen eigenen Google-Api-Key:  https://console.developers.google.com" 
+			label="COM_EINSATZKOMPONENTE_OPTION_5" 
 			class="alert alert-warning" 
 			description=""
 		/>	
@@ -218,7 +219,7 @@
 <field name="note_detail_map" 
 		type="note" 
 		showon="gmap_action:1,2"
-		label="Hier können Sie verschiedene Einstellungen für die Einsatzkarte vornehmen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSTELLUNGEN_FUER_EINSATZKARTE" 
 		class="alert alert-info" 
 		description=""
 		/>	
@@ -228,13 +229,13 @@
 				name="detail_gmap_onload"
 				type="list"
 				showon="gmap_action:1,2"
-				label="Kartentyp :"
+				label="COM_EINSATZKOMPONENTE_KARTENTYP"
 				description="Normal: zeigt die normale Standard-2D-Karte / Satellite: zeigt Luftaufnahmen des Geländes an / Hybrid: zeigt eine Mischung aus Satellite und Normal an (Luftaufnahme mit hinterlegten Straßen- Städtenamen) usw. (nur für GoogleMaps)"
 				default="HYBRID"
 				class="inputbox">
-				   	<option value="ROADMAP">Strassenkarte</option>
-      	   			<option value="HYBRID">Hybridkarte (Satellit+Ortsnamen)</option>
-           			<option value="SATELLITE">Satellitenkarte</option>
+				   	<option value="ROADMAP">COM_EINSATZKOMPONENTE_STRASSENKARTE</option>
+      	   			<option value="HYBRID">COM_EINSATZKOMPONENTE_HYBRIDKARTE_SATELLITORTSNAMEN</option>
+           			<option value="SATELLITE">COM_EINSATZKOMPONENTE_SATELLITENKARTE</option>
 	  		</field>
 			
 			
@@ -244,18 +245,18 @@
 				showon="gmap_action:1,2"
 				class="btn-group"
 				default="1"
-				label="Organisationen Standorte :"
+				label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_STANDORTE"
 				description="Hier können Sie einstellen, ob die Standorte der Organisationen auf der Karte angezeigt werden sollen.">
 					<option
-						value="0">Verbergen</option>
+						value="0">COM_EINSATZKOMPONENTE_OPTION_VERBERGEN</option>
 					<option
-						value="1">Anzeigen</option>
+						value="1">COM_EINSATZKOMPONENTE_OPTION_SHOW</option>
 	  		</field>
 			
 			<field name="einsatzkarte_orga_image" 
 				type="imagelist" 
 				showon="gmap_action:1,2"
-				default="haus_rot.png" label="Orga-Icon wählen :" 
+				default="haus_rot.png" label="COM_EINSATZKOMPONENTE_OPTION_ORGA_ICON_WAEHLEN" 
 				description="Sie können auch eigene Icons hinzufügen. Einfach in den folgenden Ordner hochladen : ../../images/com_einsatzkomponente/images/map/icons/    Die Datei muss zwingend eine PNG-Datei sein !!" 
 				directory="images/com_einsatzkomponente/images/map/icons/" 
 				exclude="index.html" 
@@ -269,7 +270,7 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="14"
-			label="Größe der Gmap-Icons :"
+			label="COM_EINSATZKOMPONENTE_OPTION_GROESSE_GMAP_ICONS"
 			description="">
 			<option
 				value="14">14 x 14</option>
@@ -286,7 +287,7 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="24"
-			label="Größe der Organisation-Icons :"
+			label="COM_EINSATZKOMPONENTE_OPTION_GROESSE_ORGANISATIONS_ICONS"
 			description="">
 			<option
 				value="14">14 x 14</option>
@@ -303,17 +304,17 @@
 				showon="gmap_action:1,2"
 				class="btn-group"
 				default="true"
-				label="Popup (on load) :"
+				label="COM_EINSATZKOMPONENTE_OPTION_POPUP_ONLOAD"
 				description="Hier können Sie einstellen, ob das Popup für den Einsatzortmarker sofort beim Laden der Seite angezeigt werden soll.">
 					<option
-						value="false">Verbergen</option>
+						value="false">COM_EINSATZKOMPONENTE_OPTION_VERBERGEN</option>
 					<option
-						value="true">Anzeigen</option>
+						value="true">COM_EINSATZKOMPONENTE_OPTION_SHOW</option>
 	  		</field>
 <field name="note_geocode" 
 		type="note" 
 		showon="gmap_action:1,2"
-		label="Hier können Sie einen Ort festlegen, der bei der Geocode-Suche berücksichtigt wird :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_MAP_2" 
 		class="alert alert-info" 
 		description=""
 		/>	
@@ -321,21 +322,21 @@
 				type="text" 
 				showon="gmap_action:1,2"
 				default="" 
-				label="Ort oder Postleitzahl :" 
+				label="COM_EINSATZKOMPONENTE_OPTION_ORT_PLZ" 
 				description="Es kann dann allerdings nicht in einem anderem Ort mehr gesucht werden !" 
 			/>
 </fieldset>
 	
 <!--Weiterleitungen-->
-<fieldset name="weiterleitung" label="Weiterleitung" description="">
+<fieldset name="weiterleitung" label="COM_EINSATZKOMPONENTE_WEITERLEITUNG" description="">
 		
 
 
 <field name="note_mail" 
 		type="note" 
-		label="Einstellungen für die Email-Weiterleitung :" 
+		label="COM_EINSATZKOMPONENTE_EINSTELLUNG_EMAIL_WEITERLEITUNG" 
 		class="alert alert-info" 
-		description="Hier können Sie Einstellungen für die Email-Funktion vornehmen."
+		description="COM_EINSATZKOMPONENTE_EINSTELLUNG_EMAIL_WEITERLEITUNG_DESC"
 		/>	
 		<field
 			name="send_mail_backend"
@@ -343,18 +344,18 @@
 			class="btn-group"
 			default="0"
 			description="Email-Funktionen (manuell) im Backend aktivieren ?"
-			label="Email - manuell:" >
+			label="COM_EINSATZKOMPONENTE_EMAIL_MANUELL" >
 			<option
-				value="0">Nein</option>
+				value="0">JNO</option>
 			<option
-				value="1">Ja</option>
+				value="1">JYES</option>
 		</field>
 		<field name="mail_empfaenger" 
 			type="text"
 			showon="send_mail_backend:1"
 			default="" 
 			hint="max.mustermann@host.de,presse@presse.net" 
-			label="Emailadressen (manuell)" 
+			label="COM_EINSATZKOMPONENTE_EMAIL_ADRESSEN_MANUELL" 
 			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
 			/>
 		<field
@@ -363,11 +364,11 @@
 			class="btn-group"
 			default="0"
 			description="Email-Funktionen (automatisch) aktivieren ?"
-			label="Email - automatisch:" >
+			label="COM_EINSATZKOMPONENTE_EMAIL_AUTOMATISCH" >
 			<option
-				value="0">Nein</option>
+				value="0">JNO</option>
 			<option
-				value="1">Ja</option>
+				value="1">JYES</option>
 		</field>
 		
 		<field name="mail_empfaenger_auto" 
@@ -375,7 +376,7 @@
 			showon="send_mail_auto:1"
 			default="" 
 			hint="max.mustermann@host.de,presse@presse.net" 
-			label="Emailadressen (auto)" 
+			label="COM_EINSATZKOMPONENTE_EMAILADRESSEN_AUTO" 
 			description="Hier bitte die Empfänger-Email-Adressen eingeben. Bei mehreren Adressen, diese bitte mit , (Komma) trennen." 
 			/>
 			
@@ -385,11 +386,11 @@
 			class="btn-group"
 			default="0"
 			description="Hier können Sie einstellen, ob in den Emails die beteiligten Organisationen eingefügt werden sollen."
-			label="Organisationen :" >
+			label="COM_EINSATZKOMPONENTE_ORGA_EMAIL" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		<field
 			name="send_mail_kat"
@@ -397,11 +398,11 @@
 			class="btn-group"
 			default="0"
 			description="Hier können Sie einstellen, ob in den Emails die Einsatzkategorie eingefügt werden soll."
-			label="Einsatzkategorie :" >
+			label="COM_EINSATZKOMPONENTE_KATEGORIE_EMAIL" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		<field
 			name="send_mail_image"
@@ -409,11 +410,11 @@
 			class="btn-group"
 			default="0"
 			description="Hier kann das Titelbild in die Email eingefügt werden."
-			label="Titelbild :" >
+			label="COM_EINSATZKOMPONENTE_TITELBILD_EMAIL" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		<field
 			name="send_mail_link"
@@ -421,11 +422,11 @@
 			class="btn-group"
 			default="0"
 			description="Hier können Sie einstellen, ob in den Emails Links zu den Detailberichten eingefügt werden sollen."
-			label="Detail-Link in Email :" >
+			label="COM_EINSATZKOMPONENTE_DETAIL_LINK_EMAIL" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		<field
 			name="send_mail_desc"
@@ -433,18 +434,18 @@
 			class="btn-group"
 			default="0"
 			description="Hier können Sie einstellen, ob in den Emails die Einsatzberichte eingefügt werden sollen."
-			label="Bericht in Email :" >
+			label="COM_EINSATZKOMPONENTE_BERICHT_EMAIL" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 
 <field name="note_social" 
 		type="note" 
-		label="Einstellungen für die sozialen Netzwerke :" 
+		label="COM_EINSATZKOMPONENTE_EINSTELLUNG_FUER_SOZIALE_NETZWERKE" 
 		class="alert alert-info" 
-		description="Entscheiden Sie selber, ob diese Buttons auf den Detailanischten angegzeigt werden sollen. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung der Buttons hinzuweisen."
+		description="COM_EINSATZKOMPONENTE_EINSTELLUNG_FUER_SOZIALE_NETZWERKE_5"
 		/>	
 		
 		<field
@@ -453,18 +454,18 @@
 			class="btn-group"
 			default="1"
 			description="Entscheiden Sie selber, ob dieser Button auf den Detailanischten angegzeigt werden soll. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung des Button hinzuweisen."
-			label="Twitter-Button :" >
+			label="COM_EINSATZKOMPONENTE_TWITTER_BUTTON" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 			<field 
 				name="twitter_via" 
 				type="text" 
 				showon ="show_twitter:1"
 				default="" 
-				label="Twittern VIA :" 
+				label="COM_EINSATZKOMPONENTE_TWITTERN_VIA" 
 				description="Geben Sie hier Ihren Twitter-Benutzernamen an, falls vorhanden." 
 				size="30" 
 				/>
@@ -474,33 +475,33 @@
 			class="btn-group"
 			default="1"
 			description="Entscheiden Sie selber, ob dieser Button auf den Detailanischten angegzeigt werden soll. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung des Button hinzuweisen."
-			label="Google +1 Button :" >
+			label="COM_EINSATZKOMPONENTE_GOOGLE_PLUSEINS_BUTTON" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		<field
 			name="show_facebook"
 			type="radio"
 			class="btn-group"
 			default="1"
-			description="Entscheiden Sie selber, ob dieser Button auf den Detailanischten angegzeigt werden soll. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung des Button hinzuweisen."
-			label="Facebook Like-Button :" >
+			description="COM_EINSATZKOMPONENTE_SOCIAL_DESC"
+			label="COM_EINSATZKOMPONENTE_FACEBOOK_LIKE_BUTTON" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 	  <field name="show_socialbar" 
 	  		type="list" 
 			default="left" 
-			label="Position Socialbuttons :" 
+			label="COM_EINSATZKOMPONENTE_POSITIONS_SOCIALBUTTONS" 
 			description="Position der Social-Buttons in der Detailansicht festlegen.">
 				<option 
-					value="left">Links</option>
+					value="left">COM_EINSATZKOMPONENTE_POSITIONS_SOCIALBUTTONS_LEFT</option>
 				<option 	
-					value="right">Rechts</option>
+					value="right">COM_EINSATZKOMPONENTE_POSITIONS_SOCIALBUTTONS_RIGHT</option>
 	  </field>
 		<field
 			name="spacer1"
@@ -509,28 +510,28 @@
 		/>
 <field name="note_rss" 
 		type="note" 
-		label="Einsatzberichte als RSS-Feed zur Verfügung stellen :" 
+		label="COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ALS_RSS_FEED_BEREITSTELLEN" 
 		class="alert alert-info" 
-		description="Über diese Option können Sie einstellen, ob Ihre Einsatzberichte als RSS-Feed auf Ihrer Seite zur Verfügung stehen sollen."
+		description="COM_EINSATZKOMPONENTE_RSS_DESC"
 		/>	
 			<field
 				name="display_home_rss"
 				type="radio"
 				class="btn-group"
 				default="1"
-				label="RSS-Feed Funktion :"
+				label="COM_EINSATZKOMPONENTE_RSS_FEED_FUNKTION"
 				description="">
 					<option
-						value="0">Aus</option>
+						value="0">JNO</option>
 					<option
-						value="1">An</option>
+						value="1">JYES</option>
 			</field>
 		
 			<field name="rss_chars" 
 				type="text" 
 				showon ="display_home_rss:1"
 				default="1000" 
-				label="Textlänge :" 
+				label="COM_EINSATZKOMPONENTE_RSS_TEXTLAENGE" 
 				description="Geben Sie hier an, wieviele Buchstaben der Text des RSS-Feeds anthalten soll." 
 				size="10" 
 				/>
@@ -539,7 +540,7 @@
 				type="text" 
 				showon ="display_home_rss:1"
 				default="10" 
-				label="Feed-Anzahl :" 
+				label="COM_EINSATZKOMPONENTE_FEED_ANZAHL" 
 				description="Geben Sie hier an, wieviele Einsatzberichte im Feed angezeigt werden sollen." 
 				size="10" 
 				/>
@@ -549,19 +550,19 @@
 				showon ="display_home_rss:1"
 				class="btn-group"
 				default="1"
-				label="Anzeige Bild :"
+				label="COM_EINSATZKOMPONENTE_ANZEIGE_BILD"
 				description="">
 					<option
-						value="0">Aus</option>
+						value="0">JNO</option>
 					<option
-						value="1">An</option>
+						value="1">JYES</option>
 			</field>
 		
 			<field name="rss_image_width" 
 				type="text" 
 				showon ="display_home_rss:1"
 				default="250px" 
-				label="Bildbreite :" 
+				label="COM_EINSATZKOMPONENTE_RSS_BILD_BREITE" 
 				description="Bitte nur so angeben : z.b. 150 px oder z.b. 80% !!" 
 				/>
 			<field 
@@ -569,7 +570,7 @@
 				type="text" 
 				showon ="display_home_rss:1"
 				default="" 
-				label="Bildhöhe :" 	
+				label="COM_EINSATZKOMPONENTE_RSS_BILD_HOEHE" 	
 				description="Bitte nur so angeben : z.b. 200 px oder am besten ganz fehlen lassen !!" 
 				/>
 		<field
@@ -577,67 +578,101 @@
 			type="spacer"
 			hr="true"
 		/>
-<field name="note_info112" 
-		type="note" 
-		label="Einsatzberichte an Info-Seiten weiterleiten :" 
-		class="alert alert-info" 
-		description="Über diese Option können Sie einstellen, ob Ihre Einsatzberichte an Info-Seiten über eine API-Schnittstelle weitergeleitet werden sollen. (Diese Funktion steht zur Zeit nicht zur Verfügung, da es zur Zeit keine Partner für die Schnittstelle gibt.)"
-		/>	
 
-				<field
-					name="info112"
-					type="radio"
-					class="btn-group"
-					default="0"
-					label="Weiterleitung an Info112.net :"
-					description="Soll die Funktion 'Weiterleiten an Info112.net' aktiviert werden ?">
-						<option
-						value="0">JNO</option>
-					<!--<option
-						value="1">JYES</option>-->
-				</field>
-				<field
-					name="info112_debug"
-					type="radio"
-					showon ="info112:1"
-					class="btn-group"
-					default="1"
-					label="Testmodus Info112.net :"
-					description="Wenn sie hier auf 'Ja' stellen, dann werden die Daten zwar gesendet, aber nicht in der Einsatzliste von Info112.net aufgenommen.">
-						<option
-						value="0">JNO</option>
-						<option
-						value="1">JYES</option>
-				</field>
+	<field name="note_joomla_article" 
+		type="note" 
+		class="alert alert-info" 
+		label="COM_EINSATZKOMPONENTE_ARTIKEL_EINSTELLUNG" 
+		description="COM_EINSATZKOMPONENTE_ARTIKEL_EINSTELLUNG_1" 
+/>
 		
-				<field name="info112_user" 
-						type="text" 
-						showon ="info112:1"
-						default="" 
-						label="Benutzername :" 
-						description="Benutzername bei Info112.net" 
-						size="20" 
-				/>
-				<field 
-						name="info112_api" 
-						type="text" 
-						showon ="info112:1"
-						default="" 
-						label="Api-Key :" 
-						description="Api-Key bei Info112.net" 
-						size="20" 
-						/>
-		
-	</fieldset>
+	  <field name="article_category" 
+	  		type="category" 
+			label="COM_EINSATZKOMPONENTE_ARTIKEL_JOOMLA_KATEGORIE" 
+			default = "0"
+			extension ="com_content"
+			description="Eine Joomla-Kategorie auswählen, in der die Einsatzberichte exportiert werden sollen." 
+			/>
+
+	  <field
+			name="article_frontpage"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="COM_EINSATZKOMPONENTE_ARTIKEL_JOOMLA_HAUPTEINTRAG"
+			description="Hier können Sie einstellen, ob der Artikel als Haupteintrag angezeigt werden soll.">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+	  
+	  <field
+			name="article_orgas"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="COM_EINSATZKOMPONENTE_ARTIKEL_EINGESETZTE_KRAEFTE"
+			description="Hier können Sie einstellen, ob die eingesetzten Kräfte unter dem Artikel angezeigt werden sollen.">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+	  
+			<field name="article_max_intro" 
+			type="text" 
+			default="400" 
+			label="COM_EINSATZKOMPONENTE_ARTIKEL_MAX_ZEICHEN_INTRO" 
+			description="" 
+			/>
+			
+	  
+		<field name="article_meta_key" 
+				type="textarea" 
+				filter="raw" 
+				default="feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation" 
+				label="COM_EINSATZKOMPONENTE_ARTIKEL_META_SCHLUESSELWOERTER" 
+				description="Eine durch Kommas getrennte Liste von Schlüsselwörtern, die mit dem HTML-Code ausgegeben wird." 
+				rows="10" cols="40" />
+				
+		<field name="article_meta_desc" 
+				type="textarea" 
+				filter="raw" 
+				default="Einsatzbericht" 
+				label="COM_EINSATZKOMPONENTE_ARTIKEL_META_BESCHREIBUNG" 
+				description="Eine zusätzliche Beschreibung, die mit dem HTML-Code ausgegeben wird. Sie wird im Allgemeinen in den Ergebnissen von Suchmaschinen angezeigt." 
+				rows="10" cols="40" />
+				
+	<field name="note_joomla_article_info" 
+		type="note" 
+		class="alert alert-warning" 
+		label="COM_EINSATZKOMPONENTE_ARTIKEL_BITTE_BEACHTEN" 
+		description="COM_EINSATZKOMPONENTE_ARTIKEL_BITTE_BEACHTEN_1" 
+/>
+		<field
+			name="article_frontend"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Joomla-Artikel direkt nach Eintrag im Frontend erstellen ?"
+			label="COM_EINSATZKOMPONENTE_ARTIKEL_JOOMLA_ARTIKEL_FRONTEND" >
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+
+		</fieldset>
 
 
 <!--Einsatzübersicht-->
 
-<fieldset name="einsatzübersicht" label="Einsatzübersicht" description="">
+<fieldset name="einsatzübersicht" label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT" description="">
 
 <field name="note_einsatzuebersicht" 
 		type="note" 
-		label="Hier können Sie Ihre Einsatzübersicht anpassen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSTELLUNGEN" 
 		class="alert alert-info" 
 		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
 		/>	
@@ -646,7 +681,7 @@
 		name="homelink" 
 		type="menuitem" 
 		default="" 
-		label="Menüeintrag für die Einsatzübersicht" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MENUE_EINTRAG" 
 		description="" 
 	/>
 		
@@ -656,7 +691,7 @@
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Bootstrap CSS+JS :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_BOOTSTRAP_CSS_JS"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
 			
 			<option
@@ -676,12 +711,12 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="0"
-			label="Karte :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MAP"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  
 	  <field
@@ -690,18 +725,18 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Einsatzgebiet auf Karte :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MAP_MISSIONAREA"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 			<field name="home_map_height" 
 				type="text" 
 			showon="gmap_action:1,2"
 				default="250px" 
-				label="Höhe der Karte :" 
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MAP_HEIGHT" 
 				description="Bitte nur so angeben : z.b. 250px !!" 
 			/>
 	  <field
@@ -710,12 +745,12 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Organisationen auf Karte :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANIZATIONS_ON_MAP"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer7"
@@ -727,13 +762,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Filter nach Jahren :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FILTER_YEAR"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 
 	  <field
@@ -741,13 +776,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Filter nach Einsatzarten :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FILTER_EINSATZARTEN"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 
 	  <field
@@ -755,13 +790,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Filter nach Organisation :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FILTER_ORGANISATIONEN"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer8"
@@ -773,95 +808,95 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Einsatznummern :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_alertimage"
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Alarmierungsart :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ALERTING_IMAGE"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_alertimage_num"
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Alarmierungsart :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ALERTING_IMAGE_NUM"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">unter Einsatz-Nr. anzeigen</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ALERTING_IMAGE_NUM_OPT</option>
 	  </field>
 	  <field
 			name="display_home_marker"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Einsatzartfarbe :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_COLOR"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_date_image"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Datumsanzeige :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_SHOW_DATE"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Datum (Text)</option>
+				value="0">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_SHOW_DATE_0</option>
 			<option
-				value="2">Datum (Text und Uhrzeit)</option>
+				value="2">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_SHOW_DATE_2</option>
 			<option
-				value="1">Kalendar-Blatt</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_SHOW_DATE_1</option>
 			<option
-				value="3">Kalendar-Blatt (und Uhrzeit als Text)</option>
+				value="3">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_SHOW_DATE_3</option>
 	  </field>
 	  <field
 			name="display_home_monat"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Monatsnamen (als Trennung) :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MONATSNAMEN_TRENNUNG"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  	  <field
 			name="display_home_jahr"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Jahr (als Trennung) :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_JAHR_TRENNUNG"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 
 	  <field
@@ -869,115 +904,115 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Einsatzart-Icon :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_ICON"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field 
 		  name="float_list_icon" 
 		  type="list" 
 		  showon ="display_list_icon:1"
 		  default="right" 
-		  label="Position Einsatzart-Icon :" 
+		  label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_MISSION_ICON" 
 		  description="Funktion nur beim Standard-Layout">
-		<option value="left">Links</option>
-		<option value="right">Rechts</option>
+		<option value="left">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_MISSION_ICON_LEFT</option>
+		<option value="right">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_MISSION_ICON_RIGHT</option>
 	  </field>
 	  <field
 			name="display_tickerkat_icon"
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Einsatzkateg.-Icon :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_CATEGORY_ICON"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field 
 		  name="float_tickerkat_icon" 
 		  type="list" 
 		  showon ="display_tickerkat_icon:1"
 		  default="right" 
-		  label="Position Einsatzkateg.-Icon :" 
+		  label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_CATEGORY_ICON" 
 		  description="Funktion nur beim Standard-Layout">
-		<option value="left">Links</option>
-		<option value="right">Rechts</option>
+		<option value="left">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_CATEGORY_ICON_LEFT</option>
+		<option value="right">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_CATEGORY_ICON_RIGHT</option>
 	  </field>
 	  <field
 			name="display_home_image"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Einsatzbild :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSATZBILD"
 			description="Funktion nur beim Standard-Layout und Layout1">
 			
 			<option
-				value="0">Ausblenden</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_counter"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Zugriffe :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ZUGRIFFE"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_orga"
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Organisationen :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANISATIONEN"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Ausblenden</option> 
+				value="0">JNO</option> 
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_presse"
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Info zu Pressebericht :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_INFO_ZU_PRESSELINKS"
 			description="Funktion nur beim Menüpunkt Einsatzarchiv">
 			
 			<option
-				value="0">Ausblenden</option> 
+				value="0">JNO</option> 
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_image_nopic"
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Ersatzbild :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ERSATZBILD"
 			description="Zeigt ein Ersatzbild an, wenn kein Foto vorhanden ist. (Pfad: ../images/com_einsatzkomponente/einsatzbilder/nopic.png). Funktion nur beim Standard-Layout und Layout1">
 			
 			<option
-				value="0">Nein</option>
+				value="0">JNO</option>
 			<option
-				value="1">Ja</option>
+				value="1">JYES</option>
 	  </field>
 			<field name="display_home_image_width" 
 			type="text" default="80px" 
-			label="Bildbreite :" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_BILDBREITE" 
 			description="Bitte nur so angeben : z.b. 80px !!" 
 			/>
 		<field
@@ -990,13 +1025,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Link zum Detailbericht :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_LINK_DETAILBERICHT"
 			description="Funktion nur beim Standard-Layout und Layout1">
 			
 			<option
-				value="0">Ausblenden</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_links_2"
@@ -1004,26 +1039,26 @@
 			showon ="display_home_links:1"
 			class="btn-group"
 			default="1"
-			label="Link zum Detailbericht auf Einsatzart :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_LINK_DETAILBERICHT_AUF_EINSATZART"
 			description="Funktion nur beim Standard-Layout und Layout1">
 			
 			<option
-				value="0">Nein</option>
+				value="0">JNO</option>
 			<option
-				value="1">Ja</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_home_info"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Link zur JQuery-Kurzinfo :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_LINK_JQUERY_KURZINFO"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
-				value="0">Ausblenden</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer45654"
@@ -1035,21 +1070,29 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Pagination :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_PAGINATION"
 			description="Funktion nur beim Standard-Layout und Layout1">
 			
 			<option
-				value="0">Aus</option>
+				value="0">JNO</option>
 			<option
-				value="1">An</option>
+				value="1">JYES</option>
 	  </field>
-	</fieldset>
+		<field
+			name="spacer5424645"
+			type="spacer"
+			hr="true"
+		/>
+		<field
+			name="spacer6453545"
+			type="spacer"
+			hr="true"
+		/>
 
-<!--Detailansicht-->
-<fieldset name="detailansicht" label="Detailansicht" description="">
-<field name="note_detailansicht" 
+	  
+	  <field name="note_detailansicht" 
 		type="note" 
-		label="Hier können Sie Ihre Detailansicht anpassen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_EINSTELLUNG" 
 		class="alert alert-info" 
 		description=""
 		/>	
@@ -1059,7 +1102,7 @@
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Bootstrap CSS+JS :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_BOOTSTRAP_CSS_JS"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden.(Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
 			
 			<option
@@ -1079,11 +1122,11 @@
 			class="btn-group"
 			default="1"
 			description="Hier können Sie einstellen, ob die Einsatzkategorie angezeigt werden sollen."
-			label="Einsatzkategorie :" >
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_MISSION_CATEGORY" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 	  <field
 			name="display_detail_tickerkat_icon"
@@ -1091,11 +1134,11 @@
 			class="btn-group"
 			default="1"
 			description="Hier können Sie einstellen, ob das Einsatzkategorie-Icon angezeigt werden soll."
-			label="Einsatzkategorie-Icon :" >
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_MISSION_CATEGORY_ICON" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		
 	  <field
@@ -1104,11 +1147,11 @@
 			class="btn-group"
 			default="0"
 			description="Hier können Sie einstellen, ob die Einsatzart angezeigt werden sollen."
-			label="Einsatzart :" >
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_MISSION_TYPE" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 	  <field
 			name="display_detail_einsatzart_icon"
@@ -1116,11 +1159,11 @@
 			class="btn-group"
 			default="0"
 			description="Hier können Sie einstellen, ob das Einsatzart-Icon angezeigt werden soll."
-			label="Einsatzart-Icon :" >
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_MISSION_TYPE_ICON" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		
 	  <field
@@ -1129,11 +1172,11 @@
 			class="btn-group"
 			default="1"
 			description="Hier können Sie einstellen, ob die Alarmierungszeit angezeigt werden sollen."
-			label="Alamierungszeit :" >
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_ALERTING_TIME" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 		
 		<field
@@ -1143,34 +1186,34 @@
 			default="1"
 			description="Hier können Sie einstellen, ob die Einsatzdauer angezeigt werden soll. Die Dauer wird aus der Alarmierungszeit und dem Einsatzende errechnet und nur ausgegeben wenn das Einsatzende eingetragen ist.
 			Die Einsatzdauer wird in folgendem Format angegeben: dd Tag(e) hh Std. mm Min."
-			label="Einsatzdauer :" >
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_EINSATZDAUER" >
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 		</field>
 
 		<field name="navi_detail_pos" 
 	  		type="list" 
 			default="left" 
-			label="Position Navigation :" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_POSITION_NAVIGATION" 
 			description="Position der Navigations-Button der Detailansicht festlegen.">
 				<option 
-					value="left">Links</option>
+					value="left">COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_POSITION_NAVIGATION_LEFT</option>
 				<option 	
-					value="right">Rechts</option>
+					value="right">COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_POSITION_NAVIGATION_RIGHT</option>
 	  </field>
 	  <field
 			name="display_detail_hits"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Zugriffe :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ZUGRIFFE"
 			description="Hier können Sie einstellen, ob die Anzahl der Zugriffe auf die Detailseite angezeigt werden soll.">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer11"
@@ -1182,13 +1225,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Organisationen :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANISATIONEN"
 			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Layout1)">
 			
 			<option
-				value="0">mit Link (nur extern)</option>
+				value="0">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANISATIONEN_LINK_0</option>
 			<option
-				value="1">mit Link (intern+extern)</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANISATIONEN_LINK_1</option>
 	  </field>
 	  
 	  <field
@@ -1196,13 +1239,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Fahrzeuge :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FAHRZEUGE"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Layout1)">
 			
 			<option
-				value="0">mit Link (nur extern)</option>
+				value="0">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANISATIONEN_LINK_0</option>
 			<option
-				value="1">mit Link (intern+extern)</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ORGANISATIONEN_LINK_1</option>
 	  </field>
 	  
 	  <field
@@ -1210,26 +1253,26 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Fahrzeuge-Bilder :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FAHRZEUGE_IMAGE"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge auch als Bild dargestellt werden sollen. (nur im Layout2)">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_detail_ausruestung"
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Ausrüstung :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_TOOLS"
 			description="Hier können Sie einstellen, ob die eingesetzte Ausrüstung angezeigt werden soll.">
 			
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer12"
@@ -1239,7 +1282,7 @@
 		
 			<field name="detail_thumbwidth" 
 			type="text" default="100px" 
-			label="Thumbs-Breite (Galerie):" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_THUMBS_BREITE_GALERIE" 
 			description="Thumbsbreite der Bildergallerie. z.b. 100px !!" 
 			/>
 			
@@ -1255,19 +1298,19 @@
 				showon="gmap_action:1,2"
 				class="btn-group"
 				default="0"
-				label="Anzeige Karte :"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSATZKARTE"
 				description="Hier können Sie einstellen, wem die Einsatzkarte angezeigt werden soll.">
 					<option
-						value="0">nur für registrierte User</option>
+						value="0">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_NUR_REGISTRIERTE</option>
 					<option
-						value="1">öffentlich</option>
+						value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_OEFFENTLICH</option>
 	  		</field>
 			<field 
 				name="detail_gmap_zoom_level" 
 				type="integer" 
 				showon="gmap_action:1,2"
 				default="12" 
-				label="Zoom-Level" 
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ZOOM_LEVEL" 
 				description="Hier können Sie den Zoom-Level der Einsatzkarte festlegen z.b 12" 
 				first="1" 
 				last="18" 
@@ -1276,7 +1319,7 @@
 				type="text" 	
 				showon="gmap_action:1,2"
 				default="250px" 
-				label="Höhe der Karte (Detailansicht) :" 
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_HEIGHT_OF_MAP_DETAIL" 
 				description="Bitte nur so angeben : z.b. 250px !!" 
 			/>
 	  		<field
@@ -1285,12 +1328,12 @@
 				showon="gmap_action:1,2"
 				class="btn-group"
 				default="1"
-				label="Einsatz-Marker :"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSATZART_MAP_MARKER"
 				description="Hier können Sie einstellen, ob die Einsatzort-Markierung generell angezeigt werden soll.">
 					<option
-						value="0">Aus</option>
+						value="0">JNO</option>
 					<option
-						value="1">An</option>
+						value="1">JYES</option>
 	  		</field>
 			<field
 				name="display_map_route"
@@ -1298,12 +1341,12 @@
 				showon="gmap_action:1,2"
 				class="btn-group"
 				default="true"
-				label="Streckenverlauf :"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSATZART_MAP_STRECKENVERLAUF"
 				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
 					<option
-						value="false">Aus</option>
+						value="false">JNO</option>
 					<option
-						value="true">An</option>
+						value="true">JYES</option>
 			</field>
 	  		<field
 				name="display_detail_einsatzgebiet"
@@ -1311,18 +1354,18 @@
 				showon="gmap_action:1,2"
 				class="btn-group"
 				default="1"
-				label="Einsatzgebiet :"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MAP_MISSION_AREA"
 				description="Hier können Sie einstellen, ob das Einsatzgebiet auf der Karte angezeigt werden sollen.">
 					<option
-						value="0">Verbergen</option>
+						value="0">JNO</option>
 					<option
-						value="1">Anzeigen</option>
+						value="1">JYES</option>
 	  		</field>
 
 <field name="note_detail_map" 
 		type="note" 
 		showon="gmap_action:1,2"
-		label="Um weitere Einstellungen für die Kartenfunktion vorzunehmen, wählen Sie bitte den Reiter 'Kartenfunktion' aus." 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_1" 
 		class="alert alert-warning" 
 		description=""
 		/>	
@@ -1337,7 +1380,7 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Detail-Footer :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_DETAIL_FOOTER"
 			description="Hier kann man einen individuellen Text (siehe unten) unterm Einsatzbericht anzeigen lassen.">
 			
 			<option
@@ -1347,7 +1390,7 @@
 	  </field>
 
        <field name="display_detail_footer_text" type="editor"
-            label="Detailansicht Footer-Text"
+            label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_DETAIL_FOOTER_TEXT"
 			showon="display_detail_footer:1"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DESC"
 			default="Wichtiger Hinweis: Auf unserer Internetseite berichten wir ausführlich (also auch mit Bildmaterial) über unser Einsatzgeschehen. Bilder werden erst gemacht, wenn das Einsatzgeschehen dies zulässt ! Es werden keine Bilder von Verletzten oder Toten gemacht oder hier veröffentlicht ! Sollten Sie Einwände gegen die hier veröffentlichen Fotos oder Berichte haben, wenden Sie sich bitte vertrauensvoll an unseren Webmaster."            width="60%"
@@ -1361,25 +1404,25 @@
 
 <!-- Einsatzkarte -->
 
-<fieldset name="einsatzkarte" label="Einsatzkarte" description="">
+<fieldset 	name="einsatzkarte" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE" description="">
 
 <field name="note_einsatzkarte" 
 		type="note" 
 		showon="gmap_action:1,2"
-		label="Hier können Sie Ihre Einsatzkarte (Übersicht) anpassen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_EINSTELLUNGEN" 
 		class="alert alert-info" 
-		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
+		description="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_1"
 		/>	
 		
 	  <field
-			name="display_einsatzkarte_bootstrap"
+			name="display_einsatzkarte_bootstrap" 
 			type="radio"
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="0"
-			label="Bootstrap CSS+JS :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_BOOTSTRAP_CSS_JS"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
 			<option
 				value="0">JNO</option>
 			<option
@@ -1397,12 +1440,12 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Karte :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_MAP"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  <field
 			name="display_einsatzkarte_sidebar"
@@ -1410,12 +1453,12 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Sidebar :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_SIDEBAR"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 	  
 	  <field
@@ -1424,22 +1467,26 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Einsatzgebiet auf Karte :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_MISSION_MAP_ALARMAREA"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 			<field name="einsatzkarte_map_height" 
 				type="text"
 				showon="gmap_action:1,2"
 				default="450" 
-				label="Höhe der Karte :" 
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_HEIGHT_OF_MAP" 
 				description="Bitte nur so angeben : z.b. 450 (ohne px) !!" 
 			/>
-	  <field name="display_einsatzkarte_zoom_level" type="list" 			showon="gmap_action:1,2"
- default="14" label="Zoom-Level :" description="">
+	  <field name="display_einsatzkarte_zoom_level" 
+	  type="list" 			
+	  showon="gmap_action:1,2"
+	  default="14" 
+	  label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_ZOOM_LEVEL" 
+	  description="">
 		<option value="8">8</option>
 		<option value="9">9</option>
 		<option value="10">10</option>
@@ -1454,8 +1501,12 @@
 		<option value="19">19</option>
 	  </field>
 	  
-	  <field name="display_einsatzkarte_max_zoom_level" type="list" 			showon="gmap_action:1,2"
- default="14" label="Max-Zoom-Level :" description="Maximal  durch User möglicher Zoom">
+	  <field name="display_einsatzkarte_max_zoom_level" 
+				type="list" 			
+				showon="gmap_action:1,2"
+				default="14" 
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_MAX_ZOOM_LEVEL" 
+				description="Maximal  durch User möglicher Zoom">
 		<option value="8">8</option>
 		<option value="9">9</option>
 		<option value="10">10</option>
@@ -1476,12 +1527,12 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Organisationen auf Karte :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_ORGANIZATION_ON_MAP"
 			description="">
 			<option
-				value="0">Verbergen</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer6456433"
@@ -1496,31 +1547,31 @@
 			showon="gmap_action:1,2"
 			class="btn-group"
 			default="1"
-			label="Link zum Detailbericht :"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_LINK_TO_DETAIL" 
 			description="">
 			
 			<option
-				value="0">Ausblenden</option>
+				value="0">JNO</option>
 			<option
-				value="1">Anzeigen</option>
+				value="1">JYES</option>
 	  </field>
 		<field
 			name="spacer45544354"
 			showon="gmap_action:1,2"
 			type="spacer"
 			hr="true"
-		/>
+		/> 
 	</fieldset>
 
 	
-	
-<fieldset name="orga_uebersicht" label="Organisationsübersicht" description="">
+	 
+<fieldset name="orga_uebersicht" label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN" description="" > 
 
 <field name="note_orga_uebersicht" 
 		type="note" 
-		label="Hier können Sie die Übersicht der Organisationen anpassen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_EINSTELLUNGEN" 
 		class="alert alert-info" 
-		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
+		description="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_1"
 		/>	
 	
 	  <field
@@ -1528,7 +1579,7 @@
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Bootstrap CSS+JS :"
+			label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_BOOTSTRAP_CSS_JS"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
 			
 			<option
@@ -1546,13 +1597,13 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Organisationen :"
+			label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_ORGANISATIONEN"
 			description="Hier können Sie einstellen, ob die angezeigten Organisationen verlinkt werden sollen. (nur im Standart-Layout)">
 			
 			<option
-				value="0">ohne Link</option>
+				value="0">COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_ORGANISATIONEN_OHNE_LINK</option>
 			<option
-				value="1">mit Link</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_ORGANISATIONEN_MIT_LINK</option>
 	  </field>
 	  
 	  <field
@@ -1560,26 +1611,26 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Fahrzeuge :"
+			label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_FAHRZEUGE"
 			description="Hier können Sie einstellen, ob die angezeigten Fahrzeuge verlinkt werden sollen. (nur im Standart-Layout)">
 			
 			<option
-				value="0">ohne Link</option>
+				value="0">COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_FAHRZEUGE_OHNE_LINK</option>
 			<option
-				value="1">mit Link</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_FAHRZEUGE_MIT_LINK</option>
 	  </field>
 
 	
 	</fieldset>
 	
 	
-<fieldset name="fahrzeug_uebersicht" label="Fahrzeugübersicht" description="">
+<fieldset name="fahrzeug_uebersicht" label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES" description="">
 
 <field name="note_fahrzeug_uebersicht" 
 		type="note" 
-		label="Hier können Sie die Übersicht der Fahrzeuge anpassen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_EINSTELLUNGEN" 
 		class="alert alert-info" 
-		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
+		description="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_1"
 		/>	
 	
 	  <field
@@ -1587,7 +1638,7 @@
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Bootstrap CSS+JS :"
+			label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_BOOTSTRAP"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
 			
 			<option
@@ -1605,7 +1656,7 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Anzeige Beschreibung :"
+			label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_BESCHREIBUNG"
 			description="">
 			
 			<option
@@ -1618,7 +1669,7 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Anzeige Detail2 :"
+			label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_ZEIGE_DETAIL_2"
 			description="">
 			
 			<option
@@ -1631,7 +1682,7 @@
 			type="radio"
 			class="btn-group"
 			default="1"
-			label="Anzeige letzter Einsatz :"
+			label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_LETZTER_EINTRAG"
 			description="Option letztes Einsatzdatum des Fahrzeuges anzeigen.">
 			
 			<option
@@ -1644,13 +1695,13 @@
 	</fieldset>
 	
 	
-<fieldset name="ausruestung_uebersicht" label="Ausrüstungübersicht" description="">
+<fieldset name="ausruestung_uebersicht" label="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG" description="">
 
 <field name="note_ausruestung_uebersicht" 
 		type="note" 
-		label="Hier können Sie die Übersicht der Ausruestungen anpassen :" 
+		label="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG_EINSTELLUNGEN" 
 		class="alert alert-info" 
-		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
+		description="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG_1"
 		/>	
 	
 	  <field
@@ -1658,7 +1709,7 @@
 			type="radio"
 			class="btn-group"
 			default="0"
-			label="Bootstrap CSS+JS :"
+			label="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG_BOOTSTRAP"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
 			
 			<option
@@ -1676,102 +1727,15 @@
 	</fieldset>
 	
 	
-<fieldset name="joomla_article" label="Joomla-Artikel" description="">
-	
-	<field name="note_joomla_article" 
-		type="note" 
-		class="alert alert-info" 
-		label="Einstellungen für den Export als Joomla-Artikel" 
-		description="Hier können Sie diverse Einstellungen für den Export der Einsatzberichte als Joomla-Artikel vornehmen." 
-/>
-		
-	  <field name="article_category" 
-	  		type="category" 
-			label="Joomla-Kategorie :" 
-			default = "0"
-			extension ="com_content"
-			description="Eine Joomla-Kategorie auswählen, in der die Einsatzberichte exportiert werden sollen." 
-			/>
-
-	  <field
-			name="article_frontpage"
-			type="radio"
-			class="btn-group"
-			default="1"
-			label="als Haupteintrag :"
-			description="Hier können Sie einstellen, ob der Artikel als Haupteintrag angezeigt werden soll.">
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
-	  
-	  <field
-			name="article_orgas"
-			type="radio"
-			class="btn-group"
-			default="1"
-			label="Eingesetzte Kräfte :"
-			description="Hier können Sie einstellen, ob die eingesetzten Kräfte unter dem Artikel angezeigt werden sollen.">
-			<option
-				value="0">nicht anzeigen</option>
-			<option
-				value="1">anzeigen</option>
-	  </field>
-	  
-			<field name="article_max_intro" 
-			type="text" 
-			default="400" 
-			label="max. Zeichen Introtext :" 
-			description="" 
-			/>
-			
-	  
-		<field name="article_meta_key" 
-				type="textarea" 
-				filter="raw" 
-				default="feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation" 
-				label="Meta-Schlüsselwörter" 
-				description="Eine durch Kommas getrennte Liste von Schlüsselwörtern, die mit dem HTML-Code ausgegeben wird." 
-				rows="10" cols="40" />
-				
-		<field name="article_meta_desc" 
-				type="textarea" 
-				filter="raw" 
-				default="Einsatzbericht" 
-				label="Meta-Beschreibung" 
-				description="Eine zusätzliche Beschreibung, die mit dem HTML-Code ausgegeben wird. Sie wird im Allgemeinen in den Ergebnissen von Suchmaschinen angezeigt." 
-				rows="10" cols="40" />
-				
-	<field name="note_joomla_article_info" 
-		type="note" 
-		class="alert alert-warning" 
-		label="Bitte beachten :" 
-		description="Weitere Einstellungen können Sie anschließend direkt im Joomla-Artikel vornehmen, bzw. über die Kategorie und/oder Menüpunkten festlegen." 
-/>
-		<field
-			name="article_frontend"
-			type="radio"
-			class="btn-group"
-			default="0"
-			description="Joomla-Artikel direkt nach Eintrag im Frontend erstellen ?"
-			label="Joomla-Artikel Frontend:" >
-			<option
-				value="0">Nein</option>
-			<option
-				value="1">Ja</option>
-		</field>
-	</fieldset>
 	
 	
-	
-<fieldset name="custom_css" label="Custom CSS" description="">
+<fieldset name="custom_css" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM" description="">
 	
 	<field name="note555" 
 		type="note" 
 		class="alert alert-info" 
-		label="Zusätzlicher CSS-Code" 
-		description="Hier können Sie noch zusätzlichen CSS-Code eingefügen, der dann in den entsprechenden Ansichten automatisch mitgeladen wird." 
+		label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_1" 
+		description="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_1_DESC" 
 />
 		
 
@@ -1779,38 +1743,38 @@
 				type="textarea" 
 				filter="raw" 
 				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}" 
-				label="Einsatz-Übersicht" 
+				label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_EINSATZ_UEBERSICHT" 
 				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
 				rows="10" 
 				cols="40" />
 				
-		<field name="detail_css" type="textarea" filter="raw" default="" label="Einsatz-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Detailansicht ein." rows="10" cols="40" />
-		<field name="fahrzeuge_css" type="textarea" filter="raw" default="" label="Fahrzeug-Übersicht" description="Füge hier den zusätzlichen CSS-Code für Fahrzeug-Übersicht ein." rows="10" cols="40" />
-		<field name="fahrzeug_css" type="textarea" filter="raw" default="" label="Fahrzeug-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Fahrzeug-Detailansicht ein." rows="10" cols="40" />
-		<field name="organisationen_css" type="textarea" filter="raw" default="" label="Organisations-Übersicht" description="Füge hier den zusätzlichen CSS-Code für die Organisations-Übersicht ein." rows="10" cols="40" />
-		<field name="organisation_css" type="textarea" filter="raw" default="" label="Organisations-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Organisations-Detailansicht ein." rows="10" cols="40" />
-		<field name="ausruestungen_css" type="textarea" filter="raw" default="" label="Ausrüstungs-Übersicht" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstungs-Übersicht ein." rows="10" cols="40" />
-		<field name="ausruestung_css" type="textarea" filter="raw" default="" label="Ausrüstung-Detailansicht" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstung-Detailansicht ein." rows="10" cols="40" /> 
+		<field name="detail_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_EINSATZ_DETAIL" description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Detailansicht ein." rows="10" cols="40" />
+		<field name="fahrzeuge_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_FAHRZEUG_UEBERSICHT" description="Füge hier den zusätzlichen CSS-Code für Fahrzeug-Übersicht ein." rows="10" cols="40" />
+		<field name="fahrzeug_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_FAHRZEUG_DETAIL" description="Füge hier den zusätzlichen CSS-Code für die Fahrzeug-Detailansicht ein." rows="10" cols="40" />
+		<field name="organisationen_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_ORGANISATIONS_UEBERSICHT" description="Füge hier den zusätzlichen CSS-Code für die Organisations-Übersicht ein." rows="10" cols="40" />
+		<field name="organisation_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_ORGANISATIONS_DETAIL" description="Füge hier den zusätzlichen CSS-Code für die Organisations-Detailansicht ein." rows="10" cols="40" />
+		<field name="ausruestungen_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_AUSRUESTUNGS_UEBERSICHT" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstungs-Übersicht ein." rows="10" cols="40" />
+		<field name="ausruestung_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_AUSRUESTUNGS_DETAIL" description="Füge hier den zusätzlichen CSS-Code für die Ausrüstung-Detailansicht ein." rows="10" cols="40" /> 
 		
-		<field name="edit_css" type="textarea" filter="raw" default="" label="Einsatz-Edit" description="Füge hier den zusätzlichen CSS-Code für die Ansicht des Einsatz-Edit ein." rows="10" cols="40" />
+		<field name="edit_css" type="textarea" filter="raw" default="" label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_EINSATZ_EDIT" description="Füge hier den zusätzlichen CSS-Code für die Ansicht des Einsatz-Edit ein." rows="10" cols="40" />
 		<field name="gmap_css" type="textarea" 			showon="gmap_action:1,2"
  filter="raw" default="" label="Einsatzkarte" description="Füge hier den zusätzlichen CSS-Code für die Einsatzkarte ein." rows="10" cols="40" />
 		
 	</fieldset>
 
-<fieldset name="pdfexport" label="PDF-Export" description="">
+<fieldset name="pdfexport" label="COM_EINSATZKOMPONENTE_OPTION_PDF" description="">
 	<field 
 		name="note_pdfexport" 
 		type="note" 
-		label="PDF-Export Einstellungen:" 
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSTELLUNGEN" 
 		class="alert alert-info" 
-		description="Bitte gebe hier an, welche Felder des Einsatzes beim Export als PDF dargestellt werden sollen. Es kann außerdem ein Bild ausgewählt werden, welches als Header in der PDF angezeigt werden soll."
+		description="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSTELLUNGEN_DESC"
 	/>
 	 <field 
 	 	name="pdf_header" 
 	 	type="imagelist" 
 	 	default="" 
-	 	label="PDF-Header" 
+	 	label="COM_EINSATZKOMPONENTE_OPTION_PDF_HEADER" 
 	 	description="Wähle hier ein Bild aus, welches beim PDF-Export in der PDF als Header eingefügt werden soll. Bilder müssen im Ordner 'images/com_einsatzkomponente/pdf' hinterlegt werden." 
 	 	directory="images/com_einsatzkomponente/pdf" 
 	 	exclude="" 
@@ -1820,7 +1784,7 @@
         	name="pdf_speicherort"
         	type="text"
         	default="images/com_einsatzkomponente/pdf"   
-        	label="PDF-Speicherort"
+        	label="COM_EINSATZKOMPONENTE_OPTION_PDF_SPEICHERORT"
         	description="Wähle hier einen Speicherort für die generierten PDF-Dateien. Standard: images/com_einsatzkomponente/pdf" size="10"
         />
         <field
@@ -1829,12 +1793,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die ID des Einsatzes in die PDF eingefügt werden soll."
-		label="Einsatz-ID in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZ_ID" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1843,12 +1807,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob der Counter in die PDF eingefügt werden soll."
-		label="Einsatz-Counter in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_COUNTER" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1857,12 +1821,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die Alarmierungsart in die PDF eingefügt werden soll."
-		label="Alarmierungsart in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_ALARMIERUNGSART" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1871,12 +1835,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die Einsatzart in die PDF eingefügt werden soll."
-		label="Einsatzart in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZART" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1885,12 +1849,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die Einsatzkategorie in die PDF eingefügt werden soll."
-		label="Einsatzkategorie in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZKATEGORIE" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1899,12 +1863,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob der Einsatzort in die PDF eingefügt werden soll."
-		label="Einsatzort in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZORT" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1913,12 +1877,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die Alarmierungszeit in die PDF eingefügt werden soll."
-		label="Alarmierungszeit in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_ALARMIERUNGSZEIT" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1927,12 +1891,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die Ausfahrzeit in die PDF eingefügt werden soll."
-		label="Ausfahrzeit in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_AUSFAHRTSZEIT" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1941,12 +1905,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob das Einsatzende in die PDF eingefügt werden soll."
-		label="Einsatzende in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZENDE" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1955,12 +1919,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob der Einsatzleiter in die PDF eingefügt werden soll."
-		label="Einsatzleiter in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZLEITER" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1969,12 +1933,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob der Einsatzführer in die PDF eingefügt werden soll."
-		label="Einsatzführer in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZFUEHRER" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1983,12 +1947,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die Mannschaftsstärke in die PDF eingefügt werden soll."
-		label="Mannschaftsstärke in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_MANNSCHAFTSSTAERKE" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -1997,12 +1961,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die beteiligten Organisationen in die PDF eingefügt werden soll."
-		label="Organisationen in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_ORGANISATIONEN" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -2011,12 +1975,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die eingesetzten Fahrzeuge in die PDF eingefügt werden soll."
-		label="Fahrzeuge in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_FAHRZEUGE" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -2025,12 +1989,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob die eingesetzte Ausrüstung in die PDF eingefügt werden soll."
-		label="Ausrüstung in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_AUSRUESTUNG" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -2039,12 +2003,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob der Kurzbericht in die PDF eingefügt werden soll."
-		label="Kurzbericht in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_KURZBERICHT" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
         <field
@@ -2053,12 +2017,12 @@
 		class="btn-group"
 		default="1"
 		description="Wähle hier aus, ob der Einsatzbericht in die PDF eingefügt werden soll."
-		label="Einsatzbericht in PDF:" >
+		label="COM_EINSATZKOMPONENTE_OPTION_PDF_EINSATZBERICHT" >
 		<option value="0">
-			Nein
+			JNO
 		</option>
 		<option value="1">
-			Ja
+			JYES
 		</option>
 	</field>
 </fieldset>	
@@ -2080,7 +2044,7 @@
 	</fieldset>
 	
 	
-	<fieldset name="information" label="Info"
+	<fieldset name="information" label="COM_EINSATZKOMPONENTE_OPTION_INFO"
 		addfieldpath="/administrator/components/com_einsatzkomponente/models/fields"
 	>
 		<field 
@@ -2091,8 +2055,8 @@
 		<field
 			name="validation_key"
 			type="text"
-			label="Validation-Key"
-			hint="Enter Key here"
+			label="COM_EINSATZKOMPONENTE_OPTION_INFO_VALIDATION_KEY"
+			hint="COM_EINSATZKOMPONENTE_OPTION_INFO_ENTER"
 			description="Validation-Key"
 		 />
 		 <field name="eiko" type="hidden" default="0" />

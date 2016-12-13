@@ -56,7 +56,7 @@ $html[]='<button type="button" value="Geocode" onclick="codeAddress2()" class="h
 endif;
 
 if (count($addressDb)):
-$address[] = JHTML::_('select.option', '', 'Adresse auswählen', 'title', 'title');
+$address[] = JHTML::_('select.option', '', JText::_('COM_EINSATZKOMPONENTE_ADRESSE_AUSWAEHLEN'), 'title', 'title');
 $address = array_merge($address, $addressDb);
 $html[].= '</br></br>'.JHTML::_('select.genericlist', $address, "adresse", 'onchange="changeText_einsatzort()" ', 'title', 'title', '0');
 

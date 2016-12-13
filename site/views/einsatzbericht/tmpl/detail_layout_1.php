@@ -12,12 +12,13 @@ defined('_JEXEC') or die;
 
 //JHtml::_('bootstrap.tooltip');
 
-require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
-$vehicles_images = '';
-
 //Load admin language file
 $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
+
+require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+$vehicles_images = '';
+
 ?>
   
 
@@ -53,7 +54,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Einsatzkategorie-->
 			<?php if ($this->params->get('display_detail_tickerkat','1') == '1') :?> 
             <?php if( $this->item->tickerkat ) : ?>
-        	<br /><span class="eiko_einsatzkategorie_2">Einsatzkategorie: <?php echo JText::_($this->tickerKat->title); ?></span>
+        	<br /><span class="eiko_einsatzkategorie_2"><?php echo JText::_('COM_EINSATZKOMPONENTE_KATEGORIE'); ?>: <?php echo JText::_($this->tickerKat->title); ?></span>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzkategorie ENDE-->
@@ -61,13 +62,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Einsatzart-->
 			<?php if ($this->params->get('display_detail_einsatzart','0') == '1') :?> 
             <?php if( $this->item->data1 ) : ?>
-        	<br /><span class="eiko_einsatzart_2">Einsatzart: <?php echo JText::_($this->einsatzlogo->title); ?></span>
+        	<br /><span class="eiko_einsatzart_2"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART'); ?>: <?php echo JText::_($this->einsatzlogo->title); ?></span>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzart ENDE-->
 
 			<?php if ($this->params->get('display_detail_hits','1')):?>
-            <br/><span class="badge small eiko_counter_detail">Zugriffe: <?php echo $this->item->counter; ?></span> 
+            <br/><span class="badge small eiko_counter_detail"><?php echo JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE'); ?>: <?php echo $this->item->counter; ?></span> 
             <?php endif;?>
 			
             <div class="eiko_clearfix"></div>

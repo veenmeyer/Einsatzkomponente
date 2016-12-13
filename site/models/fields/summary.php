@@ -44,7 +44,7 @@ $arrayDb = $db->loadObjectList();
 $html[]='<input class="control-label" type="text"  name="'. $this->name.'"  id="'.$this->id.'"  value="'.$this->value.'" size="'.$this->size.'" />';
 
 if (count($arrayDb)):
-$array[] = JHTML::_('select.option', '', 'Kurzbericht auswählen', 'title', 'title');
+$array[] = JHTML::_('select.option', '', JText::_('COM_EINSATZKOMPONENTE_KURZBERICHT_AUSWAEHLEN'), 'title', 'title');
 $array = array_merge($array, $arrayDb);
 $html[].= '<br/><br/>'.JHTML::_('select.genericlist', $array, "kurzbericht", 'onchange="changeText_kurzbericht()" ', 'title', 'title', '0');
 

@@ -68,7 +68,7 @@ if ($this->item->name)
             <div class="control-group">  
             
 <?php 
-	echo '<div class="control-label">';echo JText::_('Zugeordnete Fahrzeuge :');echo '</div>';
+	echo '<div class="control-label">';echo JText::_('COM_EINSATZKOMPONENTE_ZUGORDNETE_FAHRZEUGE').':';echo '</div>';
 	echo '<div class="controls"><ul class="adminformlist">';
 $database			= JFactory::getDBO();
 $query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$this->item->id.'" ORDER BY ordering,state ASC ' ;
@@ -82,14 +82,14 @@ $total = $database->loadObjectList();
 		if ($totale->detail2): echo ' ( '.$totale->detail2.' )'; endif;
 		if ($totale->detail1): echo ' '.$totale->detail1; endif;
 		echo '</a>';
-                if ($totale->state == 2): echo ' (Fahrzeug Au&szlig;er Dienst) '; endif;
-                if ($totale->state == 0): echo ' (Fahrzeug deaktiviert!) '; endif;
+                if ($totale->state == 2): echo JText::_('COM_EINSATZKOMPONENTE_FAHRZEUG_AUSSER_DIENST'); endif;
+                if ($totale->state == 0): echo JText::_('COM_EINSATZKOMPONENTE_FAHRZEUG_DEAKTIVIERT'); endif;
                 echo '</li>';
 		endforeach; 
 		}
 		else
 		{
-		echo '<span class="label label-important">Es wurden keine Fahrzeuge zugeordnet !!</span>';
+		echo '<span class="label label-important">'.JText::_('COM_EINSATZKOMPONENTE_KEINE_FAHRZEUGE').'</span>';
 		}
 echo '</ul></div></div>';
 }

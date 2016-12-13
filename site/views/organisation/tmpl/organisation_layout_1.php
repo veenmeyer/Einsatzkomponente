@@ -169,14 +169,15 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 
 <?php endif;?>
 
+<input type="button" class="btn eiko_back_button" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_ZURUECK');?>" onClick="history.back();">
 
 		</table>
 	</div>
 	<?php if($canEdit): ?>
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisationform.&id='.$this->item->id); ?>"><?php echo JText::_("Bearbeiten"); ?></a>
+		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisationform.&id='.$this->item->id); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_EDITIEREN"); ?></a>
 	<?php endif; ?>
 								<?php //if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.organisation.'.$this->item->id)):?>
-									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisation.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("Löschen"); ?></a> -->
+									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=organisation.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_LOESCHEN"); ?></a> -->
 								<?php //endif; ?>
 	<?php
 else:

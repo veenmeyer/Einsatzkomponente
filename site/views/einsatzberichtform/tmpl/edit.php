@@ -47,7 +47,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 <?php if ($gmap_longitude < '1') $gmap_longitude = $gmap_config->start_lang; ?>
 
 
-<input type="button" class="btn eiko_back_button" value="Zurück" onClick="history.back();">
+<input type="button" class="btn eiko_back_button" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_ZURUECK');?>" onClick="history.back();">
 
 
 <div class="einsatzbericht-edit front-end-edit">
@@ -113,7 +113,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			</div>
      </div>
     		<div class="fltlft well" style="width:80%;">
-    		<br/><h1>Einsatzkräfte :</h1>
+    		<br/><h1><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?> :</h1>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('boss'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('boss'); ?></div>
@@ -211,7 +211,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			</div>
 -->	
     		<div class="fltlft well" style="width:80%;">
-    		<br/><h1>Einsatzbericht :</h1>
+    		<br/><h1><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?> :</h1>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('summary'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('summary'); ?></div>
@@ -237,35 +237,35 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 </script>
 
     		<div class="fltlft well" style="width:80%;">
-    		<br/><h1>Einsatzbilder :</h1>
+    		<br/><h1><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFOTOS');?> :</h1>
 			<div class="control-group" style="">
-			Bildupload für Titelbild:
+			<?php echo JText::_('COM_EINSATZKOMPONENTE_BILDERUPLOAD_TITELBILD');?>:
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
 			
 			<?php if ($params->get('eiko')) : ?>
 			<div class="control-group" style="">
-			Bilderupload für Bildergalerie:
+			<?php echo JText::_('COM_EINSATZKOMPONENTE_BILDERUPLOAD_BILDERGALERIE');?>:
 			<div id="text">
             <div ><input multiple class="" name="data[]" id="file" type="file"/></div>
             <!-- This is where the new file field will appear -->
 			</div>
 
-		    <br/><input class="btn btn-default btn-xs dropdown-toggle" type="button" id="add-file-field" name="add" value="weiteres Bild einzelnd hinzufügen" />
+		    <br/><input class="btn btn-default btn-xs dropdown-toggle" type="button" id="add-file-field" name="add" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_WEITERES_BILD');?>" />
         <!-- Here u can add image for add button(Like Below) just call the id="add-file-field" into ur image tag thats it..-->
         <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
 		<!--http://www.fyneworks.com/jquery/multifile/-->
 			</div>
 		<?php else:?>	
 			<div class="control-group" style="height:100px;">
-			Bilderupload für Bildergalerie:
+			<?php echo JText::_('COM_EINSATZKOMPONENTE_BILDERUPLOAD_BILDERGALERIE');?>:
 			<div id="text">
-            <div ><input title ="Diese Funktion ist für Premiumbenutzer freigeschaltet" multiple class="" name="data[]" id="file"  disabled type="file"/></div>
-			<span style="font-weight:bold;color:#ff0000;">Diese Funktion steht nur für Premiumbenutzer zur Verfügung.</span>
+            <div ><input title ="<?php echo JText::_('COM_EINSATZKOMPONENTE_ONLY_PREMIUM');?>" multiple class="" name="data[]" id="file"  disabled type="file"/></div>
+			<span style="font-weight:bold;color:#ff0000;"><?php echo JText::_('COM_EINSATZKOMPONENTE_ONLY_PREMIUM');?></span>
 			</div>
 
-		    <br/><input class="btn btn-default btn-xs dropdown-toggle"  disabled type="button" id="add-file-field" name="add" value="weiteres Bild einzelnd hinzufügen" />
+		    <br/><input class="btn btn-default btn-xs dropdown-toggle"  disabled type="button" id="add-file-field" name="add" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_WEITERES_BILD');?>" />
 			</div>
 		<?php endif;?>		
 			</div>
@@ -297,7 +297,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 
 
     		<div class="fltlft well" style="width:80%;">
-    		<br/><h1>Quelle oder weiterführende Informationen :</h1>
+    		<br/><h1><?php echo JText::_('COM_EINSATZKOMPONENTE_QUELLE_INFO');?> :</h1>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getInput('presse_label'); ?>
 									  <?php echo $this->form->getInput('presse'); ?></div>
@@ -323,10 +323,10 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
             <!--Slider für GMap-Ortsangabe-->
             <?php if ($params->get('gmap_action','0')) : ?>
 			<div class="fltlft well" style="width:80%;">
-            <h1>Bitte markieren Sie den Einsatzort auf der Karte :</h1>
+            <h1><?php echo JText::_('COM_EINSATZKOMPONENTE_MARKIERE_EINSATZORT');?> :</h1>
             <div class="control-group" id="map_canvas" style="width:100%;max-width:600px;height:400px;border:1px solid;">Karte</div>
 			<div class="control-group">
-            <div class="control-label">Koordinaten:</div><div class="controls"><?php echo $this->form->getInput('gmap_report_latitude'); ?><?php echo $this->form->getInput('gmap_report_longitude'); ?></div>
+            <div class="control-label"><?php echo JText::_('COM_EINSATZKOMPONENTE_COORDS');?>:</div><div class="controls"><?php echo $this->form->getInput('gmap_report_latitude'); ?><?php echo $this->form->getInput('gmap_report_longitude'); ?></div>
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('gmap'); ?></div>
@@ -362,7 +362,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 		<br/><br/>
 		<div>
 			<button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
-			<?php echo JText::_('or'); ?>
+			<?php echo JText::_('COM_EINSATZKOMPONENTE_OR'); ?>
 			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzbericht.cancel'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
 			<input type='hidden' name="action" value="Filedata" />
 			<input type="hidden" name="option" value="com_einsatzkomponente" />

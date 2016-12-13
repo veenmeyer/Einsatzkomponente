@@ -3,6 +3,8 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
++ Sprache "Englisch" hinzugefügt.
++ Sprachvariabeln komplett überarbeit
 + JSON-VIEW für Einsatzarchiv-Übersicht hinzugefügt
 + RSS-Feed für Einsatzarchiv-Übersicht hinzugefügt
 # Bootstrap CSS + JS werden jetzt direkt aus Joomla verwendet

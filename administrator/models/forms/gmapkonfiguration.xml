@@ -16,15 +16,15 @@
 		<field
 			name="gmap_onload"
 			type="list"
-			label="Gmap-Kartentyp :"
+			label="COM_EINSATZKOMPONENTE_KARTENTYP"
 			description="Normal: zeigt die normale Standard-2D-Karte / Satellite: zeigt Luftaufnahmen des Geländes an / Hybrid: zeigt eine Mischung aus Satellite und Normal an (Luftaufnahme mit hinterlegten Straßen- Städtenamen) usw."
 			default="ROADMAP"
             required="true" 
 			class="inputbox">
 			
-    	   <option value="ROADMAP">Strassenkarte</option>
-      	   <option value="HYBRID">Hybridkarte (Satellit+Ortsnamen)</option>
-           <option value="SATELLITE">Satellitenkarte</option>
+    	   <option value="ROADMAP">COM_EINSATZKOMPONENTE_STRASSENKARTE</option>
+      	   <option value="HYBRID">COM_EINSATZKOMPONENTE_HYBRIDKARTE_SATELLITORTSNAMEN</option>
+           <option value="SATELLITE">COM_EINSATZKOMPONENTE_SATELLITENKARTE</option>
 	  </field>
 
 

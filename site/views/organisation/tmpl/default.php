@@ -20,7 +20,6 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <div class="page-header eiko_header_main">
 <h1 class="eiko_header_main_h1"> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1> 
-<input type="button" class="btn eiko_back_button" value="Zurück" onClick="history.back();">
 </div>
 <br/>
 <?php endif;?>

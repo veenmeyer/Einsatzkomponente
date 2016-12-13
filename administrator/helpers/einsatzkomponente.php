@@ -15,6 +15,7 @@ defined('_JEXEC') or die;
 class EinsatzkomponenteHelper
 {
 	
+	
 	/**
 	 * Configure the Linkbar.
 	 */
@@ -24,8 +25,6 @@ class EinsatzkomponenteHelper
 		$uri = (string) JUri::getInstance();
 		$return = urlencode(base64_encode($uri));
 		
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
 
 			$params = JComponentHelper::getParams('com_einsatzkomponente');
 
@@ -85,11 +84,10 @@ class EinsatzkomponenteHelper
 			  endif;
 			  
 			  JHtmlSidebar::addEntry(
-				  JText::_('Optionen'),
+				  JText::_('COM_EINSATZKOMPONENTE_OPTIONS'),
 				  'index.php?option=com_config&view=component&component=com_einsatzkomponente&return=' . $return,
 				  $vName == 'configuration'
 			  );
-		endif; 
 	}
 	/**
 	 * Gets a list of the actions that can be performed.
@@ -650,17 +648,22 @@ return $gmap; }
 	
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	
+	//Load admin language file
+$lang = JFactory::getLanguage();
+$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
+
+
 	$navbar  ='';
 	$navbar .='<div class="btn-group-justified">';
 	
 	if( $prev_id) : 
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn eiko_btn_2" title="">';
-    $navbar .='<strong>Zurück</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_ZURUECK').'</strong></a>';
 	endif; 
 	
 	if( $next_id) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class=" btn eiko_btn_2" title="">';
-    $navbar .='<strong>Vor</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_NAECHSTE').'</strong></a>';
 	endif; ?>
     
     <?php if ($menu_link=='&Itemid=') : 
@@ -669,10 +672,10 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif;
 	if( !$menu_link) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
 		$user=JFactory::getUser();
@@ -682,11 +685,11 @@ return $gmap; }
 		$result = $db->loadResult();
 	if ($user->id == $result OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
-    $navbar .='<strong>Editieren</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_EDITIEREN').'</strong></a>';
 	endif;
 	if ($user->id == $result OR JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente')) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id.'&copy=1').'" class=" btn eiko_btn_2">';
-    $navbar .='<strong>Kopieren</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_KOPIEREN').'</strong></a>';
 	endif;
     endif;
 	

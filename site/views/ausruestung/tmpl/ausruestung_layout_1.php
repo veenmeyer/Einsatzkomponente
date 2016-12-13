@@ -31,17 +31,17 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 </tr>
 <tr>
 			<td>
-			<input style="float:left;" type="button" class="btn eiko_back_button" value="Zurück" onClick="history.back();">
+			<input style="float:left;" type="button" class="btn eiko_back_button" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_ZURUECK');?>" onClick="history.back();">
 			</td>
 </tr>
 
         </table>
     </div>
     <?php if($canEdit && $this->item->checked_out == 0): ?>
-		<a class="btn btn-warning" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=ausruestungform&id='.$this->item->id); ?>"><?php echo JText::_("Bearbeiten"); ?></a>
+		<a class="btn btn-warning" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=ausruestungform&id='.$this->item->id); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_EDIT"); ?></a>
 	<?php endif; ?>
 								<?php if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.ausruestung.'.$this->item->id)):?>
-									<a class="btn btn-danger" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestung.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("Löschen"); ?></a>
+									<a class="btn btn-danger" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestung.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_LOESCHEN"); ?></a>
 								<?php endif; ?>
     <?php
 else:

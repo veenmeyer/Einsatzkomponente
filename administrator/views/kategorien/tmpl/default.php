@@ -113,7 +113,7 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_KATEGORIEN_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo 'Anzahl Einsätze'; ?>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_ANZAHL_EINSAETZE');?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_KATEGORIEN_IMAGE', 'a.image', $listDirn, $listOrder); ?>
@@ -167,7 +167,7 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
                 
 					<td class="center hidden-phone">
-						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
+						<?php echo JHtml::_('grid.id', $i, $item->id); ?> 
 					</td>
                 <?php if (isset($this->items[0]->state)): ?>
 					<td class="center">
@@ -176,7 +176,6 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
 				<td>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
-					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'kategorien.', $canCheckin); ?>
 				<?php endif; ?>
 				<?php if ($canEdit) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=kategorie.edit&id='.(int) $item->id); ?>">

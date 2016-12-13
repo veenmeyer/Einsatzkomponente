@@ -88,8 +88,8 @@ if (!empty($this->extra_sidebar)) {
 	    					</a>
 
 	    					<a class="btn" href="index.php?option=com_config&view=component&component=com_einsatzkomponente">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('Optionen'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einstellungen.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('Optionen'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_OPTIONS'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einstellungen.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_OPTIONS'); ?></span>
 	    					</a>
 
 				</div>
@@ -109,14 +109,12 @@ if (!empty($this->extra_sidebar)) {
 <div class="span4">
 <div class="alert alert-info" style=" float:left;">
 <a target="_blank" href="http://www.einsatzkomponente.de/index.php"><img src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg" style="float:left; margin-right:20px; padding-right:20px;"/></a>
-<span class="label label-important">Was könnt Ihr zur Entwicklung beitragen ?</span><br/><br/>
-Neben sehr viel Freizeit kostet die Entwicklung unserer Software und der Unterhalt dieser Supportseite natürlich auch Geld.
-Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit einer Spende, damit wir unsere Software auch weiterhin kostenlos und werbefrei zur Verfügung stellen können.
-<br/>Vielen Dank ! <br />
-<small>Kontakt: <?php echo $params['authorEmail'];?></small><br />
+<span class="label label-important"><?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_1');?></span><br/><br/>
+<?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_2');?>
+<small>PayPal-Email: <?php echo 'ralf.meyer@mail.de';?></small><br />
 
 
-<p><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><span style="float:right;">Spenden über PAYPAL : <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></span></a>
+<p><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><span style="float:right;"><?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_SPENDEN_UEBER_PAYPAL');?>: <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></span></a>
 <p><small><span style="float:right;"></br>Alternativ können Sie die Kontodaten per <a href="mailto:validate@einsatzkomponente.de?Subject=Spende%20Einsatzkomponente%20J3.x" target="_top">Email </a>anfordern.</span></small></p></p>
 
 
@@ -125,7 +123,7 @@ Unterstützen Sie die Weiterentwicklung unseres Projekts EINSATZKOMPONENTE mit e
 <div class="span5">
 					<div class="well well-small" style=" float:left;">
 						<div class="center">
-							<?php echo '<h4>'.JTEXT::_('Einsatzkomponente für das Joomla-CMS ');?><?php echo '</h4>';?>
+							<?php echo '<h4>'.JTEXT::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_TITLE');?><?php echo '</h4>';?>
 						</div>
 						<hr class="hr-condensed">
 						<dl class="dl-horizontal">

@@ -44,7 +44,7 @@ $arrayDb = $db->loadObjectList();
 $html[]='<input class="control-label" type="text"  name="'. $this->name.'"  id="'.$this->id.'"  value="'.$this->value.'" size="'.$this->size.'" />';
 
 if (count($arrayDb)):
-$array[] = JHTML::_('select.option', '', 'Einsatzleiter auswählen', 'title', 'title');
+$array[] = JHTML::_('select.option', '', JText::_('COM_EINSATZKOMPONENTE_EINSATZLEITER_AUSWAEHLEN'), 'title', 'title');
 $array = array_merge($array, $arrayDb);
 $html[].= '<br/><br/>'.JHTML::_('select.genericlist', $array, "boss", 'onchange="changeText_einsatzleiter()" ', 'title', 'title', '0');
 

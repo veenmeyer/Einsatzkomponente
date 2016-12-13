@@ -55,22 +55,22 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php endif;?>
 
   <tr style="padding:10px;">
-    <td class="layout4_row_6" width="250px">Einsatzart:</td>
+    <td class="layout4_row_6" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART');?>:</td>
     <td class="layout4_row_6" style="font-weight:bold;"><?php echo $this->einsatzlogo->title; ?></td>
   </tr>
   
   <tr>
-    <td class="layout4_row_7" width="250px">Kurzbericht:</td>
+    <td class="layout4_row_7" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_KURZBERICHT');?>:</td>
     <td class="layout4_row_7"><?php echo $this->item->summary; ?></td>
   </tr>
   
   <tr>
-    <td class="layout4_row_8" width="250px">Einsatzort:</td>
+    <td class="layout4_row_8" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZORT');?>:</td>
     <td class="layout4_row_8"><?php echo $this->item->address.''; ?></td>
   </tr>
 
   <tr>
-    <td class="layout4_row_9" width="250px">Alarmierung:</td>
+    <td class="layout4_row_9" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_ALERTING');?>:</td>
     <td class="layout4_row_9">
     Alarmierung per
 <?php if($this->alarmierungsart->image)	:?>
@@ -81,11 +81,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php endif;?>
 
 	<?php
-		$wochentage = explode(',','Sonntag,Montag,Dienstag,Mittwoch,Donnerstag,Freitag,Samstag');
+		$wochentage = explode(',',JText::_('COM_EINSATZKOMPONENTE_SONNTAG').','.JText::_('COM_EINSATZKOMPONENTE_MONTAG').','.JText::_('COM_EINSATZKOMPONENTE_DIENSTAG').','.JText::_('COM_EINSATZKOMPONENTE_MITTWOCH').','.JText::_('COM_EINSATZKOMPONENTE_DONNERSTAG').','.JText::_('COM_EINSATZKOMPONENTE_FREITAG').','.JText::_('COM_EINSATZKOMPONENTE_SAMSTAG'));
 		$date2 = $wochentage[date('w', strtotime($this->item->date1))];			   		
 	?>
 	
-    am <?php echo $date2.', '.date("d.m.Y", strtotime($this->item->date1)).''; ?>, um <?php echo date("H:i", strtotime($this->item->date1)).' Uhr'; ?>
+    am <?php echo $date2.', '.date("d.m.Y", strtotime($this->item->date1)).''; ?>, um <?php echo date("H:i", strtotime($this->item->date1)).' '.JText::_('COM_EINSATZKOMPONENTE_UHR'); ?>
     </td>
   </tr>
 
@@ -101,7 +101,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  <?php endif;?>
  
   <tr>
-    <td class="layout4_row_10" width="250px">Mannschaftsst&auml;rke:</td>
+    <td class="layout4_row_10" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_MANNSCHAFTSSTARKE');?>:</td>
     <td class="layout4_row_10">
 		<?php
 			if ($this->item->people == 0) {
@@ -115,11 +115,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
   </tr>
   
   <tr>
-    <td class="layout4_row_11" width="250px">Am Einsatz beteiligte Einheiten:</td>
+    <td class="layout4_row_11" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?>:</td>
     <td class="layout4_row_11">
             <?php if( $this->item->auswahl_orga ) : ?>   
             <div class="well well-small">
-			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Alarmierte Organisationen').'</u></span>'; ?>:
+			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN').'</u></span>'; ?>:
 			<?php
 				$array = array();
 				foreach((array)$this->item->auswahl_orga as $value): 
@@ -209,7 +209,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php endif;?>
             
             <?php if( $this->item->vehicles ) : ?>
-			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('Fahrzeuge am Einsatzort:').'</u></span><br/>'; ?>
+			<?php echo '<span><u><b>'.JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE').'</b>:</u></span><br/>'; ?>
 			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
 			<?php echo ''.$vehicles_images;?> 
             <?php else:?>
@@ -225,7 +225,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if( $this->item->desc ) : ?>
   <tr>
     <td  class="layout4_row_12" colspan="2">
-		<b><u>Einsatzbericht:</u></b>
+		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?>:</u></b>
 <?php jimport('joomla.html.content'); ?>  
 <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
 <div class="eiko_einsatzbericht_2">
@@ -258,7 +258,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if ($this->images) : ?>
   <tr>
     <td class="layout4_row_15" colspan="2">
-		<b><u>Einsatzbilder:</u></b>
+		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFOTOS');?>:</u></b>
             <div class="row-fluid">
             <ul class="thumbnails eiko_thumbnails_2">
             <?php
@@ -269,8 +269,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			?>   
               <li>
                 <div class="thumbnail eiko_thumbnail_2" style="max-width:<?php echo $thumbwidth;?>;)">
-    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
-                <img  class="eiko_img-rounded eiko_thumbs_2" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->einsatzlogo->title;?>"/>
+    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' '.JText::_('COM_EINSATZKOMPONENTE_UHR'); ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
+                <img  class="eiko_img-rounded eiko_thumbs_2" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_NR');?> <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->einsatzlogo->title;?>"/>
 <?php if ($this->images[$i]->comment) : ?>
 <br/><span><i class="icon-info-sign" style=" margin-right:5px;"></i>Info</span>
  <?php endif; ?>
@@ -292,7 +292,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>
 				<td colspan="2">
-					<b><u>Ungef&auml;hrer Einsatzort:</u></b>
+					<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZORT');?>:</u></b>
 				</td>
 			</tr>
 			<tr>			

@@ -43,17 +43,15 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
         <thead >
             <tr >
 				<th class='left'>
-				<?php echo 'Foto'; ?>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_IMAGE');?>
 				</th>
     				<th class='left'>
-				<?php echo 'Ausrüstung'; ?>
-				</th>
-
-
+					<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_AUSRUESTUNG');?>				
+					</th>
 
     				<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
-				<?php echo JText::_('Admin-Action'); ?>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_ADMIN_ACTION'); ?>
 				</th>
 				<?php endif; ?>
 
@@ -68,7 +66,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 		<?php if (!$this->params->get('ftm')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
         <td colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>">
-			<span class="copyright">Firefighters Team Manager V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
+			<span class="copyright">Firefighters Team Manager V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
         </tr>
 	<?php endif; ?>
     </tfoot>
@@ -108,7 +106,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 				<?php echo $Desc; ?>
 				<?php endif; ?>
 				
-				<p><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=ausruestung&id='.(int) $item->id); ?>" class="btn btn-primary" role="button">Details</a></p>
+				<p><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=ausruestung&id='.(int) $item->id); ?>" class="btn btn-primary" role="button"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS_2');?></a></p>
 				</td>
 
 
@@ -131,7 +129,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
     <?php if ($canCreate): ?>
         <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestungform.edit&id=0', false, 2); ?>"
            class="btn btn-success btn-small"><i
-                class="icon-plus"></i> <?php echo JText::_('Ausrüstung hinzufügen'); ?></a>
+                class="icon-plus"></i> <?php echo JText::_('COM_EINSATZKOMPONENTE_ADD'); ?></a>
     <?php endif; ?>
 
     <input type="hidden" name="task" value=""/>
@@ -149,7 +147,7 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 
     function deleteItem() {
         var item_id = jQuery(this).attr('data-item-id');
-        if (confirm("<?php echo JText::_('com_einsatzkomponente_DELETE_MESSAGE'); ?>")) {
+        if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
             window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=ausruestungform.remove&id=', false, 2) ?>' + item_id;
         }
     }
