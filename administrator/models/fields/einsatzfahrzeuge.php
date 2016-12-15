@@ -44,9 +44,11 @@ class JFormFieldeinsatzfahrzeuge extends JFormField
                         $db->setQuery($query);
                         $vehicles = $db->loadObjectList();
                                 foreach ($vehicles as $vehicle) {
+									if ($this->value) : 
 										foreach ($this->value as $value) {
 										if ($value == $vehicle->id) : $selected = 'selected';endif;
 										}
+								   endif;
                                         $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' ( '.$org->name.' ) </option>';
 										$selected = '';
                                 }
