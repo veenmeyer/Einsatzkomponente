@@ -200,7 +200,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		endif;
 		
  		$standort = EinsatzkomponenteHelper::getStandort_orga($this->item->auswahl_orga); 
-		$display_map_route		= $this->params->get('$display_map_route','true');
+		$display_map_route		= $this->params->get('display_map_route','true');
 		
         $display_detail_popup = $this->params->get('display_detail_popup','false');
 		$marker1_title 		= '';
@@ -282,6 +282,15 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 		endif;
 		//$opengraph .= '<meta property="article:publisher" content="https://www.einsatzkomponente.de" />';
+		
+			if ($this->params->get('standard_share_image','')) : 
+			$fileName_image = str_replace(' ', '%20', $this->params->get('standard_share_image',''));  
+			$size = getimagesize(JURI::base().$fileName_image);
+			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
+		endif;
+
 		if( $this->item->image ) :
 			$fileName_image = str_replace(' ', '%20', $this->item->image);  
 			$size = getimagesize(JURI::base().$fileName_image);
@@ -299,6 +308,8 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
 			} 
 	   endif;
+	   
+	   
 	   
 
 		$document->addCustomTag($opengraph);

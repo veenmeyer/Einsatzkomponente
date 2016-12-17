@@ -331,7 +331,22 @@
 <fieldset name="weiterleitung" label="COM_EINSATZKOMPONENTE_WEITERLEITUNG" description="">
 		
 
+<field name="SOCIAL_SHARE" 
+		type="note" 
+		label="COM_EINSATZKOMPONENTE_EINSTELLUNG_SOCIAL_SHARE" 
+		class="alert alert-info" 
+		description="COM_EINSATZKOMPONENTE_EINSTELLUNG_SOCIAL_SHARE_DESC"
+		/>	
 
+		    <field name="standard_share_image" type="media"
+            label="COM_EINSATZKOMPONENTE_EINSTELLUNG_SOCIAL_SHARE_IMAGE"
+            description="Sie können hier ein Bild hinterlegen, wenn immer nur dieses als Standardbild geteilt werden soll." 
+            filter="raw"
+		    preview="true"
+			id="share_image_klein"
+            directory="images" />   
+
+		
 <field name="note_mail" 
 		type="note" 
 		label="COM_EINSATZKOMPONENTE_EINSTELLUNG_EMAIL_WEITERLEITUNG" 

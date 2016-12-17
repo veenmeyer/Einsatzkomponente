@@ -3,6 +3,7 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
++ Option: Standardbild für Facebook-Teilen auswählbar
 + Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze
 - Social-Button wurden entfernt ! Alternativ Plugin: https://joomla-agentur.de/joomla/downloads/jooag-shariff-plugin
 + Sprache "Englisch" hinzugefügt.
