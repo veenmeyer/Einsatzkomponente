@@ -36,11 +36,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
   <tr>
    <td class="layout4_row_3" style="border:hidden;"></td>
    <td class="layout4_row_4" style="border:hidden;">
-    <!--Socialbar-->
-    <?php if($this->item->status_fb=='1'): ?>
-    <span class="eiko_socialbar_2" style="float:right;"><?php echo $this->social;?></span> 
-    <?php endif; ?>
-    <!--Socialbar ENDE-->
+		<?php
+			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
+			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
+			?>
     </td>
   </tr>
 </table>

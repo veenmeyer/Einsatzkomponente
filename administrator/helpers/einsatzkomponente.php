@@ -596,55 +596,6 @@ checkUtilVersion(4);
 return $gmap; }
 	
 
-    public static function getSocial($params,$id,$summary) {
-
-			// Funktion URL kürzen
-			function shortTinyUrl($url){
-				$res = "";
-				$handle = @fopen("http://tinyurl.com/api-create.php?url=".urlencode($url), "rb");
-				if($handle){
-				  while (!feof($handle)) {
-					$res .= fgets($handle,2000);
-				  }
-				  fclose($handle);
-				}
-				else{
-				  $layout_detail_link = JURI::current();	
-				}
-				return $res;
-			}
-  			if (!$layout_detail_link = shortTinyUrl( JURI::current() )):
-				$layout_detail_link = JURI::current();
-				endif;
-			// Funktion URL kürzen ENDE
-			
-	  	$social = '';
-		
- 		if ( $params->get('show_twitter', '1') ): 
-		$social .='<span class="eiko_social_2">';
-		$social .='<a href="https://twitter.com/share" data-url="'.$layout_detail_link.'" data-via="'.$params->get('twitter_via', '').'" data-text="#Einsatzinfo: #'.$summary.' --- " class="twitter-share-button">Tweet</a>';
-		$social .="<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>";
-		endif;
-		
-		if ( $params->get('show_gplus', '1') ): 
-		$social .='<span class="eiko_social_2">';
-		$social .='<div class="g-plusone" data-size="medium" data-href="'. $layout_detail_link . '"></div>';
-		$social .='<script type="text/javascript">(function() { var po = document.createElement("script"); po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/plusone.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);  })();</script></span>';
-	endif; 
-	
-		if ( $params->get('show_facebook', '1') ): 
-		$social .='<span class="eiko_social_2">'; 
-		$social .='<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, "script", "facebook-jssdk"));</script><div class="fb-share-button" data-href="' . $layout_detail_link . '" data-width="" data-type="button_count"></div></span>';
- 		endif; 
-		
-		return $social;
-	}
 	
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	

@@ -51,11 +51,10 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
         	<p style="text-align: justify;"><?php echo $Desc; ?></p>
 
-<!--Socialbar-->
-<?php if($this->item->status_fb=='1'): ?>
-<span class="eiko_socialbar_2" style="float:<?php echo $this->params->get('show_socialbar','left');?>;"><?php echo $this->social;?></span> 
-<?php endif;?>
-<!--Socialbar ENDE-->
+		<?php
+			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
+			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
+			?>
   
 <div id="attachment_6278" class="wp-caption aligncenter">
 <?php if( $this->item->image ) : ?>

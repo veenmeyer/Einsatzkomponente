@@ -340,6 +340,13 @@ $vehicles_images = '';
 <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC'); ?> :</h3>
 <?php echo $Desc;?>
 </div>
+
+		<?php
+			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
+			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
+			?>
+
+
 <?php endif;?>
 <!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
 
@@ -373,14 +380,6 @@ $vehicles_images = '';
  <?php endif;?>
  <?php endif;?>
 <!--eingesetzte Ausrüstung anzeigen ENDE -->  
-
-
-<!--Socialbar-->
-<?php if($this->item->status_fb=='1'): ?>
-<span class="eiko_socialbar_2" style="float:<?php echo $this->params->get('show_socialbar','left');?>;"><?php echo $this->social;?></span> 
-<?php endif;?>
-<!--Socialbar ENDE-->
-
 
 
 <div class="clear"></div>

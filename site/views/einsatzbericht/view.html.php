@@ -24,9 +24,8 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
     protected $einsatzlogo;				// Daten für Einsatzart (Pfad für Icon,Logo,...)
     protected $tickerKat; 				// Text für Einsatzkategorie
     protected $alarmierungsart;			// Daten für Alarmierungsart (Pfad für Icon,Logo,...)
-    protected $social;					// Daten für Social-Networks-Buttons
-    protected $navbar;					// Daten für Social-Networks-Buttons
-    protected $einsatzdauer;					// Daten für Social-Networks-Buttons
+    protected $navbar;					// 
+    protected $einsatzdauer;			// 
     /**
      * Display the view
      */
@@ -73,7 +72,6 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
         
 		
 		//print_r ($this->menu);
-		$this->social = EinsatzkomponenteHelper::getSocial($this->params,$this->item->id,$this->item->summary);
 		
 //		$sef = '';
 //		$sef_rewrite = '';

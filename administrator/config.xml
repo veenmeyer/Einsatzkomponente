@@ -441,68 +441,6 @@
 				value="1">JYES</option>
 		</field>
 
-<field name="note_social" 
-		type="note" 
-		label="COM_EINSATZKOMPONENTE_EINSTELLUNG_FUER_SOZIALE_NETZWERKE" 
-		class="alert alert-info" 
-		description="COM_EINSATZKOMPONENTE_EINSTELLUNG_FUER_SOZIALE_NETZWERKE_5"
-		/>	
-		
-		<field
-			name="show_twitter"
-			type="radio"
-			class="btn-group"
-			default="1"
-			description="Entscheiden Sie selber, ob dieser Button auf den Detailanischten angegzeigt werden soll. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung des Button hinzuweisen."
-			label="COM_EINSATZKOMPONENTE_TWITTER_BUTTON" >
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
-			<field 
-				name="twitter_via" 
-				type="text" 
-				showon ="show_twitter:1"
-				default="" 
-				label="COM_EINSATZKOMPONENTE_TWITTERN_VIA" 
-				description="Geben Sie hier Ihren Twitter-Benutzernamen an, falls vorhanden." 
-				size="30" 
-				/>
-		<field
-			name="show_gplus"
-			type="radio"
-			class="btn-group"
-			default="1"
-			description="Entscheiden Sie selber, ob dieser Button auf den Detailanischten angegzeigt werden soll. Bei Benutzung bitte nicht vergessen, im Impressum auf die Verwendung des Button hinzuweisen."
-			label="COM_EINSATZKOMPONENTE_GOOGLE_PLUSEINS_BUTTON" >
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
-		<field
-			name="show_facebook"
-			type="radio"
-			class="btn-group"
-			default="1"
-			description="COM_EINSATZKOMPONENTE_SOCIAL_DESC"
-			label="COM_EINSATZKOMPONENTE_FACEBOOK_LIKE_BUTTON" >
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-		</field>
-	  <field name="show_socialbar" 
-	  		type="list" 
-			default="left" 
-			label="COM_EINSATZKOMPONENTE_POSITIONS_SOCIALBUTTONS" 
-			description="Position der Social-Buttons in der Detailansicht festlegen.">
-				<option 
-					value="left">COM_EINSATZKOMPONENTE_POSITIONS_SOCIALBUTTONS_LEFT</option>
-				<option 	
-					value="right">COM_EINSATZKOMPONENTE_POSITIONS_SOCIALBUTTONS_RIGHT</option>
-	  </field>
 		<field
 			name="spacer1"
 			type="spacer"

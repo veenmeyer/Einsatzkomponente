@@ -3,6 +3,7 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
+- Social-Button wurden entfernt ! Alternativ Plugin: https://joomla-agentur.de/joomla/downloads/jooag-shariff-plugin
 + Sprache "Englisch" hinzugefügt.
 + Sprachvariabeln komplett überarbeit
 + JSON-VIEW für Einsatzarchiv-Übersicht hinzugefügt
