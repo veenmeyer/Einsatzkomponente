@@ -754,6 +754,18 @@
 			<option
 				value="1">JYES</option>
 	  </field>
+	  
+       <field name="display_home_number_excl_einsatzart" type="sql"
+            label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_EINSATZART"
+            description="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_EINSATZART" 
+			default = ''
+            filter="raw"
+			translate = "COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_FILTER"
+            query="SELECT 0 AS `id`, 'COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_FILTER' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_einsatzarten`" key_field="id" value_field="val"
+			multiple ="false"
+			/>
+			
+	  
 	  <field
 			name="display_home_alertimage"
 			type="radio"

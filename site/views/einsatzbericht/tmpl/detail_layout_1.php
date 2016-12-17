@@ -340,15 +340,15 @@ $vehicles_images = '';
 <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC'); ?> :</h3>
 <?php echo $Desc;?>
 </div>
+<?php endif;?>
+<!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->  
 
+<!-- Plugin-Support "MyShariff" -->  
 		<?php
 			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
 			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
 			?>
-
-
-<?php endif;?>
-<!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
+<!-- Plugin-Support "MyShariff"  ENDE -->  
 
 <!--eingesetzte Ausrüstung anzeigen -->  
 <?php 	if ($this->params->get('display_detail_ausruestung','1')) : 

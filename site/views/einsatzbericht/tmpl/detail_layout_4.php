@@ -33,15 +33,6 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     </td>-->
   </tr>
   
-  <tr>
-   <td class="layout4_row_3" style="border:hidden;"></td>
-   <td class="layout4_row_4" style="border:hidden;">
-		<?php
-			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
-			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
-			?>
-    </td>
-  </tr>
 </table>
 
 <table class="table table-bordered" border="1" style="width:100%;">  
@@ -232,6 +223,15 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 </div>
     </td>
   </tr>
+    <tr>
+   <td class="layout4_row_4" style="border:hidden;width:100%;" colspan="2">
+		<?php
+			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
+			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
+			?>
+    </td>
+  </tr>
+
 <?php endif;?>
 <!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
  

@@ -100,7 +100,7 @@ defined('_JEXEC') or die;
            <?php else:?>
 		   <td class="eiko_td_marker_main_1">
            <?php endif;?>
-			<?php echo '<span style="white-space: nowrap;margin-left:5px !important;" class="eiko_span_marker_main_1">'.JText::_('COM_EINSATZKOMPONENTE_NR').' '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1).'</span>';?> 
+			<?php echo '<span style="white-space: nowrap;margin-left:5px !important;" class="eiko_span_marker_main_1">'.JText::_('COM_EINSATZKOMPONENTE_NR').' '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id).'</span>';?> 
 			</td>
            <?php endif;?>
 		   

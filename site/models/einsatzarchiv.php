@@ -457,13 +457,14 @@ $query->where('a.state = 1');
 					$db = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-							->select('title,list_icon,marker')
+							->select('id,title,list_icon,marker')
 							->from('`#__eiko_einsatzarten`')
 							->where('id = ' . $db->quote($db->escape($item->data1)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
 					if ($results) {
 						$item->data1 = $results->title;
+						$item->data1_id = $results->id;
 						$item->list_icon = $results->list_icon;
 						$item->marker = $results->marker;
 					}

@@ -123,12 +123,15 @@ class EinsatzkomponenteHelper
 		return $result;
 	}
 	
-    public static function ermittle_einsatz_nummer ($selectedDate) {
-		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2")  ' ;
-		//return $query;
+    public static function ermittle_einsatz_nummer ($selectedDate,$einsatzart) {
+		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		$ex_einsatzart = $params->get('display_home_number_excl_einsatzart','');
+		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
+		//return $query; 
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
+		if ($einsatzart == $ex_einsatzart) : $result[0]->total = '--';  endif;
         return $result[0]->total;
     }
 	
