@@ -49,13 +49,16 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
+		
+ if ($this->params->get('display_home_JSON','1')) {
+	 
 		foreach ( $this->items as $item )
 		{
 					
 			//$item->auswahl_orga = str_replace(",", " +++ ", $this->auswahl_orga);
 			$item->desc = strip_tags( $item->desc);
 			$item->desc = (strlen($item->desc) > $this->params->get('rss_chars','1000')) ? substr($item->desc,0,strrpos(substr($item->desc,0,$this->params->get('rss_chars','1000')+1),' ')).' ...' : $item->desc;
-			$item->einsatznummer = EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1);
+			$item->einsatznummer = EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id);
 			// url link to article
 			// & used instead of &amp; as this is converted by feed creator
 			$link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht'.$this->layout_detail_link.'&id='.$item->id);
@@ -88,9 +91,8 @@ JResponse::setHeader('Content-Disposition','attachment;filename="einsatzarchiv.j
 
 		// Output the JSON data.
 		echo json_encode($this->items,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+ }
 		jexit();
-
-
         parent::display($tpl);
     }
 

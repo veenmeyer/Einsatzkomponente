@@ -38,7 +38,14 @@ class EinsatzkomponenteModelEinsatzberichtForm extends JModelForm
             $id = JFactory::getApplication()->input->get('id');
             JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', $id);
         }
+        if (JFactory::getApplication()->input->get('addlink') == '1') {
+			$id = '';
+            JFactory::getApplication()->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', '');
+		}
+		
 		$this->setState('einsatzbericht.id', $id);
+		
+		
 		// Load the parameters.
         $params = $app->getParams();
         $params_array = $params->toArray();

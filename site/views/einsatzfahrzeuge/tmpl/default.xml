@@ -29,15 +29,17 @@
 		hr="true"
 />
 
-       <!--<field name="filter_fahrzeuge" type="sql" class="inputbox"
-            label="Fahrzeuge"
-            description="" 
-            required="false" 
-            query="SELECT `id`, `name` FROM `#__eiko_fahrzeuge` WHERE `state`='1' ORDER BY `ordering` ASC"
-			key_field="id"       		
-			value_field="name"
-			multiple="multiple"
-         /> -->
+		 
+		 
+       <!--<field name="filter_organisationen" type="sql"
+            label="COM_EINSATZKOMPONENTE_OPTION_FAHRZEUGE_FILTER_ORGANISATIONEN"
+            description="COM_EINSATZKOMPONENTE_OPTION_FAHRZEUGE_FILTER_ORGANISATIONEN_DESC" 
+			default = ''
+            filter="raw"
+			translate = "COM_EINSATZKOMPONENTE_OPTION_FAHRZEUGE_FILTER_ORGANISATIONEN_DESC_FILTER"
+            query="SELECT 0 AS `id`, 'COM_EINSATZKOMPONENTE_OPTION_FAHRZEUGE_FILTER_ORGANISATIONEN_DESC_FILTER' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_organisationen`" key_field="id" value_field="val"
+			multiple ="multiple"
+			/> --> 
 
 			 <field name="filter_fahrzeuge" type="einsatzfahrzeuge" class="inputbox"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES"

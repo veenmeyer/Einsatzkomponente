@@ -457,7 +457,7 @@
 		</field>
 
 		<field
-			name="spacer1"
+			name="spacer44363431"
 			type="spacer"
 			hr="true"
 		/>
@@ -526,8 +526,33 @@
 				label="COM_EINSATZKOMPONENTE_RSS_BILD_HOEHE" 	
 				description="Bitte nur so angeben : z.b. 200 px oder am besten ganz fehlen lassen !!" 
 				/>
+				
 		<field
-			name="spacer2"
+			name="spacer443463431"
+			type="spacer"
+			hr="true"
+		/>
+<field name="note_json" 
+		type="note" 
+		label="COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ALS_JSON_FEED_BEREITSTELLEN" 
+		class="alert alert-info" 
+		description="COM_EINSATZKOMPONENTE_JSON_DESC"
+		/>	
+			<field
+				name="display_home_JSON"
+				type="radio"
+				class="btn-group"
+				default="1"
+				label="COM_EINSATZKOMPONENTE_JSON_FEED_FUNKTION"
+				description="">
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+			</field>
+
+			<field
+			name="spacer6445640"
 			type="spacer"
 			hr="true"
 		/>
@@ -1030,6 +1055,57 @@
 			type="spacer"
 			hr="true"
 		/>
+			<field
+			name="spacer34424645"
+			type="spacer"
+			hr="true"
+		/>
+	  <field
+			name="display_home_einsatzstaerke"
+			type="radio"
+			class="btn-group"
+			default="1"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSSATZSTAERKE"
+			description="">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+
+	  <field 
+			name="einsatzstaerke_people" 
+			type="int" 
+			default="0.5" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSSATZSTAERKE_PEOPLE" 
+			description="" 
+			size="10" />
+	  <field 
+			name="einsatzstaerke_vehicles" 
+			type="int" 
+			default="2" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSSATZSTAERKE_VEHICLES" 
+			description="" 
+			size="10" />
+	  <field 
+			name="einsatzstaerke_orga" 
+			type="int" 
+			default="15" 
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSSATZSTAERKE_ORGA" 
+			description="" 
+			size="10" />
+
+			<field
+			name="spacer5424645"
+			type="spacer"
+			hr="true"
+		/>
+			<field
+			name="spacer0424645"
+			type="spacer"
+			hr="true"
+		/>
 	  <field
 			name="display_home_pagination"
 			type="radio"
@@ -1056,11 +1132,6 @@
 		  <option value="1000">1000</option>
 		</field>
 
-		<field
-			name="spacer5424645"
-			type="spacer"
-			hr="true"
-		/>
 		<field
 			name="spacer6453545"
 			type="spacer"
