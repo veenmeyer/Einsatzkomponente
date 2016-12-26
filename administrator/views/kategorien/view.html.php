@@ -97,7 +97,7 @@ class EinsatzkomponenteViewKategorien extends JViewLegacy
 		
         //Set sidebar action - New in 3.0
 		JHtmlSidebar::setAction('index.php?option=com_einsatzkomponente&view=kategorien');
-		$options = '';
+		$options = array ();
 		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[] = JHtml::_('select.option', '0', 'JUNPUBLISHED');
 		$options[] = JHtml::_('select.option', '*', 'JALL');

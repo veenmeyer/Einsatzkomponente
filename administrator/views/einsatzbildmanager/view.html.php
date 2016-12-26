@@ -111,7 +111,7 @@ class EinsatzkomponenteViewEinsatzbildmanager extends JViewLegacy
 		$this->extra_sidebar .= JHtmlList::users('filter_created_by', $this->state->get('filter.created_by'), 1, 'onchange="this.form.submit();"');
 		$this->extra_sidebar .= '</div>';
 
-		$options = '';
+		$options = array ();
 		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[] = JHtml::_('select.option', '0', 'JUNPUBLISHED');
 		$options[] = JHtml::_('select.option', '*', 'JALL');

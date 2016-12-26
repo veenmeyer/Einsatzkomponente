@@ -3,6 +3,7 @@
 
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
+# Fehler: 0[]operator not supported for strings PHP7.1 behoben
 + Option: Listenlänge Einsatzüberisicht
 + Option: Standardbild für Facebook-Teilen auswählbar
 + Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze
