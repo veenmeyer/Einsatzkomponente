@@ -18,7 +18,7 @@ JHtml::_('formbehavior.chosen', 'select');
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
-
+ 
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 
@@ -218,7 +218,7 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
 					<td class="center ">
 					<?php $curTime = strtotime($item->date1);?>
-					<?php echo '<small>#'.EinsatzkomponenteHelper::ermittle_einsatz_nummer($curTime).'/'.date('Y', $curTime).'</small>';?>						
+					<?php echo '<small>#'.EinsatzkomponenteHelper::ermittle_einsatz_nummer($curTime,$item->data1_id).'/'.date('Y', $curTime).'</small>';?>						
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 						
 					</td>

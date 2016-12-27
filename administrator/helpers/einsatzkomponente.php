@@ -15,6 +15,7 @@ defined('_JEXEC') or die;
 class EinsatzkomponenteHelper
 {
 	
+	
 	/**
 	 * Configure the Linkbar.
 	 */
@@ -24,8 +25,6 @@ class EinsatzkomponenteHelper
 		$uri = (string) JUri::getInstance();
 		$return = urlencode(base64_encode($uri));
 		
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
 
 			$params = JComponentHelper::getParams('com_einsatzkomponente');
 
@@ -85,11 +84,10 @@ class EinsatzkomponenteHelper
 			  endif;
 			  
 			  JHtmlSidebar::addEntry(
-				  JText::_('Optionen'),
+				  JText::_('COM_EINSATZKOMPONENTE_OPTIONS'),
 				  'index.php?option=com_config&view=component&component=com_einsatzkomponente&return=' . $return,
 				  $vName == 'configuration'
 			  );
-		endif; 
 	}
 	/**
 	 * Gets a list of the actions that can be performed.
@@ -125,12 +123,15 @@ class EinsatzkomponenteHelper
 		return $result;
 	}
 	
-    public static function ermittle_einsatz_nummer ($selectedDate) {
-		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2")  ' ;
-		//return $query;
+    public static function ermittle_einsatz_nummer ($selectedDate,$einsatzart) {
+		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		$ex_einsatzart = $params->get('display_home_number_excl_einsatzart','');
+		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
+		//return $query; 
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
+		if ($einsatzart == $ex_einsatzart) : $result[0]->total = '--';  endif;
         return $result[0]->total;
     }
 	
@@ -146,7 +147,7 @@ class EinsatzkomponenteHelper
 
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
-		$query = 'SELECT COUNT(r.id) as total,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.ausruestung,r.state,rd.title as einsatzart,r.tickerkat,r.gmap FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
+		$query = 'SELECT COUNT(r.id) as total,r.people,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.presse2,r.presse3,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.ausruestung,r.state,rd.title as einsatzart,r.tickerkat,r.gmap FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
@@ -598,69 +599,25 @@ checkUtilVersion(4);
 return $gmap; }
 	
 
-    public static function getSocial($params,$id,$summary) {
-
-			// Funktion URL kürzen
-			function shortTinyUrl($url){
-				$res = "";
-				$handle = @fopen("http://tinyurl.com/api-create.php?url=".urlencode($url), "rb");
-				if($handle){
-				  while (!feof($handle)) {
-					$res .= fgets($handle,2000);
-				  }
-				  fclose($handle);
-				}
-				else{
-				  $layout_detail_link = JURI::current();	
-				}
-				return $res;
-			}
-  			if (!$layout_detail_link = shortTinyUrl( JURI::current() )):
-				$layout_detail_link = JURI::current();
-				endif;
-			// Funktion URL kürzen ENDE
-			
-	  	$social = '';
-		
- 		if ( $params->get('show_twitter', '1') ): 
-		$social .='<span class="eiko_social_2">';
-		$social .='<a href="https://twitter.com/share" data-url="'.$layout_detail_link.'" data-via="'.$params->get('twitter_via', '').'" data-text="#Einsatzinfo: #'.$summary.' --- " class="twitter-share-button">Tweet</a>';
-		$social .="<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>";
-		endif;
-		
-		if ( $params->get('show_gplus', '1') ): 
-		$social .='<span class="eiko_social_2">';
-		$social .='<div class="g-plusone" data-size="medium" data-href="'. $layout_detail_link . '"></div>';
-		$social .='<script type="text/javascript">(function() { var po = document.createElement("script"); po.type = "text/javascript"; po.async = true; po.src = "https://apis.google.com/js/plusone.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);  })();</script></span>';
-	endif; 
-	
-		if ( $params->get('show_facebook', '1') ): 
-		$social .='<span class="eiko_social_2">'; 
-		$social .='<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, "script", "facebook-jssdk"));</script><div class="fb-share-button" data-href="' . $layout_detail_link . '" data-width="" data-type="button_count"></div></span>';
- 		endif; 
-		
-		return $social;
-	}
 	
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	
+	//Load admin language file
+$lang = JFactory::getLanguage();
+$lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
+
+
 	$navbar  ='';
 	$navbar .='<div class="btn-group-justified">';
 	
 	if( $prev_id) : 
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn eiko_btn_2" title="">';
-    $navbar .='<strong>Zurück</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_ZURUECK').'</strong></a>';
 	endif; 
 	
 	if( $next_id) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class=" btn eiko_btn_2" title="">';
-    $navbar .='<strong>Vor</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_NAECHSTE').'</strong></a>';
 	endif; ?>
     
     <?php if ($menu_link=='&Itemid=') : 
@@ -669,10 +626,10 @@ return $gmap; }
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif;
 	if( !$menu_link) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>Übersicht</strong></a>';
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
 		$user=JFactory::getUser();
@@ -682,11 +639,11 @@ return $gmap; }
 		$result = $db->loadResult();
 	if ($user->id == $result OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
-    $navbar .='<strong>Editieren</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_EDITIEREN').'</strong></a>';
 	endif;
 	if ($user->id == $result OR JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente')) :
     $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id.'&copy=1').'" class=" btn eiko_btn_2">';
-    $navbar .='<strong>Kopieren</strong></a>';
+    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_KOPIEREN').'</strong></a>';
 	endif;
     endif;
 	
@@ -703,7 +660,7 @@ return $gmap; }
 
 		$version = new JVersion;
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
-		$response = @file("http://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$version->getShortVersion()."&eikoversion=".$eikoversion); // Request absetzen
+		$response = @file("https://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$version->getShortVersion()."&eikoversion=".$eikoversion); // Request absetzen
 		@$response_code = intval($response[1]); // Rückgabewert auslesen
 if ($response_code=='12') :	
 $params->set('eiko', '1');
@@ -1039,7 +996,7 @@ endif;
 		$query->set('`publish_down`="0000-00-00 00:00:00.000000"');
 		$query->set('`images`="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}"');
 		$query->set('`urls`="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
-		$query->set('`attribs`="{\"show_title\":"",\"link_titles\":"",\"show_tags\":"",\"show_intro\":"",\"info_block_position\":"",\"show_category\":"",\"link_category\":"",\"show_parent_category\":"",\"link_parent_category\":"",\"show_author\":"",\"link_author\":"",\"show_create_date\":"",\"show_modify_date\":"",\"show_publish_date\":"",\"show_item_navigation\":"",\"show_icons\":"",\"show_print_icon\":"",\"show_email_icon\":"",\"show_vote\":"",\"show_hits\":"",\"show_noauth\":"",\"urls_position\":"",\"alternative_readmore\":"",\"article_layout\":"",\"show_publishing_options\":"",\"show_article_options\":"",\"show_urls_images_backend\":"",\"show_urls_images_frontend\":""}"');
+		$query->set('`attribs`="{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}"');
 		$query->set('`version`="1"');
 		$query->set('`ordering`="0"');
 		$query->set('`metakey`="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
@@ -1350,4 +1307,37 @@ endif;
 		
 		return $msg;
 	}
+	
+	
+    public static function getEinsatzdauer($date1,$date3) {
+						$einsatzdauer = '';
+						$diff =  strtotime($date3)- strtotime($date1);
+			            $diff = $diff/60;
+
+			            if($diff<60):
+			            	if($diff == 0): $einsatzdauer = '0 Min.';
+			            	else: $einsatzdauer = $diff.' Min.';
+			            	endif;
+
+			            else:
+			            	$diffDate = strtotime($date3)- strtotime($date1);
+							$days = floor($diffDate / 24 / 60 / 60 ); // Anzahl Tage = Sekunden /24/60/60
+							$diffDate = $diffDate - ($days*24*60*60); // den verbleibenden Rest berechnen = Stunden
+							$hours = floor($diffDate / 60 / 60); // den Stundenanteil herausrechnen
+							$diffDate = ($diffDate - ($hours*60*60));
+							$minutes = floor($diffDate/60); // den Minutenanteil
+							$diffDate = $diffDate - ($minutes*60);
+							$seconds = floor($diffDate); // die verbleibenden Sekunden
+
+							if($days>0): $einsatzdauer = $days.' Tag(e) ' . $hours.' Std. '.$minutes.' Min.';
+							else: $einsatzdauer = $hours.' Std. '.$minutes.' Min.';
+							endif;
+			            endif;
+						
+		return $einsatzdauer;
+	}
+	
+	
+	
+	
 }

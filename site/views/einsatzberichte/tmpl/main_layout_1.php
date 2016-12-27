@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 
 <!--RSS-Feed Imag-->
 <?php if ($this->params->get('display_home_rss','1')) : ?>
-<div class="eiko_rss_main_1" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzberichte&format=feed&type=rss"><img src="<?php echo JURI::Root();?>/components/com_einsatzkomponente/assets/images/livemarks.png" class="hasTooltip eiko_rss_icon_main_1" border="0" title="RSS-Feed" alt="rss-feed-image"></a></div>
+<div class="eiko_rss_main_1" ><a href="<?php JURI::base();?>index.php?option=com_einsatzkomponente&view=einsatzberichte&format=feed&type=rss"><span class="icon-feed" style="color:#cccccc;font-size:24px;"> </span> </a></div>
 <?php endif;?>
 
 
@@ -40,26 +40,26 @@ defined('_JEXEC') or die;
 
 
 if (!$this->params->get('anzeigejahr','0') and $this->params->get('display_filter_jahre','1')) : 
-	$years[] = JHTML::_('select.option', '', JTEXT::_('Bitte das Jahr auswählen')  , 'id', 'title');
-	$years[] = JHTML::_('select.option', '9999', JTEXT::_('Alle Einsätze anzeigen')  , 'id', 'title');
+	$years[] = JHTML::_('select.option', '', JTEXT::_('COM_EINSATZKOMPONENTE_JAHR')  , 'id', 'title');
+	$years[] = JHTML::_('select.option', '9999', JTEXT::_('COM_EINSATZKOMPONENTE_ALLE_EINSAETZE')  , 'id', 'title');
 	$years = array_merge($years, (array)$this->years);
 	 
-	echo JHTML::_('select.genericlist',  $years, 'year', ' class="eiko_select_jahr_main_1" onchange=submit(); ', 'id', 'title', $this->selectedYear);?>
+	echo JHTML::_('select.genericlist',  $years, 'year', ' class="eiko_select_jahr_main_1" onchange=submit(); ', 'id', 'title', $this->selectedYear, $translate=true);?>
 	
     <?php
 endif;
 if ($this->params->get('display_filter_einsatzarten','1')) : 
-	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('alle Einsatzarten')  , 'id', 'title');
+	$einsatzarten[] = JHTML::_('select.option', '', JTEXT::_('COM_EINSATZKOMPONENTE_ALLE_EINSATZARTEN')  , 'id', 'title');
 	$einsatzarten = array_merge($einsatzarten, (array)$this->einsatzarten);
 	?><?php  
-	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' class="eiko_select_einsatzart_main_1" onchange=submit(); ', 'id', 'title', $this->selectedEinsatzart);?>
+	echo JHTML::_('select.genericlist',  $einsatzarten, 'selectedEinsatzart', ' class="eiko_select_einsatzart_main_1" onchange=submit(); ', 'id', 'title', $this->selectedEinsatzart, $translate=true);?>
     <?php
 	endif;
 	if (!$this->params->get('abfragewehr','0') and $this->params->get('display_filter_organisationen','1')) : 
-	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('alle Organisationen')  , 'id', 'name');
+	$organisationen[] = JHTML::_('select.option', '', JTEXT::_('COM_EINSATZKOMPONENTE_ALLE_ORGANISATIONEN')  , 'id', 'name');
 	$organisationen = array_merge($organisationen, (array)$this->organisationen);
 	?><?php 
-	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga);
+	echo JHTML::_('select.genericlist',  $organisationen, 'selectedOrga', ' class="eiko_select_organisation_main_1" onchange=submit(); ', 'id', 'name', $this->selectedOrga, $translate=true);
 	endif;?>
 </div>
 <?php // Filter ENDE   -------------------------------------------------------------------------------
@@ -76,36 +76,36 @@ echo '<span class="mobile_hide_320">'.$this->modulepos_2.'</span>';
            <?php $col ='0';?>
            <?php if ($this->params->get('display_home_number','1') or $this->params->get('display_home_alertimage_num','0')) : ?>
 		   <?php if ($this->params->get('display_home_number','1')):?>
-            <th class="eiko_th_einsatznummer_main_1" width="">Nr.</th>
+            <th class="eiko_th_einsatznummer_main_1" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_NR');?></th>
            <?php else:?>
             <th class="eiko_th_einsatznummer_main_1" width=""></th>
            <?php endif;?>
            <?php $col =$col+1;?>
            <?php endif;?>
            <?php if ($this->params->get('display_home_alertimage','0')) : ?>
-            <th class="eiko_th_alarmierungsart_main_1 mobile_hide_480" width="">Alarm über</th>
+            <th class="eiko_th_alarmierungsart_main_1 mobile_hide_480" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_ALARM_UEBER');?></th>
            <?php $col =$col+1;?>
            <?php endif;?>
-            <th class="eiko_th_datum_main_1 mobile_hide_320" width="">Datum</th>
+            <th class="eiko_th_datum_main_1 mobile_hide_320" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_DATUM');?></th>
            <?php $col =$col+1;?>
-            <th class="eiko_th_einsatzart_main_1" width="">Einsatzart/-ort</th>
+            <th class="eiko_th_einsatzart_main_1" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_EINSATZART_ORT');?></th>
            <?php $col =$col+1;?>
-            <th class="eiko_th_kurzbericht_main_1 mobile_hide_480" width="">Beschreibung</th>
+            <th class="eiko_th_kurzbericht_main_1 mobile_hide_480" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_DESC');?></th>
            <?php $col =$col+1;?>
            <?php if ($this->params->get('display_home_orga','0')) : ?>
-            <th class="eiko_th_organisationen_main_1 mobile_hide_480" width="">Organisationen</th>
+            <th class="eiko_th_organisationen_main_1 mobile_hide_480" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN');?></th>
            <?php $col =$col+1;?>
            <?php endif;?>
            <?php if ($this->params->get('display_home_image')) : ?>
-            <th class="eiko_th_einsatzbild_main_1 mobile_hide_480" width="">Bild</th>
+            <th class="eiko_th_einsatzbild_main_1 mobile_hide_480" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_EINSATZFOTOS');?></th>
            <?php $col =$col+1;?>
            <?php endif;?>
            <?php if ($this->params->get('display_home_presse')) : ?>
-            <th class="eiko_th_presse_main_1 mobile_hide_480" width="">Presselink</th>
+            <th class="eiko_th_presse_main_1 mobile_hide_480" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_PRESSELINK');?></th>
            <?php $col =$col+1;?>
            <?php endif;?>
 		   <?php if ($this->params->get('display_home_counter','1')) : ?>
-		   <th class="eiko_th_counter mobile_hide_480" width="">Zugriffe</th>
+		   <th class="eiko_th_counter mobile_hide_480" width=""><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_ZUGRIFFE');?></th>
 		   <?php $col =$col+1;?>
 		   <?php endif;?>
         </tr>
@@ -217,13 +217,13 @@ if ($this->params->get('display_home_pagination')) :
            
 		   <?php if ($this->params->get('display_list_icon')) : ?>
 		   <?php if (isset($item->list_icon)) :?>
-           <img class="eiko_icon hasTooltip" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" title="Einsatzart:<br/> <?php echo $item->einsatzart;?>" />
+           <img class="eiko_icon hasTooltip" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" title="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_EINSATZART');?>:<br/> <?php echo $item->einsatzart;?>" />
            <?php endif;?>
            <?php endif;?>
 
 		   <?php if ($this->params->get('display_tickerkat_icon')) : ?>
 		   <?php if (isset($tickerkat->image)) :?>
-           <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="Kategorie:<br/> <?php echo $tickerkat->title;?>" />
+           <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_KATEGORIE');?>:<br/> <?php echo $tickerkat->title;?>" />
 		   <?php endif;?>
            <?php endif;?>
 		   
@@ -236,14 +236,14 @@ if ($this->params->get('display_home_pagination')) :
 		   <?php endif; ?>
            <br />
 
-<?php echo '<span class="eiko_address_main_1"><i class="icon-arrow-right"></i> '.$item->address.'</span>';?>
+<?php echo '<span class="eiko_address_main_1"><i class="icon-location" ></i> '.$item->address.'</span>';?>
 
 			<?php if ($this->params->get('display_home_info','1') or $this->params->get('display_home_links','1')) : ?>
 			<div class="eiko_td_buttons_main_1">
 			<?php endif;?>
 
 			<?php if ($this->params->get('display_home_info','1')) : ?>
-			<input type="button" class="btn-home" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="Kurzinfo"></input>
+			<input type="button" class="btn-home" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_KURZINFO');?>"></input>
             <script type="text/javascript">
 			jQuery.toggle<?php echo $item->id;?> = function(query)
 				{
@@ -254,7 +254,7 @@ if ($this->params->get('display_home_pagination')) :
             <?php endif;?>
 			
 			<?php if ($this->params->get('display_home_links','1')) : ?>
-            <span class="mobile_hide_320"><a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">Details</a></span>
+            <span class="mobile_hide_320"><a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>"><?php echo JTEXT::_('COM_EINSATZKOMPONENTE_DETAILS');?></a></span>
            <?php endif;?>   
 		   
 			<?php if ($this->params->get('display_home_info','1') or $this->params->get('display_home_links','1')) : ?>
@@ -301,7 +301,7 @@ if ($this->params->get('display_home_pagination')) :
 			<?php if ($this->params->get('display_home_presse','0')) : ?>
 				<td class="mobile_hide_480 mobile_hide_presse">
 					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
-					<?php echo '+Presselinks'; ?>
+					<?php echo JText::_('COM_EINSATZKOMPONENTE_PRESSELINK'); ?>
 					<?php endif;?>
 				</td>
 			<?php endif; ?>
@@ -352,14 +352,16 @@ if ($this->params->get('display_home_pagination')) :
             </td>
             <td colspan="<?php echo $col;?>" class=""eiko_td_zusatz_main_1>
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
-            <h3>Alarmierungszeit :</h3><?php echo date('d.m.Y', $curTime);?> um <?php echo date('H:i', $curTime);?> Uhr
-            <h3>alarmierte Organisationen :</h3><?php echo $auswahl_orga;?><br/>
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNGSZEIT');?> :</h3><?php echo date('d.m.Y', $curTime);?> um <?php echo date('H:i', $curTime);?> Uhr
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?> :</h3><?php echo $auswahl_orga;?><br/>
 		   <?php if ($item->desc) : ?>
-			<h3>Einsatzbericht :</h3><?php echo $item->desc;?>
+			<?php jimport('joomla.html.content'); ?>  
+			<?php $Desc = JHTML::_('content.prepare', $item->desc); ?>
+			<h3><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?> :</h3><?php echo $Desc;?>
             <?php endif;?>
-            <br /><input type="button" class="btn-home" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="Info schliessen"></input>
+            <br /><input type="button" class="btn-home" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_INFO_SCHLIESSEN');?>"></input>
            <?php if ($this->params->get('display_home_links','1')) : ?>
-            <a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">zur Detailansicht</a>
+            <a class="btn-home" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS');?></a>
            <?php endif;?>
            </div> 
            </td>
@@ -380,7 +382,7 @@ if ($this->params->get('display_home_pagination')) :
     
     <?php if ($this->params->get('display_home_map')) : ?>
     <tr><td colspan="<?php echo $col;?>" class="eiko_td_gmap_main_1">
-    <h4>Einsatzgebiet</h4>
+    <h4><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZGEBIET');?></h4>
 			<?php if ($this->params->get('gmap_action','0') == '1') :?>
   			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>

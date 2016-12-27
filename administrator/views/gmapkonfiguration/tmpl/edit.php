@@ -91,20 +91,20 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 			<fieldset class="panelform">
     		<div class="alert alert-info" style="width: 500px;">
     		<ul>
-    			<li>Markieren des Einsatzgebietes durch Links-Klicks auf der Karte</li>
-    			<li>Den Karten-Mittelpunkt durch Rechts-Klick auf der Karte festlegen</li>
+    			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_1');?></li>
+    			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_2');?></li>
     		</ul>
    			</div>
-            <input class='btn btn-warning' type='button' onclick='clearMap();return false;' value='Koordinatenliste l&ouml;schen'/>
-            <input class='btn btn-warning' type='button' onclick='resetarea()' value='Koordinatenliste zur&uuml;cksetzen'/>
+            <input class='btn btn-warning' type='button' onclick='clearMap();return false;' value='<?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_KOORDINATEN_LOESCHEN');?>'/>
+            <input class='btn btn-warning' type='button' onclick='resetarea()' value='<?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_KOORDINATENLISTE_ZUUECKSETZEN');?>'/>
 						<!-- Button to trigger modal -->
-						<a href="#myModal" role="button" class="btn" data-toggle="modal">Tipp zum Einsatzgebiet</a>
+						<a href="#myModal" role="button" class="btn" data-toggle="modal"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_4');?></a>
      
 						<!-- Modal -->
 						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Tipps zum Erstellen des Einsatzgebietes</h3>
+						<h3 id="myModalLabel"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_5');?></h3>
 						</div>
 						<div class="modal-body"><br/><br/>
     1. Sucht im Internet nach dem amtlichen Gemeindeschlüssel<br/>
@@ -124,12 +124,12 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 	<h5>Vielen Dank an Martin Scholtes für diesen Hinweis.</h5>
 						</div>
 						<div class="modal-footer">
-						<button class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_6');?></button>
 						<!--<button class="btn btn-primary">Save changes</button> !-->
 						</div>
 						</div>		
 				</div>
-            <div id="map" style="width: 810px; height: 400px">Karte</div>
+            <div id="map" style="width: 810px; height: 400px"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_7');?></div>
             <input type="hidden"  name="gmap_latitude"  id="gmap_latitude"  value="<?php echo $gmap_latitude; ?>" size="30"/>
             <input type="hidden"  name="gmap_longitude"  id="gmap_longitude"  value="<?php echo $gmap_longitude; ?>" size="30"/>
           

@@ -1,5 +1,28 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
+
+<h3>Changelog <small>Version 3.14</small></h3>
+<ul>
+# Fehler: 0[]operator not supported for strings PHP7.1 behoben
++ Option: Listenlänge Einsatzüberisicht
++ Option: Standardbild für Facebook-Teilen auswählbar
++ Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze
+- Social-Button wurden entfernt ! Alternativ Plugin: https://joomla-agentur.de/joomla/downloads/jooag-shariff-plugin
++ Sprache "Englisch" hinzugefügt.
++ Sprachvariabeln komplett überarbeit
++ JSON-VIEW für Einsatzarchiv-Übersicht hinzugefügt
++ RSS-Feed für Einsatzarchiv-Übersicht hinzugefügt
+# Bootstrap CSS + JS werden jetzt direkt aus Joomla verwendet
++ main_layout_3 für Einsatzarchiv hinzugefügt
++ Optionen Fahrzeugübersicht
++ Einsatzkarte (alle oder nur aktuelles Jahr anzeigen)
+# Created-by-Filter im Einsatzbildmanager (Danke an mttronc)
+# Google-Api-Key bei Einsatz-Edit im Frontend eingesetzt.
++ Einsatzdauer in detail_layout_1 und 4 hinzugefügt. (Danke an r4id)
+# eingesetzte Fahrzeuge als Textaufzählung in detail_layout_4 korrigiert
++ Detailbutton in Einsatzübersicht main_layout_4 hinzugefügt
+</ul>
+
 <h3>Changelog <small>Version 3.13</small></h3>
 <ul>
 + Einsatzkarte in Übersicht -Einsatzarchiv- hinzugefügt.

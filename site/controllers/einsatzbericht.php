@@ -207,7 +207,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		$query->set('`publish_down`="0000-00-00 00:00:00.000000"');
 		$query->set('`images`="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"'.$result[0]->summary.'\",\"image_intro_caption\":\"'.$result[0]->summary.'\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"'.$result[0]->summary.'\",\"image_fulltext_caption\":\"'.$result[0]->summary.'\"}"');
 		$query->set('`urls`="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
-		$query->set('`attribs`="{\"show_title\":"",\"link_titles\":"",\"show_tags\":"",\"show_intro\":"",\"info_block_position\":"",\"show_category\":"",\"link_category\":"",\"show_parent_category\":"",\"link_parent_category\":"",\"show_author\":"",\"link_author\":"",\"show_create_date\":"",\"show_modify_date\":"",\"show_publish_date\":"",\"show_item_navigation\":"",\"show_icons\":"",\"show_print_icon\":"",\"show_email_icon\":"",\"show_vote\":"",\"show_hits\":"",\"show_noauth\":"",\"urls_position\":"",\"alternative_readmore\":"",\"article_layout\":"",\"show_publishing_options\":"",\"show_article_options\":"",\"show_urls_images_backend\":"",\"show_urls_images_frontend\":""}"');
+		$query->set('`attribs`="{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}"');
 		$query->set('`version`="1"');
 		$query->set('`ordering`="0"');
 		$query->set('`metakey`="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
@@ -298,13 +298,13 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
         // Redirect to the list screen.
         $this->setMessage(JText::_('Einsatzdaten erfolgreich gepeichert'));
         $menu = & JSite::getMenu();
-        $item = $menu->getActive(); //print_r ($item);break;
+        $item = $menu->getActive()->id; //print_r ($item);break;
 //echo 'View :'.JFactory::getApplication()->input->get('view').'<br/>';
 //echo 'Layout :'.JFactory::getApplication()->input->get('layout').'<br/>';
 //echo 'Task :'.JFactory::getApplication()->input->get('task').'<br/>';break;
 
         //$this->setRedirect(JRoute::_($item->link, false));
-		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink', '').'', false));
+		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&Itemid='.$item.'', false));
 		// Flush the data from the session.
 		$app->setUserState('com_einsatzkomponente.edit.einsatzbericht.data', null);
 	}
@@ -312,10 +312,10 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
     
     public function cancel() {
 		$menu = & JSite::getMenu();
-        $item = $menu->getActive();
+        $item = $menu->getActive()->id;
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
         $this->setMessage(JText::_('Einsatzeingabe abgebrochen'));
-		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink', '').'', false)); 
+		$this->setRedirect(JRoute::_('index.php?option=com_einsatzkomponente&Itemid='.$item.'', false)); 
     }
     
 	public function remove()

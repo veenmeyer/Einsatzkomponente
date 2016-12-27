@@ -24,8 +24,8 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
     protected $einsatzlogo;				// Daten für Einsatzart (Pfad für Icon,Logo,...)
     protected $tickerKat; 				// Text für Einsatzkategorie
     protected $alarmierungsart;			// Daten für Alarmierungsart (Pfad für Icon,Logo,...)
-    protected $social;					// Daten für Social-Networks-Buttons
-    protected $navbar;					// Daten für Social-Networks-Buttons
+    protected $navbar;					// 
+    protected $einsatzdauer;			// 
     /**
      * Display the view
      */
@@ -52,7 +52,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$this->einsatzlogo = EinsatzkomponenteHelper::getEinsatzlogo($this->item->data1); 
 		$this->tickerKat = EinsatzkomponenteHelper::getTickerKat($this->item->tickerkat); 
 		$this->alarmierungsart = EinsatzkomponenteHelper::getAlarmierungsart($this->item->alerting); 
-		
+		$this->einsatzdauer = EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);
 		// Get active menu
 		$app	= JFactory::getApplication();
 		$menus	= $app->getMenu();
@@ -71,9 +71,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/highslide/highslide.css'); 
         
 		
-		
 		//print_r ($this->menu);
-		$this->social = EinsatzkomponenteHelper::getSocial($this->params,$this->item->id,$this->item->summary);
 		
 //		$sef = '';
 //		$sef_rewrite = '';
@@ -202,7 +200,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		endif;
 		
  		$standort = EinsatzkomponenteHelper::getStandort_orga($this->item->auswahl_orga); 
-		$display_map_route		= $this->params->get('$display_map_route','true');
+		$display_map_route		= $this->params->get('display_map_route','true');
 		
         $display_detail_popup = $this->params->get('display_detail_popup','false');
 		$marker1_title 		= '';
@@ -243,11 +241,12 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		
 		if ($this->params->get('display_detail_bootstrap','0')) :
 		// Import Bootstrap
- 		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
+		JHtml::_('bootstrap.framework');
+		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
 		endif;
-		$document->addStyleDeclaration($this->params->get('detail_css','')); 
+		
+		// Import CSS aus Optionen
+		$document->addStyleDeclaration($this->params->get('detail_css',''));  
 		
 ?>
     <script type="text/javascript">
@@ -283,17 +282,34 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 		endif;
 		//$opengraph .= '<meta property="article:publisher" content="https://www.einsatzkomponente.de" />';
+		
+			if ($this->params->get('standard_share_image','')) : 
+			$fileName_image = str_replace(' ', '%20', $this->params->get('standard_share_image',''));  
+			$size = getimagesize(JURI::base().$fileName_image);
+			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
+		endif;
+
 		if( $this->item->image ) :
 			$fileName_image = str_replace(' ', '%20', $this->item->image);  
+			$size = getimagesize(JURI::base().$fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
 		endif;
 
 		if ($this->images) :
 			for ($i = 0;$i < count($this->images);++$i) { 
 			$fileName_image = str_replace(' ', '%20', $this->images[$i]->image);  
+			$size = getimagesize(JURI::base().$fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
 			} 
 	   endif;
+	   
+	   
 	   
 
 		$document->addCustomTag($opengraph);

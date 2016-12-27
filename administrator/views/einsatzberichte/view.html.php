@@ -298,7 +298,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy {
 			$this->extra_sidebar .= '</div>';
                                                 
 
-		$options = '';
+		$options = array ();
 		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[] = JHtml::_('select.option', '0', 'JUNPUBLISHED');
 		$options[] = JHtml::_('select.option', '2', 'Folgeeinsatz');

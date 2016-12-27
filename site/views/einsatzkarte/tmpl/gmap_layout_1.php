@@ -56,7 +56,7 @@ JFilterOutput::objectHtmlSafe($reports);
 	 
 $Monat ='';
 $selectedYear = '';
-		
+$show_all = $this->params->get('show_all','true');
 // Gmap - Konfiguration laden
 $gmapconfig = $this->gmap_config; 
 //print_r ($gmapconfig);
@@ -131,12 +131,12 @@ $catinit    .= 'show("'.$pie[$i]->data1.'");';
 $cat_count    .= 'cat_count("'.$pie[$i]->data1.'");';
 
 
-$catbox .= '<div class="eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs eiko_gmap_toolbar_button" onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" class="eiko_gmap_toolbar_icon" />&nbsp;'.$pie[$i]->einsatzart.'<span class="pull-right" style ="font-size:8px;" ><span class="eiko_gmap_count" id="'.$pie[$i]->data1.'count"></span> / '.$pie[$i]->total.' Einsätze</span></button></label></div>';
+$catbox .= '<div class="eiko_gmap_toolbar"><label for="'.$pie[$i]->data1.'box"><button type="button" class="btn btn-default btn-xs eiko_gmap_toolbar_button" onClick="boxclick(&#39;'.$pie[$i]->data1.'&#39;)"  id="div_'.$pie[$i]->data1.'"><input type="checkbox" class="eiko_gmap_checkbox" id="'.$pie[$i]->data1.'box" /><img src="'.JURI::base().$pie[$i]->icon.'" class="eiko_gmap_toolbar_icon" />&nbsp;'.$pie[$i]->einsatzart.'<span class="pull-right" style ="font-size:8px;" ><span class="eiko_gmap_count" id="'.$pie[$i]->data1.'count"></span> / '.$pie[$i]->total.' '.JText::_('COM_EINSATZKOMPONENTE_EINSAETZE').'</span></button></label></div>';
 
 $i++; 
 } 
 if ($this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
-$catbox .= '<div class="eiko_gmap_toolbar"><label for="area"><button type="button" class="btn btn-default btn-xs eiko_gmap_toolbar_button" onClick="togglearea()" id="div_area"><input type="checkbox" class="eiko_gmap_checkbox" id="area" onClick="togglearea()" checked/>&nbsp;&nbsp;<img src="'.JURI::base().'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'" class="eiko_gmap_toolbar_icon" />Einsatzgebiet anzeigen</button></label></div>';
+$catbox .= '<div class="eiko_gmap_toolbar"><label for="area"><button type="button" class="btn btn-default btn-xs eiko_gmap_toolbar_button" onClick="togglearea()" id="div_area"><input type="checkbox" class="eiko_gmap_checkbox" id="area" onClick="togglearea()" checked/>&nbsp;&nbsp;<img src="'.JURI::base().'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'" class="eiko_gmap_toolbar_icon" />'.JText::_('COM_EINSATZKOMPONENTE_EINSATZGEBIET_ANZEIGEN').'</button></label></div>';
 endif;
 if (!$this->params->get('display_einsatzkarte_einsatzgebiet','1')) :
 $catbox .= '';
@@ -205,7 +205,7 @@ function createHouse(latlng, label, html,index,image) {
 
       // A function to create the marker and set up the event window
 function createMarker(latlng,name,html,category,image,id,date1,day,month,year,foto,itemid) {
-var contentString = "<div align='center'><span class='label label-info' style='font-size:16px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;'>" + html + "</span><br/>" + name + "<br/>" + day + "." + month + "." + year + "<?php if ($this->params->get('display_einsatzkarte_links','1')) :?><br/>" + "<a class='btn-home' href=<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' ); ?>"+id+">zur Detailansicht</a><?php endif;?></div>";
+var contentString = "<div align='center'><span class='label label-info' style='font-size:16px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;'>" + html + "</span><br/>" + name + "<br/>" + day + "." + month + "." + year + "<?php if ($this->params->get('display_einsatzkarte_links','1')) :?><br/>" + "<a class='btn-home' href=<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' ); ?>"+id+"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS');?></a><?php endif;?></div>";
 
 var detailString = "<table style='height:100px;'><tr><td width='88%'><div style=' background-color:#ffffff;' align='left'><span style='font-size:14px;padding: 2px 2px 2px 2px;margin:2px 2px 2px 2px;font-weight:bold;color:#fff;background-color:#ff0000;'>" + html + "</span>" + "<p></p>Einsatzdatum : " + day + "." + month + "." + year + "<p></p><strong>" + name + "</strong> " + "" + "<p></p>" + "<p align='left'>" + "<a href=<?php echo JRoute::_('index.php?option=com_reports2&all=0');?>" + "&view=show&Itemid=" + itemid + "&gmaplink=1&id=" + id + "> zum Detailbericht <\/a></p></div></td><td style='padding-right:20px;margin-right:20px;'><img style='border:1px solid;' src='/components/com_reports2/images/noimage.png' height='90' /></td></tr></table>";
 
@@ -443,13 +443,13 @@ var infowindow = new google.maps.InfoWindow(
 		{
 			 if(years[i].value == now.getFullYear()-1)
 				{
-				years[i].selected = true;	
-                document.getElementById("selectstartmonth").options[0].selected = true;
+				years[i].selected = <?php echo $show_all;?>;	
+                document.getElementById("selectstartmonth").options[0].selected = <?php echo $show_all;?>;
 				}
 			if(years[i].value == now.getFullYear())
-				years[i].selected = true;
+				years[i].selected = <?php echo $show_all;?>;
 			if(now.getMonth == 0)
-				years[i-1].selected = true;
+				years[i-1].selected = <?php echo $show_all;?>;
 		}
         document.getElementById("selectendmonth").options[now.getMonth()].selected = true;
         years = document.getElementById("selectendyear").options;
@@ -493,18 +493,18 @@ polygon.setMap(map);
     
 <?php 
 
-  $Mona[] = JHTML::_('select.option', '01', JTEXT::_('Januar'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '02', JTEXT::_('Februar'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '03', JTEXT::_('März'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '04', JTEXT::_('April'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '05', JTEXT::_('Mai'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '06', JTEXT::_('Juni'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '07', JTEXT::_('Juli'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '08', JTEXT::_('August'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '09', JTEXT::_('September'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '10', JTEXT::_('Oktober'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '11', JTEXT::_('November'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '12', JTEXT::_('Dezember'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '01', JTEXT::_('COM_EINSATZKOMPONENTE_JANUAR'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '02', JTEXT::_('COM_EINSATZKOMPONENTE_FEBRUAR'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '03', JTEXT::_('COM_EINSATZKOMPONENTE_MAERZ'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '04', JTEXT::_('COM_EINSATZKOMPONENTE_APRIL'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '05', JTEXT::_('COM_EINSATZKOMPONENTE_MAI'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '06', JTEXT::_('COM_EINSATZKOMPONENTE_JUNI'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '07', JTEXT::_('COM_EINSATZKOMPONENTE_JULI'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '08', JTEXT::_('COM_EINSATZKOMPONENTE_AUGUST'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '09', JTEXT::_('COM_EINSATZKOMPONENTE_SEPTEMBER'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '10', JTEXT::_('COM_EINSATZKOMPONENTE_OKTOBER'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '11', JTEXT::_('COM_EINSATZKOMPONENTE_NOVEMBER'),'id','title' ); 
+  $Mona[] = JHTML::_('select.option', '12', JTEXT::_('COM_EINSATZKOMPONENTE_DEZEMBER'),'id','title' ); 
 
   $years = getyear();
 
@@ -518,12 +518,12 @@ polygon.setMap(map);
  <?php
   echo JHTML::_('select.genericlist', $Mona, 'selectstartmonth', 'class="eiko_gmap_month_select" onchange=selectdate() ','id', 'title', $Monat);
   echo JHTML::_('select.genericlist',  $years, 'selectstartyear', 'class="eiko_gmap_year_select" onchange=selectdate() ', 'id', 'title', $selectedYear);
-  echo ' bis ';
+  echo ' '.JText::_('COM_EINSATZKOMPONENTE_BIS').' ';
   echo JHTML::_('select.genericlist', $Mona, 'selectendmonth', 'class="eiko_gmap_month_select" onchange=selectdate() ','id', 'title', $Monat);
   echo JHTML::_('select.genericlist',  $years, 'selectendyear', 'class="eiko_gmap_year_select" onchange=selectdate() ', 'id', 'title', $selectedYear);
   ?>
 
-<button type="button" id="einsatzarten_flip" class="btn btn-sm">Einsatzarten auswählen</button>
+<button type="button" id="einsatzarten_flip" class="btn btn-sm"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZARTEN_AUSWAEHLEN');?></button>
 
 </div>
 
@@ -533,6 +533,9 @@ polygon.setMap(map);
  <?php if ($this->params->get('display_einsatzkarte_sidebar','1')) : ?>
 <div class="well eiko_gmap_sidebar span6" id="side_bar" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px"></div>
 <?php endif; ?>
+ <?php if (!$this->params->get('display_einsatzkarte_sidebar','1')) : ?>
+<div class="well eiko_gmap_sidebar span6" id="side_bar" style="display:none;height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px"></div>
+<?php endif; ?>
  <?php if ($this->params->get('display_einsatzkarte_map','1')) : ?>
 <div class="well eiko_gmap_map well span6" id="map" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px"></div>
 <?php endif; ?>
@@ -541,12 +544,12 @@ polygon.setMap(map);
 <?php endif; ?>
 </div>
 <?php if ($hide) :?>
-<div><span class="glyphicon glyphicon-info-sign"></span> Es werden insg. <?php echo $hide;?> Einsätze werden aufgrund der Privatsphäre in dieser Karte nicht berücksichtigt.</div>
+<div><span class="glyphicon glyphicon-info-sign"></span> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_KARTE_1');?> <?php echo $hide;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_KARTE_2');?></div>
 <?php endif;?>
 
 <div class="row-fluid">
 
-<div class="span6" id="details" style="display:none;">Daten werden eingelesen ...</div>
+<div class="span6" id="details" style="display:none;"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_DATEN_LESEN');?> ...</div>
 <!--Höhe der sidebar-tabelle an catbox-tabelle anpassen --> 
 
 </div>
@@ -554,7 +557,7 @@ polygon.setMap(map);
 <?php if (!$this->params->get('eiko')) : ?>
 <div class="row-fluid">
         <div class="span12"><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2013 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
+            <span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
         </div>
 </div>
 

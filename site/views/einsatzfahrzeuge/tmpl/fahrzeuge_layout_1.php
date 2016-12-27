@@ -9,7 +9,11 @@
 // No direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+JHtml::_('bootstrap.tooltip');
+JHtml::_('behavior.multiselect');
+JHtml::_('formbehavior.chosen', 'select');
+
 
 ?>
 
@@ -17,7 +21,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
       name="adminForm" id="adminForm">
 
 	<?php //echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
-	<table class="table" id="organisationList">
+	<table class="table" id="fahrzeugList">
 		<thead>
 		<tr>
 
@@ -26,24 +30,30 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 							<th class=''>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
+				
+				<?php if ($this->params->get('show_fahrzeuge_detail1','1')) : ?>
 				<th class=''>
-				<?php echo JHtml::_('grid.sort',  'Beschreibung', 'a.detail1', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE_BESCHREIBUNG', 'a.detail1', $listDirn, $listOrder); ?>
 				</th>
+				<?php endif;?>
+	
+				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
 				<th class=''>
 				<?php echo JHtml::_('grid.sort',  '', 'a.detail2', $listDirn, $listOrder); ?>
 				</th>
+				<?php endif;?>
 				
-				<th><?php echo 'Letzter Eintrag'; ?>:</th>
-
+				<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
+				<th><?php echo JText::_('COM_EINSATZKOMPONENTE_LETZTER_EINTRAG');?></th>
+				<?php endif; ?>
+				
 				<?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
-				<th>
-				<?php echo 'Organisation'; ?>
-				</th>
+				<th><?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATION');?></th>
 				<?php endif;?>
 
 							<?php if ($canEdit || $canDelete): ?>
 					<th class="center">
-				<?php echo JText::_('Actions'); ?>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_ADMIN_ACTION'); ?>
 				</th>
 				<?php endif; ?>
 
@@ -57,7 +67,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 		</tr>
 <?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <th colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+            <th colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
         </tr>
 	<?php endif; ?>
 		</tfoot>
@@ -84,28 +94,32 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 				<?php echo $this->escape($item->name); ?></a>
 				</td>
 				
-				
-				<td>
-
-					<?php echo $item->detail1; ?>
-				</td>
-				<td>
-
-					<?php echo $item->detail2; ?>
-				</td>
-				
-				<?php // letzter Einsatz   
-				$database			= JFactory::getDBO();
-				$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
-				$database->setQuery( $query );
-				$total = $database->loadObjectList();
-				?>
-				<?php if ($total) : ?>
-				<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
-				<?php else: ?>
-				<td><?php echo '-'; ?></td>
+				<?php if ($this->params->get('show_fahrzeuge_detail1','1')) : ?>
+					<td>
+						<?php echo $item->detail1; ?>
+					</td>
 				<?php endif;?>
+				
+				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
+					<td>
 
+						<?php echo $item->detail2; ?>
+					</td>
+				<?php endif;?>
+				
+				<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
+					<?php // letzter Einsatz   
+					$database			= JFactory::getDBO();
+					$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
+					$database->setQuery( $query );
+					$total = $database->loadObjectList();
+					?>
+					<?php if ($total) : ?>
+					<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+					<?php else: ?>
+					<td><?php echo '-'; ?></td>
+					<?php endif;?>
+				<?php endif;?>
 				
            <?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
            <?php 					
@@ -143,7 +157,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 		<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.edit&id=0', false, 2); ?>"
 		   class="btn btn-success btn-small"><i
 				class="icon-plus"></i>
-			<?php echo JText::_('Neues Fahrzeug anlegen'); ?></a>
+			<?php echo JText::_('COM_EINSATZKOMPONENTE_ADD'); ?></a>
 	<?php endif; ?>
 
 	<input type="hidden" name="task" value=""/>
@@ -162,7 +176,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 	function deleteItem() {
 		var item_id = jQuery(this).attr('data-item-id');
 		<?php if($canDelete) : ?>
-		if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_DELETE_MESSAGE'); ?>")) {
+		if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
 			window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.remove&id=', false, 2) ?>' + item_id;
 		}
 		<?php endif; ?>

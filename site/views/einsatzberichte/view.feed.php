@@ -94,9 +94,9 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 
 			$item->description 	.= '<table>';
 
-			if ($this->params->get('show_rss_image','1')) :
+			if ($this->params->get('display_rss_image','1')) :
 			if ($row->foto) :
-			$item->description 	.= '<tr><td><img src="'.JURI::base().$row->foto.'" width="'.$this->params->get('rss_image_width','150px').'" height="'.$this->params->get('rss_image_height','').'" /></td></tr>';
+			$item->description 	.= '<tr><td><img src="'.JURI::base().$row->foto.'" width="'.$this->params->get('rss_image_width','250px').'" height="'.$this->params->get('rss_image_height','').'" /></td></tr>';
 			endif;
 			endif;
 			if ($row->desc) :

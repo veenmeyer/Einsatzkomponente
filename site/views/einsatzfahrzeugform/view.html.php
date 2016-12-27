@@ -49,6 +49,21 @@ class EinsatzkomponenteViewEinsatzfahrzeugform extends JViewLegacy
 		$this->canSave = $this->get('CanSave');
 		$this->form		= $this->get('Form');
 
+		// Import CSS + JS 
+		$document = JFactory::getDocument();
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');	
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
+
+		if ($this->params->get('display_fahrzeuge_bootstrap','0')) :
+		// Import Bootstrap
+		JHtml::_('bootstrap.framework');
+		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
+		endif;
+		
+		// Import CSS aus Optionen
+		$document->addStyleDeclaration($this->params->get('fahrzeug_css',''));  
+
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{

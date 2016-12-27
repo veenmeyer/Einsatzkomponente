@@ -41,16 +41,16 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
  
 		$document = JFactory::getDocument();
 		// Import Bootstrap
- 		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 		$document->addStyleDeclaration($this->params->get('edit_css','')); 
 
-		//JHtml::_('jquery.framework',true);
-		//$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery1.9.1.js');
-		//$document->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js');
-		//$document->addScript('components/com_einsatzkomponente/assets/jquery/jquery.MultiFile.js');
+				if ($this->params->get('display_home_bootstrap','0')) :
+		// Import Bootstrap
+		JHtml::_('bootstrap.framework');
+		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
+		$document->addStyleSheet($this->baseurl.'/media/jui/css/icomoon.css');
+		endif;
+
 		
 		// Enter-Taste abstellen
 		echo '<script type="text/javascript">

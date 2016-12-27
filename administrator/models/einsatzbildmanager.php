@@ -137,4 +137,10 @@ class EinsatzkomponenteModeleinsatzbildmanager extends JModelList
         }
 		return $query;
 	}
+
+  /**
+   * Build a list of authors
+   *
+   * @return  JDatabaseQuery
+   */
 }

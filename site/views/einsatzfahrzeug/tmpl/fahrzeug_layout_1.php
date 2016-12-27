@@ -87,7 +87,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
             <div class="col-md-4">
 			<?php if ($this->params->get('show_fahrzeuge_desc','1')) : ?>
 			<?php if( $this->item->desc) : ?>
-            <h3>Beschreibung</h3>
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_DESC');?></h3>
 			<p>
 				<?php jimport('joomla.html.content'); ?>  
 				<?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?> 
@@ -97,7 +97,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 			</p>
 			<?php endif;?>
 			<?php endif;?>
-                <h3>weitere Daten</h3>
+                <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_WEITERE_DATEN');?></h3>
                 <ul>
 					<?php if ($this->params->get('show_fahrzeuge_detail_2','1')) : ?>
 					<li><?php echo $this->item->detail2_label; ?>:
@@ -133,17 +133,18 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 					<?php endif;?>
 					<?php endif;?>
 					
-					<?php // letzter Einsatz   
-					$database			= JFactory::getDBO();
-					$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$this->item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
-					$database->setQuery( $query );
-					$total = $database->loadObjectList();
-					?>
-					<?php if ($total) : ?>
-					<br/><li>Letzter Eintrag in unserem Einsatzarchiv : 
-					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
-					<?php endif; ?>
-					
+					<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
+						<?php // letzter Einsatz   
+						$database			= JFactory::getDBO();
+						$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE FIND_IN_SET ("'.$this->item->id.'",vehicles) AND (state ="1" OR state="2") ORDER BY date1 DESC' ;
+						$database->setQuery( $query );
+						$total = $database->loadObjectList();
+						?>
+						<?php if ($total) : ?>
+						<br/><li><?php echo JText::_('COM_EINSATZKOMPONENTE_LETZTER_EINTRAG');?> : 
+						<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
+						<?php endif; ?>
+					<?php endif;?>
 <!-- Ausrüstung anzeigen -->  
 <?php 	if ($this->params->get('show_fahrzeuge_ausruestung','0')) : 
 		if(!$this->item->ausruestung == '') :
@@ -162,7 +163,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 				endforeach; 
   
  ?>
- <br/><li>Beladung / Ausrüstung: <ul><?php echo $ausruestung;?></ul></li> 
+ <br/><li><?php echo JText::_('COM_EINSATZKOMPONENTE_BELADUNG_AUSRUESTUNG');?>: <ul><?php echo $ausruestung;?></ul></li> 
  <?php endif;?>
  <?php endif;?>
  <?php endif;?>
@@ -181,6 +182,8 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 
 <?php endif;?>
 
+<input type="button" class="btn eiko_back_button" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_ZURUECK');?>" onClick="history.back();">
+
 
 		</table>
 	</div>
@@ -193,10 +196,10 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 	
 	
 	<?php if($canEdit): ?>
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=fahrzeugform.&id='.$this->item->id); ?>"><?php echo JText::_("Bearbeiten"); ?></a>
+		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=fahrzeugform.&id='.$this->item->id); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_EDIT"); ?></a>
 	<?php endif; ?>
 								<?php //if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.einsatzfahrzeug.'.$this->item->id)):?>
-									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=fahrzeug.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("Löschen"); ?></a> -->
+									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=fahrzeug.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("JDELETE"); ?></a> -->
 								<?php //endif; ?>
 	<?php
 else:

@@ -15,7 +15,7 @@
 .eiko_address_main_1 {float:left;}
 }
 
- @media only screen and (max-width: 440px) {
+ @media only screen and (max-width: 764px) {
 	
 .mobile_hide_320  {display: none;} 
 .eiko_td_buttons_main_1 {float:right;}

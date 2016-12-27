@@ -28,6 +28,10 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
+	 
+	 
+   
+   
 	public function getTable($type = 'Einsatzbericht', $prefix = 'EinsatzkomponenteTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);

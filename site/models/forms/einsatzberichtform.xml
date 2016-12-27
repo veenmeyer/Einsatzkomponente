@@ -125,8 +125,8 @@
             filter="safehtml" /> 
 			
        <field name="desc" type="editor"
-            label="ausführlicher Einsatzbericht"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DESC" 
+            label="COM_EINSATZKOMPONENTE_AUSFUEHRLICHER_EINSATZBERICHT"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DESC"  
             width="60%"
             height="350px"
 			buttons="true"
@@ -275,10 +275,10 @@
             disabled="0"
             filter="raw"
 			multiple="false"
-			label="Einsatzort auf Karte :"
-			description="Hier können Sie einstellen, ob die Einsatzort-Markierung in diesem Einsatzbericht angezeigt werden soll.">
-				<option	value="0">Verbergen</option>
-				<option	value="1">Anzeigen</option>
+			label="COM_EINSATZKOMPONENTE_EINSATZORT_AUF_KARTE"
+			description="COM_EINSATZKOMPONENTE_EINSATZORT_AUF_KARTE_DESC">
+				<option	value="0">JNO</option>
+				<option	value="1">JYES</option>
 	   </field>
 
        <field name="status" 
@@ -310,21 +310,21 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_COUNTER" 
             default="0"
-            readonly="false"
+            readonly="true"
             class="eiko_counter"
             filter="int"
             size="20" /> 
 			
        <field name="einsatzticker" 
 			type="list"
-        	description="Hier können Sie Einstellen, ob nach dem abspeichern des Berichtes, ein Joomla-Artikel daraus erstellt werden soll."
-            label="Joomla-Artikel erstellen ?" 
+        	description="COM_EINSATZKOMPONENTE_JOOMLA_ARTICLE_DESC"
+            label="COM_EINSATZKOMPONENTE_JOOMLA_ARTICLE" 
             default="0"
             class="btn-group"
             filter="raw"
             multiple="false">
-                <option value="0">Nein</option>
-                <option value="1">Ja</option>
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
         </field> 
 
 			

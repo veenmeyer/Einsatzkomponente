@@ -12,7 +12,7 @@
             class="eiko_organisation_name"
             filter="safehtml"
             size="100"
-            maxlength="100" /> 
+            maxlength="500" /> 
 			
        <field name="gmap_icon_orga" type="media"
                 
@@ -57,7 +57,7 @@
             class="eiko_organisation_detail2"
             filter="safehtml"
             size="100"
-            maxlength="100" />
+            maxlength="500" />
 			
     <field name="detail3_label" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_DETAIL3_LABEL"
@@ -74,7 +74,7 @@
             class="eiko_organisation_detail3"
             filter="safehtml"
             size="100"
-            maxlength="100" />
+            maxlength="500" />
     <field name="detail4_label" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_DETAIL4_LABEL"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_ORGANISATION_DETAIL4_LABEL" 
@@ -90,7 +90,7 @@
             class="eiko_organisation_detail4"
             filter="safehtml"
             size="100"
-            maxlength="100" />
+            maxlength="500" />
 	
     <field name="detail5_label" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_DETAIL5_LABEL"
@@ -107,7 +107,7 @@
             class="eiko_organisation_detail5"
             filter="safehtml"
             size="100"
-            maxlength="100" />
+            maxlength="500" />
 			
     <field name="detail6_label" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_DETAIL6_LABEL"
@@ -124,7 +124,7 @@
             class="eiko_organisation_detail6"
             filter="safehtml"
             size="100"
-            maxlength="100" />
+            maxlength="500" />
 	
     <field name="detail7_label" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_DETAIL7_LABEL"
@@ -141,7 +141,7 @@
             class="eiko_organisation_detail7"
             filter="safehtml"
             size="100"
-            maxlength="100" />
+            maxlength="500" />
 			
 			
        <field name="link" type="text"
@@ -150,7 +150,7 @@
             class="eiko_organisation_link"
             filter="url"
             size="100"
-            maxlength="200" /> 
+            maxlength="255" /> 
        
 	   <field name="gmap_latitude" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_ORGANISATION_GMAP_LATITUDE"

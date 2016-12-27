@@ -89,9 +89,11 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
 
         // Initialise variables.
         $app = JFactory::getApplication();
-
+		$params = $app->getParams('com_einsatzkomponente');
+		$page_limit = $params->get('display_home_pagination_limit','5');
+		if (!$page_limit) : $page_limit = $app->getCfg('list_limit'); endif;
         // List state information
-        $limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
+        $limit = $app->getUserStateFromRequest('global.list.limit', 'limit',$page_limit); 
         $this->setState('list.limit', $limit);
 
         $limitstart = $app->input->getInt('limitstart', 0);
@@ -457,43 +459,33 @@ $query->where('a.state = 1');
 					$db = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-							->select('title,list_icon,marker')
+							->select('id,title,list_icon,marker')
 							->from('`#__eiko_einsatzarten`')
 							->where('id = ' . $db->quote($db->escape($item->data1)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
 					if ($results) {
 						$item->data1 = $results->title;
+						$item->data1_id = $results->id;
 						$item->list_icon = $results->list_icon;
 						$item->marker = $results->marker;
 					}
 			}
 
-	//		if (isset($item->images) && $item->images != '') {
-	//			if(is_object($item->images)){
-	//				$item->images = JArrayHelper::fromObject($item->images);
-	//			}
-	//			$values = (is_array($item->images)) ? $item->images : explode(',',$item->images);
+			
 
-	//			$textValue = array();
-	//			foreach ($values as $value){
-	//				$db = JFactory::getDbo();
-	//				$query = $db->getQuery(true);
-	//				$query
-	//						->select('image')
-	//						->from('`#__eiko_images`')
-	//						->where('id = ' . $db->quote($db->escape($value)));
-	//				$db->setQuery($query);
-	//				$results = $db->loadObject();
-	//				if ($results) {
-	//					$textValue[] = $results->image;
-	//				}
-	//			}
-
-	//		$item->images = !empty($textValue) ? implode(', ', $textValue) : $item->images;
-
-	//		}
-
+					$db = JFactory::getDbo();
+					$query = $db->getQuery(true);
+					$query
+							->select('count(image)')
+							->from('`#__eiko_images`')
+							->where('report_id = ' . $item->id);
+					$db->setQuery($query);
+					$item->images = $db->loadResult();
+			if ($item->image) { $item->images = $item->images +1;}
+					
+					
+					
 			if (isset($item->auswahl_orga) && $item->auswahl_orga != '') {
 				if(is_object($item->auswahl_orga)){
 					$item->auswahl_orga = JArrayHelper::fromObject($item->auswahl_orga);

@@ -89,15 +89,13 @@ class EinsatzkomponenteViewEinsatzkarte extends JViewLegacy
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
 		if ($this->params->get('display_einsatzkarte_bootstrap','0')) :
- 		$document->addScript('components/com_einsatzkomponente/assets/bootstrap/js/bootstrap.min.js');	
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap.min.css');
- 		$document->addStyleSheet('components/com_einsatzkomponente/assets/bootstrap/css/bootstrap-responsive.min.css');
+		JHtml::_('bootstrap.framework');
+		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
 		endif;
+		
+		// Import CSS aus Optionen
 		$document->addStyleDeclaration($this->params->get('gmap_css','')); 
 		
-		
-		//$document->addStyleSheet('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/iThing.css');
- 		//$document->addScript('components/com_einsatzkomponente/assets/jquery/JQRangeSlider/jQDateRangeSlider-withRuler-min.js');	
 		
 		
 

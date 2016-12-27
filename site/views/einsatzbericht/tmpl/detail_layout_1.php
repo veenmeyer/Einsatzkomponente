@@ -9,14 +9,16 @@
 
 // no direct access
 defined('_JEXEC') or die;  
-JHtml::_('bootstrap.tooltip');
 
-require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
-$vehicles_images = '';
+//JHtml::_('bootstrap.tooltip');
 
 //Load admin language file
 $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
+
+require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+$vehicles_images = '';
+
 ?>
   
 
@@ -52,7 +54,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Einsatzkategorie-->
 			<?php if ($this->params->get('display_detail_tickerkat','1') == '1') :?> 
             <?php if( $this->item->tickerkat ) : ?>
-        	<br /><span class="eiko_einsatzkategorie_2">Einsatzkategorie: <?php echo JText::_($this->tickerKat->title); ?></span>
+        	<br /><span class="eiko_einsatzkategorie_2"><?php echo JText::_('COM_EINSATZKOMPONENTE_KATEGORIE'); ?>: <?php echo JText::_($this->tickerKat->title); ?></span>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzkategorie ENDE-->
@@ -60,13 +62,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <!--Einsatzart-->
 			<?php if ($this->params->get('display_detail_einsatzart','0') == '1') :?> 
             <?php if( $this->item->data1 ) : ?>
-        	<br /><span class="eiko_einsatzart_2">Einsatzart: <?php echo JText::_($this->einsatzlogo->title); ?></span>
+        	<br /><span class="eiko_einsatzart_2"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART'); ?>: <?php echo JText::_($this->einsatzlogo->title); ?></span>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzart ENDE-->
 
 			<?php if ($this->params->get('display_detail_hits','1')):?>
-            <br/><span class="badge small eiko_counter_detail">Zugriffe: <?php echo $this->item->counter; ?></span> 
+            <br/><span class="badge small eiko_counter_detail"><?php echo JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE'); ?>: <?php echo $this->item->counter; ?></span> 
             <?php endif;?>
 			
             <div class="eiko_clearfix"></div>
@@ -144,6 +146,26 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
               <td class="eiko_td2_2"><span class="eiko_date3_value_2"><?php echo date("H:i", strtotime($this->item->date3)).' Uhr'; ?></span></td>
             </tr>
             <?php endif;?>
+            
+            <?php if ($this->params->get('display_einsatzdauer','1') && ($this->item->date3>1) ): ?>
+				<tr class="mobile_hide_320">
+	              <td class="eiko_td1_2 mobile_hide_320">
+	              	<span class="eiko_einsatzdauer_label_2">
+				  		<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
+	              	</span>
+	              </td>
+	              <td class="eiko_td1_2">
+	              	<span class="eiko_einsatzdauer_value_2">
+
+	              	<?php
+						echo $this->einsatzdauer;
+					?>
+
+	              	</span>
+	              </td>
+	            </tr>
+		<?php endif;?>
+            
             <?php if( $this->item->alerting) : ?>
             <tr class="mobile_hide_320">
               <td class="eiko_td1_2 mobile_hide_320"><span class="eiko_alarmart_label_2">
@@ -319,7 +341,14 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php echo $Desc;?>
 </div>
 <?php endif;?>
-<!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
+<!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->  
+
+<!-- Plugin-Support "MyShariff" -->  
+		<?php
+			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
+			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
+			?>
+<!-- Plugin-Support "MyShariff"  ENDE -->  
 
 <!--eingesetzte Ausrüstung anzeigen -->  
 <?php 	if ($this->params->get('display_detail_ausruestung','1')) : 
@@ -351,14 +380,6 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  <?php endif;?>
  <?php endif;?>
 <!--eingesetzte Ausrüstung anzeigen ENDE -->  
-
-
-<!--Socialbar-->
-<?php if($this->item->status_fb=='1'): ?>
-<span class="eiko_socialbar_2" style="float:<?php echo $this->params->get('show_socialbar','left');?>;"><?php echo $this->social;?></span> 
-<?php endif;?>
-<!--Socialbar ENDE-->
-
 
 
 <div class="clear"></div>

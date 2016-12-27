@@ -59,6 +59,8 @@ JFilterOutput::objectHtmlSafe($reports);
 	 
 $Monat ='';
 $selectedYear = '';
+$show_all = $this->params->get('show_all','true');
+
 		
 // Gmap - Konfiguration laden
 $gmapconfig = $this->gmap_config; 
@@ -443,13 +445,13 @@ var infowindow = new google.maps.InfoWindow(
 		{
 			 if(years[i].value == now.getFullYear()-1)
 				{
-				years[i].selected = true;	
-                document.getElementById("selectstartmonth").options[0].selected = true;
+				years[i].selected = <?php echo $show_all;?>;	
+                document.getElementById("selectstartmonth").options[0].selected = <?php echo $show_all;?>;
 				}
 			if(years[i].value == now.getFullYear())
-				years[i].selected = true;
+				years[i].selected = <?php echo $show_all;?>;
 			if(now.getMonth == 0)
-				years[i-1].selected = true;
+				years[i-1].selected = <?php echo $show_all;?>;
 		}
         document.getElementById("selectendmonth").options[now.getMonth()].selected = true;
         years = document.getElementById("selectendyear").options;

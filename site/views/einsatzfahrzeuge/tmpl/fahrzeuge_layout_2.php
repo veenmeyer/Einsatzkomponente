@@ -247,7 +247,7 @@ defined('_JEXEC') or die;
 		<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.edit&id=0', false, 2); ?>"
 		   class="btn btn-success btn-small"><i
 				class="icon-plus"></i>
-			<?php echo JText::_('COM_EINSATZKOMPONENTE_ADD_ITEM'); ?></a>
+			<?php echo JText::_('COM_EINSATZKOMPONENTE_ADD'); ?></a>
 	<?php endif; ?>
 
 	<input type="hidden" name="task" value=""/>
@@ -266,7 +266,7 @@ defined('_JEXEC') or die;
 	function deleteItem() {
 		var item_id = jQuery(this).attr('data-item-id');
 		<?php if($canDelete) : ?>
-		if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_DELETE_MESSAGE'); ?>")) {
+		if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
 			window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.remove&id=', false, 2) ?>' + item_id;
 		}
 		<?php endif; ?>

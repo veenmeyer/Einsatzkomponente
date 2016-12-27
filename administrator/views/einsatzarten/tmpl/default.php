@@ -120,8 +120,7 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  '', 'a.marker', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo 'Anzahl Einsätze'; ?>
-				</th>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_ANZAHL_EINSAETZE');?>				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZARTEN_BESCHR', 'a.beschr', $listDirn, $listOrder); ?>
 				</th>

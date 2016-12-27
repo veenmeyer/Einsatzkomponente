@@ -493,7 +493,7 @@ h4, h5 {
 	}
 .eiko_einsatzort_value_2, .eiko_date1_value_2, .eiko_date1_time_value_2,
 .eiko_date3_value_2, .eiko_alarmart_value_2, .eiko_boss2_value_2,
-.eiko_boss_value_2, .eiko_people_value_2 {
+.eiko_boss_value_2, .eiko_people_value_2, .eiko_einsatzdauer_value_2 {
 	color: #b10000 !important;
 	}
 	
@@ -692,8 +692,10 @@ padding-right:5px;
 .eiko_td_gmap_main_1 {}
 .eiko_td_buttons_main_1 {white-space: nowrap;}
 
-.eiko_icon {width:30px;}
+.eiko_icon {width:32px;}
+.eiko_icon_3 {width:24px;}
 .eiko_nowrap {white-space: nowrap;}
+.eiko_data1 {font-size:24px;}
 
 .eiko_distance_road {font-size:smaller;padding-bottom:2em;}
 

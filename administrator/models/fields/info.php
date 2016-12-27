@@ -44,20 +44,20 @@ class JFormFieldInfo extends JFormField
 		$val= EinsatzkomponenteHelper::getValidation();
 
 		if ($val == '12') : 
-		$html[] = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">x</button><span aria-hidden="true" class="icon-cancel"></span> ' . JText::_('<p>Diese Version von <b>Einsatzkomponente</b> ist validiert. <br/> Vielen Dank für Ihre Unterstützung.</p><p>- Die Copyrights im Frontend, sollten jetzt alle entfernt sein.</p>');		
+		$html[] = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">x</button><span aria-hidden="true" class="icon-cancel"></span> ' . JText::_('COM_EINSATZKOMPONENTE_OPTION_INFO_1');		
 		else:
-		$html[] = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button><span aria-hidden="true" class="icon-cancel"></span>Diese Version von <b>Einsatzkomponente</b> ist nicht validiert. Sie können selbstverständlich <b>alle Funktionen</b> kostenlos nutzen,<br/> aber über eine kleine Unterstützung an die Entwickler, würden wir uns natürlich sehr freuen. <br/>Helfen Sie uns, damit wir Ihnen dieses und weitere Projekte auch in Zukunft kostenlos und ohne Werbung anbieten können. <br/><br/>Schicken Sie eine Anfrage via Mail an validate@einsatzkomponente.de und holen Sie sich heute noch den Validation-Schlüssel.<br/><br/><p>kleiner Vorteil:<br/>- Das Copyright im Frontend wird dadurch entfernt.  ;-)<br/>- und bevorzugten Support im Forum und via Email</p></div><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><div>Spende über PAYPAL : <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></div></a><br/><br/>
+		$html[] = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button><span aria-hidden="true" class="icon-cancel"></span>'.JText::_('COM_EINSATZKOMPONENTE_OPTION_INFO_2').'</div><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><div>'.JText::_('COM_EINSATZKOMPONENTE_OPTION_INFO_3').' : <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></div></a><br/><br/>
 ';		
-		if ($val=='1') :	$html[] =  '<span class="label label-important">Achtung !! Dies ist keine gültige URL. (Wenden Sie sich bitte an den Support im Forum)</span>'; 	endif;
-		if ($val=='2') :	$html[] =  '<span class="label label-important">Achtung !! Dies ist kein gültiges Passwort. (Wenden Sie sich bitte an den Support im Forum)</span>'; 	endif; 
+		if ($val=='1') :	$html[] =  '<span class="label label-important">'.JText::_('COM_EINSATZKOMPONENTE_OPTION_INFO_4').'</span>'; 	endif;
+		if ($val=='2') :	$html[] =  '<span class="label label-important">'.JText::_('COM_EINSATZKOMPONENTE_OPTION_INFO_5').'</span>'; 	endif; 
 		endif;
 		$html[] = '<h2>Einsatzkomponente Version 3.x</h2>';
 		if ($val=='12') :	$html[] = '';
 		else:
-		$html[] = '<h3>Entwickler-Version</h3>';
+		$html[] = '<h3>'.JText::_('COM_EINSATZKOMPONENTE_OPTION_INFO_6').'</h3>';
 		endif;
 		$html[] = '<p></p>';
-		$html[] = '<p><a href="http://www.einsatzkomponente.de/" target="_blank">Supportforum: http://www.einsatzkomponente.de/</a></p>';	
+		$html[] = '<p><a href="https://www.einsatzkomponente.de/" target="_blank">Supportforum: https://www.einsatzkomponente.de/</a></p>';	
 		return implode($html);
 	}
 }

@@ -48,6 +48,21 @@ class EinsatzkomponenteViewOrganisationform extends JViewLegacy
 		$this->form		= $this->get('Form');
 		$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 
+		
+		// Import CSS + JS 
+		$document = JFactory::getDocument();
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');	
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
+
+		if ($this->params->get('display_orga_bootstrap','1')) :
+		// Import Bootstrap
+		JHtml::_('bootstrap.framework');
+		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
+		endif;
+		
+		// Import CSS aus Optionen
+		$document->addStyleDeclaration($this->params->get('organisation_css','')); 
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{

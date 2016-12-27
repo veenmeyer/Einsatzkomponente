@@ -326,12 +326,13 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$db = JFactory::getDbo();
 					$query = $db->getQuery(true);
 					$query
-							->select('title')
+							->select('id,title')
 							->from('`#__eiko_einsatzarten`')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
 					if ($results) {
+						$oneItem->data1_id = $results->id;
 						$textValue[] = $results->title;
 					}
 				}
