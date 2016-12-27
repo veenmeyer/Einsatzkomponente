@@ -36,7 +36,10 @@ class EinsatzkomponenteViewAusruestungform extends JViewLegacy {
         $this->form		= $this->get('Form');
 
 		
+		// Import CSS + JS 
 		$document = JFactory::getDocument();
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');	
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
 
 		if ($this->params->get('display_ausruestung_bootstrap','1')) :
 		// Import Bootstrap
