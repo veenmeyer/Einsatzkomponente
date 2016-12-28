@@ -146,6 +146,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		
 		if ($this->params->get('display_home_bootstrap','0')) :
 		// Import Bootstrap
+		JHtml::_('behavior.framework', true);
 		JHtml::_('bootstrap.framework');
 		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
 		$document->addStyleSheet($this->baseurl.'/media/jui/css/icomoon.css');

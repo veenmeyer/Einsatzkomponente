@@ -1,6 +1,11 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.15</small></h3>
+<ul>
+# Fehler: Pagination (Seitenwahl) in Einsatzübersicht (alt)
+</ul>
+
 <h3>Changelog <small>Version 3.14</small></h3>
 <ul>
 # Fehler: 0[]operator not supported for strings PHP7.1 behoben
