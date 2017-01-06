@@ -281,8 +281,8 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$gmap_onload 		= $this->gmap_config->gmap_onload;
 		$zoom_control 		= 'true';
  		$document->addScript('components/com_einsatzkomponente/assets/osm/util.js');
-   		$document->addScript('http://www.openlayers.org/api/OpenLayers.js');				
-   		$document->addScript('http://www.openstreetmap.org/openlayers/OpenStreetMap.js');	
+   		$document->addScript('https://openlayers.org/api/OpenLayers.js');				
+   		$document->addScript('https://openstreetmap.org/openlayers/OpenStreetMap.js');	
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/osm/map.css');		
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/osm/ie_map.css');	
  		$document->addScript('components/com_einsatzkomponente/assets/osm/OpenLayers_Map_minZoom_maxZoom_Patch.js');
