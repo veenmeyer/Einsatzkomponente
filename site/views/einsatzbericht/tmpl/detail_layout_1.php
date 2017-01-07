@@ -328,6 +328,9 @@ $vehicles_images = '';
                   <img class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="<?php echo $this->einsatzlogo->title;?>" alt ="<?php echo $this->einsatzlogo->title;?>"/>
                   </a>
 <?php endif;?>
+<?php if( !$this->item->image AND $this->params->get('display_home_image_nopic','0') ) : ?>
+					<img  class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
+<?php endif;?>
 
 <!--Titelbild mit Highslide JS  ENDE--> 
 

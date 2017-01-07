@@ -181,28 +181,6 @@ defined('_JEXEC') or die;
 						<?php echo '<span class="hasTooltip" title="Dieser Bericht wurde bereits '.$item->counter.' mal gelesen." ><i class="icon-eye" ></i> '.JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE').': '.$item->counter.'</span>'; ?>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('display_home_image')) : ?>
-					<div class="mobile_show_320  eiko_div_einsatzbild_main_1">
-						<?php if ($item->image) : ?>
-							</br></br>	
-							<?php if (isset($item->checked_out) && $item->checked_out) : ?>
-								<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
-							<?php endif; ?> 
-							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
-							<img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','150px');?>;" src="<?php echo JURI::Root();?><?php echo $item->image;?>"/>
-							</a>
-					<?php endif;?>
-		   
-					<?php if ($this->params->get('gmap_action','0') == '1') :?>
-						<?php if ($item->gmap & $item->gmap_report_latitude): ?>
-							</br></br>
-	
-							<img class="img-rounded eiko_karte_klein" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&zoom=14&size=150x84&maptype=roadmap&markers=color:red%7Clabel:x%7C<?php echo $item->gmap_report_latitude;?>,<?php echo $item->gmap_report_longitude;?>&key=<?php echo $this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E");?>" width="<?php echo $this->params->get('display_home_image_width','150px');?>;" alt="Einsatzkarte <?php echo $item->summary;?>">		  
-
-						<?php endif;?>
-					<?php endif;?>
-				</div>
-				<?php endif;?>
 				
 				<?php if ($this->params->get('display_home_links','1')) : ?>
 				</br></br>
@@ -228,6 +206,20 @@ defined('_JEXEC') or die;
 					</a>
 				<?php endif; ?> 
            <?php endif;?>
+			<?php if (!$item->image AND $this->params->get('display_home_image_nopic','0')) : ?>
+					<?php if (isset($item->checked_out) && $item->checked_out) : ?>
+						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
+					<?php endif; ?> 
+					
+				<?php if ($this->params->get('display_home_links','1')) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
+				<?php endif; ?> 
+					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','150px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
+				<?php if ($this->params->get('display_home_links','1')) : ?>
+					</a>
+				<?php endif; ?> 
+           <?php endif;?>
+		   
 		   
 		  <?php if ($this->params->get('gmap_action','0') == '1') :?>
 			<?php if ($item->gmap & $item->gmap_report_latitude): ?>
