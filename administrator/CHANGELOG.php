@@ -3,6 +3,7 @@
 
 <h3>Changelog <small>Version 3.15</small></h3>
 <ul>
+# Ersatzbild in Einsatzarchiv und detail_layout_1
 # Fehler: OSM-Karte funktioniert jetzt auch bei SSL-Verbindung
 # Fehler: Pagination (Seitenwahl) in Einsatzübersicht (alt)
 </ul>
