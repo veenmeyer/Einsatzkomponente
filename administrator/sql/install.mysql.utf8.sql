@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `beschreibung` TEXT NOT NULL,
+  `beschreibung` text NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL,
   `created_by` int(11) NOT NULL,
