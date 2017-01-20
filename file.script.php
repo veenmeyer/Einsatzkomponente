@@ -62,7 +62,7 @@ function preflight( $type, $parent ) {
 			}
 
 			$db = JFactory::getDbo();
-			$query = "CREATE TABLE IF NOT EXISTS #__eiko_tickerkat ( id int(11) unsigned NOT NULL AUTO_INCREMENT,  asset_id int(10) unsigned NOT NULL DEFAULT '0',  title varchar(255) NOT NULL,  image varchar(255) NOT NULL,  beschreibungtext NOT NULL,  ordering int(11) NOT NULL,  state tinyint(1) NOT NULL,  created_by int(11) NOT NULL,  checked_out int(11) NOT NULL,  checked_out_time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  PRIMARY KEY (id)) DEFAULT COLLATE=utf8_general_ci;";
+			$query = "CREATE TABLE IF NOT EXISTS #__eiko_tickerkat ( id int(11) unsigned NOT NULL AUTO_INCREMENT,  asset_id int(10) unsigned NOT NULL DEFAULT '0',  title varchar(255) NOT NULL,  image varchar(255) NOT NULL,  beschreibung TEXT NOT NULL,  ordering int(11) NOT NULL,  state tinyint(1) NOT NULL,  created_by int(11) NOT NULL,  checked_out int(11) NOT NULL,  checked_out_time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  PRIMARY KEY (id)) DEFAULT COLLATE=utf8_general_ci;";
 			$db->setQuery($query);
 			try {
 			$result = $db->execute();
