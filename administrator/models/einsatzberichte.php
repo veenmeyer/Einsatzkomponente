@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 
@@ -157,7 +157,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                         'list.select', 'DISTINCT a.*'
                 )
         );
-        $query->from('`#__eiko_einsatzberichte` AS a');
+        $query->from('#__eiko_einsatzberichte AS a');
 
         
 		// Join over the users for the checked out user
@@ -283,7 +283,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__eiko_alarmierungsarten`')
+							->from('#__eiko_alarmierungsarten')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -305,7 +305,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__eiko_tickerkat`')
+							->from('#__eiko_tickerkat')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -327,7 +327,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('id,title')
-							->from('`#__eiko_einsatzarten`')
+							->from('#__eiko_einsatzarten')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -350,7 +350,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('image')
-							->from('`#__eiko_images`')
+							->from('#__eiko_images')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -372,7 +372,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -394,7 +394,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_fahrzeuge`')
+							->from('#__eiko_fahrzeuge')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -416,7 +416,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_ausruestung`')
+							->from('#__eiko_ausruestung')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -438,7 +438,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_fahrzeuge`')
+							->from('#__eiko_fahrzeuge')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -460,7 +460,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_fahrzeuge`')
+							->from('#__eiko_fahrzeuge')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -482,7 +482,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_fahrzeuge`')
+							->from('#__eiko_fahrzeuge')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -506,7 +506,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__content`')
+							->from('#__content')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();

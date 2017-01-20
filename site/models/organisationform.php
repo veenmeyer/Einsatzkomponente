@@ -1,10 +1,10 @@
 <?php
 /**
- * @version    CVS: 3.9
- * @package    Com_Einsatzkomponente
- * @author     Ralf Meyer <ralf.meyer@einsatzkomponente.de>
- * @copyright  Copyright (C) 2015. Alle Rechte vorbehalten.
- * @license    GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 
 // No direct access.
@@ -106,7 +106,7 @@ class EinsatzkomponenteModelOrganisationForm extends JModelForm
 
 				if (!$canEdit)
 				{
-					throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'), 500);
+					throw new Exception(JText::_('ALERTNOAUTHOR'), 500);
 				}
 
 				// Check published state.
@@ -317,7 +317,7 @@ class EinsatzkomponenteModelOrganisationForm extends JModelForm
 
 		if ($authorised !== true)
 		{
-			throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'), 403);
+			throw new Exception(JText::_('ALERTNOAUTHOR'), 403);
 		}
 
 		$table = $this->getTable();
@@ -347,7 +347,7 @@ class EinsatzkomponenteModelOrganisationForm extends JModelForm
 
 		if (JFactory::getUser()->authorise('core.delete', 'com_einsatzkomponente.organisation.' . $id) !== true)
 		{
-			throw new Exception(403, JText::_('JERROR_ALERTNOAUTHOR'));
+			throw new Exception(403, JText::_('ALERTNOAUTHOR'));
 		}
 
 		$table = $this->getTable();

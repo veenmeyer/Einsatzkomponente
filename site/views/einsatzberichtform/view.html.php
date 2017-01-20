@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -39,17 +39,24 @@ class EinsatzkomponenteViewEinsatzberichtForm extends JViewLegacy {
             throw new Exception(implode("\n", $errors));
         }
  
-		$document = JFactory::getDocument();
-		// Import Bootstrap
-		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
-		$document->addStyleDeclaration($this->params->get('edit_css','')); 
-
-				if ($this->params->get('display_home_bootstrap','0')) :
-		// Import Bootstrap
+ 		$document = JFactory::getDocument();
+		
+		// Bootstrap laden
+		JHtml::_('behavior.framework', true);
+		
+		if ($this->params->get('display_home_bootstrap','0') == '1') :
 		JHtml::_('bootstrap.framework');
 		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
 		$document->addStyleSheet($this->baseurl.'/media/jui/css/icomoon.css');
 		endif;
+		if ($this->params->get('display_home_bootstrap','0') == '2') :
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/bootstrap/bootstrap.min.css');
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/bootstrap/bootstrap-responsive.min.css');
+		endif;
+
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
+		$document->addStyleDeclaration($this->params->get('edit_css','')); 
+
 
 		
 		// Enter-Taste abstellen
@@ -70,7 +77,7 @@ document.onkeypress = stopRKey;
             
             $authorised = $user->authorise('core.edit', 'com_einsatzkomponente');
             if ($authorised !== true) {
-                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+                throw new Exception(JText::_('ALERTNOAUTHOR'));
             }
         }
         

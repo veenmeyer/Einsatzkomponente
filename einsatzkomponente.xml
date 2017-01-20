@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
     <name>com_einsatzkomponente</name>
-    <creationDate>2017-01-07</creationDate>
-    <copyright>Copyright (C) 2016 by Ralf Meyer. All rights reserved.</copyright>
+    <creationDate>2017-01-20</creationDate>
+    <copyright>Copyright (C) 2017 by Ralf Meyer. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Ralf Meyer</author>
     <authorEmail>ralf.meyer@mail.de</authorEmail>
-    <authorUrl>http://einsatzkomponente.de</authorUrl>
+    <authorUrl>https://einsatzkomponente.de</authorUrl>
     <version>3.15.5_beta</version> 
 	
     <description>
@@ -48,6 +48,7 @@
 		<folder>einsatzbilder</folder>
 		<folder>images</folder>
 		<folder>pdf</folder>
+		<folder>watermark</folder>
 	</media>
 	
     <administration>
@@ -78,7 +79,6 @@
             <folder>sql</folder>
             <folder>tables</folder>
             <folder>views</folder>
-			<folder>swfupload</folder>
         </files>
 		
         <languages folder="administrator">

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -108,7 +108,7 @@ if (!empty($this->extra_sidebar)) {
 
 <div class="span4">
 <div class="alert alert-info" style=" float:left;">
-<a target="_blank" href="http://www.einsatzkomponente.de/index.php"><img src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg" style="float:left; margin-right:20px; padding-right:20px;"/></a>
+<a target="_blank" href="https://www.einsatzkomponente.de/index.php"><img src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg" style="float:left; margin-right:20px; padding-right:20px;"/></a>
 <span class="label label-important"><?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_1');?></span><br/><br/>
 <?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_2');?>
 <small>PayPal-Email: <?php echo 'ralf.meyer@mail.de';?></small><br />
@@ -173,7 +173,7 @@ if (!empty($this->extra_sidebar)) {
 							<?php endif;?>
 							<hr>
 						<b>Informationen:</b></br>
-						<a target="_blank" style="margin-bottom:5px;" style="margin-bottom:5px;" class="label label-info" href="http://www.einsatzkomponente.de">Download-Link Webseite</a> 
+						<a target="_blank" style="margin-bottom:5px;" style="margin-bottom:5px;" class="label label-info" href="https://www.einsatzkomponente.de">Download-Link Webseite</a> 
 						<br/>
 						<a target="_blank" style="margin-bottom:5px;" class="label label-info" href="https://github.com/veenmeyer/Einsatzkomponente">Link zu GitHub</a>			
 					</br>
@@ -188,15 +188,15 @@ if (!empty($this->extra_sidebar)) {
 						</div>
 						<div class="modal-body">
 						<ul>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_last</a> (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_chart</a> (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_statistik</a> (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_melder</a> (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_einsatzticker</a> (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_led</a> (Modul zur Anzeige des letzten Einsatzes als LED-Tickerlaufschrift)</li>
-						<li><a href="http://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_articles_news</a> (Modul zur Anzeige der letzten Einsätze als Joomla-Artikel)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_last</a> (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_chart</a> (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_statistik</a> (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_melder</a> (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_einsatzticker</a> (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_led</a> (Modul zur Anzeige des letzten Einsatzes als LED-Tickerlaufschrift)</li>
+						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_articles_news</a> (Modul zur Anzeige der letzten Einsätze als Joomla-Artikel)</li>
 						</ul>
-						<h4>Mehr Infos dazu auf <a href="http://www.einsatzkomponente.de/" target="_blank" class="">www.einsatzkomponente.de</a></h4>
+						<h4>Mehr Infos dazu auf <a href="https://www.einsatzkomponente.de/" target="_blank" class="">www.einsatzkomponente.de</a></h4>
 						</div>
 						<div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Schliessen</button>
@@ -213,7 +213,7 @@ if (!empty($this->extra_sidebar)) {
 								echo '<span class="label label-important">allow_url_fopen deaktiviert</span>';
 								}
 						?>
-					<hr>
+				<hr>
 						Aktuellste Version: <iframe  frameborder="0" height="30px" width="250px" src="https://www.feuerwehr-veenhusen.de/images/einsatzkomponenteJ30/index.html" scrolling="no"></iframe>
 						
 </div> 
@@ -251,7 +251,7 @@ if (!empty($this->extra_sidebar)) {
 			<tfoot>
 				<tr>
 					<td colspan="10">
-						<?php echo 'Copyright (C) 2016 by Ralf Meyer. All rights reserved.
+						<?php echo 'Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  *  GNU General Public License version 2 or later'; ?>
 					</td>
 				</tr>

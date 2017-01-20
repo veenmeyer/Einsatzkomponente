@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -82,7 +82,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query	= $db->getQuery(true);
 					$query
 						->select('name')
-						->from('`#__eiko_organisationen`')
+						->from('#__eiko_organisationen')
 						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
@@ -104,7 +104,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query	= $db->getQuery(true);
 					$query
 						->select('name')
-						->from('`#__eiko_fahrzeuge`')
+						->from('#__eiko_fahrzeuge')
 						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();

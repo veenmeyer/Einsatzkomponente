@@ -10,7 +10,7 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATA1" 
             required="true" 
             filter="raw"
-            query="SELECT * FROM `#__eiko_einsatzarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            query="SELECT * FROM #__eiko_einsatzarten WHERE state ='1' ORDER BY ordering ASC"
             key_field="id"
             value_field="title" />
 			
@@ -20,13 +20,13 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_KATEGORIE" 
             required="true" 
             filter="raw"
-            query="SELECT * FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            query="SELECT * FROM #__eiko_tickerkat WHERE state ='1' ORDER BY ordering ASC"
             key_field="id"
             value_field="title" />
 			
        <field name="filter_tickerkat" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, 'Einsatzkategorie auswählen' AS `val` , 0 AS `ordering` UNION SELECT `id`, `title`, `ordering` AS val FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC" key_field="id" value_field="val"
+            query="SELECT 0 AS id, 'Einsatzkategorie auswählen' AS val , 0 AS ordering UNION SELECT id, title, ordering AS val FROM #__eiko_tickerkat WHERE state ='1' ORDER BY ordering ASC" key_field="id" value_field="val"
              /> 
 			
        <field name="alerting" type="sql"
@@ -34,7 +34,7 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_ALERTING" 
             required="true" 
             filter="raw"
-            query="SELECT * FROM `#__eiko_alarmierungsarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            query="SELECT * FROM #__eiko_alarmierungsarten WHERE state ='1' ORDER BY ordering ASC"
             key_field="id"
             value_field="title" /> 
 			
@@ -205,7 +205,7 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
             required="true" 
-            query="SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
+            query="SELECT id, name FROM #__eiko_organisationen WHERE state='1' ORDER BY ordering ASC"
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
@@ -213,7 +213,7 @@
 
        <field name="filter_auswahl_orga" type="sql" class="inputbox"
             onchange="this.form.submit();" 
-            query="SELECT 0 AS `id`, 'Organisation auswählen' AS `name` , 0 AS `ordering` UNION SELECT `id`, `name`,`ordering` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC" 
+            query="SELECT 0 AS id, 'Organisation auswählen' AS name , 0 AS ordering UNION SELECT id, name,ordering FROM #__eiko_organisationen WHERE state='1' ORDER BY ordering ASC" 
 			key_field="id" 
 			value_field="name"
              /> 
@@ -225,7 +225,7 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSRUESTUNG" 
             required="false" 
-            query="SELECT `id`, `name` FROM `#__eiko_ausruestung` WHERE `state`='1' ORDER BY `ordering` ASC"
+            query="SELECT id, name FROM #__eiko_ausruestung WHERE state='1' ORDER BY ordering ASC"
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple" 
@@ -233,7 +233,7 @@
 
        <field name="ausruestung" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Ausrüstung -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_ausruestung`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, '- Ausrüstung -' AS val UNION SELECT id, name AS val FROM #__eiko_ausruestung" key_field="id" value_field="val"
              /> 
 		 
        <field name="article_id" 
@@ -241,7 +241,7 @@
        description="Bitte frei lassen, wenn kein Joomla-Artikel verlinkt werden soll." 
 	   default="0"
 	   type="sql" class="inputbox"
-            query="SELECT 0 AS `id`, 'Nein' AS `title` UNION SELECT `id`, `title` FROM `#__content` " 
+            query="SELECT 0 AS id, 'Nein' AS title UNION SELECT id, title FROM #__content " 
 			key_field="id" 
 			value_field="title"
              /> 

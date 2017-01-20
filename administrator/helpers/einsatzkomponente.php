@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -167,7 +167,7 @@ class EinsatzkomponenteHelper
 	{
 		// Funktion : Alle Jahreszahlen aller Einsätze zusammenfassen
 		$db = JFactory::getDBO();
-		$query = 'SELECT Year(date1) as id, Year(date1) as title FROM `#__eiko_einsatzberichte` WHERE (state="1" OR state = "2") GROUP BY title ORDER BY date1 DESC';
+		$query = 'SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE (state="1" OR state = "2") GROUP BY title ORDER BY date1 DESC';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -187,7 +187,7 @@ class EinsatzkomponenteHelper
 	{
 		// Funktion : Alle Einsatzbilder per ID laden
 		$db = JFactory::getDBO();
-		$query = 'SELECT * FROM `#__eiko_images` WHERE report_id = "'.$report_id.'" AND state ="1" ORDER BY ordering';
+		$query = 'SELECT * FROM #__eiko_images WHERE report_id = "'.$report_id.'" AND state ="1" ORDER BY ordering';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -196,7 +196,7 @@ class EinsatzkomponenteHelper
     public static function getOrganisationen() {
  		// Funktion : Feuerwehrliste aus DB holen
 		$db = JFactory::getDBO();
-		$query = 'SELECT * FROM `#__eiko_organisationen` WHERE state="1" ORDER BY `id`';
+		$query = 'SELECT * FROM #__eiko_organisationen WHERE state="1" ORDER BY id';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -211,7 +211,7 @@ class EinsatzkomponenteHelper
 				endforeach;
 				$data = array();
 		$db = JFactory::getDBO();
-		$query = 'SELECT gmap_latitude,gmap_longitude,name,gmap_icon_orga,ffw FROM `#__eiko_organisationen` WHERE state="1" and id="'.$array[0].'" ';
+		$query = 'SELECT gmap_latitude,gmap_longitude,name,gmap_icon_orga,ffw FROM #__eiko_organisationen WHERE state="1" and id="'.$array[0].'" ';
 		$db->setQuery($query);
 		$result = $db->loadObject();
         return $result;
@@ -220,7 +220,7 @@ class EinsatzkomponenteHelper
 	
     public static function getEinsatzarten() {
 		// Funktion : Liste der Einsatzarten aus DB holen
-		$query = 'SELECT id, title as title FROM `#__eiko_einsatzarten` WHERE state="1" ORDER BY `ordering` ASC';
+		$query = 'SELECT id, title as title FROM #__eiko_einsatzarten WHERE state="1" ORDER BY ordering ASC';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -230,14 +230,14 @@ class EinsatzkomponenteHelper
     public static function getPrev_id($cur_date,$selectedOrga) {
 		// Funktion : Den Einsatz vor dem aktuellen Einsatz ermitteln
 		if ($selectedOrga == 'alle Organisationen') :
-		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` < "'.$cur_date.'"  AND `state`="1" ORDER BY `date1` desc LIMIT 1';
+		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 < "'.$cur_date.'"  AND state="1" ORDER BY date1 desc LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
 		else:
 		
-		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` < "'.$cur_date.'" AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND `state`="1" ORDER BY `date1` desc LIMIT 1';
+		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 < "'.$cur_date.'" AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND state="1" ORDER BY date1 desc LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -249,13 +249,13 @@ class EinsatzkomponenteHelper
     public static function getNext_id($cur_date,$selectedOrga) {
 		// Funktion : Den Einsatz nach dem aktuellen Einsatz ermitteln
 		if ($selectedOrga == 'alle Organisationen') :
-		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` > "'.$cur_date.'"  AND `state`="1" ORDER BY `date1` asc LIMIT 1';
+		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 > "'.$cur_date.'"  AND state="1" ORDER BY date1 asc LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
 		else:
-		$query = 'SELECT id,summary FROM `#__eiko_einsatzberichte` WHERE `date1` > "'.$cur_date.'"  AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND `state`="1" ORDER BY `date1` asc LIMIT 1';
+		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 > "'.$cur_date.'"  AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND state="1" ORDER BY date1 asc LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -269,7 +269,7 @@ class EinsatzkomponenteHelper
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_einsatzarten`')
+						->from('#__eiko_einsatzarten')
 						->where('id = "' .$data1.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$result = $db->loadObject();
@@ -284,7 +284,7 @@ class EinsatzkomponenteHelper
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_tickerkat`')
+						->from('#__eiko_tickerkat')
 						->where('id = "' .$kat.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$result = $db->loadObject();
@@ -298,7 +298,7 @@ class EinsatzkomponenteHelper
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_alarmierungsarten`')
+						->from('#__eiko_alarmierungsarten')
 						->where('id = "' .$alerting.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$result = $db->loadObject();
@@ -308,7 +308,7 @@ class EinsatzkomponenteHelper
     public static function getOrga_fahrzeuge($orga_id) {
  		// Funktion : Feuerwehrliste aus DB holen
 		$db = JFactory::getDBO();
-		$query = 'SELECT * FROM `#__eiko_fahrzeuge` WHERE department = "'.$orga_id.'" and (state = 1 or state = 2) ORDER BY `ordering`';
+		$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$orga_id.'" and (state = 1 or state = 2) ORDER BY ordering';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -633,7 +633,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 	endif; 
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
 		$user=JFactory::getUser();
-		$query = 'SELECT created_by FROM `#__eiko_einsatzberichte` WHERE state="1" AND id ="'.$id.'"';
+		$query = 'SELECT created_by FROM #__eiko_einsatzberichte WHERE state="1" AND id ="'.$id.'"';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadResult();
@@ -676,7 +676,7 @@ $db->setQuery($query);
 		}
 		catch (RuntimeException $e)
 		{
-			JError::raiseError(500, $e->getMessage());
+			throw new Exception($e->getMessage(), 500);
 		}
 else:
 $params->set('eiko', '0');
@@ -704,7 +704,7 @@ $db->setQuery($query);
 		}
 		catch (RuntimeException $e)
 		{
-			JError::raiseError(500, $e->getMessage());
+			throw new Exception($e->getMessage(), 500);
 		}
 endif;		
 		return $response_code;
@@ -722,7 +722,7 @@ endif;
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'error');
 		}
 		else
 		{
@@ -734,7 +734,7 @@ endif;
 			
 		foreach ($cid as $key => $val) {
 			
-		$query = 'SELECT * FROM `#__eiko_einsatzberichte` WHERE `id` = "'.$val.'" LIMIT 1';
+		$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE id = "'.$val.'" LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -763,7 +763,7 @@ endif;
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($query);
 						$results = $db->loadObjectList();
@@ -909,7 +909,7 @@ endif;
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			JLog::add(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), JLog::WARNING, 'jerror');
+			JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'error');
 		}
 		else
 		{
@@ -921,7 +921,7 @@ endif;
 			
 		foreach ($cid as $key => $val) {
 			
-		$query = 'SELECT * FROM `#__eiko_einsatzberichte` WHERE `id` = "'.$val.'" and state ="1" LIMIT 1';
+		$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE id = "'.$val.'" and state ="1" LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -947,17 +947,17 @@ endif;
 		$query = $db->getQuery(true); // !important, true for every new query
 		
 		$query->insert('#__content'); // #__table_name = databse prefix + table name
-		$query->set('`id`=NULL');
-		$query->set('`asset_id`="'.$asset_id.'"');
-		$query->set('`title`="'.$result[0]->summary.'"');
+		$query->set('id=NULL');
+		$query->set('asset_id="'.$asset_id.'"');
+		$query->set('title="'.$result[0]->summary.'"');
 		
 		$alias = strtolower($result[0]->summary);
 		$alias = str_replace(" ", "-", $alias).'_'.date("Y-m-d", strtotime($result[0]->date1));
-		$query->set('`alias`="'.$alias.'"');
+		$query->set('alias="'.$alias.'"');
 		
 		$intro = $result[0]->desc;
 		$intro = preg_replace("#(?<=.{".$params->get('article_max_intro','400')."}?\\b)(.*)#is", " ...", $intro, 1);
-		$query->set('`introtext`="'.$db->escape($intro).'"');
+		$query->set('introtext="'.$db->escape($intro).'"');
 		
 		if ($params->get('article_orgas','1')) :	
 					$data = array();
@@ -966,7 +966,7 @@ endif;
 						$sql	= $db->getQuery(true);
 						$sql
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($sql);
 						$results = $db->loadObjectList();
@@ -978,37 +978,37 @@ endif;
 
 					$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
 		$orgas       = '<br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte: '.$orgas.'</div>';
-		$query->set('`fulltext`="'.$db->escape($result[0]->desc).$orgas.'"');
+		$query->set('fulltext="'.$db->escape($result[0]->desc).$orgas.'"');
 		else:
-		$query->set('`fulltext`="'.$db->escape($result[0]->desc).'"');
+		$query->set('fulltext="'.$db->escape($result[0]->desc).'"');
 		endif;
 		
-		$query->set('`state`="1"');
-		$query->set('`catid`="'.$params->get('article_category','0').'"');
-		$query->set('`created`="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"');
-		$query->set('`created_by`="'.$user->id.'"');
-		$query->set('`created_by_alias`=""');
-		$query->set('`modified`=""');
-		$query->set('`modified_by`="'.$user->id.'"');
-		$query->set('`checked_out`="0"');
-		$query->set('`checked_out_time`="0000-00-00 00:00:00.000000"');
-		$query->set('`publish_up`="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"'); 
-		$query->set('`publish_down`="0000-00-00 00:00:00.000000"');
-		$query->set('`images`="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}"');
-		$query->set('`urls`="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
-		$query->set('`attribs`="{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}"');
-		$query->set('`version`="1"');
-		$query->set('`ordering`="0"');
-		$query->set('`metakey`="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
-		$query->set('`metadesc`="'.$params->get('article_meta_desc','Einsatzbericht').'"');
-		$query->set('`access`="1"');
-		$query->set('`hits`="0"');
-		$query->set('`metadata`="{\"robots\":\"\",\"author\":\"'.$user->username.'\",\"rights\":\"\",\"xreference\":\"\"}"');
-		$query->set('`featured`="1"');
-		$query->set('`language`="*"');
-		$query->set('`xreference`=""');
+		$query->set('state="1"');
+		$query->set('catid="'.$params->get('article_category','0').'"');
+		$query->set('created="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"');
+		$query->set('created_by="'.$user->id.'"');
+		$query->set('created_by_alias=""');
+		$query->set('modified=""');
+		$query->set('modified_by="'.$user->id.'"');
+		$query->set('checked_out="0"');
+		$query->set('checked_out_time="0000-00-00 00:00:00.000000"');
+		$query->set('publish_up="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"'); 
+		$query->set('publish_down="0000-00-00 00:00:00.000000"');
+		$query->set('images="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"\",\"image_intro_caption\":\"\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"\",\"image_fulltext_caption\":\"\"}"');
+		$query->set('urls="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
+		$query->set('attribs="{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}"');
+		$query->set('version="1"');
+		$query->set('ordering="0"');
+		$query->set('metakey="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
+		$query->set('metadesc="'.$params->get('article_meta_desc','Einsatzbericht').'"');
+		$query->set('access="1"');
+		$query->set('hits="0"');
+		$query->set('metadata="{\"robots\":\"\",\"author\":\"'.$user->username.'\",\"rights\":\"\",\"xreference\":\"\"}"');
+		$query->set('featured="1"');
+		$query->set('language="*"');
+		$query->set('xreference=""');
 		/* or something like this:
-		$query->columns('`1`,`2`,`3`');
+		$query->columns('1,2,3');
 		$query->values('"one","two","three"');
 		*/
 		
@@ -1022,14 +1022,14 @@ endif;
 	}
 		$content_id = $db->insertId();
 		// Joomla-Artikel Id in Einsatzbericht eintragen 
-		$query = "UPDATE `#__eiko_einsatzberichte` SET `article_id` = '".$content_id."' WHERE `id` = '".$result[0]->id."'";
+		$query = "UPDATE #__eiko_einsatzberichte SET article_id = '".$content_id."' WHERE id = '".$result[0]->id."'";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$db->query();
 		
 		if ($params->get('article_frontpage','1')) :	
 		// Artikel als Haupteintrag-Eintrag markieren 
-		$frontpage_query = "INSERT INTO `#__content_frontpage` SET `content_id`='".$content_id."'";
+		$frontpage_query = "INSERT INTO #__content_frontpage SET content_id='".$content_id."'";
 		$db = JFactory::getDBO();
 		$db->setQuery($frontpage_query);
 		$db->query();

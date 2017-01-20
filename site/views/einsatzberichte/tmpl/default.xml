@@ -104,7 +104,7 @@ description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu 
 		</field>
 
 
-			<field name="anzeigewehr" type="sql" default="" label="Wenn Ja, bitte hier w&#228;hlen" query="SELECT id AS value, name AS anzeigewehr FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `name`" />
+			<field name="anzeigewehr" type="sql" default="" label="Wenn Ja, bitte hier w&#228;hlen" query="SELECT id AS value, name AS anzeigewehr FROM #__eiko_organisationen WHERE state=1 ORDER BY name" />
 
 		<field
 			name="spacer3"

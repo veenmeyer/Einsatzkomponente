@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.7
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2015. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
- * @author      Ralf Meyer <ralf.meyer@mail.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 
 // No direct access.
@@ -89,7 +89,7 @@ else{
                 }
 
                 if (!$canEdit) {
-                    JError::raiseError('500', JText::_('JERROR_ALERTNOAUTHOR'));
+                    throw new Exception( JText::_('ALERTNOAUTHOR'), 500);
                 }
                 
 				// Check published state.
@@ -244,7 +244,7 @@ else{
         }
 
         if ($authorised !== true) {
-            JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+            throw new Exception( JText::_('ALERTNOAUTHOR'), 403);
             return false;
         }
         
@@ -261,7 +261,7 @@ else{
     {
         $id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('ausruestung.id');
         if(JFactory::getUser()->authorise('core.delete', 'com_einsatzkomponente.ausruestung.'.$id) !== true){
-            JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+            throw new Exception( JText::_('ALERTNOAUTHOR'), 403);
             return false;
         }
         $table = $this->getTable();

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 
 // No direct access
@@ -72,7 +72,7 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 		// Validate the posted data.
 		$form = $model->getForm();
 		if (!$form) {
-			JError::raiseError(500, $model->getError());
+			throw new Exception($model->getError(), 500);
 			return false;
 		}
 
@@ -158,7 +158,7 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 		// Validate the posted data.
 		$form = $model->getForm();
 		if (!$form) {
-			JError::raiseError(500, $model->getError());
+			throw new Exception($model->getError(), 500);
 			return false;
 		}
 

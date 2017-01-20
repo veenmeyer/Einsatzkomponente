@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -61,7 +61,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		// Validate the posted data.
 		$form = $model->getForm();
 		if (!$form) {
-			JError::raiseError(500, $model->getError());
+			throw new Exception($model->getError(), 500);
 			return false;
 		}
 		// Validate the posted data.
@@ -133,7 +133,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 			// Make sure the item ids are integers
 		
 			
-		$query = 'SELECT * FROM `#__eiko_einsatzberichte` WHERE `id` = "'.$cid.'" and state ="1" LIMIT 1';
+		$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE id = "'.$cid.'" and state ="1" LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -158,17 +158,17 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		$query = $db->getQuery(true); // !important, true for every new query
 		
 		$query->insert('#__content'); // #__table_name = databse prefix + table name
-		$query->set('`id`=NULL');
-		$query->set('`asset_id`="'.$asset_id.'"');
-		$query->set('`title`="'.$result[0]->summary.'"');
+		$query->set('id=NULL');
+		$query->set('asset_id="'.$asset_id.'"');
+		$query->set('title="'.$result[0]->summary.'"');
 		
 		$alias = strtolower($result[0]->summary);
 		$alias = str_replace(" ", "-", $alias).'_'.date("Y-m-d", strtotime($result[0]->date1));
-		$query->set('`alias`="'.$alias.'"');
+		$query->set('alias="'.$alias.'"');
 		
 		$intro = $result[0]->desc;
 		$intro = preg_replace("#(?<=.{".$params->get('article_max_intro','400')."}?\\b)(.*)#is", " ...", $intro, 1);
-		$query->set('`introtext`="'.$db->escape($intro).'"');
+		$query->set('introtext="'.$db->escape($intro).'"');
 		
 		if ($params->get('article_orgas','1')) :	
 					$data = array();
@@ -177,7 +177,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 						$sql	= $db->getQuery(true);
 						$sql
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($sql);
 						$results = $db->loadObjectList();
@@ -189,37 +189,37 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 
 					$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
 		$orgas       = '<br/><br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte :  '.$orgas.'</div>';
-		$query->set('`fulltext`="'.$db->escape($result[0]->desc).$orgas.'"');
+		$query->set('fulltext="'.$db->escape($result[0]->desc).$orgas.'"');
 		else:
-		$query->set('`fulltext`="'.$db->escape($result[0]->desc).'"');
+		$query->set('fulltext="'.$db->escape($result[0]->desc).'"');
 		endif;
 		
-		$query->set('`state`="1"');
-		$query->set('`catid`="'.$params->get('article_category','0').'"');
-		$query->set('`created`="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"');
-		$query->set('`created_by`="'.$user->id.'"');
-		$query->set('`created_by_alias`=""');
-		$query->set('`modified`=""');
-		$query->set('`modified_by`="'.$user->id.'"');
-		$query->set('`checked_out`="0"');
-		$query->set('`checked_out_time`="0000-00-00 00:00:00.000000"');
-		$query->set('`publish_up`="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"'); 
-		$query->set('`publish_down`="0000-00-00 00:00:00.000000"');
-		$query->set('`images`="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"'.$result[0]->summary.'\",\"image_intro_caption\":\"'.$result[0]->summary.'\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"'.$result[0]->summary.'\",\"image_fulltext_caption\":\"'.$result[0]->summary.'\"}"');
-		$query->set('`urls`="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
-		$query->set('`attribs`="{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}"');
-		$query->set('`version`="1"');
-		$query->set('`ordering`="0"');
-		$query->set('`metakey`="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
-		$query->set('`metadesc`="'.$params->get('article_meta_desc','Einsatzbericht').'"');
-		$query->set('`access`="1"');
-		$query->set('`hits`="0"');
-		$query->set('`metadata`="{\"robots\":\"\",\"author\":\"'.$user->username.'\",\"rights\":\"\",\"xreference\":\"\"}"');
-		$query->set('`featured`="1"');
-		$query->set('`language`="*"');
-		$query->set('`xreference`=""');
+		$query->set('state="1"');
+		$query->set('catid="'.$params->get('article_category','0').'"');
+		$query->set('created="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"');
+		$query->set('created_by="'.$user->id.'"');
+		$query->set('created_by_alias=""');
+		$query->set('modified=""');
+		$query->set('modified_by="'.$user->id.'"');
+		$query->set('checked_out="0"');
+		$query->set('checked_out_time="0000-00-00 00:00:00.000000"');
+		$query->set('publish_up="'.date("Y-m-d H:i:s", strtotime($result[0]->date1)).'"'); 
+		$query->set('publish_down="0000-00-00 00:00:00.000000"');
+		$query->set('images="{\"image_intro\":\"'.$image_intro.'\",\"float_intro\":\"\",\"image_intro_alt\":\"'.$result[0]->summary.'\",\"image_intro_caption\":\"'.$result[0]->summary.'\",\"image_fulltext\":\"'.$image_fulltext.'\",\"float_fulltext\":\"\",\"image_fulltext_alt\":\"'.$result[0]->summary.'\",\"image_fulltext_caption\":\"'.$result[0]->summary.'\"}"');
+		$query->set('urls="{\"urla\":\"'.$link.'\",\"urlatext\":\"Weitere Informationen über diesen Einsatz im Detailbericht\",\"targeta\":\"\",\"urlb\":\"'.$result[0]->presse.'\",\"urlbtext\":\"'.$result[0]->presse_label.'\",\"targetb\":\"\",\"urlc\":\"'.$result[0]->presse2.'\",\"urlctext\":\"'.$result[0]->presse2_label.'\",\"targetc\":\"\"}"');
+		$query->set('attribs="{\"show_title\":\"\",\"link_titles\":\"\",\"show_tags\":\"\",\"show_intro\":\"\",\"info_block_position\":\"\",\"show_category\":\"\",\"link_category\":\"\",\"show_parent_category\":\"\",\"link_parent_category\":\"\",\"show_author\":\"\",\"link_author\":\"\",\"show_create_date\":\"\",\"show_modify_date\":\"\",\"show_publish_date\":\"\",\"show_item_navigation\":\"\",\"show_icons\":\"\",\"show_print_icon\":\"\",\"show_email_icon\":\"\",\"show_vote\":\"\",\"show_hits\":\"\",\"show_noauth\":\"\",\"urls_position\":\"\",\"alternative_readmore\":\"\",\"article_layout\":\"\",\"show_publishing_options\":\"\",\"show_article_options\":\"\",\"show_urls_images_backend\":\"\",\"show_urls_images_frontend\":\"\"}"');
+		$query->set('version="1"');
+		$query->set('ordering="0"');
+		$query->set('metakey="'.$auswahl_orga.','.$params->get('article_meta_key','feuerwehr,einsatzbericht,unfall,feuer,hilfeleistung,polizei,thw,rettungsdienst,hilfsorganisation').',einsatzkomponente"');
+		$query->set('metadesc="'.$params->get('article_meta_desc','Einsatzbericht').'"');
+		$query->set('access="1"');
+		$query->set('hits="0"');
+		$query->set('metadata="{\"robots\":\"\",\"author\":\"'.$user->username.'\",\"rights\":\"\",\"xreference\":\"\"}"');
+		$query->set('featured="1"');
+		$query->set('language="*"');
+		$query->set('xreference=""');
 		/* or something like this:
-		$query->columns('`1`,`2`,`3`');
+		$query->columns('1,2,3');
 		$query->values('"one","two","three"');
 		*/
 		
@@ -233,14 +233,14 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 	}
 		$content_id = $db->insertId();
 		// Joomla-Artikel Id in Einsatzbericht eintragen 
-		$query = "UPDATE `#__eiko_einsatzberichte` SET `article_id` = '".$content_id."' WHERE `id` = '".$result[0]->id."'";
+		$query = "UPDATE #__eiko_einsatzberichte SET article_id = '".$content_id."' WHERE id = '".$result[0]->id."'";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$db->query();
 		
 		if ($params->get('article_frontpage','1')) :	
 		// Artikel als Haupteintrag-Eintrag markieren 
-		$frontpage_query = "INSERT INTO `#__content_frontpage` SET `content_id`='".$content_id."'";
+		$frontpage_query = "INSERT INTO #__content_frontpage SET content_id='".$content_id."'";
 		$db = JFactory::getDBO();
 		$db->setQuery($frontpage_query);
 		$db->query();
@@ -330,7 +330,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		// Validate the posted data.
 		$form = $model->getForm();
 		if (!$form) {
-			JError::raiseError(500, $model->getError());
+			throw new Exception($model->getError(), 500);
 			return false;
 		}
 		// Validate the posted data.
@@ -394,7 +394,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		$user = JFactory::getUser();
-		$query = 'SELECT * FROM `#__eiko_einsatzberichte` WHERE `id` = "'.$cid.'" LIMIT 1';
+		$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE id = "'.$cid.'" LIMIT 1';
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -426,7 +426,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_tickerkat`')
+						->from('#__eiko_tickerkat')
 						->where('id = "' .$result[0]->tickerkat.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$kat = $db->loadObject();

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -129,7 +129,7 @@ if ($this->params->get('display_home_pagination')) :
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_tickerkat`')
+						->from('#__eiko_tickerkat')
 						->where('id = "' .$item->tickerkat.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$tickerkat = $db->loadObject();
@@ -272,7 +272,7 @@ if ($this->params->get('display_home_pagination')) :
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($query);
 						$results = $db->loadObjectList();
@@ -321,7 +321,7 @@ if ($this->params->get('display_home_pagination')) :
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($query);
 						$results = $db->loadObjectList();
@@ -412,7 +412,7 @@ if ($this->params->get('display_home_pagination')) :
 
 <?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
         </tr>
 	<?php endif; ?>
     

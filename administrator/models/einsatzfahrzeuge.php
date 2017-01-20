@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) by Ralf Meyer 2013. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
@@ -111,7 +111,7 @@ class EinsatzkomponenteModeleinsatzfahrzeuge extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__eiko_fahrzeuge` AS a');
+		$query->from('#__eiko_fahrzeuge AS a');
 		// Join over the foreign key 'auswahl_orga'
 		$query->select('#__eiko_ausruestung_1662678.name AS ausruestung_name_1662678');
 		$query->join('LEFT', '#__eiko_ausruestung AS #__eiko_ausruestung_1662678 ON #__eiko_ausruestung_1662678.id = a.ausruestung');
@@ -163,7 +163,7 @@ class EinsatzkomponenteModeleinsatzfahrzeuge extends JModelList
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_ausruestung`')
+							->from('#__eiko_ausruestung')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();

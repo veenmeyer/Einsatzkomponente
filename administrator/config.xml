@@ -141,18 +141,14 @@
 				value="true">JYES</option>
 			</field>
 			
-			<field name="watermark_image" 
-			type="imagelist" 
-			showon="watermark_show:true"
-			default="watermark.png" 
+       <field name="watermark_image" type="media"
 			label="COM_EINSATZKOMPONENTE_OPTION_WASSERZEICHEN_WAEHLEN" 
-			description="Sie können Wasserzeichen hinzufügen. Einfach in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkompponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!" 
-			directory="administrator/components/com_einsatzkomponente/assets/images/watermark" 
-			exclude="index.html" 
-			hide_default="true" 
-			hide_none="true" 
-			stripext="" 
-			/>
+			description="Sie können Wasserzeichen hinzufügen. Die Datei muss zwingend eine PNG-Datei sein !!" 
+            filter="raw"
+		    preview="true"
+			showon="watermark_show:true"
+            directory="com_einsatzkomponente/watermark" />   
+
 			
 			<field name="watermark_pos_x" 
 			type="text" 
@@ -165,7 +161,7 @@
 			<field name="watermark_pos_y" 
 			type="text" 
 			showon="watermark_show:true"
-			default="60" 
+			default="5" 
 			label="COM_EINSATZKOMPONENTE_OPTION_ABSTAND_RECHTS" 
 			description="Bitte nur so angeben : z.b. 60  ohne px !!" 
 			/>
@@ -664,19 +660,22 @@
 	/>
 		
 	
-	  <field
-			name="display_home_bootstrap"
-			type="radio"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_BOOTSTRAP_CSS_JS"
+	  
+	  		<field
+				name="display_home_bootstrap"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_BOOTSTRAP_CSS_JS"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
+					<option
+						value="1">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_JOOMLA</option>
+					<option
+						value="0">JNO</option>
+					<option
+						value="2">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_EIKO</option>
+	  		</field>
+	  
 		<field
 			name="spacer6"
 			type="spacer"
@@ -801,7 +800,7 @@
 			default = ''
             filter="raw"
 			translate = "COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_FILTER"
-            query="SELECT 0 AS `id`, 'COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_FILTER' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_einsatzarten`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, 'COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_EXCLUDED_FILTER' AS val UNION SELECT id, title AS val FROM #__eiko_einsatzarten" key_field="id" value_field="val"
 			multiple ="false"
 			/>
 			
@@ -1146,19 +1145,22 @@
 		description=""
 		/>	
 	
-	  <field
-			name="display_detail_bootstrap"
-			type="radio"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_BOOTSTRAP_CSS_JS"
+	  		<field
+				name="display_detail_bootstrap"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_BOOTSTRAP_CSS_JS"
 			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden.(Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
+					<option
+						value="1">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_JOOMLA</option>
+					<option
+						value="0">JNO</option>
+					<option
+						value="2">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_EIKO</option>
+	  		</field>
+	  
+	  
 		<field
 			name="spacer10"
 			type="spacer"
@@ -1464,19 +1466,24 @@
 		description="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_1"
 		/>	
 		
-	  <field
-			name="display_einsatzkarte_bootstrap" 
-			type="radio"
-			showon="gmap_action:1,2"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_BOOTSTRAP_CSS_JS"
-			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
+	  
+	  		<field
+				name="display_einsatzkarte_bootstrap"
+				type="radio"
+				showon="gmap_action:1,2"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_BOOTSTRAP_CSS_JS"
+				description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
+					<option
+						value="1">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_JOOMLA</option>
+					<option
+						value="0">JNO</option>
+					<option
+						value="2">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_EIKO</option>
+	  		</field>
+
+			
 		<field
 			name="spacer43323"
 			type="spacer"
@@ -1623,19 +1630,22 @@
 		description="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_1"
 		/>	
 	
-	  <field
-			name="display_orga_bootstrap"
-			type="radio"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_BOOTSTRAP_CSS_JS"
-			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
+	
+	  		<field
+				name="display_orga_bootstrap"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_BOOTSTRAP_CSS_JS"
+				description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
+					<option
+						value="1">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_JOOMLA</option>
+					<option
+						value="0">JNO</option>
+					<option
+						value="2">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_EIKO</option>
+	  		</field>
+
 		<field
 			name="spacer14"
 			type="spacer"
@@ -1682,19 +1692,21 @@
 		description="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_1"
 		/>	
 	
-	  <field
-			name="display_fahrzeuge_bootstrap"
-			type="radio"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES_BOOTSTRAP"
-			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
+	  		<field
+				name="display_fahrzeuge_bootstrap"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZKARTE_BOOTSTRAP_CSS_JS"
+				description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
+					<option
+						value="1">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_JOOMLA</option>
+					<option
+						value="0">JNO</option>
+					<option
+						value="2">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_EIKO</option>
+	  		</field>
+	  
 		<field
 			name="spacer14"
 			type="spacer"
@@ -1753,19 +1765,21 @@
 		description="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG_1"
 		/>	
 	
-	  <field
-			name="display_ausruestung_bootstrap"
-			type="radio"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG_BOOTSTRAP"
-			description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
+	  		<field
+				name="display_ausruestung_bootstrap"
+				type="radio"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_OPTION_AUSRUESTUNG_BOOTSTRAP"
+				description="Hier kann die Bootstrap CSS und Javascript manuell nachgeladen werden. (Testweise -> dieser Auswahlpunkt fällt eventuell wieder weg)">
+					<option
+						value="1">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_JOOMLA</option>
+					<option
+						value="0">JNO</option>
+					<option
+						value="2">COM_EINSATZKOMPONENTE_OPTION_BOOTSTRAP_EIKO</option>
+	  		</field>
+	  
 		<field
 			name="spacer54514"
 			type="spacer"

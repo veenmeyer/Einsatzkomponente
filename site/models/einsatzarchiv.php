@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @version     3.1.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2014. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
- * @author      Ralf Meyer <ralf.meyer@einsatzkomponente.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 
@@ -229,7 +229,7 @@ endif;
                         )
         );
 
-        $query->from('`#__eiko_einsatzberichte` AS a');
+        $query->from('#__eiko_einsatzberichte AS a');
 
         
     // Join over the users for the checked out user.
@@ -430,7 +430,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('title,image')
-							->from('`#__eiko_alarmierungsarten`')
+							->from('#__eiko_alarmierungsarten')
 							->where('id = ' . $db->quote($db->escape($item->alerting)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -445,7 +445,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('title,image')
-							->from('`#__eiko_tickerkat`')
+							->from('#__eiko_tickerkat')
 							->where('id = ' . $db->quote($db->escape($item->tickerkat)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -460,7 +460,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('id,title,list_icon,marker')
-							->from('`#__eiko_einsatzarten`')
+							->from('#__eiko_einsatzarten')
 							->where('id = ' . $db->quote($db->escape($item->data1)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -478,7 +478,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('count(image)')
-							->from('`#__eiko_images`')
+							->from('#__eiko_images')
 							->where('report_id = ' . $item->id);
 					$db->setQuery($query);
 					$item->images = $db->loadResult();
@@ -498,7 +498,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -523,7 +523,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_fahrzeuge`')
+							->from('#__eiko_fahrzeuge')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -548,7 +548,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_ausruestung`')
+	//						->from('#__eiko_ausruestung')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -573,7 +573,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_fahrzeuge`')
+	//						->from('#__eiko_fahrzeuge')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -598,7 +598,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_fahrzeuge`')
+	//						->from('#__eiko_fahrzeuge')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -623,7 +623,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_fahrzeuge`')
+	//						->from('#__eiko_fahrzeuge')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -650,7 +650,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__content`')
+							->from('#__content')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();

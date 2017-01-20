@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('JPATH_BASE') or die;
 jimport('joomla.form.formfield');
@@ -32,12 +32,10 @@ class JFormFieldEinsatzleiter extends JFormField
 		$html = array();
 		$address = array();
         
-$id = JRequest::getVar('id', 0);
 
-$params = JComponentHelper::getParams('com_einsatzkomponente');
 
 $db = JFactory::getDBO();
-$query = 'SELECT id, boss as title FROM `#__eiko_einsatzberichte` WHERE state="1" GROUP BY `boss` ASC';
+$query = 'SELECT id, boss as title FROM #__eiko_einsatzberichte WHERE state="1" GROUP BY boss ASC';
 $db->setQuery($query);
 $arrayDb = $db->loadObjectList();
 

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -66,7 +66,7 @@ $gmapconfig = $this->gmap_config;
 		if ($this->params->get('display_einsatzkarte_organisationen','1')) :
 			// Feuerwehrliste aus DB holen
 			$db = JFactory::getDBO();
-			$query = 'SELECT id, name,gmap_icon_orga,gmap_latitude,gmap_longitude,link,detail1 FROM `#__eiko_organisationen` WHERE state=1 ORDER BY `id`';
+			$query = 'SELECT id, name,gmap_icon_orga,gmap_latitude,gmap_longitude,link,detail1 FROM #__eiko_organisationen WHERE state=1 ORDER BY id';
 			$db->setQuery($query);
 			$orga = $db->loadObjectList();
 
@@ -156,7 +156,7 @@ $totalRecords = $total[0]->total;
   function getYear()
   {
 	$db = JFactory::getDBO();
-	$query = 'SELECT Year(date1) as id, Year(date1) as title FROM `#__eiko_einsatzberichte` WHERE gmap="1" AND state = "1" GROUP BY title';
+	$query = 'SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE gmap="1" AND state = "1" GROUP BY title';
 	$db->setQuery($query);
 	return $db->loadObjectList();
   }

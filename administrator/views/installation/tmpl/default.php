@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -36,12 +36,12 @@ $restore      	= JFactory::getApplication()->input->get('restore', false);
 
 // DB-Service
 
-$repair_array ['111'] = "CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `asset_id` int(10) unsigned NOT NULL DEFAULT '0',  `title` varchar(255) NOT NULL,  `image` varchar(255) NOT NULL,  `beschreibung`text NOT NULL,  `ordering` int(11) NOT NULL,  `state` tinyint(1) NOT NULL,  `created_by` int(11) NOT NULL,  `checked_out` int(11) NOT NULL,  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  PRIMARY KEY (`id`)) DEFAULT COLLATE=utf8_general_ci;";
+$repair_array ['111'] = "CREATE TABLE IF NOT EXISTS #__eiko_tickerkat ( id int(11) unsigned NOT NULL AUTO_INCREMENT,  asset_id int(10) unsigned NOT NULL DEFAULT '0',  title varchar(255) NOT NULL,  image varchar(255) NOT NULL,  beschreibungtext NOT NULL,  ordering int(11) NOT NULL,  state tinyint(1) NOT NULL,  created_by int(11) NOT NULL,  checked_out int(11) NOT NULL,  checked_out_time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  PRIMARY KEY (id)) DEFAULT COLLATE=utf8_general_ci;";
 
-$repair_array ['112'] = "CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,`asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',`name` VARCHAR(255)  NOT NULL ,`image` VARCHAR(255)  NOT NULL ,`beschreibung` TEXT NOT NULL ,`created_by` INT(11)  NOT NULL ,`checked_out` INT(11)  NOT NULL ,`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',`ordering` INT(11)  NOT NULL ,`state` TINYINT(1)  NOT NULL ,PRIMARY KEY (`id`)) DEFAULT COLLATE=utf8_general_ci;";
+$repair_array ['112'] = "CREATE TABLE IF NOT EXISTS #__eiko_ausruestung (id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,asset_id INT(10) UNSIGNED NOT NULL DEFAULT '0',name VARCHAR(255)  NOT NULL ,image VARCHAR(255)  NOT NULL ,beschreibung TEXT NOT NULL ,created_by INT(11)  NOT NULL ,checked_out INT(11)  NOT NULL ,checked_out_time DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',ordering INT(11)  NOT NULL ,state TINYINT(1)  NOT NULL ,PRIMARY KEY (id)) DEFAULT COLLATE=utf8_general_ci;";
 
-$repair_array ['113'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `ausruestung` TEXT NOT NULL AFTER `vehicles`;";
-$repair_array ['114'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `auswahl_orga` TEXT NOT NULL AFTER `tickerkat`;";
+$repair_array ['113'] = "ALTER TABLE #__eiko_einsatzberichte ADD ausruestung TEXT NOT NULL AFTER vehicles;";
+$repair_array ['114'] = "ALTER TABLE #__eiko_einsatzberichte ADD auswahl_orga TEXT NOT NULL AFTER tickerkat;";
 
 
 if ($repair) : 
@@ -141,7 +141,7 @@ if ($check_gmap) {
 else
 {
 	$db = JFactory::getDbo();
-	$query = "INSERT INTO `#__eiko_gmap_config`(`id`) VALUES (1)";
+	$query = "INSERT INTO #__eiko_gmap_config(id) VALUES (1)";
 	$db->setQuery($query);
 	try {
 	// Execute the query in Joomla 3.0.
@@ -158,7 +158,7 @@ else
 	echo 'Die GMap-Konfigurationstabelle wurde <span class="label label-info">erstellt.</span>.<br/><br/>'; 
 	
 	$db = JFactory::getDbo();
-    $query = 'UPDATE `#__eiko_gmap_config` SET `gmap_alarmarea` = "53.28071418254047,7.416630163574155|53.294772929932165,7.4492458251952485|53.29815865222114,7.4767116455077485|53.31313468829642,7.459888830566342|53.29949234792138,7.478256597900327|53.29815865222114,7.506409063720639|53.286461382800795,7.521686926269467|53.26726681991669,7.499027624511655|" WHERE `id` = 1;';	
+    $query = 'UPDATE #__eiko_gmap_config SET gmap_alarmarea = "53.28071418254047,7.416630163574155|53.294772929932165,7.4492458251952485|53.29815865222114,7.4767116455077485|53.31313468829642,7.459888830566342|53.29949234792138,7.478256597900327|53.29815865222114,7.506409063720639|53.286461382800795,7.521686926269467|53.26726681991669,7.499027624511655|" WHERE id = 1;';	
 	$db->setQuery($query); 
 	//execute db object
 	try {
@@ -173,7 +173,7 @@ else
 	}
 // ------------------ Update von Version 3.0 beta 3 auf 3.0 beta 4 --------------------------------------------------
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="presse_label"');
+	$db->setQuery('show columns from #__eiko_einsatzberichte where Field="presse_label"');
 	try {
 	$check_presse = $db->execute();
 	} catch (Exception $e) {
@@ -183,14 +183,14 @@ $check_presse = $check_presse->num_rows;
 if (!$check_presse) {
 	
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_einsatzberichte` ADD `presse_label` VARCHAR( 255 ) NOT NULL DEFAULT "Presselink" AFTER `gmap`';	
+    $query = 'ALTER TABLE #__eiko_einsatzberichte ADD presse_label VARCHAR( 255 ) NOT NULL DEFAULT "Presselink" AFTER gmap';	
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
 	} catch (Exception $e) {
 	}	
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_einsatzberichte` ADD `presse2_label` VARCHAR( 255 ) NOT NULL DEFAULT "Presselink" AFTER `presse`';	
+    $query = 'ALTER TABLE #__eiko_einsatzberichte ADD presse2_label VARCHAR( 255 ) NOT NULL DEFAULT "Presselink" AFTER presse';	
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -198,7 +198,7 @@ if (!$check_presse) {
 	}	
 	
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_einsatzberichte` ADD `presse3_label` VARCHAR( 255 ) NOT NULL DEFAULT "Presselink" AFTER `presse2`';	
+    $query = 'ALTER TABLE #__eiko_einsatzberichte ADD presse3_label VARCHAR( 255 ) NOT NULL DEFAULT "Presselink" AFTER presse2';	
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -213,7 +213,7 @@ else {
 	
 // ------------------ Update von Version 3.04 auf 3.05 beta --------------------------------------------------
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="status_fb"');
+	$db->setQuery('show columns from #__eiko_einsatzberichte where Field="status_fb"');
 	try {
 	$check_status_fb = $db->execute();
 	} catch (Exception $e) {
@@ -223,7 +223,7 @@ $check_status_fb = $check_status_fb->num_rows;
 if (!$check_status_fb) {
 	
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_einsatzberichte` ADD `status_fb` VARCHAR( 255 ) NOT NULL DEFAULT "1" AFTER `gmap`';	
+    $query = 'ALTER TABLE #__eiko_einsatzberichte ADD status_fb VARCHAR( 255 ) NOT NULL DEFAULT "1" AFTER gmap';	
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -234,7 +234,7 @@ else {
 	} 
 	
 	$db = JFactory::getDbo();
-	$db->setQuery('show columns from `#__eiko_einsatzberichte` where Field="article_id"');
+	$db->setQuery('show columns from #__eiko_einsatzberichte where Field="article_id"');
 	try {
 	$check_status_fb = $db->execute();
 	} catch (Exception $e) {
@@ -244,7 +244,7 @@ $check_status_fb = $check_status_fb->num_rows;
 if (!$check_status_fb) {
 	
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_einsatzberichte` ADD `article_id` VARCHAR( 255 ) NOT NULL DEFAULT "0" AFTER `asset_id`';	
+    $query = 'ALTER TABLE #__eiko_einsatzberichte ADD article_id VARCHAR( 255 ) NOT NULL DEFAULT "0" AFTER asset_id';	
 	$db->setQuery($query);  
 	try {
 	$result = $db->execute();
@@ -260,7 +260,7 @@ else {
 // ------------------ Update von Version 3.05 auf 3.06 beta ---------------------------------------------------
 
 	$db = JFactory::getDbo();
-	$db->setQuery('select * from `#__eiko_tickerkat` where id="0"');
+	$db->setQuery('select * from #__eiko_tickerkat where id="0"');
 	try {
 	$check_tickerkat = $db->execute();
 	} catch (Exception $e) {$check_tickerkat=true;}
@@ -295,18 +295,18 @@ $eiko_tickerkat = array(
 );
 
 $e ='';
-$sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
-`id` int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `title` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `beschreibung` text NOT NULL,
-  `ordering` int(11) NOT NULL,
-  `state` tinyint(1) NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `checked_out` int(11) NOT NULL,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
+$sql="CREATE TABLE IF NOT EXISTS #__eiko_tickerkat (
+id int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  asset_id int(10) unsigned NOT NULL DEFAULT '0',
+  title varchar(255) NOT NULL,
+  image varchar(255) NOT NULL,
+  beschreibung text NOT NULL,
+  ordering int(11) NOT NULL,
+  state tinyint(1) NOT NULL,
+  created_by int(11) NOT NULL,
+  checked_out int(11) NOT NULL,
+  checked_out_time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;";
 	$db = JFactory::getDbo();
 	$db->setQuery($sql); 
@@ -316,7 +316,7 @@ $sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
 		print_r ($e);$bug='1';
 	}	
 
-//$sql = "ALTER TABLE `#__eiko_tickerkat` CHANGE `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT;";
+//$sql = "ALTER TABLE #__eiko_tickerkat CHANGE id id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT;";
 //	$db = JFactory::getDbo();
 //	$db->setQuery($sql); 
 //	try {
@@ -328,7 +328,7 @@ $sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
 
 foreach($eiko_tickerkat as $data){
 
-    $sql = 'INSERT INTO `#__eiko_tickerkat` (id, asset_id, title, image, beschreibung, ordering, state,created_by,checked_out,checked_out_time)
+    $sql = 'INSERT INTO #__eiko_tickerkat (id, asset_id, title, image, beschreibung, ordering, state,created_by,checked_out,checked_out_time)
     VALUES ("'.$data["id"].'", "'.$data["asset_id"].'", "'.$data["title"].'", "'.$data["image"].'", "'.$data["beschreibung"].'", "'.$data["ordering"].'", "'.$data["state"].'", "'.$data["created_by"].'","'.$data["checked_out"].'","'.$data["checked_out_time"].'")';
 	//echo $sql.'<br/>';
 	$db = JFactory::getDbo();
@@ -346,7 +346,7 @@ foreach($eiko_tickerkat as $data){
 }
 
 	$db = JFactory::getDbo();
-	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `tickerkat` `tickerkat` INT(10) NOT NULL;";
+	$query = "ALTER TABLE #__eiko_einsatzberichte CHANGE tickerkat tickerkat INT(10) NOT NULL;";
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -356,14 +356,14 @@ foreach($eiko_tickerkat as $data){
 // ------------------------------------------------------------------------------------------------------------
 	$check_update = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('select `auswahl_orga` from `#__eiko_einsatzberichte`'); 
+	$db->setQuery('select auswahl_orga from #__eiko_einsatzberichte'); 
 	try {
 	$result = $db->loadObjectList();$check_update = '1';
 	} catch (Exception $e) {$check_update = '0'; }
 	
 	if (!$check_update) :
 	$db = JFactory::getDbo();
-	$query = "ALTER TABLE `#__eiko_einsatzberichte` ADD `auswahl_orga` TEXT NOT NULL AFTER `auswahlorga`;";
+	$query = "ALTER TABLE #__eiko_einsatzberichte ADD auswahl_orga TEXT NOT NULL AFTER auswahlorga;";
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -383,7 +383,7 @@ foreach($eiko_tickerkat as $data){
 						$query	= $db->getQuery(true);
 						$query
 							->select('id')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('name = "' .$data.'"');
 						$db->setQuery($query);
 						$orga_id = $db->loadResult();
@@ -427,7 +427,7 @@ $db->setQuery($query);
 						$query	= $db->getQuery(true);
 						$query
 							->select('id')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('name = "' .$result->department.'"');
 						$db->setQuery($query);
 						$orga_id = $db->loadResult();
@@ -470,7 +470,7 @@ $db->setQuery($query);
 						$query	= $db->getQuery(true);
 						$query
 							->select('id')
-							->from('`#__eiko_einsatzarten`')
+							->from('#__eiko_einsatzarten')
 							->where('title = "' .$result->data1.'"');
 						$db->setQuery($query);
 						$data_id = $db->loadResult();
@@ -495,7 +495,7 @@ $db->setQuery($query);
 	
 	if (!$bug_data) :
 	$db = JFactory::getDbo();
-	$query = "ALTER TABLE `#__eiko_einsatzberichte` CHANGE `data1` `data1` INT(10) NOT NULL;";
+	$query = "ALTER TABLE #__eiko_einsatzberichte CHANGE data1 data1 INT(10) NOT NULL;";
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -511,7 +511,7 @@ endif;
 // ------------------ ADD gmap_icon zu Organisationen --------------------------------------------------
 	$check_gmap_icon = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('select gmap_icon_orga from `#__eiko_organisationen`');
+	$db->setQuery('select gmap_icon_orga from #__eiko_organisationen');
 	try {
 	$check_gmap_icon = $db->execute();$check_gmap_icon='1';
 	} catch (Exception $e) {
@@ -521,7 +521,7 @@ endif;
 if (!$check_gmap_icon) {
 	
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_organisationen` ADD `gmap_icon_orga` VARCHAR( 255 ) NOT NULL AFTER `name`';	
+    $query = 'ALTER TABLE #__eiko_organisationen ADD gmap_icon_orga VARCHAR( 255 ) NOT NULL AFTER name';	
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -535,7 +535,7 @@ else {
 // ------------------ ADD ausruestung zu Einsatzberichte --------------------------------------------------
 	$check_update = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('select ausruestung from `#__eiko_einsatzberichte`');
+	$db->setQuery('select ausruestung from #__eiko_einsatzberichte');
 	try {
 	$check_update = $db->execute();$check_update='1';
 	} catch (Exception $e) {$check_update='0';}
@@ -543,7 +543,7 @@ else {
 	if (!$check_update) :
 	
 	$db = JFactory::getDbo();
-	$query = "ALTER TABLE `#__eiko_einsatzberichte` ADD `ausruestung` TEXT NOT NULL AFTER `vehicles`;";
+	$query = "ALTER TABLE #__eiko_einsatzberichte ADD ausruestung TEXT NOT NULL AFTER vehicles;";
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -555,7 +555,7 @@ else {
 // ------------------ ADD ausruestung zu Fahrzeuge --------------------------------------------------
 	$check_update = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('select ausruestung from `#__eiko_fahrzeuge`');
+	$db->setQuery('select ausruestung from #__eiko_fahrzeuge');
 	try {
 	$check_update = $db->execute();$check_update='1';
 	} catch (Exception $e) {$check_update='0';}
@@ -563,7 +563,7 @@ else {
 	if (!$check_update) :
 	
 	$db = JFactory::getDbo();
-	$query = "ALTER TABLE `#__eiko_fahrzeuge` ADD `ausruestung` TEXT NOT NULL AFTER `department`;";
+	$query = "ALTER TABLE #__eiko_fahrzeuge ADD ausruestung TEXT NOT NULL AFTER department;";
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();
@@ -575,7 +575,7 @@ else {
 // ------------------ Update von Version 3.06 auf 3.07  ---------------------------------------------------
 	$check_ausruestung = '';
 	$db = JFactory::getDbo();
-	$db->setQuery('select * from `#__eiko_ausruestung` where id="0"');
+	$db->setQuery('select * from #__eiko_ausruestung where id="0"');
 	try {
 	$check_ausruestung = $db->execute();
 	} catch (Exception $e) {$check_ausruestung=true;}
@@ -584,18 +584,18 @@ else {
 if ($check_ausruestung) :
 
 $e ='';
-$sql="CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (
-`id` int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
-  `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `beschreibung` text NOT NULL,
-  `ordering` int(11) NOT NULL,
-  `state` tinyint(1) NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `checked_out` int(11) NOT NULL,
-  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
+$sql="CREATE TABLE IF NOT EXISTS #__eiko_ausruestung (
+id int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
+  asset_id int(10) unsigned NOT NULL DEFAULT '0',
+  name varchar(255) NOT NULL,
+  image varchar(255) NOT NULL,
+  beschreibung text NOT NULL,
+  ordering int(11) NOT NULL,
+  state tinyint(1) NOT NULL,
+  created_by int(11) NOT NULL,
+  checked_out int(11) NOT NULL,
+  checked_out_time datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 	$db = JFactory::getDbo();
 	$db->setQuery($sql); 
@@ -650,7 +650,7 @@ endif;
 
 	// Behebt Fehler in der Sortierung nach Counter-Anzahl
 	$db = JFactory::getDbo();
-    $query = 'ALTER TABLE `#__eiko_einsatzberichte` CHANGE `counter` `counter` INT( 20 ) NOT NULL';	
+    $query = 'ALTER TABLE #__eiko_einsatzberichte CHANGE counter counter INT( 20 ) NOT NULL';	
 	$db->setQuery($query); 
 	try {
 	$result = $db->execute();

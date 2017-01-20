@@ -11,7 +11,7 @@
             label="COM_EINSATZKOMPONENTE_FIELDSET_ITEM_ID_SELECT_LABEL">
             <field
                 name="item_id"
-                query="SELECT `name`,`id` FROM #__eiko_ausruestung ORDER BY `id`"
+                query="SELECT name,id FROM #__eiko_ausruestung ORDER BY id"
                 type="sql"
                 key_field="id" 
                 value_field="name"

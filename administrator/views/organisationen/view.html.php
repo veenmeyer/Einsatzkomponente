@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
  
 // No direct access
@@ -37,10 +37,7 @@ class EinsatzkomponenteViewOrganisationen extends JViewLegacy
         
 		$this->addToolbar();
         
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         $this->sidebar = JHtmlSidebar::render();
-		endif;
 
 		parent::display($tpl);
 	}
@@ -98,8 +95,6 @@ class EinsatzkomponenteViewOrganisationen extends JViewLegacy
 			JToolBarHelper::preferences('com_einsatzkomponente');
 		}
         
-		$version = new JVersion;
-        if ($version->isCompatible('3.0')) :
         //Set sidebar action - New in 3.0
 		JHtmlSidebar::setAction('index.php?option=com_einsatzkomponente&view=organisationen');
 		$options = array ();
@@ -111,7 +106,6 @@ class EinsatzkomponenteViewOrganisationen extends JViewLegacy
 			'filter_published',
 			JHtml::_('select.options', $options, "value", "text", $this->state->get('filter.state'), true)
 		);
-		endif;
 		
         $this->extra_sidebar = '';
         
