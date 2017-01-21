@@ -144,7 +144,7 @@ if (!empty($this->extra_sidebar)) {
 				<?php //echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DEPARTMENT', 'a.department', $listDirn, $listOrder); ?>
 				</th>
 -->				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  '<small>Counter</small>', 'a.counter', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  '<small>COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ZUGRIFFE</small>', 'a.counter', $listDirn, $listOrder); ?>
 				</th>
                 
             	<?php if ($params->get('gmap_action','0')) : ?>

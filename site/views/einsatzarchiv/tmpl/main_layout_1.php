@@ -65,7 +65,7 @@ defined('_JEXEC') or die;
 				
 				<?php if ($this->params->get('display_home_presse','0') ) : ?>
 				<th class='left'>
-				<?php echo 'Pressebericht'; ?>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_PRESSEBERICHT'); ?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php endif;?>
@@ -76,7 +76,7 @@ defined('_JEXEC') or die;
 				</th> -->
 				<?php if ($this->params->get('display_home_counter','1')) : ?>
 				<th class='left mobile_hide_480 '>
-				<?php echo JHtml::_('grid.sort',  'Zugriffe', 'a.counter', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ZUGRIFFE', 'a.counter', $listDirn, $listOrder); ?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php endif;?>
@@ -295,7 +295,7 @@ defined('_JEXEC') or die;
 				<?php if ($this->params->get('display_home_presse','0')) : ?>
 				<td class="mobile_hide_480 ">
 					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
-					<?php echo '+Presselinks'; ?>
+					<?php echo ''.JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_PRESSEBERICHT').''; ?>
 					<?php endif;?>
 				</td>
 				<?php endif; ?>
