@@ -73,13 +73,12 @@ document.onkeypress = stopRKey;
 </script> ';
 
         
-        if($this->_layout == 'edit') {
-            
-            $authorised = $user->authorise('core.edit', 'com_einsatzkomponente');
-            if ($authorised !== true) {
-                throw new Exception(JText::_('ALERTNOAUTHOR'));
-            }
-        }
+   //     if($this->_layout == 'edit') {
+    //         $authorised = $user->authorise('core.edit', 'com_einsatzkomponente');
+    //         if ($authorised !== true) {
+   //            throw new Exception(JText::_('ALERTNOAUTHOR'));
+   //         }
+  //     }
         
  
         $this->_prepareDocument();

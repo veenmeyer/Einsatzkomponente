@@ -196,13 +196,13 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 			
             //Check the user can edit this item
             $authorised = $user->authorise('core.edit', 'com_einsatzkomponente') || $authorised = $user->authorise('core.edit.own', 'com_einsatzkomponente.einsatzbericht');
-            if($user->authorise('core.edit.state', 'com_einsatzkomponente') !== true && $state == 1){ //The user cannot edit the state of the item.
+            if($user->authorise('core.edit.state', 'com_einsatzkomponente') !== true){ //The user cannot edit the state of the item.
                 $data['state'] = 0;
             }
         } else {
             //Check the user can create new items in this section
             $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
-            if($user->authorise('core.edit.state', 'com_einsatzkomponente') !== true && $state == 1){ //The user cannot edit the state of the item.
+            if($user->authorise('core.edit.state', 'com_einsatzkomponente') !== true){ //The user cannot edit the state of the item.
                 $data['state'] = 0;
             }
         }
