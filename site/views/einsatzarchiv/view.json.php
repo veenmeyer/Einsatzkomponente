@@ -56,17 +56,35 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		{
 					
 			//$item->auswahl_orga = str_replace(",", " +++ ", $this->auswahl_orga);
+			
+			if ($item->desc) :
 			$item->desc = strip_tags( $item->desc);
 			$item->desc = (strlen($item->desc) > $this->params->get('rss_chars','1000')) ? substr($item->desc,0,strrpos(substr($item->desc,0,$this->params->get('rss_chars','1000')+1),' ')).' ...' : $item->desc;
+			endif;
+			
+			if ($item->einsatznummer) :
 			$item->einsatznummer = EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id);
+			endif;
+			
 			// url link to article
 			// & used instead of &amp; as this is converted by feed creator
 			$link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht'.$this->layout_detail_link.'&id='.$item->id);
 
-			//$auswahl_orga=  implode(',',$this->auswahl_orga); 
+			if ($item->auswahl_orga) :
 			$item->auswahl_orga = str_replace(",", " +++ ", $item->auswahl_orga);
+			endif;
 
+			if ($item->date1) :
+		    $item->date1 = date('d.m.Y H:i', $item->date1);
+			endif;
 			
+/* 			if ($item->date2) :
+		    $item->date2 = date('d.m.Y H:i', $item->date2);
+			endif;
+			if ($item->date3) :
+		    $item->date3 = date('d.m.Y H:i', $item->date3);
+			endif;
+ */
 		}
 
 		// Set up the data to be sent in the response.

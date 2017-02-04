@@ -639,6 +639,33 @@
 
 		</fieldset>
 
+<!--Menüpfade-->
+
+<fieldset name="menüpfad" label="COM_EINSATZKOMPONENTE_OPTION_MENU_PATH" description="COM_EINSATZKOMPONENTE_OPTION_MENU_PATH_DESC">
+
+	<field 
+		name="homelink" 
+		type="menuitem" 
+		default="" 
+		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MENUE_EINTRAG" 
+		description="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MENUE_EINTRAG_DESC" 
+	/>
+	<field 
+		name="orgalink" 
+		type="menuitem" 
+		default="" 
+		label="COM_EINSATZKOMPONENTE_OPTION_ORGA_MENUE_EINTRAG" 
+		description="COM_EINSATZKOMPONENTE_OPTION_ORGA_MENUE_EINTRAG_DESC" 
+	/>
+	<field 
+		name="vehiclelink" 
+		type="menuitem" 
+		default="" 
+		label="COM_EINSATZKOMPONENTE_OPTION_VEHICLE_MENUE_EINTRAG" 
+		description="COM_EINSATZKOMPONENTE_OPTION_VEHICLE_MENUE_EINTRAG_DESC" 
+	/>
+
+</fieldset>
 
 <!--Einsatzübersicht-->
 
@@ -651,13 +678,6 @@
 		description="Die Funktionen sind teilweise nur in bestimmten Layouts vorhanden, bitte beachten Sie die Tooltips."
 		/>	
 		
-	<field 
-		name="homelink" 
-		type="menuitem" 
-		default="" 
-		label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MENUE_EINTRAG" 
-		description="" 
-	/>
 		
 	
 	  
