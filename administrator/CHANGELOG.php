@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
+# Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze
 # Datum bei der Json-Ausgabe korrigiert
 # Organisations-und Einsatzlinks aus Fahrzeugübersicht
 # Fahrzeug-und Einsatzlinks aus Organisationübersicht

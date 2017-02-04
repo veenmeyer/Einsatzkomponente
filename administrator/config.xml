@@ -804,14 +804,16 @@
 			name="display_home_number"
 			type="radio"
 			class="btn-group"
-			default="1"
+			default="2"
 			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER"
 			description="Funktion nur beim Standard-Layout">
 			
 			<option
 				value="0">JNO</option>
 			<option
-				value="1">JYES</option>
+				value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_YES_OLD</option>
+			<option
+				value="2">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MISSION_NUMBER_YES_NEW</option>
 	  </field>
 	  
        <field name="display_home_number_excl_einsatzart" type="sql"

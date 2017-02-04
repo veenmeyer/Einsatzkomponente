@@ -188,14 +188,22 @@ if ($this->params->get('display_home_pagination')) :
            <?php else:?>
 		   <td style="text-align:center;color:#000000;font-weight:bold;font-size:larger;" >
            <?php endif;?>
-           <?php if ($this->params->get('display_home_number','1')) : ?>
+		   
+           <?php if ($this->params->get('display_home_number','2') == '1') : ?>
            <?php if ($hide) :?>
            <?php echo $i.' - '.($i + $hide);$hide =0;?>
            <?php else:?>
            <?php echo $i;?>
            <?php endif;?>
            <?php endif;?>
-           <?php if ($this->params->get('display_home_alertimage_num','0')) : ?>
+		   
+           <?php if ($this->params->get('display_home_number','2') == '2') : 
+				$item->date_11 		= strtotime($item->date1);
+				$item->date1_year 	= date('Y', $item->date_11);
+				echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date_11,$item->data1).' / '.$item->date1_year.'</span>';
+				endif;?>
+
+		<?php if ($this->params->get('display_home_alertimage_num','0')) : ?>
            <br/><img class="img-rounded" style="width:30px; height:30px;" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />
            <?php endif;?>
             </td>
