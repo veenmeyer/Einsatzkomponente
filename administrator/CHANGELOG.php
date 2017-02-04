@@ -14,7 +14,9 @@
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
 # Datum bei der Json-Ausgabe korrigiert
-# Organisation-und Fahrzeuglink aus Einsatzdetailansicht
+# Organisations-und Einsatzlinks aus Fahrzeugübersicht
+# Fahrzeug-und Einsatzlinks aus Organisationübersicht
+# Organisation-und Fahrzeuglinks aus Einsatzdetailansicht
 + Option Menüpfade hinterlegen
 + Bootstrap Option: Joomla oder Eiko
 + Auswahl Fahrzeuge (alle) pro Orga in EinsatzEdit

@@ -115,7 +115,7 @@ JHtml::_('formbehavior.chosen', 'select');
 					$total = $database->loadObjectList();
 					?>
 					<?php if ($total) : ?>
-					<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+					<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
 					<?php else: ?>
 					<td><?php echo '-'; ?></td>
 					<?php endif;?>

@@ -56,7 +56,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 				<li>
 		<?php if ($this->params->get('display_orga_fhz_links','1')) :?>
 					<?php if (!$value->link) :?>
-					<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
+					<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
 					<?php else :?>
 					<a title ="<?php echo $value->detail2;?>" target="_blank" href="<?php echo $value->link; ?>"><?php echo $value->name; ?></a>
 					<?php endif; ?>		

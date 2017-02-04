@@ -96,7 +96,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 			?>
 			<?php if ($total) : ?>
 			<li>Letzter Eintrag:
-			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
+			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
 			<?php endif; ?>
 
 			
@@ -128,7 +128,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 				
 		<?php if ($this->params->get('display_orga_fhz_links','1')) :?>
 					<?php if (!$value->link) :?>
-					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>">
+					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $value->id); ?>">
 					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="margin-right:10px;width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $value->image;?>" title="<?php echo $value->name;?>"/>
 					</a>
 					<?php else :?>

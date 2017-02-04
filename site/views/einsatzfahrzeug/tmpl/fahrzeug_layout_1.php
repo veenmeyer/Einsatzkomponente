@@ -142,7 +142,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 						?>
 						<?php if ($total) : ?>
 						<br/><li><?php echo JText::_('COM_EINSATZKOMPONENTE_LETZTER_EINTRAG');?> : 
-						<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
+						<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
 						<?php endif; ?>
 					<?php endif;?>
 <!-- Ausrüstung anzeigen -->  
@@ -196,10 +196,10 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 	
 	
 	<?php if($canEdit): ?>
-		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=fahrzeugform.&id='.$this->item->id); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_EDIT"); ?></a>
+		<a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeugform.&id='.$this->item->id); ?>"><?php echo JText::_("COM_EINSATZKOMPONENTE_EDIT"); ?></a>
 	<?php endif; ?>
 								<?php //if(JFactory::getUser()->authorise('core.delete','com_einsatzkomponente.einsatzfahrzeug.'.$this->item->id)):?>
-									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=fahrzeug.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("JDELETE"); ?></a> -->
+									<!-- <a class="btn" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeug.remove&id=' . $this->item->id, false, 2); ?>"><?php echo JText::_("JDELETE"); ?></a> -->
 								<?php //endif; ?>
 	<?php
 else:

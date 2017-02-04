@@ -94,7 +94,7 @@ defined('_JEXEC') or die;
 	<?php if ($total) : ?>
 	<tr class="fahrzeug_box_3">
 	<td><strong>Letzter Eintrag:</strong></td>
-	<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+	<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
 	</tr> 
 	<?php endif; ?>
 <?php endif; ?>
