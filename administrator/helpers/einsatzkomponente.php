@@ -328,7 +328,7 @@ class EinsatzkomponenteHelper
 						if ($vehicle->state == '2'): $vehicle->name = $vehicle->name.' (a.D.)';endif;
 						if ($params->get('display_detail_fhz_links','1')) :
 						if (!$vehicle->link) : 
-						$sonstige .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $vehicle->id).'" target="_self"><li>'.$vehicle->name.'</li></a>';
+						$sonstige .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$params->get('vehiclelink','').'&id=' . $vehicle->id).'" target="_self"><li>'.$vehicle->name.'</li></a>';
 						else:
 						$sonstige .= '<a href="'.$vehicle->link.'" target="_self"><li>'.$vehicle->name.'</li></a>';
 						endif;
@@ -363,7 +363,7 @@ class EinsatzkomponenteHelper
 						if ($vehicle->state == '2'): $vehicle->name = $vehicle->name.' (a.D.)';endif;
 						if ($params->get('display_detail_fhz_links','1')) :
 						if (!$vehicle->link) : 
-						$vehicles_image .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $vehicle->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
+						$vehicles_image .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$params->get('vehiclelink','').'&id=' . $vehicle->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
 						else:
 						$vehicles_image .= '<a href="'.$vehicle->link.'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
 						endif;

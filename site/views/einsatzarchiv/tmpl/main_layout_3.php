@@ -180,10 +180,21 @@ defined('_JEXEC') or die;
 						</br>	
 						<?php echo '<span class="hasTooltip" title="Dieser Bericht wurde bereits '.$item->counter.' mal gelesen." ><i class="icon-eye" ></i> '.JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE').': '.$item->counter.'</span>'; ?>
 					<?php endif; ?>
-
-				
+</br>
+					<!-- Button Kurzinfo --> 
+					<?php if ($this->params->get('display_home_info','1')) : ?>
+					<input type="button" class="btn btn-info" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_KURZINFO');?>"></input>
+					<script type="text/javascript">
+					jQuery.toggle<?php echo $item->id;?> = function(query)
+						{
+						jQuery(query).slideToggle("5000");
+						jQuery("#tr<?php echo $item->id;?>").fadeToggle("fast");
+						}   
+					</script>
+					<?php endif;?>
+					
+				<!-- Button Detaillink --> 
 				<?php if ($this->params->get('display_home_links','1')) : ?>
-				</br></br>
 				<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>" type="button" class="btn btn-primary"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS'); ?></a>	
 				<?php endif;?>
 			</td>
@@ -264,7 +275,57 @@ defined('_JEXEC') or die;
 
         </tr>
 		
-		
+        <!-- Zusatzinformation Kurzinfo -->
+		<?php if ($this->params->get('display_home_info','1')) : ?>
+			<?php		
+					$data = array();
+					foreach(explode(',',$item->auswahl_orga) as $value):
+						if($value){
+							$data[] = '<!-- <span class="label label-info"> --!>'.$value.'<!-- </span>--!>'; 
+						}
+					endforeach;
+					$auswahl_orga=  implode(' +++ ',$data); ?> 
+					
+            <tr id="tr<?php echo $item->id;?>" class="eiko_tr_zusatz_main_1" style=" display:none;" >
+            
+           <?php if ($this->params->get('display_home_marker','1')) : ?>
+           <?php $rgba = hex2rgba($item->marker,0.7);?>
+            <style>
+				.td<?php echo $item->id;?> {
+				background: -moz-linear-gradient(top,  <?php echo $rgba;?> 0%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,<?php echo $rgba;?>), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<?php echo $item->marker;?>', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+				}
+			</style>
+		   <td class="td<?php echo $item->id;?>" >
+           <?php else:?>
+		   <td>
+           <?php endif;?>
+            </td>
+            <td colspan="<?php echo $eiko_col-1; ?>" class="eiko_td_zusatz_main_1">
+			<div id ="div<?php echo $item->id;?>" style="display:none;">
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNGSZEIT');?> :</h3><?php echo date('d.m.Y', $item->date1);?> um <?php echo date('H:i', $item->date1);?> Uhr
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?> :</h3><?php echo $auswahl_orga;?><br/>
+		   <?php if ($item->desc) : ?>
+			<?php jimport('joomla.html.content'); ?>  
+			<?php $Desc = JHTML::_('content.prepare', $item->desc); ?>
+			<h3><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?> :</h3><?php echo $Desc;?>
+            <?php endif;?>
+            <br /><input type="button" class="btn btn-info" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_INFO_SCHLIESSEN');?>"></input>
+					<?php if ($this->params->get('display_home_links','1')) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>" type="button" class="btn btn-primary"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS'); ?></a>	
+					<?php endif;?>
+           </div> 
+           </td>
+           </tr>
+	<?php endif;?>
+     <!-- Zusatzinformation Kurzinfo ENDE -->
+	 
+	 
     <?php } ?>
     </tbody>
 	
@@ -336,4 +397,37 @@ defined('_JEXEC') or die;
     }
 </script>
 
+    <?php function hex2rgba($color, $opacity = false) {  // Farbe von HEX zu RGBA umwandeln 
+
+	$default = 'rgb(0,0,0)';
+	//Return default if no color provided
+	if(empty($color))
+          return $default; 
+	//Sanitize $color if "#" is provided 
+        if ($color[0] == '#' ) {
+        	$color = substr( $color, 1 );
+        }
+        //Check if color has 6 or 3 characters and get values
+        if (strlen($color) == 6) {
+                $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+        } elseif ( strlen( $color ) == 3 ) {
+                $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+        } else {
+                return $default;
+        }
+        //Convert hexadec to rgb
+        $rgb =  array_map('hexdec', $hex);
+        //Check if opacity is set(rgba or rgb)
+        if($opacity){
+        	if(abs($opacity) > 1)
+        		$opacity = 1.0;
+        	$output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+        } else {
+        	$output = 'rgb('.implode(",",$rgb).')';
+        }
+        //Return rgb(a) color string
+        return $output; 
+		
+}
+?> 
 

@@ -67,7 +67,7 @@ class EinsatzkomponenteController extends JControllerLegacy
 <?php	// Catch Sites 
 
 		$j_version = new JVersion;
-		$response = @file("http://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$j_version->getShortVersion()."&eikoversion=".$version); // Request absetzen
+		$response = @file("https://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$j_version->getShortVersion()."&eikoversion=".$version); // Request absetzen
 
 ?>
 

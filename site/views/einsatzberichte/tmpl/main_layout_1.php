@@ -359,7 +359,7 @@ if ($this->params->get('display_home_pagination')) :
 		   <td>
            <?php endif;?>
             </td>
-            <td colspan="<?php echo $col;?>" class=""eiko_td_zusatz_main_1>
+            <td colspan="<?php echo $col;?>" class="eiko_td_zusatz_main_1">
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
             <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNGSZEIT');?> :</h3><?php echo date('d.m.Y', $curTime);?> um <?php echo date('H:i', $curTime);?> Uhr
             <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?> :</h3><?php echo $auswahl_orga;?><br/>

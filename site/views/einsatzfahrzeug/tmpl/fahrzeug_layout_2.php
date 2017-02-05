@@ -111,7 +111,11 @@ defined('_JEXEC') or die;
 	<table class="fahrzeug_box_7"><tr><td><?php echo $Desc; ?></td></tr></table>
 <?php endif; ?>
 
-
+	<table class="fahrzeug_box_7">
+	<tr><td>
+		<input type="button" class="btn eiko_back_button" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_ZURUECK');?>" onClick="history.back();">
+	</td></tr>
+	</table>
     
 <?php else: ?>
     Could not load the item
