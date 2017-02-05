@@ -54,7 +54,7 @@
 			 
        <field name="image" type="media"
             label="Titelbild"
-            description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
+            description="Weitere Bilder können Sie über den Mehrfachbild-Uploader hinzufügen" 
             filter="raw"
 		    preview="true"
 			id="einsatzbericht_image_klein"
@@ -66,7 +66,16 @@
             filter="safehtml"
             size="60"
             maxlength="100" /> 
-	  <field
+			
+       <field name="watermark_image" type="media"
+			label="COM_EINSATZKOMPONENTE_OPTION_WASSERZEICHEN_WAEHLEN" 
+			description="Sie können Wasserzeichen hinzufügen. Die Datei muss zwingend eine PNG-Datei sein !!" 
+            filter="raw"
+		    preview="true"
+			default ="images/com_einsatzkomponente/watermark/watermark.png"
+            directory="com_einsatzkomponente/watermark" />   
+
+	<field
 			name="gmap"
 			type="radio"
 			class="btn-group"

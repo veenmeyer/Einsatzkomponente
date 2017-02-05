@@ -10,6 +10,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
+
+
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
 
@@ -43,9 +45,12 @@ while($count < $count_data)
 					
 					
 					
-						
+					
+					
 		$rep_id = $cid;   // Einsatz_ID holen für Zuordnung der Bilder in der Datenbank
+		if ($watermark_image == '') :
 		$watermark_image = JFactory::getApplication()->input->getVar('watermark_image', $params->get('watermark_image'));
+		endif;
 		
 		// Check ob Bilder in einen Unterordner (OrdnerName = ID-Nr.) abgespeichert werden sollen :
 		if ($params->get('new_dir', '1')) :

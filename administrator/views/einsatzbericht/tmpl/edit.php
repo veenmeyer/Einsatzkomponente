@@ -242,11 +242,13 @@ displayVals();
 
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Einsatzbilder :</h1>
+			
+			
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
-			
+			<hr>
 			<div class="control-group" style="">
 			Bilderupload für Bildergalerie:
 			<div id="text">
@@ -259,7 +261,15 @@ displayVals();
         <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
 		<!--http://www.fyneworks.com/jquery/multifile/-->
      
-			</div></div>
+			</div>
+			
+			<hr>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('watermark_image'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('watermark_image'); ?></div>
+			</div>
+			
+	</div>
 			
             <!--Slider für Bildergalerie-->
             

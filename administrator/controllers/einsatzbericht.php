@@ -37,7 +37,6 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
  
 
     	function save($key = NULL, $urlVar = NULL) {
-
 		// Check for request forgeries
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
@@ -47,8 +46,38 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 
 		if (parent::save()) :
+		
+		// Wasserzeichen speichern
+		$input = JFactory::getApplication()->input;
+		// Get the form data
+		$formData = new JInput($input->get('jform', '', 'array'));
+		// Get any data being able to use default values
+		$watermark_image = $formData->getString('watermark_image');
+
+		$params = JComponentHelper::getParams('com_einsatzkomponente');
+		// Set new value of param(s)
+		$params->set('watermark_image', $watermark_image);
+
+		// Save the parameters
+		$componentid = JComponentHelper::getComponent('com_einsatzkomponente')->id;
+		$table = JTable::getInstance('extension');
+		$table->load($componentid);
+		$table->bind(array('params' => $params->toString()));
+
+		// check for error
+		if (!$table->check()) {
+			echo $table->getError();
+			return false;
+		}
+		// Save to database
+		if (!$table->store()) {
+			echo $table->getError();
+			return false;
+		}
+		// Wasserzeichen speichern  ENDE
+		
+		// Bilder upload
 		$files        = JFactory::getApplication()->input->files->get('data', '', 'array');
-		//print_r ($files); exit;
 		
 		if(!$files['0']['name'] =='') : 
 		if (!$cid) :

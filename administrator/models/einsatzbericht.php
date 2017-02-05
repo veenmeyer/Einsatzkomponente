@@ -92,7 +92,9 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 			endforeach;
 			$data->ausruestung = implode(',',$array);
 		}
-
+		
+			$params = JComponentHelper::getParams('com_einsatzkomponente');
+			$data->watermark_image = 	$params->get('watermark_image','');
 		return $data;
 	}
 	/**
