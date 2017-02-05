@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
++ Bild-Kommentar in Bild-Info geändert
 + Kurzinfo in Layouts des Einsatzarchives
 # Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze
 # Datum bei der Json-Ausgabe korrigiert

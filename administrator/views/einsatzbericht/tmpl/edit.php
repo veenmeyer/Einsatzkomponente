@@ -242,7 +242,7 @@ displayVals();
 
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Einsatzbilder :</h1>
-			<div class="control-group" style="height:100px;">
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
@@ -269,6 +269,10 @@ displayVals();
         <table>
         
 			<?php 
+			$n = false;
+			for ($i = 0;$i < count($rImages);++$i) {
+			if (@$rImages[$i]->comment) : $n = true; endif;
+			}
 			for ($i = 0;$i < count($rImages);++$i) {
 			$fileName = '../'.$rImages[$i]->thumb;
 			?>   
@@ -279,7 +283,11 @@ displayVals();
 			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
             </a>
             <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
-            <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
+			<?php if ($rImages[$i]->comment) : ?>
+			<br/><span title = "<?php echo $rImages[$i]->comment;?>" style="color:#ff0000;"><small>Bild-Info</small></span>
+			 <?php else: ?>
+			<?php if ($n == true) : echo '<br/><small>keine Bild-Info</small>';endif;?>
+			 <?php endif; ?>
             </div>
             </li>
 			<?php 	} ?>

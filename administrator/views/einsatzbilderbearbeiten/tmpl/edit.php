@@ -41,11 +41,11 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				<div class="control-label"><?php echo $this->form->getLabel('report_id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('report_id'); ?></div>
 			</div>
-			<div class="control-group"  style="height:200px;">
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
-			<div class="control-group"  style="height:100px;">
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('thumb'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('thumb'); ?></div>
 			</div>
