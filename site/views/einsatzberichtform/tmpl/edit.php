@@ -244,6 +244,11 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
 			
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('watermark_image'); ?></div>
+				<br/><div class="controls"><?php echo $this->form->getInput('watermark_image'); ?></div>
+			</div>
+			
 			<?php if ($params->get('eiko')) : ?>
 			<div class="control-group" style="">
 			<?php echo JText::_('COM_EINSATZKOMPONENTE_BILDERUPLOAD_BILDERGALERIE');?>:

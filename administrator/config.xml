@@ -125,7 +125,7 @@
 		type="note" 
 		label="COM_EINSATZKOMPONENTE_OPTION_EINSTELLUNG_WASSERZEICHENFUNKTION" 
 		class="alert alert-info" 
-		description="Diese Funktion ermöglicht die automatische Integration eines Wasserzeichens. Sie können auch eigene Wasserzeichen hinzufügen, einfach eine PNG-Datei in den folgenden Ordner hochladen : ../administrator/components/com_einsatzkomponente/assets/images/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!"
+		description="Diese Funktion ermöglicht die automatische Integration eines Wasserzeichens. Sie können auch eigene Wasserzeichen hinzufügen, einfach eine PNG-Datei in den folgenden Ordner hochladen : ../images/com_einsatzkomponente/watermark/    Die Datei muss zwingend eine PNG-Datei sein !!"
 		/>	
 			<field
 			name="watermark_show"

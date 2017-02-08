@@ -23,7 +23,7 @@
 + Option Menüpfade hinterlegen
 + Bootstrap Option: Joomla oder Eiko
 + Auswahl Fahrzeuge (alle) pro Orga in EinsatzEdit
-+ Wasserzeichen kann im Einsatzbericht-EDIT gesetzt werden (Backend)
++ Wasserzeichen kann im Einsatzbericht-EDIT gesetzt werden
 # Wasserzeichen-Position korrigiert
 # Wasserzeichen-Pfad geändert
 # Code für JED-Extensions-Eintrag bereinigt
