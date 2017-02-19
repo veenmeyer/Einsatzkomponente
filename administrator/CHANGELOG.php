@@ -13,6 +13,8 @@
 
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
++ Mehrfachauswahl Organisation im Menüfilter (Einsatzarchiv)
+# Joomla-Artikel erstellen
 + Bild-Kommentar in Bild-Info geändert
 + Kurzinfo in Layouts des Einsatzarchives
 # Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze

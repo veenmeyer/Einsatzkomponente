@@ -50,7 +50,7 @@ else:  	$limitstart = '0';
 		$this->setState('list.start', $limitstart);
 endif;
 
-echo 'limit:'.$limit.'<br/>limitstart:'.$limitstart;
+//echo 'limit:'.$limit.'<br/>limitstart:'.$limitstart;
         if ($list = $app->getUserStateFromRequest($this->context . '.list', 'list', array(), 'array'))
         {
             foreach ($list as $name => $value)

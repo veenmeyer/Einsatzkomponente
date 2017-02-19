@@ -51,8 +51,9 @@
 		type="sql" 
 		class="inputbox" 
 		label = "Filter Organisation :"
-		query="SELECT '' AS id, '- alle anzeigen -' AS name UNION SELECT id, name FROM #__eiko_organisationen" 
+		query="SELECT id, name FROM #__eiko_organisationen" 
 		key_field="id" 
+		multiple = "multiple"
 		value_field="name"/>  
 <field
 		name="spacer1"

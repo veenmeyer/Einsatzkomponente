@@ -323,11 +323,27 @@ $query->where('a.state = 1');
 		}
 
 		//Filtering auswahlorga
-		$filter_auswahlorga = $this->state->get("filter.auswahl_orga");
-		if ($filter_auswahlorga) {
-			$query->where("FIND_IN_SET(" . $filter_auswahlorga. ",a.auswahl_orga)");
-		}
+			$filter_auswahlorga = $this->state->get("filter.auswahl_orga"); 
+//			if ($filter_auswahlorga) {
+//			$query->where("FIND_IN_SET(" . $filter_auswahlorga. ",a.auswahl_orga)");
+//		 }
 
+		// Filter Menüparameter auswahlorga
+			        $app = JFactory::getApplication();
+					$params = $app->getParams('com_einsatzkomponente');
+					$array = array();
+					if (count($filter_auswahlorga)>1) :
+					
+					$string = '';
+					foreach($filter_auswahlorga  as $value):
+					if (count($filter_auswahlorga)>1 AND $value) :
+					$string .= "FIND_IN_SET(" . $value. ",a.auswahl_orga) OR ";
+					endif;
+					endforeach;
+				$string = substr ( $string, 0, -3 );
+				$query->where($string);
+			endif;
+		 
 		//Filtering vehicles
 		$filter_vehicles = $this->state->get("filter.vehicles");
 		if ($filter_vehicles) {

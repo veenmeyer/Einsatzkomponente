@@ -5,8 +5,10 @@
  <field name="year" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_JAHR"
                                     query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_JAHR' AS title UNION SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" key_field="id" value_field="title"/> 
 
-<field name="auswahl_orga" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_ORGANISATION"
-                                    query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_ORGANISATION' AS name UNION SELECT id, name FROM #__eiko_organisationen" key_field="id" value_field="name"/> 
+<field name="auswahl_orga" type="sql" class="inputbox"  translate = "COM_EINSATZKOMPONENTE_ORGANISATION"
+                                    query="SELECT id, name FROM #__eiko_organisationen" key_field="id" 
+									multiple ="multiple" 
+									value_field="name"/> 
 									
  <field name="data1" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_EINSATZART"
                                     query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_EINSATZART' AS title UNION SELECT id, title FROM #__eiko_einsatzarten" key_field="id" value_field="title"/> 

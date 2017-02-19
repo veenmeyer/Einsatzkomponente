@@ -72,7 +72,17 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
                 </button>
             </div>
 		<?php endif; ?>
-            <?php if ($filters) : ?>
+		
+		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
+            <div class="btn-wrapper input-append">
+		<?php echo $filters['filter_auswahl_orga']->input; ?>
+                <button type="submit" class="btn hasTooltip" title="" data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATION'); ?>">
+                    <i class="icon-home"></i>
+                </button>
+            </div>
+		<?php endif; ?>
+
+		<?php if ($filters) : ?>
             <div class="btn-wrapper hidden-phone">
                 <button type="button" class="btn hasTooltip js-stools-btn-filter" title=""
                         data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_FILTER_AUSWAEHLEN'); ?>">
@@ -101,10 +111,6 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
 		<?php endif; ?>
 
-		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
-		<?php echo $filters['filter_auswahl_orga']->input; ?>
-		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
-		<?php endif; ?>
 		
 		<?php if ($params->get('show_filter_data1','1')) : ?>
 		<?php echo $filters['filter_data1']->input; ?>
