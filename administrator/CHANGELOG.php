@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
+# Erstellte Joomla-Artikel können jetzt geupdatet werden
 + Mehrfachauswahl Organisation im Menüfilter (Einsatzarchiv)
 # Joomla-Artikel erstellen
 + Bild-Kommentar in Bild-Info geändert

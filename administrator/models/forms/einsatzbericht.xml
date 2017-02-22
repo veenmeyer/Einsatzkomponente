@@ -261,11 +261,11 @@
              /> 
 		 
        <field name="article_id" 
-	   label = "Joomla-Artikel verlinken ?"
+	   label = "COM_EINSATZKOMPONENTE_ARTIKEL_JOOMLA_LINK"
        description="Bitte frei lassen, wenn kein Joomla-Artikel verlinkt werden soll." 
 	   default="0"
 	   type="sql" class="inputbox"
-            query="SELECT 0 AS id, 'Nein' AS title UNION SELECT id, title FROM #__content " 
+            query="SELECT 0 AS id, 'Nein' AS title UNION SELECT id, title FROM #__content ORDER BY id DESC" 
 			key_field="id" 
 			value_field="title"
              /> 

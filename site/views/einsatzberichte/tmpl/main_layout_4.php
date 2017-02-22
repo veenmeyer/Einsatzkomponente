@@ -53,7 +53,7 @@ defined('_JEXEC') or die;
 	//echo '<div style="text-align:center;margin-bottom:20px;"><img src="'.JURI::Root().'images/com_einsatzkomponente/images/years/home'.$year.'.png" title="Eins&auml;tze '.$year_text.'" /></div>';
 
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&list=1'); ?>" method="post" name="adminForm" id="adminForm">
 <?php
 	echo 'Jahr: ';
 

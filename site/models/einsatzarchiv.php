@@ -329,6 +329,7 @@ $query->where('a.state = 1');
 //		 }
 
 		// Filter Menüparameter auswahlorga
+			if ($filter_auswahlorga) {
 			        $app = JFactory::getApplication();
 					$params = $app->getParams('com_einsatzkomponente');
 					$array = array();
@@ -342,7 +343,10 @@ $query->where('a.state = 1');
 					endforeach;
 				$string = substr ( $string, 0, -3 );
 				$query->where($string);
-			endif;
+				else:
+				$query->where("FIND_IN_SET(" . $filter_auswahlorga['0']. ",a.auswahl_orga)");			
+				endif;
+			}
 		 
 		//Filtering vehicles
 		$filter_vehicles = $this->state->get("filter.vehicles");

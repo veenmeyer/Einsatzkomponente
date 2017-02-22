@@ -52,7 +52,12 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 		
 		$aktuelles_Datum = getdate(); 
+		$selectedYear = '';
+		if (!$app->input->getInt('list', 0)) : // Prüfen ob zurück aus Detailansicht
 		$selectedYear = $aktuelles_Datum["year"];
+		endif;
+		
+		$selectedEinsatzart = '';
 		//if (!$app->input->get(year)) :
 		//if ($this->params->get('anzeigejahr')) : $selectedYear = $this->params->get('anzeigejahr'); endif;
 		//endif;
@@ -64,11 +69,13 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy
 		$this->modulepos_1 = '<div class="mod_eiko1">'.EinsatzkomponenteHelper::module ('eiko1').'</div>'; 
 		$this->modulepos_2 = '<div class="mod_eiko2">'.EinsatzkomponenteHelper::module ('eiko2').'</div>'; 
 		
+if ($app->input->getInt('list', 0)) : // Prüfen ob zurück aus Detailansicht
 		$selectedYear = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedYear", 'year', $selectedYear );
 		$selectedEinsatzart = '';
 		$selectedEinsatzart = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedEinsatzart", 'selectedEinsatzart', '' );
 		$selectedOrga = '';
 		$selectedOrga = $app->getUserStateFromRequest( "com_einsatzkomponente.selectedOrga", 'selectedOrga', '0' );
+endif;		
 		//print_r ($selectedEinsatzart);
 		//endif;
 		if ($this->params->get('anzeigejahr')) : $selectedYear = $this->params->get('anzeigejahr'); endif;

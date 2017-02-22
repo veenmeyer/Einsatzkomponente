@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
 
-		$kat	= EinsatzkomponenteHelper::getTickerKat ($result[0]->tickerkat); 
+		//$kat	= EinsatzkomponenteHelper::getTickerKat ($result[0]->tickerkat); 
 		
 		$db = JFactory::getDbo();
 		$db->setQuery('SELECT MAX(asset_id) FROM #__content');
@@ -60,7 +60,7 @@ defined('_JEXEC') or die;
 		
    
 $data = array();
-$data['id']             = 0;
+$data['id']             = $result[0]->article_id;
 $data['title'] 			= $result[0]->summary;
 $data['alias'] 			= JFilterOutput::stringURLSafe($alias);
 $data['introtext'] 		= $intro;
@@ -118,22 +118,29 @@ $row->check();
 				return false;
 			}
 //print_r ($row);exit;
-			// Get the new item ID 
-			$newId = $row->id;
 
+		if (!$result[0]->article_id) {
+					// Get the new item ID 
+					$newId = $row->id;
+						 if ($params->get('article_frontpage','1')) :	
+						//Artikel als Haupteintrag-Eintrag markieren 
+						 $frontpage_query = "INSERT INTO #__content_frontpage SET content_id='".$newId."'";
+						 $db = JFactory::getDBO();
+						 $db->setQuery($frontpage_query);
+						 $db->query();
+						 endif;
+			}
+			else {
+				$newId = $result[0]->article_id;
+			}
+
+			
 		// Joomla-Artikel Id in Einsatzbericht eintragen 
 		$query = "UPDATE #__eiko_einsatzberichte SET article_id = '".$newId."' WHERE id = '".$result[0]->id."'";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		$db->query();
 		
-		 if ($params->get('article_frontpage','1')) :	
-		//Artikel als Haupteintrag-Eintrag markieren 
-		 $frontpage_query = "INSERT INTO #__content_frontpage SET content_id='".$newId."'";
-		 $db = JFactory::getDBO();
-		 $db->setQuery($frontpage_query);
-		 $db->query();
-		 endif;
 				
 				}
 		}

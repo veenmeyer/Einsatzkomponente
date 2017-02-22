@@ -141,6 +141,7 @@ class EinsatzkomponenteControllerEinsatzberichte extends JControllerAdmin
 
     public function article() {
 
+	
 	// Check for request forgeries
 	JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
 	require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
@@ -155,12 +156,12 @@ class EinsatzkomponenteControllerEinsatzberichte extends JControllerAdmin
 	}
 	else
 	{
-	    //$model = $this->getModel();
 	    $params = JComponentHelper::getParams('com_einsatzkomponente');
 	    // Make sure the item ids are integers
 	    jimport('joomla.utilities.arrayhelper');
 	    JArrayHelper::toInteger($cid);
-	    $msg = EinsatzkomponenteHelper::article($cid);
+		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/article.php'; // Helper-class laden
+		$msg    = count($cid).' Artikel erstellt';
 	    $this->setRedirect('index.php?option=com_einsatzkomponente&view=einsatzberichte', $msg); 
 	 }
     }

@@ -900,14 +900,6 @@ endif;
 			. '</div>';
 	}
 		
-    static function article($cid) {
-
-		// Check for request forgeries
-		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
-		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/article.php'; // Helper-class laden
-				$msg    = count($cid).' Artikel erstellt';
-				return $msg;
-				}
 			
 
     static function module ($pos) {

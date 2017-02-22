@@ -497,27 +497,27 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 					$oneItem->status_fb = JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_STATUS_FB_OPTION_' . strtoupper($oneItem->status_fb));
 					$oneItem->status = JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_STATUS_OPTION_' . strtoupper($oneItem->status));
 
-			if (isset($oneItem->article_id)) {
-				$values = explode(',', $oneItem->article_id);
+			// if (isset($oneItem->article_id)) {
+				// $values = explode(',', $oneItem->article_id);
 
-				$textValue = array();
-				foreach ($values as $value){
-					$db = JFactory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-							->select('title')
-							->from('#__content')
-							->where('id = ' . $db->quote($db->escape($value)));
-					$db->setQuery($query);
-					$results = $db->loadObject();
-					if ($results) {
-						$textValue[] = $results->title;
-					}
-				}
+				// $textValue = array();
+				// foreach ($values as $value){
+					// $db = JFactory::getDbo();
+					// $query = $db->getQuery(true);
+					// $query
+							// ->select('title')
+							// ->from('#__content')
+							// ->where('id = ' . $db->quote($db->escape($value)));
+					// $db->setQuery($query);
+					// $results = $db->loadObject();
+					// if ($results) {
+						// $textValue[] = $results->title;
+					// }
+				// }
 
-			$oneItem->article_id = !empty($textValue) ? implode(', ', $textValue) : $oneItem->article_id;
+			// $oneItem->article_id = !empty($textValue) ? implode(', ', $textValue) : $oneItem->article_id;
 
-			}
+			// }
 		}
         return $items;
     }
