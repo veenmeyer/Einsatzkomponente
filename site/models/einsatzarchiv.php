@@ -231,7 +231,7 @@ endif;
 
         $query->from('#__eiko_einsatzberichte AS a');
 
-        
+
     // Join over the users for the checked out user.
     //$query->select('uc.name AS editor');
     //$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
@@ -272,8 +272,21 @@ endif;
 		// Join over the created by field 'created_by'
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
 
-	    
-$query->where('a.state = 1');
+		
+			$user = JFactory::getUser();
+			$userId = $user->get('id');
+			$canCreate = $user->authorise('core.create', 'com_einsatzkomponente');
+			$canEdit = $user->authorise('core.edit', 'com_einsatzkomponente');
+			$canCheckin = $user->authorise('core.manage', 'com_einsatzkomponente');
+			$canChange = $user->authorise('core.edit.state', 'com_einsatzkomponente');
+			$canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
+			
+		if ($canCreate or $canEdit or $canChange or $canDelete) :
+			$query->where('a.state = 1 or a.state = 0');
+			else:
+			$query->where('a.state = 1');
+			endif;
+			
 
         // Filter by search in title
         $search = $this->getState('filter.search');

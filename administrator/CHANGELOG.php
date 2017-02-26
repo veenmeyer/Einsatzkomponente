@@ -13,6 +13,8 @@
 
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
+# Action-Buttons im Einsatzarchiv funktionieren jetzt
+# Berechtigungen im Einsatzarchiv korrigiert
 # gelöschte Einsatzkategorien wurden beim Update wieder neu angelegt
 # Erstellte Joomla-Artikel können jetzt geupdatet werden
 + Mehrfachauswahl Organisation im Menüfilter (Einsatzarchiv)

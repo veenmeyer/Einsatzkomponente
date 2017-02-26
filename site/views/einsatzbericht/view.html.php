@@ -347,8 +347,8 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
                 throw new Exception(JText::_('ALERTNOAUTHOR'));
             }
         }
-
-        if($this->item->state === '0') : throw new Exception(JText::_('ALERTNOAUTHOR'),'0'); endif;
+        $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
+        if($this->item->state === '0' AND !$authorised) : throw new Exception(JText::_('ALERTNOAUTHOR'),'0'); endif;
         if($this->item->state === '2') : throw new Exception(JText::_('ALERTNOAUTHOR'),'2'); endif;
         if($this->item->state === '-2') : throw new Exception(JText::_('ALERTNOAUTHOR'),'-2'); endif;
         

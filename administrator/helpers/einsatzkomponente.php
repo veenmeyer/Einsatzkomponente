@@ -126,11 +126,18 @@ class EinsatzkomponenteHelper
     public static function ermittle_einsatz_nummer ($selectedDate,$einsatzart) {
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		$ex_einsatzart = $params->get('display_home_number_excl_einsatzart','');
-		$query = 'SELECT COUNT(*) AS total FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
-		//return $query; 
+		
+		$query = 'SELECT COUNT(*) AS total,state FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
 		$db	= JFactory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
+		
+		$query = 'SELECT state FROM #__eiko_einsatzberichte WHERE (date1 = "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
+		$db	= JFactory::getDBO();
+		$db->setQuery( $query );
+		$result_state = $db->loadResult();
+		
+		if (!$result_state) : $result[0]->total = '--';  endif;
 		if ($einsatzart == $ex_einsatzart) : $result[0]->total = '--';  endif;
         return $result[0]->total;
     }

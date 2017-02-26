@@ -356,13 +356,19 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div> -->
-
-			<?php if ($params->get('article_frontpage','1')) :	?>
+	<?php   $authorised = JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente');
+            if ($authorised) {
+			?>
+			<?php if ($params->get('article_frontpage','0')) :	?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>
 			</div>
 			<?php endif;?>
+			
+			<?php
+            }
+	?>
         
 		<br/><br/>
 		<div>

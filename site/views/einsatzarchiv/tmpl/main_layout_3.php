@@ -255,7 +255,7 @@ defined('_JEXEC') or die;
                 <td class="center">
 					<?php if ($canEdit): ?>
                     <a class="btn btn-mini <?php echo $class; ?>"
-                       href="<?php echo ($canEdit || $canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
+                       href="<?php echo ($canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
                         <?php if ($item->state == 1): ?>
                             <i class="icon-save"></i>
                         <?php else: ?>
@@ -264,7 +264,7 @@ defined('_JEXEC') or die;
                     </a>
 					<?php endif; ?>
 						<?php if ($canEdit): ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
+							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.edit&layout=edit&id=' . $item->id, true, 2); ?>" class="btn btn-mini eiko_action_button" type="button"><i class="icon-edit" ></i></a>
 						<?php endif; ?>
 						<?php if ($canDelete): ?>
 							<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></button>
@@ -343,7 +343,7 @@ defined('_JEXEC') or die;
 		<?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. // Don't remove without permission -->
         <td colspan="<?php echo $eiko_col;?>">
-			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
+			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
         </tr>
 	<?php endif; ?>
 	
