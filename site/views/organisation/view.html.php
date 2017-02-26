@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @version    CVS: 3.9
- * @package    Com_Einsatzkomponente
- * @author     Ralf Meyer <ralf.meyer@einsatzkomponente.de>
- * @copyright  Copyright (C) 2015. Alle Rechte vorbehalten.
- * @license    GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -49,10 +49,17 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy
 
 		$document = JFactory::getDocument();
 
-		if ($this->params->get('display_orga_bootstrap','1')) :
-		// Import Bootstrap
+		// Bootstrap laden
+		JHtml::_('behavior.framework', true);
+		
+		if ($this->params->get('display_orga_bootstrap','0') == '1') :
 		JHtml::_('bootstrap.framework');
 		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
+		$document->addStyleSheet($this->baseurl.'/media/jui/css/icomoon.css');
+		endif;
+		if ($this->params->get('display_orga_bootstrap','0') == '2') :
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/bootstrap/bootstrap.min.css');
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/bootstrap/bootstrap-responsive.min.css');
 		endif;
 		
 		// Import CSS aus Optionen
@@ -78,7 +85,7 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy
 
 			if ($authorised !== true)
 			{
-				throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+				throw new Exception(JText::_('ALERTNOAUTHOR'));
 			}
 		}
 

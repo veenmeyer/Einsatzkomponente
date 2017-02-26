@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('JPATH_BASE') or die;
 jimport('joomla.form.formfield');
@@ -41,6 +41,15 @@ class JFormFieldoptgroup extends JFormField
                         $query = 'SELECT id,name from #__eiko_fahrzeuge where department = "' . $org->id . '" and state = 1 order by ordering ASC';
                         $db->setQuery($query);
                         $vehicles = $db->loadObjectList();
+						
+								if (count($vehicles) > 1) {
+										$v = array();
+										foreach ($vehicles as $vehicle) {
+											$v[] .= $vehicle->id;
+										}
+                                        $html[].='<option value="'.implode(',',$v).'">'.$org->name .' ( alle Fahrzeuge)</option>';
+								}
+
                                 foreach ($vehicles as $vehicle) {
                                         $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' ( '.$org->name.' ) </option>';
                                 }

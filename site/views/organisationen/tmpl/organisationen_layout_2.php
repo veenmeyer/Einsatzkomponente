@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -56,7 +56,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 				<li>
 		<?php if ($this->params->get('display_orga_fhz_links','1')) :?>
 					<?php if (!$value->link) :?>
-					<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
+					<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
 					<?php else :?>
 					<a title ="<?php echo $value->detail2;?>" target="_blank" href="<?php echo $value->link; ?>"><?php echo $value->name; ?></a>
 					<?php endif; ?>		

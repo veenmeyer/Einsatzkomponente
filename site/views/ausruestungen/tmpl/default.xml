@@ -32,7 +32,7 @@
             label="Ausrüstungen"
             description="" 
             required="false" 
-            query="SELECT `id`, `name` FROM `#__eiko_ausruestung` WHERE `state`='1' ORDER BY `ordering` ASC"
+            query="SELECT id, name FROM #__eiko_ausruestung WHERE state='1' ORDER BY ordering ASC"
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
@@ -128,7 +128,7 @@ description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu 
 		type="radio"
 		class="btn-group"
 		default="0"
-		label="Nur Feld `Beschreibung` anzeigen :"
+		label="Nur Feld Beschreibung anzeigen :"
 		description="">
 			<option	value="0">Nein</option>
 			<option	value="1">JA</option>

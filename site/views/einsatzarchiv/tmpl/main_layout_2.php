@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.1.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2014. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
- * @author      Ralf Meyer <ralf.meyer@einsatzkomponente.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -210,16 +210,33 @@ defined('_JEXEC') or die;
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
 					<?php endif; ?> 
 					
-					<?php if ($this->params->get('display_home_links','1')) : ?>
+					<?php if ($this->params->get('display_home_links_2','1')) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
 					<?php endif; ?> 
 					
 		   <img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->image;?>"/>
 		   
-					<?php if ($this->params->get('display_home_links','1')) : ?>
+					<?php if ($this->params->get('display_home_links_2','1')) : ?>
 					</a>
 					<?php endif; ?> 
            <?php endif;?>
+		   
+		   <?php if (!$item->image AND $this->params->get('display_home_image_nopic','0')) : ?>
+					<?php if (isset($item->checked_out) && $item->checked_out) : ?>
+					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
+					<?php endif; ?> 
+					
+					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
+					<?php endif; ?> 
+
+					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
+					
+					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					</a>
+					<?php endif;?>
+           <?php endif;?>
+		   
 		   </td>
            <?php endif;?>
 		<!--		<td>
@@ -271,8 +288,8 @@ defined('_JEXEC') or die;
                 <?php $class = ($canEdit || $canChange) ? 'active' : 'disabled'; ?>
                 <td class="center">
 					<?php if ($canEdit): ?>
-                    <a class="btn btn-micro <?php echo $class; ?>"
-                       href="<?php echo ($canEdit || $canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
+                    <a class="btn btn-mini <?php echo $class; ?>"
+                       href="<?php echo ($canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
                         <?php if ($item->state == 1): ?>
                             <i class="icon-publish"></i>
                         <?php else: ?>
@@ -281,7 +298,7 @@ defined('_JEXEC') or die;
                     </a>
 					<?php endif; ?>
 						<?php if ($canEdit): ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
+							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.edit&layout=edit&id=' . $item->id, true, 2); ?>" class="btn btn-mini eiko_action_button" type="button"><i class="icon-edit" ></i></a>
 						<?php endif; ?>
 						<?php if ($canDelete): ?>
 							<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></button>
@@ -309,7 +326,7 @@ defined('_JEXEC') or die;
 		<?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
         <td colspan="<?php echo $eiko_col; ?>">
-			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
+			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
         </tr>
 	<?php endif; ?>
     </tfoot>
@@ -355,7 +372,7 @@ defined('_JEXEC') or die;
 
     function deleteItem() {
         var item_id = jQuery(this).attr('data-item-id');
-        if (confirm("<?php echo JText::_('Möchten Sie diesen Einsatzbericht wirklich löschen ?'); ?>")) {
+        if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
             window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.remove&id=', false, 2) ?>' + item_id;
         }
     }

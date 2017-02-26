@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -32,11 +32,11 @@ $bug='0';
 		echo '<h2>Datenimport früherer Versionen</h2>'; 
 		
 		?>
-		<a target="_blank" href="http://www.einsatzkomponente.de/index.php"><img border=0  src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg"/></a><br/><br/>
+		<a target="_blank" href="https://www.einsatzkomponente.de/index.php"><img border=0  src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg"/></a><br/><br/>
         <?php
 // -------------------------------------------------------------------------------------------------------
 //$db = JFactory::getDbo();
-//$sql = "show columns FROM `J30_reports_vehicles_link` ";
+//$sql = "show columns FROM J30_reports_vehicles_link ";
 //$db->setQuery($sql);
 //$reports = $db->loadObjectList();
 //
@@ -157,7 +157,7 @@ $reports_id[$i] = $results[$i]->id;
 						$query	= $db->getQuery(true);
 						$query
 							->select('id')
-							->from('`#__eiko_einsatzarten`')
+							->from('#__eiko_einsatzarten')
 							->where('title = "' .$results[$i]->data1.'"');
 						$db->setQuery($query);
 						$data_id = $db->loadResult();
@@ -225,7 +225,7 @@ $i = 0;
 while ($i <= $count) {
 	
 $db =& JFactory::getDBO();
-$query = 'SELECT thumb FROM `#__eiko_images` WHERE report_id='.$reports_id[$i];
+$query = 'SELECT thumb FROM #__eiko_images WHERE report_id='.$reports_id[$i];
 $db->setQuery($query);
 $bild = $db->loadObjectList();
 $foto = $bild[0]->thumb;

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -35,7 +35,7 @@ defined('_JEXEC') or die;
 	
 
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&list=1'); ?>" method="post" name="adminForm" id="adminForm">
 <?php
 
 
@@ -129,7 +129,7 @@ if ($this->params->get('display_home_pagination')) :
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_tickerkat`')
+						->from('#__eiko_tickerkat')
 						->where('id = "' .$item->tickerkat.'"  AND state = "1" ');
 					$db->setQuery($query);
 					$tickerkat = $db->loadObject();
@@ -168,13 +168,22 @@ if ($this->params->get('display_home_pagination')) :
            <?php else:?>
 		   <td class="eiko_td_marker_main_1">
            <?php endif;?>
-           <?php if ($this->params->get('display_home_number','1')) : ?>
+		   
+           <?php if ($this->params->get('display_home_number','2') == '1') : ?>
            <?php if ($hide) :?>
            <?php echo $i.' - '.($i + $hide);$hide =0;?>
            <?php else:?>
            <?php echo $i;?>
            <?php endif;?>
            <?php endif;?>
+		   
+			
+           <?php if ($this->params->get('display_home_number','2') == '2') : 
+				$item->date_11 		= strtotime($item->date1);
+				$item->date1_year 	= date('Y', $item->date_11);
+				echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date_11,$item->data1).' / '.$item->date1_year.'</span>';
+				endif;?>
+		   
            <?php if ($this->params->get('display_home_alertimage_num','0')) : ?>
            <br/><img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->image;?>" title="<?php echo $item->alarmierungsart;?>" />
            <?php endif;?>
@@ -272,7 +281,7 @@ if ($this->params->get('display_home_pagination')) :
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($query);
 						$results = $db->loadObjectList();
@@ -321,7 +330,7 @@ if ($this->params->get('display_home_pagination')) :
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = "' .$value.'"');
 						$db->setQuery($query);
 						$results = $db->loadObjectList();
@@ -350,7 +359,7 @@ if ($this->params->get('display_home_pagination')) :
 		   <td>
            <?php endif;?>
             </td>
-            <td colspan="<?php echo $col;?>" class=""eiko_td_zusatz_main_1>
+            <td colspan="<?php echo $col;?>" class="eiko_td_zusatz_main_1">
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
             <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNGSZEIT');?> :</h3><?php echo date('d.m.Y', $curTime);?> um <?php echo date('H:i', $curTime);?> Uhr
             <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?> :</h3><?php echo $auswahl_orga;?><br/>
@@ -412,7 +421,7 @@ if ($this->params->get('display_home_pagination')) :
 
 <?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2015 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+            <th colspan="<?php echo $col;?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
         </tr>
 	<?php endif; ?>
     

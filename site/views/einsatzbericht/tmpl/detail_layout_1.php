@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 
 // no direct access
@@ -220,7 +220,7 @@ $vehicles_images = '';
 					$query	= $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_organisationen`')
+						->from('#__eiko_organisationen')
 						->where('id = "' .$value.'" AND state="1" ');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
@@ -228,7 +228,7 @@ $vehicles_images = '';
 					if ($this->params->get('display_detail_orga_links','1')) :
 					if (!$results[0]->link) :
 					?>
-					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&id=' . $results[0]->id); ?>"><?php echo $results[0]->name; ?></a><br/>
+					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&Itemid='.$this->params->get('orgalink','').'&id=' . $results[0]->id); ?>"><?php echo $results[0]->name; ?></a><br/> 
 					<?php	
 					else :
 					?>
@@ -270,8 +270,8 @@ $vehicles_images = '';
 						
 						if (!$value->link) : ?>
                         
-						<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
-						<?php $vehicles_images .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.'"/></a>';?>
+						<a title ="<?php echo $value->detail2;?>" target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $value->id); ?>"><?php echo $value->name; ?></a>
+						<?php $vehicles_images .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $value->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$value->image.'"  alt="'.$value->name.'" title="'.$value->name.'   '.$value->detail2.'"/></a>';?>
                         
                         <?php else: ?>
 						<a title ="<?php echo $value->detail2;?>" target="_blank" href="<?php echo $value->link; ?>"><?php echo $value->name; ?></a>
@@ -328,6 +328,9 @@ $vehicles_images = '';
                   <img class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="<?php echo $this->einsatzlogo->title;?>" alt ="<?php echo $this->einsatzlogo->title;?>"/>
                   </a>
 <?php endif;?>
+<?php if( !$this->item->image AND $this->params->get('display_home_image_nopic','0') ) : ?>
+					<img  class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
+<?php endif;?>
 
 <!--Titelbild mit Highslide JS  ENDE--> 
 
@@ -367,7 +370,7 @@ $vehicles_images = '';
 					$query	= $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_ausruestung`')
+						->from('#__eiko_ausruestung')
 						->where('id = "' .$value.'" AND state="1" ');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
@@ -391,6 +394,12 @@ $vehicles_images = '';
             <div class="row-fluid">
             <ul class="thumbnails eiko_thumbnails_2">
             <?php
+			$n = false;
+			for ($i = count($this->images)-count($this->images);$i < count($this->images);++$i) { 
+			if (@$this->images[$i]->comment) : $n = true; 
+			endif;
+			}
+			$i= '';
 			for ($i = count($this->images)-count($this->images);$i < count($this->images);++$i) { 
 			if (@$this->images[$i]) :
 			$fileName_thumb = JURI::Root().$this->images[$i]->thumb;
@@ -399,10 +408,14 @@ $vehicles_images = '';
 			?>   
               <li>
                 <div class="thumbnail eiko_thumbnail_2" style="max-width:<?php echo $thumbwidth;?>;)">
-    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
+    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><?php if ($this->images[$i]->comment) : ?><?php echo '<br/>Bild-Info: '.$this->images[$i]->comment;?><?php endif; ?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
                 <img  class="eiko_img-rounded eiko_thumbs_2" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->einsatzlogo->title;?>"/>
+				
 <?php if ($this->images[$i]->comment) : ?>
-<br/><span><i class="icon-info-sign" style=" margin-right:5px;"></i>Info</span>
+<br/><i class="icon-info-sign" style=" margin-right:5px;"></i><small>Bild-Info</small>
+ <?php else: ?>
+<?php if ($n == true) : echo '<br/><i class="" style=" margin-right:5px;"></i><small></small>
+';endif;?>
  <?php endif; ?>
               </a>
 			  </div>

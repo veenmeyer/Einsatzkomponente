@@ -1,10 +1,20 @@
 <?php
+
+/**
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
+ */
 /* Caveat: I'm not a PHP programmer, so this may or may
  * not be the most idiomatic code...
  *
  * FPDF is a free PHP library for creating PDFs:
  * http://www.fpdf.org/
  */
+defined('_JEXEC') or die;
+
 require("fpdf.php");
 
 class PDF extends FPDF {

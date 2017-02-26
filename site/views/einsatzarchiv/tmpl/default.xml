@@ -51,8 +51,9 @@
 		type="sql" 
 		class="inputbox" 
 		label = "Filter Organisation :"
-		query="SELECT '' AS `id`, '- alle anzeigen -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_organisationen`" 
+		query="SELECT id, name FROM #__eiko_organisationen" 
 		key_field="id" 
+		multiple = "multiple"
 		value_field="name"/>  
 <field
 		name="spacer1"
@@ -74,7 +75,7 @@
 		type="sql" 
 		class="inputbox"   
         label = "Alarmierungsart :"		
-		query="SELECT '' AS `id`, '- alle anzeigen -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_alarmierungsarten`" 
+		query="SELECT '' AS id, '- alle anzeigen -' AS title UNION SELECT id, title FROM #__eiko_alarmierungsarten" 
 		key_field="id" 
 		value_field="title"/> 
 
@@ -98,7 +99,7 @@
 		type="sql" 	
 		class="inputbox"    
         label = "Einsatzkategorie :"			
-		query="SELECT '' AS `id`, '- alle anzeigen -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_tickerkat`" 
+		query="SELECT '' AS id, '- alle anzeigen -' AS title UNION SELECT id, title FROM #__eiko_tickerkat" 
 		key_field="id" 
 		value_field="title"/> 
 
@@ -121,7 +122,7 @@
 		type="sql" 
 		class="inputbox" 
         label = "Einsatzart :"	        
-		query="SELECT '' AS `id`, '- alle anzeigen -' AS `title` UNION SELECT `id`, `title` FROM `#__eiko_einsatzarten`" 
+		query="SELECT '' AS id, '- alle anzeigen -' AS title UNION SELECT id, title FROM #__eiko_einsatzarten" 
 		key_field="id" 
 		value_field="title"/> 
 
@@ -144,7 +145,7 @@
 		type="sql" 
 		class="inputbox" 
         label = "Fahrzeug :"			
-		query="SELECT '' AS `id`, '- alle anzeigen -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_fahrzeuge`" 
+		query="SELECT '' AS id, '- alle anzeigen -' AS name UNION SELECT id, name FROM #__eiko_fahrzeuge" 
 		key_field="id" 
 		value_field="name"/> 
 
@@ -169,7 +170,7 @@
 		type="sql" 
 		class="inputbox" 
 		label="Jahr :"
-        query="SELECT '' AS `id`, '- alle anzeigen -' AS `title` UNION SELECT Year(date1) as id, Year(date1) as title FROM `#__eiko_einsatzberichte` WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" 
+        query="SELECT '' AS id, '- alle anzeigen -' AS title UNION SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" 
 		key_field="id" 
 		value_field="title"/> 
 

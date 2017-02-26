@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.1.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2014. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
- * @author      Ralf Meyer <ralf.meyer@einsatzkomponente.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -65,7 +65,7 @@ defined('_JEXEC') or die;
 				
 				<?php if ($this->params->get('display_home_presse','0') ) : ?>
 				<th class='left'>
-				<?php echo 'Pressebericht'; ?>
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_PRESSEBERICHT'); ?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php endif;?>
@@ -76,7 +76,7 @@ defined('_JEXEC') or die;
 				</th> -->
 				<?php if ($this->params->get('display_home_counter','1')) : ?>
 				<th class='left mobile_hide_480 '>
-				<?php echo JHtml::_('grid.sort',  'Zugriffe', 'a.counter', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ZUGRIFFE', 'a.counter', $listDirn, $listOrder); ?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php endif;?>
@@ -105,7 +105,7 @@ defined('_JEXEC') or die;
 
     </tr>
     <?php if ($canCreate): ?>
-        <tr>
+        <tr class="eiko_action_button">
         <td colspan="<?php echo $eiko_col;?>">
         <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=0&addlink=1', false, 2); ?>"
            class="btn btn-success btn-small"><i
@@ -228,13 +228,34 @@ defined('_JEXEC') or die;
 					<?php $strength = ($people*$this->params->get('einsatzstaerke_people','0.5')) + ($vehicles*$this->params->get('einsatzstaerke_vehicles','2')) + ($auswahl_orga*$this->params->get('einsatzstaerke_orga','15')) ; ?>
 					<div class="progress progress-danger progress-striped hasTooltip" style="margin-top:5px;margin-bottom:5px;color:#000000 !important;width:180px;" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAFT'); ?>: <?php if ($auswahl_orga) :echo $auswahl_orga;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN'); ?> //<?php endif;?> <?php if ($vehicles):echo $vehicles;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE'); ?> <?php endif;?><?php if ($people) :echo '// '.$people;?> Einsatzkräfte <?php endif;?>"> 
 					<div class="bar" style="color:#000000 !important;width:<?php echo $strength;?>px"></div></div>
-					<br/>
 					<?php } ?>
 					<!-- Einsatzstärke ENDE --> 
 					
+					<?php if ($this->params->get('display_home_info','1') or $this->params->get('display_home_links','1')) : ?>
+					<div class="eiko_td_buttons_main_1">
+					<?php endif;?>
 
+					<!-- Button Kurzinfo --> 
+					<?php if ($this->params->get('display_home_info','1')) : ?>
+					<input type="button" class="btn btn-primary" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_KURZINFO');?>"></input>
+					<script type="text/javascript">
+					jQuery.toggle<?php echo $item->id;?> = function(query)
+						{
+						jQuery(query).slideToggle("5000");
+						jQuery("#tr<?php echo $item->id;?>").fadeToggle("fast");
+						}   
+					</script>
+					<?php endif;?>
+					
+					<!-- Button Detaillink --> 
+					<?php if ($this->params->get('display_home_links','1')) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>" type="button" class="btn btn-primary"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS'); ?></a>	
+					<?php endif;?>
+					<br/>
 				</td>
 				
+
+					<!-- Einsatzbild --> 
            <?php if ($this->params->get('display_home_image')) : ?>
 		   <td class="mobile_hide_480  eiko_td_einsatzbild_main_1">
 		   <?php if ($item->image) : ?>
@@ -251,14 +272,29 @@ defined('_JEXEC') or die;
 					<?php if ($this->params->get('display_home_links_2','1')) : ?>
 					</a>
 					<?php endif;?>
+           <?php endif;?>
+		   <?php if (!$item->image AND $this->params->get('display_home_image_nopic','0')) : ?>
+					<?php if (isset($item->checked_out) && $item->checked_out) : ?>
+					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
+					<?php endif; ?> 
 					
+					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
+					<?php endif; ?> 
+
+					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
+					
+					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					</a>
+					<?php endif;?>
            <?php endif;?>
 		   </td>
+		   
            <?php endif;?>
-		<!--		<td>
-
-					<?php echo $item->images; ?>
-				</td> -->
+		   
+		   
+					<!-- Einsatzbild ENDE --> 
+		   
 				
 				<td class="mobile_hide_480">
 
@@ -282,7 +318,7 @@ defined('_JEXEC') or die;
 				<?php if ($this->params->get('display_home_presse','0')) : ?>
 				<td class="mobile_hide_480 ">
 					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
-					<?php echo '+Presselinks'; ?>
+					<?php echo ''.JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_PRESSEBERICHT').''; ?>
 					<?php endif;?>
 				</td>
 				<?php endif; ?>
@@ -312,8 +348,8 @@ defined('_JEXEC') or die;
                 <?php $class = ($canEdit || $canChange) ? 'active' : 'disabled'; ?>
                 <td class="center">
 					<?php if ($canEdit): ?>
-                    <a class="btn btn-mini <?php echo $class; ?>"
-                       href="<?php echo ($canEdit || $canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
+                    <a class="btn btn-mini <?php echo $class; ?> eiko_action_button"
+                       href="<?php echo ($canChange) ? JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.publish&id=' . $item->id . '&state=' . (($item->state + 1) % 2), false, 2) : '#'; ?>">
                         <?php if ($item->state == 1): ?>
                             <i class="icon-save"></i>
                         <?php else: ?>
@@ -322,17 +358,66 @@ defined('_JEXEC') or die;
                     </a>
 					<?php endif; ?>
 						<?php if ($canEdit): ?>
-							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
+							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.edit&layout=edit&id=' . $item->id, true, 2); ?>" class="btn btn-mini eiko_action_button" type="button"><i class="icon-edit" ></i></a>
 						<?php endif; ?>
 						<?php if ($canDelete): ?>
-							<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button" type="button"><i class="icon-trash" ></i></button>
+							<button data-item-id="<?php echo $item->id; ?>" class="btn btn-mini delete-button eiko_action_button" type="button"><i class="icon-trash" ></i></button>
 						<?php endif; ?>
                 </td>
             <?php endif; ?>
 
         </tr>
 		
-		
+        <!-- Zusatzinformation Kurzinfo -->
+		<?php if ($this->params->get('display_home_info','1')) : ?>
+			<?php		
+					$data = array();
+					foreach(explode(',',$item->auswahl_orga) as $value):
+						if($value){
+							$data[] = '<!-- <span class="label label-info"> --!>'.$value.'<!-- </span>--!>'; 
+						}
+					endforeach;
+					$auswahl_orga=  implode(' +++ ',$data); ?> 
+					
+            <tr id="tr<?php echo $item->id;?>" class="eiko_tr_zusatz_main_1" style=" display:none;" >
+            
+           <?php if ($this->params->get('display_home_marker','1')) : ?>
+           <?php $rgba = hex2rgba($item->marker,0.7);?>
+            <style>
+				.td<?php echo $item->id;?> {
+				background: -moz-linear-gradient(top,  <?php echo $rgba;?> 0%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,<?php echo $rgba;?>), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<?php echo $item->marker;?>', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+				}
+			</style>
+		   <td class="td<?php echo $item->id;?>" >
+           <?php else:?>
+		   <td>
+           <?php endif;?>
+            </td>
+            <td colspan="<?php echo $eiko_col-1; ?>" class="eiko_td_zusatz_main_1">
+			<div id ="div<?php echo $item->id;?>" style="display:none;">
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNGSZEIT');?> :</h3><?php echo date('d.m.Y', $item->date1);?> um <?php echo date('H:i', $item->date1);?> Uhr
+            <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?> :</h3><?php echo $auswahl_orga;?><br/>
+		   <?php if ($item->desc) : ?>
+			<?php jimport('joomla.html.content'); ?>  
+			<?php $Desc = JHTML::_('content.prepare', $item->desc); ?>
+			<h3><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?> :</h3><?php echo $Desc;?>
+            <?php endif;?>
+            <br /><input type="button" class="btn btn-info" onClick="jQuery.toggle<?php echo $item->id;?>(div<?php echo $item->id;?>)" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_INFO_SCHLIESSEN');?>"></input>
+					<?php if ($this->params->get('display_home_links','1')) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>" type="button" class="btn btn-primary"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS'); ?></a>	
+					<?php endif;?>
+           </div> 
+           </td>
+           </tr>
+	<?php endif;?>
+     <!-- Zusatzinformation Kurzinfo ENDE -->
+		   
     <?php endforeach; ?>
     </tbody>
 	
@@ -350,7 +435,7 @@ defined('_JEXEC') or die;
 		<?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
         <td colspan="<?php echo $eiko_col; ?>">
-			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
+			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
         </tr>
 	<?php endif; ?>
     </tfoot>
@@ -397,10 +482,44 @@ defined('_JEXEC') or die;
 
     function deleteItem() {
         var item_id = jQuery(this).attr('data-item-id');
-        if (confirm("<?php echo JText::_('Möchten Sie diesen Einsatzbericht wirklich löschen ?'); ?>")) {
+        if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
             window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.remove&id=', false, 2) ?>' + item_id;
         }
     }
 </script>
+
+    <?php function hex2rgba($color, $opacity = false) {  // Farbe von HEX zu RGBA umwandeln 
+
+	$default = 'rgb(0,0,0)';
+	//Return default if no color provided
+	if(empty($color))
+          return $default; 
+	//Sanitize $color if "#" is provided 
+        if ($color[0] == '#' ) {
+        	$color = substr( $color, 1 );
+        }
+        //Check if color has 6 or 3 characters and get values
+        if (strlen($color) == 6) {
+                $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+        } elseif ( strlen( $color ) == 3 ) {
+                $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+        } else {
+                return $default;
+        }
+        //Convert hexadec to rgb
+        $rgb =  array_map('hexdec', $hex);
+        //Check if opacity is set(rgba or rgb)
+        if($opacity){
+        	if(abs($opacity) > 1)
+        		$opacity = 1.0;
+        	$output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+        } else {
+        	$output = 'rgb('.implode(",",$rgb).')';
+        }
+        //Return rgb(a) color string
+        return $output; 
+		
+}
+?> 
 
 

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -229,8 +229,8 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$gmap_onload 		= $this->params->get('detail_gmap_onload','HYBRID');
 		$zoom_control 		= $this->params->get('detail_zoom_control','false');
  		$document->addScript('components/com_einsatzkomponente/assets/osm/util.js');
-   		$document->addScript('http://www.openlayers.org/api/OpenLayers.js');				
-   		$document->addScript('http://www.openstreetmap.org/openlayers/OpenStreetMap.js');	
+   		$document->addScript('https://openlayers.org/api/OpenLayers.js');				
+   		$document->addScript('https://openstreetmap.org/openlayers/OpenStreetMap.js');	
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/osm/map.css');		
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/osm/ie_map.css');	
  		$document->addScript('components/com_einsatzkomponente/assets/osm/OpenLayers_Map_minZoom_maxZoom_Patch.js');
@@ -239,10 +239,17 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		
 		
 		
-		if ($this->params->get('display_detail_bootstrap','0')) :
-		// Import Bootstrap
+		// Bootstrap laden
+		JHtml::_('behavior.framework', true);
+		
+		if ($this->params->get('display_home_bootstrap','0') == '1') :
 		JHtml::_('bootstrap.framework');
 		$document->addStyleSheet($this->baseurl . '/media/jui/css/bootstrap.min.css');
+		$document->addStyleSheet($this->baseurl.'/media/jui/css/icomoon.css');
+		endif;
+		if ($this->params->get('display_home_bootstrap','0') == '2') :
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/bootstrap/bootstrap.min.css');
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/bootstrap/bootstrap-responsive.min.css');
 		endif;
 		
 		// Import CSS aus Optionen
@@ -285,7 +292,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		
 			if ($this->params->get('standard_share_image','')) : 
 			$fileName_image = str_replace(' ', '%20', $this->params->get('standard_share_image',''));  
-			$size = getimagesize(JURI::base().$fileName_image);
+			$size = @getimagesize(JURI::base().$fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
@@ -293,7 +300,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 
 		if( $this->item->image ) :
 			$fileName_image = str_replace(' ', '%20', $this->item->image);  
-			$size = getimagesize(JURI::base().$fileName_image);
+			$size = @getimagesize(JURI::base().$fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
@@ -302,7 +309,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		if ($this->images) :
 			for ($i = 0;$i < count($this->images);++$i) { 
 			$fileName_image = str_replace(' ', '%20', $this->images[$i]->image);  
-			$size = getimagesize(JURI::base().$fileName_image);
+			$size = @getimagesize(JURI::base().$fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
@@ -337,13 +344,13 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
             
             $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
             if ($authorised !== true) {
-                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+                throw new Exception(JText::_('ALERTNOAUTHOR'));
             }
         }
-
-        if($this->item->state === '0') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'0'); endif;
-        if($this->item->state === '2') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'2'); endif;
-        if($this->item->state === '-2') : throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'),'-2'); endif;
+        $authorised = $user->authorise('core.create', 'com_einsatzkomponente');
+        if($this->item->state === '0' AND !$authorised) : throw new Exception(JText::_('ALERTNOAUTHOR'),'0'); endif;
+        if($this->item->state === '2') : throw new Exception(JText::_('ALERTNOAUTHOR'),'2'); endif;
+        if($this->item->state === '-2') : throw new Exception(JText::_('ALERTNOAUTHOR'),'-2'); endif;
         
 			// Increment the hit counter of the event.
 			$model = $this->getModel();

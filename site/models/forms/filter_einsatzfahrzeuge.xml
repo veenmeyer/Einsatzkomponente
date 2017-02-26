@@ -6,10 +6,10 @@
                class="js-stools-search-string" />
 
         <field name="department" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Please select department -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_organisationen`" key_field="id" value_field="name"/> 
+                                    query="SELECT '' AS id, '- Please select department -' AS name UNION SELECT id, name FROM #__eiko_organisationen" key_field="id" value_field="name"/> 
 
  <field name="ausruestung" type="sql" class="inputbox" onchange="this.form.submit();"
-                                    query="SELECT '' AS `id`, '- Please select ausruestung -' AS `name` UNION SELECT `id`, `name` FROM `#__eiko_ausruestung`" key_field="id" value_field="name"/>
+                                    query="SELECT '' AS id, '- Please select ausruestung -' AS name UNION SELECT id, name FROM #__eiko_ausruestung" key_field="id" value_field="name"/>
 
     </fields>
 </form>

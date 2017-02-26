@@ -21,7 +21,7 @@
 } 
 
 #jform_einsatzbildbearbeiten_image_gross_preview {
-	height:200px !important; 
+	max-height:200px !important; 
 } 
 .thumbnail {
     border: 1px solid #DDDDDD;

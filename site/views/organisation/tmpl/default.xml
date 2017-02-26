@@ -13,7 +13,7 @@
 		
             <field
                 name="item_id"
-                query="SELECT `name`,`id` FROM #__eiko_organisationen ORDER BY `id`"
+                query="SELECT name,id FROM #__eiko_organisationen ORDER BY id"
                 type="sql"
                 key_field="id" 
                 value_field="name"

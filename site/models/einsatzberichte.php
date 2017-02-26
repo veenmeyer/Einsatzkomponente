@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
@@ -42,10 +42,15 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
         // List state information
         $limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $page_limit);
         $this->setState('list.limit', $limit);
-
+		
+if ($limit == '0') :   
         $limitstart = $app->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
+else:  	$limitstart = '0';
+		$this->setState('list.start', $limitstart);
+endif;
 
+//echo 'limit:'.$limit.'<br/>limitstart:'.$limitstart;
         if ($list = $app->getUserStateFromRequest($this->context . '.list', 'list', array(), 'array'))
         {
             foreach ($list as $name => $value)
@@ -140,7 +145,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                 )
         );
         
-        $query->from('`#__eiko_einsatzberichte` AS a');
+        $query->from('#__eiko_einsatzberichte AS a');
         
 		// Join over the foreign key 'auswahl_orga'
 		$query->select('dep.id AS mission_orga');

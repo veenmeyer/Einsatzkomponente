@@ -1,10 +1,10 @@
 <?php
 /**
- * @version    CVS: 3.9
- * @package    Com_Einsatzkomponente
- * @author     Ralf Meyer <ralf.meyer@einsatzkomponente.de>
- * @copyright  Copyright (C) 2015. Alle Rechte vorbehalten.
- * @license    GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -96,7 +96,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 			?>
 			<?php if ($total) : ?>
 			<li>Letzter Eintrag:
-			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
+			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></li>
 			<?php endif; ?>
 
 			
@@ -128,7 +128,7 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 				
 		<?php if ($this->params->get('display_orga_fhz_links','1')) :?>
 					<?php if (!$value->link) :?>
-					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $value->id); ?>">
+					<a target="_self" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $value->id); ?>">
 					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="margin-right:10px;width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $value->image;?>" title="<?php echo $value->name;?>"/>
 					</a>
 					<?php else :?>

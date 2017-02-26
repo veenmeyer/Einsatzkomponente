@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) by Ralf Meyer 2013. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -94,7 +94,7 @@ defined('_JEXEC') or die;
 	<?php if ($total) : ?>
 	<tr class="fahrzeug_box_3">
 	<td><strong>Letzter Eintrag:</strong></td>
-	<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+	<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
 	</tr> 
 	<?php endif; ?>
 <?php endif; ?>
@@ -111,7 +111,11 @@ defined('_JEXEC') or die;
 	<table class="fahrzeug_box_7"><tr><td><?php echo $Desc; ?></td></tr></table>
 <?php endif; ?>
 
-
+	<table class="fahrzeug_box_7">
+	<tr><td>
+		<input type="button" class="btn eiko_back_button" value="<?php echo JText::_('COM_EINSATZKOMPONENTE_ZURUECK');?>" onClick="history.back();">
+	</td></tr>
+	</table>
     
 <?php else: ?>
     Could not load the item

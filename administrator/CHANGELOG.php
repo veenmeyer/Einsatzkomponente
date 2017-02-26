@@ -1,8 +1,41 @@
+<?php
+/**
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
+ */
+ ?>
+
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
-<h3>Changelog <small>Version 3.15</small></h3>
+<h3>Changelog <small>Version 3.16</small></h3>
 <ul>
+# Action-Buttons im Einsatzarchiv funktionieren jetzt
+# Berechtigungen im Einsatzarchiv korrigiert
+# gelöschte Einsatzkategorien wurden beim Update wieder neu angelegt
+# Erstellte Joomla-Artikel können jetzt geupdatet werden
++ Mehrfachauswahl Organisation im Menüfilter (Einsatzarchiv)
+# Joomla-Artikel erstellen
++ Bild-Kommentar in Bild-Info geändert
++ Kurzinfo in Layouts des Einsatzarchives
+# Option: Einsatzart -> Ausschluss aus Nummerierung der Einsätze
+# Datum bei der Json-Ausgabe korrigiert
+# Organisations-und Einsatzlinks aus Fahrzeugübersicht
+# Fahrzeug-und Einsatzlinks aus Organisationübersicht
+# Organisation-und Fahrzeuglinks aus Einsatzdetailansicht
++ Option Menüpfade hinterlegen
++ Bootstrap Option: Joomla oder Eiko
++ Auswahl Fahrzeuge (alle) pro Orga in EinsatzEdit
++ Wasserzeichen kann im Einsatzbericht-EDIT gesetzt werden
+# Wasserzeichen-Position korrigiert
+# Wasserzeichen-Pfad geändert
+# Code für JED-Extensions-Eintrag bereinigt
+- Flash SWF-Bilduploader (nicht notwendig)
+# Ersatzbild in Einsatzarchiv und detail_layout_1
+# Fehler: OSM-Karte funktioniert jetzt auch bei SSL-Verbindung
 # Fehler: Pagination (Seitenwahl) in Einsatzübersicht (alt)
 </ul>
 

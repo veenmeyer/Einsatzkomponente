@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) by Ralf Meyer 2013. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -125,7 +125,7 @@ if (!empty($this->extra_sidebar)) {
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBILDMANAGER_REPORT_ID', 'a.report_id', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBILDMANAGER_COMMENT', 'a.comment', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'Bild-Info', 'a.comment', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBILDMANAGER_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>

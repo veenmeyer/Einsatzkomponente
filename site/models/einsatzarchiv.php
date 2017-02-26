@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @version     3.1.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2014. Alle Rechte vorbehalten.
- * @license     GNU General Public License Version 2 oder später; siehe LICENSE.txt
- * @author      Ralf Meyer <ralf.meyer@einsatzkomponente.de> - http://einsatzkomponente.de
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 
@@ -229,9 +229,9 @@ endif;
                         )
         );
 
-        $query->from('`#__eiko_einsatzberichte` AS a');
+        $query->from('#__eiko_einsatzberichte AS a');
 
-        
+
     // Join over the users for the checked out user.
     //$query->select('uc.name AS editor');
     //$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
@@ -272,8 +272,21 @@ endif;
 		// Join over the created by field 'created_by'
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
 
-	    
-$query->where('a.state = 1');
+		
+			$user = JFactory::getUser();
+			$userId = $user->get('id');
+			$canCreate = $user->authorise('core.create', 'com_einsatzkomponente');
+			$canEdit = $user->authorise('core.edit', 'com_einsatzkomponente');
+			$canCheckin = $user->authorise('core.manage', 'com_einsatzkomponente');
+			$canChange = $user->authorise('core.edit.state', 'com_einsatzkomponente');
+			$canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
+			
+		if ($canCreate or $canEdit or $canChange or $canDelete) :
+			$query->where('a.state = 1 or a.state = 0');
+			else:
+			$query->where('a.state = 1');
+			endif;
+			
 
         // Filter by search in title
         $search = $this->getState('filter.search');
@@ -323,11 +336,31 @@ $query->where('a.state = 1');
 		}
 
 		//Filtering auswahlorga
-		$filter_auswahlorga = $this->state->get("filter.auswahl_orga");
-		if ($filter_auswahlorga) {
-			$query->where("FIND_IN_SET(" . $filter_auswahlorga. ",a.auswahl_orga)");
-		}
+			$filter_auswahlorga = $this->state->get("filter.auswahl_orga"); 
+//			if ($filter_auswahlorga) {
+//			$query->where("FIND_IN_SET(" . $filter_auswahlorga. ",a.auswahl_orga)");
+//		 }
 
+		// Filter Menüparameter auswahlorga
+			if ($filter_auswahlorga) {
+			        $app = JFactory::getApplication();
+					$params = $app->getParams('com_einsatzkomponente');
+					$array = array();
+					if (count($filter_auswahlorga)>1) :
+					
+					$string = '';
+					foreach($filter_auswahlorga  as $value):
+					if (count($filter_auswahlorga)>1 AND $value) :
+					$string .= "FIND_IN_SET(" . $value. ",a.auswahl_orga) OR ";
+					endif;
+					endforeach;
+				$string = substr ( $string, 0, -3 );
+				$query->where($string);
+				else:
+				$query->where("FIND_IN_SET(" . $filter_auswahlorga['0']. ",a.auswahl_orga)");			
+				endif;
+			}
+		 
 		//Filtering vehicles
 		$filter_vehicles = $this->state->get("filter.vehicles");
 		if ($filter_vehicles) {
@@ -430,7 +463,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('title,image')
-							->from('`#__eiko_alarmierungsarten`')
+							->from('#__eiko_alarmierungsarten')
 							->where('id = ' . $db->quote($db->escape($item->alerting)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -445,7 +478,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('title,image')
-							->from('`#__eiko_tickerkat`')
+							->from('#__eiko_tickerkat')
 							->where('id = ' . $db->quote($db->escape($item->tickerkat)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -460,7 +493,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('id,title,list_icon,marker')
-							->from('`#__eiko_einsatzarten`')
+							->from('#__eiko_einsatzarten')
 							->where('id = ' . $db->quote($db->escape($item->data1)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -478,7 +511,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('count(image)')
-							->from('`#__eiko_images`')
+							->from('#__eiko_images')
 							->where('report_id = ' . $item->id);
 					$db->setQuery($query);
 					$item->images = $db->loadResult();
@@ -498,7 +531,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -523,7 +556,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('name')
-							->from('`#__eiko_fahrzeuge`')
+							->from('#__eiko_fahrzeuge')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -548,7 +581,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_ausruestung`')
+	//						->from('#__eiko_ausruestung')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -573,7 +606,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_fahrzeuge`')
+	//						->from('#__eiko_fahrzeuge')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -598,7 +631,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_fahrzeuge`')
+	//						->from('#__eiko_fahrzeuge')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -623,7 +656,7 @@ $query->where('a.state = 1');
 	//				$query = $db->getQuery(true);
 	//				$query
 	//						->select('name')
-	//						->from('`#__eiko_fahrzeuge`')
+	//						->from('#__eiko_fahrzeuge')
 	//						->where('id = ' . $db->quote($db->escape($value)));
 	//				$db->setQuery($query);
 	//				$results = $db->loadObject();
@@ -650,7 +683,7 @@ $query->where('a.state = 1');
 					$query = $db->getQuery(true);
 					$query
 							->select('title')
-							->from('`#__content`')
+							->from('#__content')
 							->where('id = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();

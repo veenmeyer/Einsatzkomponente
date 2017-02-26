@@ -1,4 +1,12 @@
 <?php
+/**
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
+ */
+
 
 defined('JPATH_BASE') or die;
 
@@ -64,7 +72,8 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
                 </button>
             </div>
 		<?php endif; ?>
-            <?php if ($filters) : ?>
+		
+		<?php if ($filters) : ?>
             <div class="btn-wrapper hidden-phone">
                 <button type="button" class="btn hasTooltip js-stools-btn-filter" title=""
                         data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_FILTER_AUSWAEHLEN'); ?>">
@@ -88,16 +97,16 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 			
 		<div class="js-stools-field-filter">
 		
+		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
+		<?php echo $filters['filter_auswahl_orga']->input; ?>
+		<?php echo '<br/><br/>';?>
+		<?php endif; ?>
+
 		<?php if ($params->get('show_filter_year','1')) : ?>
 		<?php echo $filters['filter_year']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
 		<?php endif; ?>
 
-		<?php if ($params->get('show_filter_auswahl_orga','1')) : ?>
-		<?php echo $filters['filter_auswahl_orga']->input; ?>
-		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>
-		<?php endif; ?>
-		
 		<?php if ($params->get('show_filter_data1','1')) : ?>
 		<?php echo $filters['filter_data1']->input; ?>
 		<?php if ($params->get('show_filter_linebreak','0')) :echo '<br/>'; endif;?>

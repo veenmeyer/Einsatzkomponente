@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -13,13 +13,13 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-JHtml::_('formbehavior.chosen', 'select');
+JHtml::_('formbehavior.chosen', 'select'); 
 
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0)
 	{
 	$db = JFactory::getDBO();
-	$query = 'SELECT id, thumb, comment FROM `#__eiko_images` WHERE `report_id`="'.$this->item->id.'" AND `state`="1" ORDER BY `ordering` ASC';
+	$query = 'SELECT id, thumb, comment FROM #__eiko_images WHERE report_id="'.$this->item->id.'" AND state="1" ORDER BY ordering ASC';
 	$db->setQuery($query);
 	$rImages = $db->loadObjectList();
 	}
@@ -242,11 +242,13 @@ displayVals();
 
     		<div class="fltlft well" style="width:80%;">
     		<br/><h1>Einsatzbilder :</h1>
-			<div class="control-group" style="height:100px;">
+			
+			
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
-			
+			<hr>
 			<div class="control-group" style="">
 			Bilderupload für Bildergalerie:
 			<div id="text">
@@ -259,7 +261,15 @@ displayVals();
         <!--<img src="images/add_icon.png"  id="add-file-field" name="add" style="margin-top:21px;"/>-->
 		<!--http://www.fyneworks.com/jquery/multifile/-->
      
-			</div></div>
+			</div>
+			
+			<hr>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('watermark_image'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('watermark_image'); ?></div>
+			</div>
+			
+	</div>
 			
             <!--Slider für Bildergalerie-->
             
@@ -269,6 +279,10 @@ displayVals();
         <table>
         
 			<?php 
+			$n = false;
+			for ($i = 0;$i < count($rImages);++$i) {
+			if (@$rImages[$i]->comment) : $n = true; endif;
+			}
 			for ($i = 0;$i < count($rImages);++$i) {
 			$fileName = '../'.$rImages[$i]->thumb;
 			?>   
@@ -279,7 +293,11 @@ displayVals();
 			<img data-src="holder.js/300x200" src="<?php echo $fileName;?>"  alt="" title="<?php echo $fileName;?>"/>
             </a>
             <h5 class="label label-info">Bild ID.Nr. <?php echo $rImages[$i]->id;?></h5>
-            <?php if ($rImages[$i]->comment): ?>Kommentar:<p><?php echo $rImages[$i]->comment;?></p><?php endif; ?>
+			<?php if ($rImages[$i]->comment) : ?>
+			<br/><span title = "<?php echo $rImages[$i]->comment;?>" style="color:#ff0000;"><small>Bild-Info</small></span>
+			 <?php else: ?>
+			<?php if ($n == true) : echo '<br/><small>keine Bild-Info</small>';endif;?>
+			 <?php endif; ?>
             </div>
             </li>
 			<?php 	} ?>

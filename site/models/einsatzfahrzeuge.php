@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @version    CVS: 3.9
- * @package    Com_Einsatzkomponente
- * @author     Ralf Meyer <ralf.meyer@einsatzkomponente.de>
- * @copyright  Copyright (C) 2015. Alle Rechte vorbehalten.
- * @license    GNU General Public License Version 2 oder später; siehe LICENSE.txt
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 
@@ -223,7 +223,7 @@ if (empty($list['direction']))
 				)
 			);
 
-		$query->from('`#__eiko_fahrzeuge` AS a');
+		$query->from('#__eiko_fahrzeuge AS a');
 		
 		// Join over the foreign key 'department'
 		$query->select('#__eiko_organisationen_2190080.name AS organisationen_name_2190080');
@@ -327,7 +327,7 @@ if (empty($list['direction']))
 					$query = $db->getQuery(true);
 					$query
 							->select($db->quoteName('name'))
-							->from('`#__eiko_organisationen`')
+							->from('#__eiko_organisationen')
 							->where($db->quoteName('id') . ' = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -355,7 +355,7 @@ if (empty($list['direction']))
 					$query = $db->getQuery(true);
 					$query
 							->select($db->quoteName('name'))
-							->from('`#__eiko_ausruestung`')
+							->from('#__eiko_ausruestung')
 							->where($db->quoteName('id') . ' = ' . $db->quote($db->escape($value)));
 					$db->setQuery($query);
 					$results = $db->loadObject();
@@ -387,7 +387,7 @@ if (empty($list['direction']))
 
 		foreach ($filters as $key => $value)
 		{
-			if (strpos($key, '_dateformat') && !empty($value) && $this->isValidDate($value) == null)
+			if (strpos($key, '_dateformat') && !empty($value))
 			{
 				$filters[$key]    = '';
 				$error_dateformat = true;
@@ -403,16 +403,4 @@ if (empty($list['direction']))
 		return parent::loadFormData();
 	}
 
-	/**
-	 * Checks if a given date is valid and in a specified format (YYYY-MM-DD)
-	 *
-	 * @param   string  $date  Date to be checked
-	 *
-	 * @return bool
-	 */
-	private function isValidDate($date)
-	{
-		$date = str_replace('/', '-', $date);
-		return (date_create($date)) ? JFactory::getDate($date)->format("Y-m-d") : null;
-	}
 }

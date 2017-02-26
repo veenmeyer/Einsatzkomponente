@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 
 // no direct access
@@ -137,12 +137,12 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query	= $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_organisationen`')
+						->from('#__eiko_organisationen')
 						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					if (!$results[0]->link) :
-					$data[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&id=' . $results[0]->id).'" target="_self" alt="'.$results[0]->link.'">'.$results[0]->name.'</a>';
+					$data[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&Itemid='.$this->params->get('orgalink','').'&id=' . $results[0]->id).'" target="_self" alt="'.$results[0]->link.'">'.$results[0]->name.'</a>';
 					else:					
 					$data[] = '<a href="'.$results[0]->link.'" target="_blank" alt="'.$results[0]->link.'">'.$results[0]->name.'</a>';
 					endif;
@@ -169,15 +169,15 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 					$query	= $db->getQuery(true);
 					$query
 						->select('*')
-						->from('`#__eiko_fahrzeuge`')
+						->from('#__eiko_fahrzeuge')
 						->where('id = "' .$value.'"');
 					$db->setQuery($query);
 					$results = $db->loadObjectList();
 					$data[] = $results[0]->name;
 					if ($results[0]->state == '2'): $results[0]->name = $results[0]->name.' (a.D.)';endif;
 					if (!$results[0]->link) :
-					$vehicles_images[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self"><img class="img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>';
-					$vehicles_list[] = '<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</li>';
+					$vehicles_images[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $results[0]->id).'" target="_self"><img class="img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>';
+					$vehicles_list[] = '<li><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</li>';
 					else:
 					$vehicles_images[] = '<a href="'.$results[0]->link.'" target="_blank"><img class="img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>';
 					$vehicles_list[] = '<li><a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</li>';
@@ -204,24 +204,33 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
               <div class="row-fluid">
             <ul class="thumbnails">
             <?php
-			for ($i = 0;$i < count($this->images);++$i) { 
+			$n = false;
+			for ($i = count($this->images)-count($this->images);$i < count($this->images);++$i) { 
+			if (@$this->images[$i]->comment) : $n = true; 
+			endif;
+			}
+			$i= '';
+			for ($i = count($this->images)-count($this->images);$i < count($this->images);++$i) { 
+			if (@$this->images[$i]) :
 			$fileName_thumb = JURI::Root().$this->images[$i]->thumb;
 			$fileName_image = JURI::Root().$this->images[$i]->image;
 			$thumbwidth = $this->params->get('detail_thumbwidth','100px'); 
 			?>   
               <li>
-                <div class="thumbnail" style="max-width:<?php echo $thumbwidth;?>;)">
-    			  <a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
-                  <img  class="img-rounded" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->einsatzlogo->title;?>"/>
+                <div class="thumbnail eiko_thumbnail_2" style="max-width:<?php echo $thumbwidth;?>;)">
+    			<a href="<?php echo $fileName_image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><?php if ($this->images[$i]->comment) : ?><?php echo '<br/>Bild-Info: '.$this->images[$i]->comment;?><?php endif; ?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
+                <img  class="eiko_img-rounded eiko_thumbs_2" src="<?php echo $fileName_thumb;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="Bild-Nr. <?php echo $this->images[$i]->id;?>"  style="width:<?php echo $this->params->get('detail_thumbwidth','100px');?>;)" alt ="<?php echo $this->einsatzlogo->title;?>"/>
+				
 <?php if ($this->images[$i]->comment) : ?>
-<br/><span><i class="icon-info-sign" style=" margin-right:5px;"></i>Info</span>
+<br/><i class="icon-info-sign" style=" margin-right:5px;"></i><small>Bild-Info</small>
+ <?php else: ?>
+<?php if ($n == true) : echo '<br/><i class="" style=" margin-right:5px;"></i><small></small>
+';endif;?>
  <?php endif; ?>
-                  </a>
-<!--                  <div class="caption">
-					<h5 class="label label-info">Bild ID.Nr. <?php echo $this->images[$i]->id;?></h5>
-                  </div>
--->                </div>
-              </li>
+              </a>
+			  </div>
+           </li>
+			<?php endif; ?>
 			<?php 	} ?>
             </ul>
           </div>

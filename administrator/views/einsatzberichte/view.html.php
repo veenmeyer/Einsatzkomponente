@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -90,22 +90,19 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy {
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_einsatzkomponente');
 				if ($this->params->get('send_mail_backend','0')) : 
-				JToolBarHelper::custom( 'einsatzberichte.sendMail', 'edit','edit', 'Als Mail versenden',  true );
+				JToolBarHelper::custom( 'einsatzberichte.sendMail', 'edit','edit', 'COM_EINSATZKOMPONENTE_ALS_EMAIL_VERSENDEN',  true );
 				endif;
 		}
 		
-		$version = new JVersion;
-		if ($version->isCompatible('3.0')) :
 		if ($canDo->get('core.create')) {
-				JToolBarHelper::custom( 'einsatzberichte.article', 'edit','edit', 'Als Artikel erstellen',  true );
+				JToolBarHelper::custom( 'einsatzberichte.article', 'edit','edit', 'COM_EINSATZKOMPONENTE_ALS_JOOMLA_ARTIKEL_ERSTELLEN',  true );
 		}
-		JToolBarHelper::custom( 'einsatzberichte.pdf', 'upload','upload', 'Als PDF exportieren',  true );
-        endif;
+		JToolBarHelper::custom( 'einsatzberichte.pdf', 'upload','upload', 'COM_EINSATZKOMPONENTE_ALS_PDF_EXPORTIEREN',  true );
 		
             if ($canDo->get('core.create')) :
             if (isset($this->items[0]->state)) {
 			    JToolBarHelper::divider();
-			    JToolBarHelper::archiveList('einsatzberichte.archive','Als Folgeeinsatz markieren');
+			    JToolBarHelper::archiveList('einsatzberichte.archive','COM_EINSATZKOMPONENTE_ALS_FOLGEEINSATZ_MARKIEREN');
             }
 			endif;
 
@@ -301,7 +298,7 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy {
 		$options = array ();
 		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[] = JHtml::_('select.option', '0', 'JUNPUBLISHED');
-		$options[] = JHtml::_('select.option', '2', 'Folgeeinsatz');
+		$options[] = JHtml::_('select.option', '2', 'COM_EINSATZKOMPONENTE_FOLGEEINSATZ');
 		$options[] = JHtml::_('select.option', '*', 'JALL');
 		JHtmlSidebar::addFilter(
 			JText::_('JOPTION_SELECT_PUBLISHED'),

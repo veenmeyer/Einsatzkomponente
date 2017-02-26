@@ -12,13 +12,13 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_KATEGORIE" 
             required="true" 
             filter="raw"
-            query="SELECT * FROM `#__eiko_tickerkat` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            query="SELECT * FROM #__eiko_tickerkat WHERE state ='1' ORDER BY ordering ASC"
             key_field="id"
             value_field="title" />
 
        <field name="filter_tickerkat" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- alle Einsatzkategorien -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_tickerkat`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, '- alle Einsatzkategorien -' AS val UNION SELECT id, title AS val FROM #__eiko_tickerkat" key_field="id" value_field="val"
              /> 
 
        <field name="data1" type="sql"
@@ -26,13 +26,13 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATA1" 
             required="true" 
             filter="raw"
-            query="SELECT * FROM `#__eiko_einsatzarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            query="SELECT * FROM #__eiko_einsatzarten WHERE state ='1' ORDER BY ordering ASC"
             key_field="id"
             value_field="title" />
 
        <field name="filter_data1" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- alle Einsatzarten -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_einsatzarten`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, '- alle Einsatzarten -' AS val UNION SELECT id, title AS val FROM #__eiko_einsatzarten" key_field="id" value_field="val"
              /> 
 
 			
@@ -41,20 +41,20 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_ALERTING" 
             required="true" 
             filter="raw"
-            query="SELECT * FROM `#__eiko_alarmierungsarten` WHERE `state` ='1' ORDER BY `ordering` ASC"
+            query="SELECT * FROM #__eiko_alarmierungsarten WHERE state ='1' ORDER BY ordering ASC"
             key_field="id"
             value_field="title" /> 
 			
        <field name="filter_alerting" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- alle Alarmierungsarten -' AS `val` UNION SELECT `id`, `title` AS val FROM `#__eiko_alarmierungsarten`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, '- alle Alarmierungsarten -' AS val UNION SELECT id, title AS val FROM #__eiko_alarmierungsarten" key_field="id" value_field="val"
              /> 
 
 
 			 
        <field name="image" type="media"
             label="Titelbild"
-            description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
+            description="Weitere Bilder können Sie über den Mehrfachbild-Uploader hinzufügen" 
             filter="raw"
 		    preview="true"
 			id="einsatzbericht_image_klein"
@@ -66,7 +66,16 @@
             filter="safehtml"
             size="60"
             maxlength="100" /> 
-	  <field
+			
+       <field name="watermark_image" type="media"
+			label="COM_EINSATZKOMPONENTE_OPTION_WASSERZEICHEN_WAEHLEN" 
+			description="Sie können Wasserzeichen hinzufügen. Die Datei muss zwingend eine PNG-Datei sein !!" 
+            filter="raw"
+		    preview="true"
+			default ="images/com_einsatzkomponente/watermark/watermark.png"
+            directory="com_einsatzkomponente/watermark" />   
+
+	<field
 			name="gmap"
 			type="radio"
 			class="btn-group"
@@ -219,7 +228,7 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
             required="true" 
-            query="SELECT `id`, `name` FROM `#__eiko_organisationen` WHERE `state`='1' ORDER BY `ordering` ASC"
+            query="SELECT id, name FROM #__eiko_organisationen WHERE state='1' ORDER BY ordering ASC"
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
@@ -227,7 +236,7 @@
 
        <field name="filter_auswahl_orga" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- alle Organisationen -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_organisationen`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, '- alle Organisationen -' AS val UNION SELECT id, name AS val FROM #__eiko_organisationen" key_field="id" value_field="val"
              /> 
 
 
@@ -240,7 +249,7 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSRUESTUNG" 
             required="false" 
-            query="SELECT `id`, `name` FROM `#__eiko_ausruestung` WHERE `state`='1' ORDER BY `ordering` ASC"
+            query="SELECT id, name FROM #__eiko_ausruestung WHERE state='1' ORDER BY ordering ASC"
 			key_field="id"       		
 			value_field="name"
 			multiple="multiple"
@@ -248,15 +257,15 @@
 
        <field name="ausruestung" type="sql" class="inputbox"
             onchange="this.form.submit();"
-            query="SELECT 0 AS `id`, '- Ausrüstung -' AS `val` UNION SELECT `id`, `name` AS val FROM `#__eiko_ausruestung`" key_field="id" value_field="val"
+            query="SELECT 0 AS id, '- Ausrüstung -' AS val UNION SELECT id, name AS val FROM #__eiko_ausruestung" key_field="id" value_field="val"
              /> 
 		 
        <field name="article_id" 
-	   label = "Joomla-Artikel verlinken ?"
+	   label = "COM_EINSATZKOMPONENTE_ARTIKEL_JOOMLA_LINK"
        description="Bitte frei lassen, wenn kein Joomla-Artikel verlinkt werden soll." 
 	   default="0"
 	   type="sql" class="inputbox"
-            query="SELECT 0 AS `id`, 'Nein' AS `title` UNION SELECT `id`, `title` FROM `#__content` " 
+            query="SELECT 0 AS id, 'Nein' AS title UNION SELECT id, title FROM #__content ORDER BY id DESC" 
 			key_field="id" 
 			value_field="title"
              /> 

@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // No direct access
 defined('_JEXEC') or die;
@@ -36,7 +36,7 @@ $restore      	= JFactory::getApplication()->input->get('restore', false);
 
 // DB-Service
 
-$repair_array ['111'] = "CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `asset_id` int(10) unsigned NOT NULL DEFAULT '0',  `title` varchar(255) NOT NULL,  `image` varchar(255) NOT NULL,  `beschreibung`text NOT NULL,  `ordering` int(11) NOT NULL,  `state` tinyint(1) NOT NULL,  `created_by` int(11) NOT NULL,  `checked_out` int(11) NOT NULL,  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  PRIMARY KEY (`id`)) DEFAULT COLLATE=utf8_general_ci;";
+$repair_array ['111'] = "CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` ( `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `asset_id` int(10) unsigned NOT NULL DEFAULT '0',  `title` varchar(255) NOT NULL,  `image` varchar(255) NOT NULL,  `beschreibung` TEXT NOT NULL,  `ordering` int(11) NOT NULL,  `state` tinyint(1) NOT NULL,  `created_by` int(11) NOT NULL,  `checked_out` int(11) NOT NULL,  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',  PRIMARY KEY (`id`)) DEFAULT COLLATE=utf8_general_ci;";
 
 $repair_array ['112'] = "CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,`asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',`name` VARCHAR(255)  NOT NULL ,`image` VARCHAR(255)  NOT NULL ,`beschreibung` TEXT NOT NULL ,`created_by` INT(11)  NOT NULL ,`checked_out` INT(11)  NOT NULL ,`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',`ordering` INT(11)  NOT NULL ,`state` TINYINT(1)  NOT NULL ,PRIMARY KEY (`id`)) DEFAULT COLLATE=utf8_general_ci;";
 
@@ -258,15 +258,15 @@ else {
 	}
 	
 // ------------------ Update von Version 3.05 auf 3.06 beta ---------------------------------------------------
-
+$check_tickerkat = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('select * from `#__eiko_tickerkat` where id="0"');
+	$db->setQuery('select * from `#__eiko_tickerkat`');
 	try {
 	$check_tickerkat = $db->execute();
-	} catch (Exception $e) {$check_tickerkat=true;}
+	} catch (Exception $e) {$check_tickerkat='1';}
 	
 	
-if ($check_tickerkat) {
+if ($check_tickerkat == '1') {
 	
 $eiko_tickerkat = array(
   array('id' => '1','asset_id' => '0','title' => 'Brandeinsatz > Brandmeldeanlage (Fehlalarm)','image' => 'images/com_einsatzkomponente/images/list/brand_bma_fehl.png','beschreibung' => '','ordering' => '1','state' => '1','created_by' => '0','checked_out' => '0','checked_out_time' => '0000-00-00 00:00:00'),
@@ -300,7 +300,7 @@ $sql="CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `beschreibung` text NOT NULL,
+  `beschreibung` TEXT NOT NULL,
   `ordering` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL,
   `created_by` int(11) NOT NULL,

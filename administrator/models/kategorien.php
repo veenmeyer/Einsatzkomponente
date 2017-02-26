@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) by Ralf Meyer 2013. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
@@ -90,7 +90,7 @@ class EinsatzkomponenteModelKategorien extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__eiko_tickerkat` AS a');
+		$query->from('#__eiko_tickerkat AS a');
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');

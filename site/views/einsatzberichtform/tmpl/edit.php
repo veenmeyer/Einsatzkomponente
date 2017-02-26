@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     3.0.0
+ * @version     3.15.0
  * @package     com_einsatzkomponente
- * @copyright   Copyright (C) 2013 by Ralf Meyer. All rights reserved.
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Ralf Meyer <webmaster@feuerwehr-veenhusen.de> - http://einsatzkomponente.de
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
  */
 // no direct access
 defined('_JEXEC') or die;
@@ -30,7 +30,7 @@ if (!$this->item->id == 0) :
 if ($params->get('eiko')) : 
 
 	$db = JFactory::getDBO();
-	$query = 'SELECT id, thumb, comment FROM `#__eiko_images` WHERE `report_id`="'.$this->item->id.'" AND `state`="1" ORDER BY `ordering` ASC';
+	$query = 'SELECT id, thumb, comment FROM #__eiko_images WHERE report_id="'.$this->item->id.'" AND state="1" ORDER BY ordering ASC';
 	$db->setQuery($query);
 	$rImages = $db->loadObjectList();
     endif;endif;
@@ -65,7 +65,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
         <h1>Bitte geben Sie die Einsatzdaten ein :</h1>
 	<?php   $authorised = JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente');
             if ($authorised !== true) {
-                throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
+                throw new Exception(JText::_('ALERTNOAUTHOR'));
             }
 	?>
 
@@ -244,6 +244,11 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>
 			
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('watermark_image'); ?></div>
+				<br/><div class="controls"><?php echo $this->form->getInput('watermark_image'); ?></div>
+			</div>
+			
 			<?php if ($params->get('eiko')) : ?>
 			<div class="control-group" style="">
 			<?php echo JText::_('COM_EINSATZKOMPONENTE_BILDERUPLOAD_BILDERGALERIE');?>:
@@ -351,13 +356,19 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div> -->
-
-			<?php if ($params->get('article_frontpage','1')) :	?>
+	<?php   $authorised = JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente');
+            if ($authorised) {
+			?>
+			<?php if ($params->get('article_frontpage','0')) :	?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>
 			</div>
 			<?php endif;?>
+			
+			<?php
+            }
+	?>
         
 		<br/><br/>
 		<div>

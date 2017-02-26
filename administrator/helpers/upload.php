@@ -1,24 +1,17 @@
+
 <?php
 /**
-* @package		JJ SWFUpload
-* @author		JoomJunk
-* @copyright	Copyright (C) 2011 - 2012 JoomJunk. All Rights Reserved
-* @license		http://www.gnu.org/licenses/gpl-3.0.html
-*/
- 
-defined( '_JEXEC' ) or die( 'Restricted access' );
- 
-jimport( 'joomla.application.component.model' );
-class EinsatzkomponenteModelSWFUpload extends JModelLegacy
-{
-	function __construct()
-	{
-		parent::__construct();
-		
-	}
-	
-	function upload($fieldName)
-	{
+ * @version     3.15.0
+ * @package     com_einsatzkomponente
+ * @copyright   Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author      Ralf Meyer <ralf.meyer@mail.de> - https://einsatzkomponente.de
+ */
+// No direct access
+defined('_JEXEC') or die;
+
+
+
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
 
@@ -26,22 +19,25 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
  
 		//this is the name of the field in the html form, filedata is the default name for swfupload
 		//so we will leave it as that
-		$fieldName = 'Filedata';
- 
+		
 		ini_set('memory_limit', -1);
 		
+		$files        = JFactory::getApplication()->input->files->get('data', '', 'array');
+
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
- 
- 
-		$fileName = $_FILES[$fieldName]['name'];
-		$filename = JFile::makeSafe($filename);
+		$count_data=count($files) ;  ######### count the data #####
+$count = 0;
+while($count < $count_data)
+{
+		$fileName = $files[$count]['name'];//echo $count.'= Name:'.$fileName.'<br/>';
+		$fileName = JFile::makeSafe($fileName);
 		$uploadedFileNameParts = explode('.',$fileName);
 		$uploadedFileExtension = array_pop($uploadedFileNameParts);
  
-		$fileTemp = $_FILES[$fieldName]['tmp_name'];
-		
+		$fileTemp = $files[$count]['tmp_name'];
+		$count++;
 		// remove invalid chars
-//		$file_extension = strtolower(substr(strrchr($filename,"."),1));
+//		$file_extension = strtolower(substr(strrchr($fileName,"."),1));
 //		$name_cleared = preg_replace("#[^A-Za-z0-9 _.-]#", "", $fileName);
 //		if ($name_cleared != $file_extension){
 //			$fileName = $name_cleared;
@@ -49,9 +45,12 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 					
 					
 					
-						
-		$rep_id = JRequest::getVar('rep_id', 0);   // Einsatz_ID holen für Zuordnung der Bilder in der Datenbank
-		$watermark_image = JRequest::getVar('watermark_image', $params->get('watermark_image'));
+					
+					
+		$rep_id = $cid;   // Einsatz_ID holen für Zuordnung der Bilder in der Datenbank
+		if ($watermark_image == '') :
+		$watermark_image = JFactory::getApplication()->input->getVar('watermark_image', $params->get('watermark_image'));
+		endif;
 		
 		// Check ob Bilder in einen Unterordner (OrdnerName = ID-Nr.) abgespeichert werden sollen :
 		if ($params->get('new_dir', '1')) :
@@ -73,7 +72,7 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 	    
 		$uploadPath  = JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').$rep_id_ordner.'/'.$fileName ;
 		$uploadPath_thumb  = JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').'/thumbs'.$rep_id_ordner.'/'.$fileName ;
- 
+ //echo $fileTemp.' xxxx '.$uploadPath;exit; 
 		if(!JFile::upload($fileTemp, $uploadPath)) 
 		{
 			echo JText::_( 'Bild konnte nicht verschoben werden' );
@@ -87,7 +86,6 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
         if (!JFolder::exists(JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').'/thumbs')) 
 		{ JFolder::create(JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').'/thumbs');        }
 		else  {}
-		
 		
 		
 		// Exif-Information --- Bild richtig drehen
@@ -126,11 +124,9 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 		imagedestroy($scaled);
 
 		
-		
 		// thumbs erstellen und unter /thumbs abspeichern
 	    $bild = $uploadPath;
-
-		list( $original_breite, $original_hoehe, $typ, $imgtag, $bits, $channels, $mimetype ) = @getimagesize( $bild );
+		@list( $original_breite, $original_hoehe, $typ, $imgtag, $bits, $channels, $mimetype ) = @getimagesize( $bild );
 		$speichern = $uploadPath_thumb;
      	$originalbild = imagecreatefromjpeg( $bild ); 
 	    $maxbreite = $params->get('thumbwidth', '100');
@@ -159,6 +155,7 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
             $thumb_breite = $original_breite;
             $thumb_hoehe = $original_hoehe;
         }
+		
         // Thumbnail erstellen
         $thumb = imagecreatetruecolor( $thumb_breite, $thumb_hoehe );
         imagecopyresampled( $thumb, $originalbild, 0, 0, 0, 0, $thumb_breite, $thumb_hoehe, $original_breite, $original_hoehe );
@@ -190,13 +187,13 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 			$custompath = $params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder');
 			chmod($uploadPath, 0644);
 			chmod($uploadPath_thumb, 0644);
-			$db = &JFactory::getDBO();
-			$query = 'INSERT INTO `#__eiko_images` SET `report_id`="'.$rep_id.'", `image`="'.$custompath.$rep_id_ordner.'/'.$fileName.'", `thumb`="'.$custompath.'/thumbs'.$rep_id_ordner.'/'.$fileName.'", `state`="1", `created_by`="'.$user->id.'"';
+			$db = JFactory::getDBO();
+			$query = 'INSERT INTO #__eiko_images SET report_id="'.$rep_id.'", image="'.$custompath.$rep_id_ordner.'/'.$fileName.'", thumb="'.$custompath.'/thumbs'.$rep_id_ordner.'/'.$fileName.'", state="1", created_by="'.$user->id.'"';
 			$db->setQuery($query);
 			$db->query();
 			
 		$db = JFactory::getDBO();
-		$query = 'SELECT image FROM `#__eiko_einsatzberichte` WHERE `id` ="'.$rep_id.'" ';
+		$query = 'SELECT image FROM #__eiko_einsatzberichte WHERE id ="'.$rep_id.'" ';
 		$db->setQuery($query);
 		$rows = $db->loadObjectList();
 		$check_image      = $rows[0]->image;
@@ -206,8 +203,8 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 		$db		= JFactory::getDBO();
 		$query	= $db->getQuery(true);
 		$query->update('#__eiko_einsatzberichte');
-		$query->set('image = "'.$custompath.'/'.$rep_id_ordner.'/'.$fileName.'" ');
-		$query->where('`id` ="'.$rep_id.'"');
+		$query->set('image = "'.$custompath.$rep_id_ordner.'/'.$fileName.'" ');
+		$query->where('id ="'.$rep_id.'"');
 		$db->setQuery((string) $query);
 
 		try
@@ -216,23 +213,23 @@ class EinsatzkomponenteModelSWFUpload extends JModelLegacy
 		}
 		catch (RuntimeException $e)
 		{
-			JError::raiseError(500, $e->getMessage());
+			throw new Exception($e->getMessage(), 500);
 		}
 		endif;
 		endif;
 			
-			echo JText::_( 'Bild wurde hochgeladen' );
+			echo JText::_( 'Bild wurde hochgeladen' ).'<br/>';
 			
 			
 $source = JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').$rep_id_ordner.'/'.$fileName ; //the source file
 $destination =  JPATH_SITE.'/'.$params->get('uploadpath', 'images/com_einsatzkomponente/einsatzbilder').$rep_id_ordner.'/'.$fileName ; //were to place the thumb
-$watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets/images/watermark/'.$watermark_image.''; //the watermark files
+$watermark =  JPATH_SITE.'/'.$watermark_image.''; //the watermark files
 
     // Einsatzbilder resizen
 	$image_resize = $params->get('image_resize', 'true');
     if ($image_resize === 'true'):
 	$newwidth = $params->get('image_resize_max_width', '800');
-	$newheight = $params->get('image_resize_max_height', '600'); 
+	$newheight = $params->get('image_resize_max_height', '600');
     list($width, $height) = getimagesize($source);
     if($width > $height && $newheight < $height){
         $newheight = $height / ($width / $newwidth);
@@ -245,7 +242,6 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
     $thumb = imagecreatetruecolor($newwidth, $newheight);
     $source_name = imagecreatefromjpeg($source);
     imagecopyresized($thumb, $source_name, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-	//imagecopyresampled($thumb, $source_name, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 	imagejpeg($thumb, $destination, 100);  
 	endif;
 
@@ -253,12 +249,12 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	$watermark_show = $params->get('watermark_show', 'true');
     if ($watermark_show === 'true'):
 	$watermark_pos_x = $params->get('watermark_pos_x', '0');
-	$watermark_pos_y = $params->get('watermark_pos_y', '60');
+	$watermark_pos_y = $params->get('watermark_pos_y', '5');
 	list($sourcewidth,$sourceheight)=getimagesize($source);
 	list($watermarkwidth,$watermarkheight)=getimagesize($watermark);
 
 	$w_pos_x = $watermark_pos_x;
-	$w_pos_y = $sourceheight-$watermark_pos_y;
+	$w_pos_y = $sourceheight-$watermarkheight-$watermark_pos_y;
 
 	$source_img = imagecreatefromjpeg($source);
 	$watermark_img = imagecreatefrompng($watermark);
@@ -267,22 +263,6 @@ $watermark =  JPATH_SITE.'/administrator/components/com_einsatzkomponente/assets
 	imagedestroy ($source_img);
 	imagedestroy ($watermark_img);
 	endif;
+		}} 
 	
-	
-	
-	
-			
-			
-			exit(0);
-		}
-		
-		
-		
-		
-		
-	}
-	
-
-	
-}
 ?>
