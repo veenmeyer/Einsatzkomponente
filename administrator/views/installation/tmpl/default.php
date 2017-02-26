@@ -258,15 +258,15 @@ else {
 	}
 	
 // ------------------ Update von Version 3.05 auf 3.06 beta ---------------------------------------------------
-
+$check_tickerkat = '0';
 	$db = JFactory::getDbo();
-	$db->setQuery('select * from `#__eiko_tickerkat` where id="0"');
+	$db->setQuery('select * from `#__eiko_tickerkat`');
 	try {
 	$check_tickerkat = $db->execute();
-	} catch (Exception $e) {$check_tickerkat=true;}
+	} catch (Exception $e) {$check_tickerkat='1';}
 	
 	
-if ($check_tickerkat) {
+if ($check_tickerkat == '1') {
 	
 $eiko_tickerkat = array(
   array('id' => '1','asset_id' => '0','title' => 'Brandeinsatz > Brandmeldeanlage (Fehlalarm)','image' => 'images/com_einsatzkomponente/images/list/brand_bma_fehl.png','beschreibung' => '','ordering' => '1','state' => '1','created_by' => '0','checked_out' => '0','checked_out_time' => '0000-00-00 00:00:00'),
