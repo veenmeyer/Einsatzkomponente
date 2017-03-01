@@ -11,6 +11,11 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.17</small></h3>
+<ul>
+# Fehler behoben "Warning getimagesize"
+</ul>
+
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
 # Action-Buttons im Einsatzarchiv funktionieren jetzt
