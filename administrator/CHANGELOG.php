@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.17</small></h3>
 <ul>
+# Fehler Pagination+Nummerierung (alte Einsatzübersicht)
 # Fehler behoben "Warning getimagesize"
 </ul>
 

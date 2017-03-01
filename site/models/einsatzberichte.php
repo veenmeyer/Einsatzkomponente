@@ -43,14 +43,14 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
         $limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $page_limit);
         $this->setState('list.limit', $limit);
 		
-if ($limit == '0') :   
+if ($limit != '0') :   
         $limitstart = $app->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
 else:  	$limitstart = '0';
 		$this->setState('list.start', $limitstart);
 endif;
 
-//echo 'limit:'.$limit.'<br/>limitstart:'.$limitstart;
+echo 'limit:'.$limit.'<br/>limitstart:'.$limitstart;
         if ($list = $app->getUserStateFromRequest($this->context . '.list', 'list', array(), 'array'))
         {
             foreach ($list as $name => $value)
