@@ -292,7 +292,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		
 			if ($this->params->get('standard_share_image','')) : 
 			$fileName_image = str_replace(' ', '%20', $this->params->get('standard_share_image',''));  
-			$size = @getimagesize(JURI::base().$fileName_image);
+			$size = @getimagesize($fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
@@ -300,7 +300,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 
 		if( $this->item->image ) :
 			$fileName_image = str_replace(' ', '%20', $this->item->image);  
-			$size = @getimagesize(JURI::base().$fileName_image);
+			$size = @getimagesize($fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
@@ -309,7 +309,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		if ($this->images) :
 			for ($i = 0;$i < count($this->images);++$i) { 
 			$fileName_image = str_replace(' ', '%20', $this->images[$i]->image);  
-			$size = @getimagesize(JURI::base().$fileName_image);
+			$size = @getimagesize($fileName_image);
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
 			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
