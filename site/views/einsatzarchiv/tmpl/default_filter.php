@@ -67,7 +67,7 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 
             <div class="btn-wrapper input-append">
                 <?php echo $filters['filter_search']->input; ?>
-                <button type="submit" class="btn hasTooltip" title="" data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_SUCHEN'); ?>">
+                <button type="submit" class="btn " title="" data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_SUCHEN'); ?>">
                     <i class="icon-search"></i>
                 </button>
             </div>
@@ -75,14 +75,14 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 		
 		<?php if ($filters) : ?>
             <div class="btn-wrapper hidden-phone">
-                <button type="button" class="btn hasTooltip js-stools-btn-filter" title=""
+                <button type="button" class="btn  js-stools-btn-filter" title=""
                         data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_FILTER_AUSWAEHLEN'); ?>">
                     <?php echo JText::_('COM_EINSATZKOMPONENTE_FILTER_AUSWAEHLEN'); ?> <i class="caret"></i>
                 </button>
             </div>
             <?php endif; ?>
             <div class="btn-wrapper hidden-phone">
-                <button type="button" class="btn hasTooltip js-stools-btn-clear" title="" data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_ALLE_FILTER_ZURUECKSETZEN'); ?>">
+                <button type="button" class="btn  js-stools-btn-clear" title="" data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_ALLE_FILTER_ZURUECKSETZEN'); ?>">
                     <?php echo JText::_('COM_EINSATZKOMPONENTE_ALLE_FILTER_ZURUECKSETZEN'); ?>
                 </button>
             </div>

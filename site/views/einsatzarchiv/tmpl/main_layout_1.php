@@ -31,7 +31,8 @@ defined('_JEXEC') or die;
 				<?php endif;?>
 				
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1', 'a.date1', $listDirn, $listOrder); ?>
+				<!--<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1', 'a.date1', $listDirn, $listOrder);?>-->
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_DATE1');?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				
@@ -42,7 +43,8 @@ defined('_JEXEC') or die;
 				
            <?php if ($this->params->get('display_home_image')) : ?>
 				<th class='left mobile_hide_480 '>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGE', 'a.image', $listDirn, $listOrder); ?>
+				<!--<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGE', 'a.image', $listDirn, $listOrder); ?>-->
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_IMAGE');?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 			<?php endif;?>
@@ -52,13 +54,14 @@ defined('_JEXEC') or die;
 				<?php $eiko_col = $eiko_col+1;?>
 				</th> -->
 				<th class='left mobile_hide_480'>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_SUMMARY', 'a.summary', $listDirn, $listOrder);
-				?>
+				<!--<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_SUMMARY', 'a.summary', $listDirn, $listOrder);?>-->
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_SUMMARY');?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php if ($this->params->get('display_home_orga','0')) : ?>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>
+				<!--<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>-->
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA');?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th> 
 				<?php endif; ?>
@@ -76,7 +79,8 @@ defined('_JEXEC') or die;
 				</th> -->
 				<?php if ($this->params->get('display_home_counter','1')) : ?>
 				<th class='left mobile_hide_480 '>
-				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ZUGRIFFE', 'a.counter', $listDirn, $listOrder); ?>
+				<!--<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ZUGRIFFE', 'a.counter', $listDirn, $listOrder); ?>-->
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_ZUGRIFFE');?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php endif;?>
@@ -96,7 +100,7 @@ defined('_JEXEC') or die;
     		<?php if ($canEdit || $canDelete): ?>
              <?php if (isset($this->items[0]->state)): ?>
 				<th width="1%" class="nowrap center">
-				<?php echo JHtml::_('grid.sort', 'Actions', 'a.state', $listDirn, $listOrder); ?>
+				<?php echo JText::_('Actions'); ?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 			<?php endif; ?>  
@@ -197,13 +201,13 @@ defined('_JEXEC') or die;
 					<?php endif; ?>
 					
 					<?php if ($this->params->get('display_home_alertimage','0')) : ?>
-					<img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->alerting_image;?>" title="Alarmierung über: <?php echo $item->alerting;?>" />
+					<img class="eiko_icon " src="<?php echo JURI::Root();?><?php echo $item->alerting_image;?>" title="Alarmierung über: <?php echo $item->alerting;?>" />
 					<?php endif;?>
 					<?php if ($this->params->get('display_list_icon')) : ?>
-					<img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" alt="<?php echo $item->list_icon;?>" title="Einsatzart: <?php echo $item->data1;?>"/>
+					<img class="eiko_icon " src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" alt="<?php echo $item->list_icon;?>" title="Einsatzart: <?php echo $item->data1;?>"/>
 					<?php endif;?>
 					<?php if ($this->params->get('display_tickerkat_icon')) : ?>
-					<img class="eiko_icon hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->tickerkat_image;?>" alt="<?php echo $item->tickerkat;?>" title="Kategorie: <?php echo $item->tickerkat;?>"/>
+					<img class="eiko_icon " src="<?php echo JURI::Root();?><?php echo $item->tickerkat_image;?>" alt="<?php echo $item->tickerkat;?>" title="Kategorie: <?php echo $item->tickerkat;?>"/>
 					<?php endif;?>
 					
 					<span class="eiko_nowrap"><b><?php echo $item->data1; ?></b></span>
@@ -226,7 +230,7 @@ defined('_JEXEC') or die;
 		  			<?php $auswahl_orga = explode (",",$item->auswahl_orga);?>
 					<?php $auswahl_orga = count($auswahl_orga); ?>
 					<?php $strength = ($people*$this->params->get('einsatzstaerke_people','0.5')) + ($vehicles*$this->params->get('einsatzstaerke_vehicles','2')) + ($auswahl_orga*$this->params->get('einsatzstaerke_orga','15')) ; ?>
-					<div class="progress progress-danger progress-striped hasTooltip" style="margin-top:5px;margin-bottom:5px;color:#000000 !important;width:180px;" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAFT'); ?>: <?php if ($auswahl_orga) :echo $auswahl_orga;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN'); ?> //<?php endif;?> <?php if ($vehicles):echo $vehicles;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE'); ?> <?php endif;?><?php if ($people) :echo '// '.$people;?> Einsatzkräfte <?php endif;?>"> 
+					<div class="progress progress-danger progress-striped " style="margin-top:5px;margin-bottom:5px;color:#000000 !important;width:180px;" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAFT'); ?>: <?php if ($auswahl_orga) :echo $auswahl_orga;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN'); ?> //<?php endif;?> <?php if ($vehicles):echo $vehicles;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE'); ?> <?php endif;?><?php if ($people) :echo '// '.$people;?> Einsatzkräfte <?php endif;?>"> 
 					<div class="bar" style="color:#000000 !important;width:<?php echo $strength;?>px"></div></div>
 					<?php } ?>
 					<!-- Einsatzstärke ENDE --> 

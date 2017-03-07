@@ -45,7 +45,7 @@ defined('_JEXEC') or die;
 			   <?php if ($canEdit || $canDelete): ?>
                <?php if (isset($this->items[0]->state)): ?>
 			   <th width="1%" class="nowrap center">
-			   <?php echo JHtml::_('grid.sort', 'Actions', 'a.state', $listDirn, $listOrder); ?>
+				<?php echo JText::_('Actions'); ?>
 				<?php $eiko_col = $eiko_col+1;?>
 			   </th>
 			   <?php endif; ?>  
@@ -126,13 +126,13 @@ defined('_JEXEC') or die;
 					</a>
 					<?php endif;?>
 					<?php if ($this->params->get('display_home_alertimage','0')) : ?>
-					<img class="eiko_icon_3 hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->alerting_image;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNG_UEBER'); ?>: <?php echo $item->alerting;?>" />
+					<img class="eiko_icon_3 " src="<?php echo JURI::Root();?><?php echo $item->alerting_image;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_ALARMIERUNG_UEBER'); ?>: <?php echo $item->alerting;?>" />
 					<?php endif;?>
 					<?php if ($this->params->get('display_list_icon')) : ?>
-					<img class="eiko_icon_3 hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" alt="<?php echo $item->list_icon;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART'); ?>: <?php echo $item->data1;?>"/>
+					<img class="eiko_icon_3 " src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" alt="<?php echo $item->list_icon;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART'); ?>: <?php echo $item->data1;?>"/>
 					<?php endif;?>
 					<?php if ($this->params->get('display_tickerkat_icon')) : ?>
-					<img class="eiko_icon_3 hasTooltip" src="<?php echo JURI::Root();?><?php echo $item->tickerkat_image;?>" alt="<?php echo $item->tickerkat;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_KATEGORIE'); ?>: <?php echo $item->tickerkat;?>"/>
+					<img class="eiko_icon_3 " src="<?php echo JURI::Root();?><?php echo $item->tickerkat_image;?>" alt="<?php echo $item->tickerkat;?>" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_KATEGORIE'); ?>: <?php echo $item->tickerkat;?>"/>
 					<?php endif;?>
 					<br /></br>
 					
@@ -145,7 +145,7 @@ defined('_JEXEC') or die;
 		  			<?php $auswahl_orga = explode (",",$item->auswahl_orga);?>
 					<?php $auswahl_orga = count($auswahl_orga); ?>
 					<?php $strength = ($people*$this->params->get('einsatzstaerke_people','0.5')) + ($vehicles*$this->params->get('einsatzstaerke_vehicles','2')) + ($auswahl_orga*$this->params->get('einsatzstaerke_orga','15')) ; ?>
-					<div class="progress progress-danger progress-striped hasTooltip" style="margin-top:-12px;margin-bottom:5px;color:#000000 !important;width:180px;" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAFT'); ?>: <?php if ($auswahl_orga) :echo $auswahl_orga;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN'); ?> //<?php endif;?> <?php if ($vehicles):echo $vehicles;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE'); ?> <?php endif;?><?php if ($people) :echo '// '.$people;?> Einsatzkräfte <?php endif;?>"> 
+					<div class="progress progress-danger progress-striped " style="margin-top:-12px;margin-bottom:5px;color:#000000 !important;width:180px;" title="<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAFT'); ?>: <?php if ($auswahl_orga) :echo $auswahl_orga;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN'); ?> //<?php endif;?> <?php if ($vehicles):echo $vehicles;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE'); ?> <?php endif;?><?php if ($people) :echo '// '.$people;?> Einsatzkräfte <?php endif;?>"> 
 					<div class="bar" style="color:#000000 !important;width:<?php echo $strength;?>px"></div></div>
 					<?php } ?>
 					<!-- Einsatzstärke ENDE --> 
@@ -178,7 +178,7 @@ defined('_JEXEC') or die;
 			
 					<?php if ($this->params->get('display_home_counter','1')) : ?>
 						</br>	
-						<?php echo '<span class="hasTooltip" title="Dieser Bericht wurde bereits '.$item->counter.' mal gelesen." ><i class="icon-eye" ></i> '.JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE').': '.$item->counter.'</span>'; ?>
+						<?php echo '<span class="" title="Dieser Bericht wurde bereits '.$item->counter.' mal gelesen." ><i class="icon-eye" ></i> '.JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE').': '.$item->counter.'</span>'; ?>
 					<?php endif; ?>
 </br>
 					<!-- Button Kurzinfo --> 
