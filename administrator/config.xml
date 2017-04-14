@@ -736,6 +736,8 @@
 				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_MAP_HEIGHT" 
 				description="Bitte nur so angeben : z.b. 250px !!" 
 			/>
+			
+	  
 	  <field
 			name="display_home_organisationen"
 			type="radio"
@@ -1190,6 +1192,19 @@
 		/>
 		
 	  <field
+			name="display_detail_desc"
+			type="radio"
+			class="btn-group"
+			default="1"
+			description="Hier können Sie einstellen, ob der ausführliche Einsatzbericht angezeigt werden soll."
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZ_DETAILANSICHT_DESC" >
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+
+		<field
 			name="display_detail_tickerkat"
 			type="radio"
 			class="btn-group"

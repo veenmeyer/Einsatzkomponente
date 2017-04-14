@@ -47,9 +47,13 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
        <div class="clear"></div>
      </div>
     <div class="news_post">
+			<?php if( $this->item->desc) : ?>
+			<?php if ($this->params->get('display_detail_desc','1')): ?>
             <?php jimport('joomla.html.content'); ?>  
             <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
         	<p style="text-align: justify;"><?php echo $Desc; ?></p>
+			<?php endif;?>
+			<?php endif;?>
 
 		<?php
 			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;

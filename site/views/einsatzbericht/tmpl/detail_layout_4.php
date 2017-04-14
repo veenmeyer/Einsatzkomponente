@@ -213,6 +213,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 <!--Einsatzbericht anzeigen mit Plugin-Support-->           
 <?php if( $this->item->desc ) : ?>
+<?php if ($this->params->get('display_detail_desc','1')): ?>
   <tr>
     <td  class="layout4_row_12" colspan="2">
 		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?>:</u></b>
@@ -231,7 +232,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			?>
     </td>
   </tr>
-
+<?php endif;?>
 <?php endif;?>
 <!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
  

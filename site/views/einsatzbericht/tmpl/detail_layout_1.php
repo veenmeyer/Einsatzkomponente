@@ -337,12 +337,14 @@ $vehicles_images = '';
 
 <!--Einsatzbericht anzeigen mit Plugin-Support-->  
 <?php if( $this->item->desc) : ?>
+<?php if ($this->params->get('display_detail_desc','1')): ?>
 <?php jimport('joomla.html.content'); ?>  
 <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
 <div class="eiko_einsatzbericht_2">
 <h3><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC'); ?></h3>
 <?php echo $Desc;?>
 </div>
+<?php endif;?>
 <?php endif;?>
 <!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->  
 

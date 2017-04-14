@@ -90,12 +90,15 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
         	<h4 class="headline"><?php echo $this->item->summary; ?></h4>
             
-            <!--Einsatzbericht anzeigen mit Plugin-Support-->           
+            <!--Einsatzbericht anzeigen mit Plugin-Support-->   
+			<?php if( $this->item->desc) : ?>
+			<?php if ($this->params->get('display_detail_desc','1')): ?>
             <?php jimport('joomla.html.content'); ?>  
             <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
         	<p style="text-align: justify;"><?php echo $Desc; ?></p>
            <?php endif;?>
-    
+           <?php endif;?>
+           <?php endif;?>
 			<?php
 			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
 			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;

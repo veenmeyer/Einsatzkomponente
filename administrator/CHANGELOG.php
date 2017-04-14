@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.17</small></h3>
 <ul>
++ Option Einsatzbericht-Text anzeigen
 # Filterauswahl Jahre im Einsatzarchiv
 # Bootstrap-Tooltips in Einsatzarchiv entfernt
 # Fehler Pagination+Nummerierung (alte Einsatzübersicht)
