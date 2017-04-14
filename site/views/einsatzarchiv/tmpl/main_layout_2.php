@@ -121,7 +121,7 @@ defined('_JEXEC') or die;
 		   <tr class="eiko_einsatzarchiv_jahr_tr"><td class="eiko_einsatzarchiv_jahr_td" colspan="<?php echo $eiko_col; ?>">
            <?php $y= $item->date1_year;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_jahr_div">';?>
-           <?php echo 'Einsatzberichte '. $item->date1_year.' :';?> 
+           <?php echo 'Einsatzberichte '. $item->date1_year.'';?> 
            <?php echo '</div>';?>
            </td></tr>
            <?php endif;?>

@@ -282,7 +282,7 @@ endif;
 			$canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 			
 		if ($canCreate or $canEdit or $canChange or $canDelete) :
-			$query->where('a.state = 1 or a.state = 0');
+			$query->where('(a.state = 1 or a.state = 0)');
 			else:
 			$query->where('a.state = 1');
 			endif;
