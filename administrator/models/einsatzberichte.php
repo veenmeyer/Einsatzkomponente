@@ -56,6 +56,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                 'presse3_label', 'a.presse3_label',
                 'presse3', 'a.presse3',
                 'updatedate', 'a.updatedate',
+                'createdate', 'a.createdate',
                 'einsatzticker', 'a.einsatzticker',
                 'department', 'a.department',
                 'notrufticker', 'a.notrufticker',
@@ -64,6 +65,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
                 'counter', 'a.counter',
                 'state', 'a.state',
                 'created_by', 'a.created_by',
+                'modified_by', 'a.modified_by',
 
             );
         }
@@ -111,7 +113,9 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 
 		//Filtering created_by
 		$this->setState('filter.created_by', $app->getUserStateFromRequest($this->context.'.filter.created_by', 'filter_created_by', '', 'string'));
-
+		
+		//Filtering modified_by
+		$this->setState('filter.modified_by', $app->getUserStateFromRequest($this->context.'.filter.modified_by', 'filter_modified_by', '', 'string'));
 
         // Load the parameters.
         $params = JComponentHelper::getParams('com_einsatzkomponente');
@@ -181,7 +185,9 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-
+		// Join over the user field 'modified_by'
+		$query->select('modified_by.name AS modified_by');
+		$query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
         
 
 		// Filter by published state
@@ -257,7 +263,12 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
 		if ($filter_created_by) {
 			$query->where("a.created_by = '".$db->escape($filter_created_by)."'");
 		}
-
+		
+		//Filtering modified_by
+		$filter_modified_by = $this->state->get("filter.modified_by");
+		if ($filter_modified_by) {
+			$query->where("a.modified_by = '".$db->escape($filter_modified_by)."'");
+		}
 
         // Add the list ordering clause.
         $orderCol = $this->state->get('list.ordering');

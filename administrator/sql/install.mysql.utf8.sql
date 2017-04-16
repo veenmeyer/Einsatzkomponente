@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `presse3_label` VARCHAR(255)  NOT NULL DEFAULT 'Presselink' ,
 `presse3` VARCHAR(255)  NOT NULL ,
 `updatedate` DATETIME NOT NULL ,
+`createdate` DATETIME NOT NULL ,
 `einsatzticker` VARCHAR(255)  NOT NULL ,
 `notrufticker` VARCHAR(255)  NOT NULL ,
 `tickerkat` INT(10)  NOT NULL ,
@@ -37,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `status` VARCHAR(255)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`modified_by` INT(11)  NOT NULL ,
 PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8_general_ci;
 

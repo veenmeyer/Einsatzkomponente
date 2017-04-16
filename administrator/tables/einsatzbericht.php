@@ -29,7 +29,10 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
      * @since	1.5
      */
     public function bind($array, $ignore = '') {
-		$array['updatedate'] = date("Y-m-d H:i:s");
+		
+		$array['updatedate'] = JHtml::date('now', 'Y-m-d H:i:s');
+		
+
 		//Support for multiple or not foreign key field: auswahl_orga
 			if(isset($array['auswahl_orga'])):
 				if(is_array($array['auswahl_orga'])){
@@ -60,9 +63,9 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
 		if(!JFactory::getUser()->authorise('core.edit.state','com_einsatzkomponente.einsatzbericht.'.$array['id']) && $array['state'] == 1){
 			$array['state'] = 0;
 		}
-		if(isset($array['created_by']) || $array['created_by'] == 0){
-			$array['created_by'] = JFactory::getUser()->id;
-		}
+		 if(!isset($array['modified_by'])) {
+			 $array['modified_by'] = JFactory::getUser()->id;
+		 }
         if (isset($array['params']) && is_array($array['params'])) {
             $registry = new JRegistry();
             $registry->loadArray($array['params']);
@@ -112,9 +115,17 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
         if (property_exists($this, 'ordering') && $this->id == 0) {
             $this->ordering = self::getNextOrder();
         }
+		
         if ($this->counter > '0'&& $this->id == 0) {
 		$this->counter = '0';  }
-			
+		
+        if (property_exists($this, 'createdate') && $this->id == 0) {
+		$this->createdate = JHtml::date('now', 'Y-m-d H:i:s');
+		if(!$this->created_by){ 
+			$this->created_by = JFactory::getUser()->id;
+		}
+        }
+
         return parent::check();
     }
     /**

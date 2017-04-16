@@ -318,7 +318,9 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
     		</div>
     		
 				<input type="hidden" name="jform[updatedate]" value="<?php echo $this->item->updatedate; ?>" />
-			<div class="control-group">
+				<input type="hidden" name="jform[createdate]" value="<?php echo $this->item->createdate; ?>" />
+
+				<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('notrufticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('notrufticker'); ?></div>
 			</div>
@@ -355,6 +357,10 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 			<!--<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
+			</div> -->
+			<!--<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('modified_by'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('modified_by'); ?></div>
 			</div> -->
 	<?php   $authorised = JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente');
             if ($authorised) {

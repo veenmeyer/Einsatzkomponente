@@ -323,6 +323,7 @@ displayVals();
     		</div>
     
 				<input type="hidden" name="jform[updatedate]" value="<?php echo $this->item->updatedate; ?>" />
+				<input type="hidden" name="jform[createdate]" value="<?php echo $this->item->createdate; ?>" />
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>
@@ -369,6 +370,10 @@ displayVals();
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
+			</div>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('modified_by'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('modified_by'); ?></div>
 			</div>
             		<fieldset class="panelform">
 

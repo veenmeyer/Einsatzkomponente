@@ -35,7 +35,12 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	}
     }
  
-
+    	function save2copy($key = NULL, $urlVar = NULL) {
+		// Check for request forgeries
+		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		}
+ 
     	function save($key = NULL, $urlVar = NULL) {
 		// Check for request forgeries
 		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
