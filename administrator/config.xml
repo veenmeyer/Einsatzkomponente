@@ -1715,9 +1715,17 @@
 			<option
 				value="1">COM_EINSATZKOMPONENTE_OPTION_ORGANISATIONEN_FAHRZEUGE_MIT_LINK</option>
 	  </field>
+	  
+		<field
+			name="spacer65464560"
+			type="spacer"
+			hr="true"
+		/>
 
 	
 	</fieldset>
+
+	
 	
 	
 <fieldset name="fahrzeug_uebersicht" label="COM_EINSATZKOMPONENTE_OPTION_VEHICLES" description="">
@@ -2126,6 +2134,33 @@
 		</option>
 	</field>
 </fieldset>	
+
+<fieldset name="pre_select" label="Pre-Selektion" description="">
+
+<field name="note_pre_auswahl" 
+		type="note" 
+		label="Auswahl für Vorbelegung der Auswahlfelder" 
+		class="alert alert-info" 
+		description="Hier können verschiedene Auswahlfelder vordefiniert werden."
+		/>	
+
+		<field name="pre_auswahl_orga" type="sql" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
+            query="SELECT id, name FROM #__eiko_organisationen WHERE state='1' ORDER BY ordering ASC"
+			key_field="id"       		
+			value_field="name"
+			multiple="multiple"
+         /> 
+		<field
+			name="spacer65464560"
+			type="spacer"
+			hr="true"
+		/>
+
+	</fieldset>
+
+
 <!--ACL-->
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
