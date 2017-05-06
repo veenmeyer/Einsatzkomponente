@@ -21,9 +21,8 @@
                 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_AUSRUESTUNG_IMAGE"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_AUSRUESTUNG_IMAGE" 
-                
-                
-                
+	        preview="true"
+			preview_height="170px"
             directory="com_einsatzkomponente/images/tools/" /> 
 
 

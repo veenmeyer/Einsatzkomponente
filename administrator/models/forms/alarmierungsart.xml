@@ -15,6 +15,7 @@
               label="COM_EINSATZKOMPONENTE_FORM_LBL_ALARMIERUNGSART_IMAGE"
               description="COM_EINSATZKOMPONENTE_FORM_DESC_ALARMIERUNGSART_IMAGE" 
 	          preview="true"
+			  preview_height="80px"
 			  hide_none="1"
 			  id="alarmierungsart_image_klein"
               directory="com_einsatzkomponente/images/alert" /> 

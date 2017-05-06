@@ -34,32 +34,41 @@ class EinsatzkomponenteTableeinsatzbericht extends JTable {
 		
 
 		//Support for multiple or not foreign key field: auswahl_orga
-			if(isset($array['auswahl_orga'])):
+			if(isset($array['auswahl_orga'])) {
 				if(is_array($array['auswahl_orga'])){
 					$array['auswahl_orga'] = implode(',',$array['auswahl_orga']);
 				}
 				else if(strrpos($array['auswahl_orga'], ',') != false){
 					$array['auswahl_orga'] = explode(',',$array['auswahl_orga']);
 				}
-			endif;
-		//Support for multiple or not foreign key field: vehicles
-			if(isset($array['vehicles'])):
+			}
+			else {
+				$array['auswahl_orga'] = ''; }
+
+				//Support for multiple or not foreign key field: vehicles
+			if(isset($array['vehicles'])) {
 				if(is_array($array['vehicles'])){
 					$array['vehicles'] = implode(',',$array['vehicles']);
 				}
 				else if(strrpos($array['vehicles'], ',') != false){
 					$array['vehicles'] = explode(',',$array['vehicles']);
 				}
-			endif;
+			}
+			else {
+				$array['vehicles'] = ''; }
+			
 		//Support for multiple or not foreign key field: ausruestung
-			if(isset($array['ausruestung'])):
+			if(isset($array['ausruestung'])){
 				if(is_array($array['ausruestung'])){
 					$array['ausruestung'] = implode(',',$array['ausruestung']);
 				}
 				else if(strrpos($array['ausruestung'], ',') != false){
 					$array['ausruestung'] = explode(',',$array['ausruestung']);
 				}
-			endif;
+			}
+			else {
+				$array['ausruestung'] = ''; }
+			
 		if(!JFactory::getUser()->authorise('core.edit.state','com_einsatzkomponente.einsatzbericht.'.$array['id']) && $array['state'] == 1){
 			$array['state'] = 0;
 		}

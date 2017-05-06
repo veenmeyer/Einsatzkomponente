@@ -49,15 +49,15 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				<div class="control-label"><?php echo $this->form->getLabel('marker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('marker'); ?></div>
 			</div>
-			<div class="control-group" style=" height:100px;" >
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('beschr'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('beschr'); ?></div>
 			</div>
-			<div class="control-group" style=" height:100px;">
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('icon'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('icon'); ?></div>
 			</div>
-			<div class="control-group" style=" height:100px;">
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('list_icon'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('list_icon'); ?></div>
 			</div>

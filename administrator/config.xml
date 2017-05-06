@@ -146,6 +146,7 @@
 			description="Sie können Wasserzeichen hinzufügen. Die Datei muss zwingend eine PNG-Datei sein !!" 
             filter="raw"
 		    preview="true"
+	        preview_height="200px"
 			showon="watermark_show:true"
             directory="com_einsatzkomponente/watermark" />   
 
@@ -339,6 +340,7 @@
             description="Sie können hier ein Bild hinterlegen, wenn immer nur dieses als Standardbild geteilt werden soll." 
             filter="raw"
 		    preview="true"
+	        preview_height="200px"
 			id="share_image_klein"
             directory="images" />   
 

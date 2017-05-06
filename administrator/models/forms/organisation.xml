@@ -20,6 +20,7 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_ICON" 
             filter="raw"
 			preview ="true"
+	        preview_height="80px"
 			hide_none="1"
 			id="organisation_icon"
             directory="com_einsatzkomponente/images/map/icons" /> 
