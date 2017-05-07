@@ -37,6 +37,7 @@ class EinsatzkomponenteModelAusruestungen extends JModelList
                 'created_by', 'a.created_by',
                 'ordering', 'a.ordering',
                 'state', 'a.state',
+                'params', 'a.params',
 
 			);
 		}

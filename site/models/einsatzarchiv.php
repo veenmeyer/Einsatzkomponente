@@ -72,6 +72,7 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
                 'state', 'a.state',
                 'created_by', 'a.created_by',
                 'modified_by', 'a.modified_by',
+                'params', 'a.params',
 
             );
         }

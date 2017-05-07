@@ -39,8 +39,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzberichte` (
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
 `modified_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_einsatzarten` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -53,8 +54,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_einsatzarten` (
 `ordering` INT(11)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_organisationen` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -83,8 +85,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_organisationen` (
 `desc` TEXT NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_fahrzeuge` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -112,8 +115,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_fahrzeuge` (
 `desc` TEXT NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -128,8 +132,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 `ordering` INT(11)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE IF NOT EXISTS `#__eiko_alarmierungsarten` (
@@ -140,8 +145,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_alarmierungsarten` (
 `image` VARCHAR(255)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_images` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -153,8 +159,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_images` (
 `thumb` VARCHAR(255)  NOT NULL ,
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_gmap_config` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -168,8 +175,9 @@ CREATE TABLE IF NOT EXISTS `#__eiko_gmap_config` (
 `start_lang` VARCHAR(255)  NOT NULL DEFAULT '7.475510015869147',
 `state` TINYINT(1)  NOT NULL DEFAULT '1',
 `created_by` INT(11)  NOT NULL ,
+`params` MEDIUMTEXT NOT NULL,
 PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -182,5 +190,6 @@ CREATE TABLE IF NOT EXISTS `#__eiko_tickerkat` (
   `created_by` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,
   `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `params` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`id`)
-) DEFAULT COLLATE=utf8_general_ci;
+) DEFAULT COLLATE=utf8mb4_unicode_ci;

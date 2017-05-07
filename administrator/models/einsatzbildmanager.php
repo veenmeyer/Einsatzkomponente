@@ -32,6 +32,7 @@ class EinsatzkomponenteModeleinsatzbildmanager extends JModelList
                 'thumb', 'a.thumb',
                 'state', 'a.state',
                 'created_by', 'a.created_by',
+                'params', 'a.params',
             );
         }
         parent::__construct($config);

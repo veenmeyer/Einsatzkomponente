@@ -55,6 +55,7 @@ class EinsatzkomponenteModelEinsatzfahrzeuge extends JModelList
 				'desc', 'a.desc',
 				'state', 'a.state',
 				'created_by', 'a.created_by',
+                'params', 'a.params',
 			);
 		}
 

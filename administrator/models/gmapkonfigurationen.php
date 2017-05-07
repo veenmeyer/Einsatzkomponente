@@ -36,6 +36,7 @@ class EinsatzkomponenteModelgmapkonfigurationen extends JModelList
                 'start_lang', 'a.start_lang',
                 'state', 'a.state',
                 'created_by', 'a.created_by',
+                'params', 'a.params',
 
             );
         }
