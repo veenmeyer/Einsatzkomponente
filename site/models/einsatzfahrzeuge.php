@@ -238,7 +238,7 @@ if (empty($list['direction']))
 		
 		if (!JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente'))
 		{
-			$query->where('a.state = 1');
+			$query->where('(a.state = 1 or a.state = 2)');
 		}
 
 		// Filter by search in title
@@ -312,6 +312,9 @@ if (empty($list['direction']))
 		
 		foreach ($items as $item)
 		{
+			
+		 if ($item->state == '2'): $item->name = $item->name.' (a.D.)';endif; // Fahrzeug ausser Dienst ?
+			
 			if (isset($item->department) && $item->department != '')
 			{
 				if (is_object($item->department))

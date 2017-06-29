@@ -18,7 +18,6 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 }
 ?>
 <?php if ($this->item) : ?>
-<?php if ($this->item->state == '2'): $this->item->name = $this->item->name.' (a.D.)';endif;?>
 
 
 	<div class="item_fields">
