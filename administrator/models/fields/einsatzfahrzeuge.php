@@ -63,7 +63,13 @@ class JFormFieldeinsatzfahrzeuge extends JFormField
                         if ($vehicles = $db->loadObjectList()) :
                         $html[].='<optgroup label="sonstige">';
                                 foreach ($vehicles as $vehicle) {
-                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' ( sonstige ) </option>';
+										if ($this->value) : 
+											foreach ($this->value as $value) {
+											if ($value == $vehicle->id) : $selected = 'selected';endif;
+											}
+										endif;
+                                        $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' ( sonstige ) </option>';
+										$selected = '';
                                 }
                         $html[].='</optgroup>';
 						endif;
@@ -71,9 +77,16 @@ class JFormFieldeinsatzfahrzeuge extends JFormField
                         $query = 'SELECT id,name from #__eiko_fahrzeuge where state = 2 order by ordering ASC';
                         $db->setQuery($query);
                         if ($vehicles = $db->loadObjectList()) :
-                        $html[].='<optgroup label="außer Dienst">';
+                        $html[].='<optgroup label="auÃŸer Dienst">';
+						
                                 foreach ($vehicles as $vehicle) {
-                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' - a.D. ( ID '.$vehicle->id.' ) </option>';
+										if ($this->value) : 
+											foreach ($this->value as $value) {
+											if ($value == $vehicle->id) : $selected = 'selected';endif;
+											}
+										endif;
+                                        $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' - a.D. ( ID '.$vehicle->id.' ) </option>';
+										$selected = '';
                                 }
                         $html[].='</optgroup>'; 
 						endif;

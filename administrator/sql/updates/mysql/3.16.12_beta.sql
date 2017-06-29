@@ -1,0 +1,13 @@
+ALTER TABLE `#__eiko_einsatzberichte` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_alarmierungsarten` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_ausruestung` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_einsatzarten` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_fahrzeuge` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_gmap_config` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_images` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_organisationen` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_tickerkat` ADD `params` MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL ;
+ALTER TABLE `#__eiko_einsatzberichte` ADD `createdate` DATETIME NOT NULL AFTER `updatedate`;
+ALTER TABLE `#__eiko_einsatzberichte` ADD `modified_by` INT(11)  NOT NULL AFTER `created_by`;
+UPDATE `#__eiko_einsatzberichte` SET `createdate` = `updatedate`;
+UPDATE `#__eiko_einsatzberichte` SET `modified_by` = `created_by`;

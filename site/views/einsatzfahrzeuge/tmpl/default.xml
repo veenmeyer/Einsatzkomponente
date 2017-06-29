@@ -64,7 +64,7 @@
 type="note" 
 class="alert alert-info" 
 label="Eigene Layouts verwenden" 
-description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu verwenden, die bei einem Update nicht überschrieben werden. Weitere Informationen hierzu gibt es im Forum http://www.einsatzkomponente.de" 
+description="In der Einsatzkomponente V3 ist es möglich auch eigene Layouts zu verwenden, die bei einem Update nicht überschrieben werden. Weitere Informationen hierzu gibt es im Forum https://www.einsatzkomponente.de" 
 />
 
 		 <field name="note_main_layout" 
