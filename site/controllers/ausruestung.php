@@ -84,7 +84,7 @@ class EinsatzkomponenteControllerAusruestung extends EinsatzkomponenteController
 
             // Redirect to the list screen.
             $this->setMessage(JText::_('COM_EINSATZKOMPONENTE_ITEM_SAVED_SUCCESSFULLY'));
-            $menu = & JSite::getMenu();
+            $menu = & JFactory::getApplication()->getMenu();
             $item = $menu->getActive();
             if (!$item) {
                 // If there isn't any menu item active, redirect to list view
@@ -133,7 +133,7 @@ class EinsatzkomponenteControllerAusruestung extends EinsatzkomponenteController
             }
 
             // Redirect to the list screen.
-            $menu = & JSite::getMenu();
+            $menu = & JFactory::getApplication()->getMenu();
             $item = $menu->getActive();
             $this->setRedirect(JRoute::_($item->link, false));
         } else {

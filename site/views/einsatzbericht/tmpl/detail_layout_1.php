@@ -18,9 +18,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 $vehicles_images = '';
-
+//print_r ($this->item); 
 ?>
-  
 
  
 <?php if( $this->item ) : ?>  <!--Einsatzdaten vorhanden ? Sonst ENDE --> 
@@ -54,7 +53,7 @@ $vehicles_images = '';
             <!--Einsatzkategorie-->
 			<?php if ($this->params->get('display_detail_tickerkat','1') == '1') :?> 
             <?php if( $this->item->tickerkat ) : ?>
-        	<br /><span class="eiko_einsatzkategorie_2"><?php echo JText::_('COM_EINSATZKOMPONENTE_KATEGORIE'); ?>: <?php echo JText::_($this->tickerKat->title); ?></span>
+        	<span class="eiko_einsatzkategorie_2"><!--<?php echo JText::_('COM_EINSATZKOMPONENTE_KATEGORIE'); ?> --><?php echo JText::_($this->tickerKat->title); ?></span>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzkategorie ENDE-->
@@ -62,13 +61,13 @@ $vehicles_images = '';
             <!--Einsatzart-->
 			<?php if ($this->params->get('display_detail_einsatzart','0') == '1') :?> 
             <?php if( $this->item->data1 ) : ?>
-        	<br /><span class="eiko_einsatzart_2"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART'); ?>: <?php echo JText::_($this->einsatzlogo->title); ?></span>
+        	<br /><span class="eiko_einsatzart_2"><!--<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART'); ?> --><?php echo JText::_($this->einsatzlogo->title); ?></span>
             <?php endif;?>
             <?php endif;?>
             <!--Einsatzart ENDE-->
 
 			<?php if ($this->params->get('display_detail_hits','1')):?>
-            <br/><span class="badge small eiko_counter_detail"><?php echo JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE'); ?>: <?php echo $this->item->counter; ?></span> 
+            <br/><span class="badge small eiko_counter_detail"><?php echo JText::_('COM_EINSATZKOMPONENTE_ZUGRIFFE'); ?> <?php echo $this->item->counter; ?></span> 
             <?php endif;?>
 			
             <div class="eiko_clearfix"></div>
@@ -107,7 +106,7 @@ $vehicles_images = '';
 			  <?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'); ?> 
               </span></td>
               <td class="eiko_td1_2">
-			  <?php echo '<span class="mobile_show_320"><b>Details:</b><br/><br/></span>'; ?> 
+			  <?php echo '<span class="mobile_show_320"><b>Details</b><br/><br/></span>'; ?> 
 			  <span class="eiko_einsatzort_value_2"><?php echo $this->item->address.''; ?>
 			<?php if ($this->params->get('gmap_action','0')) : ?>
             <?php if( $this->item->gmap ) : ?>

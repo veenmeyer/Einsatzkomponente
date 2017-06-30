@@ -127,7 +127,7 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 
         // Redirect to the list screen.
         $this->setMessage(JText::_('Item saved successfully'));
-        $menu = & JSite::getMenu();
+        $menu = JFactory::getApplication()->getMenu();
         $item = $menu->getActive();
         $this->setRedirect(JRoute::_($item->link, false));
 
@@ -137,7 +137,7 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
     
     
     function cancel() {
-		$menu = & JSite::getMenu();
+		$menu = & JFactory::getApplication()->getMenu();
         $item = $menu->getActive();
         $this->setRedirect(JRoute::_($item->link, false));
     }
@@ -202,7 +202,7 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 
         // Redirect to the list screen.
         $this->setMessage(JText::_('Status erfolgreich geändert'));
-        $menu = & JSite::getMenu();
+        $menu = & JFactory::getApplication()->getMenu();
         $item = $menu->getActive();
         $this->setRedirect(JRoute::_($item->link, false));
 
@@ -270,7 +270,7 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 
         // Redirect to the list screen.
         $this->setMessage(JText::_('Item deleted successfully'));
-        $menu = & JSite::getMenu();
+        $menu = & JFactory::getApplication()->getMenu();
         $item = $menu->getActive();
         $this->setRedirect(JRoute::_($item->link, false));
 

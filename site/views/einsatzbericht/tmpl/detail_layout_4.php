@@ -45,22 +45,22 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php endif;?>
 
   <tr style="padding:10px;">
-    <td class="layout4_row_6" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART');?>:</td>
+    <td class="layout4_row_6" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZART');?></td>
     <td class="layout4_row_6" style="font-weight:bold;"><?php echo $this->einsatzlogo->title; ?></td>
   </tr>
   
   <tr>
-    <td class="layout4_row_7" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_KURZBERICHT');?>:</td>
+    <td class="layout4_row_7" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_KURZBERICHT');?></td>
     <td class="layout4_row_7"><?php echo $this->item->summary; ?></td>
   </tr>
   
   <tr>
-    <td class="layout4_row_8" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZORT');?>:</td>
+    <td class="layout4_row_8" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZORT');?></td>
     <td class="layout4_row_8"><?php echo $this->item->address.''; ?></td>
   </tr>
 
   <tr>
-    <td class="layout4_row_9" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_ALERTING');?>:</td>
+    <td class="layout4_row_9" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_ALERTING');?></td>
     <td class="layout4_row_9">
     Alarmierung per
 <?php if($this->alarmierungsart->image)	:?>
@@ -82,7 +82,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  <?php if ($this->params->get('display_einsatzdauer','1') && ($this->item->date3>1) ): ?>
   <tr>
     <td class="layout4_row_100" width="250px">
-    	<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>:
+    	<?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_EINSATZDAUER'); ?>
     </td>
     <td class="layout4_row_100">
 		<?php echo $this->einsatzdauer;	?>
@@ -91,7 +91,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
  <?php endif;?>
  
   <tr>
-    <td class="layout4_row_10" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_MANNSCHAFTSSTARKE');?>:</td>
+    <td class="layout4_row_10" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_MANNSCHAFTSSTARKE');?></td>
     <td class="layout4_row_10">
 		<?php
 			if ($this->item->people == 0) {
@@ -105,11 +105,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
   </tr>
   
   <tr>
-    <td class="layout4_row_11" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?>:</td>
+    <td class="layout4_row_11" width="250px"><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZKRAEFTE');?></td>
     <td class="layout4_row_11">
             <?php if( $this->item->auswahl_orga ) : ?>   
             <div class="well well-small">
-			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN').'</u></span>'; ?>:
+			<?php echo '<span style="font-weight: bold;"><u>'.JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN').'</u></span>'; ?>
 			<?php
 				$array = array();
 				foreach((array)$this->item->auswahl_orga as $value): 
@@ -199,7 +199,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php endif;?>
             
             <?php if( $this->item->vehicles ) : ?>
-			<?php echo '<span><u><b>'.JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE').'</b>:</u></span><br/>'; ?>
+			<?php echo '<span><u><b>'.JText::_('COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE').'</b></u></span><br/>'; ?>
 			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
 			<?php echo ''.$vehicles_images;?> 
             <?php else:?>
@@ -216,7 +216,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if ($this->params->get('display_detail_desc','1')): ?>
   <tr>
     <td  class="layout4_row_12" colspan="2">
-		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?>:</u></b>
+		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?></u></b>
 <?php jimport('joomla.html.content'); ?>  
 <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
 <div class="eiko_einsatzbericht_2">
@@ -258,7 +258,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if ($this->images) : ?>
   <tr>
     <td class="layout4_row_15" colspan="2">
-		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFOTOS');?>:</u></b>
+		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZFOTOS');?></u></b>
             <div class="row-fluid">
             <ul class="thumbnails eiko_thumbnails_2">
             <?php
@@ -304,7 +304,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
 			<tr>
 				<td colspan="2">
-					<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZORT');?>:</u></b>
+					<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZORT');?></u></b>
 				</td>
 			</tr>
 			<tr>			

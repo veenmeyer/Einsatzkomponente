@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.17</small></h3>
 <ul>
+# Einsatz im Frontend eintragen unter PHP7.1
 # Fahrzeugübersicht: Ausser Dienst gestellte FHZ konnten nicht gefiltert werden
 # Fahrzeugübersicht: Ausser Dienst gestellte FHZ wurden nicht angezeigt
 + Menüpunkte: Detailansicht Organisation + Einsatzfahrzeug
