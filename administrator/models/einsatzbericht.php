@@ -106,7 +106,9 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 		}
 		
 			$params = JComponentHelper::getParams('com_einsatzkomponente');
-			$data->watermark_image = 	$params->get('watermark_image','');
+			
+			if(is_object($data)) $data->watermark_image = 	$params->get('watermark_image','');
+			
 		return $data;
 	}
 	/**
