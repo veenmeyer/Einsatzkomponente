@@ -14,6 +14,7 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select'); 
+JHtml::_( 'bootstrap.startTabSet' );
 
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0)
@@ -380,6 +381,17 @@ displayVals();
             <input type="hidden" name="jform[status]" value="<?php echo $this->item->status; ?>" />
             </fieldset>
     	</div>
+		
+   <!-- 		<div class="fltlft well" style="width:80%;">
+
+			<div class="control-group">
+		<?php $this->ignore_fieldsets = array('general', 'info', 'detail', 'jmetadata', 'item_associations','accesscontrol'); ?>
+    <?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
+			</div>
+    
+    	</div>
+ -->
+		
    </div>     
         <input type="hidden" name="task" value="" />
 			<input type='hidden' name="action" value="Filedata" />
