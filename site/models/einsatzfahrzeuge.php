@@ -258,10 +258,25 @@ if (empty($list['direction']))
 		
 
 		// Filtering department
-		$filter_department = $this->state->get("filter.department");
-		if ($filter_department != '') {
-			$query->where("FIND_IN_SET('" . $db->escape($filter_department) . "',a.department)");
-		}
+	    $app = JFactory::getApplication();
+		$params = $app->getParams('com_einsatzkomponente');
+		$array = array();
+		$filter_orga = $params->get('filter_orga');
+		
+					if ($filter_orga) :
+					foreach((array)$params->get('filter_orga') as $value): 
+							if(!is_array($value)):
+							$array[] = $value;
+							endif;
+					endforeach;
+					
+					$string = '';
+					foreach($array as $value):
+					$string .= 'a.department = '.$value.' OR ';
+					endforeach;
+				$string = substr ( $string, 0, -3 );
+			$query->where($string);
+			endif;
 
 		// Filtering ausruestung
 		$filter_ausruestung = $this->state->get("filter.ausruestung");

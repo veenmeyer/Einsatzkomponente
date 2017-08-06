@@ -69,7 +69,11 @@ defined('_JEXEC') or die;
 				
 				<?php if ($this->params->get('display_home_presse','0') ) : ?>
 				<th class='left'>
+					<?php if ($this->params->get('presse_image','')) : ?>					
+					<img class="eiko_icon_press" src="<?php echo JURI::Root();?><?php echo $this->params->get('presse_image','');?>" title="" />
+					<?php else:?>
 				<?php echo JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_PRESSEBERICHT'); ?>
+				<?php endif;?>
 				<?php $eiko_col = $eiko_col+1;?>
 				</th>
 				<?php endif;?>
@@ -288,13 +292,13 @@ defined('_JEXEC') or die;
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
 					<?php endif; ?> 
 					
-					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					<?php if ($this->params->get('display_home_links_3','0')) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
 					<?php endif; ?> 
 
 					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->image;?>"/>
 					
-					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					<?php if ($this->params->get('display_home_links_3','0')) : ?>
 					</a>
 					<?php endif;?>
            <?php endif;?>
@@ -303,13 +307,13 @@ defined('_JEXEC') or die;
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzarchiv.', $canCheckin); ?>
 					<?php endif; ?> 
 					
-					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					<?php if ($this->params->get('display_home_links_3','0')) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
 					<?php endif; ?> 
 
 					<img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
 					
-					<?php if ($this->params->get('display_home_links_2','1')) : ?>
+					<?php if ($this->params->get('display_home_links_3','0')) : ?>
 					</a>
 					<?php endif;?>
            <?php endif;?>

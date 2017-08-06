@@ -276,11 +276,11 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		
 		if ($this->item->summary)
 		{	$summary = strip_tags($this->item->summary);
-		$opengraph .= '<meta property="og:description" content="Datum: '.date('d.m.Y', strtotime($this->item->date1)).' --- Ort: #'.$this->item->address.' --- #'.$summary.'" />';
+		$opengraph .= '<meta property="og:description" content="Datum: '.date('d.m.Y', strtotime($this->item->date1)).' --- Ort: '.$this->item->address.' --- '.$summary.'" />';
 		}
 		if ($this->item->desc)
 		{	$desc = strip_tags($this->item->desc);
-		$opengraph .= '<meta property="og:description" content="Datum: '.date('d.m.Y', strtotime($this->item->date1)).' --- Ort: #'.$this->item->address.' --- #'.$desc.'" />';
+		$opengraph .= '<meta property="og:description" content="Datum: '.date('d.m.Y', strtotime($this->item->date1)).' --- Ort: '.$this->item->address.' --- '.$desc.'" />';
 		}
 	
 

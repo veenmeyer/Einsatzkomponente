@@ -180,6 +180,16 @@ class EinsatzkomponenteModelEinsatzberichtForm extends JModelForm
 	{
 		$data = $this->getData(); 
         
+			$data->auswahl_orga = implode(',',$array);
+			if ($data->auswahl_orga == '') : // Vorbelegung Organisationen
+				//$db = JFactory::getDbo();
+				//$db->setQuery('SELECT id,ffw FROM #__eiko_organisationen WHERE ffw="1" LIMIT 1');
+				//$standard = $db->loadResult();
+				//$data->auswahl_orga = $standard['id'];
+			$params = JComponentHelper::getParams('com_einsatzkomponente');
+			$data->auswahl_orga = 	$params->get('pre_auswahl_orga','');
+			endif;
+		
 			$params = JComponentHelper::getParams('com_einsatzkomponente');
 			$data->watermark_image = 	$params->get('watermark_image','');
 			

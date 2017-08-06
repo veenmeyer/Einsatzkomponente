@@ -1012,6 +1012,16 @@
 			<option
 				value="1">JYES</option>
 	  </field>
+	  
+       <field name="presse_image" type="media"
+			label="COM_EINSATZKOMPONENTE_OPTION_PRESSEIMAGE_WAEHLEN" 
+			description="Sie können hier ein Bild als Presselink auswählen" 
+            filter="raw"
+		    preview="true"
+	        preview_height="80px"
+			showon="display_home_presse:1"
+            directory="com_einsatzkomponente/" />    
+	  
 	  <field
 			name="display_home_image_nopic"
 			type="radio"
@@ -1062,6 +1072,22 @@
 			<option
 				value="1">JYES</option>
 	  </field>
+	  
+	  <field
+			name="display_home_links_3"
+			type="radio"
+			showon ="display_home_links:1"
+			class="btn-group"
+			default="0"
+			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_LINK_DETAILBERICHT_AUF_BILD"
+			description="Funktion nur beim Standard-Layout und Layout1">
+			
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+	  
 	  <field
 			name="display_home_info"
 			type="radio"

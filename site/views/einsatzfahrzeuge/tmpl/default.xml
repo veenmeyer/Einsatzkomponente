@@ -53,6 +53,16 @@
 		hr="true"
 />
 
+       <field name="filter_orga" type="sql" class="inputbox"
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_AUSWAHLORGA" 
+            required="false" 
+            query="SELECT id, name FROM #__eiko_organisationen WHERE state='1' ORDER BY ordering ASC"
+			key_field="id"       		
+			value_field="name"
+			multiple="multiple"
+         /> 
+
 
 		</fieldset>
 		

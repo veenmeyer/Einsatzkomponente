@@ -287,8 +287,17 @@ if ($this->params->get('display_home_pagination')) :
            <?php endif;?>
 
            <?php if ($this->params->get('display_home_image')) : ?>
-		   <?php if ($item->foto) : ?>		   
-		   <td class="mobile_image" style="text-align:center;vertical-align:center;padding-top:5px;"> <img  class="img-rounded" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->foto;?>"/></td>
+		   <?php if ($item->foto) : ?>	
+		   <td class="mobile_image" style="text-align:center;vertical-align:center;padding-top:5px;">
+			<?php if ($this->params->get('display_home_links_3','0')) : ?>
+			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
+			<?php endif; ?> 
+		   <img  class="img-rounded" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->foto;?>"/>
+			<?php if ($this->params->get('display_home_links_3','0')) : ?>
+			</a>
+			<?php endif;?>
+		   </td>
+		   
            <?php endif;?>
 		   <?php if (!$item->foto) : ?>
            <?php if ($this->params->get('display_home_image_nopic','0')) : ?>
