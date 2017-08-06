@@ -43,7 +43,7 @@ class EinsatzkomponenteModelEinsatzberichte extends JModelList {
         $limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $page_limit);
         $this->setState('list.limit', $limit);
 		
-if ($limit == '0') :   
+if ($limit != '0') :   
         $limitstart = $app->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
 else:  	$limitstart = '0';
@@ -165,6 +165,9 @@ endif;
 		// Join over the user field 'created_by'
 		$query->select('created_by.name AS created_by');
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+		// Join over the user field 'modified_by'
+		$query->select('modified_by.name AS modified_by');
+		$query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
@@ -178,6 +181,7 @@ endif;
         
 		//Filtering data1
 		//Filtering alerting
+		
 		//Filtering updatedate
 		$filter_updatedate_from = $this->state->get("filter.updatedate.from");
 		if ($filter_updatedate_from) {
@@ -187,6 +191,17 @@ endif;
 		if ($filter_updatedate_to) {
 			$query->where("a.updatedate <= '".$filter_updatedate_to."'");
 		}
+		
+		//Filtering createdate
+		$filter_createdate_from = $this->state->get("filter.createdate.from");
+		if ($filter_createdate_from) {
+			$query->where("a.createdate >= '".$filter_createdate_from."'");
+		}
+		$filter_createdate_to = $this->state->get("filter.createdate.to");
+		if ($filter_createdate_to) {
+			$query->where("a.createdate <= '".$filter_createdate_to."'");
+		}
+
 		//Filtering auswahl_orga
 		$filter_auswahl_orga = $this->state->get("filter.auswahl_orga");
 		if ($filter_auswahl_orga) {
@@ -201,8 +216,14 @@ endif;
 		$filter_created_by = $this->state->get("filter.created_by");
 		if ($filter_created_by) {
 			$query->where("a.created_by = '".$filter_created_by."'");
+		}      
+		
+		//Filtering modified_by
+		$filter_modified_by = $this->state->get("filter.modified_by");
+		if ($filter_modified_by) {
+			$query->where("a.modified_by = '".$filter_modified_by."'");
 		}        
-        
+
         return $query;
     }
 }

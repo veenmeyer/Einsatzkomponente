@@ -14,6 +14,7 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select'); 
+JHtml::_( 'bootstrap.startTabSet' );
 
 // Daten aus der Bilder-Galerie holen 
 if (!$this->item->id == 0)
@@ -323,6 +324,7 @@ displayVals();
     		</div>
     
 				<input type="hidden" name="jform[updatedate]" value="<?php echo $this->item->updatedate; ?>" />
+				<input type="hidden" name="jform[createdate]" value="<?php echo $this->item->createdate; ?>" />
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>
@@ -370,11 +372,26 @@ displayVals();
 				<div class="control-label"><?php echo $this->form->getLabel('created_by'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('modified_by'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('modified_by'); ?></div>
+			</div>
             		<fieldset class="panelform">
 
             <input type="hidden" name="jform[status]" value="<?php echo $this->item->status; ?>" />
             </fieldset>
     	</div>
+		
+   <!-- 		<div class="fltlft well" style="width:80%;">
+
+			<div class="control-group">
+		<?php $this->ignore_fieldsets = array('general', 'info', 'detail', 'jmetadata', 'item_associations','accesscontrol'); ?>
+    <?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
+			</div>
+    
+    	</div>
+ -->
+		
    </div>     
         <input type="hidden" name="task" value="" />
 			<input type='hidden' name="action" value="Filedata" />

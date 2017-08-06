@@ -27,6 +27,7 @@
             filter="raw"
 			hide_none="1"
 			preview ="true"
+			preview_height="80px"
 			id="einsatzart_logo"
             directory="com_einsatzkomponente/images/mission" /> 
        <field name="icon" type="media"
@@ -35,6 +36,7 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_ICON" 
             filter="raw"
 			preview ="true"
+			preview_height="80px"
 			hide_none="1"
 			id="einsatzart_icon"
             directory="com_einsatzkomponente/images/map/icons" /> 
@@ -44,6 +46,7 @@
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_LIST_ICON" 
             filter="raw"
 			preview ="true"
+			preview_height="80px"
 			hide_none="1"
 			id="einsatzart_list"
             directory="com_einsatzkomponente/images/list" /> 

@@ -11,7 +11,6 @@ defined('_JEXEC') or die;
 ?>
 <?php if( $this->item ) : ?>
 
-<?php if ($this->item->state == '2'): $this->item->name = $this->item->name.' (a.D.)';endif;?>
 
 
 <table class="fahrzeug_box_1 table-striped" cellpadding="2">

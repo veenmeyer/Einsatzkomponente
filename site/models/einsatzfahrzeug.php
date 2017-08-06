@@ -99,7 +99,8 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelItem
 			}
 		}
 
-		
+			if ($this->_item->state == '2'): $this->_item->name = $this->_item->name.' (a.D.)';endif;
+
 
 			if (isset($this->_item->department) && $this->_item->department != '') {
 				if(is_object($this->_item->department)){

@@ -537,7 +537,7 @@ polygon.setMap(map);
 		<div class="well eiko_gmap_sidebar span6" id="side_bar" style="height: <?php echo $this->params->get('einsatzkarte_map_height','450');?>px;width:98%;margin-left:0px;"></div>	
 		<?php endif; ?>
 		<?php if ($hide) :?>
-		<div><span class="glyphicon glyphicon-info-sign"></span> Es werden insg. <?php echo $hide;?> Einsätze werden aufgrund der Privatsphäre in dieser Karte nicht berücksichtigt.</div>
+		<div class="eiko_privat"><span class="glyphicon glyphicon-info-sign"></span> Es werden insg. <?php echo $hide;?> Einsätze werden aufgrund der Privatsphäre in dieser Karte nicht berücksichtigt.</div>
 		<?php endif;?>
 
 		<div class="row-fluid">
@@ -548,7 +548,7 @@ polygon.setMap(map);
 		<?php if (!$this->params->get('eiko')) : ?>
 		<div class="row-fluid">
 				<div class="span12"><!-- Bitte das Copyright nicht entfernen. Danke. -->
-					<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2013 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
+					<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
 				</div>
 		</div>
 

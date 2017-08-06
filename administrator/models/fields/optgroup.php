@@ -28,6 +28,8 @@ class JFormFieldOptgroup extends JFormField
          */
         protected function getInput()
         {
+				$selected = '';
+
                 // Initialize variables.
                 $html = array();
 
@@ -52,7 +54,13 @@ class JFormFieldOptgroup extends JFormField
 								}
 										
                                 foreach ($vehicles as $vehicle) {
-                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' ( '.$org->name.' ) </option>';
+												if (is_array($this->value)) : 
+												foreach ($this->value as $value) {
+												if ($value == $vehicle->id) : $selected = 'selected';endif;
+													}
+												endif;
+                                        $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' ( '.$org->name.' ) </option>';
+										$selected = '';
                                 }
                         $html[].='</optgroup>';
                 }
@@ -62,7 +70,13 @@ class JFormFieldOptgroup extends JFormField
                         if ($vehicles = $db->loadObjectList()) :
                         $html[].='<optgroup label="sonstige">';
                                 foreach ($vehicles as $vehicle) {
-                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' ( sonstige ) </option>';
+												if (is_array($this->value)) : 
+												foreach ($this->value as $value) {
+												if ($value == $vehicle->id) : $selected = 'selected';endif;
+													}
+												endif;
+                                        $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' ( sonstige ) </option>';
+										$selected = '';
                                 }
                         $html[].='</optgroup>';
 						endif;
@@ -72,7 +86,13 @@ class JFormFieldOptgroup extends JFormField
                         if ($vehicles = $db->loadObjectList()) :
                         $html[].='<optgroup label="außer Dienst">';
                                 foreach ($vehicles as $vehicle) {
-                                        $html[].='<option value="'.$vehicle->id.'">' . $vehicle->name . ' - a.D. ( ID '.$vehicle->id.' ) </option>';
+												if (is_array($this->value)) : 
+												foreach ($this->value as $value) {
+												if ($value == $vehicle->id) : $selected = 'selected';endif;
+													}
+												endif;
+                                        $html[].='<option '.$selected.' value="'.$vehicle->id.'">' . $vehicle->name . ' - a.D. ( ID '.$vehicle->id.' ) </option>';
+										$selected = '';
                                 }
                         $html[].='</optgroup>';
 						endif;

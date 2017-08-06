@@ -58,7 +58,7 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 			$title = html_entity_decode( $summary );
 			$desc = strip_tags( $item->desc);
 			$desc = (strlen($desc) > $this->params->get('rss_chars','1000')) ? substr($desc,0,strrpos(substr($desc,0,$this->params->get('rss_chars','1000')+1),' ')).' ...' : $desc;
-			$nr = EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1);
+			$nr = EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id);
 			// url link to article
 			// & used instead of &amp; as this is converted by feed creator
 			$link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht'.$this->layout_detail_link.'&id='.$item->id);

@@ -88,6 +88,21 @@ class EinsatzkomponenteHelper
 				  'index.php?option=com_config&view=component&component=com_einsatzkomponente&return=' . $return,
 				  $vName == 'configuration'
 			  );
+			  
+			// if (JComponentHelper::isEnabled('com_fields'))
+			// {
+				// JHtmlSidebar::addEntry(
+					// JText::_('JGLOBAL_FIELDS'),
+					// 'index.php?option=com_fields&context=com_einsatzkomponente.einsatzbericht',
+					// $vName == 'fields.fields'
+				// );
+			 
+				// JHtmlSidebar::addEntry(
+					// JText::_('JGLOBAL_FIELD_GROUPS'),
+					// 'index.php?option=com_fields&view=groups&context=com_einsatzkomponente.einsatzbericht',
+					// $vName == 'fields.groups'
+				// );
+			// }			  
 	}
 	/**
 	 * Gets a list of the actions that can be performed.
@@ -101,7 +116,7 @@ class EinsatzkomponenteHelper
 		$result	= new JObject;
 		$assetName = 'com_einsatzkomponente';
 		$actions = array(
-			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.own', 'core.edit.state', 'core.delete'
+			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.own', 'core.edit.state', 'core.edit.value', 'core.delete'
 		);
 		foreach ($actions as $action) {
 			$result->set($action, $user->authorise($action, $assetName));

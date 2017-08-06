@@ -125,11 +125,11 @@ if ($this->params->get('display_home_pagination')) :
 		   <?php if (!$item->foto) : ?>
            <?php if (!$this->params->get('display_home_image_nopic','0')) : ?>
            <?php else:?>
-		   <?php if ($this->params->get('display_home_links')) : ?>
+		   <?php if ($this->params->get('display_home_links_3','0')) : ?>
 		   <a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente'.$this->layout_detail_link.'&view=einsatzbericht&id=' . (int)$item->id); ?>">
            <?php endif;?>
            <img  class="img-rounded" style="width:<?php echo $this->params->get('display_home_image_width','120px');?>;" src="<?php echo JURI::Root().'images/com_einsatzkomponente/einsatzbilder/nopic.png';?>"/>
-		   <?php if ($this->params->get('display_home_links')) : ?>
+		   <?php if ($this->params->get('display_home_links_3','0')) : ?>
            </a>
            <?php endif;?>
            <?php endif;?>

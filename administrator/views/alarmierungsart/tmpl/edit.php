@@ -42,7 +42,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 				<div class="control-label"><?php echo $this->form->getLabel('title'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('title'); ?></div>
 			</div>
-			<div class="control-group" style=" height:80px;">
+			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('image'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('image'); ?></div>
 			</div>

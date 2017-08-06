@@ -76,23 +76,26 @@
        <field name="date1" type="calendar" class="inputbox"
             required="true" 
 		    format="%Y-%m-%d %H:%M:00"
-            default="0000-00-00 00:00:00" 
+            default="NOW" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE1"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE1" 
-            filter="safehtml" /> 
+			filter="safehtml"
+			/> 
        <field name="date2" type="calendar" class="inputbox"
 	   	    format="%Y-%m-%d %H:%M:00"
             default="0000-00-00 00:00:00" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE2" 
-            filter="safehtml" /> 
+			filter="safehtml"
+			/> 
 		 
        <field name="date3" type="calendar" class="inputbox"
             format="%Y-%m-%d %H:%M:00"
             default="0000-00-00 00:00:00" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE3"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_DATE3" 
-            filter="safehtml" /> 
+			filter="safehtml"
+			/> 
 		
        <field name="summary" type="summary"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY"
@@ -303,16 +306,28 @@
         </field> 
 
        <field name="created_by" type="createdby" default="" 
-            label="Erstellt / Bearbeitet von"
+            label="Erstellt von"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_CREATED_BY"  /> 
  
 		<field name="filter_created_by" 
 		     type="user" 
 			 onchange="this.form.submit();" /> 
 			 
+       <field name="modified_by" type="modifiedby" default="" 
+            label="Bearbeitet von"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_MODIFIED_BY"  /> 
+ 
+		<field name="filter_modified_by" 
+		     type="user" 
+			 onchange="this.form.submit();" /> 
+			 
        <field name="updatedate" type="timeupdated" default="" 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_UPDATEDATE"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_UPDATEDATE"  /> 
+			
+       <field name="createdate" type="timecreated" default="" 
+            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_CREATEDATE"
+            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_CREATEDATE"  /> 
 			
        <field name="counter" type="text"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_COUNTER"

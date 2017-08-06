@@ -37,6 +37,7 @@ class EinsatzkomponenteModeleinsatzarten extends JModelList
                 'ordering', 'a.ordering',
                 'state', 'a.state',
                 'created_by', 'a.created_by',
+                'params', 'a.params',
 
             );
         }

@@ -62,6 +62,7 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
                 'presse3_label', 'a.presse3_label',
                 'presse3', 'a.presse3',
                 'updatedate', 'a.updatedate',
+                'createdate', 'a.createdate',
                 'einsatzticker', 'a.einsatzticker',
                 'department', 'a.department',
                 'notrufticker', 'a.notrufticker',
@@ -70,6 +71,8 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
                 'counter', 'a.counter',
                 'state', 'a.state',
                 'created_by', 'a.created_by',
+                'modified_by', 'a.modified_by',
+                'params', 'a.params',
 
             );
         }
@@ -271,7 +274,8 @@ endif;
 		$query->join('LEFT', '#__content AS #__content_1662648 ON #__content_1662648.id = a.article_id');
 		// Join over the created by field 'created_by'
 		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-
+		// Join over the modified by field 'created_by'
+		$query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
 		
 			$user = JFactory::getUser();
 			$userId = $user->get('id');
@@ -282,7 +286,7 @@ endif;
 			$canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 			
 		if ($canCreate or $canEdit or $canChange or $canDelete) :
-			$query->where('a.state = 1 or a.state = 0');
+			$query->where('(a.state = 1 or a.state = 0)');
 			else:
 			$query->where('a.state = 1');
 			endif;
@@ -396,7 +400,12 @@ endif;
 		if ($filter_created_by) {
 			$query->where("a.created_by = '".$db->escape($filter_created_by)."'");
 		}
-		
+		//Filtering created_by
+		$filter_modified_by = $this->state->get("filter.modified_by");
+		if ($filter_modified_by) {
+			$query->where("a.modified_by = '".$db->escape($filter_modified_by)."'");
+		}
+
 		//Filtering year
 		$filter_year = $this->state->get("filter.year");
 		if ($filter_year) {

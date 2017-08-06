@@ -226,13 +226,13 @@ if ($this->params->get('display_home_pagination')) :
            
 		   <?php if ($this->params->get('display_list_icon')) : ?>
 		   <?php if (isset($item->list_icon)) :?>
-           <img class="eiko_icon hasTooltip" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" title="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_EINSATZART');?>:<br/> <?php echo $item->einsatzart;?>" />
+           <img class="eiko_icon hasTooltip" style="float:<?php echo $this->params->get('float_list_icon');?>;" src="<?php echo JURI::Root();?><?php echo $item->list_icon;?>" title="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_EINSATZART');?>: <?php echo $item->einsatzart;?>" />
            <?php endif;?>
            <?php endif;?>
 
 		   <?php if ($this->params->get('display_tickerkat_icon')) : ?>
 		   <?php if (isset($tickerkat->image)) :?>
-           <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_KATEGORIE');?>:<br/> <?php echo $tickerkat->title;?>" />
+           <img class="eiko_icon hasTooltip mobile_hide_480" style="float:<?php echo $this->params->get('float_tickerkat_icon');?>;" src="<?php echo JURI::Root();?><?php echo $tickerkat->image;?>" title="<?php echo JTEXT::_('COM_EINSATZKOMPONENTE_KATEGORIE');?>: <?php echo $tickerkat->title;?>" />
 		   <?php endif;?>
            <?php endif;?>
 		   
@@ -296,7 +296,17 @@ if ($this->params->get('display_home_pagination')) :
 
            <?php if ($this->params->get('display_home_image')) : ?>
 		   <?php if ($item->foto) : ?>
-		   <td class="mobile_hide_480 eiko_td_einsatzbild_main_1"> <img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->foto;?>"/></td>
+		   <td class="mobile_hide_480 eiko_td_einsatzbild_main_1"> 
+		   
+			<?php if ($this->params->get('display_home_links_3','0')) : ?>
+			<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.(int) $item->id); ?>">
+			<?php endif; ?> 
+		   <img  class="img-rounded eiko_img_einsatzbild_main_1" style="width:<?php echo $this->params->get('display_home_image_width','80px');?>;" src="<?php echo JURI::Root();?><?php echo $item->foto;?>"/>
+			<?php if ($this->params->get('display_home_links_3','0')) : ?>
+			</a>
+			<?php endif;?>
+		   
+		   </td>
            <?php endif;?>
 		   <?php if (!$item->foto) : ?>
            <?php if ($this->params->get('display_home_image_nopic','0')) : ?>
@@ -310,7 +320,11 @@ if ($this->params->get('display_home_pagination')) :
 			<?php if ($this->params->get('display_home_presse','0')) : ?>
 				<td class="mobile_hide_480 mobile_hide_presse">
 					<?php if ($item->presse or $item->presse2 or $item->presse3) : ?>
+					<?php if ($this->params->get('presse_image','')) : ?>					
+					<img class="eiko_icon_press" src="<?php echo JURI::Root();?><?php echo $this->params->get('presse_image','');?>" title="" />
+					<?php else:?>
 					<?php echo JText::_('COM_EINSATZKOMPONENTE_PRESSELINK'); ?>
+					<?php endif;?>
 					<?php endif;?>
 				</td>
 			<?php endif; ?>

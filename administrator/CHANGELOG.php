@@ -11,6 +11,23 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.17</small></h3>
+<ul>
++ Presselinkinfo in Übersicht als Icon möglich
++ Fahrzeugübersicht: Anzeige nach Organisation möglich
+# Einsatz im Frontend eintragen unter PHP7.1
+# Fahrzeugübersicht: Ausser Dienst gestellte FHZ konnten nicht gefiltert werden
+# Fahrzeugübersicht: Ausser Dienst gestellte FHZ wurden nicht angezeigt
++ Menüpunkte: Detailansicht Organisation + Einsatzfahrzeug
++ Optionen: Pre-Selektion Auswahlfeld Organisation im Einsatzbericht
++ Einsatzberichte: Erstellt von / Bearbeitet von
++ Option Einsatzbericht-Text anzeigen
+# Filterauswahl Jahre im Einsatzarchiv
+# Bootstrap-Tooltips in Einsatzarchiv entfernt
+# Fehler Pagination+Nummerierung (alte Einsatzübersicht)
+# Fehler behoben "Warning getimagesize"
+</ul>
+
 <h3>Changelog <small>Version 3.16</small></h3>
 <ul>
 # Action-Buttons im Einsatzarchiv funktionieren jetzt

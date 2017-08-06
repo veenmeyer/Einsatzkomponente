@@ -312,6 +312,12 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy {
 		$this->extra_sidebar .= '<small><label for="filter_created_by">Erstellt von</label></small>';
 		$this->extra_sidebar .= JHtmlList::users('filter_created_by', $this->state->get('filter.created_by'), 1, 'onchange="this.form.submit();"');
 		$this->extra_sidebar .= '</div>';
+		
+		//Filter for the field modified_by
+		$this->extra_sidebar .= '<div class="div_side_filter">';
+		$this->extra_sidebar .= '<small><label for="filter_modified_by">Bearbeitet von</label></small>';
+		$this->extra_sidebar .= JHtmlList::users('filter_modified_by', $this->state->get('filter.modified_by'), 1, 'onchange="this.form.submit();"');
+		$this->extra_sidebar .= '</div>';
     }
 
 	protected function getSortFields()
@@ -328,10 +334,12 @@ class EinsatzkomponenteViewEinsatzberichte extends JViewLegacy {
 		'a.gmap' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_GMAP'),
 		'a.status_fb' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_STATUS_FB'),
 		'a.updatedate' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_UPDATEDATE'),
+		'a.createdate' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATEDATE'),
 		'a.status' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_STATUS'),
 		'a.counter' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_COUNTER'),
 		'a.state' => JText::_('JSTATUS'),
 		'a.created_by' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATED_BY'),
+		'a.modified_by' => JText::_('COM_EINSATZKOMPONENTE_EINSATZBERICHTE_MODIFIED_BY'),
 		);
 	}
 

@@ -67,6 +67,7 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 		$data = JFactory::getApplication()->getUserState('com_einsatzkomponente.edit.einsatzbericht.data', array());
 		if (empty($data)) {
 			$data = $this->getItem();
+			
 			//Support for multiple or not foreign key field: auswahl_orga
 			$array = array();
 			foreach((array)$data->auswahl_orga as $value): 
@@ -75,6 +76,15 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 				endif;
 			endforeach;
 			$data->auswahl_orga = implode(',',$array);
+			if ($data->auswahl_orga == '') : // Vorbelegung Organisationen
+				//$db = JFactory::getDbo();
+				//$db->setQuery('SELECT id,ffw FROM #__eiko_organisationen WHERE ffw="1" LIMIT 1');
+				//$standard = $db->loadResult();
+				//$data->auswahl_orga = $standard['id'];
+			$params = JComponentHelper::getParams('com_einsatzkomponente');
+			$data->auswahl_orga = 	$params->get('pre_auswahl_orga','');
+			endif;
+			
 			//Support for multiple or not foreign key field: vehicles
 			$array = array();
 			foreach((array)$data->vehicles as $value): 
@@ -83,6 +93,8 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 				endif;
 			endforeach;
 			$data->vehicles = implode(',',$array);
+			
+			
 			//Support for multiple or not foreign key field: ausruestung
 			$array = array();
 			foreach((array)$data->ausruestung as $value): 
@@ -94,7 +106,9 @@ class EinsatzkomponenteModeleinsatzbericht extends JModelAdmin
 		}
 		
 			$params = JComponentHelper::getParams('com_einsatzkomponente');
-			$data->watermark_image = 	$params->get('watermark_image','');
+			
+			if(is_object($data)) $data->watermark_image = 	$params->get('watermark_image','');
+			
 		return $data;
 	}
 	/**

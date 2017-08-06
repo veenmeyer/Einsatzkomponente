@@ -18,7 +18,6 @@ JHtml::_('formbehavior.chosen', 'select');
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
- 
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 
@@ -154,9 +153,12 @@ if (!empty($this->extra_sidebar)) {
  				<?php  endif; ?>
                 
 				<th class='left'>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATEDATE', 'a.createdate', $listDirn, $listOrder); ?>
+				</th>
+				
+				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_UPDATEDATE', 'a.updatedate', $listDirn, $listOrder); ?>
 				</th>
-                
                 
                 <?php if ($this->params->get('info112','0')) : ?>
 				<th class='left'>
@@ -167,10 +169,13 @@ if (!empty($this->extra_sidebar)) {
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_AUSWAHLORGA', 'a.auswahl_orga', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+	<!--			<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
 				</th>
-                    
+				<th class='left'>
+				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZBERICHTE_MODIFIED_BY', 'a.modified_by', $listDirn, $listOrder); ?>
+				</th>
+				-->
                     
                 <?php if (isset($this->items[0]->id)): ?>
 					<th width="1%" class="nowrap center hidden-phone">
@@ -318,9 +323,11 @@ if (!empty($this->extra_sidebar)) {
  				<?php  endif; ?>
                 
 				<td>
-					<?php echo $item->updatedate; ?>
+					<?php echo '<span>'.$item->createdate.'</span><br/><span style="color:#aaaaaa;">'.$item->created_by.'</span>'; ?>
 				</td>
-            
+				<td>
+					<?php echo '<span>'.$item->updatedate.'</span><br/><span style="color:#aaaaaa;">'.$item->modified_by.'</span>'; ?>
+				</td>  
                 <?php 
 // ----------------  info112.net  ----------------------------------------
 			if ($this->params->get('info112','0')) : 
@@ -347,9 +354,16 @@ if (!empty($this->extra_sidebar)) {
             <td>
 					<?php echo $item->auswahl_orga; ?>
 				</td>
+				
+				<!--
 				<td>
 					<?php echo $item->created_by; ?>
 				</td>
+				<td>
+					<?php echo $item->modified_by; ?>
+				</td>
+				-->
+				
                 <?php if (isset($this->items[0]->id)): ?>
 					<td class="center hidden-phone">
 						<?php echo (int) $item->id; ?>

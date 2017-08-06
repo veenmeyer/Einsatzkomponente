@@ -30,6 +30,7 @@ class EinsatzkomponenteModelKategorien extends JModelList
                 'image', 'a.image',
                 'state', 'a.state',
                 'created_by', 'a.created_by',
+                'params', 'a.params',
             );
         }
         parent::__construct($config);

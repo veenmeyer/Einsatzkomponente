@@ -557,7 +557,7 @@ polygon.setMap(map);
 <?php if (!$this->params->get('eiko')) : ?>
 <div class="row-fluid">
         <div class="span12"><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="http://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
+            <span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
         </div>
 </div>
 
