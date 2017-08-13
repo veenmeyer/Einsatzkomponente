@@ -223,7 +223,7 @@ class EinsatzkomponenteModelEinsatzberichtForm extends JModelForm
             }
         }
         if ($authorised !== true) {
-            JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
             return false;
         }
         
@@ -240,7 +240,7 @@ class EinsatzkomponenteModelEinsatzberichtForm extends JModelForm
     {
         $id = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('einsatzbericht.id');
         if(JFactory::getUser()->authorise('core.delete', 'com_einsatzkomponente.einsatzbericht'.$id) !== true){
-            JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+			JFactory::getApplication()->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
             return false;
         }
         $table = $this->getTable();
