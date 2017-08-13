@@ -1456,13 +1456,13 @@
 				type="radio"
 				showon="gmap_action:1,2"
 				class="btn-group"
-				default="true"
+				default="1"
 				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSATZART_MAP_STRECKENVERLAUF"
 				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
 					<option
-						value="false">JNO</option>
+						value="0">JNO</option>
 					<option
-						value="true">JYES</option>
+						value="1">JYES</option>
 			</field>
 	  		<field
 				name="display_detail_einsatzgebiet"

@@ -402,7 +402,7 @@ class EinsatzkomponenteHelper
         return $vehicles_images;
 	}
 	
-public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
+public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="0")
  {
 $params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='function initialize() {
@@ -474,7 +474,7 @@ google.maps.event.addListener(map, "click", function() { infowindow_marker2.clos
   
 // Route anzeigen ANFANG ------------------------------------------------------------------
   var route = "'.$display_map_route.'";
-  if (route == "true") {
+  if (route == "1") {
 		directionsService = new google.maps.DirectionsService();
 		directionsDisplay = new google.maps.DirectionsRenderer(
 		{

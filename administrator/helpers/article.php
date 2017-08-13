@@ -113,8 +113,7 @@ $row->check();
 			// Store the row.
 			if (!$row->store())
 			{
-				JError::raiseNotice(500, $row->getError());
-
+			JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . ' '), 'error');
 				return false;
 			}
 //print_r ($row);exit;
