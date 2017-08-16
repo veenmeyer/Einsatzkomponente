@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.18</small></h3>
 <ul>
+# Fehler Frontendeintrag,-bearbeitung: fehlende Organisationen
 # Option Streckenverlauf Farbe der Auswahlbuttons rot-grün
 </ul>
 

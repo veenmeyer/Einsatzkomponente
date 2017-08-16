@@ -74,7 +74,7 @@ function preflight( $type, $parent ) {
 		
 endif;
  
-	echo '<p>' . JText::_('Einsatzkomponente ' . $type . ' ' . $rel) . '</p>';
+	//echo '<p>' . JText::_('Einsatzkomponente ' . $type . ' ' . $rel) . '</p>';
 }
 
 
