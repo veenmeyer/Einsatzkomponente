@@ -507,6 +507,7 @@ var marker2 = new google.maps.Marker({
             marker2 = null;
          }
 	 marker = createMarker(event.latLng, "name", "<b>Location</b><br>"+event.latLng);
+	 map.panTo(latLng);
   });
 }
     

@@ -255,6 +255,7 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
                           marker2 = null;
                        }
                    marker = createMarker(event.latLng, "name", "<b>Location</b><br>"+event.latLng);
+				   map.panTo(latLng);
                 });
               }
                   

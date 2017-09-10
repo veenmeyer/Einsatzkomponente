@@ -106,7 +106,7 @@
        <field name="summary" type="summary"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_SUMMARY" 
-            required="true" 
+            required="false" 
             class="eiko_summary"
             filter="string"
             size="60"
