@@ -47,15 +47,21 @@ defined('_JEXEC') or die;
 		
 		$user = JFactory::getUser(); 
 			
+		$alias = '';
+		$intro = '';
+		$fulltext = '';
 		
-		
+		if ($result[0]->summary) {
 		$alias = strtolower($result[0]->summary);
 		$alias = str_replace(" ", "-", $alias).'_'.date("Y-m-d", strtotime($result[0]->date1));
+		}
 		
+		if ($result[0]->desc) {
 		$intro = $result[0]->desc;
+		$intro = strstr($intro, '<hr id="system-readmore" />', true) ; 
 		$intro = preg_replace("#(?<=.{".$params->get('article_max_intro','400')."}?\\b)(.*)#is", " ...", $intro, 1);
-		
-		
+		$fulltext = str_replace('<hr id="system-readmore" />', '', $result[0]->desc);
+		}
 
 		
    
@@ -84,9 +90,9 @@ $data['introtext'] 		= $intro;
 
 					$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
 		$orgas       = '<br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte: '.$orgas.'</div>';
-		$data['fulltext'] = $result[0]->desc.$orgas;
+		$data['fulltext'] = $fulltext.$orgas;
 		else:
-		$data['fulltext'] = $result[0]->desc;
+		$data['fulltext'] = $fulltext;
 		endif;
 
 $data['state'] 			= 1;
