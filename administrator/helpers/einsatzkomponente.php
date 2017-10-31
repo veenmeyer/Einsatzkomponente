@@ -1066,9 +1066,10 @@ endif;
 			
 			//Header-Image
 			if (!$params->get('pdf_header') == '') {
-				$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
+				$img = "../images/com_einsatzkomponente/pdf/".$params->get('pdf_header');
 				list($width, $height) = $pdf->resizeToFit($img);
-				$pdf->resizeImage($img,0,0);
+				//$pdf->resizeImage($img,0,0);
+				$pdf->Image($img,0, 0,210,$height);
 				//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
 				$pdf->Ln($height);
 			}
@@ -1136,24 +1137,29 @@ endif;
 				$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
 			}}
 			
+			$pdf->Ln(5);
+
 			if ($params->get('pdf_show_orgas') == 1) {
 				if ($organisationen) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
+				//$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
+				$pdf->MultiCell(140,$hoehe,utf8_decode($organisationen),0,'LR',false);
 			}}
 			
 			if ($params->get('pdf_show_fahrzeuge') == 1) {
 				if ($fahrzeuge) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
-			}}
+				//$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
+				$pdf->MultiCell(140,$hoehe,utf8_decode($fahrzeuge),0,'LR',false);
+		}}
 			
 			if ($params->get('pdf_show_ausruestung') == 1) {
 				if ($ausruest) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1);
+				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1); 
 			}}
 			
+			$pdf->Ln(5);
 			
 			if ($params->get('pdf_show_langbericht') == 1) {
 				if ($bericht) {

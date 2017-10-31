@@ -174,7 +174,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
         $app->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', null);
         // Redirect to the list screen.
         $this->setMessage(JText::_('Einsatzdaten erfolgreich gepeichert'));
-        $menu = & JFactory::getApplication()->getMenu();
+        $menu = JFactory::getApplication()->getMenu();
         $item = $menu->getActive()->id; //print_r ($item);break;
 //echo 'View :'.JFactory::getApplication()->input->get('view').'<br/>';
 //echo 'Layout :'.JFactory::getApplication()->input->get('layout').'<br/>';
@@ -188,7 +188,11 @@ class EinsatzkomponenteControllerEinsatzbericht extends EinsatzkomponenteControl
     
     
     public function cancel() {
-		$menu = & JFactory::getApplication()->getMenu();
+		
+		$app = JFactory::getApplication();
+		$app->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', null);
+
+		$menu = JFactory::getApplication()->getMenu();
         $item = $menu->getActive()->id;
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
         $this->setMessage(JText::_('Einsatzeingabe abgebrochen'));
