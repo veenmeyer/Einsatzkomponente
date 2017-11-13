@@ -22,7 +22,6 @@
             	label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBILDERBEARBEITEN_IMAGE"
             	description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_IMAGE" 
                 required="true" 
-         	    filter="raw"
 			    id="einsatzbildbearbeiten_image_gross"
 				preview="true"
             	directory="/images/com_einsatzkomponente/einsatzbilder" /> 
@@ -30,7 +29,6 @@
             	label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBILDERBEARBEITEN_THUMB"
             	description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_THUMB" 
                 required="false" 
-            	filter="raw"
 			    id="einsatzbildbearbeiten_image_klein"
 				preview="true"
             	directory="/images/com_einsatzkomponente/einsatzbilder/thumbs" /> 

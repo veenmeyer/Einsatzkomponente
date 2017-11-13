@@ -49,10 +49,14 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		$this->document->link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$menu->id);;
+		$this->document->link = JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$menu->id);
+		$i=0;
 		foreach ( $this->items as $item )
 		{
-					
+			if ($this->params->get('rss_items','2') == $i ) : break;endif;
+			$i++;
+			
+			
 			//$item->auswahl_orga = str_replace(",", " +++ ", $this->auswahl_orga);
 			$summary = $this->escape( $item->summary );
 			$title = html_entity_decode( $summary );
@@ -77,10 +81,23 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 
 			$rss_item->description 	.= '<table>';
 			
-			if ($item->auswahl_orga) :
+			if ($item->auswahl_orga and $this->params->get('display_rss_orgas','1')) :
 			$rss_item->description 	.= '<tr><td><b>Einsatzkräfte</b>: +++ '.$item->auswahl_orga.' +++</td></tr>';
 			endif;
 			
+			if ($item->vehicles and $this->params->get('display_rss_vehicles','0')) :
+			$rss_item->description 	.= '<tr><td><b>Einsatzfahrzeuge</b>: +++ '.$item->vehicles.' +++</td></tr>';
+			endif;
+			
+			if ($item->people and $this->params->get('display_rss_people','0')) :
+			$rss_item->description 	.= '<tr><td><b>Mannschaftsstärke</b>: '.$item->people.'</td></tr>';
+			endif;
+			
+			if ($item->date3 >1 and $this->params->get('display_rss_time','0')) : 
+			$einsatzdauer = EinsatzkomponenteHelper::getEinsatzdauer(date('d.m.Y H:i', $item->date1),$item->date3);
+			$rss_item->description 	.= '<tr><td><b>Einsatzdauer</b>: '.$einsatzdauer.'</td></tr>';
+			endif;
+
 			if ($desc) :
 			$rss_item->description 	.= '<tr><td>'.$desc.'</td></tr>';
 			endif;
@@ -96,15 +113,6 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 			
 			$rss_item->description 	.= '</table>';
 			
-			/*$rss_item->category   	= $item->category;
-			$rss_item->author		= $author;
-			if ($feedEmail == 'site') {
-				$rss_item->authorEmail = $siteEmail;
-			}
-			else {
-				$rss_item->authorEmail = $item->author_email;
-			}
-*/
 			// loads item info into rss array
 			$this->document->addItem( $rss_item );
 		}

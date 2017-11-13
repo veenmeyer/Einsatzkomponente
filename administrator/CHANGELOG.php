@@ -13,6 +13,9 @@
 
 <h3>Changelog <small>Version 3.18</small></h3>
 <ul>
+# exportierter Joomla-Artikel war trotz abwählter Option immer Haupteintrag
+# exportierter Joomla-Artikel wird bei Bearbeitung des Einsatzberichtes geupdatet 
+# Fehlerhafter Image-Upload seit J!3.8.2
 # PDF Zeilenumbruch bei Organisationen und Fahrzeugen
 + System-Read more in Artikelexport hinzugefügt
 # Fehler Frontendeintrag,-bearbeitung: fehlende Organisationen

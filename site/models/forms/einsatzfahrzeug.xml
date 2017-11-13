@@ -168,7 +168,6 @@
     <field name="image" type="media"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZFAHRZEUG_IMAGE"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZFAHRZEUG_IMAGE" 
-            filter="raw"
 			preview="true"
             directory="/media/com_einsatzkomponente/images/vehicles" />
     <field name="desc" type="editor"

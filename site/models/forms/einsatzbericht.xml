@@ -41,7 +41,6 @@
        <field name="image" type="media"
             label="Titelbild"
             description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
-            filter="raw"
 		    preview="true"
 			id="einsatzbericht_image_klein"
             directory="com_einsatzkomponente/einsatzbilder" />   

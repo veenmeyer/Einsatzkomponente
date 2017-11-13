@@ -108,7 +108,7 @@ $data['metakey'] 		= $auswahl_orga.','.$params->get('article_meta_key','feuerweh
 $data['metadesc'] = $params->get('article_meta_desc','Einsatzbericht');
 $data['metadata	'] 		= '{"page_title":"","author":"","robots":""}';
 $data['access'] 		= 1;
-$data['featured'] 		= '1';
+$data['featured'] 		= $params->get('article_frontpage','1');
 $data['language'] 		= '*';
 
    
