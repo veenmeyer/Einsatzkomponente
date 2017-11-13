@@ -41,7 +41,6 @@
        <field name="image" type="media"
             label="Titelbild"
             description="Weitere Bilder können Sie über den Flash-Uploader hinzufügen" 
-            filter="raw"
 		    preview="true"
 			id="einsatzbericht_image_klein"
             directory="com_einsatzkomponente/einsatzbilder" />   
@@ -106,7 +105,7 @@
        <field name="summary" type="summary"
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBERICHT_SUMMARY" 
-            required="true" 
+            required="false" 
             class="eiko_summary"
             filter="string"
             size="60"

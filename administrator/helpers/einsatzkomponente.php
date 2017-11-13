@@ -402,7 +402,7 @@ class EinsatzkomponenteHelper
         return $vehicles_images;
 	}
 	
-public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="false")
+public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="0")
  {
 $params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='function initialize() {
@@ -474,7 +474,7 @@ google.maps.event.addListener(map, "click", function() { infowindow_marker2.clos
   
 // Route anzeigen ANFANG ------------------------------------------------------------------
   var route = "'.$display_map_route.'";
-  if (route == "true") {
+  if (route == "1") {
 		directionsService = new google.maps.DirectionsService();
 		directionsDisplay = new google.maps.DirectionsRenderer(
 		{
@@ -1066,9 +1066,10 @@ endif;
 			
 			//Header-Image
 			if (!$params->get('pdf_header') == '') {
-				$img = "../media/com_einsatzkomponente/images/pdf/".$params->get('pdf_header');
+				$img = "../images/com_einsatzkomponente/pdf/".$params->get('pdf_header');
 				list($width, $height) = $pdf->resizeToFit($img);
-				$pdf->resizeImage($img,0,0);
+				//$pdf->resizeImage($img,0,0);
+				$pdf->Image($img,0, 0,210,$height);
 				//Setze Abstand von der Oberkante des Blatts die der Höhe des Bilds entspricht
 				$pdf->Ln($height);
 			}
@@ -1136,24 +1137,29 @@ endif;
 				$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
 			}}
 			
+			$pdf->Ln(5);
+
 			if ($params->get('pdf_show_orgas') == 1) {
 				if ($organisationen) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
+				//$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
+				$pdf->MultiCell(140,$hoehe,utf8_decode($organisationen),0,'LR',false);
 			}}
 			
 			if ($params->get('pdf_show_fahrzeuge') == 1) {
 				if ($fahrzeuge) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
-			}}
+				//$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
+				$pdf->MultiCell(140,$hoehe,utf8_decode($fahrzeuge),0,'LR',false);
+		}}
 			
 			if ($params->get('pdf_show_ausruestung') == 1) {
 				if ($ausruest) {
 				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG').':'));
-				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1);
+				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1); 
 			}}
 			
+			$pdf->Ln(5);
 			
 			if ($params->get('pdf_show_langbericht') == 1) {
 				if ($bericht) {

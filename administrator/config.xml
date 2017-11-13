@@ -144,7 +144,6 @@
        <field name="watermark_image" type="media"
 			label="COM_EINSATZKOMPONENTE_OPTION_WASSERZEICHEN_WAEHLEN" 
 			description="Sie können Wasserzeichen hinzufügen. Die Datei muss zwingend eine PNG-Datei sein !!" 
-            filter="raw"
 		    preview="true"
 	        preview_height="200px"
 			showon="watermark_show:true"
@@ -338,7 +337,6 @@
 		    <field name="standard_share_image" type="media"
             label="COM_EINSATZKOMPONENTE_EINSTELLUNG_SOCIAL_SHARE_IMAGE"
             description="Sie können hier ein Bild hinterlegen, wenn immer nur dieses als Standardbild geteilt werden soll." 
-            filter="raw"
 		    preview="true"
 	        preview_height="200px"
 			id="share_image_klein"
@@ -502,6 +500,62 @@
 				class="btn-group"
 				default="1"
 				label="COM_EINSATZKOMPONENTE_ANZEIGE_BILD"
+				description="">
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+			</field>
+		
+			<field
+				name="display_rss_orgas"
+				type="radio"
+				showon ="display_home_rss:1"
+				class="btn-group"
+				default="1"
+				label="COM_EINSATZKOMPONENTE_ANZEIGE_RSS_ORGAS" 
+				description="">
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+			</field>
+			
+			<field
+				name="display_rss_vehicles"
+				type="radio"
+				showon ="display_home_rss:1"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_ANZEIGE_RSS_VEHICLES" 
+				description="">
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+			</field>
+			
+			<field
+				name="display_rss_people"
+				type="radio"
+				showon ="display_home_rss:1"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_ANZEIGE_RSS_PEOPLE" 
+				description="">
+					<option
+						value="0">JNO</option>
+					<option
+						value="1">JYES</option>
+			</field>
+		
+			<field
+				name="display_rss_time"
+				type="radio"
+				showon ="display_home_rss:1"
+				class="btn-group"
+				default="0"
+				label="COM_EINSATZKOMPONENTE_ANZEIGE_RSS_TIME" 
 				description="">
 					<option
 						value="0">JNO</option>
@@ -1016,7 +1070,6 @@
        <field name="presse_image" type="media"
 			label="COM_EINSATZKOMPONENTE_OPTION_PRESSEIMAGE_WAEHLEN" 
 			description="Sie können hier ein Bild als Presselink auswählen" 
-            filter="raw"
 		    preview="true"
 	        preview_height="80px"
 			showon="display_home_presse:1"
@@ -1456,13 +1509,13 @@
 				type="radio"
 				showon="gmap_action:1,2"
 				class="btn-group"
-				default="true"
+				default="1"
 				label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_EINSATZART_MAP_STRECKENVERLAUF"
 				description="Hier können Sie die Anzeige des Streckenverlauf von der erstgenanneten Organisation zum Einsatzort anzeigen lassen. (nur für GoogleMaps)">
 					<option
-						value="false">JNO</option>
+						value="0">JNO</option>
 					<option
-						value="true">JYES</option>
+						value="1">JYES</option>
 			</field>
 	  		<field
 				name="display_detail_einsatzgebiet"

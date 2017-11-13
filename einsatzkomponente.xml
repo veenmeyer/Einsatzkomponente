@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
     <name>com_einsatzkomponente</name>
-    <creationDate>2017-08-06</creationDate>
+    <creationDate>2017-11-13</creationDate>
     <copyright>Copyright (C) 2017 by Ralf Meyer. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
     <author>Ralf Meyer</author>
     <authorEmail>ralf.meyer@mail.de</authorEmail>
     <authorUrl>https://einsatzkomponente.de</authorUrl>
-    <version>3.17</version> 
+    <version>3.18.0</version> 
 	
     <description>
             <![CDATA[
@@ -103,7 +103,7 @@
 <!-- UPDATESERVER DEFINITION -->
 	<updateservers>
 		<!-- Note: No spaces or linebreaks allowed between the server tags -->
-		<server type="extension" priority="1" name="Einsatzkomponente">http://www.feuerwehr-veenhusen.de/update/com_einsatzkomponente-update.xml</server>
+		<server type="extension" priority="1" name="Einsatzkomponente">https://www.feuerwehr-veenhusen.de/update/com_einsatzkomponente-update.xml</server>
 	</updateservers>
 
 	

@@ -47,15 +47,21 @@ defined('_JEXEC') or die;
 		
 		$user = JFactory::getUser(); 
 			
+		$alias = '';
+		$intro = '';
+		$fulltext = '';
 		
-		
+		if ($result[0]->summary) {
 		$alias = strtolower($result[0]->summary);
 		$alias = str_replace(" ", "-", $alias).'_'.date("Y-m-d", strtotime($result[0]->date1));
+		}
 		
+		if ($result[0]->desc) {
 		$intro = $result[0]->desc;
+		$intro = strstr($intro, '<hr id="system-readmore" />', true) ; 
 		$intro = preg_replace("#(?<=.{".$params->get('article_max_intro','400')."}?\\b)(.*)#is", " ...", $intro, 1);
-		
-		
+		$fulltext = str_replace('<hr id="system-readmore" />', '', $result[0]->desc);
+		}
 
 		
    
@@ -84,9 +90,9 @@ $data['introtext'] 		= $intro;
 
 					$orgas 		 = str_replace(",", " +++ ", $auswahl_orga);
 		$orgas       = '<br/><div class=\"eiko_article_orga\">Eingesetzte Kräfte: '.$orgas.'</div>';
-		$data['fulltext'] = $result[0]->desc.$orgas;
+		$data['fulltext'] = $fulltext.$orgas;
 		else:
-		$data['fulltext'] = $result[0]->desc;
+		$data['fulltext'] = $fulltext;
 		endif;
 
 $data['state'] 			= 1;
@@ -102,7 +108,7 @@ $data['metakey'] 		= $auswahl_orga.','.$params->get('article_meta_key','feuerweh
 $data['metadesc'] = $params->get('article_meta_desc','Einsatzbericht');
 $data['metadata	'] 		= '{"page_title":"","author":"","robots":""}';
 $data['access'] 		= 1;
-$data['featured'] 		= '1';
+$data['featured'] 		= $params->get('article_frontpage','1');
 $data['language'] 		= '*';
 
    
@@ -113,8 +119,7 @@ $row->check();
 			// Store the row.
 			if (!$row->store())
 			{
-				JError::raiseNotice(500, $row->getError());
-
+			JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . ' '), 'error');
 				return false;
 			}
 //print_r ($row);exit;

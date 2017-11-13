@@ -17,7 +17,6 @@
                 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZART_ICON"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_ICON" 
-            filter="raw"
 			preview ="true"
 			hide_none="1"
 			id="organisation_icon"

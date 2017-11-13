@@ -24,7 +24,6 @@
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZART_BESCHR"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_BESCHR" 
             required="true" 
-            filter="raw"
 			hide_none="1"
 			preview ="true"
 			preview_height="80px"
@@ -34,7 +33,6 @@
                 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZART_ICON"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_ICON" 
-            filter="raw"
 			preview ="true"
 			preview_height="80px"
 			hide_none="1"
@@ -44,7 +42,6 @@
                 
             label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZART_LIST_ICON"
             description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZART_LIST_ICON" 
-            filter="raw"
 			preview ="true"
 			preview_height="80px"
 			hide_none="1"
