@@ -810,54 +810,10 @@
 		<field
 			name="spacer7"
 			type="spacer"
+			showon="gmap_action:1,2"
 			hr="true"
 		/>
-	  <field
-			name="display_filter_jahre"
-			type="radio"
-			class="btn-group"
-			default="1"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FILTER_YEAR"
-			description="Funktion nur beim Standard-Layout">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
 
-	  <field
-			name="display_filter_einsatzarten"
-			type="radio"
-			class="btn-group"
-			default="1"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FILTER_EINSATZARTEN"
-			description="Funktion nur beim Standard-Layout">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
-
-	  <field
-			name="display_filter_organisationen"
-			type="radio"
-			class="btn-group"
-			default="1"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_FILTER_ORGANISATIONEN"
-			description="Funktion nur beim Standard-Layout">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">JYES</option>
-	  </field>
-		<field
-			name="spacer8"
-			type="spacer"
-			hr="true"
-		/>
 	  <field
 			name="display_home_number"
 			type="radio"
@@ -898,19 +854,7 @@
 			<option
 				value="1">JYES</option>
 	  </field>
-	  <field
-			name="display_home_alertimage_num"
-			type="radio"
-			class="btn-group"
-			default="0"
-			label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ALERTING_IMAGE_NUM"
-			description="Funktion nur beim Standard-Layout">
-			
-			<option
-				value="0">JNO</option>
-			<option
-				value="1">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_ALERTING_IMAGE_NUM_OPT</option>
-	  </field>
+
 	  <field
 			name="display_home_marker"
 			type="radio"
@@ -981,16 +925,6 @@
 			<option
 				value="1">JYES</option>
 	  </field>
-	  <field 
-		  name="float_list_icon" 
-		  type="list" 
-		  showon ="display_list_icon:1"
-		  default="right" 
-		  label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_MISSION_ICON" 
-		  description="Funktion nur beim Standard-Layout">
-		<option value="left">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_MISSION_ICON_LEFT</option>
-		<option value="right">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_MISSION_ICON_RIGHT</option>
-	  </field>
 	  <field
 			name="display_tickerkat_icon"
 			type="radio"
@@ -1003,16 +937,6 @@
 				value="0">JNO</option>
 			<option
 				value="1">JYES</option>
-	  </field>
-	  <field 
-		  name="float_tickerkat_icon" 
-		  type="list" 
-		  showon ="display_tickerkat_icon:1"
-		  default="right" 
-		  label="COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_CATEGORY_ICON" 
-		  description="Funktion nur beim Standard-Layout">
-		<option value="left">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_CATEGORY_ICON_LEFT</option>
-		<option value="right">COM_EINSATZKOMPONENTE_OPTION_EINSATZBERICHT_POSITION_CATEGORY_ICON_RIGHT</option>
 	  </field>
 	  <field
 			name="display_home_image"
