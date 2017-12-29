@@ -95,7 +95,7 @@ defined('_JEXEC') or die;
 		   <tr class="eiko_einsatzarchiv_monat_tr"><td class="eiko_einsatzarchiv_monat_td" colspan="<?php echo $eiko_col;?>">
            <?php $m= $item->date1_month;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_monat_div">';?>
-           <?php echo '<b>'. $this->monate[$m].'</b>'; ?>
+           <?php echo '<b>'.(new JDate)->monthToString($m).'</b>'; ?>
            <?php echo '</div>';?>
            </td></tr>
            <?php endif;?>
@@ -436,4 +436,3 @@ defined('_JEXEC') or die;
 		
 }
 ?> 
-
