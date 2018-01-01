@@ -13,6 +13,9 @@
 
 <h3>Changelog <small>Version 3.20</small></h3>
 <ul>
+# Entferne alte Einsatzbericht-Optionen (mttronc)
+# Organisation-Filter (Placeholder) im Einsatzarchiv (mttronc)
+# überarbeitete Monatsnamenerzeugung (mttronc)
 # Joomla-Artikel Intro-Text wurde doppelt angezeigt
 # Joomla-Artikel aus Frontend erstellen (Option-Bug)
 # Detail_Layout4 Socialbuttons MyShariff
