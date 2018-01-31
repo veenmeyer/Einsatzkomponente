@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.20</small></h3>
 <ul>
+# Bug durch Update auf Joomla 3.8.4 (Übersichtsbutton,Filter,...)
 # Entferne alte Einsatzbericht-Optionen (mttronc)
 # Organisation-Filter (Placeholder) im Einsatzarchiv (mttronc)
 # überarbeitete Monatsnamenerzeugung (mttronc)

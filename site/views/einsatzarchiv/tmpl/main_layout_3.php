@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 <?php echo '<span class="mobile_hide_320">'.$this->modulepos_2.'</span>';?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$this->params->get('homelink','').''); ?>" method="post" name="adminForm" id="adminForm">
 
    <?php echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
    
