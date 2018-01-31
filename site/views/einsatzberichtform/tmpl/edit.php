@@ -365,7 +365,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 	<?php   $authorised = JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente');
             if ($authorised) {
 			?>
-			<?php if ($params->get('article_frontpage','0')) :	?>
+			<?php if ($params->get('article_frontend','0')) :	?>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('einsatzticker'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('einsatzticker'); ?></div>

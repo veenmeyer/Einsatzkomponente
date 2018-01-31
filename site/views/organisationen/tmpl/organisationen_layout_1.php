@@ -28,8 +28,7 @@ require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers
 
 ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisationen'); ?>" method="post"
-      name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=organisationen&Itemid='.$this->params->get('orgalink','').''); ?>" method="post" name="adminForm" id="adminForm">
 
 	<?php //echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
 	<table class="table" id="organisationList">

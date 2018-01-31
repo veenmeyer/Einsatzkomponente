@@ -60,7 +60,7 @@ defined('_JEXEC') or die;
 		$intro = $result[0]->desc;
 		$intro = strstr($intro, '<hr id="system-readmore" />', true) ; 
 		$intro = preg_replace("#(?<=.{".$params->get('article_max_intro','400')."}?\\b)(.*)#is", " ...", $intro, 1);
-		$fulltext = str_replace('<hr id="system-readmore" />', '', $result[0]->desc);
+		$fulltext = str_replace($intro.'<hr id="system-readmore" />', '', $result[0]->desc);
 		}
 
 		

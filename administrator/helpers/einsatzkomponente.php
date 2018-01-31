@@ -648,11 +648,21 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			?>
     
 	<?php if( $menu_link) :  
-    $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+   // $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+   
+   // Behebt Bug aus J3.8.4   &list=1 funktioniert in Link nicht mehr
+    $navbar .='<a href="'.$menu_link.'" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif;
+	
+	
 	if( !$menu_link) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+    //$navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+	
+   // Behebt Bug aus J3.8.4   &list=1 funktioniert in Link nicht mehr
+    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif; 
+	
+	
 	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
 		$user=JFactory::getUser();
 		$query = 'SELECT created_by FROM #__eiko_einsatzberichte WHERE state="1" AND id ="'.$id.'"';

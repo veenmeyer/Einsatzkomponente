@@ -11,8 +11,20 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.20</small></h3>
+<ul>
+# Bug durch Update auf Joomla 3.8.4 (Übersichtsbutton,Filter,...)
+# Entferne alte Einsatzbericht-Optionen (mttronc)
+# Organisation-Filter (Placeholder) im Einsatzarchiv (mttronc)
+# überarbeitete Monatsnamenerzeugung (mttronc)
+# Joomla-Artikel Intro-Text wurde doppelt angezeigt
+# Joomla-Artikel aus Frontend erstellen (Option-Bug)
+# Detail_Layout4 Socialbuttons MyShariff
+</ul>
+
 <h3>Changelog <small>Version 3.18</small></h3>
 <ul>
+# Die alte Einsatzübersicht wird nicht mehr unterstützt !
 # exportierter Joomla-Artikel war trotz abwählter Option immer Haupteintrag
 # exportierter Joomla-Artikel wird bei Bearbeitung des Einsatzberichtes geupdatet 
 # Fehlerhafter Image-Upload seit J!3.8.2

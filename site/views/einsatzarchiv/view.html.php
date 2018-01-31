@@ -22,7 +22,6 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
     protected $state;
     protected $params;
     protected $version;
-    protected $monate;
 	protected $modulepos_1;
 	protected $modulepos_2;
 	protected $gmap_config;
@@ -202,20 +201,6 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		
 		//Komponentenversion aus Datenbank lesen
 		$this->version 		= EinsatzkomponenteHelper::getVersion (); 
-
-		// Monatsnamen auf Deutsch
-		$this->monate = array(1=>"Januar",
-                2=>"Februar",
-                3=>"M&auml;rz",
-                4=>"April",
-                5=>"Mai",
-                6=>"Juni",
-                7=>"Juli",
-                8=>"August",
-                9=>"September",
-                10=>"Oktober",
-                11=>"November",
-                12=>"Dezember");
 
 		  //----Modulposition laden ----
 		$this->modulepos_1 = '<div class="mod_eiko1">'.EinsatzkomponenteHelper::module ('eiko1').'</div>'; 

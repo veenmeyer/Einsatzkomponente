@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 
 <?php echo '<span class="mobile_hide_320">'.$this->modulepos_2.'</span>';?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$this->params->get('homelink','').''); ?>" method="post" name="adminForm" id="adminForm">
 
     <?php echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
     <table class="table" id = "einsatzberichtList" >
@@ -134,6 +134,7 @@ defined('_JEXEC') or die;
            <?php if ($item->date1_year != $y&& $this->params->get('display_home_jahr','1')) : ?>
 		   <tr class="eiko_einsatzarchiv_jahr_tr"><td class="eiko_einsatzarchiv_jahr_td" colspan="<?php echo $eiko_col; ?>">
            <?php $y= $item->date1_year;?>
+           <?php $m= ''; /* reset month for new year */ ?>
 		   <?php echo '<div class="eiko_einsatzarchiv_jahr_div">';?>
            <?php echo 'Einsatzberichte '. $item->date1_year.'';?> 
            <?php echo '</div>';?>
@@ -142,11 +143,11 @@ defined('_JEXEC') or die;
            <!--Anzeige des Jahres ENDE-->
 
            <!--Anzeige des Monatsnamen-->
-           <?php if ($item->date1_month != $m && $this->params->get('display_home_monat','1')) : ?>
+           <?php if (($item->date1_month != $m || $item->date1_year != $y) && $this->params->get('display_home_monat','1')) : ?>
 		   <tr class="eiko_einsatzarchiv_monat_tr"><td class="eiko_einsatzarchiv_monat_td" colspan="<?php echo $eiko_col; ?>">
            <?php $m= $item->date1_month;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_monat_div">';?>
-           <?php echo '<b>'.$this->monate[$m].'</b>';?>
+           <?php echo '<b>'.(new JDate)->monthToString($m).'</b>';?>
            <?php echo '</div>';?>
            </td></tr>
            <?php endif;?>
@@ -531,5 +532,3 @@ defined('_JEXEC') or die;
 		
 }
 ?> 
-
-

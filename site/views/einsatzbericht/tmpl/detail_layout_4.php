@@ -224,17 +224,26 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 </div>
     </td>
   </tr>
-    <tr>
-   <td class="layout4_row_4" style="border:hidden;width:100%;" colspan="2">
-		<?php
-			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
-			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
-			?>
-    </td>
-  </tr>
 <?php endif;?>
 <?php endif;?>
 <!--Einsatzbericht anzeigen mit Plugin-Support  ENDE-->           
+ 
+<!-- Plugin-Support "MyShariff" -->  
+		<?php
+			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
+			if ($plugin) : 	
+			?>
+			    <tr>
+				<td class="layout4_row_4" style="border:hidden;width:100%;" colspan="2">
+			<?php
+			echo JHTML::_('content.prepare', '{myshariff}');
+			?>
+				</td>
+				</tr>
+			<?php
+			endif;
+			?>
+<!-- Plugin-Support "MyShariff"  ENDE -->  
  
 <!-- Presselinks -->           
 <?php if( $this->item->presse or $this->item->presse2 or $this->item->presse3) : ?>

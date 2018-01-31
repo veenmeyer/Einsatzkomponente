@@ -17,6 +17,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
+JHtml::_('formbehavior.chosen', '.multipleOrganisations', null, array('placeholder_text_multiple' => JText::_('COM_EINSATZKOMPONENTE_ORGANISATIONEN_AUSWAEHLEN')));
 JHtml::_('formbehavior.chosen', 'select');
 
 $user = JFactory::getUser();
@@ -42,5 +43,3 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 require_once JPATH_SITE.'/components/com_einsatzkomponente/views/einsatzarchiv/tmpl/'.$this->params->get('main_layout','main_layout_1.php').''; 
 
 ?>
-
-

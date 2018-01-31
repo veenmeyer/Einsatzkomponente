@@ -11,8 +11,7 @@ defined('_JEXEC') or die;
 
 ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge'); ?>" method="post"
-      name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge&Itemid='.$this->params->get('vehiclelink','').''); ?>" method="post" name="adminForm" id="adminForm">
 
 	<?php echo JLayoutHelper::render('default_filter', array('view' => $this), dirname(__FILE__)); ?>
 	<table class="table table-striped" id="einsatzfahrzeugList">

@@ -493,18 +493,10 @@ polygon.setMap(map);
     
 <?php 
 
-  $Mona[] = JHTML::_('select.option', '01', JTEXT::_('COM_EINSATZKOMPONENTE_JANUAR'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '02', JTEXT::_('COM_EINSATZKOMPONENTE_FEBRUAR'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '03', JTEXT::_('COM_EINSATZKOMPONENTE_MAERZ'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '04', JTEXT::_('COM_EINSATZKOMPONENTE_APRIL'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '05', JTEXT::_('COM_EINSATZKOMPONENTE_MAI'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '06', JTEXT::_('COM_EINSATZKOMPONENTE_JUNI'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '07', JTEXT::_('COM_EINSATZKOMPONENTE_JULI'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '08', JTEXT::_('COM_EINSATZKOMPONENTE_AUGUST'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '09', JTEXT::_('COM_EINSATZKOMPONENTE_SEPTEMBER'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '10', JTEXT::_('COM_EINSATZKOMPONENTE_OKTOBER'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '11', JTEXT::_('COM_EINSATZKOMPONENTE_NOVEMBER'),'id','title' ); 
-  $Mona[] = JHTML::_('select.option', '12', JTEXT::_('COM_EINSATZKOMPONENTE_DEZEMBER'),'id','title' ); 
+  $Mona = [];
+  for ($i = 0; $i < 12; $i++):
+    $Mona[$i] = JHTML::_('select.option', sprintf('%02d', $i + 1), JTEXT::_((new JDate)->monthToString($i + 1)),'id','title');
+  endfor;
 
   $years = getyear();
 
