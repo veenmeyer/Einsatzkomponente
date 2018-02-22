@@ -11,6 +11,10 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.20.1_beta</small></h3>
+<ul>
+</ul>
+
 <h3>Changelog <small>Version 3.20</small></h3>
 <ul>
 # Bug durch Update auf Joomla 3.8.4 (Übersichtsbutton,Filter,...)
