@@ -93,10 +93,12 @@ class EinsatzkomponenteModelEinsatzarchiv extends JModelList
         // Initialise variables.
         $app = JFactory::getApplication();
 		$params = $app->getParams('com_einsatzkomponente');
-		$page_limit = $params->get('display_home_pagination_limit','5');
+		$page_limit = $params->get('display_home_pagination_limit','');
+		$show_pagination = $params->get('display_home_pagination','1');
 		if (!$page_limit) : $page_limit = $app->getCfg('list_limit'); endif;
+		if (!$show_pagination) : $page_limit = ''; endif; 
         // List state information
-        $limit = $app->getUserStateFromRequest('global.list.limit', 'limit',$page_limit); 
+        $limit = $app->getUserStateFromRequest('list.limit', 'limit',$page_limit); 
         $this->setState('list.limit', $limit);
 
         $limitstart = $app->input->getInt('limitstart', 0);

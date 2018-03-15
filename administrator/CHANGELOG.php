@@ -11,8 +11,8 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
-<h3>Changelog <small>Version 3.20.1_beta</small></h3>
-<ul>
+<h3>Changelog <small>Version 3.20.3_beta</small></h3>
+# Bug in der Übersicht-Pagination behoben<ul>
 </ul>
 
 <h3>Changelog <small>Version 3.20</small></h3>
