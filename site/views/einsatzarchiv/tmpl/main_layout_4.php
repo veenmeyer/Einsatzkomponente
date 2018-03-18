@@ -167,33 +167,30 @@ defined('_JEXEC') or die;
 			<?php echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id).'</span>';?> 
 			</td>
            <?php endif;?>
-		   
-		   
-           <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
-		   <td class="eiko_td_kalender_main_1"> 
-			<div class="home_cal_icon">
-			<div class="home_cal_monat"><?php echo date('M', $item->date1);?></div>
-			<div class="home_cal_tag"><?php echo date('d', $item->date1);?></div>
-			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $item->date1);?></span></div>
-			</div>
-           </td>
-           <?php endif;?>
-           <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
-		   <td class="eiko_td_datum_main_1"> <?php echo '<i class="icon-calendar" ></i> '.date('d.m.Y ', $item->date1);?><br /><?php echo '<i class="icon-clock" ></i> '.date('H:i ', $item->date1); ?>Uhr</td>
-           <?php endif;?>
-           <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
-		   <td class="eiko_td_datum_main_1"> <?php echo '<i class="icon-calendar" ></i> '.date('d.m.Y ', $item->date1);?></td>
-           <?php endif;?>
-           <?php if ($this->params->get('display_home_date_image','1')=='3') : ?>
-		   <td class="eiko_td_kalender_main_1"> 
-			<div class="home_cal_icon">
-			<div class="home_cal_monat"><?php echo date('M', $item->date1);?></div>
-			<div class="home_cal_tag"><?php echo date('d', $item->date1);?></div>
-			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $item->date1);?></span></div>
-			 <?php echo '<div style="font-size:12px;white-space: nowrap;">'.date('H:i ', $item->date1).' Uhr</div>'; ?>
-			</div>
-           </td>
-           <?php endif;?>
+
+
+          <?php $date_image = $this->params->get('display_home_date_image','1') ?>
+          <?php if ($date_image == '0' || $date_image == '2') : ?>
+            <td class="eiko_td_datum_main_1">
+              <i class="icon-calendar"></i> <?php echo date('d.m.Y', $item->date1); ?>
+              <?php if ($date_image == '2') : ?>
+                <br /><i class="icon-clock"></i> <?php echo date('H:i', $item->date1); ?>Uhr
+              <?php endif; ?>
+            </td>
+          <?php endif; ?>
+
+          <?php if ($date_image == '1' || $date_image == '3') : ?>
+            <td class="eiko_td_kalender_main_1">
+              <div class="home_cal_icon">
+                <div class="home_cal_monat"><?php echo date('M', $item->date1); ?></div>
+                <div class="home_cal_tag"><?php echo date('d', $item->date1); ?></div>
+                <div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $item->date1); ?></span></div>
+                <?php if ($date_image == '3') : ?>
+                  <div style="font-size: 12px; white-space: nowrap;"><?php echo date('H:i', $item->date1); ?>Uhr</div>
+                <?php endif; ?>
+              </div>
+            </td>
+          <?php endif; ?>
 
             	<td>
 					<?php if (isset($item->checked_out) && $item->checked_out) : ?>
