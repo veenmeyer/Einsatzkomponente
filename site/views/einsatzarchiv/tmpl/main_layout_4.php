@@ -127,6 +127,7 @@ defined('_JEXEC') or die;
 	
 	<?php 	$m ='';
 			$y=''; //print_r ($this->items);
+			$marker_colors = array();
 	?>
     <?php foreach ($this->items as $i => $item) : ?>
         <?php $canEdit = $user->authorise('core.edit', 'com_einsatzkomponente'); ?>
@@ -160,11 +161,7 @@ defined('_JEXEC') or die;
 		   <tr class="row<?php echo $i % 2; ?>">
 
            <?php if ($this->params->get('display_home_number','1') ) : ?>
-           <?php if ($this->params->get('display_home_marker','1')) : ?>
-		   <td class="eiko_td_marker_main_1" style="background-color:<?php echo $item->marker;?>;" >
-           <?php else:?>
-		   <td class="eiko_td_marker_main_1">
-           <?php endif;?>
+      <td class="eiko_td_marker_main_1 eiko_td_marker_color_<?php echo $item->data1_id; ?>">
 			<?php echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id).'</span>';?> 
 			</td>
            <?php endif;?>
@@ -391,24 +388,7 @@ defined('_JEXEC') or die;
 					$auswahl_orga=  implode(' +++ ',$data); ?> 
 					
             <tr id="tr<?php echo $item->id;?>" class="eiko_tr_zusatz_main_1" style=" display:none;" >
-            
-           <?php if ($this->params->get('display_home_marker','1')) : ?>
-           <?php $rgba = hex2rgba($item->marker,0.7);?>
-            <style>
-				.td<?php echo $item->id;?> {
-				background: -moz-linear-gradient(top,  <?php echo $rgba;?> 0%, rgba(125,185,232,0) 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,<?php echo $rgba;?>), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<?php echo $item->marker;?>', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
-				}
-			</style>
-		   <td class="td<?php echo $item->id;?>" >
-           <?php else:?>
-		   <td>
-           <?php endif;?>
+            <td class="eiko_td_marker_gradient_<?php echo $item->data1_id;?>">
             </td>
             <td colspan="<?php echo $eiko_col-1; ?>" class="eiko_td_zusatz_main_1">
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
@@ -428,107 +408,10 @@ defined('_JEXEC') or die;
            </tr>
 	<?php endif;?>
      <!-- Zusatzinformation Kurzinfo ENDE -->
-		   
+
+      <?php $marker_colors[$item->data1_id] = $item->marker; //add marker color to array to create CSS from ?>
+
     <?php endforeach; ?>
     </tbody>
-	
-    <tfoot>
-    				<!--Prüfen, ob Pagination angezeigt werden soll-->
-    				<?php if ($this->params->get('display_home_pagination')) : ?>
-					<tr>
-					<td colspan="<?php echo $eiko_col; ?>">
-                    	<form action="#" method=post>
-						<?php echo $this->pagination->getListFooter(); ?><!--Pagination anzeigen-->
-						</form> 
-					</td></tr>
-		   			<?php endif;?><!--Prüfen, ob Pagination angezeigt werden soll   ENDE -->
-		
-		<?php if (!$this->params->get('eiko')) : ?>
-        <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-        <td colspan="<?php echo $eiko_col; ?>">
-			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
-        </tr>
-	<?php endif; ?>
-    </tfoot>
 
-
-
-    <input type="hidden" name="task" value=""/>
-    <input type="hidden" name="boxchecked" value="0"/>
-    <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-    <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-    <?php echo JHtml::_('form.token'); ?>
-</form>
-
-
-
-    <?php if ($this->params->get('display_home_map')) : ?>
-    <tr><td colspan="<?php echo $eiko_col;?>" class="eiko_td_gmap_main_1">
-    <h4>Einsatzgebiet</h4>
-			<?php if ($this->params->get('gmap_action','0') == '1') :?>
-  			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
-    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
-			</div>
-            <?php endif;?>
-			<?php if ($this->params->get('gmap_action','0') == '2') :?>
-<body onLoad="drawmap();">
-				<!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
-				<div id="description" class="">Einsatzkarte</div>-->
-   				<div id="map" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;"></div> 
-    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
-            <?php endif;?>
-            </td></tr>
-    <?php endif;?>
-	
-    </table>
-	
-<?php echo '<span class="mobile_hide_320">'.$this->modulepos_1.'</span>'; ?>
-
-
-<script type="text/javascript">
-
-    jQuery(document).ready(function () {
-        jQuery('.delete-button').click(deleteItem);
-    });
-
-    function deleteItem() {
-        var item_id = jQuery(this).attr('data-item-id');
-        if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
-            window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.remove&id=', false, 2) ?>' + item_id;
-        }
-    }
-</script>
-
-    <?php function hex2rgba($color, $opacity = false) {  // Farbe von HEX zu RGBA umwandeln 
-
-	$default = 'rgb(0,0,0)';
-	//Return default if no color provided
-	if(empty($color))
-          return $default; 
-	//Sanitize $color if "#" is provided 
-        if ($color[0] == '#' ) {
-        	$color = substr( $color, 1 );
-        }
-        //Check if color has 6 or 3 characters and get values
-        if (strlen($color) == 6) {
-                $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
-        } elseif ( strlen( $color ) == 3 ) {
-                $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
-        } else {
-                return $default;
-        }
-        //Convert hexadec to rgb
-        $rgb =  array_map('hexdec', $hex);
-        //Check if opacity is set(rgba or rgb)
-        if($opacity){
-        	if(abs($opacity) > 1)
-        		$opacity = 1.0;
-        	$output = 'rgba('.implode(",",$rgb).','.$opacity.')';
-        } else {
-        	$output = 'rgb('.implode(",",$rgb).')';
-        }
-        //Return rgb(a) color string
-        return $output; 
-		
-}
-?> 
+<?php require_once JPATH_COMPONENT_SITE . '/views/einsatzarchiv/tmpl/main_layout_bottom.php'; ?>
