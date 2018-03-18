@@ -702,3 +702,16 @@ padding-right:5px;
 .eiko_ausruestung {margin-top: 10px;}
 
 .eiko_table_ausruestung {width: 100%;}
+
+
+.icon-first::before {
+    content: "" !important;
+}
+
+.icon-previous::before , .icon-backward::before {
+    content: "" !important;
+}
+.icon-next::before, .icon-forward::before {
+    content: "" !important;
+}
+
