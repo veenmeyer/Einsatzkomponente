@@ -66,3 +66,16 @@ function deleteItem() {
     }
 }
 </script>
+
+<?php /* create CSS rules for marker colors */
+if ($this->params->get('display_home_marker','1') && !empty($marker_colors)) {
+  JLoader::register('EinsatzkomponenteFrontendHelper', JPATH_COMPONENT_SITE . '/helpers/einsatzkomponente.php');
+  $markers_css = '';
+  foreach ($marker_colors as $id => $color) {
+    $rgba = EinsatzkomponenteFrontendHelper::hex2rgba($color, 0.7);
+    $markers_css .= '.eiko_td_marker_color_' . $id . ' {background-color: ' . $color . ';}' . "\n";
+    $markers_css .= '.eiko_td_marker_gradient_' . $id . ' {background: linear-gradient(to bottom, ' . $rgba . ' 0%,rgba(125,185,232,0) 100%);}' . "\n";
+  }
+  JFactory::getDocument()->addStyleDeclaration($markers_css);
+}
+?>

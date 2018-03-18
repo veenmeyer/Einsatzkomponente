@@ -122,6 +122,7 @@ defined('_JEXEC') or die;
 	
 	<?php 	$m ='';
 			$y=''; //print_r ($this->items);
+			$marker_colors = array();
 	?>
     <?php foreach ($this->items as $i => $item) : ?>
         <?php $canEdit = $user->authorise('core.edit', 'com_einsatzkomponente'); ?>
@@ -156,11 +157,7 @@ defined('_JEXEC') or die;
 		   <tr class="row<?php echo $i % 2; ?>">
 
            <?php if ($this->params->get('display_home_number','1') ) : ?>
-           <?php if ($this->params->get('display_home_marker','1')) : ?>
-		   <td class="eiko_td_marker_main_1" style="background-color:<?php echo $item->marker;?>;" >
-           <?php else:?>
-		   <td class="eiko_td_marker_main_1">
-           <?php endif;?>
+			<td class="eiko_td_marker_main_1 eiko_td_marker_color_<?php echo $item->data1_id; ?>">
 			<?php echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id).'</span>';?> 
 			</td>
            <?php endif;?>
@@ -391,25 +388,7 @@ defined('_JEXEC') or die;
 					$auswahl_orga=  implode(' +++ ',$data); ?> 
 					
             <tr id="tr<?php echo $item->id;?>" class="eiko_tr_zusatz_main_1" style=" display:none;" >
-            
-           <?php if ($this->params->get('display_home_marker','1')) : ?>
-           <?php JLoader::register('EinsatzkomponenteFrontendHelper', JPATH_COMPONENT_SITE . '/helpers/einsatzkomponente.php'); ?>
-           <?php $rgba = EinsatzkomponenteFrontendHelper::hex2rgba($item->marker,0.7);?>
-            <style>
-				.td<?php echo $item->id;?> {
-				background: -moz-linear-gradient(top,  <?php echo $rgba;?> 0%, rgba(125,185,232,0) 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,<?php echo $rgba;?>), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(top,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* IE10+ */
-				background: linear-gradient(to bottom,  <?php echo $rgba;?> 0%,rgba(125,185,232,0) 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<?php echo $item->marker;?>', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
-				}
-			</style>
-		   <td class="td<?php echo $item->id;?>" >
-           <?php else:?>
-		   <td>
-           <?php endif;?>
+            <td class="eiko_td_marker_gradient_<?php echo $item->data1_id;?>">
             </td>
             <td colspan="<?php echo $eiko_col-1; ?>" class="eiko_td_zusatz_main_1">
 			<div id ="div<?php echo $item->id;?>" style="display:none;">
@@ -429,7 +408,9 @@ defined('_JEXEC') or die;
            </tr>
 	<?php endif;?>
      <!-- Zusatzinformation Kurzinfo ENDE -->
-		   
+
+      <?php $marker_colors[$item->data1_id] = $item->marker; //add marker color to array to create CSS from ?>
+
     <?php endforeach; ?>
     </tbody>
 
