@@ -140,6 +140,7 @@ defined('_JEXEC') or die;
            <?php if ($item->date1_year != $y&& $this->params->get('display_home_jahr','1')) : ?>
 		   <tr class="eiko_einsatzarchiv_jahr_tr"><td class="eiko_einsatzarchiv_jahr_td" colspan="<?php echo $eiko_col; ?>">
            <?php $y= $item->date1_year;?>
+           <?php $m= ''; /* reset month for new year */ ?>
 		   <?php echo '<div class="eiko_einsatzarchiv_jahr_div">';?>
            <?php echo 'Einsatzberichte '. $item->date1_year.'';?> 
            <?php echo '</div>';?>
@@ -148,7 +149,8 @@ defined('_JEXEC') or die;
            <!--Anzeige des Jahres ENDE-->
 
            <!--Anzeige des Monatsnamen-->
-           <?php if ($item->date1_month != $m && $this->params->get('display_home_monat','1')) : ?>
+           <?php if (($item->date1_month != $m || $item->date1_year != $y) && $this->params->get('display_home_monat','1')) : ?>
+           <?php $y = $item->date1_year; // $y may not have been set before if display_home_jahr is 0 ?>
 		   <tr class="eiko_einsatzarchiv_monat_tr"><td class="eiko_einsatzarchiv_monat_td" colspan="<?php echo $eiko_col; ?>">
            <?php $m= $item->date1_month;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_monat_div">';?>
