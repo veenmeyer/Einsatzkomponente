@@ -11,8 +11,9 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
-<h3>Changelog <small>Version 3.20.3_beta</small></h3>
+<h3>Changelog <small>Version 3.21</small></h3>
 <ul>
+# alle Einsatzorte auf Einsatzübersichtskarte
 # Überlagerung Pagination
 # Bug in der Übersicht-Pagination behoben
 </ul>
