@@ -197,7 +197,7 @@
 		<field
 			name="gmapkey"
 			type="text"
-			default ="AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"
+			default =""
 			label="COM_EINSATZKOMPONENTE_OPTION_GOOGLE_API_KEY"
 			width ="100"
 			hint="GoogleMap Api-Key benötigt"
