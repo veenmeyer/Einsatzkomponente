@@ -258,12 +258,12 @@ $vehicles_images = '';
 						$array_vehicle[] = $value;
 						endif;
 						endforeach;
-						echo '<div class="items"><ul class="items_list">';
+						echo '<div class="items"><ul class="items_list eiko_item_ul">';
 						foreach($array as $value):
 				// sonstige Fahrzeuge anzeigen lassen
 						if (in_array($value->id, $array_vehicle)) : 
 						if ($value->state == '2'): $value->name = $value->name.' (a.D.)';endif;
-						echo '<li>';
+						echo '<li class="eiko_item_li">';
 						//if ($array_vehicle == $value->id) : echo $value->name;break; endif;
 						if ($this->params->get('display_detail_fhz_links','1')) :
 						

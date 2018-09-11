@@ -54,7 +54,7 @@ class EinsatzkomponenteModelOrganisation extends JModelItem
 
 		if (isset($params_array['item_id']))
 		{
-			$this->setState('organisation.id', $params_array['item_id']);
+			$this->setState('organisation.id', (int)$params_array['item_id']);
 		}
 
 		$this->setState('params', $params);

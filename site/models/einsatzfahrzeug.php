@@ -54,7 +54,7 @@ class EinsatzkomponenteModelEinsatzfahrzeug extends JModelItem
 
 		if (isset($params_array['item_id']))
 		{
-			$this->setState('einsatzfahrzeug.id', $params_array['item_id']);
+			$this->setState('einsatzfahrzeug.id', (int)$params_array['item_id']);
 		}
 
 		$this->setState('params', $params);

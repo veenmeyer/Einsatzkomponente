@@ -7,7 +7,7 @@
     <author>Ralf Meyer</author>
     <authorEmail>ralf.meyer@mail.de</authorEmail>
     <authorUrl>https://einsatzkomponente.de</authorUrl>
-    <version>3.20.5_beta</version> 
+    <version>3.20.6_beta</version> 
 	
     <description>
             <![CDATA[
@@ -44,6 +44,7 @@
         <filename>einsatzkomponente.php</filename>
         <filename>controller.php</filename>
         <filename>router.php</filename>
+        <folder>helpers</folder>
         <folder>views</folder>
         <folder>assets</folder>
         <folder>models</folder>

@@ -40,7 +40,7 @@ class EinsatzkomponenteModelAusruestung extends JModelItem {
         $params = $app->getParams();
         $params_array = $params->toArray();
         if (isset($params_array['item_id'])) {
-            $this->setState('ausruestung.id', $params_array['item_id']);
+            $this->setState('ausruestung.id', (int)$params_array['item_id']);
         }
         $this->setState('params', $params);
     }
