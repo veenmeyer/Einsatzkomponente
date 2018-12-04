@@ -697,8 +697,24 @@ padding-right:5px;
 .eiko_nowrap {white-space: nowrap;}
 .eiko_data1 {font-size:24px;}
 
+.eiko_einsatzarchiv_jahr_tr {background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;}
+.eiko_einsatzarchiv_monat_tr {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}
+.eiko_span_marker_main_1 {color:#ffffff!important;}
+
 .eiko_distance_road {font-size:smaller;padding-bottom:2em;}
 
 .eiko_ausruestung {margin-top: 10px;}
 
 .eiko_table_ausruestung {width: 100%;}
+
+
+.icon-first::before {
+    content: "" !important;
+}
+
+.icon-previous::before , .icon-backward::before {
+    content: "" !important;
+}
+.icon-next::before, .icon-forward::before {
+    content: "" !important;
+}

@@ -74,14 +74,16 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 		<?php endif; ?>
 		
 		<?php if ($filters) : ?>
-            <div class="btn-wrapper hidden-phone">
+            <!-- <div class="btn-wrapper hidden-phone"> -->
+            	<div class="btn-wrapper"> 
                 <button type="button" class="btn  js-stools-btn-filter" title=""
                         data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_FILTER_AUSWAEHLEN'); ?>">
                     <?php echo JText::_('COM_EINSATZKOMPONENTE_FILTER_AUSWAEHLEN'); ?> <i class="caret"></i>
                 </button>
             </div>
             <?php endif; ?>
-            <div class="btn-wrapper hidden-phone">
+            <!-- <div class="btn-wrapper hidden-phone"> -->
+            	<div class="btn-wrapper"> 
                 <button type="button" class="btn  js-stools-btn-clear" title="" data-original-title="<?php echo JText::_('COM_EINSATZKOMPONENTE_ALLE_FILTER_ZURUECKSETZEN'); ?>">
                     <?php echo JText::_('COM_EINSATZKOMPONENTE_ALLE_FILTER_ZURUECKSETZEN'); ?>
                 </button>
@@ -91,7 +93,8 @@ JHtml::_('searchtools.form', $formSelector, $data['options']);
 	
 	
     <!-- Filters div -->
-    <div class="js-stools-container-filters hidden-phone clearfix" style="">
+    <!-- <div class="js-stools-container-filters hidden-phone clearfix" style=""> -->
+    <div class="js-stools-container-filters clearfix" style="">
         <?php // Load the form filters ?>
         <?php if ($filters) : ?>
 			

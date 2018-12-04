@@ -15,10 +15,7 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 
-$version = new JVersion;
-if ($version->isCompatible('3.0')) :
 JHtml::_('formbehavior.chosen', 'select');
-endif;
 
 // Import CSS
 $document = JFactory::getDocument();
@@ -194,9 +191,8 @@ $stralarmarea=$stralarmarea.' ];';
 
 <!--Javascript für Gmap-Karte-->
 
-<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','') ;?>"></script> 
 
-</script>
 <script type="text/javascript"> 
 //<![CDATA[
  

@@ -26,32 +26,36 @@ JHtml::_('formbehavior.chosen', 'select');
 
 		<th>
 		</th>
-							<th class=''>
+							<th class="eiko_einsatzfahrzeug_name">
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				
 				<?php if ($this->params->get('show_fahrzeuge_detail1','1')) : ?>
-				<th class=''>
+				<th class="eiko_einsatzfahrzeug_beschreibung">
 				<?php echo JHtml::_('grid.sort',  'COM_EINSATZKOMPONENTE_EINSATZFAHRZEUGE_BESCHREIBUNG', 'a.detail1', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif;?>
 	
 				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
-				<th class=''>
+				<th class="eiko_einsatzfahrzeug_detail2">
 				<?php echo JHtml::_('grid.sort',  '', 'a.detail2', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif;?>
 				
 				<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
-				<th><?php echo JText::_('COM_EINSATZKOMPONENTE_LETZTER_EINTRAG');?></th>
+				<th  class="eiko_einsatzfahrzeug_letzter"
+				><?php echo JText::_('COM_EINSATZKOMPONENTE_LETZTER_EINTRAG');?>
+				</th>
 				<?php endif; ?>
 				
 				<?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
-				<th><?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATION');?></th>
+				<th  class="eiko_einsatzfahrzeug_organisation">
+				<?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATION');?>
+				</th>
 				<?php endif;?>
 
 							<?php if ($canEdit || $canDelete): ?>
-					<th class="center">
+					<th class="eiko_admin_action center">
 				<?php echo JText::_('COM_EINSATZKOMPONENTE_ADMIN_ACTION'); ?>
 				</th>
 				<?php endif; ?>
@@ -66,7 +70,7 @@ JHtml::_('formbehavior.chosen', 'select');
 		</tr>
 <?php if (!$this->params->get('eiko')) : ?>
         <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-            <th colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2016 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
+            <th colspan="<?php echo isset($this->items[0]) ? count(get_object_vars($this->items[0])) : 10; ?>"><span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2018 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></th>
         </tr>
 	<?php endif; ?>
 		</tfoot>
@@ -85,22 +89,22 @@ JHtml::_('formbehavior.chosen', 'select');
 
 				</td>
 				
-				<td>
+				<td class="eiko_checkout">
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'einsatzfahrzeuge.', $canCheckin); ?>
 				<?php endif; ?>
-				<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id='.(int) $item->id); ?>">
+				<a class="eiko_fahrzeug_link" href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&id='.(int) $item->id); ?>">
 				<?php echo $this->escape($item->name); ?></a>
 				</td>
 				
 				<?php if ($this->params->get('show_fahrzeuge_detail1','1')) : ?>
-					<td>
+					<td class="eiko_fahrzeug_detail1">
 						<?php echo $item->detail1; ?>
 					</td>
 				<?php endif;?>
 				
 				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
-					<td>
+					<td class="eiko_fahrzeug_detail2">
 
 						<?php echo $item->detail2; ?>
 					</td>
@@ -114,7 +118,7 @@ JHtml::_('formbehavior.chosen', 'select');
 					$total = $database->loadObjectList();
 					?>
 					<?php if ($total) : ?>
-					<td><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+					<td  class="eiko_fahrzeug_letzter_einsatz"><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
 					<?php else: ?>
 					<td><?php echo '-'; ?></td>
 					<?php endif;?>
@@ -135,7 +139,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				
 				
 								<?php if ($canEdit || $canDelete): ?>
-					<td class="center">
+					<td class="center eiko_admin_action">
 						<?php if ($canEdit): ?>
 							<a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzfahrzeugform.edit&id=' . $item->id, false, 2); ?>" class="btn btn-mini" type="button"><i class="icon-edit" ></i></a>
 						<?php endif; ?>

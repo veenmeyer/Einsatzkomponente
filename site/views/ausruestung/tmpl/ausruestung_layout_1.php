@@ -23,6 +23,8 @@ if (!$canEdit && JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkom
 			<img class="img-rounded ftm_img_ausbildung_detail_1" style="float:right;margin-top:20px;margin-right:10px;margin-left:10px;width:250px;" src="<?php echo JURI::Root();?><?php echo $this->item->image;?>" title="<?php echo $this->item->name;?>"/>
 			
 			<?php if ($this->item->beschreibung) :?>
+			<?php $this->item->beschreibung = str_replace('<hr id="system-readmore" />', "", $this->item->beschreibung); ?>
+
 			<?php jimport('joomla.html.content'); ?>  
 			<?php $Desc = JHTML::_('content.prepare', $this->item->beschreibung); ?>
 			<?php echo $Desc; ?>

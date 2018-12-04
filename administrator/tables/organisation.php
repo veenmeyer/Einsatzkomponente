@@ -19,6 +19,8 @@ class EinsatzkomponenteTableorganisation extends JTable {
      */
     public function __construct(&$db) {
         parent::__construct('#__eiko_organisationen', 'id', $db);
+				// Set the alias since the column is called state
+				$this->setColumnAlias('published', 'state');
     }
     /**
      * Overloaded bind function to pre-process the params.

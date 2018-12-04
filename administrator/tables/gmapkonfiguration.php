@@ -22,6 +22,8 @@ class EinsatzkomponenteTablegmapkonfiguration extends JTable {
      */
     public function __construct(&$db) {
         parent::__construct('#__eiko_gmap_config', 'id', $db);
+				// Set the alias since the column is called state
+				$this->setColumnAlias('published', 'state');
     }
 
     /**

@@ -68,11 +68,26 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		
 		if ($this->params->get('gmap_action','0') == '1') :
 			
-			$standort = new StdClass;
+			// Einsatzorte für Übersichtskarte
+			$einsatzorte='[]'; 
+		if ($this->params->get('display_home_missions','1')) :
+			$i = '0';
+			$einsatzorte='['; 
+			foreach ($this->items as $i => $item) : 
+				if ($item->gmap AND $item->state == '1') :
+				$einsatzorte= $einsatzorte.'["'.$item->summary.'",'.$item->gmap_report_latitude.','.$item->gmap_report_longitude.','.$i.',"'.$item->icon.'","'.$item->summary.'","'.$item->id.'","'.$item->address.'"],';
+				endif;
+			endforeach; 
+	  		$einsatzorte=substr($einsatzorte,0,strlen($einsatzorte)-1);
+	  		$einsatzorte=$einsatzorte.' ];';
+			// Einsatzorte für Übersichtskarte  ENDE
+		endif;
+			
+	$standort = new StdClass;
 			$standort->gmap_latitude = '0';
 			$standort->gmap_longitude= '0';
 			$orga = EinsatzkomponenteHelper::getOrganisationen(); 
-		if ($this->params->get('display_detail_organisationen','1')) :
+		if ($this->params->get('display_home_organisationen','1')) :
 			$orga = EinsatzkomponenteHelper::getOrganisationen(); 
 	  		$organisationen='['; // Feuerwehr Details  ------>
 	  		$n=0;
@@ -126,17 +141,32 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		$gmap_onload 		= $this->gmap_config->gmap_onload;
 		$zoom_control 		= 'true';
 		$document->addScript('//maps.googleapis.com/maps/api/js?key='.$this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"));			
-		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route) );		
+		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route,$einsatzorte) );		
 		endif;
 
 		if ($this->params->get('gmap_action','0') == '2') :
 		
+			// Einsatzorte für Übersichtskarte
+			$einsatzorte='[]'; 
+		if ($this->params->get('display_home_missions','1')) :
+			$i = '0';
+			$einsatzorte='['; 
+			foreach ($this->items as $i => $item) : 
+				if ($item->gmap AND $item->state == '1') :
+				$einsatzorte= $einsatzorte.'["'.$item->summary.'",'.$item->gmap_report_latitude.','.$item->gmap_report_longitude.','.$i.',"'.$item->icon.'","'.$item->summary.'","'.$item->id.'","'.$item->address.'"],';
+				endif;
+			endforeach; 
+	  		$einsatzorte=substr($einsatzorte,0,strlen($einsatzorte)-1);
+	  		$einsatzorte=$einsatzorte.' ];';
+			// Einsatzorte für Übersichtskarte  ENDE
+		endif;
+
 			$standort = new StdClass;
 			$standort->gmap_latitude = '0';
 			$standort->gmap_longitude= '0';
 
 			$orga = EinsatzkomponenteHelper::getOrganisationen(); 
-		if ($this->params->get('display_detail_organisationen','1')) :
+		if ($this->params->get('display_home_organisationen','1')) :
 			$orga = EinsatzkomponenteHelper::getOrganisationen(); 
 	  		$organisationen='['; // Feuerwehr Details  ------>
 	  		$n=0;
@@ -196,7 +226,7 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/osm/map.css');		
  		$document->addStyleSheet('components/com_einsatzkomponente/assets/osm/ie_map.css');	
  		$document->addScript('components/com_einsatzkomponente/assets/osm/OpenLayers_Map_minZoom_maxZoom_Patch.js');
-		$document->addScriptDeclaration( EinsatzkomponenteHelper::getOsm($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route) );											
+		$document->addScriptDeclaration( EinsatzkomponenteHelper::getOsm($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route,$einsatzorte) );											
  		endif;
 		
 		//Komponentenversion aus Datenbank lesen

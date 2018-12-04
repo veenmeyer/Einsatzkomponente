@@ -11,6 +11,15 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.21</small></h3>
+<ul>
+# State-Problem ab Joomla 3.9.1 behoben
++ Readmore-Funktion in Ausrüstung-Ansichten 
+# alle Einsatzorte auf Einsatzübersichtskarte
+# Überlagerung Pagination
+# Bug in der Übersicht-Pagination behoben
+</ul>
+
 <h3>Changelog <small>Version 3.20</small></h3>
 <ul>
 # Bug durch Update auf Joomla 3.8.4 (Übersichtsbutton,Filter,...)

@@ -8,22 +8,31 @@
  */
 // no direct access
 defined('_JEXEC') or die;
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+
+
+
+HTMLHelper::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 $val= EinsatzkomponenteHelper::getValidation();
 
-JHtml::_('behavior.multiselect');
+HTMLHelper::_('behavior.multiselect');
 
-	JHtml::_('bootstrap.tooltip');
-	JHtml::_('formbehavior.chosen', 'select'); 
+	HTMLHelper::_('bootstrap.tooltip');
+	HTMLHelper::_('formbehavior.chosen', 'select'); 
 
 // Import CSS
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
 // Versions-Nummer 
-$db = JFactory::getDbo();
+$db = Factory::getDbo();
 $db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 $params = json_decode( $db->loadResult(), true );
-$user	= JFactory::getUser();
+$user	= Factory::getUser();
 $userId	= $user->get('id');
 ?>
 
@@ -32,7 +41,7 @@ if (!empty($this->extra_sidebar)) {
     $this->sidebar .= $this->extra_sidebar;
 }
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=kontrollcenter'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo Route::_('index.php?option=com_einsatzkomponente&view=kontrollcenter'); ?>" method="post" name="adminForm" id="adminForm">
 <?php if(!empty($this->sidebar)): ?>
 	<div id="j-sidebar-container" class="span2">
 		<?php echo $this->sidebar; ?>
@@ -48,48 +57,48 @@ if (!empty($this->extra_sidebar)) {
         
 			  <div class="btn-group btn-group-justified">
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzberichte">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/liste.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/liste.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'); ?></span>
 	    					</a>
 							
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=kategorien">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'); ?></span>
 	    					</a>   						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzarten">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzarten.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'); ?></span>
 	    					</a>    						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=organisationen">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/organisationen.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/organisationen.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'); ?></span>
 	    					</a>    						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=alarmierungsarten">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/alarmierungsarten.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?>" src="components/com_einsatzkomponente/assets/images/menu/alarmierungsarten.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'); ?></span>
 	    					</a>    						
 						
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzfahrzeuge.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzfahrzeuge.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'); ?></span>
 	    					</a>
     						
 	    					<!--<a class="btn" href="index.php?option=com_einsatzkomponente&view=beispiel">
-		    				<img  style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?>" src="components/com_einsatzkomponente/assets/images/menu/beispiel.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?></span>
+		    				<img  style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?>" src="components/com_einsatzkomponente/assets/images/menu/beispiel.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_BEISPIEL'); ?></span>
 	    					</a>-->
     					
 	    					<a class="btn" href="index.php?option=com_einsatzkomponente&view=einsatzbildmanager">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzbildmanager.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einsatzbildmanager.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'); ?></span>
 	    					</a>
 
 	    					<a class="btn" href="index.php?option=com_config&view=component&component=com_einsatzkomponente">
-		    				<img style="width:32px;height:32px;" alt="<?php echo JText::_('COM_EINSATZKOMPONENTE_OPTIONS'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einstellungen.png" /><br/>
-		    				<span style="font-size:11px;"><?php echo JText::_('COM_EINSATZKOMPONENTE_OPTIONS'); ?></span>
+		    				<img style="width:32px;height:32px;" alt="<?php echo Text::_('COM_EINSATZKOMPONENTE_OPTIONS'); ?>" src="components/com_einsatzkomponente/assets/images/menu/einstellungen.png" /><br/>
+		    				<span style="font-size:11px;"><?php echo Text::_('COM_EINSATZKOMPONENTE_OPTIONS'); ?></span>
 	    					</a>
 
 				</div>
@@ -108,13 +117,13 @@ if (!empty($this->extra_sidebar)) {
 
 <div class="span4">
 <div class="alert alert-info" style=" float:left;">
-<a target="_blank" href="https://www.einsatzkomponente.de/index.php"><img src="<?php echo JURI::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg" style="float:left; margin-right:20px; padding-right:20px;"/></a>
-<span class="label label-important"><?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_1');?></span><br/><br/>
-<?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_2');?>
+<a target="_blank" href="https://www.einsatzkomponente.de/index.php"><img src="<?php echo Uri::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg" style="float:left; margin-right:20px; padding-right:20px;"/></a>
+<span class="label label-important"><?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_1');?></span><br/><br/>
+<?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_2');?>
 <small>PayPal-Email: <?php echo 'ralf.meyer@mail.de';?></small><br />
 
 
-<p><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><span style="float:right;"><?php echo JText::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_SPENDEN_UEBER_PAYPAL');?>: <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></span></a>
+<p><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><span style="float:right;"><?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_SPENDEN_UEBER_PAYPAL');?>: <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></span></a>
 <p><small><span style="float:right;"></br>Alternativ können Sie die Kontodaten per <a href="mailto:validate@einsatzkomponente.de?Subject=Spende%20Einsatzkomponente%20J3.x" target="_top">Email </a>anfordern.</span></small></p></p>
 
 
@@ -123,7 +132,7 @@ if (!empty($this->extra_sidebar)) {
 <div class="span5">
 					<div class="well well-small" style=" float:left;">
 						<div class="center">
-							<?php echo '<h4>'.JTEXT::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_TITLE');?><?php echo '</h4>';?>
+							<?php echo '<h4>'.Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_TITLE');?><?php echo '</h4>';?>
 						</div>
 						<hr class="hr-condensed">
 						<dl class="dl-horizontal">
@@ -135,7 +144,7 @@ if (!empty($this->extra_sidebar)) {
 							<?php echo '<span class="label label-important"> ( nicht validiert ) </span><br/>siehe Optionen / Info';?>
                             <?php endif;?>
 							
-								<?php JHtml::_('behavior.modal'); ?>
+								<?php HTMLHelper::_('behavior.modal'); ?>
 								</br>
 								<div style="display:none;">
 								<div id="eiko-changelog">
@@ -259,7 +268,7 @@ if (!empty($this->extra_sidebar)) {
             
 		</table>
 		<input type="hidden" name="task" value="" />
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 	</div>
 </form>     
 	

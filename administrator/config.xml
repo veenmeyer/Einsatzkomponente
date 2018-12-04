@@ -197,7 +197,7 @@
 		<field
 			name="gmapkey"
 			type="text"
-			default ="AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"
+			default =""
 			label="COM_EINSATZKOMPONENTE_OPTION_GOOGLE_API_KEY"
 			width ="100"
 			hint="GoogleMap Api-Key benötigt"
@@ -807,6 +807,21 @@
 			<option
 				value="1">JYES</option>
 	  </field>
+	  
+	  <field
+			name="display_home_missions"
+			type="radio"
+			showon="gmap_action:1,2"
+			class="btn-group"
+			default="1"
+			label="Einsatzorte auf Karte"
+			description="">
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+	  </field>
+	  
 		<field
 			name="spacer7"
 			type="spacer"
@@ -1855,7 +1870,7 @@
 		<field 	name="main_css" 
 				type="textarea" 
 				filter="raw" 
-				default=".eiko_td_marker_main_1 {color:#ffffff;} .eiko_einsatzarchiv_jahr_tr,eiko_einsatzarchiv_jahr_td{background-color:#dddddd;color:#000000;font-size:24px !important;font-weight:bold !important;margin-top:50px !important;} eiko_einsatzarchiv_jahr_div {color:#ffffff important;} .eiko_einsatzarchiv_monat_tr,eiko_einsatzarchiv_monat_td {background-color:#cccccc;color:#000000;}eiko_einsatzarchiv_monat_div {color:#ffffff !important;}.eiko_span_marker_main_1 {color:#ffffff!important;}" 
+				default=""
 				label="COM_EINSATZKOMPONENTE_OPTION_CUSTOM_EINSATZ_UEBERSICHT" 
 				description="Füge hier den zusätzlichen CSS-Code für die Einsatz-Übersicht ein." 
 				rows="10" 

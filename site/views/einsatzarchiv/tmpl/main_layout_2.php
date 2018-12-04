@@ -130,6 +130,7 @@ defined('_JEXEC') or die;
 
            <!--Anzeige des Monatsnamen-->
            <?php if (($item->date1_month != $m || $item->date1_year != $y) && $this->params->get('display_home_monat','1')) : ?>
+           <?php $y = $item->date1_year; // $y may not have been set before if display_home_jahr is 0 ?>
 		   <tr class="eiko_einsatzarchiv_monat_tr"><td class="eiko_einsatzarchiv_monat_td" colspan="<?php echo $eiko_col; ?>">
            <?php $m= $item->date1_month;?>
 		   <?php echo '<div class="eiko_einsatzarchiv_monat_div">';?>
@@ -144,31 +145,29 @@ defined('_JEXEC') or die;
 			<td>
 			<?php //echo $item->number;?>
 			</td>
-           <?php if ($this->params->get('display_home_date_image','1')=='1') : ?>
-		   <td class="eiko_td_kalender_main_1"> 
-			<div class="home_cal_icon">
-			<div class="home_cal_monat"><?php echo date('M', $item->date1);?></div>
-			<div class="home_cal_tag"><?php echo date('d', $item->date1);?></div>
-			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $item->date1);?></span></div>
-			</div>
-           </td>
-           <?php endif;?>
-           <?php if ($this->params->get('display_home_date_image','1')=='2') : ?>
-		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $item->date1);?><br /><?php echo date('H:i ', $item->date1); ?>Uhr</td>
-           <?php endif;?>
-           <?php if ($this->params->get('display_home_date_image','1')=='0') : ?>
-		   <td class="eiko_td_datum_main_1"> <?php echo date('d.m.Y ', $item->date1);?></td>
-           <?php endif;?>
-           <?php if ($this->params->get('display_home_date_image','1')=='3') : ?>
-		   <td class="eiko_td_kalender_main_1"> 
-			<div class="home_cal_icon">
-			<div class="home_cal_monat"><?php echo date('M', $item->date1);?></div>
-			<div class="home_cal_tag"><?php echo date('d', $item->date1);?></div>
-			<div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $item->date1);?></span></div>
-			 <?php echo '<div style="font-size:12px;white-space: nowrap;">'.date('H:i ', $item->date1).' Uhr</div>'; ?>
-			</div>
-           </td>
-           <?php endif;?>
+
+        <?php $date_image = $this->params->get('display_home_date_image','1') ?>
+        <?php if ($date_image == '0' || $date_image == '2') : ?>
+          <td class="eiko_td_datum_main_1">
+            <?php echo date('d.m.Y', $item->date1); ?>
+            <?php if ($date_image == '2') : ?>
+              <br /><?php echo date('H:i', $item->date1); ?>Uhr
+            <?php endif; ?>
+          </td>
+        <?php endif; ?>
+
+        <?php if ($date_image == '1' || $date_image == '3') : ?>
+          <td class="eiko_td_kalender_main_1">
+            <div class="home_cal_icon">
+              <div class="home_cal_monat"><?php echo date('M', $item->date1); ?></div>
+              <div class="home_cal_tag"><?php echo date('d', $item->date1); ?></div>
+              <div class="home_cal_jahr"><span style="font-size:10px;"><?php echo date('Y', $item->date1); ?></span></div>
+              <?php if ($date_image == '3') : ?>
+                <div style="font-size: 12px; white-space: nowrap;"><?php echo date('H:i', $item->date1); ?>Uhr</div>
+              <?php endif;?>
+            </div>
+          </td>
+        <?php endif;?>
 
             	<td>
 					<?php if (isset($item->checked_out) && $item->checked_out) : ?>
@@ -312,69 +311,5 @@ defined('_JEXEC') or die;
 		
     <?php endforeach; ?>
     </tbody>
-	
-    <tfoot>
-    				<!--Prüfen, ob Pagination angezeigt werden soll-->
-    				<?php if ($this->params->get('display_home_pagination')) : ?>
-					<tr>
-					<td colspan="<?php echo $eiko_col; ?>">
-                    	<form action="#" method=post>
-						<?php echo $this->pagination->getListFooter(); ?><!--Pagination anzeigen-->
-						</form> 
-					</td></tr>
-		   			<?php endif;?><!--Prüfen, ob Pagination angezeigt werden soll   ENDE -->
-		
-		<?php if (!$this->params->get('eiko')) : ?>
-        <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
-        <td colspan="<?php echo $eiko_col; ?>">
-			<span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span></td>
-        </tr>
-	<?php endif; ?>
-    </tfoot>
 
-
-
-    <input type="hidden" name="task" value=""/>
-    <input type="hidden" name="boxchecked" value="0"/>
-    <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-    <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-    <?php echo JHtml::_('form.token'); ?>
-</form>
-
-    <?php if ($this->params->get('display_home_map')) : ?>
-    <tr><td colspan="<?php echo $eiko_col;?>" class="eiko_td_gmap_main_1">
-    <h4>Einsatzgebiet</h4>
-			<?php if ($this->params->get('gmap_action','0') == '1') :?>
-  			<div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
-    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
-			</div>
-            <?php endif;?>
-			<?php if ($this->params->get('gmap_action','0') == '2') :?>
-<body onLoad="drawmap();">
-				<!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
-				<div id="description" class="">Einsatzkarte</div>-->
-   				<div id="map" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;"></div> 
-    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
-            <?php endif;?>
-            </td></tr>
-    <?php endif;?>
-
-    </table>
-
-
-<?php echo '<span class="mobile_hide_320">'.$this->modulepos_1.'</span>'; ?>
-
-
-<script type="text/javascript">
-
-    jQuery(document).ready(function () {
-        jQuery('.delete-button').click(deleteItem);
-    });
-
-    function deleteItem() {
-        var item_id = jQuery(this).attr('data-item-id');
-        if (confirm("<?php echo JText::_('COM_EINSATZKOMPONENTE_WIRKLICH_LOESCHEN'); ?>")) {
-            window.location.href = '<?php echo JRoute::_('index.php?option=com_einsatzkomponente&task=einsatzberichtform.remove&id=', false, 2) ?>' + item_id;
-        }
-    }
-</script>
+<?php require_once JPATH_COMPONENT_SITE . '/views/einsatzarchiv/tmpl/main_layout_bottom.php'; ?>

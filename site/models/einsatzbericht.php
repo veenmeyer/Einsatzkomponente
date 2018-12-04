@@ -42,7 +42,7 @@ class EinsatzkomponenteModelEinsatzbericht extends JModelForm
 		$params = $app->getParams();
         $params_array = $params->toArray();
         if(isset($params_array['item_id'])){
-            $this->setState('einsatzbericht.id', $params_array['item_id']);
+            $this->setState('einsatzbericht.id', (int)$params_array['item_id']);
         }
 		$this->setState('params', $params);
 	}
