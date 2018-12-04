@@ -30,11 +30,10 @@ class EinsatzkomponenteViewKontrollcenter extends JViewLegacy
 		
 		//$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
 		
-		
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
-			throw new Exception(implode("\n", $errors));
-		}
+		// if (count($errors = $this->get('Errors'))) {
+			// throw new Exception(implode("\n", $errors));
+		// }
         
 		EinsatzkomponenteHelper::addSubmenu('kontrollcenter');
         

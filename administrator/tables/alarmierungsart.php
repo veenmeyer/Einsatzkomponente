@@ -19,6 +19,8 @@ class EinsatzkomponenteTablealarmierungsart extends JTable {
      */
     public function __construct(&$db) {
         parent::__construct('#__eiko_alarmierungsarten', 'id', $db);
+				// Set the alias since the column is called state
+				$this->setColumnAlias('published', 'state');
     }
     /**
      * Overloaded bind function to pre-process the params.

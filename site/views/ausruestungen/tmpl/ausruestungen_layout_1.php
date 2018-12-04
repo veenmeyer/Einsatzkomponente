@@ -101,9 +101,19 @@ $canDelete = $user->authorise('core.delete', 'com_einsatzkomponente');
 				<?php endif; ?>
 				<br/>
 				<?php if ($item->beschreibung) : ?>
-				<?php jimport('joomla.html.content'); ?>  
-				<?php $Desc = JHTML::_('content.prepare', $item->beschreibung); ?>
-				<?php echo $Desc; ?>
+				
+					<?php
+					$intro = $item->beschreibung;
+					if (strstr($intro, '<hr id="system-readmore" />', true)) {
+					$intro = strstr($intro, '<hr id="system-readmore" />', true) ; 
+					$intro = preg_replace("#(?<=.{2000}?\\b)(.*)#is", " ...", $intro, 1);
+					}
+					$item->beschreibung = $intro;
+					?>
+				
+					<?php jimport('joomla.html.content'); ?>  
+					<?php $Desc = JHTML::_('content.prepare', $item->beschreibung); ?>
+					<?php echo $Desc; ?>
 				<?php endif; ?>
 				
 				<p><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=ausruestung&id='.(int) $item->id); ?>" class="btn btn-primary" role="button"><?php echo JText::_('COM_EINSATZKOMPONENTE_DETAILS_2');?></a></p>

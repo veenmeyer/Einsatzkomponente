@@ -8,6 +8,13 @@
  */
 // No direct access
 defined('_JEXEC') or die;
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
+
 /**
  * Einsatzkomponente helper.
  */
@@ -22,69 +29,69 @@ class EinsatzkomponenteHelper
 	public static function addSubmenu($vName = '')
 	{
 		
-		$uri = (string) JUri::getInstance();
+		$uri = (string) Uri::getInstance();
 		$return = urlencode(base64_encode($uri));
 		
 
 			$params = JComponentHelper::getParams('com_einsatzkomponente');
 
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_KONTROLLCENTER'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_KONTROLLCENTER'),
 				  'index.php?option=com_einsatzkomponente&view=kontrollcenter',
 				  $vName == 'kontrollcenter'
 			  );
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBERICHTE'),
 				  'index.php?option=com_einsatzkomponente&view=einsatzberichte',
 				  $vName == 'einsatzberichte'
 			  );
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_KATEGORIEN'),
 				  'index.php?option=com_einsatzkomponente&view=kategorien',
 				  $vName == 'kategorien'
 			  );
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZARTEN'),
 				  'index.php?option=com_einsatzkomponente&view=einsatzarten',
 				  $vName == 'einsatzarten'
 			  );
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_ALARMIERUNGSARTEN'),
 				  'index.php?option=com_einsatzkomponente&view=alarmierungsarten',
 				  $vName == 'alarmierungsarten'
 			  );
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZFAHRZEUGE'),
 				  'index.php?option=com_einsatzkomponente&view=einsatzfahrzeuge',
 				  $vName == 'einsatzfahrzeuge'
 			  );
 			  if ($params->get('eiko','0')) :
         		JHtmlSidebar::addEntry(
-			JText::_('COM_EINSATZKOMPONENTE_TITLE_AUSRUESTUNGEN'),
+			Text::_('COM_EINSATZKOMPONENTE_TITLE_AUSRUESTUNGEN'),
 			'index.php?option=com_einsatzkomponente&view=ausruestungen',
 			$vName == 'ausruestungen'
 		);
 			  endif;
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_ORGANISATIONEN'),
 				  'index.php?option=com_einsatzkomponente&view=organisationen',
 				  $vName == 'organisationen'
 			  );
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_EINSATZBILDMANAGER'),
 				  'index.php?option=com_einsatzkomponente&view=einsatzbildmanager',
 				  $vName == 'einsatzbildmanager'
 			  );
 			  if ($params->get('gmap_action','0')) :
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_TITLE_GMAPKONFIGURATIONEN'),
+				  Text::_('COM_EINSATZKOMPONENTE_TITLE_GMAPKONFIGURATIONEN'),
 				  'index.php?option=com_einsatzkomponente&view=gmapkonfigurationen',
 				  $vName == 'gmapkonfigurationen'
 			  );
 			  endif;
 			  
 			  JHtmlSidebar::addEntry(
-				  JText::_('COM_EINSATZKOMPONENTE_OPTIONS'),
+				  Text::_('COM_EINSATZKOMPONENTE_OPTIONS'),
 				  'index.php?option=com_config&view=component&component=com_einsatzkomponente&return=' . $return,
 				  $vName == 'configuration'
 			  );
@@ -92,13 +99,13 @@ class EinsatzkomponenteHelper
 			// if (JComponentHelper::isEnabled('com_fields'))
 			// {
 				// JHtmlSidebar::addEntry(
-					// JText::_('JGLOBAL_FIELDS'),
+					// Text::_('JGLOBAL_FIELDS'),
 					// 'index.php?option=com_fields&context=com_einsatzkomponente.einsatzbericht',
 					// $vName == 'fields.fields'
 				// );
 			 
 				// JHtmlSidebar::addEntry(
-					// JText::_('JGLOBAL_FIELD_GROUPS'),
+					// Text::_('JGLOBAL_FIELD_GROUPS'),
 					// 'index.php?option=com_fields&view=groups&context=com_einsatzkomponente.einsatzbericht',
 					// $vName == 'fields.groups'
 				// );
@@ -112,7 +119,7 @@ class EinsatzkomponenteHelper
 	 */
 	public static function getActions()
 	{
-		$user	= JFactory::getUser();
+		$user	= Factory::getUser();
 		$result	= new JObject;
 		$assetName = 'com_einsatzkomponente';
 		$actions = array(
@@ -127,7 +134,7 @@ class EinsatzkomponenteHelper
 	public static function load_gmap_config()
 	{
 		// GMap-Config laden
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select('*');
 		$query->from('#__eiko_gmap_config');
@@ -143,12 +150,12 @@ class EinsatzkomponenteHelper
 		$ex_einsatzart = $params->get('display_home_number_excl_einsatzart','');
 		
 		$query = 'SELECT COUNT(*) AS total,state FROM #__eiko_einsatzberichte WHERE (date1 BETWEEN "'.date('Y', $selectedDate).'-01-01 00:00:00" AND "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
-		$db	= JFactory::getDBO();
+		$db	= Factory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
 		
 		$query = 'SELECT state FROM #__eiko_einsatzberichte WHERE (date1 = "'.date('Y-m-d H:i:s', $selectedDate).'") AND (state = "1" OR state = "2" OR state = "2") and data1 !="'.$ex_einsatzart.'"  ' ;
-		$db	= JFactory::getDBO();
+		$db	= Factory::getDBO();
 		$db->setQuery( $query );
 		$result_state = $db->loadResult();
 		
@@ -161,7 +168,7 @@ class EinsatzkomponenteHelper
     public static function count_einsatz_daten_bestimmtes_jahr ($selectedYear) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
 		$query = 'SELECT COUNT(r.id) as total FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC ' ;
-		$db	= JFactory::getDBO();
+		$db	= Factory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
         return $result;
@@ -170,7 +177,7 @@ class EinsatzkomponenteHelper
     public static function einsatz_daten_bestimmtes_jahr ($selectedYear,$limit,$limitstart) {
 		// Funktion : Einsatzdaten für ein bestimmtes Jahr aus der DB holen<br />
 		$query = 'SELECT COUNT(r.id) as total,r.people,r.id,r.image as foto,rd.marker,r.address,r.summary,r.date1,r.data1,r.counter,r.alerting,r.presse,r.presse2,r.presse3,r.gmap_report_latitude,r.gmap_report_longitude,re.image,re.title as alarmierungsart,rd.list_icon,rd.icon,r.desc,r.auswahl_orga,r.ausruestung,r.state,rd.title as einsatzart,r.tickerkat,r.gmap FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE r.date1 LIKE "'.$selectedYear.'%" AND (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state ="1" GROUP BY r.id ORDER BY r.date1 DESC LIMIT '.$limitstart.','.$limit.' ' ;
-		$db	= JFactory::getDBO();
+		$db	= Factory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
         return $result;
@@ -179,7 +186,7 @@ class EinsatzkomponenteHelper
     public static function letze_x_einsatzdaten ($x) {
 		// Funktion : letze x Einsatzdaten laden
 		$query = 'SELECT r.id,r.image as foto,rd.marker,r.address,r.summary,r.auswahl_orga,r.ausruestung,r.desc,r.date1,r.data1,r.counter,r.alerting,r.presse,re.image,rd.list_icon,r.auswahl_orga,r.state,rd.title as einsatzart,r.tickerkat FROM #__eiko_einsatzberichte r JOIN #__eiko_einsatzarten rd ON r.data1 = rd.id LEFT JOIN #__eiko_alarmierungsarten re ON re.id = r.alerting WHERE (r.state = "1" OR r.state = "2") and rd.state = "1" and re.state = "1" ORDER BY r.date1 DESC LIMIT '.$x.' ' ;
-		$db	= JFactory::getDBO();
+		$db	= Factory::getDBO();
 		$db->setQuery( $query );
 		$result = $db->loadObjectList();
         return $result;
@@ -188,7 +195,7 @@ class EinsatzkomponenteHelper
 	public static function getYear() 
 	{
 		// Funktion : Alle Jahreszahlen aller Einsätze zusammenfassen
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = 'SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE (state="1" OR state = "2") GROUP BY title ORDER BY date1 DESC';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -198,7 +205,7 @@ class EinsatzkomponenteHelper
 	public static function getVersion()
 	{
 		// Funktion : Installierte Version ermitteln
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 		$params = json_decode( $db->loadResult(), true );
         $version = $params['version'];
@@ -208,7 +215,7 @@ class EinsatzkomponenteHelper
 	public static function getEinsatzbilder ($report_id = '0') 
 	{
 		// Funktion : Alle Einsatzbilder per ID laden
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = 'SELECT * FROM #__eiko_images WHERE report_id = "'.$report_id.'" AND state ="1" ORDER BY ordering';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -217,7 +224,7 @@ class EinsatzkomponenteHelper
 
     public static function getOrganisationen() {
  		// Funktion : Feuerwehrliste aus DB holen
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = 'SELECT * FROM #__eiko_organisationen WHERE state="1" ORDER BY id';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -232,7 +239,7 @@ class EinsatzkomponenteHelper
 					endif;
 				endforeach;
 				$data = array();
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = 'SELECT gmap_latitude,gmap_longitude,name,gmap_icon_orga,ffw FROM #__eiko_organisationen WHERE state="1" and id="'.$array[0].'" ';
 		$db->setQuery($query);
 		$result = $db->loadObject();
@@ -243,7 +250,7 @@ class EinsatzkomponenteHelper
     public static function getEinsatzarten() {
 		// Funktion : Liste der Einsatzarten aus DB holen
 		$query = 'SELECT id, title as title FROM #__eiko_einsatzarten WHERE state="1" ORDER BY ordering ASC';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -253,14 +260,14 @@ class EinsatzkomponenteHelper
 		// Funktion : Den Einsatz vor dem aktuellen Einsatz ermitteln
 		if ($selectedOrga == 'alle Organisationen') :
 		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 < "'.$cur_date.'"  AND state="1" ORDER BY date1 desc LIMIT 1';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
 		else:
 		
 		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 < "'.$cur_date.'" AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND state="1" ORDER BY date1 desc LIMIT 1';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -272,13 +279,13 @@ class EinsatzkomponenteHelper
 		// Funktion : Den Einsatz nach dem aktuellen Einsatz ermitteln
 		if ($selectedOrga == 'alle Organisationen') :
 		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 > "'.$cur_date.'"  AND state="1" ORDER BY date1 asc LIMIT 1';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
 		else:
 		$query = 'SELECT id,summary FROM #__eiko_einsatzberichte WHERE date1 > "'.$cur_date.'"  AND auswahl_orga LIKE "%'.$selectedOrga.'%"  AND state="1" ORDER BY date1 asc LIMIT 1';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
         return $result;
@@ -287,7 +294,7 @@ class EinsatzkomponenteHelper
 	
     public static function getEinsatzlogo($data1) {
 		// Funktion : Daten für Einsatzlogo holen
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
@@ -302,7 +309,7 @@ class EinsatzkomponenteHelper
 
     public static function getTickerKat($kat) {
 		// Funktion : Einsatzkategorie
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
@@ -316,7 +323,7 @@ class EinsatzkomponenteHelper
 	
     public static function getAlarmierungsart($alerting) {
 		// Funktion : Daten für Einsatzlogo holen
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = $db->getQuery(true);
 					$query
 						->select('*')
@@ -329,7 +336,7 @@ class EinsatzkomponenteHelper
 	
     public static function getOrga_fahrzeuge($orga_id) {
  		// Funktion : Feuerwehrliste aus DB holen
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$query = 'SELECT * FROM #__eiko_fahrzeuge WHERE department = "'.$orga_id.'" and (state = 1 or state = 2) ORDER BY ordering';
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
@@ -342,7 +349,7 @@ class EinsatzkomponenteHelper
 						$sonstige ='';
 						$sonstige_result = '';
 						$query = 'SELECT * from #__eiko_fahrzeuge where department = "'.$orga_id.'" and (state = 1 or state = 2) order by ordering ASC';
-						$db = JFactory::getDBO();
+						$db = Factory::getDBO();
                         $db->setQuery($query);
                         if ($vehicles = $db->loadObjectList()) :
                                 foreach ($vehicles as $vehicle) {
@@ -350,7 +357,7 @@ class EinsatzkomponenteHelper
 						if ($vehicle->state == '2'): $vehicle->name = $vehicle->name.' (a.D.)';endif;
 						if ($params->get('display_detail_fhz_links','1')) :
 						if (!$vehicle->link) : 
-						$sonstige .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$params->get('vehiclelink','').'&id=' . $vehicle->id).'" target="_self"><li>'.$vehicle->name.'</li></a>';
+						$sonstige .= '<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$params->get('vehiclelink','').'&id=' . $vehicle->id).'" target="_self"><li>'.$vehicle->name.'</li></a>';
 						else:
 						$sonstige .= '<a href="'.$vehicle->link.'" target="_self"><li>'.$vehicle->name.'</li></a>';
 						endif;
@@ -377,7 +384,7 @@ class EinsatzkomponenteHelper
 						$vehicles_images ='';
 						$sonstige_result = '';
 						$query = 'SELECT * from #__eiko_fahrzeuge where department = "'.$orga_id.'" and (state = 1 or state = 2) order by ordering ASC';
-						$db = JFactory::getDBO();
+						$db = Factory::getDBO();
                         $db->setQuery($query);
                         if ($vehicles = $db->loadObjectList()) :
                                 foreach ($vehicles as $vehicle) {
@@ -385,12 +392,12 @@ class EinsatzkomponenteHelper
 						if ($vehicle->state == '2'): $vehicle->name = $vehicle->name.' (a.D.)';endif;
 						if ($params->get('display_detail_fhz_links','1')) :
 						if (!$vehicle->link) : 
-						$vehicles_image .= '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$params->get('vehiclelink','').'&id=' . $vehicle->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
+						$vehicles_image .= '<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$params->get('vehiclelink','').'&id=' . $vehicle->id).'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.Uri::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
 						else:
-						$vehicles_image .= '<a href="'.$vehicle->link.'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
+						$vehicles_image .= '<a href="'.$vehicle->link.'" target="_self">&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.Uri::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/></a>';
 						endif;
 						else:
-						$vehicles_image .= '&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.JURI::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/>';
+						$vehicles_image .= '&nbsp;&nbsp;<img class="eiko_img-rounded eiko_image_fahrzeugaufgebot" src="'.Uri::Root().$vehicle->image.'"  alt="'.$vehicle->name.'" title="'.$vehicle->name.'   '.$vehicle->detail2.' ('.$vehicle->department.' )"/>';
 						endif;
 						
 						endif;
@@ -431,7 +438,7 @@ $gmap ='function initialize() {
   }
 
   var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  var image = "'.JURI::base().$marker2_image.'";
+  var image = "'.Uri::base().$marker2_image.'";
   var myLatlng = new google.maps.LatLng("'.$marker2_lat.'","'.$marker2_lng.'");
   var marker2Marker = new google.maps.Marker({
       position: myLatlng,
@@ -447,9 +454,9 @@ $gmap ='function initialize() {
   });
 google.maps.event.addListener(map, "click", function() { infowindow_marker2.close(); });
   
-  var image = "'.JURI::base().$marker1_image.'";
+  var image = "'.Uri::base().$marker1_image.'";
 	var image = {
-    url: "'.JURI::base().$marker1_image.'",
+    url: "'.Uri::base().$marker1_image.'",
     scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon', 14).','.$params->get('einsatzkarte_gmap_icon', 14).') 
     };
   var myLatLng = new google.maps.LatLng("'.$marker1_lat.'","'.$marker1_lng.'");
@@ -509,7 +516,7 @@ function setMarkers(map, locations) {
     var orgas = locations[i];
     var myLatLng = new google.maps.LatLng(orgas[1], orgas[2]);
 	var image = {
-    url: "'.JURI::base().'"+orgas[4],
+    url: "'.Uri::base().'"+orgas[4],
     scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon_orga', 24).','.$params->get('einsatzkarte_gmap_icon_orga', 24).') 
     };
 
@@ -530,7 +537,7 @@ function setMarkerz(map, locations) {
     var einsatzorte = locations[i];
     var myLatLng = new google.maps.LatLng(einsatzorte[1], einsatzorte[2]);
 	var image = {
-    url: "'.JURI::base().'"+einsatzorte[4],
+    url: "'.Uri::base().'"+einsatzorte[4],
     scaledSize: new google.maps.Size('.$params->get('einsatzkarte_gmap_icon', 8).','.$params->get('einsatzkarte_gmap_icon', 8).') 
     };
 
@@ -613,7 +620,7 @@ jumpTo(lon,lat,zoom);
 
 // Benutzte Marker Icons hinzufügen..
 icons = new Array();
-icons[4] = new Array("'.JURI::base().$marker1_image.'","'.$params->get('einsatzkarte_gmap_icon', 24).'","'.$params->get('einsatzkarte_gmap_icon', 24).'","0","1");
+icons[4] = new Array("'.Uri::base().$marker1_image.'","'.$params->get('einsatzkarte_gmap_icon', 24).'","'.$params->get('einsatzkarte_gmap_icon', 24).'","0","1");
 
 
 // Marker hinzufügen
@@ -625,7 +632,7 @@ setMarkers(map, orgas);
 function setMarkers(map, locations) {
    for (var i = 0; i < locations.length; i++) {
      var orgas = locations[i];
-	icons[i] = new Array("'.JURI::base().'"+orgas[4],"'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","0","1");
+	icons[i] = new Array("'.Uri::base().'"+orgas[4],"'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","'.$params->get('einsatzkarte_gmap_icon_orga', 24).'","0","1");
 	 addMarker(layer_standort,orgas[2],orgas[1],orgas[0],false,i);
   } }
 
@@ -634,7 +641,7 @@ setMarkerz(map, einsatzorte);
 function setMarkerz(map, locations) {
    for (var i = 0; i < locations.length; i++) {
      var einsatzorte = locations[i];
-	icons[i] = new Array("'.JURI::base().'"+einsatzorte[4],"'.$params->get('einsatzkarte_gmap_icon', 8).'","'.$params->get('einsatzkarte_gmap_icon', 8).'","0","1");
+	icons[i] = new Array("'.Uri::base().'"+einsatzorte[4],"'.$params->get('einsatzkarte_gmap_icon', 8).'","'.$params->get('einsatzkarte_gmap_icon', 8).'","0","1");
 	 addMarker(layer_standort,einsatzorte[2],einsatzorte[1],einsatzorte[0],false,i);
   } }
   
@@ -659,7 +666,7 @@ return $gmap; }
 	    public static function getNavbar($params,$prev_id,$next_id,$id,$menu_link) {
 	
 	//Load admin language file
-$lang = JFactory::getLanguage();
+$lang = Factory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 
@@ -667,49 +674,49 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 	$navbar .='<div class="btn-group-justified">';
 	
 	if( $prev_id) : 
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn eiko_btn_2" title="">';
-    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_ZURUECK').'</strong></a>';
+    $navbar .='<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$prev_id).'" class="btn eiko_btn_2" title="">';
+    $navbar .='<strong>'.Text::_('COM_EINSATZKOMPONENTE_ZURUECK').'</strong></a>';
 	endif; 
 	
 	if( $next_id) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class=" btn eiko_btn_2" title="">';
-    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_NAECHSTE').'</strong></a>';
+    $navbar .='<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&id=' . (int)$next_id).'" class=" btn eiko_btn_2" title="">';
+    $navbar .='<strong>'.Text::_('COM_EINSATZKOMPONENTE_NAECHSTE').'</strong></a>';
 	endif; ?>
     
     <?php if ($menu_link=='&Itemid=') : 
-			$menu_link = JRoute::_('index.php?Itemid='.$params->get('homelink','').'');
+			$menu_link = Route::_('index.php?Itemid='.$params->get('homelink','').'');
 			endif;
 			?>
     
 	<?php if( $menu_link) :  
-   // $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+   // $navbar .='<a href="'.$menu_link.'&list=1" class="btn eiko_btn_2"><strong>'.Text::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
    
    // Behebt Bug aus J3.8.4   &list=1 funktioniert in Link nicht mehr
-    $navbar .='<a href="'.$menu_link.'" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+    $navbar .='<a href="'.$menu_link.'" class="btn eiko_btn_2"><strong>'.Text::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif;
 	
 	
 	if( !$menu_link) :
-    //$navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+    //$navbar .='<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzberichte&Itemid='.$params->get('homelink','').'').'&list=1" class="btn eiko_btn_2"><strong>'.Text::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	
    // Behebt Bug aus J3.8.4   &list=1 funktioniert in Link nicht mehr
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2"><strong>'.JText::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
+    $navbar .='<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzarchiv&Itemid='.$params->get('homelink','').'').'" class="btn eiko_btn_2"><strong>'.Text::_('COM_EINSATZKOMPONENTE_UEBERSICHT').'</strong></a>';
 	endif; 
 	
 	
-	if(JFactory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
-		$user=JFactory::getUser();
+	if(Factory::getUser()->authorise('core.edit.own', 'com_einsatzkomponente') OR Factory::getUser()->authorise('core.edit', 'com_einsatzkomponente')):
+		$user=Factory::getUser();
 		$query = 'SELECT created_by FROM #__eiko_einsatzberichte WHERE state="1" AND id ="'.$id.'"';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadResult();
-	if ($user->id == $result OR JFactory::getUser()->authorise('core.edit', 'com_einsatzkomponente')) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
-    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_EDITIEREN').'</strong></a>';
+	if ($user->id == $result OR Factory::getUser()->authorise('core.edit', 'com_einsatzkomponente')) :
+    $navbar .='<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id).'" class=" btn eiko_btn_2">';
+    $navbar .='<strong>'.Text::_('COM_EINSATZKOMPONENTE_EDITIEREN').'</strong></a>';
 	endif;
-	if ($user->id == $result OR JFactory::getUser()->authorise('core.create', 'com_einsatzkomponente')) :
-    $navbar .='<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id.'&copy=1').'" class=" btn eiko_btn_2">';
-    $navbar .='<strong>'.JText::_('COM_EINSATZKOMPONENTE_KOPIEREN').'</strong></a>';
+	if ($user->id == $result OR Factory::getUser()->authorise('core.create', 'com_einsatzkomponente')) :
+    $navbar .='<a href="'.Route::_('index.php?option=com_einsatzkomponente&view=einsatzberichtform&layout=edit&id='.$id.'&copy=1').'" class=" btn eiko_btn_2">';
+    $navbar .='<strong>'.Text::_('COM_EINSATZKOMPONENTE_KOPIEREN').'</strong></a>';
 	endif;
     endif;
 	
@@ -719,18 +726,17 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
 	    public static function getValidation() { 
 		
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 		$params = json_decode( $db->loadResult(), true );
         $eikoversion = $params['version'];
-
 		$version = new JVersion;
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		$response = @file("https://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$version->getShortVersion()."&eikoversion=".$eikoversion); // Request absetzen
 		@$response_code = intval($response[1]); // Rückgabewert auslesen
 if ($response_code=='12') :	
 $params->set('eiko', '1');
-$db = JFactory::getDBO();
+$db = Factory::getDBO();
 $query = $db->getQuery(true);
 $query->update('#__extensions AS a');
 $query->set('a.params = ' . $db->quote((string)$params));
@@ -747,7 +753,7 @@ $db->setQuery($query);
 else:
 $params->set('eiko', '0');
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$db->setQuery('SELECT manifest_cache FROM #__extensions WHERE name = "com_einsatzkomponente"');
 		$paramms = json_decode( $db->loadResult(), true );
         $version = $paramms['version'];
@@ -757,7 +763,7 @@ $params->set('eiko', '0');
 		$response_code='12';
 		endif;  
 
-$db = JFactory::getDBO();
+$db = Factory::getDBO();
 $query = $db->getQuery(true);
 $query->update('#__extensions AS a');
 $query->set('a.params = ' . $db->quote((string)$params));
@@ -780,15 +786,15 @@ endif;
     public function sendMail($cid) {
 
 		// Check for request forgeries
-		JSession::checkToken() or die(JText::_('JINVALID_TOKEN'));
-		$user = JFactory::getUser();
+		JSession::checkToken() or die(Text::_('JINVALID_TOKEN'));
+		$user = Factory::getUser();
 		// Get items to remove from the request.
-		$cid = JFactory::getApplication()->input->get('cid', array(), 'array');
+		$cid = Factory::getApplication()->input->get('cid', array(), 'array');
 		
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'error');
+			Factory::getApplication()->enqueueMessage(Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'error');
 		}
 		else
 		{
@@ -801,12 +807,12 @@ endif;
 		foreach ($cid as $key => $val) {
 			
 		$query = 'SELECT * FROM #__eiko_einsatzberichte WHERE id = "'.$val.'" LIMIT 1';
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
 	
-		$mailer = JFactory::getMailer();
-		$config = JFactory::getConfig();
+		$mailer = Factory::getMailer();
+		$config = Factory::getConfig();
 		
 		//$sender = array( 
     	//$config->get( 'config.mailfrom' ),
@@ -817,7 +823,7 @@ endif;
 		
 		$mailer->setSender($sender);
 		
-		$user = JFactory::getUser();
+		$user = Factory::getUser();
 		//$recipient = $user->email;
 		$recipient = $params->get('mail_empfaenger',$user->email);
 		
@@ -825,7 +831,7 @@ endif;
 		
 					$data = array();
 					foreach(explode(',',$result[0]->auswahl_orga) as $value):
-						$db = JFactory::getDbo();
+						$db = Factory::getDbo();
 						$query	= $db->getQuery(true);
 						$query
 							->select('name')
@@ -848,12 +854,12 @@ endif;
 		
 		$kat	= EinsatzkomponenteHelper::getTickerKat ($result[0]->tickerkat); 
 		
-		$link = JRoute::_( JURI::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id.'&Itemid='.$params->get('homelink','')); 
+		$link = Route::_( Uri::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id.'&Itemid='.$params->get('homelink','')); 
 		
 		$body   = ''
 				. '<h2>+++ '.$result[0]->summary.' +++</h2>';
 		if ($params->get('send_mail_kat','0')) :	
-		$body   .= '<h4>'.JText::_($kat->title).'</h4>';
+		$body   .= '<h4>'.Text::_($kat->title).'</h4>';
 		endif;
 		if ($params->get('send_mail_orga','0')) :	
 		$body   .= '<span><b>Eingesetzte Kräfte:</b> '.$orgas.'</span>';
@@ -871,7 +877,7 @@ endif;
 		endif;
 		if ($result[0]->image) :	
 		if ($params->get('send_mail_image','0')) :	
-		$body   .= '<img src="'.JURI::root().$result[0]->image.'" style="margin-left:10px;float:right;height:50%;" alt="Einsatzbild"/>';
+		$body   .= '<img src="'.Uri::root().$result[0]->image.'" style="margin-left:10px;float:right;height:50%;" alt="Einsatzbild"/>';
 		endif;
 		endif;
 		$body   .= '</div>';
@@ -932,12 +938,12 @@ endif;
 		}
 
 		// Load the calendar behavior
-		JHTML::_('behavior.calendar');
+		HTMLHelper::_('behavior.calendar');
 
 		// Only display the triggers once for each control.
 		if (!in_array($id, $done))
 		{
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$document->addScriptDeclaration(
 		'jQuery(document).ready(function($) {Calendar.setup({
 		// Id of the input field
@@ -949,7 +955,7 @@ endif;
 		// Alignment (defaults to "Bl")
 		align: "Tl",
 		singleClick: true,
-		firstDay: ' . JFactory::getLanguage()->getFirstDay() . '
+		firstDay: ' . Factory::getLanguage()->getFirstDay() . '
 		});});'
 		);
 		$done[] = $id;
@@ -960,7 +966,7 @@ endif;
 		$div_class	= (!$readonly && !$disabled) ? ' class="input-append"' : '';
 
 		return '<div' . $div_class . '>'
-				. '<input type="text" title="' . (0 !== (int) $value ? JHTML::_('date', $value, null, null) : '')
+				. '<input type="text" title="' . (0 !== (int) $value ? HTMLHelper::_('date', $value, null, null) : '')
 				. '" name="' . $name . '" id="' . $id . '" value="' . htmlspecialchars($inputvalue, ENT_COMPAT, 'UTF-8') . '" ' . $attribs . ' />'
 				. '<button type="button" class="btn" id="' . $id . '_img"' . $btn_style . '><i class="icon-calendar"></i></button>'
 			. '</div>';
@@ -969,7 +975,7 @@ endif;
 			
 
     static function module ($pos) {
-		$document = JFactory::getDocument();
+		$document = Factory::getDocument();
 		$renderer = $document->loadRenderer( 'modules' );
 		$options = array( 'style' => 'xhtml' );
 		return $renderer->render( $pos, $options, null);  
@@ -984,7 +990,7 @@ endif;
 		JArrayHelper::toInteger($cid);
 		
 		foreach ($cid as $key => $rep_id) {
-			$db = JFactory::getDBO();
+			$db = Factory::getDBO();
 			$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 
 					  ea.title as einsatzart, eb.address as ort, eb.date1 as startd, eb.date2 as fahrd, 
 					  eb.date3 as endd, eb.boss as el, eb.boss2 as ef, eb.people as pers, eb.auswahl_orga as orgas, 
@@ -1120,64 +1126,64 @@ endif;
 			//Erstelle die Zellen
 			if ($params->get('pdf_show_id') == 1) {
 				$pdf->SetFont('Arial','',8);
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_LEGEND_EINSATZBERICHT').'-'.Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ID').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,$id,0,1);
 				$pdf->SetFont('Arial','',10);
 			}
 			if ($params->get('pdf_show_counter') == 1) {
 				$pdf->SetFont('Arial','',8);
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('WEB-Zugriffe').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('WEB-Zugriffe').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,$counter,0,1);
 				$pdf->SetFont('Arial','',10);
 			}
 			if ($params->get('pdf_show_kurzbericht') == 1) {
 				if ($kurzbericht) {
 				$pdf->SetFont('Arial','',14);
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_SUMMARY').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($kurzbericht),0,1);
 				$pdf->SetFont('Arial','',10);
 			}}
 			if ($params->get('pdf_show_alarmart') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ALERTING').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($alarmart),0,1);
 			}
 			if ($params->get('pdf_show_einsatzart') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzart),0,1);
 			}
 			if ($params->get('pdf_show_einsatzkat') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_KATEGORIE').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzkat),0,1);
 			}
 			if ($params->get('pdf_show_ort') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ort),0,1);
 			}
 			if ($params->get('pdf_show_alarmzeit') == 1) {
-				$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMESTART').':');
+				$pdf->Cell($breite_beschriftung,$hoehe,Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMESTART').':');
 				$pdf->Cell($breite_inhalt,$hoehe,$beginn,0,1);
 			}
 			if ($params->get('pdf_show_ausfahrzeit') == 1 AND $ausrueck != "0000-00-00 00:00:00") {
-				$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2').':');
+				$pdf->Cell($breite_beschriftung,$hoehe,Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATE2').':');
 				$pdf->Cell($breite_inhalt,$hoehe,$ausrueck,0,1);
 			}
 			if ($params->get('pdf_show_einsatzende') == 1 AND $ende != "0000-00-00 00:00:00") {
-				$pdf->Cell($breite_beschriftung,$hoehe,JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMEEND').':');
+				$pdf->Cell($breite_beschriftung,$hoehe,Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_TIMEEND').':');
 				$pdf->Cell($breite_inhalt,$hoehe,$ende,0,1);
 			}
 			if ($params->get('pdf_show_einsatzleiter') == 1) {
 				if ($einsatzleiter) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzleiter),0,1);
 			}}
 			if ($params->get('pdf_show_einsatzfuehrer') == 1) {
 				if ($einsatzführer) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_BOSS2').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($einsatzführer),0,1);
 			}}
 			if ($params->get('pdf_show_mannschaft') == 1) {
 				if ($mannschaft) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_PEOPLE').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,$mannschaft,0,1);
 			}}
 			
@@ -1185,21 +1191,21 @@ endif;
 
 			if ($params->get('pdf_show_orgas') == 1) {
 				if ($organisationen) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSWAHLORGA').':'));
 				//$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($organisationen),0,1);
 				$pdf->MultiCell(140,$hoehe,utf8_decode($organisationen),0,'LR',false);
 			}}
 			
 			if ($params->get('pdf_show_fahrzeuge') == 1) {
 				if ($fahrzeuge) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_VEHICLES').':'));
 				//$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($fahrzeuge),0,1);
 				$pdf->MultiCell(140,$hoehe,utf8_decode($fahrzeuge),0,'LR',false);
 		}}
 			
 			if ($params->get('pdf_show_ausruestung') == 1) {
 				if ($ausruest) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_AUSRUESTUNG').':'));
 				$pdf->Cell($breite_inhalt,$hoehe,utf8_decode($ausruest),0,1); 
 			}}
 			
@@ -1207,7 +1213,7 @@ endif;
 			
 			if ($params->get('pdf_show_langbericht') == 1) {
 				if ($bericht) {
-				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC').':'));
+				$pdf->Cell($breite_beschriftung,$hoehe,utf8_decode(Text::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DESC').':'));
 				$pdf->MultiCell(150,$hoehe,utf8_decode($bericht),0,1);
 			}}
 			
@@ -1234,9 +1240,9 @@ endif;
 		}
 		//Nachricht bei Erfolg
 		if (count($cid) == 1)
-			$msg = count($cid).JText::_(' Einsatz wurden in den Ordner "'.$speicherort.'" exportiert.' );
+			$msg = count($cid).Text::_(' Einsatz wurden in den Ordner "'.$speicherort.'" exportiert.' );
 		else
-			$msg = count($cid).JText::_(' Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
+			$msg = count($cid).Text::_(' Einsätze wurden in den Ordner "'.$speicherort.'" exportiert.' );
 		
 		return $msg;
 	}
