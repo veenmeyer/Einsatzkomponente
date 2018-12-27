@@ -10,6 +10,9 @@
 // No direct access
 defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
+JLoader::import('helpers.einsatzkomponente', JPATH_SITE.'/administrator/components/com_einsatzkomponente');
+JLoader::import('helpers.osm', JPATH_SITE.'/administrator/components/com_einsatzkomponente'); 
+
 /**
  * View to edit
  */
@@ -25,12 +28,11 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
+
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
 		$this->form		= $this->get('Form');
 		$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
-		
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
