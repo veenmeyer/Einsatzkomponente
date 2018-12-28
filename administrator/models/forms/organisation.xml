@@ -159,6 +159,7 @@
             class="eiko_organisation_coords"
             filter="safehtml"
             size="100"
+			id="gmap_report_latitude"
             maxlength="100" /> 
 	   
 	   <field name="gmap_longitude" type="text"
@@ -168,6 +169,7 @@
             class="eiko_organisation_coords"
             filter="safehtml"
             size="100"
+			id="gmap_report_longitude"
             maxlength="100" /> 
        
 	   <field name="ffw" type="list"

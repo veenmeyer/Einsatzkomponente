@@ -65,58 +65,55 @@ class OsmHelper
 	{
 			?>
 			<script type="text/javascript">
-   
-
-
-function addMarker(e){	
+	function addMarker(e){	
 		map.removeLayer(marker2);
  
-	var marker = new L.marker(e.latlng,{draggable:'true',icon: blueIcon}).bindPopup().addTo(map);
+		var marker = new L.marker(e.latlng,{draggable:'true',icon: blueIcon}).bindPopup().addTo(map);
 	
-	// Koordinaten im Feld aktualisieren
+		// Koordinaten im Feld aktualisieren
 		var m = marker.getLatLng();
 		document.getElementById("jform_gmap_report_latitude").value=m.lat.toFixed(15);
         document.getElementById("jform_gmap_report_longitude").value=m.lng.toFixed(15);
 		
 		marker.on("drag", function(e) {
-    var marker = e.target;
-    var m = marker.getLatLng();
-    //map.panTo(new L.LatLng(m.lat, m.lng));
-	document.getElementById("jform_gmap_report_latitude").value=m.lat.toFixed(15);
-    document.getElementById("jform_gmap_report_longitude").value=m.lng.toFixed(15);
-});
+			var marker = e.target;
+			var m = marker.getLatLng();
+			//map.panTo(new L.LatLng(m.lat, m.lng));
+			document.getElementById("jform_gmap_report_latitude").value=m.lat.toFixed(15);
+			document.getElementById("jform_gmap_report_longitude").value=m.lng.toFixed(15);
+		});
 
-	// Marker bei Doppelklick löschen
-	marker.on('dblclick', ondblclick);	
+		// Marker bei Doppelklick löschen
+		marker.on('dblclick', ondblclick);	
 	
-	// Popup aktualisieren und öffnen wenn Marker angeklickt wird 
-	marker.on('click', onclick);	
+		// Popup aktualisieren und öffnen wenn Marker angeklickt wird 
+		marker.on('click', onclick);	
 	
-	// löscht den letzten Marker
-	// Zeile entfernen wenn mehrere Marker angezeigt werden sollen
-	map.on('click', ondblclick);
+		// löscht den letzten Marker
+		// Zeile entfernen wenn mehrere Marker angezeigt werden sollen
+		map.on('click', ondblclick);
 
-	function onclick() {
-		var ZoomLevel = map.getZoom();
-		var m = marker.getLatLng();
-		document.getElementById("jform_gmap_report_latitude").value=m.lat.toFixed(15);
-        document.getElementById("jform_gmap_report_longitude").value=m.lng.toFixed(15);
-		
-	//	marker._popup.setContent(
-	//	  "<h4>OSM-Link (url)</h4>" 
-	//	+ "www.openstreetmap.org/?mlat=" + m.lat.toFixed(6) + "&mlon=" +  m.lng.toFixed(6) 
-	//	+ "#map=" + ZoomLevel + "/" + m.lat.toFixed(6) + "/" + m.lng.toFixed(6) + "<br>" 
-	//	+ "<h4>Koordinaten</h4>" 
-	//	+ "Lat,Lon: " + m.lat.toFixed(6) + "," + m.lng.toFixed(6) + "<br>" 
-	//	+ "Lon,Lat: " + m.lng.toFixed(6) + "," + m.lat.toFixed(6)		
-	//	)
-	}  
+		function onclick() {
+			var ZoomLevel = map.getZoom();
+			var m = marker.getLatLng();
+			document.getElementById("jform_gmap_report_latitude").value=m.lat.toFixed(15);
+			document.getElementById("jform_gmap_report_longitude").value=m.lng.toFixed(15);
+			
+			//	marker._popup.setContent(
+			//	  "<h4>OSM-Link (url)</h4>" 
+			//	+ "www.openstreetmap.org/?mlat=" + m.lat.toFixed(6) + "&mlon=" +  m.lng.toFixed(6) 
+			//	+ "#map=" + ZoomLevel + "/" + m.lat.toFixed(6) + "/" + m.lng.toFixed(6) + "<br>" 
+			//	+ "<h4>Koordinaten</h4>" 
+			//	+ "Lat,Lon: " + m.lat.toFixed(6) + "," + m.lng.toFixed(6) + "<br>" 
+			//	+ "Lon,Lat: " + m.lng.toFixed(6) + "," + m.lat.toFixed(6)		
+			//	)
+		}  
 	
-	function ondblclick() 
-		{	
-		map.removeLayer(marker);
-		}
-};
+		function ondblclick() 
+			{	
+			map.removeLayer(marker);
+			}
+	};
 
 
 map.on('click', addMarker);
@@ -135,7 +132,7 @@ var LeafIcon = L.Icon.extend({
 //*********************************************************************
 // Icons zuweisen
 
-var blueIcon   = new LeafIcon({iconUrl: 'components/com_einsatzkomponente/assets/leaflet/pin48blue.png'});
+var blueIcon   = new LeafIcon({iconUrl:'<?php echo Uri::base();?>/components/com_einsatzkomponente/assets/leaflet/pin48blue.png'});
 		
 		
 var marker2 = new L.marker([<?php echo $lat.','.$lon;?>],{draggable:'true',icon: blueIcon}).bindPopup().addTo(map);
@@ -148,11 +145,11 @@ marker2.on("drag", function(e) {
     document.getElementById("jform_gmap_report_longitude").value=m.lng.toFixed(15);
 });
 
-
-			</script>
+</script>
 			<?php
 			return;
-	}
-	
+}
+
+
 	
 }
