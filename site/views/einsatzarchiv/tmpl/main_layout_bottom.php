@@ -29,26 +29,42 @@
 
 </form>
 
+<?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
 <?php if ($this->params->get('display_home_map')) : ?>
   <tr>
     <td colspan="<?php echo $eiko_col;?>" class="eiko_td_gmap_main_1">
       <h4>Einsatzgebiet</h4>
+	  
       <?php if ($this->params->get('gmap_action','0') == '1') :?>
         <div id="map-canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
           <noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
         </div>
       <?php endif;?>
+	  
       <?php if ($this->params->get('gmap_action','0') == '2') :?>
-        <body onLoad="drawmap();">
-        <!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
-        <div id="description" class="">Einsatzkarte</div>-->
-        <div id="map" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
+        <div id="map_canvas" style="width:100%; height:<?php echo $this->params->get('home_map_height','300px');?>;">
           <noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
         </div>
-      <?php endif;?>
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
+			
+			<?php if ($this->params->get('display_home_missions','1')) :?>
+			<?php OsmHelper::addEinsatzorteMap($this->einsatzorte);?>
+			<?php endif;?>
+			<?php if ($this->params->get('display_home_organisationen','1')) :?>
+			<?php OsmHelper::addOrganisationenMap($this->organisationen);?>
+			<?php endif;?>
+			<?php if ($this->params->get('display_home_einsatzgebiet','1')) :?>
+			<?php OsmHelper::addPolygonMap($this->einsatzgebiet,'blue');?>
+			<?php endif;?>
+
+			<?php endif;?>
     </td>
   </tr>
 <?php endif;?>
+			<?php else:?> 
+			<?php echo '<tr><td colspan="'.$eiko_col.'" class="eiko_td_gmap_main_1"><span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span><br/><br/></td></tr>';?>
+			<?php endif;?>
 
 </table>
 
