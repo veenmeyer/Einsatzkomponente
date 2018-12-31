@@ -11,6 +11,9 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+JLoader::import('helpers.einsatzkomponente', JPATH_SITE.'/administrator/components/com_einsatzkomponente');
+JLoader::import('helpers.osm', JPATH_SITE.'/administrator/components/com_einsatzkomponente'); 
+
 
 /**
  * View to edit
@@ -21,6 +24,8 @@ class EinsatzkomponenteViewGmapkonfiguration extends JViewLegacy
 	protected $item;
 	protected $form;
 	protected $params;
+	protected $gmap_config;
+	protected $einsatzgebiet;
 
 	/**
 	 * Display the view
@@ -32,6 +37,22 @@ class EinsatzkomponenteViewGmapkonfiguration extends JViewLegacy
 		$this->form		= $this->get('Form');
 		$this->params = JComponentHelper::getParams('com_einsatzkomponente');
 
+		$this->gmap_config = EinsatzkomponenteHelper::load_gmap_config(); // GMap-Config aus helper laden 
+
+	  	 $alarmareas1  = $this->gmap_config->gmap_alarmarea;  // Einsatzgebiet  ---->
+	 	 $alarmareas = explode('|', $alarmareas1);
+	     $this->einsatzgebiet='[';
+		  for($i = 0; $i < count($alarmareas)-1; $i++)
+		  {
+			  	  $areas = explode(',', $alarmareas[$i]);
+				  $this->einsatzgebiet=$this->einsatzgebiet.'['.$areas[0].','.$areas[1].'],';
+		  }
+		$areas = explode(',', $alarmareas[0]);
+		//$this->einsatzgebiet=$this->einsatzgebiet.'['.$areas[0].','.$areas[1].'],';
+	    $this->einsatzgebiet=substr($this->einsatzgebiet,0,strlen($this->einsatzgebiet)-1);
+	    $this->einsatzgebiet=$this->einsatzgebiet.']';	
+		
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
             throw new Exception(implode("\n", $errors));

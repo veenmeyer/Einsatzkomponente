@@ -34,7 +34,7 @@ class OsmHelper
 	}
 
 
-public static function callOsmMap($zoom='13',$lat='53.26434271775887',$lon='7.5730027132448186')
+public static function callOsmMap($zoom='',$lat='53.26434271775887',$lon='7.5730027132448186')
 	{
 ?>
 		<script type="text/javascript">
@@ -45,15 +45,16 @@ public static function callOsmMap($zoom='13',$lat='53.26434271775887',$lon='7.57
 			doubleClickZoom: false,
 			center: [<?php echo $lat;?>, <?php echo $lon;?>],
 			minZoom: 2,
+			maxZoom: 18,
 			zoom: <?php echo $zoom;?>,
 			layers: [myOsmDe],
 			scrollWheelZoom: false
 			});
-					
-		var baseLayers = {
-			"OSM deutscher Style": myOsmDe
-			};
-			L.control.layers(baseLayers).addTo(map);
+		//var baseLayers = {
+		//	"OSM deutscher Style": myOsmDe
+		//	};
+		//	L.control.layers(baseLayers).addTo(map);
+
 
 		var osmGeocoder = new L.Control.OSMGeocoder();
 		map.addControl(osmGeocoder);
@@ -207,6 +208,10 @@ marker2.on("drag", function(e) {
 			popup = <?php echo $params->get('display_detail_popup','false');?>;
 			map.setView(new L.LatLng(lat,lon), <?php echo $params->get('detail_gmap_zoom_level','12');?>);
 			
+			map.options.minZoom = <?php echo $params->get('detail_gmap_zoom_level','12');?>;
+			map.options.maxZoom = <?php echo $params->get('detail_gmap_zoom_level','12');?>;
+			
+			
 			var LeafIcon = L.Icon.extend({
 						options: {
 						iconSize:    [15, 18],		
@@ -281,6 +286,113 @@ marker2.on("drag", function(e) {
 			<?php
 			return;
 }
+
+		public static function addRightClickOsmMap()
+	{
+			?>
+			<script type="text/javascript">
+			
+			map.on('contextmenu', function(e) {
+				//alert(e.target);
+				var marker = new L.marker(e.latlng,{draggable:'true'}).addTo(map);
+				var m = marker.getLatLng();
+				map.panTo(new L.LatLng(m.lat, m.lng));
+				document.getElementById("jform_start_lat").value=m.lat.toFixed(15);
+				document.getElementById("jform_start_lang").value=m.lat.toFixed(15);
+			});
+			map.on('zoomstart',function(e){
+				  var currZoom = map.getZoom();
+				  document.getElementById("jform_gmap_zoom_level").value=currZoom;
+				  });		
+			
+			</script>
+			<?php
+			return;
+}
+
+
+		public static function editPolygonMap($latlngs='[[0,0]]',$color='red')
+	{
+			$document = JFactory::getDocument();
+			$document->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css'); 
+			$document->addScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js');
+
+			?>
+			<script type="text/javascript">
+			
+			var latlngs = <?php echo $latlngs;?>;
+			var polygon = L.polygon(latlngs, {color: '<?php echo $color;?>'}).addTo(map);
+			
+			// Initialise the FeatureGroup to store editable layers
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+
+var drawPluginOptions = {
+  position: 'topright',
+  draw: {
+    polygon: {
+      allowIntersection: true, // Restricts shapes to simple polygons
+      drawError: {
+        color: '#e1e100', // Color the shape will turn when intersects
+        message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+      },
+      shapeOptions: {
+        color: '#97009c'
+      }
+    },
+    // disable toolbar item by setting it to false
+    polyline: false,
+    circle: false, // Turns off this drawing tool
+    rectangle: false,
+    marker: false,
+    },
+  edit: {
+    featureGroup: editableLayers, //REQUIRED!!
+    remove: false
+  }
+};
+
+// Initialise the draw control and pass it the FeatureGroup of editable layers
+var drawControl = new L.Control.Draw(drawPluginOptions);
+map.addControl(drawControl);
+
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+map.on('draw:created', function(e) {
+  var type = e.layerType,
+    layer = e.layer;
+
+  if (type === 'marker') {
+    layer.bindPopup('A popup!');
+  }
+
+if (type === 'polygon') {
+        // structure the geojson object
+        var geojson = {};
+
+        // export the coordinates from the layer
+        coordinates = '';
+        latlngs = layer.getLatLngs()[0];
+
+        for (var i = 0; i < latlngs.length; i++) {
+            coordinates= coordinates+latlngs[i].lat+","+latlngs[i].lng+"|";
+        }
+
+		document.getElementById('jform_gmap_alarmarea').innerHTML = coordinates;
+		
+    }
+
+	
+  editableLayers.addLayer(layer);
+});
+
+			</script>
+			<?php
+			return;
+}
+
 
 
 	

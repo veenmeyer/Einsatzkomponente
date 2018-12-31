@@ -65,8 +65,8 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
   <div style=" text-align:center;">
                 <div>
-    			  <a href="<?php echo $this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->item->einsatzart;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?><br/><?php echo $this->images[$i]->comment;?>' });" alt ="<?php echo $this->item->einsatzart;?>">
-                  <img  class="img-rounded" src="<?php echo $this->item->image;?>"  alt="<?php echo $this->item->einsatzart;?>" title="<?php echo $this->item->einsatzart;?>" alt ="<?php echo $this->item->einsatzart;?>" style="max-width:600px;"/>
+				<a href="<?php echo JURI::Root().$this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
+                  <img class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="<?php echo $this->einsatzlogo->title;?>" alt ="<?php echo $this->einsatzlogo->title;?>"/>
                   </a>
                 </div>
   </div>
@@ -132,11 +132,23 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			<?php if ($this->params->get('gmap_action','0')=='2') : ?>
   			<div class="distance100">&nbsp;</div>
   			<h3>Einsatzort</h3> 
-			<body onLoad="drawmap();"></body>
-			<!--<div id="descriptionToggle" onClick="toggleInfo()">Informationen zur Karte anzeigen</div>
-			<div id="description" class="">Einsatzkarte</div>-->
-			<div id="map" style="width:100%; height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
+   				<div id="map_canvas" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+			
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
+			
+			<?php if ($this->params->get('display_detail_einsatz_marker','1')) :?>
+			<?php OsmHelper::addEinsatzortMap($this->item->gmap_report_latitude,$this->item->gmap_report_longitude,$this->item->summary,$this->einsatzlogo->icon,$this->item->id);?>
+			<?php endif;?> 
+			
+			<?php if ($this->params->get('display_detail_organisationen','1')) :?>
+			<?php OsmHelper::addOrganisationenMap($this->organisationen);?>
+			<?php endif;?>
+			<?php if ($this->params->get('display_detail_einsatzgebiet','1')) :?>
+			<?php OsmHelper::addPolygonMap($this->einsatzgebiet,'blue');?>
+			<?php endif;?> 
+
             <?php endif;?>
 			<?php else:?> 
 			<?php echo '<span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span><br/><br/>';?>
