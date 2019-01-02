@@ -173,16 +173,16 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$orga_image 	= $orga[$i]->gmap_icon_orga;
 			if (!$orga_image) : $orga_image= 'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png'); endif;
 		  	if($i==$n-1){
-			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":'.$orga[$i]->gmap_latitude.',"lon":'.$orga[$i]->gmap_longitude.',"i":'.$i.',"icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"}';
+			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":"'.$orga[$i]->gmap_latitude.'","lon":"'.$orga[$i]->gmap_longitude.'","i":"'.$i.'","icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"}';
 		 	}else {
-			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":'.$orga[$i]->gmap_latitude.',"lon":'.$orga[$i]->gmap_longitude.',"i":'.$i.',"icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"';
+			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":"'.$orga[$i]->gmap_latitude.'","lon":"'.$orga[$i]->gmap_longitude.'","i":"'.$i.'","icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"';
 			$this->organisationen=$this->organisationen.'},';
 		    }
 	        }
 	  		$this->organisationen=substr($this->organisationen,0,strlen($this->organisationen)-1);
 	$this->organisationen=$this->organisationen.']';
 		else:
-			$this->organisationen	 = '[{"name:"","lat":1,"lon":1,"i"=0,"icon":"images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'"}]';	
+			$this->organisationen	 = '[{"name:"","lat":"1","lon":"1","i"="0","icon":"images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'"}]';	
 			endif;
 			
 		if ($this->params->get('display_detail_einsatzgebiet','1')) :

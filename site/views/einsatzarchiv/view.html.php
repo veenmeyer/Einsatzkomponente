@@ -158,7 +158,7 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 			$this->einsatzorte='['; 
 			foreach ($this->items as $i => $item) : 
 				if ($item->gmap AND $item->state == '1') :
-			$this->einsatzorte= $this->einsatzorte.'{"name":"'.$item->summary.'","lat":'.$item->gmap_report_latitude.',"lon":'.$item->gmap_report_longitude.',"i":'.$i.',"icon":"'.$item->icon.'","id":"'.$item->id.'","address":"'.$item->address.'"},';
+			$this->einsatzorte= $this->einsatzorte.'{"name":"'.$item->summary.'","lat":"'.$item->gmap_report_latitude.'","lon":"'.$item->gmap_report_longitude.'","i":"'.$i.'","icon":"'.$item->icon.'","id":"'.$item->id.'","address":"'.$item->address.'"},';
 				endif;
 			endforeach; 
 	  		$this->einsatzorte=substr($this->einsatzorte,0,strlen($this->einsatzorte)-1);
@@ -176,16 +176,16 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 			$orga_image 	= $orga[$i]->gmap_icon_orga;
 			if (!$orga_image) : $orga_image= 'images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png'); endif;
 		  	if($i==$n-1){
-			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":'.$orga[$i]->gmap_latitude.',"lon":'.$orga[$i]->gmap_longitude.',"i":'.$i.',"icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"}';
+			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":"'.$orga[$i]->gmap_latitude.'","lon":"'.$orga[$i]->gmap_longitude.'","i":"'.$i.'","icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"}';
 		 	}else {
-			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":'.$orga[$i]->gmap_latitude.',"lon":'.$orga[$i]->gmap_longitude.',"i":'.$i.',"icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"';
+			$this->organisationen=$this->organisationen.'{"name":"'.$orga[$i]->name.'","lat":"'.$orga[$i]->gmap_latitude.'","lon":"'.$orga[$i]->gmap_longitude.'","i":"'.$i.'","icon":"'.$orga_image.'","id":"'.$orga[$i]->id.'"';
 			$this->organisationen=$this->organisationen.'},';
 		    }
 	        }
 	  		$this->organisationen=substr($this->organisationen,0,strlen($this->organisationen)-1);
 	$this->organisationen=$this->organisationen.']';
 		else:
-			$this->organisationen	 = '[{"name:"","lat":1,"lon":1,"i"=0,"icon":"images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'"}]';	
+			$this->organisationen	 = '[{"name:"","lat":"1","lon":"1","i"="0","icon":"images/com_einsatzkomponente/images/map/icons/'.$this->params->get('einsatzkarte_orga_image','haus_rot.png').'"}]';	
 			endif;
 			
 	  	 $alarmareas1  = $this->gmap_config->gmap_alarmarea;  // Einsatzgebiet  ---->

@@ -13,6 +13,8 @@
 
 <h3>Changelog <small>Version 3.22</small></h3>
 <ul>
++ OSM-Karte in GMap-Konfiguration hinzugefügt
++ OSM-Karte im Frontend bei Detailansicht überarbeitet
 + OSM-Karte im Frontend bei Einsatz-Edit hinzugefügt
 + OSM-Karte im Backend bei Organisationen hinzugefügt
 + OSM-Karte im Backend bei Einsatzberichte hinzugefügt

@@ -159,15 +159,19 @@ marker2.on("drag", function(e) {
 
 		public static function addEinsatzorteMap($json='')
 	{
+			$app	= Factory::getApplication();
+			$params = $app->getParams('com_einsatzkomponente');
+
 			?>
 			<script type="text/javascript">
 	var geodaten =[];
 	var current;
+			icsize = '<?php echo $params->get('einsatzkarte_gmap_icon','18');?>';	
 			geodaten = <?php echo $json;?>;
 			
 			var LeafIcon = L.Icon.extend({
 						options: {
-						iconSize:    [15, 18],		
+						iconSize:    [icsize, icsize],		
 						iconAnchor:  [9, 21],
 						popupAnchor: [0, -14]
 						}
@@ -204,17 +208,18 @@ marker2.on("drag", function(e) {
 			lon = <?php echo $lon;?>;
 			name = '<?php echo $name;?>';
 			icon = '<?php echo $icon;?>';
+			icsize = '<?php echo $params->get('einsatzkarte_gmap_icon','18');?>';
 			id = '<?php echo $id;?>';
 			popup = <?php echo $params->get('display_detail_popup','false');?>;
 			map.setView(new L.LatLng(lat,lon), <?php echo $params->get('detail_gmap_zoom_level','12');?>);
 			
-			map.options.minZoom = <?php echo $params->get('detail_gmap_zoom_level','12');?>;
+			//map.options.minZoom = <?php echo $params->get('detail_gmap_zoom_level','12');?>;
 			map.options.maxZoom = <?php echo $params->get('detail_gmap_zoom_level','12');?>;
 			
 			
 			var LeafIcon = L.Icon.extend({
 						options: {
-						iconSize:    [15, 18],		
+						iconSize:    [icsize,icsize],		
 						iconAnchor:  [9, 21],
 						popupAnchor: [0, -14]
 						}
@@ -243,15 +248,19 @@ marker2.on("drag", function(e) {
 
 		public static function addOrganisationenMap($json='')
 	{
+			$app	= Factory::getApplication();
+			$params = $app->getParams('com_einsatzkomponente');
+		
 			?>
 			<script type="text/javascript">
 	var geodaten =[];
 	var current;
-			geodaten = <?php echo $json;?>;
+	icsize = '<?php echo $params->get('einsatzkarte_gmap_icon_orga','18');?>';
+	geodaten = <?php echo $json;?>;
 			
 			var LeafIcon = L.Icon.extend({
 						options: {
-						iconSize:    [15, 18],		
+						iconSize:    [icsize, icsize],		
 						iconAnchor:  [9, 21],
 						popupAnchor: [0, -14]
 						}
