@@ -328,7 +328,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
                 
                 
             <!--Slider für GMap-Ortsangabe-->
-            <?php if ($params->get('gmap_action','0')) : ?>
+            <?php if ($params->get('gmap_action','0') == '1' or $params->get('gmap_action','0') == '2') : ?>
 			<div class="fltlft well" style="width:80%;">
             <h1><?php echo JText::_('COM_EINSATZKOMPONENTE_MARKIERE_EINSATZORT');?> :</h1>
             <div class="control-group" id="map_canvas" style="width:100%;max-width:600px;height:400px;border:1px solid;">Karte</div>
@@ -339,9 +339,14 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 				<div class="control-label"><?php echo $this->form->getLabel('gmap'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('gmap'); ?></div>
 			</div>
-            
 			</div>
  			<?php  endif; ?>
+			
+			<?php if ($params->get('gmap_action','0') == '2') : ?>
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($gmap_config->gmap_zoom_level,$gmap_latitude,$gmap_longitude); ?>
+			<?php OsmHelper::addMarkerOsmMap($gmap_latitude,$gmap_longitude); ?> 
+			<?php endif;?>
         
 	<?php   $authorised = JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente');
             if ($authorised) {
@@ -390,6 +395,7 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/edit.css')
 
 	</form>
 </div>
+<?php if ($params->get('gmap_action','0') == '1') : ?>
 <!-- Javascript für GMap-Anzeige -->
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
 <script type="text/javascript"> 
@@ -503,4 +509,5 @@ var marker2 = new google.maps.Marker({
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <!-- Javascript für GMap-Anzeige ENDE -->
+<?php endif;?>
 

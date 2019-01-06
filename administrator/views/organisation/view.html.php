@@ -9,6 +9,9 @@
 // No direct access
 defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
+JLoader::import('helpers.einsatzkomponente', JPATH_SITE.'/administrator/components/com_einsatzkomponente');
+JLoader::import('helpers.osm', JPATH_SITE.'/administrator/components/com_einsatzkomponente'); 
+
 /**
  * View to edit
  */
@@ -24,7 +27,6 @@ class EinsatzkomponenteViewOrganisation extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 
 		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');

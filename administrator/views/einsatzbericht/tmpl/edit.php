@@ -335,12 +335,19 @@ displayVals();
 			</div>
 				
         
-        
+        		
+
             <!--Slider für GMap-Ortsangabe-->
-            <?php if ($params->get('gmap_action','0')) : ?>
+            <?php if ($params->get('gmap_action','0') == '1' or $params->get('gmap_action','0') == '2') : ?>
 			<div class="fltlft well" style="width:80%;">
             <h1>Bitte markieren Sie den Einsatzort auf der Karte :</h1>
             <div class="control-group" id="map_canvas" style="width:100%;max-width:600px;height:400px;border:1px solid;">Karte</div>
+			<?php if ($params->get('gmap_action','0') == '2') : ?>
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$gmap_latitude,$gmap_longitude); ?>
+			<?php OsmHelper::addMarkerOsmMap($gmap_latitude,$gmap_longitude); ?> 
+			<?php endif;?>
+
 			<div class="control-group">
             <div class="control-label">Koordinaten:</div><div class="controls"><?php echo $this->form->getInput('gmap_report_latitude'); ?><?php echo $this->form->getInput('gmap_report_longitude'); ?></div>
 			</div>
@@ -400,6 +407,8 @@ displayVals();
     </div>
 </form>
 
+<?php if ($params->get('gmap_action','0') == '1') : ?>
+
 <!-- Javascript für GMap-Anzeige -->
 
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
@@ -429,51 +438,51 @@ function codeAddress2() {
     });
   }	 
   
-function placeMarker(location) {
-    if (marker) {
-        //if marker already was created change positon
-        marker.setPosition(location);
-    } else {
-        //create a marker
-        marker = new google.maps.Marker({
-            position: location,
-            map: map,
-            draggable: true
-        });
-    }
-}
+ function placeMarker(location) {
+     if (marker) {
+      //  if marker already was created change positon
+         marker.setPosition(location);
+     } else {
+    //    create a marker
+         marker = new google.maps.Marker({
+             position: location,
+             map: map,
+             draggable: true
+         });
+     }
+ }
    
  
 // A function to create the marker and set up the event window function 
-function createMarker(latlng, name, html) {
-    var contentString = html;
-    var marker = new google.maps.Marker({
-        position: latlng,
-        map: map,
-        draggable: true,
-        zIndex: Math.round(latlng.lat()*-100000)<<5
-        });
-  google.maps.event.addListener(marker, 'dragend', function() {
-    latLng = marker.getPosition();
-            document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
-            document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
-        });
-     google.maps.event.addListener(marker, 'click', function() {
-      latLng = marker.getPosition();
-            document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
-            document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
-        });
-    google.maps.event.trigger(marker, 'click');    
-    return marker;
-}
+ function createMarker(latlng, name, html) {
+     var contentString = html;
+     var marker = new google.maps.Marker({
+         position: latlng,
+         map: map,
+         draggable: true,
+         zIndex: Math.round(latlng.lat()*-100000)<<5
+         });
+   google.maps.event.addListener(marker, 'dragend', function() {
+     latLng = marker.getPosition();
+             document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
+             document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
+         });
+      google.maps.event.addListener(marker, 'click', function() {
+       latLng = marker.getPosition();
+             document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
+             document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
+         });
+     google.maps.event.trigger(marker, 'click');    
+     return marker;
+ }
  
-function updateInfoWindow () {
-}
+ function updateInfoWindow () {
+ }
  
-function initialize() {
-  // create the map
-  geocoder = new google.maps.Geocoder();
-  var myOptions = {
+ function initialize() {
+ // create the map
+   geocoder = new google.maps.Geocoder();
+   var myOptions = {
     zoom: <?php echo $this->gmap_config->gmap_zoom_level; ?>,
     center: new google.maps.LatLng(<?php echo $gmap_latitude; ?>,<?php echo $gmap_longitude; ?>), 
     mapTypeControl: true,
@@ -486,8 +495,8 @@ function initialize() {
       navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
     mapTypeId: google.maps.MapTypeId.<?php echo $this->gmap_config->gmap_onload; ?>
   }
-  map = new google.maps.Map(document.getElementById("map_canvas"),
-                                myOptions);
+  map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+  
 var marker2 = new google.maps.Marker({
         position: new google.maps.LatLng(<?php echo $gmap_latitude; ?>,<?php echo $gmap_longitude; ?>), 
         map: map,
@@ -506,12 +515,14 @@ var marker2 = new google.maps.Marker({
             marker2.setMap(null);
             marker2 = null;
          }
-	 marker = createMarker(event.latLng, "name", "<b>Location</b><br>"+event.latLng);
-	 map.panTo(latLng);
-  });
-}
+	  marker = createMarker(event.latLng, "name", "<b>Location</b><br>"+event.latLng);
+	  map.panTo(latLng);
+   });
+ }
     
 // Onload handler to fire off the app.
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <!-- Javascript für GMap-Anzeige ENDE -->
+
+<?php endif;?>

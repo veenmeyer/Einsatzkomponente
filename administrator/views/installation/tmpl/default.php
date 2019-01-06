@@ -42,7 +42,10 @@ $repair_array ['112'] = "CREATE TABLE IF NOT EXISTS `#__eiko_ausruestung` (`id` 
 
 $repair_array ['113'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `ausruestung` TEXT NOT NULL AFTER `vehicles`;";
 $repair_array ['114'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `auswahl_orga` TEXT NOT NULL AFTER `tickerkat`;";
-
+$repair_array ['115'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `createdate` DATETIME NOT NULL AFTER `updatedate`;";
+$repair_array ['116'] = "ALTER TABLE `#__eiko_einsatzberichte` ADD `modified_by` INT(11)  NOT NULL AFTER `created_by`;";
+$repair_array ['117'] = "UPDATE `#__eiko_einsatzberichte` SET `createdate` = `updatedate`;";
+$repair_array ['118'] = "UPDATE `#__eiko_einsatzberichte` SET `modified_by` = `created_by`;";
 
 if ($repair) : 
 	$db = JFactory::getDbo();

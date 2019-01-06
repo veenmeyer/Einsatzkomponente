@@ -52,7 +52,7 @@ $params = JComponentHelper::getParams('com_einsatzkomponente');
 
 $html[]='<input class="control-label" type="text"  name="'. $this->name.'"  id="'.$this->id.'"  value="'.$this->value.'" size="'.$this->size.'" />';
 if ($params->get('gmap_action','0')) :
-$html[]='<button type="button" value="Geocode" onclick="codeAddress2()" class="hasTooltip control-label btn btn-danger btn-sm" title="Koordinaten automatisch anhand der Adresse ermitteln">Geocode</button>&nbsp;';
+$html[]='<button type="button" id="Geocode" value="Geocode" onclick="codeAddress2()" class="hasTooltip control-label btn btn-danger btn-sm" title="Koordinaten automatisch anhand der Adresse ermitteln">Geocode</button>&nbsp;';
 endif;
 
 if (count($addressDb)):

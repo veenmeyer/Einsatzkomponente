@@ -10,7 +10,6 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
@@ -92,8 +91,10 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
     			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_2');?></li>
     		</ul>
    			</div>
+			<?php if ($this->params->get('gmap_action','0') == '1') : ?> 
             <input class='btn btn-warning' type='button' onclick='clearMap();return false;' value='<?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_KOORDINATEN_LOESCHEN');?>'/>
             <input class='btn btn-warning' type='button' onclick='resetarea()' value='<?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_KOORDINATENLISTE_ZUUECKSETZEN');?>'/>
+			<?php endif;?>
 						<!-- Button to trigger modal -->
 						<a href="#myModal" role="button" class="btn" data-toggle="modal"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_4');?></a>
      
@@ -126,7 +127,19 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
 						</div>
 						</div>		
 				</div>
+			<?php if ($this->params->get('gmap_action','0') == '1') : ?> 
             <div id="map" style="width: 810px; height: 400px"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_7');?></div>
+			<?php endif;?>
+
+			<?php if ($this->params->get('gmap_action','0') == '2') : ?> 
+            <div id="map_canvas" style="width: 810px; height: 400px"><?php echo JText::_('COM_EINSATZKOMPONENTE_GMAP_7');?></div>
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
+			<?php OsmHelper::addRightClickOsmMap(); ?> 
+			<?php OsmHelper::editPolygonMap($this->einsatzgebiet,'blue'); ?> 
+			<?php endif;?>
+
+			
             <input type="hidden"  name="gmap_latitude"  id="gmap_latitude"  value="<?php echo $gmap_latitude; ?>" size="30"/>
             <input type="hidden"  name="gmap_longitude"  id="gmap_longitude"  value="<?php echo $gmap_longitude; ?>" size="30"/>
           
@@ -155,8 +168,39 @@ $document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkom
     </div>
 </form>
 
+<script type="text/javascript"> 
+
+</script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ############ GoogleMaps  #############  -->
+
+<?php if ($this->params->get('gmap_action','0') == '1') { ?> 
 
 <?php // Einsatzgebiet für GMap-Karte vorbereiten
 $area = substr($this->item->gmap_alarmarea, -1); 
@@ -189,7 +233,8 @@ $stralarmarea=$stralarmarea.' ];';
 
 ?>
 
-<!--Javascript für Gmap-Karte-->
+
+ <!--Javascript für Gmap-Karte-->
 
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $this->params->get ('gmapkey','') ;?>"></script> 
 
@@ -488,3 +533,6 @@ function resetarea() {
 // Onload handler to fire off the app.
 google.maps.event.addDomListener(window, 'load', buildMap);
 </script>
+
+<?php } ?>
+

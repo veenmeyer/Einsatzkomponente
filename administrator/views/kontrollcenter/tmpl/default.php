@@ -118,13 +118,16 @@ if (!empty($this->extra_sidebar)) {
 <div class="span4">
 <div class="alert alert-info" style=" float:left;">
 <a target="_blank" href="https://www.einsatzkomponente.de/index.php"><img src="<?php echo Uri::base(); ?>components/com_einsatzkomponente/assets/images/komponentenbanner.jpg" style="float:left; margin-right:20px; padding-right:20px;"/></a>
-<span class="label label-important"><?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_1');?></span><br/><br/>
+<span class="label label-important" style="padding: 5px 5px 5px 5px;font-size:larger;"><?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_1');?></span><br/><br/> 
+<span class="label label-important" style="padding: 5px 5px 5px 5px;font-size:larger;"><?php echo 'Bzw. Werde Premium-User';?></span><br/><br/>
 <?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_PAYPAL_2');?>
+<div class="alert alert-warning" style=" float:left;margin-top:10px;">PS: Ihr dürft auch gerne per PayPal <b>eine kleine monatliche Spende</b> einrichten.</div>
 <small>PayPal-Email: <?php echo 'ralf.meyer@mail.de';?></small><br />
 
 
 <p><a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HDFKVJSKSEFY"><span style="float:right;"><?php echo Text::_('COM_EINSATZKOMPONENTE_KONTROLLCENTER_SPENDEN_UEBER_PAYPAL');?>: <img border=0  src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" /></span></a>
-<p><small><span style="float:right;"></br>Alternativ können Sie die Kontodaten per <a href="mailto:validate@einsatzkomponente.de?Subject=Spende%20Einsatzkomponente%20J3.x" target="_top">Email </a>anfordern.</span></small></p></p>
+<p><small><span style="float:left;"></br>Alternativ können Sie die Kontodaten per <a href="mailto:validate@einsatzkomponente.de?Subject=Spende%20Einsatzkomponente%20J3.x" target="_top">Email </a>anfordern.</span></small></p>
+</p>
 
 
 </div>
@@ -169,7 +172,7 @@ if (!empty($this->extra_sidebar)) {
 							<dd>GNU General Public License version 2 or later </dd>
 						</dl>
 						<hr>
-							<b>Premiumfunktionen:</b></br>
+							<b>Premiumfunktionen (nur für Premium-User):</b></br>
 							<?php if ($val) : ?>
 							<?php echo '<span style="margin-bottom:5px;" class="label label-success">Mehrfachbild-Upload im Frontend-Edit</span></br>';?>
 							<?php else:?>
@@ -197,13 +200,11 @@ if (!empty($this->extra_sidebar)) {
 						</div>
 						<div class="modal-body">
 						<ul>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_last</a> (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_chart</a> (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_statistik</a> (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_melder</a> (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_einsatzticker</a> (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_led</a> (Modul zur Anzeige des letzten Einsatzes als LED-Tickerlaufschrift)</li>
-						<li><a href="https://www.einsatzkomponente.de/wsif/index.php/Category/6-Module-f%C3%BCr-die-Einsatzkomponente-V3/" target="_blank" class="">mod_eiko_articles_news</a> (Modul zur Anzeige der letzten Einsätze als Joomla-Artikel)</li>
+						<li><a href="https://einsatzkomponente.de/forum/index.php?thread/1225-mod-eiko-last-f%C3%BCr-j3-x/" target="_blank" class="">mod_eiko_last</a> (Modul zur Anzeige der letzten Einsätze auf einer Modulposition)</li>
+						<li><a href="https://einsatzkomponente.de/forum/index.php?thread/1234-mod-eiko-chart-statistik-modul-als-kuchen-f%C3%BCr-j3-x/" target="_blank" class="">mod_eiko_chart</a> (Modul zur Anzeige einer Statistik in Kuchenform auf einer Modulposition)</li>
+						<li><a href="https://einsatzkomponente.de/forum/index.php?thread/1228-mod-eiko-statistik-f%C3%BCr-j3-x/" target="_blank" class="">mod_eiko_statistik</a> (Modul zur Anzeige einer Statistik als Balkendiagramm auf einer Modulposition)</li>
+						<li><a href="https://einsatzkomponente.de/forum/index.php?thread/1238-mod-eiko-melder-f%C3%BCr-j3-x/" target="_blank" class="">mod_eiko_melder (nur Premium User)</a> (Modul zur Anzeige des letzten Einsatzes auf einen Meldeempfänger)</li>
+						<li><a href="https://einsatzkomponente.de/forum/index.php?thread/1235-mod-eiko-einsatzticker-f%C3%BCr-j3-x/" target="_blank" class="">mod_eiko_einsatzticker</a> (Modul zur Anzeige des letzten Einsatzes als Tickerlaufschrift)</li>
 						</ul>
 						<h4>Mehr Infos dazu auf <a href="https://www.einsatzkomponente.de/" target="_blank" class="">www.einsatzkomponente.de</a></h4>
 						</div>
@@ -260,7 +261,7 @@ if (!empty($this->extra_sidebar)) {
 			<tfoot>
 				<tr>
 					<td colspan="10">
-						<?php echo 'Copyright (C) 2017 by Ralf Meyer. All rights reserved.
+						<?php echo 'Copyright (C) 2019 by Ralf Meyer. All rights reserved.
  *  GNU General Public License version 2 or later'; ?>
 					</td>
 				</tr>

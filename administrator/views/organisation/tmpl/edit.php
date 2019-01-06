@@ -144,19 +144,25 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
 				<div class="controls"><?php echo $this->form->getInput('created_by'); ?></div>
 			</div>
 -->            
-   <?php if ($params->get('gmap_action','0')) : ?>
+            <?php if ($params->get('gmap_action','0') == '1' or $params->get('gmap_action','0') == '2') : ?>
 	           <!--Slider für Ortsangaben-->
             <?php $gmap_config = $this->gmap_config;  // GMap-Config Daten laden?>
 			<div class="fltlft" style="width:80%;">
             <div class="control-group" id="map_canvas" style="width:100%;max-width:600px;height:400px;border:1px solid;">Karte</div>
 			<div class="control-group">
-            <div class="controls"><input id="address" class="input-large" placeholder="Adresse hier eingeben" type="text" value="">&nbsp;&nbsp;
-            <input class="btn btn-danger" type="button" value="Geocode" onclick="codeAddress()"></div>
+            <div class="controls"><input id="jform_address" class="input-large" placeholder="Adresse hier eingeben" type="text" value="">&nbsp;&nbsp;
+            <input class="btn btn-danger" type="button" id="Geocode" value="Geocode" onclick="codeAddress()"></div>
 			</div>		
 			<div class="control-group">
             <div class="controls"><?php echo $this->form->getInput('gmap_longitude'); ?><?php echo $this->form->getInput('gmap_latitude'); ?></div>
 			</div>
-            
+            <?php endif;?>
+			<?php if ($params->get('gmap_action','0') == '2') : ?>
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($gmap_config->gmap_zoom_level,$gmap_latitude,$gmap_longitude); ?>
+			<?php OsmHelper::addMarkerOsmMap($gmap_latitude,$gmap_longitude); ?> 
+			<?php endif;?>
+			
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('state'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('state'); ?></div>
@@ -164,7 +170,9 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
 			</div>
 			</fieldset>
 			</div>
-			
+
+<?php if ($params->get('gmap_action','0') == '1') : ?>
+
               <!-- Javascript für GMap-Anzeige -->
 			  
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=<?php echo $params->get ('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E') ;?>"></script> 
@@ -176,7 +184,7 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
                     var geocoder;
                     
               function codeAddress() {
-                  var address = document.getElementById("address").value;
+                  var address = document.getElementById("jform_address").value;
                   geocoder.geocode( { 'address': address}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                       map.setCenter(results[0].geometry.location);
@@ -185,8 +193,8 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
                           position: results[0].geometry.location
                       });
                       latLng = marker.getPosition();
-                          document.getElementById("jform_gmap_latitude").value=latLng.lat();
-                          document.getElementById("jform_gmap_longitude").value=latLng.lng();
+                          document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
+                          document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
                     } else {
                       alert("Geocode war nicht erfolgreich aus folgendem Grund: " + status);
                     }
@@ -204,13 +212,13 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
                       });
                 google.maps.event.addListener(marker, 'dragend', function() {
                   latLng = marker.getPosition();
-                          document.getElementById("jform_gmap_latitude").value=latLng.lat();
-                          document.getElementById("jform_gmap_longitude").value=latLng.lng();
+                          document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
+                          document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
                       });
                    google.maps.event.addListener(marker, 'click', function() {
                     latLng = marker.getPosition();
-                          document.getElementById("jform_gmap_latitude").value=latLng.lat();
-                          document.getElementById("jform_gmap_longitude").value=latLng.lng();
+                          document.getElementById("jform_gmap_report_latitude").value=latLng.lat();
+                          document.getElementById("jform_gmap_report_longitude").value=latLng.lng();
                       });
                   google.maps.event.trigger(marker, 'click');    
                   return marker;

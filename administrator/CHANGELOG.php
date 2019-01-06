@@ -11,6 +11,11 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.22</small></h3>
+<ul>
++ OSM-Karten hinzugefügt
+</ul>
+
 <h3>Changelog <small>Version 3.21</small></h3>
 <ul>
 # State-Problem ab Joomla 3.9.1 behoben

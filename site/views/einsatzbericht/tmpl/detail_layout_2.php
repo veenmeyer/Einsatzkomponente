@@ -65,16 +65,30 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
             <?php if( $this->item->gmap_report_latitude != '0' ) : ?> 
             <?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
 			<?php if ($this->params->get('gmap_action','0')=='1') : ?>
-            <td style="float:right;">
+            <td style="float:right;width:50%;" class="eiko_top_td_detail_2">
 			<div  id="map-canvas" style="min-width:350px;width:100%;border:solid #000 1px;height:<?php echo $this->params->get('detail_map_height','250px');?>"></div>
             <div id="distance_direct" title ="Die Angabe kann vom tats&auml;chlichen Streckenverlauf abweichen, da diese Angabe automatisch von Google Maps errechnet wurde !"></div>
             </td>
             <?php endif;?>
 			<?php if ($this->params->get('gmap_action','0')=='2') : ?>
-            <td style="float:right;">
-				<body onLoad="drawmap();">
-				<div id="map" style="min-width:350px;width:100%;border:solid #000 1px;height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
-				<div class="hide"><p>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</p></div>
+            <td style="float:right;width:50%;" class="eiko_top_td_detail_2">
+   				<div id="map_canvas" class="eiko_einsatzkarte_2" style="width:300px;height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
+    		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+			
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
+			
+			<?php if ($this->params->get('display_detail_einsatz_marker','1')) :?>
+			<?php OsmHelper::addEinsatzortMap($this->item->gmap_report_latitude,$this->item->gmap_report_longitude,$this->item->summary,$this->einsatzlogo->icon,$this->item->id);?>
+			<?php endif;?> 
+			
+			<?php if ($this->params->get('display_detail_organisationen','1')) :?>
+			<?php OsmHelper::addOrganisationenMap($this->organisationen);?>
+			<?php endif;?>
+			<?php if ($this->params->get('display_detail_einsatzgebiet','1')) :?>
+			<?php OsmHelper::addPolygonMap($this->einsatzgebiet,'blue');?>
+			<?php endif;?> 
+
             </td>
             <?php endif;?>
 			<?php else:?> 

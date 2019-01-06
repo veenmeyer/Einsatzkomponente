@@ -325,9 +325,23 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			</div>
             <?php endif;?>
 			<?php if ($this->params->get('gmap_action','0') == '2') :?>
-				<body onLoad="drawmap();">
-   				<div id="map" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
+   				<div id="map_canvas" class="eiko_einsatzkarte_2" style="height:<?php echo $this->params->get('detail_map_height','250px');?>;"></div> 
     		<noscript>Dieser Teil der Seite erfordert die JavaScript Unterstützung Ihres Browsers!</noscript>
+			
+			<?php OsmHelper::installOsmMap();?>
+			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
+			
+			<?php if ($this->params->get('display_detail_einsatz_marker','1')) :?>
+			<?php OsmHelper::addEinsatzortMap($this->item->gmap_report_latitude,$this->item->gmap_report_longitude,$this->item->summary,$this->einsatzlogo->icon,$this->item->id);?>
+			<?php endif;?> 
+			
+			<?php if ($this->params->get('display_detail_organisationen','1')) :?>
+			<?php OsmHelper::addOrganisationenMap($this->organisationen);?>
+			<?php endif;?>
+			<?php if ($this->params->get('display_detail_einsatzgebiet','1')) :?>
+			<?php OsmHelper::addPolygonMap($this->einsatzgebiet,'blue');?>
+			<?php endif;?> 
+
 			<?php endif;?>
 			<?php if ($this->params->get('gmap_action','0')) : ?>
             <?php if( $this->item->gmap ) : ?>
