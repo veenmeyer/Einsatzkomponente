@@ -15,6 +15,8 @@ defined('_JEXEC') or die;
 $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
+$user = JFactory::getUser($this->item->created_by);
+$this->item->created_by=$user->get('username');
 ?>
 
   
@@ -22,36 +24,172 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if( $this->item ) : ?> 
 
     
-    
-    
-    
-            <!--Navigation-->
-			<div class="eiko_navbar_2" style="float:<?php echo $this->params->get('navi_detail_pos','left');?>;"><?php echo $this->navbar;?></div>
-            <!--Navigation ENDE-->
+    <div class="post-inner group">
+	
+    <h1 class=""><?php echo $this->item->summary; ?> - <?php echo date("d.m.Y", strtotime($this->item->date1)).''; ?></h1>
+	<p class="" style="font-size:smaller;">Bericht veröffentlicht von   
+		<span class="vcard author">
+			<span class="">
+				<i class="icon-user" style="margin-right:5px;"></i>
+					<a href="" title="Beiträge von <?php echo $this->item->created_by;?>" rel="author"><?php echo $this->item->created_by;?></a>
+			</span>
+		</span> am
+        <span class="published"><?php echo date("d.m.Y", strtotime($this->item->createdate)).''; ?>
+		</span>
+    </p>
+      
+      <div class="clear"></div>
 
-  <div class="distance100">&nbsp;</div>
-   <div class="clearfix"></div>
-    
-
-<div class="content_news_inner">
-  <div id="post-6277">
-    <div class="news"><h2 class="news_titel_single"><?php echo $this->item->summary; ?></h2></div> 
-     <div class="content_news_info">
-       <div class="content_news_datum"><i class="icon-calendar" style="margin-right:5px;"></i><strong><?php echo date("d.m.Y H:i", strtotime($this->item->date1)).' Uhr'; ?></strong>
-			<?php if ($this->params->get('display_detail_hits','1')):?>
-            <span class="badge pull-right small">Zugriffe: <?php echo $this->item->counter; ?></span>
+      <div class="">
+        <div class="">
+          <p>
+		  
+		  <strong>Datum:</strong> <?php echo date("d.m.Y", strtotime($this->item->date1)).''; ?>&nbsp;<br>
+		  
+		  <strong>Alarmzeit:</strong> <?php echo date("H:i", strtotime($this->item->date1)).' Uhr'; ?><br>
+		  
+		  <strong>Alarmierungsart:</strong> <?php echo $this->alarmierungsart->title;?><br>
+		  
+          <?php if ($this->params->get('display_einsatzdauer','1') && ($this->item->date3>1) ): ?>
+		  <strong>Dauer:</strong> <?php	echo $this->einsatzdauer;?><br>
+		  <?php endif;?>
+		  
+            <!--Einsatzkategorie-->
+			<?php if ($this->params->get('display_detail_tickerkat','1') == '1') :?> 
+            <?php if( $this->item->tickerkat ) : ?>
+			<strong>Kategorie:</strong> <?php echo JText::_($this->tickerKat->title);?><br>
             <?php endif;?>
-       </div>
-       <div class="content_news_ort"><i class="icon-globe" style="margin-right:5px;"></i>Ort: <?php echo $this->item->address; ?></div>
-       <div class="content_news_autor"><i class="icon-user" style="margin-right:5px;"></i>Einsatzleiter: <?php echo $this->item->boss; ?></div>
-       <div class="clear"></div>
-     </div>
-    <div class="news_post">
+            <?php endif;?>
+            <!--Einsatzkategorie ENDE-->
+			
+            <!--Einsatzart-->
+			<?php if ($this->params->get('display_detail_einsatzart','0') == '1') :?> 
+            <?php if( $this->item->data1 ) : ?>
+			<strong>Art:</strong> <?php echo JText::_($this->einsatzlogo->title);?><br>
+            <?php endif;?>
+            <?php endif;?>
+            <!--Einsatzart ENDE-->
+			
+			<strong>Einsatzort:</strong> <?php echo $this->item->address.''; ?><br>
+
+            <?php if( $this->item->vehicles ) : ?>
+			<?php
+				$array = array();
+				foreach((array)$this->item->vehicles as $value): 
+					if(!is_array($value)):
+						$array[] = $value;
+					endif;
+				endforeach;
+				$data = array();
+				$vehicles_images = array();
+				$vehicles_list = array();
+				foreach($array as $value):
+					$db = JFactory::getDbo();
+					$query	= $db->getQuery(true);
+					$query
+						->select('*')
+						->from('#__eiko_fahrzeuge')
+						->where('id = "' .$value.'"');
+					$db->setQuery($query);
+					$results = $db->loadObjectList();
+					$data[] = $results[0]->name;
+					if ($results[0]->state == '2'): $results[0]->name = $results[0]->name.' (a.D.)';endif;
+					
+					if ($this->params->get('display_detail_fhz_links','1')) :
+					if (!$results[0]->link) :
+					$vehicles_list[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>';
+					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $results[0]->id).'" target="_self"><img width="40px" style="margin-top:15px;"  src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  '.$results[0]->detail2.'"/></a>&nbsp;&nbsp;<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzfahrzeug&Itemid='.$this->params->get('vehiclelink','').'&id=' . $results[0]->id).'" target="_self">'.$results[0]->name.'</a>  '.$results[0]->detail2.'</span>';					
+					else:
+					$vehicles_list[] = '<a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</a>';
+					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="40px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
+					endif;
+					else:
+					
+					if ($results[0]->link) :
+					$vehicles_list[] = '<a href="'.$results[0]->link.'" target="_blank">'.$results[0]->name.'</a>';
+					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><a href="'.$results[0]->link.'" target="_blank"><img width="40px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" /></a>&nbsp;&nbsp;<a href="'.$results[0]->link.'" target="_blank">&nbsp;&nbsp;'.$results[0]->name.'</a></span>';
+					else:
+					$vehicles_list[] = ''.$results[0]->name.'';
+					$vehicles_images[] = '<span style="margin-right:10px;background-color:#D8D8D8;white-space:nowrap;"><img width="40px" style="margin-top:15px;" src="'.JURI::Root().$results[0]->image.'"  alt="'.$results[0]->name.'" title="'.$results[0]->name.'  ('.$results[0]->detail2.')" />&nbsp;&nbsp;'.$results[0]->name.'</span>';
+					endif;
+					endif;
+
+					endforeach;
+				$this->item->vehicles = implode(', ',$data); 
+				$vehicles_images = implode(' ',$vehicles_images); 
+				$vehicles_list = implode(', ',$vehicles_list); ?>
+            <?php endif;?>
+            
+            <?php if( $this->item->vehicles ) : ?>
+			<?php if ($this->params->get('display_detail_fhz_images','1') and $this->item->vehicles) :?>
+			<?php echo '<strong>Fahrzeuge:</strong> '.$vehicles_images.'</br>';?> 
+            <?php else:?>
+			<strong>Fahrzeuge:</strong> <?php echo $vehicles_list;?><br>
+            <?php endif;?>
+            <?php endif;?>
+			
+			
+            <?php if( $this->item->auswahl_orga ) : ?>   
+			<?php
+				$array = array();
+				foreach((array)$this->item->auswahl_orga as $value): 
+					if(!is_array($value)):
+						$array[] = $value;
+					endif;
+				endforeach;
+				$data = array();
+				foreach($array as $value):
+					$db = JFactory::getDbo();
+					$query	= $db->getQuery(true);
+					$query
+						->select('*')
+						->from('#__eiko_organisationen')
+						->where('id = "' .$value.'"');
+					$db->setQuery($query);
+					$results = $db->loadObjectList();
+					
+					if ($this->params->get('display_detail_orga_links','1')) :
+					if (!$results[0]->link) :
+					$data[] = '<a href="'.JRoute::_('index.php?option=com_einsatzkomponente&view=organisation&Itemid='.$this->params->get('orgalink','').'&id=' . $results[0]->id).'" target="_self" alt="'.$results[0]->link.'">'.$results[0]->name.'</a>';
+					else:					
+					$data[] = '<a href="'.$results[0]->link.'" target="_blank" alt="'.$results[0]->link.'">'.$results[0]->name.'</a>';
+					endif;
+					else:
+					if ($results[0]->link) :
+					$data[] = '<a href="'.$results[0]->link.'" target="_blank" alt="'.$results[0]->link.'">'.$results[0]->name.'</a>';
+					else:
+					$data[] = ''.$results[0]->name.'';
+					endif;
+					endif;
+
+										
+				endforeach;
+				$this->item->auswahl_orga = implode(', ',$data); ?>
+			<strong>Eingesetzte Kräfte:</strong> <?php echo $this->item->auswahl_orga;?><br>
+            <?php endif;?>
+
+			
+			</p>
+			<hr>
+			<?php if( $this->item->desc) : ?>
+			<h3>Einsatzbericht:</h3>
+		    <?php endif;?>
+		  <p>
+		  
+<?php if( $this->item->image ) : ?>
+
+				<a href="<?php echo JURI::Root().$this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
+                  <img class="eiko_img-rounded_2 eiko_detail_image_3 alignleft_detail_3" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="<?php echo $this->einsatzlogo->title;?>" alt ="<?php echo $this->einsatzlogo->title;?>"/>
+                  </a>
+			
+		  <br />
+		  <?php endif;?>
+		  
 			<?php if( $this->item->desc) : ?>
 			<?php if ($this->params->get('display_detail_desc','1')): ?>
             <?php jimport('joomla.html.content'); ?>  
             <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
-        	<p style="text-align: justify;"><?php echo $Desc; ?></p>
+        	<p style="text-align: justify;" class="detail_layout_3_p"><?php echo $Desc; ?></p>
 			<?php endif;?>
 			<?php endif;?>
 
@@ -59,25 +197,26 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			$plugin = JPluginHelper::getPlugin('content', 'myshariff') ;
 			if ($plugin) : 	echo JHTML::_('content.prepare', '{myshariff}');endif;
 			?>
-  
-<div id="attachment_6278" class="wp-caption aligncenter">
-<?php if( $this->item->image ) : ?>
 
-  <div style=" text-align:center;">
-                <div>
-				<a href="<?php echo JURI::Root().$this->item->image;?>" rel="highslide[<?php echo $this->item->id; ?>]" class="highslide" onClick="return hs.expand(this, { captionText: '<?php echo $this->einsatzlogo->title;?> am <?php echo date("d.m.Y - H:i", strtotime($this->item->date1)).' Uhr'; ?>' });" alt ="<?php echo $this->einsatzlogo->title;?>">
-                  <img class="eiko_img-rounded_2 eiko_detail_image_2" src="<?php echo JURI::Root().$this->item->image;?>"  alt="<?php echo $this->einsatzlogo->title;?>" title="<?php echo $this->einsatzlogo->title;?>" alt ="<?php echo $this->einsatzlogo->title;?>"/>
-                  </a>
-                </div>
-  </div>
-<?php endif;?>
+			
+          <nav style="float:<?php echo $this->params->get('navi_detail_pos','left');?>;" class="">
+			<?php echo $this->navbar;?>
+                      </nav>
+        </div>
 
-</div>
-<p>&nbsp;</p>
-    </div>  
-  </div>
-</div>
+        
+        <div class="clear"></div>
+      </div>
+
+    </div>
+
+
+
   
+    
+    
+
+   <div class="clearfix"></div>
   <div class="distance100">&nbsp;</div>
    <h2>Sonstige Informationen</h2>
 			<?php if ($this->images) : ?>

@@ -242,7 +242,9 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		{	$summary = strip_tags($this->item->summary);
  		$opengraph  = '<meta property="og:title" content="#Einsatzinfo: '.$summary.'"/>';
 		}
-		$opengraph .= '<meta property="og:type" content="article"/>'; 
+		else {
+ 		$opengraph  = '<meta property="og:title" content="#Einsatzinfo"/>';
+		}
 		$opengraph .= '<meta property="og:url"  content="'.JURI::current().'"/>';
 		$opengraph .= '<meta property="og:site_name" content="#Einsatzinfo: '.$this->einsatzlogo->title.'"/>';
 		
