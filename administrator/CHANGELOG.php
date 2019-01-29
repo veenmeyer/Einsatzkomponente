@@ -13,6 +13,7 @@
 
 <h3>Changelog <small>Version 3.23</small></h3>
 <ul>
+# Bugfix Detaillink in der Einsatzkarte
 # Detail-Layout 3 bei Einsatzberichten geändert 
 </ul>
 
