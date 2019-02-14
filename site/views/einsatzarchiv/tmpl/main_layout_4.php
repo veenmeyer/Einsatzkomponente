@@ -163,7 +163,7 @@ defined('_JEXEC') or die;
 		   <tr class="row<?php echo $i % 2; ?>">
 
            <?php if ($this->params->get('display_home_number','1') ) : ?>
-      <td class="eiko_td_marker_main_1 eiko_td_marker_color_<?php echo $item->data1_id; ?>">
+      <td class="mobile_hide_480 eiko_td_marker_main_1 eiko_td_marker_color_<?php echo $item->data1_id; ?>">
 			<?php echo '<span style="white-space: nowrap;" class="eiko_span_marker_main_1">Nr. '.EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id).'</span>';?> 
 			</td>
            <?php endif;?>
