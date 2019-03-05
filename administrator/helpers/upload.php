@@ -203,7 +203,8 @@ while($count < $count_data)
 		$db		= JFactory::getDBO();
 		$query	= $db->getQuery(true);
 		$query->update('#__eiko_einsatzberichte');
-		$query->set('image = "'.$custompath.$rep_id_ordner.'/'.$fileName.'" ');
+		//$query->set('image = "'.$custompath.$rep_id_ordner.'/'.$fileName.'" ');
+		$query->set('image = "'.$custompath.'/thumbs'.$rep_id_ordner.'/'.$fileName.'" ');
 		$query->where('id ="'.$rep_id.'"');
 		$db->setQuery((string) $query);
 

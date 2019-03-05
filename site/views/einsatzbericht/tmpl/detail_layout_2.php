@@ -52,6 +52,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
         <table width="100%"><tr>
         
             <?php if( $this->item->image ) : ?>
+			<?php $this->item->image = preg_replace("%thumbs/%", "", $this->item->image,1); ?>
             <td style="float:left;">            
                 <div class="detail_image">
                   <img   class="img-rounded" style="height:220px;" src="<?php echo JURI::Root();?><?php echo $this->item->image;?>"  alt="" title=""/>

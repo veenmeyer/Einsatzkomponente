@@ -23,6 +23,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_DATA1'); ?>:
 			<?php echo $this->item->data1.' : '.$this->item->einsatzart; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_IMAGE'); ?>:
+			<?php $this->item->image = preg_replace("%thumbs/%", "", $this->item->image,1); ?>
 			<?php echo $this->item->image; ?></li>
 			<li><?php echo JText::_('COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBERICHT_ADDRESS'); ?>:
 			<?php echo $this->item->address; ?></li>
