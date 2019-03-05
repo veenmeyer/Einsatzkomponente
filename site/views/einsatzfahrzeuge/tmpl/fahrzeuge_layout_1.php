@@ -37,19 +37,19 @@ JHtml::_('formbehavior.chosen', 'select');
 				<?php endif;?>
 	
 				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
-				<th class="eiko_einsatzfahrzeug_detail2">
+				<th class="eiko_einsatzfahrzeug_detail2  mobile_hide_480">
 				<?php echo JHtml::_('grid.sort',  '', 'a.detail2', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif;?>
 				
 				<?php if ($this->params->get('show_fahrzeuge_einsatz','1')) : ?>
-				<th  class="eiko_einsatzfahrzeug_letzter"
+				<th  class="eiko_einsatzfahrzeug_letzter  mobile_hide_480"
 				><?php echo JText::_('COM_EINSATZKOMPONENTE_LETZTER_EINTRAG');?>
 				</th>
 				<?php endif; ?>
 				
 				<?php if ($this->params->get('show_fahrzeuge_orga','1')) : ?>
-				<th  class="eiko_einsatzfahrzeug_organisation">
+				<th  class="eiko_einsatzfahrzeug_organisation  mobile_hide_480">
 				<?php echo JText::_('COM_EINSATZKOMPONENTE_ORGANISATION');?>
 				</th>
 				<?php endif;?>
@@ -104,7 +104,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				<?php endif;?>
 				
 				<?php if ($this->params->get('show_fahrzeuge_detail2','1')) : ?>
-					<td class="eiko_fahrzeug_detail2">
+					<td class="eiko_fahrzeug_detail2  mobile_hide_480">
 
 						<?php echo $item->detail2; ?>
 					</td>
@@ -118,7 +118,7 @@ JHtml::_('formbehavior.chosen', 'select');
 					$total = $database->loadObjectList();
 					?>
 					<?php if ($total) : ?>
-					<td  class="eiko_fahrzeug_letzter_einsatz"><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
+					<td  class="eiko_fahrzeug_letzter_einsatz  mobile_hide_480"><a href="<?php echo JRoute::_('index.php?option=com_einsatzkomponente&view=einsatzbericht&Itemid='.$this->params->get('homelink','').'&id='.(int) $total[0]->id); ?>"><?php echo date("d.m.Y", strtotime($total[0]->date1));?></a></td>
 					<?php else: ?>
 					<td><?php echo '-'; ?></td>
 					<?php endif;?>
