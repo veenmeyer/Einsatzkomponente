@@ -11,6 +11,11 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.40</small></h3>
+<ul>
+# kleine Bugfixes
+</ul>
+
 <h3>Changelog <small>Version 3.30</small></h3>
 <ul>
 # Updateserver erneuert
