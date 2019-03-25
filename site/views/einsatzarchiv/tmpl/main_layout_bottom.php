@@ -29,7 +29,7 @@
 
 </form>
 
-<?php if( $this->params->get('display_detail_map_for_only_user','0') == '1' || $user->id ) :?> 
+<?php if ($this->params->get('gmap_action','0') != '0') :?>
 <?php if ($this->params->get('display_home_map')) : ?>
   <tr>
     <td colspan="<?php echo $eiko_col;?>" class="eiko_td_gmap_main_1">
@@ -62,10 +62,7 @@
     </td>
   </tr>
 <?php endif;?>
-			<?php else:?> 
-			<?php echo '<tr><td colspan="'.$eiko_col.'" class="eiko_td_gmap_main_1"><span style="padding:5px;" class="label label-info">( Bitte melden Sie sich an, um den Einsatzort auf einer Karte zu sehen. )</span><br/><br/></td></tr>';?>
-			<?php endif;?>
-
+<?php endif;?>
 </table>
 
 <?php echo '<span class="mobile_hide_320">'.$this->modulepos_1.'</span>'; ?>

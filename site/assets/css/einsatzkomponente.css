@@ -718,3 +718,20 @@ padding-right:5px;
 .icon-next::before, .icon-forward::before {
     content: "" !important;
 }
+
+
+.eiko_detail_image_3 {
+	width:50%; 
+	max-width:300px; 
+	min-width:200px;
+	}
+.alignleft_detail_3 {
+
+    display: block;
+    margin-right: 15px;
+    float: left;
+
+}
+
+.detail_layout_3_p {margin-top: -35px;}
+

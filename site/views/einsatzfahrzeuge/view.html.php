@@ -50,6 +50,9 @@ class EinsatzkomponenteViewEinsatzfahrzeuge extends JViewLegacy
 
 		$document = JFactory::getDocument();
 
+        // Import CSS
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/einsatzkomponente.css');
+		$document->addStyleSheet('components/com_einsatzkomponente/assets/css/responsive.css');
 		// Bootstrap laden
 		JHtml::_('behavior.framework', true);
 		

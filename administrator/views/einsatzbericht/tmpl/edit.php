@@ -349,7 +349,7 @@ displayVals();
 			<?php endif;?>
 
 			<div class="control-group">
-            <div class="control-label">Koordinaten:</div><div class="controls"><?php echo $this->form->getInput('gmap_report_latitude'); ?><?php echo $this->form->getInput('gmap_report_longitude'); ?></div>
+            <div class="control-label">Koordinaten (Lat./Lon.):</div><div class="controls"><?php echo $this->form->getInput('gmap_report_latitude'); ?><?php echo $this->form->getInput('gmap_report_longitude'); ?></div>
 			</div>
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('gmap'); ?></div>

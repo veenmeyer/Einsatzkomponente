@@ -154,7 +154,8 @@ else {}  // zugeordnete Fahrzeuge aufrufen   ENDE --------------------------
             <input class="btn btn-danger" type="button" id="Geocode" value="Geocode" onclick="codeAddress()"></div>
 			</div>		
 			<div class="control-group">
-            <div class="controls"><?php echo $this->form->getInput('gmap_longitude'); ?><?php echo $this->form->getInput('gmap_latitude'); ?></div>
+			<div class="control-label"><?php echo 'Latitude / Longitude'; ?></div>
+            <div class="controls"><?php echo $this->form->getInput('gmap_latitude'); ?><?php echo $this->form->getInput('gmap_longitude'); ?></div>
 			</div>
             <?php endif;?>
 			<?php if ($params->get('gmap_action','0') == '2') : ?>

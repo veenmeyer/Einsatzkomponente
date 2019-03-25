@@ -732,7 +732,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
         $eikoversion = $params['version'];
 		$version = new JVersion;
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
-		$response = @file("https://einsatzkomponente.de/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$version->getShortVersion()."&eikoversion=".$eikoversion); // Request absetzen
+		$response = @file("https://einsatzkomponente.joomla100.com/gateway/validation.php?validation=".$params->get('validation_key','0')."&domain=".$_SERVER['SERVER_NAME']."&version=".$version->getShortVersion()."&eikoversion=".$eikoversion); // Request absetzen
 		@$response_code = intval($response[1]); // Rückgabewert auslesen
 if ($response_code=='12') :	
 $params->set('eiko', '1');

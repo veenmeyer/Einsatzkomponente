@@ -216,7 +216,7 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 <?php if ($this->params->get('display_detail_desc','1')): ?>
   <tr>
     <td  class="layout4_row_12" colspan="2">
-		<b><u><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?></u></b>
+		<b><u class="einsatzbericht-title"><?php echo JText::_('COM_EINSATZKOMPONENTE_TITLE_MAIN_3');?></u></b>
 <?php jimport('joomla.html.content'); ?>  
 <?php $Desc = JHTML::_('content.prepare', $this->item->desc); ?>
 <div class="eiko_einsatzbericht_2">

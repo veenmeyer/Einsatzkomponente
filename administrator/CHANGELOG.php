@@ -11,6 +11,13 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.30</small></h3>
+<ul>
+# Updateserver erneuert
+# Bugfix Detaillink in der Einsatzkarte
+# Detail-Layout 3 bei Einsatzberichten geändert 
+</ul>
+
 <h3>Changelog <small>Version 3.22</small></h3>
 <ul>
 + OSM-Karten hinzugefügt

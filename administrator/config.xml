@@ -224,7 +224,7 @@
 			<field
 				name="detail_gmap_onload"
 				type="list"
-				showon="gmap_action:1,2"
+				showon="gmap_action:1"
 				label="COM_EINSATZKOMPONENTE_KARTENTYP"
 				description="Normal: zeigt die normale Standard-2D-Karte / Satellite: zeigt Luftaufnahmen des Geländes an / Hybrid: zeigt eine Mischung aus Satellite und Normal an (Luftaufnahme mit hinterlegten Straßen- Städtenamen) usw. (nur für GoogleMaps)"
 				default="HYBRID"
