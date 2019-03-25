@@ -172,7 +172,7 @@ $this->item->created_by=$user->get('username');
 			</p>
 			<hr>
 			<?php if( $this->item->desc) : ?>
-			<h3>Einsatzbericht:</h3>
+			<h3  class="einsatzbericht-title">Einsatzbericht:</h3>
 		    <?php endif;?>
 		  <p>
 		  
