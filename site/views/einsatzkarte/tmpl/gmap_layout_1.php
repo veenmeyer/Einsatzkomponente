@@ -536,7 +536,7 @@ polygon.setMap(map);
 <?php endif; ?>
 </div>
 <?php if ($hide) :?>
-<div><span class="glyphicon glyphicon-info-sign"></span> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_KARTE_1');?> <?php echo $hide;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_KARTE_2');?></div>
+<div class="eiko_privat"><span class="glyphicon glyphicon-info-sign"></span> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_KARTE_1');?> <?php echo $hide;?> <?php echo JText::_('COM_EINSATZKOMPONENTE_EINSAETZE_KARTE_2');?></div>
 <?php endif;?>
 
 <div class="row-fluid">
