@@ -237,7 +237,7 @@ if (!JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente'))
 					
 					$string = '';
 					foreach($array as $value):
-					$string .= 'a.id = '.$value.' OR ';
+					$string .= 'a.id = '.$db->quote($value).' OR ';
 					endforeach;
 				$string = substr ( $string, 0, -3 );
 			$query->where($string);
@@ -248,7 +248,7 @@ if (!JFactory::getUser()->authorise('core.edit.state', 'com_einsatzkomponente'))
 		$orderDirn = $this->state->get('list.direction');
 		if ($orderCol && $orderDirn)
 		{
-			$query->order($db->escape($orderCol . ' ' . $orderDirn));
+			$query->order($db->quoteName($orderCol) . ' ' . $db->escape($orderDirn));
 		}
 
 		return $query;
