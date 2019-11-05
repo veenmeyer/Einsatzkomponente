@@ -272,7 +272,7 @@ if (empty($list['direction']))
 					
 					$string = '';
 					foreach($array as $value):
-					$string .= 'a.department = '.$value.' OR ';
+					$string .= 'a.department = '.$db->quote($value).' OR ';
 					endforeach;
 				$string = substr ( $string, 0, -3 );
 			$query->where($string);
@@ -281,7 +281,7 @@ if (empty($list['direction']))
 		// Filtering ausruestung
 		$filter_ausruestung = $this->state->get("filter.ausruestung");
 		if ($filter_ausruestung != '') {
-			$query->where("FIND_IN_SET('" . $db->escape($filter_ausruestung) . "',a.ausruestung)");
+			$query->where("FIND_IN_SET('" . $db->quote($filter_ausruestung) . "',a.ausruestung)");
 		}
 		
 		// Filter Menüparameter 
@@ -298,7 +298,7 @@ if (empty($list['direction']))
 					
 					$string = '';
 					foreach($array as $value):
-					$string .= 'a.id = '.$value.' OR ';
+					$string .= 'a.id = '.$db->quote($value).' OR ';
 					endforeach;
 				$string = substr ( $string, 0, -3 );
 			$query->where($string);
@@ -310,7 +310,7 @@ if (empty($list['direction']))
 
 		if ($orderCol && $orderDirn)
 		{
-			$query->order($db->escape($orderCol . ' ' . $orderDirn));
+			$query->order($db->quoteName($orderCol) . ' ' . $db->escape($orderDirn));
 		}
 
 		return $query;

@@ -314,19 +314,19 @@ endif;
 		//Filtering alerting
 		$filter_alerting = $this->state->get("filter.alerting");
 		if ($filter_alerting) {
-			$query->where("a.alerting = '".$db->escape($filter_alerting)."'");
+			$query->where("a.alerting = ".$db->quote($filter_alerting));
 		}
 
 		//Filtering tickerkat
 		$filter_tickerkat = $this->state->get("filter.tickerkat");
 		if ($filter_tickerkat) {
-			$query->where("a.tickerkat = '".$db->escape($filter_tickerkat)."'");
+			$query->where("a.tickerkat = ".$db->quote($filter_tickerkat));
 		}
 
 		//Filtering data1
 		$filter_data1 = $this->state->get("filter.data1");
 		if ($filter_data1) {
-			$query->where("a.data1 = '".$db->escape($filter_data1)."'");
+			$query->where("a.data1 = ".$db->quote($filter_data1));
 		}
 
 		//Filtering date1
@@ -334,11 +334,11 @@ endif;
 		//Checking "_dateformat"
 		$filter_date1_from = $this->state->get("filter.date1_from_dateformat");
 		if ($filter_date1_from && preg_match("/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/", $filter_date1_from) && date_create($filter_date1_from) ) {
-			$query->where("a.date1 >= '".$db->escape($filter_date1_from)."'");
+			$query->where("a.date1 >= ".$db->quote($filter_date1_from));
 		}
 		$filter_date1_to = $this->state->get("filter.date1_to_dateformat");
 		if ($filter_date1_to && preg_match("/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/", $filter_date1_to) && date_create($filter_date1_to) ) {
-			$query->where("a.date1 <= '".$db->escape($filter_date1_to)."'");
+			$query->where("a.date1 <= ".$db->quote($filter_date1_to));
 		}
 
 		//Filtering auswahlorga
@@ -357,20 +357,20 @@ endif;
 					$string = '';
 					foreach($filter_auswahlorga  as $value):
 					if (count($filter_auswahlorga)>1 AND $value) :
-					$string .= "FIND_IN_SET(" . $value. ",a.auswahl_orga) OR ";
+					$string .= "FIND_IN_SET(" . $db->quote($value) . ",a.auswahl_orga) OR ";
 					endif;
 					endforeach;
 				$string = substr ( $string, 0, -3 );
 				$query->where($string);
 				else:
-				$query->where("FIND_IN_SET(" . $filter_auswahlorga['0']. ",a.auswahl_orga)");			
+				$query->where("FIND_IN_SET(" . $db->quote($filter_auswahlorga['0']) . ",a.auswahl_orga)");
 				endif;
 			}
 		 
 		//Filtering vehicles
 		$filter_vehicles = $this->state->get("filter.vehicles");
 		if ($filter_vehicles) {
-			$query->where("FIND_IN_SET(" . $filter_vehicles. ",a.vehicles)");
+			$query->where("FIND_IN_SET(" . $db->quote($filter_vehicles) . ",a.vehicles)");
 		}
 
 		//Filtering ausruestung
@@ -400,18 +400,18 @@ endif;
 		//Filtering created_by
 		$filter_created_by = $this->state->get("filter.created_by");
 		if ($filter_created_by) {
-			$query->where("a.created_by = '".$db->escape($filter_created_by)."'");
+			$query->where("a.created_by = ".$db->quote($filter_created_by));
 		}
 		//Filtering created_by
 		$filter_modified_by = $this->state->get("filter.modified_by");
 		if ($filter_modified_by) {
-			$query->where("a.modified_by = '".$db->escape($filter_modified_by)."'");
+			$query->where("a.modified_by = ".$db->quote($filter_modified_by));
 		}
 
 		//Filtering year
 		$filter_year = $this->state->get("filter.year");
 		if ($filter_year) {
-			$query->where("a.date1 LIKE '".$db->escape($filter_year)."%'");
+			$query->where("a.date1 LIKE ".$db->quote($db->escape($filter_year) . "%"));
 		}
 
         // Add the list ordering clause.

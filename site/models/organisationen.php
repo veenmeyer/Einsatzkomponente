@@ -257,7 +257,7 @@ if (empty($list['direction']))
 					
 					$string = '';
 					foreach($array as $value):
-					$string .= 'a.id = '.$value.' OR ';
+					$string .= 'a.id = '.$db->quote($value).' OR ';
 					endforeach;
 				$string = substr ( $string, 0, -3 );
 			$query->where($string);
@@ -287,7 +287,7 @@ $query->where('( a.name LIKE '.$search.' )');
 
 		if ($orderCol && $orderDirn)
 		{
-			$query->order($db->escape($orderCol . ' ' . $orderDirn));
+			$query->order($db->quoteName($orderCol) . ' ' . $db->escape($orderDirn));
 		}
 		
 		return $query;
