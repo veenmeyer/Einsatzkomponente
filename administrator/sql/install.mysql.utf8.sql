@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `#__eiko_organisationen` (
 `asset_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
 `ordering` INT(11)  NOT NULL ,
 `name` VARCHAR(255)  NOT NULL ,
+`gmap_icon_orga` VARCHAR(255)  NOT NULL ,
 `gmap_icon` VARCHAR(255)  NOT NULL ,
 `detail1_label` VARCHAR(255)  NOT NULL DEFAULT 'Detail1',
 `detail1` VARCHAR(255)  NOT NULL ,

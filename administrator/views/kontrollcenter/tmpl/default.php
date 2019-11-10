@@ -295,7 +295,6 @@ if (!empty($this->extra_sidebar)) {
 			switch($type)
 			{
 				case '=':
-					continue;
 					break;
 				case '-':
 					$ret .= '<li><span style="font-size:8pt;color:#ff0000;">Removed:</span> '.substr($line, 1).'</li>';
