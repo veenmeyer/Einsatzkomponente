@@ -37,7 +37,7 @@ $id = JFactory::getApplication()->input->getVar('id', 0);
 $params = JComponentHelper::getParams('com_einsatzkomponente');
 
 $db = JFactory::getDBO();
-$query = 'SELECT id, summary as title FROM #__eiko_einsatzberichte WHERE state="1" GROUP BY summary ASC';
+$query = 'SELECT id, summary as title FROM #__eiko_einsatzberichte WHERE state="1" GROUP BY summary ORDER BY summary';
 $db->setQuery($query);
 $arrayDb = $db->loadObjectList();
 
