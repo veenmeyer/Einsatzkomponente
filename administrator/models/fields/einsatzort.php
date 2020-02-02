@@ -36,7 +36,7 @@ $id = JFactory::getApplication()->input->getVar('id', 0);
 
 
 $db = JFactory::getDBO();
-$query = 'SELECT id, address as title FROM #__eiko_einsatzberichte WHERE state="1" GROUP BY address ASC';
+$query = 'SELECT id, address as title FROM #__eiko_einsatzberichte WHERE state="1" GROUP BY address ORDER BY address';
 $db->setQuery($query);
 $addressDb = $db->loadObjectList();
 

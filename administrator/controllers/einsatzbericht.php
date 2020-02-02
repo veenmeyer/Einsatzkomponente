@@ -95,7 +95,10 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/upload.php'; // Helper-class laden
 			endif;		
 
+		$automail_off = $formData->getString('automail_off');
+
 				if ( $params->get('send_mail_auto', '0') ): 
+				if ( !$automail_off ): 
 		if (!$cid) :
 		$db = JFactory::getDBO();
 		$query = "SELECT id FROM #__eiko_einsatzberichte ORDER BY id DESC LIMIT 1";
@@ -107,6 +110,7 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		$send = sendMail_auto($cid,'Update: ');
 		endif;
 		endif;
+		endif;
 	endif;
     //print_r ($send);break;
     }
@@ -114,6 +118,11 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 	    function sendMail_auto($cid,$status) {
 
 		
+		$input = JFactory::getApplication()->input;
+		// Get the form data
+		$formData = new JInput($input->get('jform', '', 'array'));
+		// Get any data being able to use default values
+		$emailtext = $formData->getString('emailtext');
 
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
@@ -171,8 +180,11 @@ class EinsatzkomponenteControllerEinsatzbericht extends JControllerForm
 		
 		$link = JRoute::_( JURI::root() . 'index.php?option=com_einsatzkomponente&view=einsatzbericht&id='.$result[0]->id.'&Itemid='.$params->get('homelink','')); 
 		
-		$body   = ''
-				. '<h2>+++ '.$result[0]->summary.' +++</h2>';
+		$body   = '';
+			if ($emailtext) :
+			$body   .= $emailtext.'<hr>';
+			endif;
+		$body	. '<h2>+++ '.$result[0]->summary.' +++</h2>';
 		if ($params->get('send_mail_kat','0')) :	
 		$body   .= '<h4>'.JText::_($kat->title).'</h4>';
 		endif;
