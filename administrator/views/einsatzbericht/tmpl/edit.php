@@ -362,6 +362,19 @@ displayVals();
 	
     		<div class="fltlft well" style="width:80%;">
 
+<?php if ( $params->get('send_mail_auto', '0') ): ?>
+			<hr>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('emailtext'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('emailtext'); ?></div>
+			</div>
+			<div class="control-group">
+				<div class="control-label"><?php echo $this->form->getLabel('automail_off'); ?></div>
+				<div class="controls"><?php echo $this->form->getInput('automail_off'); ?></div>
+			</div>
+<?php endif; ?>
+
+
 			<div class="control-group">
 				<div class="control-label"><?php echo $this->form->getLabel('article_id'); ?></div>
 				<div class="controls"><?php echo $this->form->getInput('article_id'); ?></div>
@@ -387,6 +400,8 @@ displayVals();
 
             <input type="hidden" name="jform[status]" value="<?php echo $this->item->status; ?>" />
             </fieldset>
+			
+			
     	</div>
 		
    <!-- 		<div class="fltlft well" style="width:80%;">
@@ -398,6 +413,9 @@ displayVals();
     
     	</div>
  -->
+
+
+
 		
    </div>     
         <input type="hidden" name="task" value="" />
@@ -405,6 +423,9 @@ displayVals();
         <?php echo JHtml::_('form.token'); ?>
         
     </div>
+	
+
+
 </form>
 
 <?php if ($params->get('gmap_action','0') == '1') : ?>

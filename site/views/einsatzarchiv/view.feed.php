@@ -11,6 +11,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+JLoader::import('helpers.einsatzkomponente', JPATH_SITE.'/administrator/components/com_einsatzkomponente');
+JLoader::import('helpers.osm', JPATH_SITE.'/administrator/components/com_einsatzkomponente'); 
 
 /**
  * View class for a list of Einsatzkomponente.
@@ -27,7 +29,6 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
      * Display the view
      */
     public function display($tpl = null) {
-		require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
         $app = JFactory::getApplication();
 
         $this->state = $this->get('State');
@@ -126,7 +127,7 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
             throw new Exception(implode("\n", $errors));
         }
 
-        parent::display($tpl);
+        //parent::display($tpl);
     }
 
 

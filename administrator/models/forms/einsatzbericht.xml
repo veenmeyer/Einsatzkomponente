@@ -373,6 +373,27 @@
                 <option value="0">JUNPUBLISHED</option>
        </field> 
 	   
+
+       <field name="automail_off" type="list"
+            label="Automailfunktion"
+			description="Schaltet einmalig für das Abspeichern die automaitsche Emailfunktion aus." 
+            default="0"
+            disabled="0"
+            class="eiko_status"
+            filter="raw"
+            multiple="false">
+                <option value="0">an</option>
+                <option value="1">aus</option>
+        </field> 
+
+       <field name="emailtext" type="editor"
+			label="Emailtext" 
+			description="Optionaler Emailinfotext bei Emailbenachrichtigung" 
+            width="80%"
+            height="100px"
+			buttons="false"
+            filter="raw" /> 
+
 	   
  </fieldset> 
  <fieldset 
