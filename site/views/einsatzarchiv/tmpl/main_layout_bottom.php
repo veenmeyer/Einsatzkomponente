@@ -49,7 +49,9 @@
 			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
 			
 			<?php if ($this->params->get('display_home_missions','1')) :?>
+			<?php if ($this->params->get('display_detail_map_for_only_user','0')) :?>
 			<?php OsmHelper::addEinsatzorteMap($this->einsatzorte);?>
+			<?php endif;?>
 			<?php endif;?>
 			<?php if ($this->params->get('display_home_organisationen','1')) :?>
 			<?php OsmHelper::addOrganisationenMap($this->organisationen);?>

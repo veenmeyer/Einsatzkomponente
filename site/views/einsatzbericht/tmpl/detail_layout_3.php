@@ -36,6 +36,10 @@ $this->item->created_by=$user->get('username');
 		</span> am
         <span class="published"><?php echo date("d.m.Y", strtotime($this->item->createdate)).''; ?>
 		</span>
+					<?php if ($this->params->get('display_detail_einsatznummer','0') == '1') :?> 
+			 <span style="font-size:smaller;" class="text-muted eiko_detail_einsatznummer"><?php echo JText::_('</br>(Einsatz-Nr.'); ?> <?php echo $this->einsatznummer.')'; ?></span> 
+            <?php endif;?>
+
     </p>
       
       <div class="clear"></div>

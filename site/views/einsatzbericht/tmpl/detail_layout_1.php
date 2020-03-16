@@ -35,7 +35,7 @@ $vehicles_images = '';
 			
 			<?php if ($this->params->get('display_detail_tickerkat_icon','1') == '1') :?> 
             <?php if (isset($this->tickerKat->image)) :?>
-        	<img  class="eiko_img-rounded_2 eiko_list_icon_2 mobile_hide_320" src="<?php echo JURI::Root();?><?php echo $this->tickerKat->image;?>"  alt="eiko_icon" title="<?php echo JText::_($this->tickerKat->title); ?>"/>
+        	<img  class="eiko_img-rounded_2 eiko_list_icon_2 mobile_hide_320" src="<?php echo JURI::Root();?><?php echo $this->tickerKat->image;?>"  alt="" title="<?php echo JText::_($this->tickerKat->title); ?>"/>
             <?php endif;?>
             <?php endif;?>
 			
@@ -46,6 +46,11 @@ $vehicles_images = '';
             <?php endif;?>
 			
 			<span class="eiko_kurzbericht_2"><?php echo $this->item->summary; ?></span>
+			
+			<?php if ($this->params->get('display_detail_einsatznummer','0') == '1') :?> 
+			 <small style="font-size:smaller;" class="text-muted eiko_detail_einsatznummer"><?php echo JText::_('</br>(Einsatz-Nr.'); ?> <?php echo $this->einsatznummer.')'; ?></small> 
+            <?php endif;?>
+			
             </h1>
             <!--Headline ENDE-->
             

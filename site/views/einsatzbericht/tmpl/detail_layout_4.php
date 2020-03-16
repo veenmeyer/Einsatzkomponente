@@ -26,6 +26,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
     <td class="layout4_row_1" style="border:hidden;">
     <!--Navigation-->
 	<div class="eiko_navbar_2 " style="left"><?php echo $this->navbar;?></div>
+	
+			<?php if ($this->params->get('display_detail_einsatznummer','0') == '1') :?> 
+			 <div class="text-muted eiko_detail_einsatznummer"><?php echo JText::_('</br>(Einsatz-Nr.'); ?> <?php echo $this->einsatznummer.')'; ?></div> 
+            <?php endif;?>
+
     <!--Navigation ENDE-->
     </td>
     <!--<td class="layout4_row_2" style="border:hidden;">

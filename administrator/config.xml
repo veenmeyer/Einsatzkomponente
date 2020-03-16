@@ -1262,6 +1262,18 @@
 				value="1">JYES</option>
 		</field>
 	  <field
+			name="display_detail_einsatznummer"
+			type="radio"
+			class="btn-group"
+			default="0"
+			description="Hier können Sie einstellen, ob die Einsatznummer angezeigt werden sollen."
+			label="Einsatznummer" >
+			<option
+				value="0">JNO</option>
+			<option
+				value="1">JYES</option>
+		</field>
+	  <field
 			name="display_detail_einsatzart_icon"
 			type="radio"
 			class="btn-group"
