@@ -13,6 +13,8 @@
 
 <h3>Changelog <small>Version 3.43</small></h3>
 <ul>
+# diverse kleinere Bugfixes
+# Fehler beim Sperren und Veröffentlichen in der Einsatzübersicht behoben
 + Anzeige der Einsatznummer in der Detailansicht
 # Fehler in Kartenzentrierung (OSM) behoben (in der View Gmap-Konfig.)
 # Einsatzorte nur für registr. User anzeigen -> Einsatzübersichts-Karte

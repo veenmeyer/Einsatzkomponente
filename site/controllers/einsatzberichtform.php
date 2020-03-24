@@ -176,8 +176,29 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 			return false;
 		}
 
+		
+		
+		if ($data['id']):
+		$db		= JFactory::getDBO();
+		$query	= $db->getQuery(true);
+		$query->update('#__eiko_einsatzberichte');
+		$query->set('state = "'.$data['state'].'" ');
+		$query->where('id ="'.$data['id'].'"');
+		$db->setQuery((string) $query);
+		try
+		{
+			$db->execute();
+			$return = true;
+		}
+		catch (RuntimeException $e)
+		{
+			throw new Exception($e->getMessage(), 500);
+		}
+		endif;
+
+
 		// Attempt to save the data.
-		$return	= $model->save($data);
+		//$return	= $model->save($data);
 
 		// Check for errors.
 		if ($return === false) {
@@ -192,10 +213,6 @@ class EinsatzkomponenteControllerEinsatzberichtForm extends EinsatzkomponenteCon
 		}
 
             
-        // Check in the profile.
-        if ($return) {
-            $model->checkin($return);
-        }
         
         // Clear the profile id from the session.
         //$app->setUserState('com_einsatzkomponente.edit.einsatzbericht.id', null);
