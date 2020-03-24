@@ -11,12 +11,21 @@
 <?php defined('_JEXEC') or die(); ?>
 <h1>Einsatzkomponente für das Joomla-CMS</h1>
 
+<h3>Changelog <small>Version 3.43</small></h3>
+<ul>
+# diverse kleinere Bugfixes
+# Fehler beim Sperren und Veröffentlichen in der Einsatzübersicht behoben
++ Anzeige der Einsatznummer in der Detailansicht
+# Fehler in Kartenzentrierung (OSM) behoben (in der View Gmap-Konfig.)
+# Einsatzorte nur für registr. User anzeigen -> Einsatzübersichts-Karte
+</ul>
+
 <h3>Changelog <small>Version 3.42</small></h3>
 <ul>
 # SQL-Fehler unter MySQL8 behoben
 # RSS-Feed Bug behoben
 + Optionaler Emailinfotext bei Automatischer Mailbenachrichtigung
-+ Temponär Auto-Emailfunktion abschaltbar
++ Temporär Auto-Emailfunktion abschaltbar
 </ul>
 
 <h3>Changelog <small>Version 3.40</small></h3>

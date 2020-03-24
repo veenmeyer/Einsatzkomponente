@@ -30,6 +30,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
     protected $einsatzdauer;			// 
 	protected $organisationen;
 	protected $einsatzgebiet;
+	protected $einsatznummer;
     /**
      * Display the view
      */
@@ -42,9 +43,9 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		//echo $selectedOrga;
         $user		= JFactory::getUser();
 		//$id = $app->input->get(id); 
-        
         $this->state = $this->get('State');
-        $this->item = $this->get('Data'); 
+        $this->item = $this->get('Data');
+
 		$this->images = EinsatzkomponenteHelper::getEinsatzbilder($this->item->id);
 		$this->prev_id = EinsatzkomponenteHelper::getPrev_id($this->item->date1,$selectedOrga); 
 		$this->next_id = EinsatzkomponenteHelper::getNext_id($this->item->date1,$selectedOrga);
@@ -56,6 +57,7 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$this->tickerKat = EinsatzkomponenteHelper::getTickerKat($this->item->tickerkat); 
 		$this->alarmierungsart = EinsatzkomponenteHelper::getAlarmierungsart($this->item->alerting); 
 		$this->einsatzdauer = EinsatzkomponenteHelper::getEinsatzdauer($this->item->date1,$this->item->date3);
+		$this->einsatznummer = EinsatzkomponenteHelper::ermittle_einsatz_nummer(strtotime($this->item->date1),$this->item->data1);
 		// Get active menu
 		$app	= JFactory::getApplication();
 		$menus	= $app->getMenu();

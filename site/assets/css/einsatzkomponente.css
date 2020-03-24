@@ -707,7 +707,6 @@ padding-right:5px;
 
 .eiko_table_ausruestung {width: 100%;}
 
-
 .icon-first::before {
     content: "" !important;
 }
@@ -718,6 +717,7 @@ padding-right:5px;
 .icon-next::before, .icon-forward::before {
     content: "" !important;
 }
+
 
 
 .eiko_detail_image_3 {

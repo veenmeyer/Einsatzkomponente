@@ -82,6 +82,10 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 
 			$rss_item->description 	.= '<table>';
 			
+			if ($item->date1 >1 and $this->params->get('display_rss_alerttime','0')) : 
+			$rss_item->description 	.= '<tr><td><b>Alarmierung am</b>: '.date('d.m.Y', $item->date1).' um '.date('H:i', $item->date1).' Uhr</td></tr>';
+			endif;
+
 
 			if ($desc) :
 			$rss_item->description 	.= '<tr><td>'.$desc.'</td></tr>';

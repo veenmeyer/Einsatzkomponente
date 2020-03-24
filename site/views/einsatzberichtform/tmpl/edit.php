@@ -20,6 +20,8 @@ JHtml::_('formbehavior.chosen', 'select');
 $lang = JFactory::getLanguage();
 $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 
+$rImages = '';
+
 require_once JPATH_SITE.'/administrator/components/com_einsatzkomponente/helpers/einsatzkomponente.php'; // Helper-class laden
 $app	= JFactory::getApplication();
 $params = $app->getParams('com_einsatzkomponente');

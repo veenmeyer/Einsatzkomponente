@@ -103,7 +103,11 @@ $lang->load('com_einsatzkomponente', JPATH_ADMINISTRATOR);
 			</table>
             <br/>
 
-        	<h4 class="headline"><?php echo $this->item->summary; ?></h4>
+        	<h4 class="headline"><?php echo $this->item->summary; ?>
+			<?php if ($this->params->get('display_detail_einsatznummer','0') == '1') :?> 
+			 <small style="font-size:smaller;" class="text-muted eiko_detail_einsatznummer"><?php echo JText::_('</br>(Einsatz-Nr.'); ?> <?php echo $this->einsatznummer.')'; ?></small> 
+            <?php endif;?>
+			</h4>
             
             <!--Einsatzbericht anzeigen mit Plugin-Support-->   
 			<?php if( $this->item->desc) : ?>

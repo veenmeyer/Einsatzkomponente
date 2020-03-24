@@ -15,7 +15,7 @@
   <?php if (!$this->params->get('eiko')) : ?>
     <tr><!-- Bitte das Copyright nicht entfernen. Danke. -->
       <td colspan="<?php echo $eiko_col; ?>">
-        <span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2017 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
+        <span class="copyright">Einsatzkomponente V<?php echo $this->version; ?>  (C) 2020 by Ralf Meyer ( <a class="copyright_link" href="https://einsatzkomponente.de" target="_blank">www.einsatzkomponente.de</a> )</span>
       </td>
     </tr>
   <?php endif; ?>
@@ -49,7 +49,9 @@
 			<?php OsmHelper::callOsmMap($this->gmap_config->gmap_zoom_level,$this->gmap_config->start_lat,$this->gmap_config->start_lang); ?>
 			
 			<?php if ($this->params->get('display_home_missions','1')) :?>
+			<?php if ($this->params->get('display_detail_map_for_only_user','0')) :?>
 			<?php OsmHelper::addEinsatzorteMap($this->einsatzorte);?>
+			<?php endif;?>
 			<?php endif;?>
 			<?php if ($this->params->get('display_home_organisationen','1')) :?>
 			<?php OsmHelper::addOrganisationenMap($this->organisationen);?>

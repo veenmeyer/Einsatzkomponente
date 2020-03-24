@@ -307,7 +307,7 @@ marker2.on("drag", function(e) {
 				var m = marker.getLatLng();
 				map.panTo(new L.LatLng(m.lat, m.lng));
 				document.getElementById("jform_start_lat").value=m.lat.toFixed(15);
-				document.getElementById("jform_start_lang").value=m.lat.toFixed(15);
+				document.getElementById("jform_start_lang").value=m.lng.toFixed(15);
 			});
 			map.on('zoomstart',function(e){
 				  var currZoom = map.getZoom();
