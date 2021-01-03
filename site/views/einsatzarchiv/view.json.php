@@ -62,7 +62,7 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 			$item->desc = (strlen($item->desc) > $this->params->get('rss_chars','1000')) ? substr($item->desc,0,strrpos(substr($item->desc,0,$this->params->get('rss_chars','1000')+1),' ')).' ...' : $item->desc;
 			endif;
 			
-			if ($item->einsatznummer) :
+			if (isset($item->einsatznummer)) :
 			$item->einsatznummer = EinsatzkomponenteHelper::ermittle_einsatz_nummer($item->date1,$item->data1_id);
 			endif;
 			

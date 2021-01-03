@@ -2,45 +2,91 @@
 <form>
     <fields name="filter">
 	
- <field name="year" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_JAHR"
-                                    query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_JAHR' AS title UNION SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" key_field="id" value_field="title"/> 
+ <field name="year" 
+		type="sql" 
+		class="inputbox" 
+		onchange="this.form.submit();" 
+		translate = "COM_EINSATZKOMPONENTE_JAHR"
+        query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_JAHR' AS title UNION SELECT Year(date1) as id, Year(date1) as title FROM #__eiko_einsatzberichte WHERE (state='1' OR state = '2') GROUP BY title ORDER BY title DESC" 
+		key_field="id" 
+		value_field="title"/> 
 
-<field name="auswahl_orga" type="sql" class="multipleOrganisations" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_ORGANISATION"
-                                    query="SELECT id, name FROM #__eiko_organisationen  WHERE state='1'" key_field="id" 
-									multiple ="multiple"
-									label="COM_EINSATZKOMPONENTE_ORGANISATION"
-									value_field="name"/> 
+<field name="auswahl_orga" 
+	   type="sql" 
+	   class="multipleOrganisations" 
+	   onchange="this.form.submit();" 
+	   translate = "COM_EINSATZKOMPONENTE_ORGANISATION"
+       query="SELECT id, name FROM #__eiko_organisationen  WHERE state='1' order by ordering ASC" 
+	   key_field="id" 
+	   multiple ="multiple"
+	   label="COM_EINSATZKOMPONENTE_ORGANISATION"
+	   value_field="name"/> 
 									
- <field name="data1" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_EINSATZART"
-                                    query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_EINSATZART' AS title UNION SELECT id, title FROM #__eiko_einsatzarten WHERE state='1'" key_field="id" value_field="title"/> 
+ <field name="data1" 
+        type="sql" 
+		class="inputbox" 
+		onchange="this.form.submit();" 
+		translate = "COM_EINSATZKOMPONENTE_EINSATZART"
+	    header = "COM_EINSATZKOMPONENTE_EINSATZART"
+        query="SELECT id, title FROM #__eiko_einsatzarten WHERE state='1' order by ordering ASC" 
+		key_field="id" 
+		value_field="title"/> 
 
- <field name="tickerkat" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_KATEGORIE"
-                                    query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_KATEGORIE' AS title UNION SELECT id, title FROM #__eiko_tickerkat  WHERE state='1'" key_field="id" value_field="title"/> 
+ <field name="tickerkat" 
+        type="sql" 
+		class="inputbox" 
+		onchange="this.form.submit();" 
+		translate = "COM_EINSATZKOMPONENTE_KATEGORIE"
+		header = "COM_EINSATZKOMPONENTE_KATEGORIE"
+        query="SELECT id, title FROM #__eiko_tickerkat  WHERE state='1' order by ordering ASC" 
+		key_field="id" 
+		value_field="title"/> 
 	
-       <field name="alerting" type="sql" class="inputbox" onchange="this.form.submit();"  translate = "COM_EINSATZKOMPONENTE_ALARMIERUNGSART"
-                                    query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_ALARMIERUNGSART' AS title UNION SELECT id, title FROM #__eiko_alarmierungsarten WHERE state='1'" key_field="id" value_field="title"/> 
+ <field name="alerting" 
+		type="sql" 
+		class="inputbox" 
+		onchange="this.form.submit();"  
+		translate = "COM_EINSATZKOMPONENTE_ALARMIERUNGSART"
+		header = "COM_EINSATZKOMPONENTE_ALARMIERUNGSART"
+        query="SELECT id, title FROM #__eiko_alarmierungsarten WHERE state='1' order by ordering ASC" 
+		key_field="id" 
+		value_field="title"/> 
 									
- <field name="vehicles" type="sql" class="inputbox" onchange="this.form.submit();" translate = "COM_EINSATZKOMPONENTE_FAHRZEUG"
-                                    query="SELECT '' AS id, 'COM_EINSATZKOMPONENTE_FAHRZEUG' AS name UNION SELECT id, name FROM #__eiko_fahrzeuge WHERE (state='1' OR state = '2')" key_field="id" value_field="name"/> 
+ <field name="vehicles" 
+        type="sql" 
+		class="inputbox" 
+		onchange="this.form.submit();" 
+		translate = "COM_EINSATZKOMPONENTE_FAHRZEUG"
+		header = "COM_EINSATZKOMPONENTE_FAHRZEUG"
+        query="SELECT id, concat( name, '   (', detail2, ')') AS name FROM #__eiko_fahrzeuge WHERE (state='1' OR state = '2') order by ordering ASC" 
+		key_field="id" 
+		value_field="name"/> 
 
 									
-        <field name="search" type="text" hint="COM_EINSATZKOMPONENTE_SUCHEN"
-               label="COM_USERS_FILTER_SEARCH_DESC"
-               class="js-stools-search-string" />
+ <field name="search" 
+		type="text" 
+		hint="COM_EINSATZKOMPONENTE_SUCHEN"
+        label="COM_USERS_FILTER_SEARCH_DESC"
+        class="js-stools-search-string" />
 
  
 
-
-
  
 		<!-- Keep "_dateformat" suffix for date validation on form submit -->
-		<field name="date1_from_dateformat" type="calendar" class="inputbox"
-            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBILDERBEARBEITEN_CREATED_BY"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY"  onchange="this.form.submit();" />
+ <field name="date1_from_dateformat" 
+        type="calendar" 
+		class="inputbox"
+        label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBILDERBEARBEITEN_CREATED_BY"
+        description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY"  
+		onchange="this.form.submit();" />
+		
 		<!-- Keep "_dateformat" suffix for date validation on form submit -->
-		<field name="date1_to_dateformat" type="calendar" class="inputbox"
-            label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBILDERBEARBEITEN_CREATED_BY"
-            description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY"  onchange="this.form.submit();" /> 
+ <field name="date1_to_dateformat" 
+        type="calendar" 
+		class="inputbox"
+        label="COM_EINSATZKOMPONENTE_FORM_LBL_EINSATZBILDERBEARBEITEN_CREATED_BY"
+        description="COM_EINSATZKOMPONENTE_FORM_DESC_EINSATZBILDERBEARBEITEN_CREATED_BY"  
+		onchange="this.form.submit();" /> 
 
 
 
