@@ -14,6 +14,7 @@
 <h3>Changelog <small>Version 3.50</small></h3>
 <ul>
 # Filtersortierung im Front-und Backend nach Reihenfolge bzw. Namen
+# Fehlerhafte Anzeige der OSM-KArte in in der Übersicht behoben
 # diverse kleinere Bugfixes
 </ul>
 
