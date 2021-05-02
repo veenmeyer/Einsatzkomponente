@@ -155,16 +155,16 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 		$marker1_lat  		= '1';
 		$marker1_lng 		= '1';
 		endif;
-		$center_lat  		= $this->item->gmap_report_latitude; 
+		$center_lat  		= $this->item->gmap_report_latitude;
 		$center_lng 		= $this->item->gmap_report_longitude;
-		$gmap_zoom_level 	= $this->params->get('detail_gmap_zoom_level','12'); 
+		$gmap_zoom_level 	= $this->params->get('detail_gmap_zoom_level','12');
 		$gmap_onload 		= $this->params->get('detail_gmap_onload','HYBRID');
 		$zoom_control 		= $this->params->get('detail_zoom_control','false');
-		$document->addScript('//maps.googleapis.com/maps/api/js?key='.$this->params->get('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E').' ');		
-		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route,'[]') );											
+		$document->addScript('//maps.googleapis.com/maps/api/js?key='.$this->params->get('gmapkey','AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E').' ');
+		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($standort,$marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$display_map_route,'[]') );
 		endif;
-		
-		
+
+
 		if ($this->params->get('gmap_action','0') == '2') :
 		
 		if ($this->params->get('display_detail_organisationen','1')) :
@@ -265,35 +265,41 @@ class EinsatzkomponenteViewEinsatzbericht extends JViewLegacy {
 			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
 		endif;
 		//$opengraph .= '<meta property="article:publisher" content="https://www.einsatzkomponente.de" />';
-		
-			if ($this->params->get('standard_share_image','')) : 
-			$fileName_image = str_replace(' ', '%20', $this->params->get('standard_share_image',''));  
-			$size = @getimagesize($fileName_image);
-			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
-			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
-			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
-		endif;
+
+        if ($this->params->get('standard_share_image','')) :
+        $fileName_image = str_replace(' ', '%20', $this->params->get('standard_share_image',''));
+        $size = @getimagesize($fileName_image);
+        if ($size !== false) {
+            $opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+            $opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+            $opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
+        }
+        endif;
 
 		if( $this->item->image ) :
-			$fileName_image = str_replace(' ', '%20', $this->item->image);  
+			$fileName_image = str_replace(' ', '%20', $this->item->image);
 			$size = @getimagesize($fileName_image);
-			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
-			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
-			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
+            if ($size !== false) {
+                $opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+                $opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+                $opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
+            }
 		endif;
 
 		if ($this->images) :
-			for ($i = 0;$i < count($this->images);++$i) { 
-			$fileName_image = str_replace(' ', '%20', $this->images[$i]->image);  
-			$size = @getimagesize($fileName_image);
-			$opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
-			$opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
-			$opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
-			} 
+			for ($i = 0;$i < count($this->images);++$i) {
+                $fileName_image = str_replace(' ', '%20', $this->images[$i]->image);
+                $size = @getimagesize($fileName_image);
+                if ($size !== false) {
+                    $opengraph .= '<meta property="og:image" content="'.JURI::base().$fileName_image.'"/>';
+                    $opengraph .= '<meta property="og:image:width" content="'.$size[0].'"/>';
+                    $opengraph .= '<meta property="og:image:height" content="'.$size[1].'"/>';
+                }
+			}
 	   endif;
-	   
-	   
-	   
+
+
+
 
 		$document->addCustomTag($opengraph);
 
