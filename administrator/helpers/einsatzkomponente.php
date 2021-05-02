@@ -408,8 +408,8 @@ class EinsatzkomponenteHelper
 						endif;
         return $vehicles_images;
 	}
-	
-public static function getGmap($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$standort,$display_map_route="0",$einsatzorte='[]')
+
+public static function getGmap($standort,$marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655]',$display_detail_popup='false',$display_map_route="0",$einsatzorte='[]')
  {
 $params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='function initialize() {
@@ -568,10 +568,10 @@ var einsatzgebiet_coords = '.$einsatzgebiet.';
 }
 google.maps.event.addDomListener(window, "load", initialize);';
 return $gmap; }
-	
-	
-	
-public static function getOsm($marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[ [53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655] ]',$display_detail_popup='false',$standort,$display_map_route="true",$einsatzorte='[]')
+
+
+
+public static function getOsm($standort,$marker1_title='',$marker1_lat='1',$marker1_lng='1',$marker1_image='circle.png',$marker2_title='',$marker2_lat='1',$marker2_lng='1',$marker2_image='icon.png',$center_lat='1',$center_lng='1',$gmap_zoom_level='1',$gmap_onload='HYBRID',$zoom_control = 'false',$organisationen='[["",1,1,0,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"],["",1,1,1,"../../images/com_einsatzkomponente/images/map/icons/haus_rot.png"] ]',$orga_image='haus_rot.png',$einsatzgebiet='[ [53.28071418254047,7.416630163574155],[53.294772929932165,7.4492458251952485],[53.29815865222114,7.4767116455077485],[53.31313468829642,7.459888830566342],[53.29949234792138,7.478256597900327],[53.29815865222114,7.506409063720639],[53.286461382800795,7.521686926269467],[53.26726681991669,7.499027624511655] ]',$display_detail_popup='false',$display_map_route="true",$einsatzorte='[]')
  {
 $params = JComponentHelper::getParams('com_einsatzkomponente');
 $gmap ='//<![CDATA[
@@ -781,20 +781,20 @@ $db->setQuery($query);
 endif;		
 		return $response_code;
 		}
-		
-		
-    public function sendMail($cid) {
+
+
+    public static function sendMail($cid) {
 
 		// Check for request forgeries
 		JSession::checkToken() or die(Text::_('JINVALID_TOKEN'));
 		$user = Factory::getUser();
 		// Get items to remove from the request.
 		$cid = Factory::getApplication()->input->get('cid', array(), 'array');
-		
+
 
 		if (!is_array($cid) || count($cid) < 1)
 		{
-			Factory::getApplication()->enqueueMessage(Text::_($this->text_prefix . '_NO_ITEM_SELECTED'), 'error');
+			Factory::getApplication()->enqueueMessage(Text::_('NO_ITEM_SELECTED'), 'error');
 		}
 		else
 		{
@@ -978,17 +978,18 @@ endif;
 		$document = Factory::getDocument();
 		$renderer = $document->loadRenderer( 'modules' );
 		$options = array( 'style' => 'xhtml' );
-		return $renderer->render( $pos, $options, null);  
+		return $renderer->render( $pos, $options, null);
     }
-	public function pdf($cid)
-     	{
-	     	require_once JPATH_COMPONENT.'/helpers/fpdf.php';
+
+	public static function pdf($cid)
+	{
+		require_once JPATH_COMPONENT.'/helpers/fpdf.php';
 		//$model = $this->getModel();
 		$params = JComponentHelper::getParams('com_einsatzkomponente');
 		// Make sure the item ids are integers
 		jimport('joomla.utilities.arrayhelper');
 		JArrayHelper::toInteger($cid);
-		
+
 		foreach ($cid as $key => $rep_id) {
 			$db = Factory::getDBO();
 			$query = 	"SELECT eb.id as id, eb.counter as counter, aa.title as alarmart, tk.title as einsatzkat, 

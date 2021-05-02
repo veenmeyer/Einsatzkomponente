@@ -139,13 +139,13 @@ class EinsatzkomponenteViewEinsatzarchiv extends JViewLegacy {
 		$marker2_image 		= ''; // leer
 		$marker2_lat  		= '';// leer
 		$marker2_lng 		= '';// leer
-		$center_lat  		= $this->gmap_config->start_lat; 
+		$center_lat  		= $this->gmap_config->start_lat;
 		$center_lng 		= $this->gmap_config->start_lang;
-		$gmap_zoom_level 	= $this->gmap_config->gmap_zoom_level; 
+		$gmap_zoom_level 	= $this->gmap_config->gmap_zoom_level;
 		$gmap_onload 		= $this->gmap_config->gmap_onload;
 		$zoom_control 		= 'true';
-		$document->addScript('//maps.googleapis.com/maps/api/js?key='.$this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"));			
-		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$standort,$display_map_route,$einsatzorte) );		
+		$document->addScript('//maps.googleapis.com/maps/api/js?key='.$this->params->get ("gmapkey","AIzaSyAuUYoAYc4DI2WBwSevXMGhIwF1ql6mV4E"));
+		$document->addScriptDeclaration( EinsatzkomponenteHelper::getGmap($standort,$marker1_title,$marker1_lat,$marker1_lng,$marker1_image,$marker2_title,$marker2_lat,$marker2_lng,$marker2_image,$center_lat,$center_lng,$gmap_zoom_level,$gmap_onload,$zoom_control,$organisationen,$orga_image,$einsatzgebiet,$display_detail_popup,$display_map_route,$einsatzorte) );
 		endif;
 
 		// OSM-Karte Daten vorbereiten
