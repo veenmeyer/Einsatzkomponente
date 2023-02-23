@@ -21,13 +21,13 @@ class EinsatzkomponenteControllerGmapkonfigurationen extends JControllerAdmin
 	 * Proxy for getModel.
 	 * @since	1.6
 	 */
-	public function getModel($name = 'gmapkonfiguration', $prefix = 'EinsatzkomponenteModel')
+	public function getModel($name = 'gmapkonfiguration', $prefix = 'EinsatzkomponenteModel', $config = [])
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;
 	}
-    
-    
+
+
 	/**
 	 * Method to save the submitted ordering values for records via AJAX.
 	 *
